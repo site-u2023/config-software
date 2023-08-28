@@ -1,4 +1,5 @@
 #! /bin/sh
+
 # scripts
 . /lib/functions/network.sh
 network_flush_cache
@@ -6,6 +7,7 @@ network_find_wan6 NET_IF6
 network_get_physdev NET_L2D6 "${NET_IF6}"
 # network_find_wan NET_IF
 # network_get_physdev NET_L2D "${NET_IF}"
+
 # ネットワークを変更する
 cp /etc/config/network /etc/config/network.dump.bak
 cp /etc/config/dhcp /etc/config/dhcp.dump.bak
@@ -16,6 +18,7 @@ uci delete network.wan
 uci delete network.wan6
 uci delete network.lan
 uci -q delete network.globals.ula_prefix
+
 # IPV4
 BRIDGE='lan'
 uci set network.${BRIDGE}=interface
@@ -26,6 +29,7 @@ uci set network.${BRIDGE}.netmask='255.255.255.0'
 uci set network.${BRIDGE}.gateway=192.168.1.1
 uci set network.${BRIDGE}.dns=192.168.1.1
 uci set network.${BRIDGE}.delegate='0'
+
 # IPV6
 BRIDGE6='lan6'
 uci set network.${BRIDGE6}=interface
@@ -34,26 +38,33 @@ uci set network.${BRIDGE6}.device=@${BRIDGE}
 uci set network.${BRIDGE6}.reqaddress='try'
 uci set network.${BRIDGE6}.reqprefix='no'
 uci set network.${BRIDGE6}.type='bridge'
+
 # 既存のワイヤレス ネットワークを変更する
 uci set wireless.default_radio0.network=${BRIDGE}
 uci set wireless.default_radio1.network=${BRIDGE}
 
 uci commit
+
 # DHCP サーバーを無効にする
 /etc/init.d/odhcpd disable
 /etc/init.d/odhcpd stop
+
 # DNSを無効にする
 /etc/init.d/dnsmasq disable
 /etc/init.d/dnsmasq stop
+
 # ファイアウォールを無効にする
 /etc/init.d/firewall disable
 /etc/init.d/firewall stop
+
 # マルチキャスト
 uci set network.globals.packet_steering='1'
 uci set network.globals.igmp_snooping='1'
+
 # wpa_supplicant を無効にする
 rm /usr/sbin/wpa_supplicant
 echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
+
 # デーモンを永続的に無効にする
 # for i in firewall dnsmasq odhcpd; do
 #   if /etc/init.d/"$i" enabled; then
