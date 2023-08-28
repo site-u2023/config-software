@@ -16,7 +16,7 @@ done
 function _func_ROOT_PASSWD
 while :
 do
-  echo -e " \033[1;31m${input_str_SYSTEM_HOSTNAME}のパスワードを入力して下さい\033[0;39m"
+  echo -e " \033[1;31mデバイスのパスワードを入力して下さい\033[0;39m"
   read -p " デバイスのパスワード: " input_str_ROOT_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -100,15 +100,15 @@ done
 function _func_DEVICE_SET
 {
   wget --no-check-certificate -O /etc/device.sh https://raw.githubusercontent.com/site-u2023/config-software/main/device.sh;
-  sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/device.sh; _func_ROOT_PASSWD;
+  sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/device.sh;
   sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/device.sh;
   sed -i -e "s/WIFI_SSID_A='SSID_A'/WIFI_SSID_A=${input_str_WIFI_SSID_A}/g" /etc/device.sh;
   sed -i -e "s/wifi_PASSWORD_A='password'/wifi_PASSWORD_A=${input_str_WIFI_PASSWD_A}/g" /etc/device.sh;
   sed -i -e "s/WIFI_SSID_B='SSID_B'/WIFI_SSID_B=${input_str_WIFI_SSID_B}/g" /etc/device.sh;
   sed -i -e "s/wifi_PASSWORD_B='password'/wifi_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" /etc/device.sh;     
   sh /etc/device.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
 }
 
 while :
