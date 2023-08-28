@@ -16,16 +16,19 @@ opkg install luci-i18n-firewall-ja
 
 # SFTP
 opkg install openssh-sftp-server
-
+ 
+ 
 # CPU負荷分散
 CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
-if [ "$CPU_INFO" -gt 2 ]
+if [ "$CPU_INFO" -gt 3 ]
 then
  opkg install irqbalance;
  uci set irqbalance.irqbalance=irqbalance;
  uci set irqbalance.irqbalance.enabled='1';
  uci commit irqbalance;
  /etc/init.d/irqbalance start
+ echo "CPUコア: ${CPU_INFO}"
+ echo "インストール: Irqbalance"
 fi
 
 # SQM
@@ -155,6 +158,7 @@ if [ -n "$str_USB" ]; then
   opkg install kmod-fs-hfsplus3;
   opkg install hdparm;
   opkg install hd-idle
+  echo "インストール: USBドライバー&ツール"
 else
   echo "USBデバイスはありません"
 fi
