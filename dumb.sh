@@ -65,6 +65,7 @@ uci set network.globals.igmp_snooping='1'
 rm /usr/sbin/wpa_supplicant
 echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
 
+# {
 # デーモンを永続的に無効にする
 # for i in firewall dnsmasq odhcpd; do
 #   if /etc/init.d/"$i" enabled; then
@@ -72,3 +73,13 @@ echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
 #     /etc/init.d/"$i" stop
 #   fi
 # done
+# }
+
+# 複数の AP にわたってホスト名を表示できるようにする
+opkg install fping
+sed -i "/exit 0/d" /etc/rc.local
+echo "fping -g 192.168.1.0/24" >> /etc/rc.local 
+echo "exit 0" >> /etc/rc.local
+echo "0 */1 * * * fping -g 192.168.1.0/24" >> /etc/crontabs/root
+
+
