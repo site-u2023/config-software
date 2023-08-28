@@ -856,9 +856,6 @@ uci set dhcp.lan.force='1'
 # WAN
 uci set network.wan.auto='0'
 
-# WAN6
-uci set network.wan6.ip6prefix=${CE_CE}::/56
-
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
 uci set dhcp.wan6.interface='wan6'
@@ -867,6 +864,9 @@ uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
 uci set dhcp.wan6.dhcpv6='relay'
 uci set dhcp.wan6.ndp='relay'
+
+# WAN6
+uci set network.wan6.ip6prefix=${CE_CE}::/56
 
 # WANMAP
 WANMAP='wanmap'
