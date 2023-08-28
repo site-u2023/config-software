@@ -23,7 +23,7 @@ uci set dhcp.wan6.ndp='relay'
 DSLITE='ds_lite'
 uci set network.${DSLITE}=interface
 uci set network.${DSLITE}.proto='dslite'
-uci set network.${DSLITE}.peeraddr=${AFTR_ADDRESS}
+uci set network.${DSLITE}.peeraddr='AFTR_ADDRESS'
 uci set network.${DSLITE}.encaplimit='ignore'
 
 # FW
