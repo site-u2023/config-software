@@ -103,6 +103,15 @@ done
 
 while :
 do
+{
+OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
+if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
+ echo -e " \033[1;37mバージョンチェックOK\033[0;39m"
+else
+ read -p " バージョンが違うため終了します"
+ exit
+fi
+}
   echo -e " \033[1;37mアクセスポイントの設定を開始します\033[0;39m"
   read -p " 開始します [y/n]:" num
   case "${num}" in
