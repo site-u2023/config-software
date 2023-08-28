@@ -7,8 +7,8 @@ do
   echo -e " \033[1;34mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/device-config.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/device-config.sh;
-          wget --no-check-certificate -O /etc/system-config.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/system-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/device-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/device-config.sh;
+          wget --no-check-certificate -O /etc/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh;
           sh /etc/system-config.sh;
           break ;;
     "n" ) break ;;
@@ -21,7 +21,7 @@ do
   echo -e " \033[1;32mインターネット接続設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/internet-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh;
           sh /etc/internet-config.sh;
           break ;;
     "n" ) break ;;
@@ -34,7 +34,7 @@ do
   echo -e " \033[1;35mパッケージインストールのスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/package-config.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/package-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh;
           sh /etc/package-config.sh;
           break ;;
     "n" ) break ;;
@@ -67,7 +67,7 @@ fi
     "i" ) _func_INTERNET ;;
     "p" ) _func_PACKAGE ;;
     "r" ) echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m";
-          wget --no-check-certificate -O /etc/end-config.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/end-config.sh;
+          wget --no-check-certificate -O /etc/end-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/end-config.sh;
           rm -f /etc/system-config.sh;
           rm -f /etc/device-config.sh;
           rm -f /etc/internet-config.sh;
