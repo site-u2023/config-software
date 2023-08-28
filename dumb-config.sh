@@ -44,9 +44,9 @@ done
 function _func_Dumb_SET
 {
 wget --no-check-certificate -O /etc/dumb.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb.sh
-sed -i -e "s/ipaddr='192.168.1.2'/ipaddr=${input_str_IPV4}/g" /etc/dumb.sh
-sed -i -e "s/gateway='192.168.1.1'/gateway=${input_str_GATEWAY}/g" /etc/dumb.sh
-sed -i -e "s/dns='192.168.1.1'/dns=${input_str_GATEWAY}/g" /etc/dumb.sh
+sed -i -e "s/ipaddr='192.168.1.2'/ipaddr='${input_str_IPV4}'/g" /etc/dumb.sh
+sed -i -e "s/gateway='192.168.1.1'/gateway='${input_str_GATEWAY}'/g" /etc/dumb.sh
+sed -i -e "s/dns='192.168.1.1'/dns='${input_str_GATEWAY}'/g" /etc/dumb.sh
 sh /etc/dumb.sh 2> /dev/null
 echo  IPV4アドレス: ${input_str_IPV4}
 echo  ゲートウェイ: ${input_str_GATEWAY}
