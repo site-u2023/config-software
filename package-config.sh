@@ -163,6 +163,7 @@ fi
 echo " CPUコア: ${CPU_INFO}"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 while :
