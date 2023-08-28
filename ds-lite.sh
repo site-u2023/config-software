@@ -34,5 +34,3 @@ uci commit
 
 cp /lib/netifd/proto/dslite /lib/netifd/proto/dslite.sh.sh.old
 sed -i -e "s/mtu:-1280/mtu:-1460/g" /lib/netifd/proto/dslite.sh
-
-echo -e "\033[1;32m DS-LITE: ${AFTR_ADDRESS}\033[0;39m"
