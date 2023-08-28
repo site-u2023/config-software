@@ -39,7 +39,7 @@ function _func_MAP_e_VirtualConnect_SET
 opkg update
 opkg install bash
 opkg install map
-wget --no-check-certificate -O /usr/sbin/map-e-ocn.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/map-e-ocn.sh
+wget --no-check-certificate -O /usr/sbin/map-e-ocn.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-ocn.sh
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 bash map-e-ocn.sh 2> /dev/null
@@ -109,7 +109,7 @@ function _func_MAP_e_V6plus_SET
 opkg update
 opkg install bash
 opkg install map
-wget --no-check-certificate -O /usr/sbin/map-e-v6plus.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/map-e-v6plus.sh
+wget --no-check-certificate -O /usr/sbin/map-e-v6plus.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-v6plus.sh
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 bash map-e-v6plus.sh 2> /dev/null
@@ -214,7 +214,7 @@ function _func_DS_LITE_Transix_SET
 {
 opkg update
 opkg install ds-lite
-wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/ds-lite.sh
+wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sh /usr/sbin/ds-lite.sh 2> /dev/null
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -267,7 +267,7 @@ function _func_DS_LITE_Xpass_SET
 {
 opkg update
 opkg install ds-lite
-wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/ds-lite.sh
+wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sh /usr/sbin/ds-lite.sh 2> /dev/null
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -320,7 +320,7 @@ function _func_DS_LITE_V6connect_SET
 {
 opkg update
 opkg install ds-lite
-wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/ds-lite.sh
+wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sh /usr/sbin/ds-lite.sh 2> /dev/null
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -613,7 +613,7 @@ done
 
 function _func_Dumb_SET
 {
-wget --no-check-certificate -O /etc/dumb.sh https://raw.githubusercontent.com/site-u2023/config-softwire/main/dumb.sh
+wget --no-check-certificate -O /etc/dumb.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb.sh
 sed -i -e "s/ipaddr='192.168.1.2'/ipaddr=${input_str_IPV4}/g" /etc/dumb.sh
 sed -i -e "s/gateway='192.168.1.1'/gateway=${input_str_GATEWAY}/g" /etc/dumb.sh
 sed -i -e "s/dns='192.168.1.1'/dns=${input_str_GATEWAY}/g" /etc/dumb.sh
