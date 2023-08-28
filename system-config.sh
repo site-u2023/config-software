@@ -9,7 +9,7 @@ do
   case "${num}" in
     "y" ) _func_ROOT_PASSWD ;;
     "n" ) _func_HOSTNAME ;;
-    "r" ) exit ;;
+    "r" ) break ;;
   esac
 done
 
