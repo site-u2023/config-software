@@ -865,6 +865,8 @@ uci set dhcp.wan6.dhcpv6='relay'
 uci set dhcp.wan6.ndp='relay'
 
 # WAN6
+uci set network.wan6=interface
+uci set network.wan6.proto='static'
 uci set network.wan6.ip6prefix=${CE}::/56
 
 # WANMAP
