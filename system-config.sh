@@ -109,6 +109,7 @@ function _func_DEVICE_SET
   sh /etc/device.sh 2> /dev/null
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
+  exit
 }
 
 while :
