@@ -87,7 +87,7 @@ do
   echo -e " \033[1;37mシステム初期設定を開始します\033[0;39m"
   read -p " 開始します [y/n]:" num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/device-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/device.sh;
+    "y" ) wget --no-check-certificate -O /etc/device.sh https://raw.githubusercontent.com/site-u2023/config-software/main/device.sh;
           _func_HOSTNAME ;;
     "n" ) exit ;;
   esac
