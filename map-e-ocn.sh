@@ -845,7 +845,7 @@ PSID=$psid
 BR=$peeraddr
 
 # network backup
-cp /etc/config/network /etc/config/network.old
+cp /etc/config/network /etc/config/network.MAP_e_VirtualConnect.old
 
 # DHCP LAN
 uci set dhcp.lan=dhcp
