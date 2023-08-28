@@ -30,8 +30,8 @@ function _func_Dumb_confirmation
 while :
 do
   echo -e " \033[1;37mアクセスポイント -----------------------------------------------\033[0;39m"
-  echo -e " \033[1;32m IPV4アドレス: ${input_str_IPV4}\033[0;39m"
-  echo -e " \033[1;32m ゲートウェイ: ${input_str_GATEWAY}\033[0;39m"
+  echo -e " \033[1;32mIPV4アドレス: ${input_str_IPV4}\033[0;39m"
+  echo -e " \033[1;32mゲートウェイ: ${input_str_GATEWAY}\033[0;39m"
   echo -e " \033[1;37m---------------------------------------------------------------\033[0;39m"
   read -p " これで宜しければ設定を開始します [y/n or r]: " num
   case "${num}" in
