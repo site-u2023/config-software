@@ -120,4 +120,3 @@ fi
     "n" ) exit ;;
   esac
 done
-exit
