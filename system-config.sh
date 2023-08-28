@@ -29,8 +29,8 @@ done
 function _func_WIFI_SSID_A
 while :
 do
-  echo -e " \033[1;32mWi-FiのSSID Aを入力して下さい\033[0;39m"
-  read -p " Wi-Fi A のSSID: " input_str_WIFI_SSID_A
+  echo -e " \033[1;32mWi-FiのSSID(A)を入力して下さい\033[0;39m"
+  read -p " Wi-Fi(A)のSSID: " input_str_WIFI_SSID_A
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_A ;;
@@ -42,8 +42,8 @@ done
 function _func_WIFI_PASSWD_A
 while :
 do
-  echo -e " \033[1;33mWi-Fi Aのパスワードを入力して下さい\033[0;39m"
-  read -p " Wi-Fi A のパスワード: " input_str_WIFI_PASSWD_A
+  echo -e " \033[1;33mWi-Fi(A)のパスワードを入力して下さい\033[0;39m"
+  read -p " Wi-Fi(A)のパスワード: " input_str_WIFI_PASSWD_A
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_B ;;
@@ -55,8 +55,8 @@ done
 function _func_WIFI_SSID_B
 while :
 do
-  echo -e " \033[1;32mWi-FiのSSID Bを入力して下さい\033[0;39m"
-  read -p " Wi-Fi B のSSID: " input_str_WIFI_SSID_B
+  echo -e " \033[1;32mWi-FiのSSID(B)を入力して下さい\033[0;39m"
+  read -p " Wi-Fi(B)のSSID: " input_str_WIFI_SSID_B
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
@@ -68,8 +68,8 @@ done
 function _func_WIFI_PASSWD_B
 while :
 do
-  echo -e " \033[1;33mWi-Fi Bのパスワードを入力して下さい\033[0;39m"
-  read -p " Wi-Fi B のパスワード: " input_str_WIFI_PASSWD_B
+  echo -e " \033[1;33mWi-Fi(B)のパスワードを入力して下さい\033[0;39m"
+  read -p " Wi-Fi(B)のパスワード: " input_str_WIFI_PASSWD_B
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DEVICE_confirmation ;;
