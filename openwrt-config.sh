@@ -7,8 +7,7 @@ do
   echo -e " \033[1;34mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/device-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/device-config.sh;
-          wget --no-check-certificate -O /etc/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh;
           sh /etc/system-config.sh;
           break ;;
     "n" ) break ;;
