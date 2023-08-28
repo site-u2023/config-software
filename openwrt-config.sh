@@ -41,7 +41,7 @@ do
   esac
 done
 
-function _func_PACKAGE
+function _func_ACCESSPOINT
 while :
 do
   echo -e " \033[1;35mアクセスポイント設定のスクリプトをダウンロードします\033[0;39m"
@@ -74,12 +74,13 @@ fi
   echo -e " \033[1;31m[a]\033[0;39m": アクセスポイント設定
   echo -e " \033[1;37m[r]\033[0;39m": スクリプトリムーブ後終了
   echo -e " \033[7;40m[q]\033[0;39m": 終了
-  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.4.11\033[0;39m"
+  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.5.0\033[0;39m"
   read -p " キーを選択してください [s/i/p or r/q]: " num
   case "${num}" in
     "s" ) _func_SYSTEM ;;
     "i" ) _func_INTERNET ;;
     "p" ) _func_PACKAGE ;;
+    "a" ) _func_ACCESSPOINT ;;
     "r" ) echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m";
           rm -f /etc/system-config.sh;
           rm -f /etc/device-config.sh;
