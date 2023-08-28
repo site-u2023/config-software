@@ -24,10 +24,10 @@ BRIDGE='lan'
 uci set network.${BRIDGE}=interface
 uci set network.${BRIDGE}.proto='static'
 uci set network.${BRIDGE}.device='br-lan'
-uci set network.${BRIDGE}.ipaddr=192.168.1.3
+uci set network.${BRIDGE}.ipaddr='192.168.1.2'
 uci set network.${BRIDGE}.netmask='255.255.255.0'
-uci set network.${BRIDGE}.gateway=192.168.1.1
-uci set network.${BRIDGE}.dns=192.168.1.1
+uci set network.${BRIDGE}.gateway='192.168.1.1'
+uci set network.${BRIDGE}.dns='192.168.1.1'
 uci set network.${BRIDGE}.delegate='0'
 
 # IPV6
