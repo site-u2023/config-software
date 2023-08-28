@@ -32,5 +32,5 @@ uci add_list firewall.@zone[${ZOON_NO}].network=${DSLITE}
 
 uci commit
 
-cp /lib/netifd/proto/dslite /lib/netifd/proto/dslite.sh.sh.old
+cp /lib/netifd/proto/dslite.sh /lib/netifd/proto/dslite.sh.old
 sed -i -e "s/mtu:-1280/mtu:-1460/g" /lib/netifd/proto/dslite.sh
