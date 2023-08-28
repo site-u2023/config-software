@@ -45,6 +45,7 @@ wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubuserco
 bash map-e-ocn.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_MAP_e_VirtualConnect_Before
@@ -69,6 +70,7 @@ rm /lib/netifd/proto/map.sh.old
 rm /usr/sbin/map-e-ocn.sh
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_MAP_e_V6plus
@@ -115,6 +117,7 @@ wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubuserco
 bash map-e-v6plus.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_MAP_e_V6plus_Before
@@ -139,6 +142,7 @@ rm /lib/netifd/proto/map.sh.old
 rm /usr/sbin/map-e-v6plus.sh
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_MAP_e_Nichiban_map
@@ -179,6 +183,7 @@ cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_DS_LITE_Transix
@@ -219,6 +224,7 @@ sh /usr/sbin/ds-lite.sh 2> /dev/null
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_DS_LITE_Transix_Before
@@ -272,6 +278,7 @@ sh /usr/sbin/ds-lite.sh 2> /dev/null
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_DS_LITE_Xpass_Before
@@ -325,6 +332,7 @@ sh /usr/sbin/ds-lite.sh 2> /dev/null
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_DS_LITE_V6connect_Before
@@ -348,6 +356,7 @@ cp /lib/netifd/proto/dslite.sh.old /lib/netifd/proto/dslite.sh
 rm /lib/netifd/proto/dslite.sh.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_PPPoE
@@ -423,6 +432,7 @@ echo -e " \033[1;37m ${input_str_ID}\033[0;39m"
 echo -e " \033[1;37m ${input_str_PASSWORD}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_PPPo_Before
@@ -443,6 +453,7 @@ cp /etc/config/network.pppoe.bak /etc/config/network
 rm /etc/config/network.pppoe.bak
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_PPPoE_ID4
@@ -532,6 +543,7 @@ echo -e " \033[1;37m ${input_str_ID6}\033[0;39m"
 echo -e " \033[1;37m ${input_str_PASSWORD6}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_PPPo_Before6
@@ -552,6 +564,7 @@ cp /etc/config/network.pppoe6.bak /etc/config/network
 rm /etc/config/network.pppoe6.bak
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_main
