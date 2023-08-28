@@ -3,8 +3,8 @@
 function _func_HOSTNAME
 while :
 do
-  echo -e " \033[1;32mデバイスの名称を入力して下さい\033[0;39m"
-  read -p " デバイスの名称: " input_str_SYSTEM_HOSTNAME
+  echo -e " \033[1;32mデバイスのホストネームを入力して下さい\033[0;39m"
+  read -p " デバイスのホストネーム: " input_str_SYSTEM_HOSTNAME
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_ROOT_PASSWD ;;
@@ -82,8 +82,8 @@ function _func_DEVICE_confirmation
 while :
 do
   echo -e " \033[1;37mシステム設定 --------------------------------------------------\033[0;39m"
-  echo -e " \033[1;32mデバイス の名称: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
-  echo -e " \033[1;32mデバイス のパスワード: ${input_str_ROOT_PASSWD}\033[0;39m"
+  echo -e " \033[1;32mデバイスのホストネーム: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
+  echo -e " \033[1;32mデバイスのパスワード: ${input_str_ROOT_PASSWD}\033[0;39m"
   echo -e " \033[1;32mWi-Fi(wwan0)のSSID: ${input_str_WIFI_SSID_A}\033[0;39m"
   echo -e " \033[1;32mWi-Fi(wwan0)のパスワード: ${input_str_WIFI_PASSWD_A}\033[0;39m"
   echo -e " \033[1;32mWi-Fi(wwan1)のSSID: ${input_str_WIFI_SSID_B}\033[0;39m"
