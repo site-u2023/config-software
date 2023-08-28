@@ -58,6 +58,7 @@ fi
   echo -e " \033[1;34m[s]\033[0;39m": システム初期設定
   echo -e " \033[1;32m[i]\033[0;39m": インターネット接続設定
   echo -e " \033[1;35m[p]\033[0;39m": パッケージインストール
+  echo -e " \033[1;31m[a]\033[0;39m": アクセスポイント設定
   echo -e " \033[1;37m[r]\033[0;39m": スクリプトリムーブ後終了
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.4.11\033[0;39m"
@@ -67,13 +68,12 @@ fi
     "i" ) _func_INTERNET ;;
     "p" ) _func_PACKAGE ;;
     "r" ) echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m";
-          wget --no-check-certificate -O /etc/end-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/end-config.sh;
           rm -f /etc/system-config.sh;
           rm -f /etc/device-config.sh;
           rm -f /etc/internet-config.sh;
           rm -f /etc/package-config.sh;
+          rm -f /etc/dumb-config.sh; 
           rm -f /etc/openwrt-config.sh;
-          sh /etc/end-config.sh;
           break ;;
     "q" ) echo -e " \033[1;31m終了しました\033[0;39m";
           break ;;
