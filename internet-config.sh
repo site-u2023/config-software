@@ -566,7 +566,7 @@ do
   echo -e " \033[1;36m[o]\033[0;39m": PPPoE（iPv4・IPv6）
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m----------------------------------------------- August 25, 2023\033[0;39m"
-  read -p " キーを選択してください [v/p/t/x/c/o/a or q]: " num
+  read -p " キーを選択してください [v/p/t/x/c/o or q]: " num
   case "${num}" in
     "v" ) _func_MAP_e_VirtualConnect ;;
     "p" ) _func_MAP_e_V6plus ;;
@@ -574,7 +574,6 @@ do
     "x" ) _func_DS_LITE_Xpass ;;
     "c" ) _func_DS_LITE_V6connect ;;
     "o" ) _func_PPPoE ;;
-    "a" ) _func_Dumb ;;
     "q" ) exit ;;
   esac
 done
