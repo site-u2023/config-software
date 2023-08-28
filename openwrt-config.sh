@@ -74,7 +74,7 @@ fi
   echo -e " \033[1;37m[r]\033[0;39m": スクリプトリムーブ後終了
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.6.2\033[0;39m"
-  read -p " キーを選択してください [s/i/p or r/q]: " num
+  read -p " キーを選択してください [s/i/p/a or r/q]: " num
   case "${num}" in
     "s" ) _func_SYSTEM ;;
     "i" ) _func_INTERNET ;;
