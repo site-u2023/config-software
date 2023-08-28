@@ -41,6 +41,19 @@ do
   esac
 done
 
+function _func_PACKAGE
+while :
+do
+  echo -e " \033[1;35mアクセスポイント設定のスクリプトをダウンロードします\033[0;39m"
+  read -p " 宜しいですか? [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh;
+          sh /etc/dumb-config.sh;
+          break ;;
+    "n" ) break ;;
+  esac
+done
+
 while :
 do
 {
