@@ -83,6 +83,7 @@ rm /etc/config/wireless.dump.bak
 rm /etc/dumb.sh
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
+exit
 }
 
 function _func_Dumb
