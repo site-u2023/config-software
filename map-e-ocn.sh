@@ -1,5 +1,11 @@
 #!/bin/bash
 # this script based http://ipv4.web.fc2.com/map-e.html & https://benedicam-te.blogspot.com/
+. /lib/functions/network.sh
+network_flush_cache
+network_find_wan6 NET_IF6
+network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
+network_get_device NET_L3D6 "${NET_IF6}"
+new_ip6_prefix=${NET_ADDR6}
 
 declare -A ruleprefix31=(
   [0x240b0010]=106,72
@@ -697,13 +703,6 @@ declare -A ruleprefix38_20=(
   [0x2400415298]=153,156,128
   [0x240041529c]=153,156,144
 )
-
-. /lib/functions/network.sh
-network_flush_cache
-network_find_wan6 NET_IF6
-network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
-network_get_device NET_L3D6 "${NET_IF6}"
-new_ip6_prefix=${NET_ADDR6}
 
 ip6_prefix_tmp=`echo ${new_ip6_prefix/::/:0::}`
 if [[ $ip6_prefix_tmp =~ ^([0-9a-f]{1,4}):([0-9a-f]{1,4}):([0-9a-f]{1,4}):([0-9a-f]{0,4}) ]]; then
