@@ -27,8 +27,6 @@ then
  uci set irqbalance.irqbalance.enabled='1';
  uci commit irqbalance;
  /etc/init.d/irqbalance start
- echo "CPUコア: ${CPU_INFO}"
- echo "インストール: Irqbalance"
 fi
 
 # SQM
@@ -158,10 +156,11 @@ if [ -n "$str_USB" ]; then
   opkg install kmod-fs-hfsplus3;
   opkg install hdparm;
   opkg install hd-idle
-  echo "インストール: USBドライバー&ツール"
+  echo " インストール: USBドライバー&ツール"
 else
-  echo "USBデバイスはありません"
+  echo " USBデバイスはありません"
 fi
+echo " CPUコア: ${CPU_INFO}"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 }
