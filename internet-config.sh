@@ -342,8 +342,8 @@ done
 
 function _func_DS_LITE_Before_Restoration
 {
-cp /etc/config/network.old /etc/config/network
-rm /etc/config/network.old
+cp /etc/config/network.dslite.old /etc/config/network
+rm /etc/config/network.dslite.old
 cp /lib/netifd/proto/dslite.sh.old /lib/netifd/proto/dslite.sh
 rm /lib/netifd/proto/dslite.sh.old
 read -p " 何かキーを押してデバイスを再起動してください"
