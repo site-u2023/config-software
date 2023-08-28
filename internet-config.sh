@@ -62,8 +62,8 @@ done
 
 function _func_MAP_e_VirtualConnect_Before_Restoration
 {
-cp /etc/config/network.old /etc/config/network
-rm /etc/config/network.old
+cp /etc/config/network.MAP_e_VirtualConnect.old /etc/config/network
+rm /etc/config/network.MAP_e_VirtualConnect.old
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
 rm /usr/sbin/map-e-ocn.sh
@@ -132,8 +132,8 @@ done
 
 function _func_MAP_e_V6plus_Before_Restoration
 {
-cp /etc/config/network.old /etc/config/network
-rm /etc/config/network.old
+cp /etc/config/network.map-e-v6plus.old /etc/config/network
+rm /etc/config/network.map-e-v6plus.old
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
 rm /usr/sbin/map-e-v6plus.sh
