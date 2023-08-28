@@ -22,7 +22,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_SSID_A ;;
     "n" ) _func_ROOT_PASSWD ;;
-    "r" ) exit ;;
+    "r" ) break ;;
   esac
 done
 
@@ -35,7 +35,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_A ;;
     "n" ) _func_WIFI_SSID_A ;;
-    "r" ) exit ;;
+    "r" ) break ;;
   esac
 done
 
@@ -48,7 +48,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_SSID_B ;;
     "n" ) _func_WIFI_PASSWD_A ;;
-    "r" ) exit ;;
+    "r" ) break ;;
   esac
 done
 
@@ -61,7 +61,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
     "n" ) _func_WIFI_SSID_B ;;
-    "r" ) exit ;;
+    "r" ) break ;;
   esac
 done
 
@@ -74,7 +74,7 @@ do
   case "${num}" in
     "y" ) _func_DEVICE_confirmation ;;
     "n" ) _func_WIFI_PASSWD_B ;;
-    "r" ) exit ;;
+    "r" ) break ;;
   esac
 done
 
@@ -107,7 +107,7 @@ function _func_DEVICE_SET
   sed -i -e "s/WIFI_SSID_B='SSID_B'/WIFI_SSID_B=${input_str_WIFI_SSID_B}/g" /etc/device.sh;
   sed -i -e "s/wifi_PASSWORD_B='password'/wifi_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" /etc/device.sh;     
   sh /etc/device.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
+read -p " 何かキーを押してデバイスを再起動してください";
 reboot
 }
 
