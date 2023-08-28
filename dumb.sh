@@ -78,6 +78,7 @@ echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
 # }
 
 # 複数の AP にわたってホスト名を表示できるようにする
+opkg update
 opkg install fping
 sed -i "/exit 0/d" /etc/rc.local
 echo "fping -g 192.168.1.0/24" >> /etc/rc.local 
