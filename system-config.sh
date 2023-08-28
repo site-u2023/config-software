@@ -9,7 +9,7 @@ do
   case "${num}" in
     "y" ) _func_ROOT_PASSWD ;;
     "n" ) _func_HOSTNAME ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
@@ -22,7 +22,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_SSID_A ;;
     "n" ) _func_ROOT_PASSWD ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
@@ -35,7 +35,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_A ;;
     "n" ) _func_WIFI_SSID_A ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
@@ -48,7 +48,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_SSID_B ;;
     "n" ) _func_WIFI_PASSWD_A ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
@@ -61,7 +61,7 @@ do
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
     "n" ) _func_WIFI_SSID_B ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
@@ -74,7 +74,7 @@ do
   case "${num}" in
     "y" ) _func_DEVICE_confirmation ;;
     "n" ) _func_WIFI_PASSWD_B ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
@@ -93,7 +93,7 @@ do
   case "${num}" in
     "y" ) _func_DEVICE_SET ;; 
     "n" ) _func_HOSTNAME ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
