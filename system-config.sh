@@ -99,14 +99,14 @@ done
 
 function _func_DEVICE_SET
 {
-  wget --no-check-certificate -O /etc/device.sh https://raw.githubusercontent.com/site-u2023/config-software/main/device.sh;
-  sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/device.sh;
-  sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/device.sh;
-  sed -i -e "s/WIFI_SSID_A='SSID_A'/WIFI_SSID_A=${input_str_WIFI_SSID_A}/g" /etc/device.sh;
-  sed -i -e "s/wifi_PASSWORD_A='password'/wifi_PASSWORD_A=${input_str_WIFI_PASSWD_A}/g" /etc/device.sh;
-  sed -i -e "s/WIFI_SSID_B='SSID_B'/WIFI_SSID_B=${input_str_WIFI_SSID_B}/g" /etc/device.sh;
-  sed -i -e "s/wifi_PASSWORD_B='password'/wifi_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" /etc/device.sh;     
-  sh /etc/device.sh 2> /dev/null
+  wget --no-check-certificate -O /etc/system.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system.sh;
+  sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/system.sh;
+  sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/system.sh;
+  sed -i -e "s/WIFI_SSID_A='SSID_A'/WIFI_SSID_A=${input_str_WIFI_SSID_A}/g" /etc/system.sh;
+  sed -i -e "s/wifi_PASSWORD_A='password'/wifi_PASSWORD_A=${input_str_WIFI_PASSWD_A}/g" /etc/system.sh;
+  sed -i -e "s/WIFI_SSID_B='SSID_B'/WIFI_SSID_B=${input_str_WIFI_SSID_B}/g" /etc/system.sh;
+  sed -i -e "s/wifi_PASSWORD_B='password'/wifi_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" //etc/system.sh;     
+  sh /etc/system.sh 2> /dev/null
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
   exit
