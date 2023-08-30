@@ -36,18 +36,22 @@ uci set network.${BRIDGE}.delegate='0'
 BRIDGE6='lan6'
 uci set network.${BRIDGE6}=interface
 uci set network.${BRIDGE6}.proto='dhcpv6'
-uci set network.${BRIDGE6}.device=@${BRIDGE}
+uci set network.${BRIDGE6}.device='@br-lan'
 uci set network.${BRIDGE6}.reqaddress='try'
 uci set network.${BRIDGE6}.reqprefix='no'
 uci set network.${BRIDGE6}.type='bridge'
 
-# 既存のワイヤレス ネットワークを変更する
+# 既存のワイヤレスネットワークを変更する
 uci set wireless.default_radio0.network=${BRIDGE}
 uci set wireless.default_radio1.network=${BRIDGE}
 
+# NTPサーバー
+uci delete system.ntp.server
+uci set system.ntp.use_dhcp='1'
+
 uci commit
 
-# DHCP サーバーを無効にする
+# DHCPサーバーを無効にする
 /etc/init.d/odhcpd disable
 /etc/init.d/odhcpd stop
 
@@ -63,7 +67,7 @@ uci commit
 uci set network.globals.packet_steering='1'
 uci set network.globals.igmp_snooping='1'
 
-# wpa_supplicant を無効にする
+# wpa_supplicantを無効にする
 rm /usr/sbin/wpa_supplicant
 echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
 
