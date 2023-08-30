@@ -132,28 +132,28 @@ rm /tmp/luci-theme-argon.ipk
 # USB
 str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
-  opkg install block-mount;
-  opkg install kmod-usb-storage;
-  opkg install kmod-usb-storage-uas;
-  opkg install usbutils;
-  opkg install gdisk;
-  opkg install libblkid1;
-  opkg install kmod-usb-ledtrig-usbport;
-  opkg install luci-app-ledtrig-usbport;
-  opkg install dosfstools;
-  opkg install kmod-fs-vfat;
-  opkg install e2fsprogs;
-  opkg install kmod-fs-ext4;
-  opkg install f2fs-tools;
-  opkg install kmod-fs-f2fs;
-  opkg install exfat-fsck;
-  opkg install kmod-fs-exfat;
-  opkg install ntfs-3g;
-  opkg install kmod-fs-ntfs3;
-  opkg install hfsfsck;
-  opkg install kmod-fs-hfs;
-  opkg install kmod-fs-hfsplus3;
-  opkg install hdparm;
+  opkg install block-mount
+  opkg install kmod-usb-storage
+  opkg install kmod-usb-storage-uas
+  opkg install usbutils
+  opkg install gdisk
+  opkg install libblkid1
+  opkg install kmod-usb-ledtrig-usbport
+  opkg install luci-app-ledtrig-usbport
+  opkg install dosfstools
+  opkg install kmod-fs-vfat
+  opkg install e2fsprogs
+  opkg install kmod-fs-ext4
+  opkg install f2fs-tools
+  opkg install kmod-fs-f2fs
+  opkg install exfat-fsck
+  opkg install kmod-fs-exfat
+  opkg install ntfs-3g
+  opkg install kmod-fs-ntfs3
+  opkg install hfsfsck
+  opkg install kmod-fs-hfs
+  opkg install kmod-fs-hfsplus3
+  opkg install hdparm
   opkg install hd-idle
   echo " インストール: USBドライバー&ツール"
 else
