@@ -102,11 +102,11 @@ uci set wireless.default_radio1.isolate='1'
 # Wi-Fi Bチャンネル
 WIFI_SSID_B='SSID_C'
 WIFI_PASSWORD_C='password'
-uci set wireless.radio1.country='JP'
-uci set wireless.radio1.txpower='10'
-uci set wireless.radio1.noscan='1'
-uci set wireless.radio1.frag='2347'
-uci set wireless.radio1.rts='2346'
+uci set wireless.radio2.country='JP'
+uci set wireless.radio2.txpower='10'
+uci set wireless.radio2.noscan='1'
+uci set wireless.radio2.frag='2347'
+uci set wireless.radio2.rts='2346'
 uci set wireless.default_radio1.encryption='sae-mixed'
 uci set wireless.default_radio1.ssid=${WIFI_SSID_C}
 uci set wireless.default_radio1.key=${WIFI_PASSWORD_C}
