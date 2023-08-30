@@ -47,7 +47,10 @@ uci set wireless.default_radio1.network=${BRIDGE}
 
 # NTPサーバー
 uci delete system.ntp.server
+uci set system.ntp=timeserver
+uci set system.ntp.enable_server='0'
 uci set system.ntp.use_dhcp='1'
+uci set system.ntp.server='192.168.1.1'
 
 uci commit
 
