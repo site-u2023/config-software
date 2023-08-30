@@ -718,6 +718,8 @@ if [[ $ip6_prefix_tmp =~ ^([0-9a-f]{1,4}):([0-9a-f]{1,4}):([0-9a-f]{1,4}):([0-9a
   done
 else
   echo "プレフィックスを認識できません"
+  echo "ONUに直接接続していますか"
+  echo "終了します"
   exit 1  
 fi
 
