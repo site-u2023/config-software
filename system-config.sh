@@ -151,7 +151,7 @@ function _func_DEVICE_SET
   sed -i -e "s/wifi_PASSWORD_B='password'/wifi_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_C='SSID_C'/WIFI_SSID_C=${input_str_WIFI_SSID_C}/g" /etc/config-software/system.sh
   sed -i -e "s/wifi_PASSWORD_C='password'/wifi_PASSWORD_C=${input_str_WIFI_PASSWD_C}/g" /etc/config-software/system.sh
-  sh /etc/system.sh 2> /dev/null
+  sh /etc/config-software/system.sh 2> /dev/null
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
   exit
