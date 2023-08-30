@@ -75,6 +75,8 @@ cp /etc/config/firewall.dump.bak /etc/config/firewall
 rm /etc/config/firewall.dump.bak
 cp /etc/config/wireless.dump.bak /etc/config/wireless
 rm /etc/config/wireless.dump.bak
+cp /etc/config/dropbear.dump.bak /etc/config/dropbear
+rm /etc/config/dropbear.dump.bak
 /etc/init.d/odhcpd enable
 /etc/init.d/odhcpd start
 /etc/init.d/dnsmasq enable
