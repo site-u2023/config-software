@@ -29,7 +29,7 @@ done
 function _func_WIFI_SSID_A
 while :
 do
-  echo -e " \033[1;32mWi-FiのSSID(wwan0)を入力して下さい\033[0;39m"
+  echo -e " \033[1;32mWi-Fi(wwan0)のSSIDを入力して下さい\033[0;39m"
   read -p " Wi-Fi(wwan0)のSSID: " input_str_WIFI_SSID_A
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -55,7 +55,7 @@ done
 function _func_WIFI_SSID_B
 while :
 do
-  echo -e " \033[1;32mWi-FiのSSID(wwan1)を入力して下さい\033[0;39m"
+  echo -e " \033[1;32mWi-Fi(wwan1)のSSIDを入力して下さい\033[0;39m"
   read -p " Wi-Fi(wwan1)のSSID: " input_str_WIFI_SSID_B
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -81,17 +81,17 @@ done
 function _func_WIFI_SEARCH
 {
 WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
-    if [ "$WIFI_DEVICE" -gt 3 ]
-     _func_WIFI_SSID_C
+    if [ "$WIFI_DEVICE" = 3 ]
     then
-     _func_DEVICE_confirmation
+    _func_WIFI_SSID_C
     fi
+    _func_DEVICE_confirmation
 }
 
 function _func_WIFI_SSID_C
 while :
 do
-  echo -e " \033[1;35mWi-FiのSSID(wwan2)を入力して下さい\033[0;39m"
+  echo -e " \033[1;35mWi-Fi(wwan2)のSSIDを入力して下さい\033[0;39m"
   read -p " Wi-Fi(wwan2)のSSID: " input_str_WIFI_SSID_C
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
