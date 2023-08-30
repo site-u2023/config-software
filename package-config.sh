@@ -176,8 +176,32 @@ else
  exit
 fi
 }
-  AVAILABLE_FLASH=`df -Th | fgrep 'overlayfs:/overlay' | awk '{ print $5 }'`
-  echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}\033[0;39m"
+{
+str_USB=`dmesg | grep -s usb`
+if [ -n "$str_USB" ]; then
+  {
+  AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+  if [ "${AVAILABLE_FLASH}" -gt "6500" ]; then
+   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
+   echo -e " \033[1;37mインストールサイズ: 約6500KB\033[0;39m"
+  else
+   read -p " フラッシュ容量が足りないため終了します"
+   exit
+  fi
+  }
+else
+ {
+  AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+  if [ "${AVAILABLE_FLASH}" -gt "4300" ]; then
+   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
+   echo -e " \033[1;37mインストールサイズ: 約4300KB\033[0;39m"
+  else
+   read -p " フラッシュ容量が足りないため終了します"
+   exit
+  fi
+  }
+fi
+}
   echo -e " \033[1;35mパッケージインストールを開始します\033[0;39m"
   echo -e " \033[1;35m※カスタムフィードは失敗する事があります\033[0;39m"
   read -p " 開始します [y/n]: " num
