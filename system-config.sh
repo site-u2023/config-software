@@ -81,7 +81,8 @@ done
 function _func_WIFI_SEARCH
 {
 WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
-    if [ "$WIFI_DEVICE" = 3 ]
+WIFI_NO=3
+    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
     then
      _func_WIFI_SSID_C
     else
@@ -125,8 +126,11 @@ do
   echo -e " \033[1;32mWi-Fi(wwan0)のパスワード: ${input_str_WIFI_PASSWD_A}\033[0;39m"
   echo -e " \033[1;32mWi-Fi(wwan1)のSSID: ${input_str_WIFI_SSID_B}\033[0;39m"
   echo -e " \033[1;32mWi-Fi(wwan1)のパスワード: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+   if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
+    then
   echo -e " \033[1;35mWi-Fi(wwan2)のSSID: ${input_str_WIFI_SSID_C}\033[0;39m"
   echo -e " \033[1;35mWi-Fi(wwan2)のパスワード: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+   fi
   echo -e " \033[1;37m---------------------------------------------------------------\033[0;39m"
   read -p " これで宜しければ設定を開始します [y/n or r]: " num
   case "${num}" in
