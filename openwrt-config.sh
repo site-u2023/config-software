@@ -7,8 +7,8 @@ do
   echo -e " \033[1;34mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh;
-          sh /etc/system-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/config-software/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh
+          sh /etc/config-software/system-config.sh
           break ;;
     "n" ) break ;;
   esac
@@ -20,8 +20,8 @@ do
   echo -e " \033[1;32mインターネット接続設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh;
-          sh /etc/internet-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/config-software/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh
+          sh /etc/config-software/internet-config.sh
           break ;;
     "n" ) break ;;
   esac
@@ -33,8 +33,8 @@ do
   echo -e " \033[1;35mパッケージインストールのスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh;
-          sh /etc/package-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/config-software/package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh
+          sh /etc/config-software/package-config.sh
           break ;;
     "n" ) break ;;
   esac
@@ -46,8 +46,8 @@ do
   echo -e " \033[1;35mアクセスポイント設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh;
-          sh /etc/dumb-config.sh;
+    "y" ) wget --no-check-certificate -O /etc/config-software/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh
+          sh /etc/config-software/dumb-config.sh
           break ;;
     "n" ) break ;;
   esac
@@ -73,22 +73,17 @@ fi
   echo -e " \033[1;31m[a]\033[0;39m": アクセスポイント設定
   echo -e " \033[1;37m[r]\033[0;39m": スクリプトリムーブ後終了
   echo -e " \033[7;40m[q]\033[0;39m": 終了
-  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.6.4\033[0;39m"
+  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.7.0\033[0;39m"
   read -p " キーを選択してください [s/i/p/a or r/q]: " num
   case "${num}" in
     "s" ) _func_SYSTEM ;;
     "i" ) _func_INTERNET ;;
     "p" ) _func_PACKAGE ;;
     "a" ) _func_ACCESSPOINT ;;
-    "r" ) echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m";
-          rm -f /etc/system-config.sh;
-          rm -f /etc/device-config.sh;
-          rm -f /etc/internet-config.sh;
-          rm -f /etc/package-config.sh;
-          rm -f /etc/dumb-config.sh; 
-          rm -f /etc/openwrt-config.sh;
+    "r" ) echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m"
+          rm -f /etc/config-software/
           break ;;
-    "q" ) echo -e " \033[1;31m終了しました\033[0;39m";
+    "q" ) echo -e " \033[1;31m終了しました\033[0;39m"
           break ;;
   esac
  done 
