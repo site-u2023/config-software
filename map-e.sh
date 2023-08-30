@@ -844,18 +844,15 @@ PSID=$psid
 BR=$peeraddr
 
 # network backup
-cp /etc/config/network /etc/config/network.MAP_e_VirtualConnect.old
-
+cp /etc/config/network /etc/config/network.map-e.old
 # DHCP LAN
 uci set dhcp.lan=dhcp
 uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ra='relay'
 uci set dhcp.lan.ndp='relay'
 uci set dhcp.lan.force='1'
-
 # WAN
 uci set network.wan.auto='0'
-
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
 uci set dhcp.wan6.interface='wan6'
@@ -864,12 +861,10 @@ uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
 uci set dhcp.wan6.dhcpv6='relay'
 uci set dhcp.wan6.ndp='relay'
-
 # WAN6 # Onry_V6plus
 uci set network.wan6=interface # Onry_V6plus
 uci set network.wan6.proto='static' # Onry_V6plus
 uci set network.wan6.ip6prefix=${CE}::/56 # Onry_V6plus
-
 # WAN6RA # Onry_OCN
 WAN6RA='wan6ra' # Onry_OCN
 uci set network.${WAN6RA}=interface # Onry_OCN
@@ -878,7 +873,6 @@ uci set network.${WAN6RA}.device=${NET_L3D6} # Onry_OCN
 uci set network.${WAN6RA}.ip6gw=${CE}::1 # Onry_OCN
 uci set network.${WAN6RA}.ip6prefix=${CE}::/56 # Onry_OCN
 uci add_list network.${WAN6RA}.ip6addr=${CE}::1001 # Onry_OCN
-
 # WANMAP
 WANMAP='wanmap'
 uci set network.${WANMAP}=interface
@@ -896,7 +890,6 @@ uci set network.${WANMAP}.legacymap='1'
 uci set network.${WANMAP}.mtu='1460'
 uci set network.${WANMAP}.encaplimit='ignore' # Onry_V6plus
 uci set network.${WANMAP}.tunlink='wan6' # Onry_V6plus
-
 # FW
 ZOON_NO='1'
 uci del_list firewall.@zone[${ZOON_NO}].network='wan'
