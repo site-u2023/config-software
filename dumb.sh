@@ -12,6 +12,7 @@ cp /etc/config/network /etc/config/network.dump.bak
 cp /etc/config/dhcp /etc/config/dhcp.dump.bak
 cp /etc/config/firewall /etc/config/firewall.dump.bak
 cp /etc/config/wireless /etc/config/wireless.dump.bak
+cp /etc/config/dropbear /etc/config/dropbear.dump.bak
 uci add_list network.@device[0].ports=${NET_L2D6}
 uci delete network.wan
 uci delete network.wan6
