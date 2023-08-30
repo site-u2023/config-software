@@ -83,9 +83,10 @@ function _func_WIFI_SEARCH
 WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
     if [ "$WIFI_DEVICE" = 3 ]
     then
-    _func_WIFI_SSID_C
+     _func_WIFI_SSID_C
+    else
+     _func_DEVICE_confirmation
     fi
-    _func_DEVICE_confirmation
 }
 
 function _func_WIFI_SSID_C
