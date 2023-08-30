@@ -39,10 +39,11 @@ function _func_MAP_e_VirtualConnect_SET
 opkg update
 opkg install bash
 opkg install map
-wget --no-check-certificate -O /usr/sbin/map-e-ocn.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-ocn.sh
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-bash map-e-ocn.sh 2> /dev/null
+wget --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
+sed -i "/Onry_V6plus/d"  /etc/config-software/map-e.sh
+bash /etc/config-software/map-e.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -55,23 +56,11 @@ do
   echo -e " \033[1;37mパッケージ: map/bashはリムーブしません\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_MAP_e_VirtualConnect_Before_Restoration ;;
+    "y" ) _func_MAP_e_Restoration ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
     "r" ) _func_main ;;
   esac
 done
-
-function _func_MAP_e_VirtualConnect_Before_Restoration
-{
-cp /etc/config/network.MAP_e_VirtualConnect.old /etc/config/network
-rm /etc/config/network.MAP_e_VirtualConnect.old
-cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
-rm /lib/netifd/proto/map.sh.old
-rm /usr/sbin/map-e-ocn.sh
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
-}
 
 function _func_MAP_e_V6plus
 while :
@@ -111,10 +100,11 @@ function _func_MAP_e_V6plus_SET
 opkg update
 opkg install bash
 opkg install map
-wget --no-check-certificate -O /usr/sbin/map-e-v6plus.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-v6plus.sh
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-bash map-e-v6plus.sh 2> /dev/null
+wget --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
+sed -i "/Onry_OCN/d"  /etc/config-software/map-e.sh
+bash /etc/config-software/map-e.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -127,19 +117,19 @@ do
   echo -e " \033[1;37mパッケージ: map/bashはリムーブしません\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_MAP_e_V6plus_Before_Restoration ;;
+    "y" ) _func_MAP_e_Before_Restoration ;;
     "n" ) _func_MAP_e_V6plus ;;
     "r" ) _func_main ;;
   esac
 done
 
-function _func_MAP_e_V6plus_Before_Restoration
+function _func_MAP_e_Before_Restoration
 {
-cp /etc/config/network.map-e-v6plus.old /etc/config/network
-rm /etc/config/network.map-e-v6plus.old
+cp /etc/config/network.map-e.old /etc/config/network
+rm /etc/config/network.map-e.old
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
-rm /usr/sbin/map-e-v6plus.sh
+rm /etc/config-software/map-e.sh
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -219,9 +209,9 @@ function _func_DS_LITE_Transix_SET
 {
 opkg update
 opkg install ds-lite
-wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
-sh /usr/sbin/ds-lite.sh 2> /dev/null
-sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
+wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
+sh /etc/config-software/ds-lite.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -273,9 +263,9 @@ function _func_DS_LITE_Xpass_SET
 {
 opkg update
 opkg install ds-lite
-wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
-sh /usr/sbin/ds-lite.sh 2> /dev/null
-sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
+wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+sed -i -e "s/AFTR_ADDRESS/2001:f60:0:200::1:1/g" /etc/config-software/ds-lite.sh
+sh /etc/config-software/ds-lite.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -327,9 +317,9 @@ function _func_DS_LITE_V6connect_SET
 {
 opkg update
 opkg install ds-lite
-wget --no-check-certificate -O /usr/sbin/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
-sh /usr/sbin/ds-lite.sh 2> /dev/null
-sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config/network
+wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+sed -i -e "s/AFTR_ADDRESS/2001:c28:5:301::11/g" /etc/config-software/ds-lite.sh
+sh /etc/config-software/ds-lite.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -353,7 +343,7 @@ function _func_DS_LITE_Before_Restoration
 cp /etc/config/network.dslite.old /etc/config/network
 rm /etc/config/network.dslite.old
 cp /lib/netifd/proto/dslite.sh.old /lib/netifd/proto/dslite.sh
-rm /lib/netifd/proto/dslite.sh.old
+rm /etc/config-software/ds-lite.sh
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
