@@ -2,7 +2,7 @@
 # this script based http://ipv4.web.fc2.com/map-e.html & https://benedicam-te.blogspot.com/
 . /lib/functions.sh
 . /lib/functions/network.sh
-. ../netifd-proto.sh
+. /lib/netifd/netifd-proto.sh
 
 network_flush_cache
 network_find_wan6 NET_IF6
