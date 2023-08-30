@@ -69,7 +69,7 @@ AVAILABLE_MEMORY2=`expr ${AVAILABLE_MEMORY} / 1024`
 AVAILABLE_FLASH=`df -Th | fgrep 'overlayfs:/overlay' | awk '{ print $5 }'`
   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}\033[0;39m"
   echo -e " \033[1;37m利用可能メモリーサイズ: ${AVAILABLE_MEMORY2}M\033[0;39m"
-  echo -e " \033[1;37m推奨設定順序: システム > インターネット > パッケージ\033[0;39m"
+  echo -e " \033[1;37m推奨設定順序: システム > インターネット > パッケージ\033[0;39m" 
   echo -e " \033[1;37mopenwrt-config ------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[s]\033[0;39m": システム初期設定（USB自動判別）
   echo -e " \033[1;32m[i]\033[0;39m": インターネット接続設定
