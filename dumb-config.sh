@@ -67,6 +67,8 @@ done
 
 function _func_Dumb_Before_Restoration
 {
+cp /etc/config/system.dump.bak /etc/config/system
+rm /etc/config/system.dump.bak
 cp /etc/config/network.dump.bak /etc/config/network
 rm /etc/config/network.dump.bak
 cp /etc/config/dhcp.dump.bak /etc/config/dhcp
