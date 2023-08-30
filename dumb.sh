@@ -8,6 +8,7 @@ network_get_physdev NET_L2D6 "${NET_IF6}"
 # network_find_wan NET_IF
 # network_get_physdev NET_L2D "${NET_IF}"
 # ネットワークを変更する
+cp /etc/config/system /etc/config/system.dump.bak
 cp /etc/config/network /etc/config/network.dump.bak
 cp /etc/config/dhcp /etc/config/dhcp.dump.bak
 cp /etc/config/firewall /etc/config/firewall.dump.bak
