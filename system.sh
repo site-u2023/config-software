@@ -38,14 +38,14 @@ uci commit system
 # ソフトウェア フローオフロード
 uci set firewall.@defaults[0].flow_offloading='1'
 uci commit firewall
-/etc/init.d/firewall restart
+# /etc/init.d/firewall restart
 
 # ハードウェア フローオフロード
 Hardware_flow_offload=`grep 'mediatek' /etc/openwrt_release`
 if [ "${Hardware_flow_offload:16:8}" = "mediatek" ]; then
- uci set firewall.@defaults[0].flow_offloading_hw='1';
- uci commit firewall;
- /etc/init.d/firewall restart
+ uci set firewall.@defaults[0].flow_offloading_hw='1'
+ uci commit firewall
+ # /etc/init.d/firewall restart
 fi
 
 # パケットステアリング
@@ -66,8 +66,8 @@ uci add_list dhcp.lan.dns="2606:4700:4700::1001"
 uci add_list dhcp.lan.dns="2001:4860:4860::8844"
 # set
 uci commit dhcp
-/etc/init.d/dnsmasq restart
-/etc/init.d/odhcpd restart
+# /etc/init.d/dnsmasq restart
+# /etc/init.d/odhcpd restart
 
 # Wi-Fi Aチャンネル
 WIFI_SSID_A='SSID_A'
@@ -122,15 +122,15 @@ uci delete wireless.radio0.disabled
 uci delete wireless.radio1.disabled
 uci delete wireless.radio2.disabled
 uci commit wireless
-/etc/init.d/network restart
+# /etc/init.d/network restart
 
 # PING宛先
 uci set luci.diag.dns='one.one.one.one'
 uci set luci.diag.ping='one.one.one.one'
 uci set luci.diag.route='one.one.one.one'
 uci commit luci
-/etc/init.d/rpcd reload
+# /etc/init.d/rpcd reload
 
 # CRON(再起動)
 echo "00 04 * * * sleep 70 && touch /etc/banner && reboot" >> /etc/crontabs/root
-/etc/init.d/cron restart
+# /etc/init.d/cron restart
