@@ -52,6 +52,10 @@ uci set system.ntp.enable_server='0'
 uci set system.ntp.use_dhcp='1'
 uci set system.ntp.server='192.168.1.1'
 
+# マルチキャスト
+uci set network.globals.packet_steering='1'
+uci set network.globals.igmp_snooping='1'
+
 uci commit
 
 # DHCPサーバーを無効にする
@@ -65,10 +69,6 @@ uci commit
 # ファイアウォールを無効にする
 /etc/init.d/firewall disable
 /etc/init.d/firewall stop
-
-# マルチキャスト
-uci set network.globals.packet_steering='1'
-uci set network.globals.igmp_snooping='1'
 
 # wpa_supplicantを無効にする
 rm /usr/sbin/wpa_supplicant
