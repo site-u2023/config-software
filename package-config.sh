@@ -17,7 +17,6 @@ opkg install luci-i18n-firewall-ja
 # SFTP
 opkg install openssh-sftp-server
  
- 
 # CPU負荷分散
 CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
 if [ "$CPU_INFO" -gt 3 ]
