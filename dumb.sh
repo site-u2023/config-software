@@ -16,6 +16,7 @@ uci add_list network.@device[0].ports=${NET_L2D6}
 uci delete network.wan
 uci delete network.wan6
 uci delete network.lan
+uci delete dropbear.@dropbear[0]
 uci -q delete network.globals.ula_prefix
 # IPV4
 BRIDGE='bridge'
