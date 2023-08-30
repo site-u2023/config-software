@@ -17,7 +17,6 @@ uci delete network.wan
 uci delete network.wan6
 uci delete network.lan
 uci -q delete network.globals.ula_prefix
-
 # IPV4
 BRIDGE='bridge'
 uci set network.${BRIDGE}=interface
