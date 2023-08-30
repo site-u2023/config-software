@@ -86,6 +86,8 @@ rm /etc/config/dropbear.dump.bak
 /etc/init.d/firewall enable
 /etc/init.d/firewall start
 rm /etc/config-software/dumb.sh
+sed -i "/fping -g 192.168.1.0/24/d" /etc/rc.local
+sed -i "/fping -g 192.168.1.0/24/d" /etc/crontabs/root
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
