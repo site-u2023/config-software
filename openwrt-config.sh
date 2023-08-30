@@ -81,7 +81,7 @@ fi
     "p" ) _func_PACKAGE ;;
     "a" ) _func_ACCESSPOINT ;;
     "r" ) echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m"
-          rm -f /etc/config-software
+          rm -rf /etc/config-software
           break ;;
     "q" ) echo -e " \033[1;31m終了しました\033[0;39m"
           break ;;
