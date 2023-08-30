@@ -100,7 +100,7 @@ uci set wireless.default_radio1.isolate='1'
 # uci set wireless.default_radio1.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio1.wpa_disable_eapol_key_retries='1'
 # Wi-Fi Bチャンネル
-WIFI_SSID_B='SSID_C'
+WIFI_SSID_C='SSID_C'
 WIFI_PASSWORD_C='password'
 uci set wireless.radio2.country='JP'
 uci set wireless.radio2.txpower='10'
