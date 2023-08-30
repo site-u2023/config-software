@@ -65,7 +65,7 @@ opkg install luci-theme-material
 # モダン
 opkg install luci-theme-openwrt-2020
 
-# カスタム フィード
+# カスタムフィード
 
 # ログ情報
 wget --no-check-certificate -O /tmp/luci-app-log_0.6-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.6-2_all.ipk
@@ -179,6 +179,7 @@ fi
   AVAILABLE_FLASH=`df -Th | fgrep 'overlayfs:/overlay' | awk '{ print $5 }'`
   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}\033[0;39m"
   echo -e " \033[1;35mパッケージインストールを開始します\033[0;39m"
+  echo -e " \033[1;35m※カスタムフィードは失敗する事があります\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
