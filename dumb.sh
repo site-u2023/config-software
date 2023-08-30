@@ -18,11 +18,8 @@ uci delete network.wan6
 uci delete network.lan
 uci -q delete network.globals.ula_prefix
 
-uci commit
-/etc/init.d/network reload
-
 # IPV4
-BRIDGE='lan'
+BRIDGE='bridge'
 uci set network.${BRIDGE}=interface
 uci set network.${BRIDGE}.proto='static'
 uci set network.${BRIDGE}.device='br-lan'
@@ -32,7 +29,7 @@ uci set network.${BRIDGE}.gateway='192.168.1.1'
 uci set network.${BRIDGE}.dns='192.168.1.1'
 uci set network.${BRIDGE}.delegate='0'
 # IPV6
-BRIDGE6='lan6'
+BRIDGE6='bridge6'
 uci set network.${BRIDGE6}=interface
 uci set network.${BRIDGE6}.proto='dhcpv6'
 uci set network.${BRIDGE6}.device=@${BRIDGE}
