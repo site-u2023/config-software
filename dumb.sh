@@ -69,7 +69,6 @@ uci set network.globals.igmp_snooping='1'
 
 # wpa_supplicantを無効にする
 rm /usr/sbin/wpa_supplicant
-echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
 
 # {
 # デーモンを永続的に無効にする
@@ -89,4 +88,4 @@ echo "fping -g 192.168.1.0/24" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 echo "0 */1 * * * fping -g 192.168.1.0/24" >> /etc/crontabs/root
 
-
+echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
