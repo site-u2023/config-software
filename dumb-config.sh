@@ -47,6 +47,7 @@ wget --no-check-certificate -O /etc/config-software/dumb.sh https://raw.githubus
 sed -i -e "s/ipaddr='192.168.1.2'/ipaddr='${input_str_IPV4}'/g" /etc/config-software/dumb.sh
 sed -i -e "s/gateway='192.168.1.1'/gateway='${input_str_GATEWAY}'/g" /etc/config-software/dumb.sh
 sed -i -e "s/dns='192.168.1.1'/dns='${input_str_GATEWAY}'/g" /etc/config-software/dumb.sh
+sed -i -e "s/ntp.server='192.168.1.1'/ntp.server='${input_str_GATEWAY}'/g" /etc/config-software/dumb.sh
 sh /etc/config-software/dumb.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
