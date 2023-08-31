@@ -50,6 +50,8 @@ uci set system.ntp.server='192.168.1.1'
 # マルチキャスト
 uci set network.globals.packet_steering='1'
 uci set network.globals.igmp_snooping='1'
+#
+usi set dropbear.@dropbear[0].PasswordAuth='on'
 
 uci commit
 
