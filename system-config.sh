@@ -119,7 +119,7 @@ done
 function _func_DEVICE_confirmation
 while :
 do 
-  echo -e " \033[1;37mシステム設定 --------------------------------------------------\033[0;39m"
+  echo -e " \033[1;37mシステム設定 ----------------------------------------\033[0;39m"
   echo -e " \033[1;34mデバイスのホストネーム: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
   echo -e " \033[1;34mデバイスのパスワード: ${input_str_ROOT_PASSWD}\033[0;39m"
   echo -e " \033[1;32mWi-Fi(wwan0)のSSID: ${input_str_WIFI_SSID_A}\033[0;39m"
@@ -131,7 +131,7 @@ do
   echo -e " \033[1;35mWi-Fi(wwan2)のSSID: ${input_str_WIFI_SSID_C}\033[0;39m"
   echo -e " \033[1;35mWi-Fi(wwan2)のパスワード: ${input_str_WIFI_PASSWD_C}\033[0;39m"
    fi
-  echo -e " \033[1;37m---------------------------------------------------------------\033[0;39m"
+  echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " これで宜しければ設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DEVICE_SET ;; 
