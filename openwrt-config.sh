@@ -68,7 +68,7 @@ AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m利用可能メモリーサイズ: ${AVAILABLE_MEMORY}KB\033[0;39m"
-  echo -e " \033[1;37mスクリプトは以下に設置: /etc/config-software\033[0;39m" 
+  echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software\033[0;39m" 
   echo -e " \033[1;37m推奨設定順序: システム > インターネット > パッケージ\033[0;39m" 
   echo -e " \033[1;37mopenwrt-config ------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[s]\033[0;39m": システム初期設定（USB自動判別）
