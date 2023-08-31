@@ -66,9 +66,9 @@ fi
 }
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+  echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software\033[0;39m" 
   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m利用可能メモリーサイズ: ${AVAILABLE_MEMORY}KB\033[0;39m"
-  echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software\033[0;39m" 
   echo -e " \033[1;37m推奨設定順序: システム > インターネット > パッケージ\033[0;39m" 
   echo -e " \033[1;37mopenwrt-config ------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[s]\033[0;39m": システム初期設定（USB自動判別）
@@ -77,7 +77,7 @@ AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;31m[a]\033[0;39m": アクセスポイント（Dumb）設定
   echo -e " \033[1;37m[r]\033[0;39m": スクリプトリムーブ後終了
   echo -e " \033[7;40m[q]\033[0;39m": 終了
-  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.9.1\033[0;39m"
+  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.9.2\033[0;39m"
   read -p " キーを選択してください [s/i/p/a or r/q]: " num
   case "${num}" in
     "s" ) _func_SYSTEM ;;
