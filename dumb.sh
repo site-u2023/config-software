@@ -23,7 +23,6 @@ uci delete network.wan
 uci delete network.wan6
 uci delete network.lan
 uci delete system.ntp.server
-uci delete dropbear.@dropbear[0]
 uci -q delete network.globals.ula_prefix
 # IPV4
 BRIDGE='bridge'
@@ -55,8 +54,6 @@ uci set system.ntp.server=${GATEWAY}
 uci set network.globals.packet_steering='1'
 uci set network.globals.igmp_snooping='1'
 #
-uci set dropbear.@dropbear[0]=dropbear
-uci set dropbear.@dropbear[0].PasswordAuth='on'
 uci set dropbear.@dropbear[0].Interface=${BRIDGE}
 
 uci commit
