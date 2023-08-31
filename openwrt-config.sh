@@ -55,6 +55,18 @@ done
 
 while :
 do
+cat << EOF > /etc/config-software/config-banner
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt-CONFIG 02.10.4
+ -----------------------------------------------------
+EOF
+echo -e " \033[1;36m`cat /etc/config-software/config-banner`\033[0;39m"
+read -p " 何かキーを押してください"
 {
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
@@ -68,24 +80,24 @@ AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software\033[0;39m" 
   echo -e " \033[1;37m推奨設定順序: システム > インターネット > パッケージ\033[0;39m" 
-  echo -e " \033[1;37mopenwrt-config ------------------------------------------------\033[0;39m"
+  echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
   echo -e " \033[1;34m[s]\033[0;39m": システム初期設定
   echo -e " \033[1;32m[i]\033[0;39m": インターネット接続設定
   echo -e " \033[1;35m[p]\033[0;39m": パッケージインストール（USB自動判別）
   echo -e " \033[1;31m[a]\033[0;39m": アクセスポイント（Dumb）設定
   echo -e " \033[1;37m[r]\033[0;39m": スクリプトリムーブ後終了
   echo -e " \033[7;40m[q]\033[0;39m": 終了
-  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.10.3\033[0;39m"
+  echo -e " \033[1;37m------------------------------------- August 27, 2023\033[0;39m"
   read -p " キーを選択してください [s/i/p/a or r/q]: " num
   case "${num}" in
     "s" ) _func_SYSTEM ;;
     "i" ) _func_INTERNET ;;
     "p" ) _func_PACKAGE ;;
     "a" ) _func_ACCESSPOINT ;;
-    "r" ) echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m"
-          rm -rf /etc/config-software
-          break ;;
+    "r" ) rm -rf /etc/config-software
+          echo -e " \033[1;31mこのスクリプト及び関連スクリプトをリムーブ後終了しました\033[0;39m"
+          exit ;;
     "q" ) echo -e " \033[1;31m終了しました\033[0;39m"
-          break ;;
+          exit ;;
   esac
  done 
