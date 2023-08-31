@@ -220,15 +220,16 @@ grep -vixf /etc/config-software/list-installed/schedule /etc/config-software/lis
 {
 if [ ! -s $`cat /etc/config-software/list-installed/installed` ]; then
 echo -e " \033[1;37mインストールは成功しました\033[0;39m"
-else
-echo -e " \033[1;37m失敗したインストール:"
-echo -e "\033[1;37m`cat /etc/config-software/list-installed/installed`\033[0;39m"
-echo -e " \033[1;37mインストールに失敗したパッケージは再度スクリプトを回して取得ください\033[0;39m"
-fi
-}
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
+else
+echo -e " \033[1;37m失敗したインストール:"
+echo -e "\033[1;37m`cat /etc/config-software/list-installed/installed`\033[0;39m"
+echo -e " \033[1;37m何かキーを押すと再度スクリプトを回します033[0;39m"
+_func_INSTALL
+fi
+}
 }
 
 while :
