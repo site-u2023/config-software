@@ -130,6 +130,7 @@ rm /tmp/luci-theme-argon.ipk
 # /etc/init.d/rpcd restart
 
 # USB
+{
 str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
   opkg install block-mount
@@ -155,10 +156,8 @@ if [ -n "$str_USB" ]; then
   opkg install kmod-fs-hfsplus
   opkg install hdparm
   opkg install hd-idle
-  echo " インストール: USBドライバー&ツール"
-else
-  echo " USBデバイスはありません"
 fi
+}
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-i18n-base-ja.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-i18n-opkg-ja.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
@@ -184,29 +183,34 @@ echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/internet-detecto
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-cpu-perf.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-temp-status.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-theme-argon.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/block-mount.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-storage.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-storage-uas.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/usbutils.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/gdisk.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/libblkid1.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-ledtrig-usbport.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-ledtrig-usbport.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/dosfstools.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-vfat.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/e2fsprogs.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-ext4.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/f2fs-tools.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-f2fs.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/exfat-fsck.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-exfat.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/ntfs-3g.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-ntfs3.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/hfsfsck.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-hfs.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-hfsplus.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/hdparm.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/hd-idle.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+{
+str_USB=`dmesg | grep -s usb`
+if [ -n "$str_USB" ]; then
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/block-mount.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-storage.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-storage-uas.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/usbutils.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/gdisk.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/libblkid1.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-ledtrig-usbport.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-ledtrig-usbport.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/dosfstools.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-vfat.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/e2fsprogs.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-ext4.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/f2fs-tools.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-f2fs.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/exfat-fsck.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-exfat.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/ntfs-3g.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-ntfs3.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/hfsfsck.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-hfs.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-fs-hfsplus.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/hdparm.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+  echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/hd-idle.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+fi
+}
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
