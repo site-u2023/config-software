@@ -35,7 +35,7 @@ luci-theme-argon
 EOF
 
 # パッケージ
-# opkg update
+opkg update
 
 # LuCi
 opkg install luci
