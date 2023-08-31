@@ -22,9 +22,9 @@ CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
 if [ "$CPU_INFO" -gt 3 ]
 then
  opkg install irqbalance;
- uci set irqbalance.irqbalance=irqbalance;
- uci set irqbalance.irqbalance.enabled='1';
- uci commit irqbalance;
+ uci set irqbalance.irqbalance=irqbalance
+ uci set irqbalance.irqbalance.enabled='1'
+ uci commit irqbalance
  # /etc/init.d/irqbalance start
 fi
 
