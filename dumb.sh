@@ -1,5 +1,10 @@
 #! /bin/sh
 
+IPADDR='192.168.1.2'
+GATEWAY='192.168.1.1'
+FPING=`echo $IPADDR | cut -d'.' -f1,2,3`
+echo $FPING
+
 # scripts
 . /lib/functions/network.sh
 network_flush_cache
@@ -25,10 +30,10 @@ BRIDGE='bridge'
 uci set network.${BRIDGE}=interface
 uci set network.${BRIDGE}.proto='static'
 uci set network.${BRIDGE}.device='br-lan'
-uci set network.${BRIDGE}.ipaddr='192.168.1.2'
+uci set network.${BRIDGE}.ipaddr=${IPADDR}
 uci set network.${BRIDGE}.netmask='255.255.255.0'
-uci set network.${BRIDGE}.gateway='192.168.1.1'
-uci set network.${BRIDGE}.dns='192.168.1.1'
+uci set network.${BRIDGE}.gateway=${GATEWAY}
+uci set network.${BRIDGE}.dns=${GATEWAY}
 uci set network.${BRIDGE}.delegate='0'
 # IPV6
 BRIDGE6='bridge6'
@@ -46,7 +51,7 @@ uci delete system.ntp.server
 uci set system.ntp=timeserver
 uci set system.ntp.enable_server='0'
 uci set system.ntp.use_dhcp='1'
-uci set system.ntp.server='192.168.1.1'
+uci set system.ntp.server=${GATEWAY}
 # マルチキャスト
 uci set network.globals.packet_steering='1'
 uci set network.globals.igmp_snooping='1'
@@ -79,8 +84,8 @@ rm /usr/sbin/wpa_supplicant
 opkg update
 opkg install fping
 sed -i "/exit 0/d" /etc/rc.local
-echo "fping -g 192.168.1.0/24" >> /etc/rc.local 
+echo "fping -g $FPING.0/24" >> /etc/rc.local 
 echo "exit 0" >> /etc/rc.local
-echo "0 */1 * * * fping -g 192.168.1.0/24" >> /etc/crontabs/root
+echo "0 */1 * * * fping -g $FPING.0/24" >> /etc/crontabs/root
 
 echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
