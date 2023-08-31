@@ -76,7 +76,7 @@ AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;31m[a]\033[0;39m": アクセスポイント設定（Dumb）
   echo -e " \033[1;37m[r]\033[0;39m": スクリプトリムーブ後終了
   echo -e " \033[7;40m[q]\033[0;39m": 終了
-  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.8.3\033[0;39m"
+  echo -e " \033[1;37m------------------------------------- August 27, 2023 Ver.2.9.0\033[0;39m"
   read -p " キーを選択してください [s/i/p/a or r/q]: " num
   case "${num}" in
     "s" ) _func_SYSTEM ;;
