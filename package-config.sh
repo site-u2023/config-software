@@ -158,7 +158,7 @@ if [ -n "$str_USB" ]; then
   opkg install hd-idle
 fi
 }
-echo -e " \033[1;37m--------------------------------------------------------------\033[0;39m"
+echo -e " \033[1;37mインストールパッケージ ---------------------------------------\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-i18n-base-ja.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-i18n-opkg-ja.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
