@@ -22,6 +22,7 @@ uci add_list network.@device[0].ports=${NET_L2D6}
 uci delete network.wan
 uci delete network.wan6
 uci delete network.lan
+uci delete system.ntp.server
 uci delete dropbear.@dropbear[0]
 uci -q delete network.globals.ula_prefix
 # IPV4
@@ -46,7 +47,6 @@ uci set network.${BRIDGE6}.type='bridge'
 uci set wireless.default_radio0.network=${BRIDGE}
 uci set wireless.default_radio1.network=${BRIDGE}
 # NTPサーバー
-uci delete system.ntp.server
 uci set system.ntp=timeserver
 uci set system.ntp.enable_server='0'
 uci set system.ntp.use_dhcp='1'
