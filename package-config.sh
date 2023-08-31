@@ -21,7 +21,7 @@ opkg install openssh-sftp-server
 CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
 if [ "$CPU_INFO" -gt 3 ]
 then
- opkg install irqbalance;
+ opkg install irqbalance
  uci set irqbalance.irqbalance=irqbalance
  uci set irqbalance.irqbalance.enabled='1'
  uci commit irqbalance
