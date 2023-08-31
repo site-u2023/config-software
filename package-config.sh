@@ -142,9 +142,10 @@ else
 fi
 
 # インターネット可用性確認
-wget --no-check-certificate -O /tmp/internet-detector_1.0-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.0-2_all.ipk
-opkg install /tmp/internet-detector_1.0-2_all.ipk
-rm /tmp/internet-detector_1.0-2_all.ipk
+opkg update
+wget --no-check-certificate -O /tmp/internet-detector_1.0-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.0-3_all.ipk
+opkg install /tmp/internet-detector_1.0-3_all.ipk
+rm /tmp/internet-detector_1.0-3_all.ipk
 /etc/init.d/internet-detector start
 /etc/init.d/internet-detector enable
 wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.0-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.0-1_all.ipk
