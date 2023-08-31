@@ -55,7 +55,9 @@ uci set system.ntp.server=${GATEWAY}
 uci set network.globals.packet_steering='1'
 uci set network.globals.igmp_snooping='1'
 #
+usi set dropbear.@dropbear[0]=dropbear
 usi set dropbear.@dropbear[0].PasswordAuth='on'
+usi set dropbear.@dropbear[0].Interface=${BRIDGE}
 
 uci commit
 
