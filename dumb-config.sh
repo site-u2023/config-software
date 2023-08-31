@@ -88,6 +88,7 @@ rm /etc/config/dropbear.dump.bak
 rm /etc/config-software/dumb.sh
 sed -i "/fping -g 192.168.1.0/24/d" /etc/rc.local
 sed -i "/fping -g 192.168.1.0/24/d" /etc/crontabs/root
+  echo -e " \033[1;32m再起動後は ${input_str_IPV4} でログインして下さい\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
