@@ -198,6 +198,7 @@ function _func_DS_LITE_Transix_confirmation
 while :
 do
   echo -e " \033[1;37mトランジックスの設定を実行します\033[0;39m"
+  echo -e " \033[1;37mgw.transix.jp: 2404:8e00::feed:100\033[0;39m"  
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -252,6 +253,7 @@ function _func_DS_LITE_Xpass_confirmation
 while :
 do
   echo -e " \033[1;37mクロスパスの設定を実行します\033[0;39m"
+  echo -e " \033[1;37mxpass: 2001:f60:0:200::1:1\033[0;39m"
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -306,6 +308,7 @@ function _func_DS_LITE_V6connect_confirmation
 while :
 do
   echo -e " \033[1;37mv6 コネクトの設定を実行します\033[0;39m"
+  echo -e " \033[1;37mdslite.v6connect.net: 2001:c28:5:301::11\033[0;39m"
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
