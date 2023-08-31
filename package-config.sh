@@ -224,9 +224,10 @@ read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
 else
-echo -e " \033[1;37m失敗したインストール:"
+echo -e " \033[1;37m失敗したインストール:\033[0;39m"
 echo -e "\033[1;37m`cat /etc/config-software/list-installed/installed`\033[0;39m"
-echo -e " \033[1;37m何かキーを押すと再度スクリプトを回します033[0;39m"
+echo -e " \033[1;37m途中で停止させる場合: Ctrl + c\033[0;39m"
+read -p " \033[1;37m何かキーを押すと再度スクリプトを回します\033[0;39m"
 _func_INSTALL
 fi
 }
