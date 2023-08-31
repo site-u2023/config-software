@@ -187,7 +187,7 @@ echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-theme-argon
 {
 str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
-　echo -e " \033[1;37mUSB ----------------------------------------------------------\033[0;39m"
+  echo -e " \033[1;37mUSB ----------------------------------------------------------\033[0;39m"
   echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/block-mount.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
   echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-storage.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
   echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/kmod-usb-storage-uas.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
