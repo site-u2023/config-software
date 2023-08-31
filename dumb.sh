@@ -1,7 +1,9 @@
 #! /bin/sh
+
 IPADDR='192.168.1.2'
 GATEWAY='192.168.1.1'
 FPING=`echo $IPADDR | cut -d'.' -f1,2,3`
+
 # scripts
 . /lib/functions/network.sh
 network_flush_cache
