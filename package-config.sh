@@ -152,7 +152,7 @@ if [ -n "$str_USB" ]; then
   opkg install kmod-fs-ntfs3
   opkg install hfsfsck
   opkg install kmod-fs-hfs
-  opkg install kmod-fs-hfsplus3
+  opkg install kmod-fs-hfsplus
   opkg install hdparm
   opkg install hd-idle
   echo " インストール: USBドライバー&ツール"
