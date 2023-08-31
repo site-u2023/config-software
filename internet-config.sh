@@ -25,7 +25,8 @@ function _func_MAP_e_VirtualConnect_confirmation
 while :
 do
   echo -e " \033[1;37mOCNバーチャルコネクトの設定を実行します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: map/bashをインストールします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: map サイズ6kBをインストールします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: bash サイズ375kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_VirtualConnect_SET ;;
@@ -86,7 +87,8 @@ function _func_MAP_e_V6plus_confirmation
 while :
 do
   echo -e " \033[1;37mV6プラス・IPv6オプションの設定を実行します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: map/bashをインストールします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: map サイズ6kBをインストールします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: bash サイズ375kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_V6plus_SET ;;
@@ -196,7 +198,7 @@ function _func_DS_LITE_Transix_confirmation
 while :
 do
   echo -e " \033[1;37mトランジックスの設定を実行します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: ds-liteをインストールします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: ds-lite サイズ1kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Transix_SET ;;
@@ -250,7 +252,7 @@ function _func_DS_LITE_Xpass_confirmation
 while :
 do
   echo -e " \033[1;37mクロスパスの設定を実行します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: ds-liteをインストールします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: ds-lite サイズ1kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Xpass_SET ;;
@@ -304,7 +306,7 @@ function _func_DS_LITE_V6connect_confirmation
 while :
 do
   echo -e " \033[1;37mv6 コネクトの設定を実行します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: ds-liteをインストールします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: ds-lite サイズ1kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_V6connect_SET ;;
