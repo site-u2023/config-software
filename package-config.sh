@@ -175,13 +175,15 @@ echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-nlbwmon
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-i18n-nlbwmon-ja.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/wifischedule.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-wifischedule.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-i18n-wifischedule-ja.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-theme-openwrt.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-theme-material.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-theme-openwrt-2020.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-log.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
-echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/internet-detector.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-cpu-perf.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-app-temp-status.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/internet-detector.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
+echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/mailsend.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/luci-theme-argon.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 {
 str_USB=`dmesg | grep -s usb`
