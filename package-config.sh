@@ -1,10 +1,41 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
- function _func_INSTALL
- {
+function _func_INSTALL
+{
+mkdir -p /etc/config-software/list-installed
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/before
+cat << EOF > /etc/config-software/list-installed/schedule
+luci
+luci-i18n-base-ja
+info/luci-i18n-opkg-ja
+luci-i18n-firewall-ja
+openssh-sftp-server
+irqbalance
+sqm-scripts
+luci-app-sqm
+luci-i18n-sqm-ja
+luci-app-statistics
+luci-i18n-statistics-ja
+nlbwmon
+luci-app-nlbwmon
+luci-i18n-nlbwmon-ja
+wifischedule
+luci-app-wifischedule
+luci-i18n-wifischedule-ja
+luci-theme-openwrt
+luci-theme-material
+luci-theme-openwrt-2020
+luci-app-log
+luci-app-cpu-perf
+luci-app-temp-status
+internet-detector
+mailsend
+luci-theme-argon
+EOF
+
 # パッケージ
-opkg update
+# opkg update
 
 # LuCi
 opkg install luci
@@ -156,6 +187,31 @@ if [ -n "$str_USB" ]; then
   opkg install kmod-fs-hfsplus
   opkg install hdparm
   opkg install hd-idle
+cat << EOF >> /etc/config-software/list-installed/schedule
+block-mount
+kmod-usb-storage
+kmod-usb-storage-uas
+usbutils
+gdisk
+libblkid1
+kmod-usb-ledtrig-usbport
+luci-app-ledtrig-usbport
+dosfstools
+kmod-fs-vfat
+e2fsprogs
+kmod-fs-ext4
+f2fs-tools
+kmod-fs-f2fs
+exfat-fsck
+kmod-fs-exfat
+ntfs-3g
+kmod-fs-ntfs3
+hfsfsck
+kmod-fs-hfs
+kmod-fs-hfsplus
+hdparm
+hd-idle
+EOF
 fi
 }
 echo -e " \033[1;37mインストールパッケージ ---------------------------------------\033[0;39m"
@@ -214,8 +270,18 @@ if [ -n "$str_USB" ]; then
   echo -e " \033[1;37m`grep -H Installed-Size: /usr/lib/opkg/info/hd-idle.control |  sed 's,^.*/\([^/]\+\)\.control:Installed-Size: *\(.*\),\2\t\1,' | sort -n`\033[0;39m"
 fi
 }
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/after
+grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/difference
+grep -vixf /etc/config-software/list-installed/schedule /etc/config-software/list-installed/difference > /etc/config-software/list-installed/installed
 echo -e " \033[1;37m--------------------------------------------------------------\033[0;39m"
-echo -e " \033[1;37mインストールに失敗したパッケージは再度このスクリプトを回して取得ください\033[0;39m"
+{
+if [ ! -s $`cat /etc/config-software/list-installed/installed` ]; then
+echo -e " \033[1;37mインストールは成功しました\033[0;39m"
+else
+echo -e " \033[1;37m失敗したインストール: `cat /etc/config-software/list-installed/installed`\033[0;39m"
+echo -e " \033[1;37mインストールに失敗したパッケージは再度スクリプトを回して取得ください\033[0;39m"
+fi
+}
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
