@@ -217,7 +217,6 @@ fi
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/after
 grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/difference
 grep -vixf /etc/config-software/list-installed/schedule /etc/config-software/list-installed/difference > /etc/config-software/list-installed/installed
-echo -e " \033[1;37m--------------------------------------------------------------\033[0;39m"
 {
 if [ ! -s $`cat /etc/config-software/list-installed/installed` ]; then
 echo -e " \033[1;37mインストールは成功しました\033[0;39m"
