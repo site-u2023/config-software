@@ -30,6 +30,7 @@ luci-app-log
 luci-app-cpu-perf
 luci-app-temp-status
 internet-detector
+luci-app-internet-detector
 mailsend
 luci-theme-argon
 EOF
