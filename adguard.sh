@@ -1,5 +1,8 @@
 #! /bin/sh
 
+cp /etc/config/dhcp /etc/config/dhcp.adguard.bak
+cp /etc/config/firewall /etc/config/firewall.adguard.bak
+
 opkg update
 opkg install adguardhome
 # service adguardhome enable
