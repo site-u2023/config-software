@@ -1,5 +1,21 @@
 #! /bin/sh
 
+function _func_adguard
+while :
+do
+  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[e]\033[0;39m": AdGuardの設定を実行します
+  echo -e " \033[1;31m[b]\033[0;39m": AdGuardの設定を以前の設定に復元します
+  echo -e " \033[1;33m[r]\033[0;39m": 戻る    
+  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
+  read -p " キーを選択してください [e/b or r]: " num
+  case "${num}" in
+    "e" ) _func_PORT ;;
+    "b" ) _func_Before ;;
+    "r" ) break ;;
+  esac
+done
+
 function _func_PORT
 while :
 do
@@ -71,6 +87,37 @@ reboot
 exit
 }
 
+function _func_Before
+while :
+do
+  echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mパッケージ: adguardhomeをリムーブします\033[0;39m"
+  read -p " 本当に宜しいですか? [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_Restoration ;;
+    "n" ) _func_adguard ;;
+    "r" ) break ;;
+  esac
+done
+
+function _func_Restoration
+{
+service adguardhome stop
+service adguardhome disable
+opkg remove adguardhome
+cp /etc/config/network.adguard.bak /etc/config/network
+rm /etc/config/network.adguard.bak
+cp /etc/config/dhcp.adguard.bak /etc/config/dhcp
+rm /etc/config/dhcp.adguard.bak
+cp /etc/config/firewall.adguard.bak /etc/config/firewall
+rm /etc/config/firewall.adguard.bak
+rm /etc/config-software/adguard-config.sh
+rm /etc/config-software/adguard.sh
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit
+}
+
 while :
 do
 {
@@ -91,7 +138,7 @@ echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\0
   echo -e " \033[1;35mAdGuardのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
-    "y" ) _func_PORT ;;
+    "y" ) _func_adguard ;;
     "n" ) exit ;;
   esac
 done
