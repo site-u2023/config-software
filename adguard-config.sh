@@ -10,7 +10,24 @@ do
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or r]: " num
   case "${num}" in
-    "e" ) _func_PORT ;;
+    "e" ) 
+{
+opkg update
+AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
+AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+ADGUARD_SIZE_TEMP=`opkg info adguardhome | grep Size | awk '{ print $2 }'`
+ADGUARD_SIZE=`expr $ADGUARD_SIZE_TEMP / 1024`
+echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
+echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
+echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
+  if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
+   read -p " 何かキーを押して下さい"
+  else
+   read -p " フラッシュ容量が足りないため終了します"
+   exit
+  fi
+}        
+         _func_PORT ;;
     "b" ) _func_Before ;;
     "r" ) exit ;;
   esac
@@ -130,12 +147,6 @@ else
  read -p " バージョンが違うため終了します"
  exit
 fi
-}
-{
-AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
-AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-echo -e " \033[1;37m利用可能メモリーサイズ: ${AVAILABLE_MEMORY}KB\033[0;39m"
-echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
 }
   echo -e " \033[1;35mAdGuardのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
