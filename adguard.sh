@@ -273,7 +273,7 @@ filters:
     name: AdAway Default Blocklist
     id: 2
   - enabled: true
-    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt
+    url: https://280blocker.net/files/280blocker_domain_ag_202309.txt
     name: 280blocker
     id: 1693396666
 whitelist_filters: []
