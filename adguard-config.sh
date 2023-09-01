@@ -4,7 +4,7 @@ function _func_adguard
 while :
 do
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": AdGuardの設定を実行します
+  echo -e " \033[1;34m[e]\033[0;39m": AdGuardの設定を実行します（容量判定します）
   echo -e " \033[1;31m[b]\033[0;39m": AdGuardの設定を以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
@@ -20,6 +20,7 @@ ADGUARD_SIZE=`expr $ADGUARD_SIZE_TEMP / 1024`
 echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
 echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
 echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
+echo -e " \033[1;37mインストール可能です\033[0;39m"
   if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
    read -p " 何かキーを押して下さい"
   else
