@@ -11,7 +11,7 @@ do
   echo -e " \033[1;35m[o]\033[0;39m": ニチバン対策の設定を以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b/n or r]: " num
+  read -p " キーを選択してください [e/b/n/o or r]: " num
   case "${num}" in
     "e" ) _func_MAP_e_VirtualConnect_confirmation ;;
     "b" ) _func_MAP_e_VirtualConnect_Before ;;
@@ -73,7 +73,7 @@ do
   echo -e " \033[1;35m[o]\033[0;39m": ニチバン対策の設定を以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;33m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or r]: " num
+  read -p " キーを選択してください [e/b/n/o or r]: " num
   case "${num}" in
     "e" ) _func_MAP_e_V6plus_confirmation ;;
     "b" ) _func_MAP_e_V6plus_Before ;;
@@ -364,7 +364,7 @@ do
   echo -e " \033[1;35m[w]\033[0;39m": PPPoEのIPv4及びIPv6接続を以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;36m-----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or r]: " num
+  read -p " キーを選択してください [4/6/b/w or r]: " num
   case "${num}" in
     "4" ) _func_PPPoE_ID ;;
     "6" ) _func_PPPoE_ID4 ;;
