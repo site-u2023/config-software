@@ -4,6 +4,7 @@ function _func_Dumb_IPV4
 while :
 do
   echo -e "\033[1;37m アクセスポイントのIPV4アドレスを入力して下さい\033[0;39m"
+  echo -e "\033[1;33m 例: 192.168.1.2\033[0;39m"
   read -p " IPV4アドレス: " input_str_IPV4
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -17,6 +18,7 @@ function _func_Dumb_GATEWAY
 while :
 do
   echo -e "\033[1;37m アクセスポイントのゲートウェイを入力して下さい\033[0;39m"
+  echo -e "\033[1;33m 例: 192.168.1.1\033[0;39m"
   read -p " ゲートウェイ: " input_str_GATEWAY
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
