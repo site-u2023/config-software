@@ -40,7 +40,7 @@ uci set firewall.adguardhome_dns_53.family="any"
 uci commit firewall
 /etc/init.d/firewall restart
 
-cat << EOF > /etc/adguardhome.yaml
+cat << 'EOF' > /etc/adguardhome.yaml
 http:
   address: 0.0.0.0:3000
   session_ttl: 720h
