@@ -98,7 +98,7 @@ do
   case "${num}" in
     "y" ) _func_Restoration ;;
     "n" ) _func_adguard ;;
-    "r" ) exit ;;
+    "r" ) _func_adguard ;;
   esac
 done
 
