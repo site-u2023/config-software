@@ -12,7 +12,7 @@ do
   case "${num}" in
     "e" ) _func_PORT ;;
     "b" ) _func_Before ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
@@ -26,7 +26,7 @@ do
   case "${num}" in
     "y" ) _func_USER ;;
     "n" ) _func_PORT ;;
-    "r" ) break ;;
+    "r" ) _func_adguard ;;
   esac
 done
 
@@ -40,7 +40,7 @@ do
   case "${num}" in
     "y" ) _func_PASSWD ;;
     "n" ) _func_USER ;;
-    "r" ) break ;;
+    "r" ) _func_adguard ;;
   esac
 done
 
@@ -55,14 +55,14 @@ do
   case "${num}" in
     "y" ) _func_confirmation ;;
     "n" ) _func_PASSWD ;;
-    "r" ) break ;;
+    "r" ) _func_adguard ;;
   esac
 done
 
 function _func_confirmation
 while :
 do
-  echo -e " \033[1;37mアクセスポイント ------------------------------------\033[0;39m"
+  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;32mポート番号: ${input_str_PORT}\033[0;39m"
   echo -e " \033[1;32mユーザー名: ${input_str_USER}\033[0;39m"
   echo -e " \033[1;32mパスワード: ${input_str_PASSWD}\033[0;39m"
@@ -70,8 +70,8 @@ do
   read -p " これで宜しければ設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_SET ;;
-    "n" ) _func_USER ;;
-    "r" ) break ;;
+    "n" ) _func_PORT ;;
+    "r" ) _func_adguard ;;
   esac
 done
 
@@ -96,7 +96,7 @@ do
   case "${num}" in
     "y" ) _func_Restoration ;;
     "n" ) _func_adguard ;;
-    "r" ) break ;;
+    "r" ) exit ;;
   esac
 done
 
