@@ -62,7 +62,7 @@ cat << EOF > /etc/config-software/config-banner
  |_______||   __|_____|__|__||________||__|  |____|
           |__| W I R E L E S S   F R E E D O M
  -----------------------------------------------------
- OpenWrt-CONFIG 02.10.5
+ OpenWrt-CONFIG 02.10.
  -----------------------------------------------------
 EOF
 echo -e " \033[1;37m`cat /etc/config-software/config-banner`\033[0;39m"
