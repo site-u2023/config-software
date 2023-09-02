@@ -118,4 +118,3 @@ else
  exit
 fi
 _func_main
-exit
