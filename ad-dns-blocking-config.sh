@@ -1,7 +1,7 @@
 #! /bin/sh
 
 
-function _func_AdGuard
+function _func_AdGuard_INST
 while :
 do
   echo -e " \033[1;34mAdGuard設定のスクリプトをダウンロードします\033[0;39m"
@@ -14,7 +14,7 @@ do
   esac
 done
 
-function _func_AdBlock
+function _func_AdBlock_INST
 while :
 do
   echo -e " \033[1;32mAdBlock設定のスクリプトをダウンロードします\033[0;39m"
@@ -45,8 +45,8 @@ fi
   echo -e " \033[1;37m------------------------------------- August 27, 2023\033[0;39m"
   read -p " キーを選択してください [s/i/p/a or r/q]: " num
   case "${num}" in
-    "g" ) _func_AdGuard ;;
-    "b" ) _func_AdBlock ;;
+    "g" ) _func_AdGuard_INST ;;
+    "b" ) _func_AdBlock_INST ;;
     "q" ) exit ;;
   esac
  done 
