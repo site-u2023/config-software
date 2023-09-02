@@ -582,7 +582,7 @@ do
     "x" ) _func_DS_LITE_Xpass ;;
     "c" ) _func_DS_LITE_V6connect ;;
     "o" ) _func_PPPoE ;;
-    "q" ) exit ;;
+    "q" ) break ;;
   esac
 done
 
