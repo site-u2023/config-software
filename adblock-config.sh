@@ -10,13 +10,13 @@ do
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
-    "c" ) _func_AdBlock_confirmation ;;
+    "c" ) _func_AdBlock_confirm ;;
     "b" ) _func_AdBlock_Before ;;
     "q" ) exit ;;
   esac
 done
 
-function _func_AdBlock_confirmation
+function _func_AdBlock_confirm
   echo -e " \033[1;35mAdBlockdのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
@@ -67,7 +67,7 @@ reboot
 exit
 }
 
-function _func_Before
+function _func_AdBlock_Before
 while :
 do
   echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
@@ -76,13 +76,13 @@ do
   echo -e " \033[1;37mパッケージ: tcpdump-miniをリムーブします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_Restoration ;;
+    "y" ) _func_AdBlock_Restoration ;;
     "n" ) _func_AdBlock ;;
     "r" ) _func_AdBlock ;;
   esac
 done
 
-function _func_Restoration
+function _func_AdBlock_Restoration
 {
 opkg remove luci-i18n-adblock-ja
 opkg remove adblock
