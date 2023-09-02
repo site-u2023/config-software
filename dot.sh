@@ -1,6 +1,17 @@
 #! /bin/sh
 
 function _func_STUBBY
+while :
+do
+  echo -e " \033[1;35mSTUBBYのインストールを開始します\033[0;39m"
+  read -p " 開始します [y/n]: " num
+  case "${num}" in
+    "y" ) _func_SET ;;
+    "n" ) exit ;;
+  esac
+done
+
+function _func_SET
 {
 cp /etc/config/dhcp /etc/config/dhcp.dot.bak
 cp /etc/config/network /etc/config/network.dot.bak
@@ -36,6 +47,33 @@ reboot
 exit
 }
 
+function _func_Before
+while :
+do
+  echo -e " \033[1;37mSTUBBYの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mパッケージ: stubbyをリムーブします\033[0;39m"
+  read -p " 本当に宜しいですか? [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_Restoration ;;
+    "n" ) _func_STUBBY ;;
+    "r" ) _func_STUBBY ;;
+  esac
+done
+
+function _func_Restoration
+{
+opkg remove stubby
+cp /etc/config/dhcp.dot.bak /etc/config/dhcp
+cp /etc/config/network.dot.bak /etc/config/network
+rm etc/config/dhcp.dot.bak
+rm /etc/config/network.dot.bak
+sed -i -e "s|/etc/init.d/stubby restart||g" /etc/rc.local
+rm /etc/config-software/dot.sh
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit
+}
+
 while :
 do
 {
@@ -47,10 +85,15 @@ else
  exit
 fi
 }
-  echo -e " \033[1;35mSTUBBYのインストールを開始します\033[0;39m"
-  read -p " 開始します [y/n]: " num
+  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[e]\033[0;39m": STUBBYの設定を実行します
+  echo -e " \033[1;31m[b]\033[0;39m": STUBBYの設定を以前の設定に復元します
+  echo -e " \033[1;33m[r]\033[0;39m": 戻る    
+  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
+  read -p " キーを選択してください [e/b or r]: " num
   case "${num}" in
-    "y" ) _func_STUBBY ;;
-    "n" ) exit ;;
+    "e" ) _func_STUBBY ;;
+    "b" ) _func_Before ;;
+    "r" ) exit ;;
   esac
 done
