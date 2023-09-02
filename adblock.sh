@@ -1,6 +1,30 @@
 #! /bin/sh
 
-function _func_adblock
+function _func_AdBlock
+while :
+do
+  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[e]\033[0;39m": AdBlockdのインストールを開始します
+  echo -e " \033[1;31m[b]\033[0;39m": AdBlockdの設定を以前の設定に復元します
+  echo -e " \033[1;33m[q]\033[0;39m": 終了    
+  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
+  read -p " キーを選択してください [e/b or q]: " num
+  case "${num}" in
+    "c" ) _func_confirmation ;;
+    "b" ) _func_Before ;;
+    "q" ) exit ;;
+  esac
+done
+
+function _func_confirmation
+  echo -e " \033[1;35mAdBlockdのインストールを開始します\033[0;39m"
+  read -p " 開始します [y/n]: " num
+  case "${num}" in
+    "y" ) _func_SET ;;
+    "n" ) break ;;
+  esac
+  
+function _func_SET
 {
 opkg update
 opkg install adblock
@@ -43,21 +67,34 @@ reboot
 exit
 }
 
+function _func_Before
 while :
 do
+  echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mパッケージ: adguardhomeをリムーブします\033[0;39m"
+  read -p " 本当に宜しいですか? [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_Restoration ;;
+    "n" ) _func_AdBlock ;;
+    "r" ) _func_AdBlock ;;
+  esac
+done
+
+function _func_Restoration
 {
+opkg remove luci-i18n-adblock-ja
+opkg remove adblock
+opkg remove tcpdump-mini
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit
+}
+
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
 else
- read -p " バージョンが違うため終了します"
+ read -p " バージョンが違うため終了します";
  exit
 fi
-}
-  echo -e " \033[1;35mAdBlockのインストールを開始します\033[0;39m"
-  read -p " 開始します [y/n]: " num
-  case "${num}" in
-    "y" ) _func_adblock ;;
-    "n" ) exit ;;
-  esac
-done
+_func_AdBlock
