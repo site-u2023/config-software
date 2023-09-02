@@ -28,13 +28,13 @@ echo -e " \033[1;37mインストール可能です\033[0;39m"
    exit
   fi
 }
-          _func_AdGuard_confirm ;;
+          _func_AdGuard_Confirm ;;
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
 done
 
-function _func_AdGuard_confirm
+function _func_AdGuard_Confirm
   echo -e " \033[1;35mAdGuardのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
@@ -79,13 +79,13 @@ do
   read -p " パスワード: " input_str_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_AdGuard_confirm2 ;;
+    "y" ) _func_AdGuard_Confirm2 ;;
     "n" ) _func_AdGuard_PASSWD ;;
     "r" ) _func_AdGuard ;;
   esac
 done
 
-function _func_AdGuard_confirm2
+function _func_AdGuard_Confirm2
 while :
 do
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
