@@ -71,7 +71,9 @@ function _func_Before
 while :
 do
   echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: adguardhomeをリムーブします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: AdBlockをリムーブします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: luci-i18n-adblock-jaをリムーブします\033[0;39m"
+  echo -e " \033[1;37mパッケージ: tcpdump-miniをリムーブします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Restoration ;;
