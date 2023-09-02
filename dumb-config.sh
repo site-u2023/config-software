@@ -106,7 +106,7 @@ do
   case "${num}" in
     "e" ) _func_Dumb_IPV4 ;;
     "b" ) _func_Dumb_Before ;;
-    "q" ) break ;;
+    "q" ) exit ;;
   esac
 done
 
