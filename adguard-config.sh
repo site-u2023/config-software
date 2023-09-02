@@ -27,7 +27,7 @@ echo -e " \033[1;37mインストール可能です\033[0;39m"
    read -p " フラッシュ容量が足りないため終了します"
    exit
   fi
-}        
+}
           _func_AdGuard_confirmation ;;
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
