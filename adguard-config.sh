@@ -52,7 +52,7 @@ do
   case "${num}" in
     "y" ) _func_USER ;;
     "n" ) _func_PORT ;;
-    "r" ) _func_adguard ;;
+    "r" ) _func_AdGuard ;;
   esac
 done
 
@@ -66,7 +66,7 @@ do
   case "${num}" in
     "y" ) _func_PASSWD ;;
     "n" ) _func_USER ;;
-    "r" ) _func_adguard ;;
+    "r" ) _func_AdGuard ;;
   esac
 done
 
@@ -81,7 +81,7 @@ do
   case "${num}" in
     "y" ) _func_confirmation ;;
     "n" ) _func_PASSWD ;;
-    "r" ) _func_adguard ;;
+    "r" ) _func_AdGuard ;;
   esac
 done
 
@@ -97,7 +97,7 @@ do
   case "${num}" in
     "y" ) _func_SET ;;
     "n" ) _func_PORT ;;
-    "r" ) _func_adguard ;;
+    "r" ) _func_AdGuard ;;
   esac
 done
 
@@ -123,8 +123,8 @@ do
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Restoration ;;
-    "n" ) _func_adguard ;;
-    "r" ) _func_adguard ;;
+    "n" ) _func_AdGuard ;;
+    "r" ) _func_AdGuard ;;
   esac
 done
 
