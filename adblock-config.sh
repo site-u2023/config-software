@@ -10,7 +10,7 @@ do
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
-    "c" ) _func_AdBlock_Confirm ;;
+    "e" ) _func_AdBlock_Confirm ;;
     "b" ) _func_AdBlock_Before ;;
     "q" ) exit ;;
   esac
@@ -28,8 +28,7 @@ do
 done
  
 function _func_AdBlock_SET
-while :
-do
+{
 opkg update
 opkg install adblock
 opkg install luci-i18n-adblock-ja
@@ -69,7 +68,7 @@ uci commit adblock
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
-done
+}
 
 function _func_AdBlock_Before
 while :
