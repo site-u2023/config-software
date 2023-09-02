@@ -10,13 +10,13 @@ do
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
-    "c" ) _func_AdBlock_confirm ;;
+    "c" ) _func_AdBlock_Confirm ;;
     "b" ) _func_AdBlock_Before ;;
     "q" ) exit ;;
   esac
 done
 
-function _func_AdBlock_confirm
+function _func_AdBlock_Confirm
   echo -e " \033[1;35mAdBlockdのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
