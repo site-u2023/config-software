@@ -6,12 +6,12 @@ do
   echo -e " \033[1;35mSTUBBYのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
-    "y" ) _func_SET ;;
+    "y" ) _func_STUBBY_SET ;;
     "n" ) exit ;;
   esac
 done
 
-function _func_SET
+function _func_STUBBY_SET
 {
 cp /etc/config/dhcp /etc/config/dhcp.dot.bak
 cp /etc/config/network /etc/config/network.dot.bak
@@ -47,20 +47,20 @@ reboot
 exit
 }
 
-function _func_Before
+function _func_STUBBY_Before
 while :
 do
   echo -e " \033[1;37mSTUBBYの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: stubbyをリムーブします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_Restoration ;;
+    "y" ) _func_STUBBY_Restoration ;;
     "n" ) _func_STUBBY ;;
     "r" ) _func_STUBBY ;;
   esac
 done
 
-function _func_Restoration
+function _func_STUBBY_Restoration
 {
 opkg remove stubby
 cp /etc/config/dhcp.dot.bak /etc/config/dhcp
@@ -93,7 +93,7 @@ fi
   read -p " キーを選択してください [e/b or r]: " num
   case "${num}" in
     "e" ) _func_STUBBY ;;
-    "b" ) _func_Before ;;
+    "b" ) _func_STUBBY_Before ;;
     "r" ) exit ;;
   esac
 done
