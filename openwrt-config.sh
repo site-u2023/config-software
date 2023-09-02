@@ -66,7 +66,7 @@ cat << EOF > /etc/config-software/config-banner
  -----------------------------------------------------
 EOF
 echo -e " \033[1;37m`cat /etc/config-software/config-banner`\033[0;39m"
-read -p " 何かキーを押してください"
+sleep 2
 {
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
