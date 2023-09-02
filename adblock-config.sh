@@ -90,9 +90,9 @@ function _func_AdBlock_Restoration
 {
 /etc/init.d/adblock disable
 /etc/init.d/adblock stop
-opkg remove adblock
-opkg remove luci-app-adblock
 opkg remove luci-i18n-adblock-ja
+opkg remove luci-app-adblock
+opkg remove adblock
 opkg remove tcpdump-mini
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
