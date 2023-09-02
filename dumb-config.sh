@@ -10,7 +10,7 @@ do
   case "${num}" in
     "y" ) _func_Dumb_GATEWAY ;;
     "n" ) _func_Dumb_IPV4 ;;
-    "r" ) _func_Dumb ;;
+    "r" ) _func_main ;;
   esac
 done
 
@@ -94,7 +94,7 @@ reboot
 exit
 }
 
-function _func_Dumb
+function _func_main
 while :
 do
   echo -e " \033[1;37mアクセスポイント ----------------------------------------------\033[0;39m"
@@ -106,25 +106,15 @@ do
   case "${num}" in
     "e" ) _func_Dumb_IPV4 ;;
     "b" ) _func_Dumb_Before ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
-while :
-do
-{
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
+if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
 else
- read -p " バージョンが違うため終了します"
+ read -p " バージョンが違うため終了します";
  exit
 fi
-}
-  echo -e " \033[1;37mアクセスポイントの設定を開始します\033[0;39m"
-  read -p " 開始します [y/n]:" num
-  case "${num}" in
-    "y" ) _func_Dumb ;;
-    "n" ) exit ;;
-  esac
-done
+_func_main
