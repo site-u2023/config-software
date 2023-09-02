@@ -31,6 +31,7 @@ function _func_AdBlock_SET
 {
 opkg update
 opkg install adblock
+opkg install luci-app-adblock
 opkg install luci-i18n-adblock-ja
 opkg install tcpdump-mini
 uci set adblock.global.adb_backupdir="/etc/adblock"
@@ -87,8 +88,11 @@ done
 
 function _func_AdBlock_Restoration
 {
-opkg remove luci-i18n-adblock-ja
+/etc/init.d/adblock disable
+/etc/init.d/adblock stop
 opkg remove adblock
+opkg remove luci-app-adblock
+opkg remove luci-i18n-adblock-ja
 opkg remove tcpdump-mini
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
