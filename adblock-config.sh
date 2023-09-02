@@ -88,8 +88,8 @@ done
 
 function _func_AdBlock_Restoration
 {
-/etc/init.d/adblock disable
-/etc/init.d/adblock stop
+service adblock stop
+service adblock disable
 opkg remove luci-i18n-adblock-ja
 opkg remove luci-app-adblock
 opkg remove adblock
