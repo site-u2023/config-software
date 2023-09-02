@@ -94,6 +94,7 @@ opkg remove luci-i18n-adblock-ja
 opkg remove luci-app-adblock
 opkg remove adblock
 opkg remove tcpdump-mini
+rm -rf /etc/adblock
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
