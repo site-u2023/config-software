@@ -43,7 +43,7 @@ fi
   echo -e " \033[1;32m[b]\033[0;39m": AdBlock設定
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m------------------------------------- August 27, 2023\033[0;39m"
-  read -p " キーを選択してください [s/i/p/a or r/q]: " num
+  read -p " キーを選択してください [g/b or q]: " num
   case "${num}" in
     "g" ) _func_AdGuard_INST ;;
     "b" ) _func_AdBlock_INST ;;
