@@ -154,4 +154,3 @@ else
  exit
 fi
 _func_AdGuard
-exit
