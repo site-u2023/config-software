@@ -31,7 +31,6 @@ luci-app-cpu-perf
 luci-app-temp-status
 internet-detector
 luci-app-internet-detector
-mailsend
 luci-theme-argon
 EOF
 
@@ -151,7 +150,6 @@ wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.0-1_all.ipk htt
 opkg install /tmp/luci-app-internet-detector_1.0-1_all.ipk
 rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
 # /etc/init.d/rpcd restart
-opkg install mailsend
 
 # テーマ ARGON (テンプレート)
 opkg install luci-compat
