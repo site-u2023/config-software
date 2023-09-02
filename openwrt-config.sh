@@ -62,11 +62,11 @@ cat << EOF > /etc/config-software/config-banner
  |_______||   __|_____|__|__||________||__|  |____|
           |__| W I R E L E S S   F R E E D O M
  -----------------------------------------------------
- OpenWrt-CONFIG 02.11.0
+ OpenWrt-CONFIG 02.11.1
  -----------------------------------------------------
- echo -e " \033[1;37m3秒後に切り替わります\033[0;39m" 
 EOF
 echo -e " \033[1;37m`cat /etc/config-software/config-banner`\033[0;39m"
+echo -e " \033[1;37m3秒後に切り替わります\033[0;39m" 
 sleep 3
 {
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
