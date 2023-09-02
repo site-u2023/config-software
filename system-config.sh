@@ -132,11 +132,11 @@ do
   echo -e " \033[1;35mWi-Fi(wwan2)のパスワード: ${input_str_WIFI_PASSWD_C}\033[0;39m"
    fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
-  read -p " これで宜しければ設定を開始します [y/n or r]: " num
+  read -p " これで宜しければ設定を開始します [y/n or q]: " num
   case "${num}" in
     "y" ) _func_DEVICE_SET ;; 
     "n" ) _func_HOSTNAME ;;
-    "r" ) exit ;;
+    "q" ) exit ;;
   esac
 done
 
