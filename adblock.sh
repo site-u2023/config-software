@@ -37,6 +37,7 @@ uci set adblock.global.adb_backup="1"
 uci set adblock.global.adb_backupdir="/etc/adblock"
 uci set adblock.global.adb_backup_mode="1"
 uci add_list adblock.global.adb_sources='tofu'
+
 uci commit adblock
 /etc/init.d/adblock enable
 /etc/init.d/adblock start
