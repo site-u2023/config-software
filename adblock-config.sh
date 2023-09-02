@@ -28,7 +28,8 @@ do
 done
  
 function _func_AdBlock_SET
-{
+while :
+do
 opkg update
 opkg install adblock
 opkg install luci-i18n-adblock-ja
@@ -68,7 +69,7 @@ uci commit adblock
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
-}
+done
 
 function _func_AdBlock_Before
 while :
