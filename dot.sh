@@ -1,5 +1,7 @@
 #! /bin/sh
 
+function _func_STUBBY
+{
 cp /etc/config/dhcp /etc/config/dhcp.dot.bak
 cp /etc/config/network /etc/config/network.dot.bak
 
@@ -27,5 +29,28 @@ uci commit
 # ブート失敗対策
 sed -i "/exit 0/d" /etc/rc.local
 echo "/etc/init.d/stubby restart" >> /etc/rc.local 
-echo "exit 0" >> /etc/rc.local 
+echo "exit 0" >> /etc/rc.local
 
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit
+}
+
+while :
+do
+{
+OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
+if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
+ echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+else
+ read -p " バージョンが違うため終了します"
+ exit
+fi
+}
+  echo -e " \033[1;35mSTUBBYのインストールを開始します\033[0;39m"
+  read -p " 開始します [y/n]: " num
+  case "${num}" in
+    "y" ) _func_STUBBY ;;
+    "n" ) exit ;;
+  esac
+done
