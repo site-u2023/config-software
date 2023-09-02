@@ -10,21 +10,21 @@ do
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
-    "c" ) _func_confirmation ;;
-    "b" ) _func_Before ;;
+    "c" ) _func_AdBlock_confirmation ;;
+    "b" ) _func_AdBlock_Before ;;
     "q" ) exit ;;
   esac
 done
 
-function _func_confirmation
+function _func_AdBlock_confirmation
   echo -e " \033[1;35mAdBlockdのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
-    "y" ) _func_SET ;;
+    "y" ) _func_AdBlock_SET ;;
     "n" ) break ;;
   esac
   
-function _func_SET
+function _func_AdBlock_SET
 {
 opkg update
 opkg install adblock
