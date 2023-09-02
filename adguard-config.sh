@@ -28,21 +28,21 @@ echo -e " \033[1;37mインストール可能です\033[0;39m"
    exit
   fi
 }        
-          _func_confirmation ;;
-    "b" ) _func_Before ;;
+          _func_AdGuard_confirmation ;;
+    "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
 done
 
-function _func_confirmation
+function _func_AdGuard_confirmation
   echo -e " \033[1;35mAdGuardのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
-    "y" ) _func_PORT ;;
+    "y" ) _func_AdGuard_PORT ;;
     "n" ) break ;;
   esac
 
-function _func_PORT
+function _func_AdGuard_PORT
 while :
 do
   echo -e "\033[1;37m AdGuardのポート番号を入力して下さい\033[0;39m"
@@ -50,13 +50,13 @@ do
   read -p " ポート番号: " input_str_PORT
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_USER ;;
-    "n" ) _func_PORT ;;
+    "y" ) _func_AdGuard_USER ;;
+    "n" ) _func_AdGuard_PORT ;;
     "r" ) _func_AdGuard ;;
   esac
 done
 
-function _func_USER
+function _func_AdGuard_USER
 while :
 do
   echo -e "\033[1;37m AdGuardのユーザー名を入力して下さい\033[0;39m"
@@ -64,13 +64,13 @@ do
   read -p " ユーザー名: " input_str_USER
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_PASSWD ;;
-    "n" ) _func_USER ;;
+    "y" ) _func_AdGuard_PASSWD ;;
+    "n" ) _func_AdGuard_USER ;;
     "r" ) _func_AdGuard ;;
   esac
 done
 
-function _func_PASSWD
+function _func_AdGuard_PASSWD
 while :
 do
   echo -e "\033[1;37m AdGuardのパスワードを入力して下さい\033[0;39m"
@@ -79,13 +79,13 @@ do
   read -p " パスワード: " input_str_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_confirmation ;;
-    "n" ) _func_PASSWD ;;
+    "y" ) _func_AdGuard_confirmation2 ;;
+    "n" ) _func_AdGuard_PASSWD ;;
     "r" ) _func_AdGuard ;;
   esac
 done
 
-function _func_confirmation
+function _func_AdGuard_confirmation2
 while :
 do
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
@@ -95,13 +95,13 @@ do
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " これで宜しければ設定を開始します [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_SET ;;
-    "n" ) _func_PORT ;;
+    "y" ) _func_AdGuard_SET ;;
+    "n" ) _func_AdGuard_PORT ;;
     "r" ) _func_AdGuard ;;
   esac
 done
 
-function _func_SET
+function _func_AdGuard_SET
 {
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sed -i -e "s/address: 0.0.0.0:3000/address: 0.0.0.0:${input_str_PORT}/g" /etc/config-software/adguard.sh
@@ -115,20 +115,20 @@ reboot
 exit
 }
 
-function _func_Before
+function _func_AdGuard_Before
 while :
 do
   echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: adguardhomeをリムーブします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_Restoration ;;
+    "y" ) _func_AdGuard_Restoration ;;
     "n" ) _func_AdGuard ;;
     "r" ) _func_AdGuard ;;
   esac
 done
 
-function _func_Restoration
+function _func_AdGuard_Restoration
 {
 service adguardhome stop
 service adguardhome disable
