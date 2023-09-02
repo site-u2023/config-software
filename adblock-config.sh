@@ -17,13 +17,15 @@ do
 done
 
 function _func_AdBlock_Confirm
+{
   echo -e " \033[1;35mAdBlockdのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_AdBlock_SET ;;
     "n" ) break ;;
   esac
-  
+}
+ 
 function _func_AdBlock_SET
 {
 opkg update
