@@ -1,16 +1,16 @@
 #! /bin/sh
 
-function _func_adguard
+function _func_AdGuard
 while :
 do
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": AdGuardの設定を実行します（容量判定します）
+  echo -e " \033[1;34m[c]\033[0;39m": AdGuardの容量判定を実行します
   echo -e " \033[1;31m[b]\033[0;39m": AdGuardの設定を以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or r]: " num
+  read -p " キーを選択してください [c/b or r]: " num
   case "${num}" in
-    "e" ) 
+    "c" ) 
 {
 opkg update
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
@@ -28,11 +28,19 @@ echo -e " \033[1;37mインストール可能です\033[0;39m"
    exit
   fi
 }        
-         _func_PORT ;;
+          _func_confirmation ;;
     "b" ) _func_Before ;;
     "r" ) exit ;;
   esac
 done
+
+function _func_confirmation
+  echo -e " \033[1;35mAdGuardのインストールを開始します\033[0;39m"
+  read -p " 開始します [y/n]: " num
+  case "${num}" in
+    "y" ) _func_PORT ;;
+    "n" ) break ;;
+  esac
 
 function _func_PORT
 while :
@@ -138,21 +146,11 @@ reboot
 exit
 }
 
-while :
-do
-{
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
 else
- read -p " バージョンが違うため終了します"
+ read -p " バージョンが違うため終了します";
  exit
 fi
-}
-  echo -e " \033[1;35mAdGuardのインストールを開始します\033[0;39m"
-  read -p " 開始します [y/n]: " num
-  case "${num}" in
-    "y" ) _func_adguard ;;
-    "n" ) exit ;;
-  esac
-done
+_func_AdGuard
