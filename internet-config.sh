@@ -54,7 +54,8 @@ function _func_MAP_e_VirtualConnect_Before
 while :
 do
   echo -e " \033[1;37mOCNバーチャルコネクトの設定を以前の設定に復元します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: map/bashはリムーブしません\033[0;39m"
+  echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
+  echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Restoration ;;
@@ -116,7 +117,8 @@ function _func_MAP_e_V6plus_Before
 while :
 do
   echo -e " \033[1;37mV6プラス・IPv6オプションの設定を以前の設定に復元します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: map/bashはリムーブしません\033[0;39m"
+  echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
+  echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Before_Restoration ;;
