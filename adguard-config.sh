@@ -35,12 +35,14 @@ echo -e " \033[1;37mインストール可能です\033[0;39m"
 done
 
 function _func_AdGuard_Confirm
+{
   echo -e " \033[1;35mAdGuardのインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_AdGuard_PORT ;;
     "n" ) break ;;
   esac
+}
 
 function _func_AdGuard_PORT
 while :
