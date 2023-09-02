@@ -63,8 +63,8 @@ uci set adblock.global.adb_backup_mode="1"
 uci add_list adblock.global.adb_sources='tofu'
 
 uci commit adblock
-/etc/init.d/adblock enable
-/etc/init.d/adblock start
+service adblock enable
+service adblock start
 
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
