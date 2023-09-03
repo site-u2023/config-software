@@ -195,7 +195,7 @@ do
   case "${num}" in
     "y" ) echo luci >> /etc/config-software/list-installed/Before ;;
     "n" ) LUCI='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -216,7 +216,7 @@ do
     "n" ) LUCI_JA='1'
           LUCI_JA_OPKG='1'
           LUCI_JA_FIREWALL='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -231,7 +231,7 @@ do
   case "${num}" in
     "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before ;;
     "n" ) SFTP='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -248,7 +248,7 @@ if [ -z "$CPU" ]; then
     case "${num}" in
       "y" ) echo irqbalance >> /etc/config-software/list-installed/Before ;;
       "n" ) CPU='1' ;;
-      "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
     esac
   done
  fi
@@ -270,7 +270,7 @@ do
     "n" ) SQM='1'
           SQM_APP='1'
           SQM_APP_JA='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -288,7 +288,7 @@ do
           echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) STATUS='1'
           STATUS_JA='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -306,7 +306,7 @@ do
           echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) NLBWMON='1'
           NLBWMON_JA='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -327,7 +327,7 @@ do
     "n" ) WIFISCHEDULE='1'
           WIFISCHEDULE_APP='1'
           WIFISCHEDULE_APP_JA='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -348,7 +348,7 @@ do
     "n" ) THEME_OPENWRT='1'
           THEME_MATERIAL='1'
           THEME_2020='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -364,7 +364,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before ;;
     "n" ) LOG='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -380,7 +380,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before ;;
     "n" ) CPU_STATUS='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -396,7 +396,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before ;;
     "n" ) CPU_PERFORMANCE='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -412,7 +412,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before ;;
     "n" ) TMP_STATUS='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -431,7 +431,7 @@ do
           echo luci-app-internet-detector >> /etc/config-software/list-installed/Before ;;
     "n" ) DETECTER='1'
           DETECTER_APP='1' ;;
-    "q" ) _func_Package_MAIN ;;
+    "q" ) break ;;
   esac
 done
 fi
@@ -487,10 +487,3 @@ fi
     "n" ) exit ;;
   esac
 done
-
-# ----------------------------------------------------------------
-
-function _func_Package_MAIN
-{
-exit
-}
