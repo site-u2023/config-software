@@ -29,7 +29,8 @@ done
  
 function _func_AdBlock_SET
 {
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install adblock
