@@ -1,6 +1,8 @@
 #! /bin/sh
 
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install https-dns-proxy
 opkg install luci-app-https-dns-proxy
 opkg install luci-i18n-https-dns-proxy-ja
