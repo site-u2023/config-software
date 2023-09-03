@@ -188,18 +188,13 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/B
 # LuCi
 LUCI=`opkg list-installed luci | awk '{ print $1 }'`
 if [ -z "$LUCI" ]; then
-while :
-do
   echo -e " \033[1;34mLuciをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y or q]: " num
   case "${num}" in
-    "y" ) echo luci >> /etc/config-software/list-installed/Before
-          exit ;;
-    "n" ) LUCI='1'
-          exit ;;
+    "y" ) echo luci >> /etc/config-software/list-installed/Before ;;
+    "n" ) LUCI='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # LuCi日本語化
@@ -207,39 +202,29 @@ LUCI_JA=`opkg list-installed luci-i18n-base-ja | awk '{ print $1 }'`
 LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-ja | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-ja | awk '{ print $1 }'`
 if [ -z "$LUCI_JA" ]; then
-while :
-do
   echo -e " \033[1;34mLuci日本語化をインストールしますか\033[0;39m"
   read -p " キーを選択してください [y or q]: " num
   case "${num}" in
     "y" ) echo luci-i18n-base-ja >> /etc/config-software/list-installed/Before
           echo luci-i18n-opkg-ja >> /etc/config-software/list-installed/Before
-          echo luci-i18n-firewall-ja >> /etc/config-software/list-installed/Before
-          exit ;;
+          echo luci-i18n-firewall-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) LUCI_JA='1'
           LUCI_JA_OPKG='1'
-          LUCI_JA_FIREWALL='1'
-          exit ;;
+          LUCI_JA_FIREWALL='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # SFTPサーバー
 SFTP=`opkg list-installed openssh-sftp-server | awk '{ print $1 }'`
 if [ -z "$SFTP" ]; then
-while :
-do
   echo -e " \033[1;34mSFTPサーバーをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before
-          exit ;;
-    "n" ) SFTP='1'
-          exit ;;
+    "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before ;;
+    "n" ) SFTP='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # CPU負荷分散
@@ -247,18 +232,13 @@ CPU=`opkg list-installed irqbalance | awk '{ print $1 }'`
 if [ -z "$CPU" ]; then
  CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
  if [ "$CPU_INFO" -gt 3 ]; then
-  while :
-  do
     echo -e " \033[1;34mCPU負荷分散をインストールしますか\033[0;39m"
     read -p " キーを選択してください [y/n or q]: " num
     case "${num}" in
-      "y" ) echo irqbalance >> /etc/config-software/list-installed/Before
-            exit ;;
-      "n" ) CPU='1'
-            exit ;;
+      "y" ) echo irqbalance >> /etc/config-software/list-installed/Before ;;
+      "n" ) CPU='1' ;;
       "q" ) exit ;;
     esac
-  done
  fi
 fi
 
@@ -267,62 +247,47 @@ SQM=`opkg list-installed sqm-scripts | awk '{ print $1 }'`
 SQM_APP=`opkg list-installed luci-app-sqm | awk '{ print $1 }'`
 SQM_APP_JA=`opkg list-installed luci-i18n-sqm-ja | awk '{ print $1 }'`
 if [ -z "$SQM" ]; then
-while :
-do
   echo -e " \033[1;34mSQMをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo sqm-scripts >> /etc/config-software/list-installed/Before
           echo luci-app-sqm >> /etc/config-software/list-installed/Before
-          echo luci-i18n-sqm-ja >> /etc/config-software/list-installed/Before
-          exit ;;
+          echo luci-i18n-sqm-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) SQM='1'
           SQM_APP='1'
-          SQM_APP_JA='1'
-          exit ;;
+          SQM_APP_JA='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # ネットワーク統計インターフェイス
 STATUS=`opkg list-installed luci-app-statistics | awk '{ print $1 }'`
 STATUS_JA=`opkg list-installed luci-i18n-statistics-ja | awk '{ print $1 }'`
 if [ -z "$STATUS" ]; then
-while :
-do
   echo -e " \033[1;34mネットワーク統計インターフェイスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-statistics >> /etc/config-software/list-installed/Before
-          echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before
-          exit ;;
+          echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) STATUS='1'
-          STATUS_JA='1'
-          exit ;;
+          STATUS_JA='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # 帯域幅モニター
 NLBWMON=`opkg list-installed nlbwmon | awk '{ print $1 }'`
 NLBWMON_JA=`opkg list-installed luci-i18n-nlbwmon-ja | awk '{ print $1 }'`
 if [ -z "$NLBWMON" ]; then
-while :
-do
   echo -e " \033[1;34m帯域幅モニターをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo nlbwmon >> /etc/config-software/list-installed/schedule
-          echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before
-          exit ;;
+          echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) NLBWMON='1'
-          NLBWMON_JA='1'
-          exit ;;
+          NLBWMON_JA='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # WiFiスケジュール
@@ -330,22 +295,17 @@ WIFISCHEDULE=`opkg list-installed wifischedule | awk '{ print $1 }'`
 WIFISCHEDULE_APP=`opkg list-installed luci-app-wifischedule | awk '{ print $1 }'`
 WIFISCHEDULE_APP_JA=`opkg list-installed luci-i18n-wifischedule-ja | awk '{ print $1 }'`
 if [ -z "$WIFISCHEDULE" ]; then
-while :
-do
   echo -e " \033[1;34mWiFiスケジュールをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci >> /etc/config-software/list-installed/schedule
           echo luci-app-wifischedule >> /etc/config-software/list-installed/Before
-          echo luci-i18n-wifischedule-ja >> /etc/config-software/list-installed/Before
-          exit ;;
+          echo luci-i18n-wifischedule-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) WIFISCHEDULE='1'
           WIFISCHEDULE_APP='1'
-          WIFISCHEDULE_APP_JA='1'
-          exit ;;
+          WIFISCHEDULE_APP_JA='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # 追加テーマ
@@ -353,22 +313,17 @@ THEME_OPENWRT=`opkg list-installed luci-theme-openwrt | awk '{ print $1 }'`
 THEME_MATERIAL=`opkg list-installed luci-theme-material | awk '{ print $1 }'`
 THEME_2020=`opkg list-installed luci-theme-openwrt-2020 | awk '{ print $1 }'`
 if [ -z "$THEME_OPENWRT" ]; then
-while :
-do
   echo -e " \033[1;34m追加テーマをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
           echo luci-theme-material >> /etc/config-software/list-installed/Before
-          echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before
-          exit ;;
+          echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before ;;
     "n" ) THEME_OPENWRT='1'
           THEME_MATERIAL='1'
-          THEME_2020='1'
-          exit ;;
+          THEME_2020='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # ログ情報
@@ -380,88 +335,65 @@ do
   echo -e " \033[1;34mログ情報をインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before
-          exit ;;
-    "n" ) LOG='1'
-          exit ;;
+    "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before ;;
+    "n" ) LOG='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # CPUステータス
 CPU_STATUS=`opkg list-installed luci-app-cpu-status | awk '{ print $1 }'`
 if [ -z "$CPU_STATUS" ]; then
-while :
-do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;34mCPUステータスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before
-          exit ;;
-    "n" ) CPU_STATUS='1'
-          exit ;;
+    "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before ;;
+    "n" ) CPU_STATUS='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # CPUパフォーマンス
 CPU_PERFORMANCE=`opkg list-installed luci-app-cpu-perf | awk '{ print $1 }'`
 if [ -z "$CPU_PERFORMANCE" ]; then
-while :
-do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;34mCPUパフォーマンスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before
-          exit ;;
-    "n" ) CPU_PERFORMANCE='1'
-          exit ;;
+    "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before ;;
+    "n" ) CPU_PERFORMANCE='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # 温度センサー
 TMP_STATUS=`opkg list-installed luci-app-temp-status | awk '{ print $1 }'`
 if [ -z "$TMP_STATUS" ]; then
-while :
-do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;34mCPUパフォーマンスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before
-          exit ;;
-    "n" ) TMP_STATUS='1'
-          exit ;;
+    "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before ;;
+    "n" ) TMP_STATUS='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 # インターネット可用性確認
 DETECTER=`opkg list-installed internet-detector | awk '{ print $1 }'`
 DETECTER_APP=`opkg list-installed luci-app-internet-detector | awk '{ print $1 }'`
 if [ -z "$DETECTER" ]; then
-while :
-do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;34mCPUパフォーマンスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo internet-detector >> /etc/config-software/list-installed/Before
-          echo luci-app-internet-detector >> /etc/config-software/list-installed/Before
-          exit ;;
+          echo luci-app-internet-detector >> /etc/config-software/list-installed/Before ;;
     "n" ) DETECTER='1'
-          DETECTER_APP='1'
-          exit ;;
+          DETECTER_APP='1' ;;
     "q" ) exit ;;
   esac
-done
 fi
 
 _func_PACKAGE_INSTALL
