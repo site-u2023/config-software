@@ -12,7 +12,8 @@ do
   case "${num}" in
     "c" ) 
 {
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
