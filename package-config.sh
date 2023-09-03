@@ -8,7 +8,7 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/b
 cat << EOF > /etc/config-software/list-installed/schedule
 luci
 luci-i18n-base-ja
-info/luci-i18n-opkg-ja
+luci-i18n-opkg-ja
 luci-i18n-firewall-ja
 openssh-sftp-server
 irqbalance
