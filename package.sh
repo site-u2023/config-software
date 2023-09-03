@@ -6,7 +6,7 @@ function _func_PACKAGE_INSTALL
 {
 
 # アップデート
-if [ -z /tmp/opkg-lists ]; then
+if [ -n /tmp/opkg-lists ]; then
 opkg update
 fi
  
