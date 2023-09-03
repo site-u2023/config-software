@@ -5,6 +5,9 @@
 function _func_PACKAGE_INSTALL
 {
 
+# パッケージ
+opkg update
+
 # LuCi
 if [ -z "$LUCI" ]; then
 opkg install luci
