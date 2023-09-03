@@ -20,8 +20,8 @@ ADGUARD_SIZE=`expr $ADGUARD_SIZE_TEMP / 1024`
 echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
 echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
 echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
-echo -e " \033[1;37mインストール可能です\033[0;39m"
   if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
+   echo -e " \033[1;37mインストール可能です\033[0;39m"
    read -p " 何かキーを押して下さい"
   else
    read -p " フラッシュ容量が足りないため終了します"
