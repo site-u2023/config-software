@@ -192,7 +192,7 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/B
 LUCI=`opkg list-installed luci | awk '{ print $1 }'`
 if [ -z "$LUCI" ]; then
   echo -e " \033[1;33mLuciをインストールしますか\033[0;39m"
-  read -p " キーを選択してください [y or q]: " num
+  read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci >> /etc/config-software/list-installed/Before ;;
     "n" ) LUCI='1' ;;
@@ -206,7 +206,7 @@ LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-ja | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-ja | awk '{ print $1 }'`
 if [ -z "$LUCI_JA" ]; then
   echo -e " \033[1;33mLuci日本語化をインストールしますか\033[0;39m"
-  read -p " キーを選択してください [y or q]: " num
+  read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-i18n-base-ja >> /etc/config-software/list-installed/Before
           echo luci-i18n-opkg-ja >> /etc/config-software/list-installed/Before
