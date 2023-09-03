@@ -416,7 +416,6 @@ done
 
 while :
 do
-{
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
@@ -424,35 +423,7 @@ else
  read -p " バージョンが違うため終了します"
  exit
 fi
-}
-{
-str_USB=`dmesg | grep -s usb`
-if [ -n "$str_USB" ]; then
-  {
-  AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-  if [ "${AVAILABLE_FLASH}" -gt "6500" ]; then
-   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
-   echo -e " \033[1;37mインストールサイズ: 約6500KB\033[0;39m"
-  else
-   read -p " フラッシュ容量が足りないため終了します"
-   exit
-  fi
-  }
-else
- {
-  AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-  if [ "${AVAILABLE_FLASH}" -gt "4300" ]; then
-   echo -e " \033[1;37m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
-   echo -e " \033[1;37mインストールサイズ: 約4300KB\033[0;39m"
-  else
-   read -p " フラッシュ容量が足りないため終了します"
-   exit
-  fi
- }
-fi
-}
   echo -e " \033[1;35mパッケージの選択をしてからインストールを開始します\033[0;39m"
-  echo -e " \033[1;35m※カスタムフィードは失敗する事があります\033[0;39m"
   read -p " パッケージの選択を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_PACKAGE_SELECTOR ;;
