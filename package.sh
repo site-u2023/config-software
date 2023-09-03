@@ -15,7 +15,7 @@ if [ -z "$LUCI_JA" ]; then
 opkg install luci-i18n-base-ja
 fi
 if [ -z "$LUCI_JA_OPKG" ]; then
-opkg install uci-i18n-opkg-ja
+opkg install luci-i18n-opkg-ja
 fi
 if [ -z "$LUCI_JA_FIREWALL" ]; then
 opkg install luci-i18n-firewall-ja
@@ -230,7 +230,7 @@ fi
 
 # LuCi日本語化
 LUCI_JA=`opkg list-installed luci-i18n-base-ja | awk '{ print $1 }'`
-LUCI_JA_OPKG=`opkg list-installed uci-i18n-opkg-ja | awk '{ print $1 }'`
+LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-ja | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-ja | awk '{ print $1 }'`
 if [ -z "$LUCI_JA" ]; then
 while :
