@@ -161,16 +161,15 @@ opkg install /tmp/luci-app-internet-detector_1.0-1_all.ipk
 rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
 fi
 
-opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/after
-grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/difference
-grep -vixf /etc/config-software/list-installed/schedule /etc/config-software/list-installed/difference > /etc/config-software/list-installed/installed
-if [ ! -s $`cat /etc/config-software/list-installed/installed` ]; then
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
+grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/difference
+if [ ! -s $`cat /etc/config-software/list-installed/difference` ]; then
  echo -e " \033[1;37mインストールは成功しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
 else
  echo -e " \033[1;37m失敗したインストール\033[0;39m"
- echo -e "\033[1;37m`cat /etc/config-software/list-installed/installed`\033[0;39m"
+ echo -e "\033[1;37m`cat /etc/config-software/list-installed/difference`\033[0;39m"
  echo -e " \033[1;37m失敗したインストールを再試行します\033[0;39m"
  read -p " 何かキーを押すと再度スクリプトを開始します"
  _func_PACKAGE_INSTALL
@@ -184,35 +183,7 @@ function _func_PACKAGE_SELECTOR
 {
 
 mkdir -p /etc/config-software/list-installed
-opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/before
-cat << EOF > /etc/config-software/list-installed/schedule
-luci
-luci-i18n-base-ja
-info/luci-i18n-opkg-ja
-luci-i18n-firewall-ja
-openssh-sftp-server
-irqbalance
-sqm-scripts
-luci-app-sqm
-luci-i18n-sqm-ja
-luci-app-statistics
-luci-i18n-statistics-ja
-nlbwmon
-luci-app-nlbwmon
-luci-i18n-nlbwmon-ja
-wifischedule
-luci-app-wifischedule
-luci-i18n-wifischedule-ja
-luci-theme-openwrt
-luci-theme-material
-luci-theme-openwrt-2020
-luci-app-log
-luci-app-cpu-perf
-luci-app-temp-status
-internet-detector
-luci-app-internet-detector
-luci-theme-argon
-EOF
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
 
 # LuCi
 LUCI=`opkg list-installed luci | awk '{ print $1 }'`
@@ -224,7 +195,7 @@ do
   echo -e " \033[1;33m[q]\033[0;39m": 終了    
   read -p " キーを選択してください [y or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci >> /etc/config-software/list-installed/Before ;;
     "n" ) LUCI='1' ;;
     "q" ) _func_Package_MAIN ;;
   esac
@@ -242,7 +213,9 @@ do
   echo -e " \033[1;33m[q]\033[0;39m": 終了    
   read -p " キーを選択してください [y or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci-i18n-base-ja >> /etc/config-software/list-installed/Before
+          echo luci-i18n-opkg-ja >> /etc/config-software/list-installed/Before
+          echo luci-i18n-firewall-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) LUCI_JA='1'
           LUCI_JA_OPKG='1'
           LUCI_JA_FIREWALL='1' ;;
@@ -259,7 +232,7 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": SFTPサーバーをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before ;;
     "n" ) SFTP='1' ;;
     "q" ) _func_Package_MAIN ;;
   esac
@@ -276,7 +249,7 @@ if [ -z "$CPU" ]; then
     echo -e " \033[1;34m[y]\033[0;39m": CPU負荷分散をインストールしますか
     read -p " キーを選択してください [y/n or q]: " num
     case "${num}" in
-      "y" ) break ;;
+      "y" ) echo irqbalance >> /etc/config-software/list-installed/Before ;;
       "n" ) CPU='1' ;;
       "q" ) _func_Package_MAIN ;;
     esac
@@ -294,7 +267,9 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": SQMをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo sqm-scripts >> /etc/config-software/list-installed/Before
+          echo luci-app-sqm >> /etc/config-software/list-installed/Before
+          echo luci-i18n-sqm-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) SQM='1'
           SQM_APP='1'
           SQM_APP_JA='1' ;;
@@ -312,9 +287,10 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": ネットワーク統計インターフェイスをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci-app-statistics >> /etc/config-software/list-installed/Before
+          echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) STATUS='1'
-         STATUS_JA='1' ;;
+          STATUS_JA='1' ;;
     "q" ) _func_Package_MAIN ;;
   esac
 done
@@ -329,7 +305,8 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": 帯域幅モニターをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo nlbwmon >> /etc/config-software/list-installed/schedule
+          echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) NLBWMON='1'
           NLBWMON_JA='1' ;;
     "q" ) _func_Package_MAIN ;;
@@ -347,7 +324,9 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": WiFiスケジュールをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci >> /etc/config-software/list-installed/schedule
+          echo luci-app-wifischedule >> /etc/config-software/list-installed/Before
+          echo luci-i18n-wifischedule-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) WIFISCHEDULE='1'
           WIFISCHEDULE_APP='1'
           WIFISCHEDULE_APP_JA='1' ;;
@@ -366,7 +345,9 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": 追加テーマをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
+          echo luci-theme-material >> /etc/config-software/list-installed/Before
+          echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before ;;
     "n" ) THEME_OPENWRT='1'
           THEME_MATERIAL='1'
           THEME_2020='1' ;;
@@ -384,7 +365,7 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": ログ情報をインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before ;;
     "n" ) LOG='1' ;;
     "q" ) _func_Package_MAIN ;;
   esac
@@ -400,7 +381,7 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": CPUステータスをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before ;;
     "n" ) CPU_STATUS='1' ;;
     "q" ) _func_Package_MAIN ;;
   esac
@@ -416,7 +397,7 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": CPUパフォーマンスをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before ;;
     "n" ) CPU_PERFORMANCE='1' ;;
     "q" ) _func_Package_MAIN ;;
   esac
@@ -432,7 +413,7 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": CPUパフォーマンスをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before ;;
     "n" ) TMP_STATUS='1' ;;
     "q" ) _func_Package_MAIN ;;
   esac
@@ -449,7 +430,8 @@ do
   echo -e " \033[1;34m[y]\033[0;39m": CPUパフォーマンスをインストールしますか
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) break ;;
+    "y" ) echo internet-detector >> /etc/config-software/list-installed/Before
+          echo luci-app-internet-detector >> /etc/config-software/list-installed/Before ;;
     "n" ) DETECTER='1'
           DETECTER_APP='1' ;;
     "q" ) _func_Package_MAIN ;;
