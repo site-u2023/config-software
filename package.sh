@@ -77,6 +77,9 @@ if [ -z "$NLBWMON" ]; then
 opkg install nlbwmon
 fi
 if [ -z "$NLBWMON_JA" ]; then
+opkg install luci-app-nlbwmon
+fi
+if [ -z "$NLBWMON_JA" ]; then
 opkg install luci-i18n-nlbwmon-ja
 fi
 
@@ -278,12 +281,14 @@ fi
 
 # 帯域幅モニター
 NLBWMON=`opkg list-installed nlbwmon | awk '{ print $1 }'`
+NLBWMON_JA=`opkg list-installed luci-app-nlbwmon | awk '{ print $1 }'`
 NLBWMON_JA=`opkg list-installed luci-i18n-nlbwmon-ja | awk '{ print $1 }'`
 if [ -z "$NLBWMON" ]; then
   echo -e " \033[1;34m帯域幅モニターをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo nlbwmon >> /etc/config-software/list-installed/schedule
+          echo luci-app-nlbwmon >> /etc/config-software/list-installed/schedule
           echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) NLBWMON='1'
           NLBWMON_JA='1' ;;
