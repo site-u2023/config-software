@@ -400,7 +400,7 @@ if [ -z "$DETECTER" ]; then
 fi
 
 # アップデート
-if [ -z /tmp/opkg-lists ]; then
+if [ -n /tmp/opkg-lists ]; then
 opkg update
 fi
  
