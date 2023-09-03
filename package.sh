@@ -514,4 +514,5 @@ fi
     "y" ) _func_PACKAGE_SELECTOR ;;
     "n" ) exit ;;
   esac
+   eixt
 done
