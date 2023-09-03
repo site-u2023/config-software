@@ -6,7 +6,7 @@ function _func_PACKAGE_INSTALL
 {
 
 # アップデート
-if [ -n /tmp/opkg-lists ]; then
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
  
@@ -399,14 +399,13 @@ if [ -z "$DETECTER" ]; then
   esac
 fi
 
-# アップデート
-if [ -n /tmp/opkg-lists ]; then
-opkg update
-fi
- 
 # DIFF
 DIFF=`opkg list-installed diffutils | awk '{ print $1 }'`
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ -z "$DIFF" ]; then
+ if [ ! -e ${UPDATE} ]; then
+ opkg update
+ fi
 opkg install diffutils
 fi
 
