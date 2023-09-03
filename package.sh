@@ -180,7 +180,8 @@ fi
 # ----------------------------------------------------------------
 
 function _func_PACKAGE_SELECTOR
-{
+while :
+do
 
 mkdir -p /etc/config-software/list-installed
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
@@ -396,7 +397,7 @@ fi
 
 _func_PACKAGE_INSTALL
 
-}
+done
 
 # ----------------------------------------------------------------
 
