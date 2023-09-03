@@ -16,7 +16,9 @@ function _func_STUBBY_SET
 cp /etc/config/dhcp /etc/config/dhcp.dot.bak
 cp /etc/config/network /etc/config/network.dot.bak
 
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install stubby
 /etc/init.d/dnsmasq stop
 
