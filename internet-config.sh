@@ -37,7 +37,8 @@ done
 
 function _func_MAP_e_VirtualConnect_SET
 {
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install bash
@@ -102,7 +103,8 @@ done
 
 function _func_MAP_e_V6plus_SET
 {
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install bash
@@ -216,7 +218,8 @@ done
 
 function _func_DS_LITE_Transix_SET
 {
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install ds-lite
@@ -273,7 +276,8 @@ done
 
 function _func_DS_LITE_Xpass_SET
 {
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install ds-lite
@@ -330,7 +334,8 @@ done
 
 function _func_DS_LITE_V6connect_SET
 {
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install ds-lite
