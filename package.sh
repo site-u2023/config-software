@@ -401,7 +401,7 @@ if [ -z "$DETECTER" ]; then
 fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/after
-grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/difference
+grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/differencegrep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/difference 2> /dev/null
 if [ ! -s $`cat /etc/config-software/list-installed/difference` ]; then
 echo -e " \033[1;37mインストールはありません\033[0;39m"
 read -p " 何かキーを押して終了して下さい"
