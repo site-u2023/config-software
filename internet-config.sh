@@ -37,7 +37,9 @@ done
 
 function _func_MAP_e_VirtualConnect_SET
 {
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install bash
 opkg install map
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
@@ -100,7 +102,9 @@ done
 
 function _func_MAP_e_V6plus_SET
 {
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install bash
 opkg install map
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
@@ -212,7 +216,9 @@ done
 
 function _func_DS_LITE_Transix_SET
 {
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install ds-lite
 wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
@@ -267,7 +273,9 @@ done
 
 function _func_DS_LITE_Xpass_SET
 {
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install ds-lite
 wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sed -i -e "s/AFTR_ADDRESS/2001:f60:0:200::1:1/g" /etc/config-software/ds-lite.sh
@@ -322,7 +330,9 @@ done
 
 function _func_DS_LITE_V6connect_SET
 {
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install ds-lite
 wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sed -i -e "s/AFTR_ADDRESS/2001:c28:5:301::11/g" /etc/config-software/ds-lite.sh
