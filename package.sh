@@ -167,7 +167,7 @@ fi
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/difference
 if [ ! -s $`cat /etc/config-software/list-installed/difference` ]; then
- echo -e " \033[1;37mインストールは成功しました\033[0;39m"
+ echo -e " \033[1;37mインストールは完了しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
 else
@@ -400,7 +400,15 @@ if [ -z "$DETECTER" ]; then
   esac
 fi
 
-_func_PACKAGE_INSTALL
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
+grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/difference
+echo -e "\033[1;37m`cat /etc/config-software/list-installed/difference`\033[0;39m"
+read -p " インストールを開始します [y/n or q]: " num
+  case "${num}" in
+    "y" ) _func_PACKAGE_INSTALL ;;
+    "n" ) _func_PACKAGE_SELECTOR ;;
+    "q" ) exit ;;    
+  esac
 
 done
 
@@ -445,10 +453,9 @@ fi
 }
   echo -e " \033[1;35mパッケージの選択をしてからインストールを開始します\033[0;39m"
   echo -e " \033[1;35m※カスタムフィードは失敗する事があります\033[0;39m"
-  read -p " 開始します [y/n]: " num
+  read -p " パッケージの選択を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_PACKAGE_SELECTOR ;;
     "n" ) exit ;;
   esac
-   eixt
 done
