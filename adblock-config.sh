@@ -29,7 +29,9 @@ done
  
 function _func_AdBlock_SET
 {
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 opkg install adblock
 opkg install luci-app-adblock
 opkg install luci-i18n-adblock-ja
