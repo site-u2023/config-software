@@ -6,7 +6,10 @@ function _func_PACKAGE_INSTALL
 {
 
 # パッケージ
+
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 
 # LuCi
 if [ -z "$LUCI" ]; then
