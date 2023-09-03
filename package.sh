@@ -166,7 +166,7 @@ fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/Difference
-if [ ! -s $`cat /etc/config-software/list-installed/Difference` 2> /dev/null ]; then
+if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
  echo -e " \033[1;37mインストールは完了しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
@@ -401,8 +401,8 @@ if [ -z "$DETECTER" ]; then
 fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/after
-grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/Differencegrep
-if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]  2> /dev/null ; then
+grep -svixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/Differencegrep
+if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
 echo -e " \033[1;37mインストールはありません\033[0;39m"
 read -p " 何かキーを押して終了して下さい"
 exit
