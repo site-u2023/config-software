@@ -1,6 +1,7 @@
 #! /bin/sh
 
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install https-dns-proxy
