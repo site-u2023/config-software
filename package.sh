@@ -282,7 +282,7 @@ if [ -z "$CPU" ]; then
 fi
 
 # SQM
-SQM`opkg list-installed sqm-scripts | awk '{ print $1 }'`
+SQM=`opkg list-installed sqm-scripts | awk '{ print $1 }'`
 SQM_APP=`opkg list-installed luci-app-sqm | awk '{ print $1 }'`
 SQM_APP_JA=`opkg list-installed luci-i18n-sqm-ja | awk '{ print $1 }'`
 if [ -z "$SQM" ]; then
