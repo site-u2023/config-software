@@ -399,12 +399,14 @@ if [ -z "$DETECTER" ]; then
   esac
 fi
 
+# アップデート
+if [ -z /tmp/opkg-lists ]; then
+opkg update
+fi
+ 
 # DIFF
 DIFF=`opkg list-installed diffutils | awk '{ print $1 }'`
 if [ -z "$DIFF" ]; then
- if [ -z /tmp/opkg-lists ]; then
- opkg update
- fi
 opkg install diffutils
 fi
 
