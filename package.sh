@@ -193,9 +193,11 @@ do
   echo -e " \033[1;34mLuciをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y or q]: " num
   case "${num}" in
-    "y" ) echo luci >> /etc/config-software/list-installed/Before ;;
-    "n" ) LUCI='1' ;;
-    "q" ) break ;;
+    "y" ) echo luci >> /etc/config-software/list-installed/Before
+          exit ;;
+    "n" ) LUCI='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -212,11 +214,13 @@ do
   case "${num}" in
     "y" ) echo luci-i18n-base-ja >> /etc/config-software/list-installed/Before
           echo luci-i18n-opkg-ja >> /etc/config-software/list-installed/Before
-          echo luci-i18n-firewall-ja >> /etc/config-software/list-installed/Before ;;
+          echo luci-i18n-firewall-ja >> /etc/config-software/list-installed/Before
+          exit ;;
     "n" ) LUCI_JA='1'
           LUCI_JA_OPKG='1'
-          LUCI_JA_FIREWALL='1' ;;
-    "q" ) break ;;
+          LUCI_JA_FIREWALL='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -229,9 +233,11 @@ do
   echo -e " \033[1;34mSFTPサーバーをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before ;;
-    "n" ) SFTP='1' ;;
-    "q" ) break ;;
+    "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before
+          exit ;;
+    "n" ) SFTP='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -246,9 +252,11 @@ if [ -z "$CPU" ]; then
     echo -e " \033[1;34mCPU負荷分散をインストールしますか\033[0;39m"
     read -p " キーを選択してください [y/n or q]: " num
     case "${num}" in
-      "y" ) echo irqbalance >> /etc/config-software/list-installed/Before ;;
-      "n" ) CPU='1' ;;
-    "q" ) break ;;
+      "y" ) echo irqbalance >> /etc/config-software/list-installed/Before
+            exit ;;
+      "n" ) CPU='1'
+            exit ;;
+      "q" ) exit ;;
     esac
   done
  fi
@@ -266,11 +274,13 @@ do
   case "${num}" in
     "y" ) echo sqm-scripts >> /etc/config-software/list-installed/Before
           echo luci-app-sqm >> /etc/config-software/list-installed/Before
-          echo luci-i18n-sqm-ja >> /etc/config-software/list-installed/Before ;;
+          echo luci-i18n-sqm-ja >> /etc/config-software/list-installed/Before
+          exit ;;
     "n" ) SQM='1'
           SQM_APP='1'
-          SQM_APP_JA='1' ;;
-    "q" ) break ;;
+          SQM_APP_JA='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -285,10 +295,12 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-statistics >> /etc/config-software/list-installed/Before
-          echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before ;;
+          echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before
+          exit ;;
     "n" ) STATUS='1'
-          STATUS_JA='1' ;;
-    "q" ) break ;;
+          STATUS_JA='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -303,10 +315,12 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo nlbwmon >> /etc/config-software/list-installed/schedule
-          echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before ;;
+          echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before
+          exit ;;
     "n" ) NLBWMON='1'
-          NLBWMON_JA='1' ;;
-    "q" ) break ;;
+          NLBWMON_JA='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -323,11 +337,13 @@ do
   case "${num}" in
     "y" ) echo luci >> /etc/config-software/list-installed/schedule
           echo luci-app-wifischedule >> /etc/config-software/list-installed/Before
-          echo luci-i18n-wifischedule-ja >> /etc/config-software/list-installed/Before ;;
+          echo luci-i18n-wifischedule-ja >> /etc/config-software/list-installed/Before
+          exit ;;
     "n" ) WIFISCHEDULE='1'
           WIFISCHEDULE_APP='1'
-          WIFISCHEDULE_APP_JA='1' ;;
-    "q" ) break ;;
+          WIFISCHEDULE_APP_JA='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -344,11 +360,13 @@ do
   case "${num}" in
     "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
           echo luci-theme-material >> /etc/config-software/list-installed/Before
-          echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before ;;
+          echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before
+          exit ;;
     "n" ) THEME_OPENWRT='1'
           THEME_MATERIAL='1'
-          THEME_2020='1' ;;
-    "q" ) break ;;
+          THEME_2020='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -362,9 +380,11 @@ do
   echo -e " \033[1;34mログ情報をインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before ;;
-    "n" ) LOG='1' ;;
-    "q" ) break ;;
+    "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before
+          exit ;;
+    "n" ) LOG='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -378,9 +398,11 @@ do
   echo -e " \033[1;34mCPUステータスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before ;;
-    "n" ) CPU_STATUS='1' ;;
-    "q" ) break ;;
+    "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before
+          exit ;;
+    "n" ) CPU_STATUS='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -394,9 +416,11 @@ do
   echo -e " \033[1;34mCPUパフォーマンスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before ;;
-    "n" ) CPU_PERFORMANCE='1' ;;
-    "q" ) break ;;
+    "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before
+          exit ;;
+    "n" ) CPU_PERFORMANCE='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -410,9 +434,11 @@ do
   echo -e " \033[1;34mCPUパフォーマンスをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before ;;
-    "n" ) TMP_STATUS='1' ;;
-    "q" ) break ;;
+    "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before
+          exit ;;
+    "n" ) TMP_STATUS='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
@@ -428,10 +454,12 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo internet-detector >> /etc/config-software/list-installed/Before
-          echo luci-app-internet-detector >> /etc/config-software/list-installed/Before ;;
+          echo luci-app-internet-detector >> /etc/config-software/list-installed/Before
+          exit ;;
     "n" ) DETECTER='1'
-          DETECTER_APP='1' ;;
-    "q" ) break ;;
+          DETECTER_APP='1'
+          exit ;;
+    "q" ) exit ;;
   esac
 done
 fi
