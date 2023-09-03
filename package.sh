@@ -371,7 +371,7 @@ fi
 
 # CPUステータス
 CPU_STATUS=`opkg list-installed luci-app-cpu-status | awk '{ print $1 }'`
-if [ -z "$LOG" ]; then
+if [ -z "$CPU_STATUS" ]; then
 while :
 do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
