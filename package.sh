@@ -74,7 +74,7 @@ if [ -z "$NLBWMON_JA" ]; then
 opkg install luci-i18n-nlbwmon-ja
 fi
 
-# SQM # WiFiスケジュール
+# WiFiスケジュール
 if [ -z "$WIFISCHEDULE" ]; then
 opkg install wifischedule
 fi
