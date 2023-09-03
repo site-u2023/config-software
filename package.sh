@@ -214,9 +214,6 @@ luci-app-internet-detector
 luci-theme-argon
 EOF
 
-# パッケージ
-# opkg update
-
 # LuCi
 LUCI=`opkg list-installed luci | awk '{ print $1 }'`
 if [ -z "$LUCI" ]; then
