@@ -8,7 +8,7 @@ function _func_PACKAGE_INSTALL
 # LuCi
 if [ -z "$LUCI" ]; then
 opkg install luci
-fi # LuCi
+fi
 
 # LuCi日本語化
 if [ -z "$LUCI_JA" ]; then
