@@ -329,8 +329,6 @@ fi
 # ログ情報
 LOG=`opkg list-installed luci-app-log | awk '{ print $1 }'`
 if [ -z "$LOG" ]; then
-while :
-do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;34mログ情報をインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
