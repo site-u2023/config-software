@@ -12,7 +12,9 @@ do
   case "${num}" in
     "c" ) 
 {
+if [ -z /tmp/opkg-lists ]; then
 opkg update
+fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
 ADGUARD_SIZE_TEMP=`opkg info adguardhome | grep Size | awk '{ print $2 }'`
