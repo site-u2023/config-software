@@ -34,8 +34,8 @@ luci-app-internet-detector
 luci-theme-argon
 EOF
 
-# パッケージ
-if [ -z /tmp/opkg-lists ]; then
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 
