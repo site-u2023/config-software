@@ -400,8 +400,13 @@ if [ -z "$DETECTER" ]; then
   esac
 fi
 
-opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
-grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/difference
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/after
+grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/difference
+if [ ! -s $`cat /etc/config-software/list-installed/difference` ]; then
+echo -e " \033[1;37mインストールはありません\033[0;39m"
+read -p " 何かキーを押して終了して下さい"
+exit
+else
 echo -e "\033[1;37m`cat /etc/config-software/list-installed/difference`\033[0;39m"
 read -p " インストールを開始します [y/n or q]: " num
   case "${num}" in
@@ -409,6 +414,7 @@ read -p " インストールを開始します [y/n or q]: " num
     "n" ) _func_PACKAGE_SELECTOR ;;
     "q" ) exit ;;    
   esac
+fi
 
 done
 
