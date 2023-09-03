@@ -49,7 +49,7 @@ cat <<"EOF" >> /etc/adblock/adblock.sources.tofu
                                 "size": "XL",
                                 "focus": "tofu",
                                 "descurl": "https://github.com/tofukko/filter"
-               }
+                }
 }
 EOF
 
