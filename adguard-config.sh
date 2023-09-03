@@ -111,7 +111,6 @@ sed -i -e "s/address: 0.0.0.0:3000/address: 0.0.0.0:${input_str_PORT}/g" /etc/co
 sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/config-software/adguard.sh
 sed -i -e "s|password: PASSWD|password: ${input_str_PASSWD}|g" /etc/config-software/adguard.sh
 sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/config-software/adguard.sh
-`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`
 sh /etc/config-software/adguard.sh
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
