@@ -5,12 +5,11 @@
 function _func_PACKAGE_INSTALL
 {
 
-# パッケージ
-
+# アップデート
 if [ -z /tmp/opkg-lists ]; then
 opkg update
 fi
-
+ 
 # LuCi
 if [ -z "$LUCI" ]; then
 opkg install luci
@@ -165,7 +164,7 @@ rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
 fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
-grep -vixfs /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/Difference
+diff -u /etc/config-software/list-installed/Before /etc/config-software/list-installed/After | grep ^+ | grep -v ^+++ | sed s/^+// > /etc/config-software/list-installed/Difference
 if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
  echo -e " \033[1;37mインストールは完了しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
@@ -400,9 +399,17 @@ if [ -z "$DETECTER" ]; then
   esac
 fi
 
+# DIFF
+DIFF=`opkg list-installed diffutils | awk '{ print $1 }'`
+if [ -z "$DIFF" ]; then
+ if [ -z /tmp/opkg-lists ]; then
+ opkg update
+ fi
+opkg install diffutils
+fi
+
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
-grep -vixfs /etc/config-software/list-installed/before /etc/config-software/list-installed/After > /etc/config-software/list-installed/Difference
-if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
+diff -u /etc/config-software/list-installed/Before /etc/config-software/list-installed/After | grep ^+ | grep -v ^+++ | sed s/^+// > /etc/config-software/list-installed/Difference
 echo -e " \033[1;37mインストールはありません\033[0;39m"
 read -p " 何かキーを押して終了して下さい"
 exit
