@@ -180,7 +180,8 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
  read -p " インストールを再試行して下さい [y/n]: " num
   case "${num}" in
   "y" ) _func_listinstalled ;;
-  "n" ) exit ;;
+  "n" )  read -p " 何かキーを押してデバイスを再起動してください"
+         reboot ;;
   esac
 done
 else
