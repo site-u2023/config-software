@@ -2,9 +2,7 @@
 # OpenWrt >= 21.02:
 
 
-function _func_PACKAGE_INSTALL
-while :
-do
+function _func_PACKAGE_INSTALL {
 
 # アップデート
 if [ ! -e ${UPDATE} ]; then
@@ -177,14 +175,13 @@ else
  read -p " 何かキーを押すと再度スクリプトを開始します"
  _func_PACKAGE_INSTALL
 fi
+}
 
-done
 
 # ----------------------------------------------------------------
 
-function _func_PACKAGE_SELECTOR
-while :
-do
+function _func_PACKAGE_SELECTOR {
+
 
 mkdir -p /etc/config-software/list-installed
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
@@ -500,8 +497,7 @@ do
     "q" ) exit ;; 
   esac
 done
-
-done
+}
 
 # ----------------------------------------------------------------
 
