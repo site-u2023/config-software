@@ -516,7 +516,7 @@ do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;32mCPUパフォーマンスをインストールしますか\033[0;39m"
-  echo -e " \033[1;32mluci-app-cpu-perf: $((0/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-app-cpu-perf: $((6519/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before
