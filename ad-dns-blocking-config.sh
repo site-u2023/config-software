@@ -39,9 +39,9 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
 fi
 }
   echo -e " \033[1;37mad dns blocking config ------------------------------\033[0;39m"
-  echo -e " \033[1;34m[g]\033[0;39m": AdGuard設定（280blockerアドイン）
-  echo -e " \033[1;32m[b]\033[0;39m": AdBlock設定（豆腐フィルタアドイン）
-  echo -e " \033[7;40m[q]\033[0;39m": 終了
+  echo -e " \033[1;32m[g]\033[0;39m": AdGuard設定（280blockerアドイン）
+  echo -e " \033[1;36m[b]\033[0;39m": AdBlock設定（豆腐フィルタアドイン）
+  echo -e " \033[1;33m[q]\033[0;39m": 終了
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [g/b or q]: " num
   case "${num}" in
