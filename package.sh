@@ -169,20 +169,24 @@ fi
 if [ -z "$LIB" ]; then
 opkg install luci-lib-ipkg
 fi
-
+ 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
+while :
+ do
 if [ -s /etc/config-software/list-installed/Difference ]; then
  echo -e "\033[1;33m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
- echo -e " \033[1;31m失敗したインストールを再試行します\033[0;39m"
- read -p " 何かキーを押すと再度スクリプトを開始します"
- _func_PACKAGE_INSTALL
+ echo -e " \033[1;31mインストールに失敗しました\033[0;39m"
+ read -p " インストールを再試行します [y/n]: " num
+   case "${num}" in
+    "y" )  _func_PACKAGE_INSTALL ;;
+    "n" ) exit ;;
+ done
 else
  echo -e " \033[1;36mインストールが完了しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
 fi
-
 }
 
 # ----------------------------------------------------------------
