@@ -26,6 +26,6 @@ do
     "c" ) wget --no-check-certificate -O /etc/config-software/package-manual.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-manual.sh
           sh /etc/config-software/package-manual.sh
           break ;;
-    "n" ) exit ;;
+    "q" ) exit ;;
   esac
 done
