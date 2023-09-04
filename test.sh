@@ -220,7 +220,7 @@ do
           echo luci-i18n-firewall-ja >> /etc/config-software/list-installed/Before ;;
     "n" ) LUCI_JA='1'
           LUCI_JA_OPKG='1'
-          LUCI_JA_FIREWALL='1' ;;
+          LUCI_JA_FIREWALL='1'
           break ;;
     "q" ) exit ;;
   esac
