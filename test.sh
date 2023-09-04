@@ -192,7 +192,7 @@ if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 mkdir -p /etc/config-software/list-installed
-echo -n >| /etc/config-software/list-installed/Flash
+echo 0 > /etc/config-software/list-installed/Flash
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
 _func_luci
 }
