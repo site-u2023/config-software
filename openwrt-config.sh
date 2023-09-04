@@ -66,8 +66,6 @@ do
   esac
 done
 
-while :
-do
 {
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
@@ -77,8 +75,11 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  exit
 fi
 }
+
+while :
+do
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  echo -e " \033[1;37mOpenWrt-CONFIG 03.1.1\033[0;39m"
+  echo -e " \033[1;37mOpenWrt-CONFIG 03.1.2\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37m自動で切り替わります\033[0;39m" 
   sleep 1
