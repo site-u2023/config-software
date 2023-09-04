@@ -3,7 +3,8 @@
 
 
 function _func_PACKAGE_INSTALL
-
+while :
+do
 
 # アップデート
 if [ ! -e ${UPDATE} ]; then
@@ -177,11 +178,13 @@ else
  _func_PACKAGE_INSTALL
 fi
 
+done
 
 # ----------------------------------------------------------------
 
 function _func_PACKAGE_SELECTOR
-
+while :
+do
 
 mkdir -p /etc/config-software/list-installed
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
@@ -498,7 +501,7 @@ do
   esac
 done
 
-
+done
 
 # ----------------------------------------------------------------
 
