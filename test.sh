@@ -274,7 +274,7 @@ do
   esac
 done
 fi
-_func_luci-apptempstatus
+_func_luciapptempstatus
 }
 
 function _func_luciapptempstatus {
