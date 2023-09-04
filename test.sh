@@ -75,8 +75,6 @@ _func_irqbalance
 
 function _func_irqbalance {
 CPU=`opkg list-installed irqbalance | awk '{ print $1 }'`
-while :
-do
 if [ -z "$CPU" ]; then
  CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
  if [ "$CPU_INFO" -gt 3 ]; then
