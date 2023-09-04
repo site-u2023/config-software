@@ -5,7 +5,7 @@ while :
 do
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]\033[0;39m": AdGuardの容量判定を実行します
-  echo -e " \033[1;31m[b]\033[0;39m": AdGuardの設定を以前の設定に復元します
+  echo -e " \033[1;31m[b]\033[0;39m": AdGuardをリムーブして以前の設定に復元します
   echo -e " \033[1;33m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [c/b or q]: " num
@@ -155,12 +155,5 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; the
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
 else
  read -p " バージョンが違うため終了します";
- exit
-fi
-ADGUARD=`opkg list-installed adguardhome | awk '{ print $1 }'`
-if [ -z "$ADGUARD" ]; then
- _func_AdGuard
-else
- read -p " 既にインストールされているため終了します";
  exit
 fi
