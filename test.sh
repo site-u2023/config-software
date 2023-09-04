@@ -118,7 +118,7 @@ do
   esac
 done
 fi
-_func_luciapp-statistics
+_func_luciappstatistics
 }
 
 function _func_luciappstatistics {
