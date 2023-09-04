@@ -108,9 +108,9 @@ fi
 
 # CPUステータス
 if [ -z "$CPU_STATUS" ]; then
-wget --no-check-certificate -O /tmp/luci-app-log_0.6-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.6-2_all.ipk
-opkg install /tmp/luci-app-log_0.6-2_all.ipk
-rm /tmp/luci-app-log_0.6-2_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-2_all.ipk
+opkg install /tmp/luci-app-cpu-status_0.4-2_all.ipk
+rm /tmp/luci-app-cpu-status_0.4-2_all.ipk
 fi
 
 # CPUパフォーマンス
