@@ -213,6 +213,9 @@ if [ -z "$LUCI_JA" ]; then
 while :
 do
   echo -e " \033[1;33mLuci日本語化をインストールしますか\033[0;39m"
+  echo -e " \033[1;37mluci-i18n-base-ja\033[0;39m"
+  echo -e " \033[1;37mluci-i18n-opkg-ja\033[0;39m"
+  echo -e " \033[1;37mluci-i18n-firewall-ja\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-i18n-base-ja >> /etc/config-software/list-installed/Before
@@ -374,7 +377,10 @@ THEME_2020=`opkg list-installed luci-theme-openwrt-2020 | awk '{ print $1 }'`
 if [ -z "$THEME_OPENWRT" ]; then
 while :
 do
-  echo -e " \033[1;33m追加テーマをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mテーマをインストールしますか\033[0;39m"
+  echo -e " \033[1;37mtheme-openwrt\033[0;39m"
+  echo -e " \033[1;37mtheme-material\033[0;39m"
+  echo -e " \033[1;37mtheme-openwrt-2020\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
