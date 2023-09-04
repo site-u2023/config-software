@@ -368,7 +368,7 @@ fi
   echo -e " \033[1;35mパッケージの選択をしてからインストールを開始します\033[0;39m"
   read -p " パッケージの選択を開始します [y/n]: " num
   case "${num}" in
-    "y" ) _func_list-installed_Before ;;
+    "y" ) _func_listinstalled_Before ;;
     "n" ) exit ;;
   esac
 done
