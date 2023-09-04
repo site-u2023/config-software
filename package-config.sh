@@ -271,11 +271,18 @@ else
  }
 fi
 }
-  echo -e " \033[1;35mパッケージインストールを開始します\033[0;39m"
-  echo -e " \033[1;35m※カスタムフィードは失敗する事があります\033[0;39m"
+  echo -e " \033[1;35m※インストールは失敗する事があります\033[0;39m"
+  echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[f]\033[0;39m": 自動フルインストール（初心者向け）
+  echo -e " \033[1;33m[c]\033[0;39m": 選択インストール
+  echo -e " \033[7;40m[q]\033[0;39m": 終了
+  echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
+  read -p " キーを選択してください [f/c or q]: " num 
   read -p " 開始します [y/n]: " num
   case "${num}" in
-    "y" ) _func_INSTALL ;;
+    "f" ) _func_INSTALL ;;
+    "c" ) wget --no-check-certificate -O /etc/config-software/package.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package.sh
+          sh /etc/config-software/package.sh ;;
     "n" ) exit ;;
   esac
 done
