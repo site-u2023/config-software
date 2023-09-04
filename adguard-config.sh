@@ -158,4 +158,10 @@ else
  read -p " バージョンが違うため終了します";
  exit
 fi
-_func_AdGuard
+ADGUARD=`opkg list-installed adguardhome | awk '{ print $1 }'`
+if [ -z "$ADGUARD" ]; then
+ _func_AdGuard
+else
+ read -p " 既にインストールされているため終了します";
+ exit
+fi
