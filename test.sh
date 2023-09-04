@@ -3,12 +3,6 @@
 
 function _func_PACKAGE_INSTALL {
 
-# アップデート
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ ! -e ${UPDATE} ]; then
-opkg update
-fi
-
 # LuCi
 if [ -z "$LUCI" ]; then
 opkg install luci
@@ -192,8 +186,11 @@ fi
 
 # ----------------------------------------------------------------
 
-
 function _func_listinstalled_Before {
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
 mkdir -p /etc/config-software/list-installed
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
 _func_luci
