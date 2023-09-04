@@ -1,8 +1,7 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
-function _func_INSTALL
-{
+function _func_INSTALL {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
