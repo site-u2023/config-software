@@ -3,6 +3,7 @@
 
 
 function _func_PACKAGE_INSTALL {
+}
 
 # アップデート
 if [ ! -e ${UPDATE} ]; then
@@ -175,12 +176,12 @@ else
  read -p " 何かキーを押すと再度スクリプトを開始します"
  _func_PACKAGE_INSTALL
 fi
-}
 
 
 # ----------------------------------------------------------------
 
 function _func_PACKAGE_SELECTOR {
+}
 
 
 mkdir -p /etc/config-software/list-installed
@@ -497,7 +498,6 @@ do
     "q" ) exit ;; 
   esac
 done
-}
 
 # ----------------------------------------------------------------
 
