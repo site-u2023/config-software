@@ -3,7 +3,7 @@
 
 
 function _func_PACKAGE_INSTALL
-{
+
 
 # アップデート
 if [ ! -e ${UPDATE} ]; then
@@ -177,12 +177,11 @@ else
  _func_PACKAGE_INSTALL
 fi
 
-}
 
 # ----------------------------------------------------------------
 
 function _func_PACKAGE_SELECTOR
-{
+
 
 mkdir -p /etc/config-software/list-installed
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
@@ -499,7 +498,7 @@ do
   esac
 done
 
-}
+
 
 # ----------------------------------------------------------------
 
