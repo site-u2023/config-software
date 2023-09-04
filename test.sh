@@ -266,7 +266,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) SFTP='1'
           break ;;
@@ -290,7 +290,7 @@ do
     read -p " キーを選択してください [y/n or q]: " num
     case "${num}" in
       "y" ) echo irqbalance >> /etc/config-software/list-installed/Before
-            echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+            echo $((`opkg info irqbalance | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
             break ;;
       "n" ) CPU='1'
             break ;;
@@ -319,9 +319,9 @@ do
     "y" ) echo sqm-scripts >> /etc/config-software/list-installed/Before
           echo luci-app-sqm >> /etc/config-software/list-installed/Before
           echo luci-i18n-sqm-ja >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-i18n-sqm-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) SQM='1'
           SQM_APP='1'
@@ -348,8 +348,8 @@ do
   case "${num}" in
     "y" ) echo luci-app-statistics >> /etc/config-software/list-installed/Before
           echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-i18n-statistics-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) STATUS='1'
           STATUS_JA='1'
@@ -378,9 +378,9 @@ do
     "y" ) echo nlbwmon >> /etc/config-software/list-installed/schedule
           echo luci-app-nlbwmon >> /etc/config-software/list-installed/schedule
           echo luci-i18n-nlbwmon-ja >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info nlbwmon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-nlbwmon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-i18n-nlbwmon-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) NLBWMON='1'
           NLBWMON_JA='1'
@@ -406,12 +406,12 @@ do
   echo -e " \033[1;32mluci-i18n-wifischedule-ja: $((`opkg info luci-i18n-wifischedule-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci >> /etc/config-software/list-installed/schedule
+    "y" ) echo wifischedule >> /etc/config-software/list-installed/schedule
           echo luci-app-wifischedule >> /etc/config-software/list-installed/Before
           echo luci-i18n-wifischedule-ja >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info wifischedule | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-wifischedule | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-i18n-wifischedule-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) WIFISCHEDULE='1'
           WIFISCHEDULE_APP='1'
@@ -441,9 +441,9 @@ do
     "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
           echo luci-theme-material >> /etc/config-software/list-installed/Before
           echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) THEME_OPENWRT='1'
           THEME_MATERIAL='1'
@@ -468,7 +468,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-log | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) LOG='1'
           break ;;
@@ -491,7 +491,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-cpu-status | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) CPU_STATUS='1'
           break ;;
@@ -514,7 +514,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-cpu-perf | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) CPU_PERFORMANCE='1'
           break ;;
@@ -537,7 +537,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-temp-status | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) TMP_STATUS='1'
           break ;;
@@ -563,8 +563,8 @@ do
   case "${num}" in
     "y" ) echo internet-detector >> /etc/config-software/list-installed/Before
           echo luci-app-internet-detector >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info internet-detector | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-internet-detector | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) DETECTER='1'
           DETECTER_APP='1'
@@ -597,9 +597,9 @@ do
     "y" ) echo luci-theme-argon >> /etc/config-software/list-installed/Before
           echo luci-compat >> /etc/config-software/list-installed/Before
           echo luci-lib-ipkg >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-theme-argon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-compat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-lib-ipkg | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) ARGON='1'
           COMPAT='1'
