@@ -108,6 +108,6 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; the
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
  _func_AdBlock
 else
- read -p " バージョンが違うため終了します";
+ read -p " バージョンが違うため終了します"
  exit
 fi
