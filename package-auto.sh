@@ -3,9 +3,15 @@
 
 function _func_INSTALL
 {
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
 mkdir -p /etc/config-software/list-installed
+echo 0 > /etc/config-software/list-installed/Flash
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
-cat << EOF > /etc/config-software/list-installed/Schedule
+
+cat << EOF > /etc/config-software/list-installed/Before
 luci
 luci-i18n-base-ja
 luci-i18n-opkg-ja
@@ -188,7 +194,7 @@ if [ -n "$str_USB" ]; then
   opkg install kmod-fs-hfsplus
   opkg install hdparm
   opkg install hd-idle
-cat << EOF >> /etc/config-software/list-installed/Schedule
+cat << EOF >> /etc/config-software/list-installed/Before
 block-mount
 kmod-usb-storage
 kmod-usb-storage-uas
@@ -218,11 +224,10 @@ fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
-awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/Difference /etc/config-software/list-installed/Schedule > /etc/config-software/list-installed/Installed
-if [ -s /etc/config-software/list-installed/Installed ]; then
+if [ -s /etc/config-software/list-installed/Difference ]; then
  while :
  do
- echo -e "\033[1;33m`cat /etc/config-software/list-installed/Installed`\033[0;39m"
+ echo -e "\033[1;33m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
  echo -e " \033[1;31mインストールに失敗しました\033[0;39m"
  read -p " インストールを再試行して下さい [y/n]: " num
   case "${num}" in
