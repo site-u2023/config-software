@@ -4,7 +4,7 @@
 
 
 
-function _func_list-installed_Before {
+function _func_listinstalled_Before {
 mkdir -p /etc/config-software/list-installed
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
 _func_luci
