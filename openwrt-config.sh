@@ -78,10 +78,10 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
 fi
 }
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  echo -e " \033[1;37mOpenWrt-CONFIG 03.1.0\033[0;39m"
+  echo -e " \033[1;37mOpenWrt-CONFIG 03.1.1\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37m自動で切り替わります\033[0;39m" 
-  sleep 0.5
+  sleep 1
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software\033[0;39m" 
