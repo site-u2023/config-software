@@ -18,7 +18,6 @@ do
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [f/c or q]: " num 
-  read -p " 開始します [y/n]: " num
   case "${num}" in
     "f" ) wget --no-check-certificate -O /etc/config-software/package-auto.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto.sh
           sh /etc/config-software/package-auto.sh
