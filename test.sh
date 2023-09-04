@@ -3,13 +3,12 @@
 
 
 function _func_PACKAGE_INSTALL {
-}
-
 # アップデート
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
- 
+}
+
 # LuCi
 if [ -z "$LUCI" ]; then
 opkg install luci
@@ -176,19 +175,16 @@ else
  read -p " 何かキーを押すと再度スクリプトを開始します"
  _func_PACKAGE_INSTALL
 fi
-
+}
 
 # ----------------------------------------------------------------
 
 function _func_PACKAGE_SELECTOR {
-}
-
-
 mkdir -p /etc/config-software/list-installed
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
+}
 
-# LuCi
-
+# LuCiA
 LUCI=`opkg list-installed luci | awk '{ print $1 }'`
 if [ -n "$LUCI" ]; then
 while :
@@ -501,6 +497,8 @@ done
 
 # ----------------------------------------------------------------
 
+while :
+do
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
@@ -509,8 +507,6 @@ else
  exit
 fi
 
-while :
-do
   echo -e " \033[1;35mパッケージの選択をしてからインストールを開始します\033[0;39m"
   read -p " パッケージの選択を開始します [y/n]: " num
   case "${num}" in
