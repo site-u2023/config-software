@@ -204,7 +204,7 @@ LUCI=`opkg list-installed luci | awk '{ print $1 }'`
 if [ -z "$LUCI" ]; then
 while :
 do
-  echo -e " \033[1;32mLuciをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci: $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024))KB インストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci >> /etc/config-software/list-installed/Before
@@ -225,10 +225,9 @@ LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-ja | awk '{ print $1 }'
 if [ -z "$LUCI_JA" ]; then
 while :
 do
-  echo -e " \033[1;32mLuci日本語をインストールしますか\033[0;39m"
-  echo -e " \033[1;37mluci-i18n-base-ja\033[0;39m"
-  echo -e " \033[1;37mluci-i18n-opkg-ja\033[0;39m"
-  echo -e " \033[1;37mluci-i18n-firewall-ja\033[0;39m"
+  echo -e " \033[1;32mluci-i18n-base-ja: $((`opkg info luci-i18n-base-ja | grep Size | awk '{ print $2 }'`/1024))KB インストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-i18n-opkg-ja: $((`opkg info luci-i18n-opkg-ja | grep Size | awk '{ print $2 }'`/1024))KB インストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-i18n-firewall-ja: $((`opkg info luci-i18n-firewall-ja | grep Size | awk '{ print $2 }'`/1024))KB インストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-i18n-base-ja >> /etc/config-software/list-installed/Before
