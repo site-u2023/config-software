@@ -40,11 +40,6 @@ luci-app-internet-detector
 luci-theme-argon
 EOF
 
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ ! -e ${UPDATE} ]; then
-opkg update
-fi
-
 # LuCi
 opkg install luci
 
