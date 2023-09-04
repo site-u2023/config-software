@@ -26,10 +26,10 @@ do
   esac
 done
 fi
-_func_luci-i18n-base-ja
+_func_lucii18nbaseja
 }
 
-function _func_luci-i18n-base-ja {
+function _func_lucii18nbaseja {
 LUCI_JA=`opkg list-installed luci-i18n-base-ja | awk '{ print $1 }'`
 LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-ja | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-ja | awk '{ print $1 }'`
@@ -51,10 +51,10 @@ do
   esac
 done
 fi
-_func_openssh-sftp-server
+_func_opensshsftpserver
 }
 
-function _func_openssh-sftp-server {
+function _func_opensshsftpserver {
 SFTP=`opkg list-installed openssh-sftp-server | awk '{ print $1 }'`
 if [ -z "$SFTP" ]; then
 while :
@@ -93,10 +93,10 @@ do
     esac
 done
 fi
-_func_sqm-scripts
+_func_sqmscripts
 }
 
-function _func_sqm-scripts {
+function _func_sqmscripts {
 SQM=`opkg list-installed sqm-scripts | awk '{ print $1 }'`
 SQM_APP=`opkg list-installed luci-app-sqm | awk '{ print $1 }'`
 SQM_APP_JA=`opkg list-installed luci-i18n-sqm-ja | awk '{ print $1 }'`
@@ -118,10 +118,10 @@ do
   esac
 done
 fi
-_func_luci-app-statistics
+_func_luciapp-statistics
 }
 
-function _func_luci-app-statistics {
+function _func_luciappstatistics {
 STATUS=`opkg list-installed luci-app-statistics | awk '{ print $1 }'`
 STATUS_JA=`opkg list-installed luci-i18n-statistics-ja | awk '{ print $1 }'`
 if [ -z "$STATUS" ]; then
@@ -189,10 +189,10 @@ do
   esac
 done
 fi
-_func_luci-theme-openwrt
+_func_lucithemeopenwrt
 }
 
-function _func_luci-theme-openwrt {
+function _func_lucithemeopenwrt {
 THEME_OPENWRT=`opkg list-installed luci-theme-openwrt | awk '{ print $1 }'`
 THEME_MATERIAL=`opkg list-installed luci-theme-material | awk '{ print $1 }'`
 THEME_2020=`opkg list-installed luci-theme-openwrt-2020 | awk '{ print $1 }'`
@@ -214,10 +214,10 @@ do
   esac
 done
 fi
-_func_luci-app-log
+_func_luciapplog
 }
 
-function _func_luci-app-log {
+function _func_luciapplog {
 LOG=`opkg list-installed luci-app-log | awk '{ print $1 }'`
 if [ -z "$LOG" ]; then
 while :
@@ -234,10 +234,10 @@ do
   esac
 done
 fi
-_func_luci-app-cpu-status
+_func_luciappcpustatus
 }
 
-function _func_luci-app-cpu-status {
+function _func_luciappcpustatus {
 CPU_STATUS=`opkg list-installed luci-app-cpu-status | awk '{ print $1 }'`
 if [ -z "$CPU_STATUS" ]; then
 while :
@@ -254,10 +254,10 @@ do
   esac
 done
 fi
-_func_luci-app-cpu-perf
+_func_luciappcpuperf
 }
 
-function _func_luci-app-cpu-perf {
+function _func_luciappcpuperf {
 CPU_PERFORMANCE=`opkg list-installed luci-app-cpu-perf | awk '{ print $1 }'`
 if [ -z "$CPU_PERFORMANCE" ]; then
 while :
@@ -274,10 +274,10 @@ do
   esac
 done
 fi
-_func_luci-app-temp-status
+_func_luci-apptempstatus
 }
 
-function _func_luci-app-temp-status {
+function _func_luciapptempstatus {
 TMP_STATUS=`opkg list-installed luci-app-temp-status | awk '{ print $1 }'`
 if [ -z "$TMP_STATUS" ]; then
 while :
@@ -294,10 +294,10 @@ do
   esac
 done
 fi
-_func_internet-detector
+_func_internetdetector
 }
 
-function _func_internet-detector {
+function _func_internetdetector {
 DETECTER=`opkg list-installed internet-detector | awk '{ print $1 }'`
 DETECTER_APP=`opkg list-installed luci-app-internet-detector | awk '{ print $1 }'`
 if [ -z "$DETECTER" ]; then
@@ -329,10 +329,10 @@ if [ -z "$DIFF" ]; then
  fi
 opkg install diffutils
 fi
-_func_list-installed_After
+_func_listinstalled_After
 }
 
-function _func_list-installed_After {
+function _func_listinstalled_After {
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 diff -u /etc/config-software/list-installed/Before /etc/config-software/list-installed/After | grep ^+ | grep -v ^+++ | sed s/^+// > /etc/config-software/list-installed/Difference
 if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
@@ -347,7 +347,7 @@ do
   read -p " インストールを開始します [y/n or q]: " num
    case "${num}" in
     "y" ) ;;
-    "n" ) _func_list-installed_Before ;;
+    "n" ) _func_listinstalled_Before ;;
     "q" ) exit ;; 
   esac
 done
