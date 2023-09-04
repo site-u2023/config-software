@@ -495,7 +495,6 @@ do
     "y" ) _func_PACKAGE_INSTALL ;;
     "n" ) _func_PACKAGE_SELECTOR ;;
     "q" ) exit ;;
-  esac
 done
 fi
 
