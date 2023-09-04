@@ -1,7 +1,7 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
-function _func_PACKAGE_INSTALL {
+function _func_listinstalled {
 
 # LuCi
 if [ -z "$LUCI" ]; then
@@ -179,7 +179,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
  echo -e " \033[1;31mインストールに失敗しました\033[0;39m"
  read -p " インストールを再試行して下さい [y/n]: " num
   case "${num}" in
-  "y" ) _func_listinstalled_Before ;;
+  "y" ) _func_listinstalled ;;
   "n" ) exit ;;
   esac
 done
@@ -628,7 +628,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
     echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
     read -p " インストールを開始します [y/n or q]: " num
      case "${num}" in
-      "y" ) _func_PACKAGE_INSTALL ;;
+      "y" ) _func_listinstalled ;;
       "n" ) _func_listinstalled_Before ;;
       "q" ) exit ;; 
     esac
