@@ -3,11 +3,12 @@
 
 
 function _func_PACKAGE_INSTALL {
+
 # アップデート
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
-}
+
 
 # LuCi
 if [ -z "$LUCI" ]; then
@@ -175,6 +176,8 @@ else
  read -p " 何かキーを押すと再度スクリプトを開始します"
  _func_PACKAGE_INSTALL
 fi
+
+}
 
 # ----------------------------------------------------------------
 
