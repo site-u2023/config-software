@@ -480,23 +480,25 @@ if [ -z "$DIFF" ]; then
 opkg install diffutils
 fi
 
+
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 diff -u /etc/config-software/list-installed/Before /etc/config-software/list-installed/After | grep ^+ | grep -v ^+++ | sed s/^+// > /etc/config-software/list-installed/Difference
 if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
   echo -e " \033[1;37mインストールはありません\033[0;39m"
   read -p " 何かキーを押して終了して下さい"
   exit
-else
+fi
+
 while :
 do
   echo -e "\033[1;37m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
   read -p " インストールを開始します [y/n or q]: " num
-  case "${num}" in
+   case "${num}" in
     "y" ) _func_PACKAGE_INSTALL ;;
     "n" ) _func_PACKAGE_SELECTOR ;;
-    "q" ) exit ;;
+    "q" ) exit ;; 
+  esac
 done
-fi
 
 }
 
