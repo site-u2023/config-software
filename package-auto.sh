@@ -162,7 +162,6 @@ rm /tmp/luci-theme-argon.ipk
 # /etc/init.d/rpcd restart
 
 # USB
-{
 str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
   opkg install block-mount
@@ -214,7 +213,6 @@ hdparm
 hd-idle
 EOF
 fi
-}
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
@@ -234,7 +232,6 @@ else
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
 fi
-
 }
 
 
