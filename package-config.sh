@@ -256,7 +256,8 @@ fi
   case "${num}" in
     "f" ) _func_INSTALL ;;
     "c" ) wget --no-check-certificate -O /etc/config-software/package.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package.sh
-          sh /etc/config-software/package.sh ;;
+          sh /etc/config-software/package.sh
+          break ;;
     "n" ) exit ;;
   esac
 done
