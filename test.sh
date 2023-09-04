@@ -4,6 +4,7 @@
 function _func_PACKAGE_INSTALL {
 
 # アップデート
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
@@ -162,13 +163,12 @@ rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
 fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
-diff -u /etc/config-software/list-installed/Before /etc/config-software/list-installed/After | grep ^+ | grep -v ^+++ | sed s/^+// > /etc/config-software/list-installed/Difference
+awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
 if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
  echo -e " \033[1;37mインストールは完了しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
 else
- echo -e " \033[1;37m失敗したインストール\033[0;39m"
  echo -e "\033[1;37m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
  echo -e " \033[1;37m失敗したインストールを再試行します\033[0;39m"
  read -p " 何かキーを押すと再度スクリプトを開始します"
@@ -492,40 +492,28 @@ do
   esac
 done
 fi
-_func_diffutils
-}
-
-function _func_diffutils {
-DIFF=`opkg list-installed diffutils | awk '{ print $1 }'`
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ -z "$DIFF" ]; then
- if [ ! -e ${UPDATE} ]; then
- opkg update
- fi
-opkg install diffutils
-fi
 _func_listinstalled_After
 }
 
 function _func_listinstalled_After {
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
-diff -u /etc/config-software/list-installed/Before /etc/config-software/list-installed/After | grep ^+ | grep -v ^+++ | sed s/^+// > /etc/config-software/list-installed/Difference
+awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
 if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
   echo -e " \033[1;37mインストールはありません\033[0;39m"
   read -p " 何かキーを押して終了して下さい"
   exit
+else
+  while :
+  do
+    echo -e "\033[1;37m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
+    read -p " インストールを開始します [y/n or q]: " num
+     case "${num}" in
+      "y" ) _func_PACKAGE_INSTALL ;;
+      "n" ) _func_listinstalled_Before ;;
+      "q" ) exit ;; 
+    esac
+  done
 fi
-
-while :
-do
-  echo -e "\033[1;37m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
-  read -p " インストールを開始します [y/n or q]: " num
-   case "${num}" in
-    "y" ) _func_PACKAGE_INSTALL ;;
-    "n" ) _func_listinstalled_Before ;;
-    "q" ) exit ;; 
-  esac
-done
 }
 
 # ----------------------------------------------------------------
@@ -533,17 +521,16 @@ done
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
-else
- read -p " バージョンが違うため終了します"
- exit
-fi
-
-while :
-do
+ while :
+ do
   echo -e " \033[1;35mパッケージの選択をしてからインストールを開始します\033[0;39m"
   read -p " パッケージの選択を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
     "n" ) exit ;;
   esac
-done
+ done
+else
+ read -p " バージョンが違うため終了します"
+ exit
+fi
