@@ -18,8 +18,7 @@ opkg update
 fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-ADGUARD_SIZE_TEMP=`opkg info adguardhome | grep Size | awk '{ print $2 }'`
-ADGUARD_SIZE=`expr $ADGUARD_SIZE_TEMP / 1024`
+ADGUARD_SIZE=$((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))
 echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
 echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
 echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
