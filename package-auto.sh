@@ -234,22 +234,21 @@ fi
 }
 }
 
-while :
-do
-{
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
-else
- read -p " バージョンが違うため終了します"
- exit
-fi
-}
-  echo -e " \033[1;35mインストールは失敗する事があります\033[0;39m"
-  echo -e " \033[1;34m[f]\033[0;39m": 自動フルインストール（初心者向け）
-  read -p " 開始します [y/n]: " num
+ echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
+ while :
+ do
+  AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+  echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
+  echo -e " \033[1;35m自動フルインストール（初心者向け）\033[0;39m"
+  read -p " パッケージのインストールを開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
     "n" ) exit ;;
   esac
-done
+ done
+else
+ read -p " バージョンが違うため終了します"
+ exit
+f
