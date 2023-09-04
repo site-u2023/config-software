@@ -110,11 +110,3 @@ else
  read -p " バージョンが違うため終了します";
  exit
 fi
-
-ADBLOCK=`opkg list-installed adblock | awk '{ print $1 }'`
-if [ -z "$ADBLOCK" ]; then
- _func_AdBlock
-else
- read -p " 既にインストールされているため終了します";
- exit
-fi
