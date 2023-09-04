@@ -251,4 +251,4 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
 else
  read -p " バージョンが違うため終了します"
  exit
-f
+fi
