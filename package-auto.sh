@@ -4,8 +4,8 @@
 function _func_INSTALL
 {
 mkdir -p /etc/config-software/list-installed
-opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/before
-cat << EOF > /etc/config-software/list-installed/schedule
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
+cat << EOF > /etc/config-software/list-installed/Schedule
 luci
 luci-i18n-base-ja
 luci-i18n-opkg-ja
@@ -188,7 +188,7 @@ if [ -n "$str_USB" ]; then
   opkg install kmod-fs-hfsplus
   opkg install hdparm
   opkg install hd-idle
-cat << EOF >> /etc/config-software/list-installed/schedule
+cat << EOF >> /etc/config-software/list-installed/Schedule
 block-mount
 kmod-usb-storage
 kmod-usb-storage-uas
@@ -215,9 +215,9 @@ hd-idle
 EOF
 fi
 }
-opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/after
-grep -vixf /etc/config-software/list-installed/before /etc/config-software/list-installed/after > /etc/config-software/list-installed/difference
-grep -vixf /etc/config-software/list-installed/schedule /etc/config-software/list-installed/difference > /etc/config-software/list-installed/installed
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
+awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/Before /etc/config-software/list-installed/After > /etc/config-software/list-installed/Difference
+awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/Schedule /etc/config-software/list-installed/Difference > /etc/config-software/list-installed/Installed
 {
 if [ ! -s $`cat /etc/config-software/list-installed/installed` ]; then
 echo -e " \033[1;37mインストールは成功しました\033[0;39m"
