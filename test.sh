@@ -92,7 +92,7 @@ if [ -z "$WIFISCHEDULE_APP_JA" ]; then
 opkg install luci-i18n-wifischedule-ja
 fi
 
-# 追加テーマ
+# テーマ
 if [ -z "$THEME_OPENWRT" ]; then
 opkg install luci-theme-openwrt
 fi
@@ -162,6 +162,19 @@ opkg install /tmp/luci-app-internet-detector_1.0-1_all.ipk
 rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
 fi
 
+# テーマ ARGON (テンプレート)
+if [ -z "$ARGON" ]; then
+wget --no-check-certificate -O /tmp/luci-theme-argon.ipk https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.1/luci-theme-argon_2.3.1_all.ipk
+opkg install /tmp/luci-theme-argon.ipk
+rm /tmp/luci-theme-argon.ipk
+fi
+if [ -z "$COMPAT" ]; then
+opkg install luci-compat
+fi
+if [ -z "$LIB" ]; then
+opkg install luci-lib-ipkg
+fi
+
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
 if [ -s /etc/config-software/list-installed/Difference ]; then
@@ -212,7 +225,7 @@ LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-ja | awk '{ print $1 }'
 if [ -z "$LUCI_JA" ]; then
 while :
 do
-  echo -e " \033[1;32mLuci日本語化をインストールしますか\033[0;39m"
+  echo -e " \033[1;32mLuci日本語をインストールしますか\033[0;39m"
   echo -e " \033[1;37mluci-i18n-base-ja\033[0;39m"
   echo -e " \033[1;37mluci-i18n-opkg-ja\033[0;39m"
   echo -e " \033[1;37mluci-i18n-firewall-ja\033[0;39m"
@@ -464,7 +477,7 @@ if [ -z "$TMP_STATUS" ]; then
 while :
 do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mCPUパフォーマンスをインストールしますか\033[0;39m"
+  echo -e " \033[1;32m温度センサーをインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before
@@ -485,7 +498,7 @@ if [ -z "$DETECTER" ]; then
 while :
 do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mCPUパフォーマンスをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mインターネット可用性確認をインストールしますか\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo internet-detector >> /etc/config-software/list-installed/Before
@@ -493,6 +506,35 @@ do
           break ;;
     "n" ) DETECTER='1'
           DETECTER_APP='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_lucithemeargon
+}
+
+function _func_lucithemeargon {
+ARGON=`opkg list-installed luci-theme-argon | awk '{ print $1 }'`
+COMPAT=`opkg list-installed luci-compat | awk '{ print $1 }'`
+LIB=`opkg list-installed luci-lib-ipkg | awk '{ print $1 }'`
+if [ -z "$ARGON" ]; then
+while :
+do
+  echo -e " \033[1;34mカスタムフィード\033[0;39m"
+  echo -e " \033[1;32mテーマARGONをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-theme-argon\033[0;39m"
+  echo -e " \033[1;32mluci-compat\033[0;39m"
+  echo -e " \033[1;32mluci-lib-ipkg\033[0;39m"  
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo luci-theme-argon >> /etc/config-software/list-installed/Before
+          echo luci-compat >> /etc/config-software/list-installed/Before
+          echo luci-lib-ipkg >> /etc/config-software/list-installed/Before
+          break ;;
+    "n" ) ARGON='1'
+          COMPAT='1'
+          LIB='1'
           break ;;
     "q" ) exit ;;
   esac
