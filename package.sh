@@ -466,7 +466,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-app-log | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((5791/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) LOG='1'
           break ;;
@@ -489,7 +489,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-app-cpu-status | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((1445/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) CPU_STATUS='1'
           break ;;
@@ -512,7 +512,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-app-cpu-perf | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((0/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) CPU_PERFORMANCE='1'
           break ;;
@@ -535,7 +535,7 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-app-temp-status | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((2032/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) TMP_STATUS='1'
           break ;;
@@ -561,8 +561,8 @@ do
   case "${num}" in
     "y" ) echo internet-detector >> /etc/config-software/list-installed/Before
           echo luci-app-internet-detector >> /etc/config-software/list-installed/Before
-          echo $((`opkg info internet-detector | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-app-internet-detector | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((10680/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((7771/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) DETECTER='1'
           DETECTER_APP='1'
@@ -595,9 +595,9 @@ do
     "y" ) echo luci-theme-argon >> /etc/config-software/list-installed/Before
           echo luci-compat >> /etc/config-software/list-installed/Before
           echo luci-lib-ipkg >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-theme-argon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-compat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-lib-ipkg | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((388904/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((46213/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((2062/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) ARGON='1'
           COMPAT='1'
