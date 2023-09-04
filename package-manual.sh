@@ -649,7 +649,7 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  do
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
-  echo -e " \033[1;35mパッケージの選択をしてからインストールを開始します\033[0;39m"
+  echo -e " \033[1;35m選択インストール\033[0;39m"
   read -p " パッケージの選択を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
