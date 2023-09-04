@@ -164,7 +164,7 @@ fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
-if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
+if [ -z $`cat /etc/config-software/list-installed/Difference` ]; then
  echo -e " \033[1;37mインストールは完了しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
@@ -498,7 +498,7 @@ _func_listinstalled_After
 function _func_listinstalled_After {
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
-if [ ! -s $`cat /etc/config-software/list-installed/Difference` ]; then
+if [ -z $`cat /etc/config-software/list-installed/Difference` ]; then
   echo -e " \033[1;37mインストールはありません\033[0;39m"
   read -p " 何かキーを押して終了して下さい"
   exit
