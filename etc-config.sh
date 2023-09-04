@@ -3,11 +3,28 @@
 function _func_IPERF3
 while :
 do
-  echo -e " \033[1;34mIPERF3設定のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;34mIPERF3設定のスクリプトをダウンロードしてインストールします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/iperf3.sh https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3.sh
-          sh /etc/config-software/iperf3.sh
+    "y" ) 
+          UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+          if [ ! -e ${UPDATE} ]; then
+          opkg update
+          fi
+          opkg install iperf3
+          wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
+          chmod +x /etc/init.d/iperf3
+          NET_IF="lan"
+          . /lib/functions/network.sh
+          network_flush_cache
+          network_get_ipaddr NET_ADDR "${NET_IF}"
+          sed -i -e "s/192.168.1.1/${NET_ADDR}/g" /etc/init.d/iperf3
+          # service iperf3 enable
+          # service iperf3 start
+          echo -e " \033[1;36mインストールが完了しました\033[0;39m"
+          echo -e " \033[1;36m開始: service iperf3 start\033[0;39m"
+          echo -e " \033[1;36m終了: service iperf3 stop\033[0;39m"
+          read -p " 何かキーを押して下さい"
           break ;;
     "n" ) break ;;
   esac
@@ -16,7 +33,7 @@ done
 while :
 do
   echo -e " \033[1;37metc -------------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[1]\033[0;39m": IPERF3設定
+  echo -e " \033[1;34m[1]\033[0;39m": IPERF3インストール
   echo -e " \033[1;33m[2]\033[0;39m": 
   echo -e " \033[1;32m[3]\033[0;39m": 
   echo -e " \033[1;35m[4]\033[0;39m": 
