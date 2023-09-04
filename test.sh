@@ -170,7 +170,7 @@ if [ -s $`cat /etc/config-software/list-installed/Difference` ]; then
  read -p " 何かキーを押すと再度スクリプトを開始します"
  _func_PACKAGE_INSTALL
 else
- echo -e " \033[1;37mインストールは完了しました\033[0;39m"
+ echo -e " \033[1;37mインストールが完了しました\033[0;39m"
  read -p " 何かキーを押してデバイスを再起動してください"
  reboot
 fi
