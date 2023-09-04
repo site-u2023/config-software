@@ -91,6 +91,7 @@ do
     esac
 done
 fi
+fi
 _func_sqmscripts
 }
 
