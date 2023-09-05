@@ -276,7 +276,7 @@ fi
   read -p " パッケージのインストールを開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
-    "n" ) exit ;;
+    "n" ) break ;;
   esac
 done
 
