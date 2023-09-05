@@ -35,11 +35,33 @@ do
   esac
 done
 
+function _func_WiFi_location_service
+while :
+do
+  echo -e " \033[1;33mWiFi位置情報サービスを停止します\033[0;39m"
+  read -p " 宜しいですか? [y/n]: " num
+  case "${num}" in
+    "y" ) sed -i -e 's/\s*$//' /etc/config/wireless
+          sed -i -e "/option ssid/s/'$//" /etc/config/wireless
+          sed -i -e "/option ssid/s/$/_optout_nomap'/g" /etc/config/wireless
+          /etc/init.d/network restart
+          echo -e " \033[1;36m`uci show wireless.default_radio0.ssid`\033[0;39m"
+          echo -e " \033[1;36m`uci show wireless.default_radio1.ssid`\033[0;39m"
+          echo -e " \033[1;36m`uci show wireless.default_radio2.ssid`\033[0;39m"
+          echo -e " \033[1;32m設定が完了しました\033[0;39m"
+          echo -e " \033[1;33mクライアントのSSID末尾に _optout_nomap を追加して下さい\033[0;39m"
+          read -p " 何かキーを押して下さい"
+          break ;;
+    "n" ) break ;;
+  esac
+done
+
+
 while :
 do
   echo -e " \033[1;37metc -------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[1]\033[0;39m": IPERF3インストール及びサービス追加
-  echo -e " \033[1;33m[2]\033[0;39m": 
+  echo -e " \033[1;33m[2]\033[0;39m": WiFi位置情報サービス停止
   echo -e " \033[1;32m[3]\033[0;39m": 
   echo -e " \033[1;35m[4]\033[0;39m": 
   echo -e " \033[1;31m[5]\033[0;39m": 
@@ -49,7 +71,7 @@ do
   read -p " キーを選択してください [1/2/3/4/5/6 or q]: " num
   case "${num}" in
     "1" ) _func_IPERF3 ;;
-    "2" ) exit ;;
+    "2" ) _func_WiFi_location_service ;;
     "3" ) exit ;;
     "4" ) exit ;;
     "5" ) exit ;;
