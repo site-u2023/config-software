@@ -6,14 +6,13 @@ do
   echo -e " \033[1;34mIPERF3設定のスクリプトをダウンロードしてインストールします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) 
+    "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
+          chmod +x /etc/init.d/iperf3
           UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
           if [ ! -e ${UPDATE} ]; then
           opkg update
           fi
           opkg install iperf3
-          wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
-          chmod +x /etc/init.d/iperf3
           NET_IF="lan"
           . /lib/functions/network.sh
           network_flush_cache
