@@ -3,6 +3,9 @@
 function _func_AdBlock
 while :
 do
+if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
+  echo -e " \033[1;37mAdBlockが既にインストールされています\033[0;39m"
+fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]\033[0;39m": AdBlockdのインストールを開始します
   echo -e " \033[1;31m[b]\033[0;39m": AdBlockdをリムーブして以前の設定に復元します
@@ -10,14 +13,7 @@ do
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
-    "e" )
-  {
-if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
-　read -p " AdBlockが既にインストールされています"
-  exit
-fi
-  }
-  　　　　_func_AdBlock_Confirm ;;
+    "e" ) _func_AdBlock_Confirm ;;
     "b" ) _func_AdBlock_Before ;;
     "q" ) exit ;;
   esac
