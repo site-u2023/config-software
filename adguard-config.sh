@@ -3,6 +3,10 @@
 function _func_AdGuard
 while :
 do
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+  echo -e " \033[1;37mAdGuardがインストールが既にインストールされています\033[0;39m"
+  exit
+fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]\033[0;39m": AdGuardの容量判定を実行します
   echo -e " \033[1;31m[b]\033[0;39m": AdGuardをリムーブして以前の設定に復元します
@@ -12,10 +16,6 @@ do
   case "${num}" in
     "c" ) 
 {
-if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-　read -p " AdGuardがインストールが既にインストールされています"
-  exit
-fi
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
