@@ -162,7 +162,6 @@ rm /tmp/luci-theme-argon.ipk
 # /etc/init.d/rpcd restart
 
 # USB
-str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
 cat << EOF >> /etc/config-software/list-installed/Before
 block-mount
@@ -262,7 +261,7 @@ fi
   echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・インターネット可用性確認（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"
-  str_USB=`dmesg | grep -s usb`
+str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
   echo -e " \033[1;37m・USB：ベースパッケージ \033[0;39m"
   echo -e " \033[1;37m・USB：LED\033[0;39m"
