@@ -14,7 +14,7 @@ do
 {
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 　read -p " AdGuardがインストールが既にインストールされています"
-  exit
+  exit ;;
 fi
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
