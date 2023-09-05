@@ -37,7 +37,7 @@ This README is edited in Japanese.
 ### ワンコピペ自動スクリプト※要ONU直結
 
 推奨設定順序: システム > インターネット > パッケージ
-```bash
+```
 mkdir /etc/config-software; wget --no-check-certificate -O /etc/config-software/openwrt-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/openwrt-config.sh; sh /etc/config-software/openwrt-config.sh
 
 ```
