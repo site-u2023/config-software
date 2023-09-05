@@ -674,6 +674,6 @@ fi
   read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
-    "n" ) exit ;;
+    "n" ) break ;;
   esac
  done
