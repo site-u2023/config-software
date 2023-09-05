@@ -10,17 +10,20 @@ do
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
-    "e" ) _func_AdBlock_Confirm ;;
+    "e" )
+  {
+if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
+　read -p " AdBlockが既にインストールされています"
+  exit
+fi
+  }
+  　　　　_func_AdBlock_Confirm ;;
     "b" ) _func_AdBlock_Before ;;
     "q" ) exit ;;
   esac
 done
 
 function _func_AdBlock_Confirm
-if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
-　read -p " AdBlockが既にインストールされています"
-  exit
-fi
 while :
 do
   echo -e " \033[1;35mAdBlockdのインストールを開始します\033[0;39m"
