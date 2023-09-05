@@ -20,11 +20,9 @@ do
   read -p " キーを選択してください [f/c or q]: " num 
   case "${num}" in
     "f" ) wget --no-check-certificate -O /etc/config-software/package-auto.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto.sh
-          sh /etc/config-software/package-auto.sh
-          break ;;
+          sh /etc/config-software/package-auto.sh ;;
     "c" ) wget --no-check-certificate -O /etc/config-software/package-manual.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-manual.sh
-          sh /etc/config-software/package-manual.sh
-          break ;;
+          sh /etc/config-software/package-manual.sh ;;
     "q" ) exit ;;
   esac
 done
