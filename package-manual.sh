@@ -627,7 +627,8 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
     echo -e "\033[1;33m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
     echo -e " \033[1;32mインストールサイズ合計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
     echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
-    read -p " インストールを開始します [y/n or q]: " num
+    echo -e " \033[1;37m選択したパッケージのインストールを開始します\033[0;39m"
+    read -p " 開始します [y/n or q]: " num
      case "${num}" in
       "y" ) _func_listinstalled ;;
       "n" ) _func_listinstalled_Before ;;
@@ -655,7 +656,22 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m選択インストール\033[0;39m"
-  read -p " パッケージの選択を開始します [y/n]: " num
+  echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
+  echo -e " \033[1;37m・LuCi\033[0;39m"
+  echo -e " \033[1;37m・LuCi日本語化\033[0;39m"
+  echo -e " \033[1;37m・SFTPサーバー\033[0;39m"
+  echo -e " \033[1;37m・CPU負荷分散\033[0;39m"
+  echo -e " \033[1;37m・SQM\033[0;39m"
+  echo -e " \033[1;37m・ネットワーク統計インターフェイス\033[0;39m"
+  echo -e " \033[1;37m・帯域幅モニター\033[0;39m"
+  echo -e " \033[1;37m・テーマ（OpenWrt・マテリアル・OpenWrt2020）\033[0;39m"
+  echo -e " \033[1;37m・ログ情報（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・CPUステータス（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・CPUパフォーマンス（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・インターネット可用性確認（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"
+  read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
     "n" ) exit ;;
