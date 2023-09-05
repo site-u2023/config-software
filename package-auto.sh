@@ -257,6 +257,7 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
   echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・インターネット可用性確認（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"  
+  {
   str_USB=`dmesg | grep -s usb`
 　if [ -n "$str_USB" ]; then
   echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
@@ -270,6 +271,7 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
   echo -e " \033[1;37m・USB：HFS & HFS+\033[0;39m"
   echo -e " \033[1;37m・USB：HDD\033[0;39m"
   fi
+  }
   read -p " パッケージのインストールを開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
