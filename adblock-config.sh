@@ -105,8 +105,8 @@ exit
 
 
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-  read -p " AdGuardがインストールされている為終了します"
-  exit
+ read -p " AdGuardがインストールされている為終了します"
+ exit
 fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
