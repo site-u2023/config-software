@@ -162,6 +162,7 @@ rm /tmp/luci-theme-argon.ipk
 # /etc/init.d/rpcd restart
 
 # USB
+str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
 cat << EOF >> /etc/config-software/list-installed/Before
 block-mount
@@ -237,12 +238,16 @@ fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
+ else
+ read -p " バージョンが違うため終了します"
+ exit
+fi
+
  while :
  do
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m自動フルインストール（初心者向け）\033[0;39m"
-  echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
   echo -e " \033[1;37m・LuCi\033[0;39m"
   echo -e " \033[1;37m・LuCi日本語化\033[0;39m"
   echo -e " \033[1;37m・SFTPサーバー\033[0;39m"
@@ -256,11 +261,9 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
   echo -e " \033[1;37m・CPUパフォーマンス（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・インターネット可用性確認（カスタムフィード）\033[0;39m"
-  echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"  
-  {
+  echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"
   str_USB=`dmesg | grep -s usb`
-　if [ -n "$str_USB" ]; then
-  echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
+if [ -n "$str_USB" ]; then
   echo -e " \033[1;37m・USB：ベースパッケージ \033[0;39m"
   echo -e " \033[1;37m・USB：LED\033[0;39m"
   echo -e " \033[1;37m・USB：FAT32 \033[0;39m"
@@ -270,15 +273,11 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
   echo -e " \033[1;37m・USB：NTFS\033[0;39m"
   echo -e " \033[1;37m・USB：HFS & HFS+\033[0;39m"
   echo -e " \033[1;37m・USB：HDD\033[0;39m"
-  fi
-  }
+fi
   read -p " パッケージのインストールを開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
     "n" ) exit ;;
   esac
- done
-else
- read -p " バージョンが違うため終了します"
- exit
-fi
+done
+
