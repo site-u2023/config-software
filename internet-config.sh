@@ -587,7 +587,6 @@ else
  read -p " バージョンが違うため終了します";
  exit
 fi
-
 while :
 do
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
