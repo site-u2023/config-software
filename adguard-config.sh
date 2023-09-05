@@ -12,6 +12,10 @@ do
   case "${num}" in
     "c" ) 
 {
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+　read -p " AdGuardがインストールが既にインストールされています"
+  exit
+fi
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
