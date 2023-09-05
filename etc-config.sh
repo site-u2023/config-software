@@ -18,7 +18,7 @@ do
           network_flush_cache
           network_get_ipaddr NET_ADDR "${NET_IF}"
           sed -i -e "s/192.168.1.1/${NET_ADDR}/g" /etc/init.d/iperf3
-          echo -e " \033[1;36mインストールが完了しました\033[0;39m"
+          echo -e " \033[1;32mインストールが完了しました\033[0;39m"
           echo -e " \033[1;36m有効: service iperf3 enable\033[0;39m"
           echo -e " \033[1;36m無効: service iperf3 disable\033[0;39m"
           echo -e " \033[1;36m開始: service iperf3 start\033[0;39m"
