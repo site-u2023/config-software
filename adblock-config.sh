@@ -17,6 +17,10 @@ do
 done
 
 function _func_AdBlock_Confirm
+if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
+　read -p " AdBlockが既にインストールされています"
+  exit
+fi
 while :
 do
   echo -e " \033[1;35mAdBlockdのインストールを開始します\033[0;39m"
