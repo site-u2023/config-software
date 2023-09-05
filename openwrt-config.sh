@@ -66,7 +66,6 @@ do
   esac
 done
 
-{
 function _func_ETC
 while :
 do
@@ -139,4 +138,3 @@ do
     "q" ) _func_QUIT ;;
   esac
  done 
-}
