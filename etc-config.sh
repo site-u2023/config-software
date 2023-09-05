@@ -19,11 +19,17 @@ do
           network_flush_cache
           network_get_ipaddr NET_ADDR "${NET_IF}"
           sed -i -e "s/192.168.1.1/${NET_ADDR}/g" /etc/init.d/iperf3
-          # service iperf3 enable
-          # service iperf3 start
           echo -e " \033[1;36mインストールが完了しました\033[0;39m"
+          echo -e " \033[1;36m有効: service iperf3 enable\033[0;39m"
+          echo -e " \033[1;36m無効: service iperf3 disable\033[0;39m"
           echo -e " \033[1;36m開始: service iperf3 start\033[0;39m"
           echo -e " \033[1;36m終了: service iperf3 stop\033[0;39m"
+          read -p " サービスを開始しますか? [y/n]: " snum
+            case "${snum}" in
+                "y" ) echo -e " \033[1;36mIPERF3を開始します\033[0;39m"
+                      service iperf3 start ;;
+                "n" ) break ;;
+            esac 
           read -p " 何かキーを押して下さい"
           break ;;
     "n" ) break ;;
@@ -33,14 +39,14 @@ done
 while :
 do
   echo -e " \033[1;37metc -------------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[1]\033[0;39m": IPERF3インストール
+  echo -e " \033[1;34m[1]\033[0;39m": IPERF3インストール及びサービス追加
   echo -e " \033[1;33m[2]\033[0;39m": 
   echo -e " \033[1;32m[3]\033[0;39m": 
   echo -e " \033[1;35m[4]\033[0;39m": 
   echo -e " \033[1;31m[5]\033[0;39m": 
   echo -e " \033[1;36m[6]\033[0;39m": 
   echo -e " \033[7;40m[q]\033[0;39m": 終了
-  echo -e " \033[1;37m------------------------------------- August 27, 2023\033[0;39m"
+  echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [1/2/3/4/5/6 or q]: " num
   case "${num}" in
     "1" ) _func_IPERF3 ;;
