@@ -80,10 +80,7 @@ done
 
 function _func_WIFI_SEARCH
 {
-WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
-WIFI_NO=3
-    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
-    then
+    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
      _func_WIFI_SSID_C
     else
      _func_DEVICE_confirmation
@@ -160,6 +157,18 @@ function _func_DEVICE_SET
 while :
 do
   echo -e " \033[1;37mシステム初期設定を開始します\033[0;39m"
+  echo -e " \033[1;37m・デバイスのホストネーム\033[0;39m"
+  echo -e " \033[1;37m・デバイスのパスワード\033[0;39m"
+  echo -e " \033[1;37m・Wi-Fi(wwan0)のSSID\033[0;39m"
+  echo -e " \033[1;37m・Wi-Fi(wwan0)のパスワード\033[0;39m"
+  echo -e " \033[1;37m・Wi-Fi(wwan1)のSSID\033[0;39m"
+  echo -e " \033[1;37m・Wi-Fi(wwan1)のパスワード\033[0;39m"
+  WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
+  WIFI_NO=3
+    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
+  echo -e " \033[1;37m・Wi-Fi(wwan2)のSSID\033[0;39m"
+  echo -e " \033[1;37m・Wi-Fi(wwan2)のパスワード\033[0;39m"
+    fi
   read -p " 開始します [y/n]:" num
   case "${num}" in
     "y" ) _func_HOSTNAME ;;
