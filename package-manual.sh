@@ -645,6 +645,11 @@ fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+ else
+ read -p " バージョンが違うため終了します"
+ exit
+fi
+
  while :
  do
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
@@ -656,7 +661,3 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
     "n" ) exit ;;
   esac
  done
-else
- read -p " バージョンが違うため終了します"
- exit
-fi
