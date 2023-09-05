@@ -3,6 +3,7 @@
 This README is edited in Japanese.
 
 ### 選択型自動初期設定
+
 初心者向けに自動設定
 - オールインワンスクリプト
   -  スクリプトリムーブ後終了
@@ -34,6 +35,7 @@ This README is edited in Japanese.
 
 
 ### ワンコピペ自動スクリプト※要ONU直結
+
 推奨設定順序: システム > インターネット > パッケージ
 ```bash:/etc/config-software/openwrt-config.sh
 mkdir /etc/config-software; wget --no-check-certificate -O /etc/config-software/openwrt-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/openwrt-config.sh; sh /etc/config-software/openwrt-config.sh
