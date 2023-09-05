@@ -81,9 +81,10 @@ done
 function _func_AdGuard_PASSWD
 while :
 do
-  echo -e "\033[1;37m AdGuardのパスワードを入力して下さい\033[0;39m"
-  echo -e "\033[1;33m ※htpasswdで生成したBcryptの暗号ハッシュ\033[0;39m"
-  echo -e '\033[1;33m 例: $2y$05$5k0xQSF.ioRhGmleXF1SeOW59LE6JzZoz/Ob1ukV7TbhqN2xRv5rK\033[0;39m'
+  echo -e " \033[1;37mAdGuardのパスワードを入力して下さい\033[0;39m"
+  echo -e " \033[1;33m※htpasswdで生成したBcryptの暗号パスワード\033[0;39m"
+  echo -e " \033[1;33m参考URL: https://tool-taro.com/htpasswd/\033[0;39m" ＜＜ ダブルクリック
+  echo -e ' \033[1;33m例: $2y$05$5k0xQSF.ioRhGmleXF1SeOW59LE6JzZoz/Ob1ukV7TbhqN2xRv5rK\033[0;39m'
   read -p " パスワード: " input_str_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
