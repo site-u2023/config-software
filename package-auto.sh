@@ -162,7 +162,6 @@ rm /tmp/luci-theme-argon.ipk
 # /etc/init.d/rpcd restart
 
 # USB
-str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
 cat << EOF >> /etc/config-software/list-installed/Before
 block-mount
@@ -243,6 +242,34 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m自動フルインストール（初心者向け）\033[0;39m"
+  echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
+  echo -e " \033[1;37m・LuCi\033[0;39m"
+  echo -e " \033[1;37m・LuCi日本語化\033[0;39m"
+  echo -e " \033[1;37m・SFTPサーバー\033[0;39m"
+  echo -e " \033[1;37m・CPU負荷分散\033[0;39m"
+  echo -e " \033[1;37m・SQM\033[0;39m"
+  echo -e " \033[1;37m・ネットワーク統計インターフェイス\033[0;39m"
+  echo -e " \033[1;37m・帯域幅モニター\033[0;39m"
+  echo -e " \033[1;37m・テーマ（OpenWrt・マテリアル・OpenWrt2020）\033[0;39m"
+  echo -e " \033[1;37m・ログ情報（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・CPUステータス（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・CPUパフォーマンス（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・インターネット可用性確認（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"  
+  str_USB=`dmesg | grep -s usb`
+　if [ -n "$str_USB" ]; then
+  echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
+  echo -e " \033[1;37m・USB：ベースパッケージ \033[0;39m"
+  echo -e " \033[1;37m・USB：LED\033[0;39m"
+  echo -e " \033[1;37m・USB：FAT32 \033[0;39m"
+  echo -e " \033[1;37m・USB：ext4\033[0;39m"
+  echo -e " \033[1;37m・USB：f2fs\033[0;39m"
+  echo -e " \033[1;37m・USB：exFAT\033[0;39m"
+  echo -e " \033[1;37m・USB：NTFS\033[0;39m"
+  echo -e " \033[1;37m・USB：HFS & HFS+\033[0;39m"
+  echo -e " \033[1;37m・USB：HDD\033[0;39m"
+  fi
   read -p " パッケージのインストールを開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
