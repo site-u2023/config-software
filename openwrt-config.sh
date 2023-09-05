@@ -4,7 +4,7 @@
 function _func_SYSTEM
 while :
 do
-  echo -e " \033[1;34mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;31mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh
@@ -56,7 +56,7 @@ done
 function _func_AD_DNS
 while :
 do
-  echo -e " \033[1;35mDNS暗号化・広告ブロッカーインストールのスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;31mDNS暗号化・広告ブロッカーインストールのスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/ad-dns-blocking-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocking-config.sh
@@ -70,7 +70,7 @@ done
 function _func_ETC
 while :
 do
-  echo -e " \033[1;35mその他のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;36mその他のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software//etc-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh
@@ -83,14 +83,14 @@ done
 function _func_QUIT
 while :
 do
-  echo -e " \033[1;31mこのスクリプト及び関連スクリプトを削除します\033[0;39m"
-  echo -e " \033[1;31m復元用ファイルは削除されません\033[0;39m"
+  echo -e " \033[1;37mこのスクリプト及び関連スクリプトを削除します\033[0;39m"
+  echo -e " \033[1;37m復元用ファイルは削除されません\033[0;39m"
   read -p " 削除しますか? [y/n or r]: " num
    case "${num}" in
     "y" ) rm -rf /etc/config-software
-          echo -e " \033[1;33mこのスクリプト及び関連スクリプトを削除して終了しました\033[0;39m"
+          echo -e " \033[1;37mこのスクリプト及び関連スクリプトを削除して終了しました\033[0;39m"
           exit ;;
-    "n" ) echo -e " \033[1;33m終了しました\033[0;39m"
+    "n" ) echo -e " \033[1;37m終了しました\033[0;39m"
           exit ;;
     "r" ) break ;;
    esac 
