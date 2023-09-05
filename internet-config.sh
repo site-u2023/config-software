@@ -17,7 +17,7 @@ do
     "b" ) _func_MAP_e_VirtualConnect_Before ;;
     "n" ) _func_MAP_e_Nichiban_map ;;
     "o" ) _func_MAP_e_Nichiban_map_Before ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -31,7 +31,7 @@ do
   case "${num}" in
     "y" ) _func_MAP_e_VirtualConnect_SET ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -63,7 +63,7 @@ do
   case "${num}" in
     "y" ) _func_MAP_e_Restoration ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -83,7 +83,7 @@ do
     "b" ) _func_MAP_e_V6plus_Before ;;
     "n" ) _func_MAP_e_Nichiban_map ;;
     "o" ) _func_MAP_e_Nichiban_map_Before ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -97,7 +97,7 @@ do
   case "${num}" in
     "y" ) _func_MAP_e_V6plus_SET ;;
     "n" ) _func_MAP_e_V6plus ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -129,7 +129,7 @@ do
   case "${num}" in
     "y" ) _func_MAP_e_Before_Restoration ;;
     "n" ) _func_MAP_e_V6plus ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -153,7 +153,7 @@ do
   case "${num}" in
     "y" ) _func_MAP_e_Nichiban_map_SET ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -173,7 +173,7 @@ do
   case "${num}" in
     "y" ) _func_MAP_e_Nichiban_map_Restoration ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -198,7 +198,7 @@ do
   case "${num}" in
     "e" ) _func_DS_LITE_Transix_confirmation ;;
     "b" ) _func_DS_LITE_Transix_Before ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -212,7 +212,7 @@ do
   case "${num}" in
     "y" ) _func_DS_LITE_Transix_SET ;;
     "n" ) _func_DS_LITE_Transix ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -240,7 +240,7 @@ do
   case "${num}" in
     "y" ) _func_DS_LITE_Before_Restoration ;;
     "n" ) _func_DS_LITE_Transix ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -256,7 +256,7 @@ do
   case "${num}" in
     "e" ) _func_DS_LITE_Xpass_confirmation ;;
     "b" ) _func_DS_LITE_Xpass_Before ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -270,7 +270,7 @@ do
   case "${num}" in
     "y" ) _func_DS_LITE_Xpass_SET ;;
     "n" ) _func_DS_LITE_Xpass ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -298,7 +298,7 @@ do
   case "${num}" in
     "y" ) _func_DS_LITE_Before_Restoration ;;
     "n" ) _func_DS_LITE_Xpass ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -314,7 +314,7 @@ do
   case "${num}" in
     "e" ) _func_DS_LITE_V6connect_confirmation ;;
     "b" ) _func_DS_LITE_V6connect_Before ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -328,7 +328,7 @@ do
   case "${num}" in
     "y" ) _func_DS_LITE_V6connect_SET ;;
     "n" ) _func_DS_LITE_V6connect ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -356,7 +356,7 @@ do
   case "${num}" in
     "y" ) _func_DS_LITE_Before_Restoration ;;
     "n" ) _func_DS_LITE_V6connect ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -388,7 +388,7 @@ do
     "6" ) _func_PPPoE_ID4 ;;
     "b" ) _func_PPPo_Before ;;
     "w" ) _func_PPPo_Before6 ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -401,7 +401,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_PASSWORD ;;
     "n" ) _func_PPPoE_ID ;;
-    "r" ) _func_PPPoE ;;
+    "r" ) break ;;
   esac
 done
 
@@ -414,7 +414,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_confirmation ;;
     "n" ) _func_PPPoE_PASSWORD ;;
-    "r" ) _func_PPPoE ;;
+    "r" ) break ;;
   esac
 done
 
@@ -429,7 +429,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_SET ;;
     "n" ) _func_PPPoE ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -456,7 +456,7 @@ do
   case "${num}" in
     "y" ) _func_PPPo_Before_Restoration ;;
     "n" ) _func_PPPoE ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -478,7 +478,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_PASSWORD4 ;;
     "n" ) _func_PPPoE_ID4 ;;
-    "r" ) _func_PPPoE ;;
+    "r" ) break ;;
   esac
 done
 
@@ -491,7 +491,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_ID6 ;;
     "n" ) _func_PPPoE_PASSWORD4 ;;
-    "r" ) _func_PPPoE ;;
+    "r" ) break ;;
   esac
 done
 
@@ -504,7 +504,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_PASSWORD6 ;;
     "n" ) _func_PPPoE_ID6 ;;
-    "r" ) _func_PPPoE ;;
+    "r" ) break ;;
   esac
 done
 
@@ -517,7 +517,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_confirmation6 ;;
     "n" ) _func_PPPoE_PASSWORD6 ;;
-    "r" ) _func_PPPoE ;;
+    "r" ) break ;;
   esac
 done
 
@@ -534,7 +534,7 @@ do
   case "${num}" in
     "y" ) _func_PPPoE_SET6 ;;
     "n" ) _func_PPPoE ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -567,7 +567,7 @@ do
   case "${num}" in
     "y" ) _func_PPPo_Before_Restoration6 ;;
     "n" ) _func_PPPoE ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -580,7 +580,14 @@ reboot
 exit
 }
 
-function _func_main
+OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
+if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
+ echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+else
+ read -p " バージョンが違うため終了します";
+ exit
+fi
+
 while :
 do
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
@@ -603,12 +610,3 @@ do
     "q" ) exit ;;
   esac
 done
-
-OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
-else
- read -p " バージョンが違うため終了します";
- exit
-fi
-_func_main
