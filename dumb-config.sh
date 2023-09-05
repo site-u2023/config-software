@@ -10,7 +10,7 @@ do
   case "${num}" in
     "y" ) _func_Dumb_GATEWAY ;;
     "n" ) _func_Dumb_IPV4 ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -24,7 +24,7 @@ do
   case "${num}" in
     "y" ) _func_Dumb_confirmation ;;
     "n" ) _func_Dumb_GATEWAY ;;
-    "r" ) _func_Dumb ;;
+    "r" ) break ;;
   esac
 done
 
@@ -40,7 +40,7 @@ do
   case "${num}" in
     "y" ) _func_Dumb_SET ;;
     "n" ) _func_Dumb_IPV4 ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -62,7 +62,7 @@ do
   case "${num}" in
     "y" ) _func_Dumb_Before_Restoration ;;
     "n" ) _func_Dumb ;;
-    "r" ) _func_main ;;
+    "r" ) break ;;
   esac
 done
 
@@ -89,15 +89,23 @@ rm /etc/config/dropbear.dump.bak
 rm /etc/config-software/dumb.sh
 sed -i "/fping -g 192.168.1.0/24/d" /etc/rc.local
 sed -i "/fping -g 192.168.1.0/24/d" /etc/crontabs/root
-  echo -e " \033[1;32m再起動後は ${input_str_IPV4} でログインして下さい\033[0;39m"
+echo -e " \033[1;32m再起動後は ${input_str_IPV4} でログインして下さい\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
 }
 
-function _func_main
+
+OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
+if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ]; then
+ echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+else
+ read -p " バージョンが違うため終了します"
+ exit
+fi
 while :
 do
+  echo -e " \033[1;33mアクセスポイントのIPV4アドレス及びゲートウェイを準備下さい\033[0;39m"
   echo -e " \033[1;37mアクセスポイント ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]\033[0;39m": アクセスポイントの設定を実行します
   echo -e " \033[1;32m[b]\033[0;39m": 以前の設定に復元します
@@ -110,12 +118,3 @@ do
     "q" ) exit ;;
   esac
 done
-
-OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
-else
- read -p " バージョンが違うため終了します"
- exit
-fi
-_func_main
