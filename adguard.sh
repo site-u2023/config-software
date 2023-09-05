@@ -83,6 +83,7 @@ dns:
     - '# DNS-over-TLS'
     - '# tls://1dot1dot1dot1.cloudflare-dns.com'
     - '# tls://dns.google'
+  　- tls://unfiltered.adguard-dns.com
     - '# DNS-over-HTTPS(coercion HTTP/3)'
     - '# h3://dns.cloudflare.com/dns-query'
     - '# h3://dns.google/dns-query'
@@ -103,9 +104,9 @@ dns:
     - 1.0.0.1
     - 8.8.8.8
     - 2606:4700:4700::1111
-    - 2001:4860:4860::8888
-    - 2606:4700:4700::1001
     - 2001:4860:4860::8844
+    - 2606:4700:4700::1001
+    - 2001:4860:4860::8888
   all_servers: false
   fastest_addr: false
   fastest_timeout: 1s
