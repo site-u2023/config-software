@@ -38,6 +38,7 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  exit
 fi
 }
+  echo -e " \033[1;37m[g]\033[0;39m": AdGuardとAdBlockは排他利用
   echo -e " \033[1;37mad dns blocking config ------------------------------\033[0;39m"
   echo -e " \033[1;34m[g]\033[0;39m": AdGuard設定（280blockerアドイン）
   echo -e " \033[1;32m[b]\033[0;39m": AdBlock設定（豆腐フィルタアドイン）
