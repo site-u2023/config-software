@@ -580,9 +580,7 @@ reboot
 exit
 }
 
-while :
-do
-{
+
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
@@ -590,7 +588,9 @@ else
  read -p " バージョンが違うため終了します";
  exit
 fi
-}
+
+while :
+do
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
   echo -e " \033[1;34m[v]\033[0;39m": OCNバーチャルコネクト自動設定
   echo -e " \033[1;33m[p]\033[0;39m": V6プラス・IPv6オプション自動設定
