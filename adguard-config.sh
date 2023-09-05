@@ -150,14 +150,14 @@ reboot
 exit
 }
 
-if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
- read -p " AdBlockがインストールされている為終了します"
-  exit
-fi
 
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+ if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
+ read -p " AdBlockがインストールされている為終了します"
+  exit
+fi
  _func_AdGuard
 else
  read -p " バージョンが違うため終了します"
