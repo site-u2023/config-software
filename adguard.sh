@@ -44,7 +44,8 @@ uci set firewall.adguardhome_dns_53.dest_port='53'
 uci set firewall.adguardhome_dns_53.family="any"
 uci commit firewall
 /etc/init.d/firewall restart
-
+service adguardhome enable
+service adguardhome start
 cat << 'EOF' > /etc/adguardhome.yaml
 http:
   address: 0.0.0.0:3000
@@ -320,5 +321,4 @@ os:
 schema_version: 23
 EOF
 
-service adguardhome enable
-service adguardhome start
+service adguardhome restart
