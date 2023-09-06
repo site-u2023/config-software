@@ -11,7 +11,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
   echo -e " \033[1;37mAdGuardがインストールが既にインストールされています\033[0;39m"
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]\033[0;39m": AdGuardのインストールと設定
+  echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定とインストール
   echo -e " \033[1;33m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
@@ -37,33 +37,16 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
    exit
   fi
 }
-          _func_AdGuard_Install ;;
-    "a" ) _func_AdGuard_Confirm ;;
+          _func_AdGuard_Confirm ;;
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
 done
 
-function _func_AdGuard_Install
-while :
-do
-  read -p " これで宜しければインストールと設定を開始します [y/n]: " num
-  case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
-          sh /etc/config-software/adguard.sh
-          echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
-          echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:3000\033[0;39m"
-          echo -e " \033[1;32m初期設定で必ず管理用ウェブインターフェイスからポート番号・ユーザー名・パスワードを設定\033[0;39m"
-          read -p " 何かキーを押してデバイスを再起動してください"
-          reboot ;;
-    "n" ) _func_AdGuard ;;
-  esac
-done
- 
 function _func_AdGuard_Confirm
 while :
 do
-  echo -e " \033[1;35mAdGuardの設定変更を開始します\033[0;39m"
+  echo -e " \033[1;35mAdGuardの設定とインストールを開始します\033[0;39m"
   echo -e " \033[1;37m管理用ウェブインターフェイスポート番号入力\033[0;39m"
   echo -e " \033[1;37m管理用ウェブインターフェイスユーザー名入力\033[0;39m"
   echo -e " \033[1;37m管理用ウェブインターフェイスパスワード入力\033[0;39m"
@@ -157,10 +140,13 @@ PASSWD='$2a$10$9mSG/fEZuP9Sd3.r1IAHvOzul38OtER8lt2oPniKTOgDDsiRiqdzq'
 sed -i -e "s|password: ${PASSWD}|password: ${Bcrypt_PASSWD#root:}|g" /etc/adguardhome.yaml
 sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/adguardhome.yaml
 echo -e " \033[1;32m変更設定が完了しました\033[0;39m"
+read -p " 何かキーを押してインストールを開始して下さい"
+wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
+sh /etc/config-software/adguard.sh
+echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
-exit
 }
 
 function _func_AdGuard_Before
