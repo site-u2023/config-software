@@ -49,7 +49,7 @@ do
   echo -e " \033[1;37m管理画面ユーザー名入力\033[0;39m"
   echo -e " \033[1;37m管理画面パスワード入力\033[0;39m"
   echo -e " \033[1;37mインストール: adguardhome ${ADGUARD_VERSION} ${ADGUARD_SIZE}kB\033[0;39m"
-  echo -e " \033[1;37mインストール: apache-utils 19.38kB033[0;39m"
+  echo -e " \033[1;37mインストール: apache-utils 19.38kB\033[0;39m"
   echo -e " \033[1;37mインストール: libaprutil 75.04kB\033[0;39m"
   echo -e " \033[1;37mインストール: libapr 92.12kB\033[0;39m"
   echo -e " \033[1;37mインストール: libexpat 45.10kB\033[0;39m"
