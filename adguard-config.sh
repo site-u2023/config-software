@@ -12,6 +12,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]\033[0;39m": AdGuardのインストールと設定
+  echo -e " \033[1;34m[a]\033[0;39m": ポート番号・ユーザー名・パスワードの変更及び280ブロッカー設定
   echo -e " \033[1;31m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;33m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
@@ -37,11 +38,24 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
    exit
   fi
 }
-          _func_AdGuard_Confirm ;;
+          _func_AdGuard_Install ;;
+    "a" ) _func_AdGuard_Confirm ;;
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
 done
+
+function _func_AdGuard_Install
+{
+wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
+sh /etc/config-software/adguard.sh
+echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
+echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:3000\033[0;39m"
+echo -e " \033[1;32m管理用ウェブインターフェイスからポート番号・ユーザー名・パスワードを設定\033[0;39m"
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit
+}
 
 function _func_AdGuard_Confirm
 while :
