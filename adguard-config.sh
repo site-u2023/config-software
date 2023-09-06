@@ -123,17 +123,17 @@ done
 
 function _func_AdGuard_SET
 {
-wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
+wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
-wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
-sed -i -e "s/address: 0.0.0.0:8000/address: 0.0.0.0:${input_str_PORT}/g" /etc/config-software/adguard.sh
-sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/config-software/adguard.sh
+sed -i -e "s/address: 0.0.0.0:8000/address: 0.0.0.0:${input_str_PORT}/g" /etc/adguardhome.yaml
+sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b root ${input_str_PASSWD}`
-sed -i -e "s|password: PASSWD|password: ${Bcrypt_PASSWD#root:}|g" /etc/config-software/adguard.sh
-sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/config-software/adguard.sh
+sed -i -e "s|password: PASSWD|password: ${Bcrypt_PASSWD#root:}|g" /etc/adguardhome.yaml
+sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/adguardhome.yaml
+wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sh /etc/config-software/adguard.sh
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
