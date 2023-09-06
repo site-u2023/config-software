@@ -147,10 +147,10 @@ while :
 do
   echo -e " \033[1;37mAdGuardをリムーブして以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: adguardhome\033[0;39m"
-  echo -e " \033[1;37mリムーブ: apache-utils\033[0;39m"
-  echo -e " \033[1;37mリムーブ: libaprutil\033[0;39m"
-  echo -e " \033[1;37mリムーブ: libapr\033[0;39m"
-  echo -e " \033[1;37mリムーブ: libexpat\033[0;39m"
+  #echo -e " \033[1;37mリムーブ: htpasswd\033[0;39m"
+  #echo -e " \033[1;37mリムーブ: libaprutil\033[0;39m"
+  #echo -e " \033[1;37mリムーブ: libapr\033[0;39m"
+  #echo -e " \033[1;37mリムーブ: libexpat\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_Restoration ;;
@@ -164,9 +164,9 @@ function _func_AdGuard_Restoration
 service adguardhome stop
 service adguardhome disable
 opkg remove adguardhome
-opkg remove --nodeps libaprutil
-opkg remove --nodeps libapr
-opkg remove --nodeps libexpat
+#opkg remove --nodeps libaprutil
+#opkg remove --nodeps libapr
+#opkg remove --nodeps libexpat
 cp /etc/config/network.adguard.bak /etc/config/network
 rm /etc/config/network.adguard.bak
 cp /etc/config/dhcp.adguard.bak /etc/config/dhcp
