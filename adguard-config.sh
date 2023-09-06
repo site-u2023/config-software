@@ -164,6 +164,7 @@ function _func_AdGuard_Restoration
 service adguardhome stop
 service adguardhome disable
 opkg remove adguardhome
+rm /usr/bin/htpasswd
 opkg remove --nodeps libaprutil
 opkg remove --nodeps libapr
 opkg remove --nodeps libexpat
