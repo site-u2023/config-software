@@ -46,6 +46,11 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
 done
 
 function _func_AdGuard_Install
+while :
+do
+  read -p " これで宜しければインストールと設定を開始します [y/n or r]: " num
+  case "${num}" in
+    "y" ) 
 {
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sh /etc/config-software/adguard.sh
@@ -53,14 +58,16 @@ echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:3000\033[0;39m"
 echo -e " \033[1;32m初期設定で必ず管理用ウェブインターフェイスからポート番号・ユーザー名・パスワードを設定\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
+reboot ;;
 }
-
+    "n" ) _func_AdGuard ;;
+  esac
+done
+ 
 function _func_AdGuard_Confirm
 while :
 do
-  echo -e " \033[1;35mAdGuardの設定及びインストールを開始します\033[0;39m"
+  echo -e " \033[1;35mAdGuardの設定変更を開始します\033[0;39m"
   echo -e " \033[1;37m管理用ウェブインターフェイスポート番号入力\033[0;39m"
   echo -e " \033[1;37m管理用ウェブインターフェイスユーザー名入力\033[0;39m"
   echo -e " \033[1;37m管理用ウェブインターフェイスパスワード入力\033[0;39m"
@@ -127,7 +134,7 @@ do
   echo -e " \033[1;32mパスワード: ${input_str_PASSWD}\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-  read -p " これで宜しければインストールと設定を開始します [y/n or r]: " num
+  read -p " これで宜しければ変更設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_SET ;;
     "n" ) _func_AdGuard_PORT ;;
