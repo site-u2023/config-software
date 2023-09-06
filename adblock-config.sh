@@ -4,9 +4,9 @@ function _func_AdBlock
 while :
 do
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdBlockが既にインストールされています\033[0;39m"
+  echo -e " \033[1;37mAdBlockは既にインストールされています\033[0;39m"
 fi
-  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34mAdBlockd ---------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]\033[0;39m": AdBlockdのインストールと設定（豆腐フィルタアドイン）
   echo -e " \033[1;31m[b]\033[0;39m": AdBlockdのリムーブと以前の設定に復元
   echo -e " \033[1;33m[q]\033[0;39m": 終了    
