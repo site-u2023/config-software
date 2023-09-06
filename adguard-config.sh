@@ -133,7 +133,7 @@ fi
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
-sed -i "2c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
+sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
