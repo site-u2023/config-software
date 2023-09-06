@@ -7,7 +7,7 @@ if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdBlockが既にインストールされています\033[0;39m"
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": AdBlockdのインストールと設定
+  echo -e " \033[1;34m[e]\033[0;39m": AdBlockdのインストールと設定（豆腐フィルタアドイン）
   echo -e " \033[1;31m[b]\033[0;39m": AdBlockdのリムーブと以前の設定に復元
   echo -e " \033[1;33m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
@@ -40,37 +40,9 @@ opkg install adblock
 opkg install luci-app-adblock
 opkg install luci-i18n-adblock-ja
 opkg install tcpdump-mini
-uci set adblock.global.adb_backupdir="/etc/adblock"
 
-cp /etc/adblock/adblock.sources.gz /etc/adblock/adblock.sources.tofu.gz
-gunzip /etc/adblock/adblock.sources.tofu.gz
-
-sed -i -e '$d' /etc/adblock/adblock.sources.tofu
-sed -i -e '$d' /etc/adblock/adblock.sources.tofu
-cat <<"EOF" >> /etc/adblock/adblock.sources.tofu
-                },
-                "tofu": {
-                                "url": "https://raw.githubusercontent.com/tofukko/filter/master/Adblock_Plus_list.txt",
-                                "rule": "BEGIN{FS=\"[|^]\"}/^\\|\\|([[:alnum:]_-]{1,63}\\.)+[[:alpha:]]+\\^(\\$third-party)?$/{print tolower($3)}",
-                                "size": "XL",
-                                "focus": "tofu",
-                                "descurl": "https://github.com/tofukko/filter"
-                }
-}
-EOF
-
-gzip /etc/adblock/adblock.sources.tofu
-
-uci set adblock.global.adb_srcarc="/etc/adblock/adblock.sources.tofu.gz"
-uci set adblock.global.adb_enabled="1"
-uci set adblock.global.adb_backup="1"
-uci set adblock.global.adb_backupdir="/etc/adblock"
-uci set adblock.global.adb_backup_mode="1"
-uci add_list adblock.global.adb_sources='tofu'
-
-uci commit adblock
-service adblock enable
-service adblock start
+wget --no-check-certificate -O /etc/config-software/adblock.sh　https://raw.githubusercontent.com/site-u2023/config-software/main/adblock.sh
+sh /etc/config-software/adblock.sh
 
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
