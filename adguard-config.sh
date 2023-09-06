@@ -47,9 +47,9 @@ function _func_AdGuard_Confirm
 while :
 do
   echo -e " \033[1;35mAdGuardの設定及びインストールを開始します\033[0;39m"
-  echo -e " \033[1;37m管理画面ポート番号入力\033[0;39m"
-  echo -e " \033[1;37m管理画面ユーザー名入力\033[0;39m"
-  echo -e " \033[1;37m管理画面パスワード入力\033[0;39m"
+  echo -e " \033[1;37m管理用ウェブインターフェイスポート番号入力\033[0;39m"
+  echo -e " \033[1;37m管理用ウェブインターフェイスユーザー名入力\033[0;39m"
+  echo -e " \033[1;37m管理用ウェブインターフェイスパスワード入力\033[0;39m"
   echo -e " \033[1;37mインストール: adguardhome ${ADGUARD_VERSION} ${ADGUARD_SIZE}kB\033[0;39m"
   echo -e " \033[1;37mインストール: htpasswd 63.90kB\033[0;39m"
   echo -e " \033[1;37mインストール: libaprutil 75.04kB\033[0;39m"
@@ -65,7 +65,7 @@ done
 function _func_AdGuard_PORT
 while :
 do
-  echo -e "\033[1;37m AdGuard管理画面のポート番号を入力して下さい\033[0;39m"
+  echo -e "\033[1;37m AdGuard管理用ウェブインターフェイスのポート番号を入力して下さい\033[0;39m"
   echo -e "\033[1;33m 例: 8000\033[0;39m"
   read -p " ポート番号: " input_str_PORT
   read -p " 宜しいですか? [y/n or r]: " num
@@ -79,7 +79,7 @@ done
 function _func_AdGuard_USER
 while :
 do
-  echo -e "\033[1;37m AdGuard管理画面ののユーザー名を入力して下さい\033[0;39m"
+  echo -e "\033[1;37m AdGuard管理用ウェブインターフェイスのユーザー名を入力して下さい\033[0;39m"
   echo -e "\033[1;33m 例: admin\033[0;39m"
   read -p " ユーザー名: " input_str_USER
   read -p " 宜しいですか? [y/n or r]: " num
@@ -93,7 +93,7 @@ done
 function _func_AdGuard_PASSWD
 while :
 do
-  echo -e " \033[1;37mAdGuard管理画面ののパスワードを入力して下さい\033[0;39m"
+  echo -e " \033[1;37mAdGuard管理用ウェブインターフェイスのパスワードを入力して下さい\033[0;39m"
   echo -e " \033[1;33m例: password\033[0;39m"
   read -p " パスワード: " input_str_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
@@ -112,7 +112,7 @@ do
   echo -e " \033[1;32mユーザー名: ${input_str_USER}\033[0;39m"
   echo -e " \033[1;32mパスワード: ${input_str_PASSWD}\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  echo -e " \033[1;32m管理画面: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
+  echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
   read -p " これで宜しければインストールと設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_SET ;;
@@ -136,7 +136,7 @@ sed -i -e "s|password: PASSWD|password: ${Bcrypt_PASSWD#root:}|g" /etc/config-so
 sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/config-software/adguard.sh
 sh /etc/config-software/adguard.sh
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
-echo -e " \033[1;32m管理画面: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
+echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
