@@ -7,10 +7,10 @@ network_get_ipaddr NET_ADDR "${NET_IF}"
 function _func_AdGuard
 while :
 do
-if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdGuardがインストールが既にインストールされています\033[0;39m"
-fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+  echo -e " \033[1;37mAdGuardが既にインストールされている為設定変更だけ行います\033[0;39m"
+fi
   echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定とインストール
   echo -e " \033[1;33m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
@@ -139,20 +139,18 @@ Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
 sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/adguardhome.yaml
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
-
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdGuardがインストールが既にインストールされています\033[0;39m"
-  service adguardhome restart
+  read -p " 何かキーを押してスクリプトを終了して下さい"
   exit
 else  
-read -p " 何かキーを押してインストールを開始して下さい"
-wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
-sh /etc/config-software/adguard.sh
-echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m
-echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
+  read -p " 何かキーを押してインストールを開始して下さい"
+  wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
+  sh /etc/config-software/adguard.sh
+  echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m
+  echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
 fi
 }
 
