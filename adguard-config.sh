@@ -37,7 +37,7 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
    exit
   fi
 }
-          _func_AdGuard_SET ;;
+          _func_AdGuard_Confirm ;;
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
@@ -66,7 +66,7 @@ function _func_AdGuard_PORT
 while :
 do
   echo -e "\033[1;37m AdGuard管理画面のポート番号を入力して下さい\033[0;39m"
-  echo -e "\033[1;33m 例: 3000\033[0;39m"
+  echo -e "\033[1;33m 例: 8000\033[0;39m"
   read -p " ポート番号: " input_str_PORT
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -123,17 +123,17 @@ done
 
 function _func_AdGuard_SET
 {
-#wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
-#chmod +x /usr/bin/htpasswd
-#opkg install --nodeps libaprutil
-#opkg install --nodeps libapr
-#opkg install --nodeps libexpat
+wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
+chmod +x /usr/bin/htpasswd
+opkg install --nodeps libaprutil
+opkg install --nodeps libapr
+opkg install --nodeps libexpat
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
-#sed -i -e "s/address: 0.0.0.0:3000/address: 0.0.0.0:${input_str_PORT}/g" /etc/config-software/adguard.sh
-#sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/config-software/adguard.sh
-#Bcrypt_PASSWD=`htpasswd -B -n -b root ${input_str_PASSWD}`
-#sed -i -e "s|password: PASSWD|password: ${Bcrypt_PASSWD#root:}|g" /etc/config-software/adguard.sh
-#sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/config-software/adguard.sh
+sed -i -e "s/address: 0.0.0.0:8000/address: 0.0.0.0:${input_str_PORT}/g" /etc/config-software/adguard.sh
+sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/config-software/adguard.sh
+Bcrypt_PASSWD=`htpasswd -B -n -b root ${input_str_PASSWD}`
+sed -i -e "s|password: PASSWD|password: ${Bcrypt_PASSWD#root:}|g" /etc/config-software/adguard.sh
+sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/config-software/adguard.sh
 sh /etc/config-software/adguard.sh
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理画面: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
@@ -147,10 +147,10 @@ while :
 do
   echo -e " \033[1;37mAdGuardをリムーブして以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: adguardhome\033[0;39m"
-  #echo -e " \033[1;37mリムーブ: htpasswd\033[0;39m"
-  #echo -e " \033[1;37mリムーブ: libaprutil\033[0;39m"
-  #echo -e " \033[1;37mリムーブ: libapr\033[0;39m"
-  #echo -e " \033[1;37mリムーブ: libexpat\033[0;39m"
+  echo -e " \033[1;37mリムーブ: htpasswd\033[0;39m"
+  echo -e " \033[1;37mリムーブ: libaprutil\033[0;39m"
+  echo -e " \033[1;37mリムーブ: libapr\033[0;39m"
+  echo -e " \033[1;37mリムーブ: libexpat\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_Restoration ;;
@@ -164,9 +164,9 @@ function _func_AdGuard_Restoration
 service adguardhome stop
 service adguardhome disable
 opkg remove adguardhome
-#opkg remove --nodeps libaprutil
-#opkg remove --nodeps libapr
-#opkg remove --nodeps libexpat
+opkg remove --nodeps libaprutil
+opkg remove --nodeps libapr
+opkg remove --nodeps libexpat
 cp /etc/config/network.adguard.bak /etc/config/network
 rm /etc/config/network.adguard.bak
 cp /etc/config/dhcp.adguard.bak /etc/config/dhcp
