@@ -1,6 +1,8 @@
 #! /bin/sh
 . /lib/functions/network.sh
-
+NET_IF="lan"
+network_flush_cache
+network_get_ipaddr NET_ADDR "${NET_IF}"
 
 function _func_AdGuard
 while :
@@ -110,9 +112,6 @@ do
   echo -e " \033[1;32mユーザー名: ${input_str_USER}\033[0;39m"
   echo -e " \033[1;32mパスワード: ${input_str_PASSWD}\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  NET_IF="lan"
-  network_flush_cache
-  network_get_ipaddr NET_ADDR "${NET_IF}"
   echo -e " \033[1;32m管理画面: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
   read -p " これで宜しければインストールと設定を開始します [y/n or r]: " num
   case "${num}" in
