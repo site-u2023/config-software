@@ -37,7 +37,7 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
    exit
   fi
 }
-          _func_AdGuard_Confirm ;;
+          _func_AdGuard_SET ;;
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
