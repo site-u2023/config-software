@@ -47,7 +47,7 @@ done
 function _func_AdGuard_Install
 while :
 do
-  read -p " これで宜しければインストールと設定を開始します [y/n or r]: " num
+  read -p " これで宜しければインストールと設定を開始します [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
           sh /etc/config-software/adguard.sh
