@@ -8,7 +8,7 @@ function _func_AdGuard
 while :
 do
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdGuardが既にインストールされています\033[0;39m"
+  echo -e " \033[1;37mAdGuardは既にインストールされています\033[0;39m"
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定とインストール（280blockerアドイン）
