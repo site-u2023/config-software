@@ -92,7 +92,7 @@ function _func_AdGuard_PASSWD
 while :
 do
   echo -e " \033[1;37mAdGuard管理画面ののパスワードを入力して下さい\033[0;39m"
-  echo -e " \033[1;33m例: password"
+  echo -e " \033[1;33m例: password"\033[0;39m"
   read -p " パスワード: " input_str_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
