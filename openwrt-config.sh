@@ -107,7 +107,7 @@ fi
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  echo -e " \033[1;37mOpenWrt-CONFIG 03.3.5\033[0;39m"
+  echo -e " \033[1;37mOpenWrt-CONFIG 03.4.0\033[0;39m"
   echo -e " \033[1;37mAugust 25, 2023\033[0;39m"
   echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
