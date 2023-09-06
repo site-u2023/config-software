@@ -1,4 +1,4 @@
-# OpenWrt For new settings All-in-one script Beginner friendly Japanese
+# OpenWrt For new settings All-in-one script Beginner friendly  Japanese
 
 This README is edited in Japanese.
 
