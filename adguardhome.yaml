@@ -3,7 +3,7 @@ http:
   session_ttl: 720h
 users:
   - name: root
-    password: password: PASSWD
+    password: $2a$10$9mSG/fEZuP9Sd3.r1IAHvOzul38OtER8lt2oPniKTOgDDsiRiqdzq
 auth_attempts: 5
 block_auth_min: 15
 http_proxy: ""
@@ -33,22 +33,22 @@ dns:
     - '# DNS-over-QUIC'
     - quic://unfiltered.adguard-dns.com
     - '# DNS-over-TLS'
-    - '# tls://1dot1dot1dot1.cloudflare-dns.com'
-    - '# tls://dns.google'
+    - tls://1dot1dot1dot1.cloudflare-dns.com
+    - tls://dns.google
     - tls://unfiltered.adguard-dns.com
     - '# DNS-over-HTTPS(coercion HTTP/3)'
-    - '# h3://dns.cloudflare.com/dns-query'
-    - '# h3://dns.google/dns-query'
+    - h3://dns.cloudflare.com/dns-query
+    - h3://dns.google/dns-query
     - h3://unfiltered.adguard-dns.com/dns-query
     - '# DNS-over-HTTPS'
-    - '# https://dns.cloudflare.com/dns-query'
-    - '# https://dns.google/dns-query'
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
     - https://unfiltered.adguard-dns.com/dns-query
     - '# NTP service'
     - '[/jp.pool.ntp.org/]1.1.1.1'
-    - '[/jp/pool.ntp.org/]1.0.0.1'
+    - '[/jp.pool.ntp.org/]1.0.0.1'
     - '[/jp.pool.ntp.org/]2606:4700:4700::1111'
-    - '[/jp/pool.ntp.org/]2606:4700:4700::1001'
+    - '[/jp.pool.ntp.org/]2606:4700:4700::1001'
   upstream_dns_file: ""
   bootstrap_dns:
     - 1.1.1.1
@@ -89,14 +89,14 @@ dns:
   bootstrap_prefer_ipv6: false
   filtering_enabled: true
   filters_update_interval: 24
-  parental_enabled: true
-  safebrowsing_enabled: true
+  parental_enabled: false
+  safebrowsing_enabled: false
   safebrowsing_cache_size: 1048576
   safesearch_cache_size: 1048576
   parental_cache_size: 1048576
   cache_time: 30
   safe_search:
-    enabled: true
+    enabled: false
     bing: true
     duckduckgo: true
     google: true
@@ -107,82 +107,7 @@ dns:
   blocked_services:
     schedule:
       time_zone: UTC
-    ids:
-      - 500px
-      - 9gag
-      - activision_blizzard
-      - battle_net
-      - bilibili
-      - blizzard_entertainment
-      - clubhouse
-      - crunchyroll
-      - dailymotion
-      - deezer
-      - disneyplus
-      - douban
-      - ebay
-      - electronic_arts
-      - epic_games
-      - gog
-      - hbomax
-      - icloud_private_relay
-      - iqiyi
-      - kik
-      - lazada
-      - leagueoflegends
-      - linkedin
-      - mail_ru
-      - mastodon
-      - minecraft
-      - nintendo
-      - nvidia
-      - ok
-      - onlyfans
-      - origin
-      - playstation
-      - qq
-      - rakuten_viki
-      - riot_games
-      - rockstar_games
-      - shopee
-      - skype
-      - snapchat
-      - soundcloud
-      - steam
-      - telegram
-      - tidal
-      - tinder
-      - twitch
-      - ubisoft
-      - valorant
-      - viber
-      - vimeo
-      - vk
-      - voot
-      - wechat
-      - weibo
-      - xboxlive
-      - zhihu
-      - aliexpress
-      - amazon
-      - cloudflare
-      - discord
-      - facebook
-      - flickr
-      - hulu
-      - imgur
-      - instagram
-      - kakaotalk
-      - line
-      - netflix
-      - pinterest
-      - reddit
-      - roblox
-      - spotify
-      - tiktok
-      - twitter
-      - whatsapp
-      - youtube
+    ids: []
   upstream_timeout: 10s
   private_networks: []
   use_private_ptr_resolvers: true
@@ -226,13 +151,12 @@ filters:
     url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
     name: AdAway Default Blocklist
     id: 2
+whitelist_filters:
   - enabled: true
     url: https://280blocker.net/files/280blocker_domain_ag_202309.txt
     name: 280blocker
-    id: 1693396666
-whitelist_filters: []
-user_rules:
-  - ""
+    id: 1693997878
+user_rules: []
 dhcp:
   enabled: false
   interface_name: ""
