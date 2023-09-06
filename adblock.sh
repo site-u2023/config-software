@@ -1,3 +1,6 @@
+#! /bin/sh
+
+
 uci set adblock.global.adb_backupdir="/etc/adblock"
 
 cp /etc/adblock/adblock.sources.gz /etc/adblock/adblock.sources.tofu.gz
