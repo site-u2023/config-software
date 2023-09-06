@@ -139,7 +139,7 @@ Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 PASSWD='$2a$10$9mSG/fEZuP9Sd3.r1IAHvOzul38OtER8lt2oPniKTOgDDsiRiqdzq'
 sed -i -e "s|password: ${PASSWD}|password: ${Bcrypt_PASSWD#root:}|g" /etc/adguardhome.yaml
 sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/adguardhome.yaml
-echo -e " \033[1;32m変更設定が完了しました\033[0;39m"
+echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
 read -p " 何かキーを押してインストールを開始して下さい"
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sh /etc/config-software/adguard.sh
