@@ -49,16 +49,13 @@ while :
 do
   read -p " これで宜しければインストールと設定を開始します [y/n or r]: " num
   case "${num}" in
-    "y" ) 
-{
-wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
-sh /etc/config-software/adguard.sh
-echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
-echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:3000\033[0;39m"
-echo -e " \033[1;32m初期設定で必ず管理用ウェブインターフェイスからポート番号・ユーザー名・パスワードを設定\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot ;;
-}
+    "y" ) wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
+          sh /etc/config-software/adguard.sh
+          echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
+          echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:3000\033[0;39m"
+          echo -e " \033[1;32m初期設定で必ず管理用ウェブインターフェイスからポート番号・ユーザー名・パスワードを設定\033[0;39m"
+          read -p " 何かキーを押してデバイスを再起動してください"
+          reboot ;;
     "n" ) _func_AdGuard ;;
   esac
 done
