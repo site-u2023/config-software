@@ -113,7 +113,7 @@ do
   echo -e " \033[1;32mパスワード: ${input_str_PASSWD}\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-  read -p " これで宜しければ変更設定を開始します [y/n or r]: " num
+  read -p " これで宜しければ管理用ウェブインターフェイスの設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_SET ;;
     "n" ) _func_AdGuard_PORT ;;
