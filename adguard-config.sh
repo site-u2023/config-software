@@ -80,7 +80,7 @@ function _func_AdGuard_USER
 while :
 do
   echo -e "\033[1;37m AdGuard管理用ウェブインターフェイスのユーザー名を入力して下さい\033[0;39m"
-  echo -e "\033[1;33m 例: admin\033[0;39m"
+  echo -e "\033[1;33m 例: root\033[0;39m"
   read -p " ユーザー名: " input_str_USER
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
