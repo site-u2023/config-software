@@ -51,7 +51,7 @@ wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githu
 sh /etc/config-software/adguard.sh
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:3000\033[0;39m"
-echo -e " \033[1;32m管理用ウェブインターフェイスからポート番号・ユーザー名・パスワードを設定\033[0;39m"
+echo -e " \033[1;32m初期設定で必ず管理用ウェブインターフェイスからポート番号・ユーザー名・パスワードを設定\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -148,9 +148,7 @@ sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i -e "s|password: PASSWD|password: ${Bcrypt_PASSWD#root:}|g" /etc/adguardhome.yaml
 sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/adguardhome.yaml
-wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
-sh /etc/config-software/adguard.sh
-echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
+echo -e " \033[1;32m変更設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
