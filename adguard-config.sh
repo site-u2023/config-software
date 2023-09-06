@@ -1,6 +1,8 @@
 #! /bin/sh
 . /lib/functions/network.sh
-
+NET_IF="lan"
+network_flush_cache
+network_get_ipaddr NET_ADDR "${NET_IF}"
 
 function _func_AdGuard
 while :
@@ -103,9 +105,6 @@ do
 done
 
 function _func_AdGuard_Confirm2
-NET_IF="lan"
-network_flush_cache
-network_get_ipaddr NET_ADDR "${NET_IF}"
 while :
 do
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
