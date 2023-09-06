@@ -124,6 +124,7 @@ done
 function _func_AdGuard_SET
 {
 wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
+wget --no-check-certificate -O /etc/config-software/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
