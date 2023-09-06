@@ -134,10 +134,10 @@ opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
 sed -i -e "s/address: 0.0.0.0:8000/address: 0.0.0.0:${input_str_PORT}/g" /etc/adguardhome.yaml
-sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 PASSWD='$2a$10$9mSG/fEZuP9Sd3.r1IAHvOzul38OtER8lt2oPniKTOgDDsiRiqdzq'
 sed -i -e "s|password: ${PASSWD}|password: ${Bcrypt_PASSWD#root:}|g" /etc/adguardhome.yaml
+sed -i -e "s/name: root/name: ${input_str_USER}/g" /etc/adguardhome.yaml
 sed -i -e "s/280blocker_domain_ag_202309/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`/g" /etc/adguardhome.yaml
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
 read -p " 何かキーを押してインストールを開始して下さい"
