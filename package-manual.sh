@@ -68,10 +68,10 @@ fi
 if [ -z "$NLBWMON" ]; then
 opkg install nlbwmon
 fi
-if [ -z "$NLBWMON_JA" ]; then
+if [ -z "$NLBWMON_APP" ]; then
 opkg install luci-app-nlbwmon
 fi
-if [ -z "$NLBWMON_JA" ]; then
+if [ -z "$NLBWMON_APP_JA" ]; then
 opkg install luci-i18n-nlbwmon-ja
 fi
 
@@ -312,7 +312,7 @@ function _func_sqmscripts {
 SQM=`opkg list-installed sqm-scripts | awk '{ print $1 }'`
 SQM_APP=`opkg list-installed luci-app-sqm | awk '{ print $1 }'`
 SQM_APP_JA=`opkg list-installed luci-i18n-sqm-ja | awk '{ print $1 }'`
-if [ -z "$SQM" ]; then
+if [ -z "$SQM_APP_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
@@ -343,7 +343,7 @@ _func_luciappstatistics
 function _func_luciappstatistics {
 STATUS=`opkg list-installed luci-app-statistics | awk '{ print $1 }'`
 STATUS_JA=`opkg list-installed luci-i18n-statistics-ja | awk '{ print $1 }'`
-if [ -z "$STATUS" ]; then
+if [ -z "$STATUS_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
@@ -369,9 +369,9 @@ _func_nlbwmon
 
 function _func_nlbwmon {
 NLBWMON=`opkg list-installed nlbwmon | awk '{ print $1 }'`
-NLBWMON_JA=`opkg list-installed luci-app-nlbwmon | awk '{ print $1 }'`
-NLBWMON_JA=`opkg list-installed luci-i18n-nlbwmon-ja | awk '{ print $1 }'`
-if [ -z "$NLBWMON" ]; then
+NLBWMON_APP=`opkg list-installed luci-app-nlbwmon | awk '{ print $1 }'`
+NLBWMON_APP_JA=`opkg list-installed luci-i18n-nlbwmon-ja | awk '{ print $1 }'`
+if [ -z "$NLBWMON_APP_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
@@ -389,7 +389,8 @@ do
           echo $((`opkg info luci-i18n-nlbwmon-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) NLBWMON='1'
-          NLBWMON_JA='1'
+          NLBWMON_APP='1'
+          NLBWMON_APP_JA='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -402,7 +403,7 @@ function _func_wifischedule {
 WIFISCHEDULE=`opkg list-installed wifischedule | awk '{ print $1 }'`
 WIFISCHEDULE_APP=`opkg list-installed luci-app-wifischedule | awk '{ print $1 }'`
 WIFISCHEDULE_APP_JA=`opkg list-installed luci-i18n-wifischedule-ja | awk '{ print $1 }'`
-if [ -z "$WIFISCHEDULE" ]; then
+if [ -z "$WIFISCHEDULE_APP_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
@@ -557,7 +558,7 @@ _func_internetdetector
 function _func_internetdetector {
 DETECTER=`opkg list-installed internet-detector | awk '{ print $1 }'`
 DETECTER_APP=`opkg list-installed luci-app-internet-detector | awk '{ print $1 }'`
-if [ -z "$DETECTER" ]; then
+if [ -z "$DETECTER_APP" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
