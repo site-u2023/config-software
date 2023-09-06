@@ -123,7 +123,8 @@ done
 
 function _func_AdGuard_SET
 {
-opkg install --nodeps apache-utils
+wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
+chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
@@ -163,7 +164,6 @@ function _func_AdGuard_Restoration
 service adguardhome stop
 service adguardhome disable
 opkg remove adguardhome
-opkg remove --nodeps apache-utils
 opkg remove --nodeps libaprutil
 opkg remove --nodeps libapr
 opkg remove --nodeps libexpat
