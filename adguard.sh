@@ -9,6 +9,8 @@ if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
 opkg install adguardhome
+service adguardhome enable
+service adguardhome start
 NET_ADDR=$(/sbin/ip -o -4 addr list br-lan | awk 'NR==1{ split($4, ip_addr, "/"); print ip_addr[1] }')
 NET_ADDR6=$(/sbin/ip -o -6 addr list br-lan scope global | awk 'NR==1{ split($4, ip_addr, "/"); print ip_addr[1] }')
 echo "Router IPv4 : ""${NET_ADDR}"
@@ -44,8 +46,7 @@ uci set firewall.adguardhome_dns_53.dest_port='53'
 uci set firewall.adguardhome_dns_53.family="any"
 uci commit firewall
 /etc/init.d/firewall restart
-service adguardhome enable
-service adguardhome start
+
 cat << 'EOF' > /etc/adguardhome.yaml
 http:
   address: 0.0.0.0:3000
