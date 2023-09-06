@@ -11,6 +11,7 @@ fi
 opkg install adguardhome
 service adguardhome enable
 service adguardhome start
+
 NET_ADDR=$(/sbin/ip -o -4 addr list br-lan | awk 'NR==1{ split($4, ip_addr, "/"); print ip_addr[1] }')
 NET_ADDR6=$(/sbin/ip -o -6 addr list br-lan scope global | awk 'NR==1{ split($4, ip_addr, "/"); print ip_addr[1] }')
 echo "Router IPv4 : ""${NET_ADDR}"
