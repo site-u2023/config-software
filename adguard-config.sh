@@ -105,7 +105,7 @@ done
 function _func_AdGuard_Confirm2
 while :
 do
-  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;32mポート番号: ${input_str_PORT}\033[0;39m"
   echo -e " \033[1;32mユーザー名: ${input_str_USER}\033[0;39m"
   echo -e " \033[1;32mパスワード: ${input_str_PASSWD}\033[0;39m"
