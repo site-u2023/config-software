@@ -151,11 +151,10 @@ filters:
     url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
     name: AdAway Default Blocklist
     id: 2
-whitelist_filters:
   - enabled: true
     url: https://280blocker.net/files/280blocker_domain_ag_202309.txt
     name: 280blocker
-    id: 1693997878
+    id: 3
 user_rules: []
 dhcp:
   enabled: false
