@@ -15,7 +15,7 @@ fi
   echo -e " \033[1;33m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [c/b or q]: " num
+  read -p " キーを選択して下さい [c/b or q]: " num
   case "${num}" in
     "c" ) 
 {
@@ -33,7 +33,7 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
   if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
    echo -e " \033[1;37mインストール可能です\033[0;39m"
   else
-   read -p " フラッシュ容量が足りないため終了します"
+   read -p " フラッシュ容量が足りない為終了します"
    exit
   fi
 }
@@ -144,7 +144,7 @@ wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githu
 sh /etc/config-software/adguard.sh
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
+read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 fi
@@ -185,7 +185,7 @@ rm /etc/config/firewall.adguard.bak
 rm /etc/config-software/adguard-config.sh
 rm /etc/config-software/adguard.sh
 echo -e " \033[1;32mリムーブと以前の設定に復元が完了しました\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
+read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 }
