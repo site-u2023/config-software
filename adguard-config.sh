@@ -9,8 +9,8 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
   echo -e " \033[1;37mAdGuardがインストールが既にインストールされています\033[0;39m"
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定及びインストール
-  echo -e " \033[1;31m[b]\033[0;39m": AdGuardをリムーブ及び以前の設定に復元
+  echo -e " \033[1;34m[c]\033[0;39m": AdGuardのインストールと設定
+  echo -e " \033[1;31m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;33m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [c/b or q]: " num
@@ -92,7 +92,7 @@ function _func_AdGuard_PASSWD
 while :
 do
   echo -e " \033[1;37mAdGuard管理画面ののパスワードを入力して下さい\033[0;39m"
-  echo -e " \033[1;33m例: password"\033[0;39m"
+  echo -e " \033[1;33m例: password\033[0;39m"
   read -p " パスワード: " input_str_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
