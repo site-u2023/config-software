@@ -41,9 +41,8 @@ opkg install luci-app-adblock
 opkg install luci-i18n-adblock-ja
 opkg install tcpdump-mini
 
-wget --no-check-certificate -O /etc/config-software/adblock.sh　https://raw.githubusercontent.com/site-u2023/config-software/main/adblock.sh
+wget --no-check-certificate -O /etc/config-software/adblock.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock.sh
 sh /etc/config-software/adblock.sh
-
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
