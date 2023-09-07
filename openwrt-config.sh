@@ -103,7 +103,6 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  read -p " 非対応バージョンのため終了します"
  exit
 fi
-
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
