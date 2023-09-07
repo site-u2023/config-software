@@ -178,6 +178,14 @@ if [ -z "$LIB" ]; then
 opkg install luci-lib-ipkg
 fi
 
+# ディスクインフォ
+if [ -z "$luci_app_disks_info" ]; then
+wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
+opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
+rm /tmp/luci-app-disks-info_0.4-2_all.ipk
+fi
+
+
 # USB
 if [ -z "$block_mount" ]; then
 opkg install block-mount
@@ -777,10 +785,34 @@ _func_USB
 # USB判定
 function _func_USB {
 if [ -n "$str_USB" ]; then
-_func_USB_BASE
+_func_DISK_INFO
 else
 _func_listinstalled_After
 fi
+}
+
+# ディスクインフォ
+function _func_DISK_INFO {
+luci_app_disks_info=`opkg list-installed luci-app-disks-info | awk '{ print $1 }'`
+if [ -z "$luci_app_disks_info" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;34mカスタムフィード\033[0;39m"
+  echo -e " \033[1;32m温度センサーをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-app-disks-info: $((481/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo luci-app-disks-info >> /etc/config-software/list-installed/Before
+          echo $((481/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) luci_app_disks_info='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_USB_BASE
 }
 
 # USBベース
@@ -1100,6 +1132,7 @@ fi
   echo -e " \033[1;37m・テーマ ARGON: luci-theme-argon（カスタムフィード）\033[0;39m"
   str_USB=`dmesg | grep -s usb`
   if [ -n "$str_USB" ]; then
+  echo -e " \033[1;37m・ディスクインフォ: luci-app-disks-info（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・USB: block-mount\033[0;39m"
   echo -e " \033[1;37m・USB: kmod-usb-storage\033[0;39m"
   echo -e " \033[1;37m・USB: kmod-usb-storage-uas\033[0;39m"
