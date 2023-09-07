@@ -8,7 +8,7 @@ do
   echo -e " \033[1;37mインストール: https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mインストール: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mインストール: luci-i18n-https-dns-proxy-ja\033[0;39m" 
-  read -e -p " 開始します [y/n]: " num
+  read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_HTTPS_SET ;;
     "n" ) exit ;;
@@ -36,7 +36,7 @@ uci commit https-dns-proxy
 /etc/init.d/rpcd restart
 /etc/init.d/https-dns-proxy restart
 echo -e " \033[1;37mインストールと設定が完了しました\033[0;39m"
-read -e -p " 何かキーを押して終了して下さい"
+read -p " 何かキーを押して終了して下さい"
 exit
 }
 
@@ -47,7 +47,7 @@ do
   echo -e " \033[1;37mリムーブ: https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-https-dns-proxy-ja\033[0;39m"
-  read -e -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 本当に宜しいですか? [y/n or r]: " num
 
   case "${num}" in
     "y" ) _func_HTTPS_Restoration ;;
@@ -61,7 +61,7 @@ function _func_HTTPS_Restoration {
 opkg remove https-dns-proxy
 opkg remove luci-app-https-dns-proxy
 opkg remove luci-i18n-https-dns-proxy-ja
-read -e -p " 何かキーを押してデバイスを再起動してください"
+read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
 }
@@ -71,7 +71,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
  exit
 fi
 if [ "stubby" = "`opkg list-installed stubby | awk '{ print $1 }'`" ]; then
- read -e -p " DNS over TLS (DoT) がインストールされている為終了します"
+ read -p " DNS over TLS (DoT) がインストールされている為終了します"
  exit
 fi
 OPENWRT_REL
@@ -79,7 +79,7 @@ OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
 else
- read -e -p " バージョンが違うため終了します"
+ read -p " バージョンが違うため終了します"
  exit
 fi
 while :
