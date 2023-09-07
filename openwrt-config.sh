@@ -98,12 +98,13 @@ done
 for i in `seq 30 38` `seq 40 47` ; do
     for j in 0 1 2 3 4 5 6 7 ; do
         printf "\033[${j};${i}m"
-        printf "${j};${i}"
+        printf " ${j};${i} "
         printf "\033[0;39;49m"
         printf " "
     done
     printf "\n"
 done
+
 sleep 1
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
@@ -112,6 +113,7 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  read -p " 非対応バージョンのため終了します"
  exit
 fi
+
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
@@ -124,6 +126,7 @@ fi
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p "  何かキーを押して下さい"
   echo -e 
+  
 while :
 do
   echo -e " \033[1;33m推奨設定順序: システム > インターネット > パッケージ\033[0;39m"  
