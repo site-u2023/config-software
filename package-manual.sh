@@ -193,6 +193,7 @@ opkg install usbutils
 fi
 if [ -z "$gdisk" ]; then
 opkg install gdisk
+fi
 if [ -z "$libblkid1" ]; then
 opkg install libblkid1
 fi
@@ -231,7 +232,7 @@ opkg install exfat-fsck
 fi
 if [ -z "$kmod_fs_exfat" ]; then
 opkg install kmod-fs-exfat
-
+fi
 # NTFS
 if [ -z "$ntfs_3g" ]; then
 opkg install ntfs-3g
@@ -249,7 +250,7 @@ fi
 if [ -z "$kmod_fs_hfsplus" ]; then
 opkg install kmod-fs-hfsplus
 fi
-# ハードディスクアイドル
+# HDDアイドル
 if [ -z "$hdparm" ]; then
 opkg install hdparm
 fi
@@ -860,6 +861,34 @@ fi
   echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・インターネット可用性確認: internet-detector（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・テーマ ARGON: luci-theme-argon（カスタムフィード）\033[0;39m"
+  str_USB=`dmesg | grep -s usb`
+  if [ -n "$str_USB" ]; then
+  echo -e " \033[1;37m・USB ベースファイル: block-mount\033[0;39m"
+  echo -e " \033[1;37m・USB ベースファイル: kmod-usb-storage\033[0;39m"
+  echo -e " \033[1;37m・USB ベースファイル: kmod-usb-storage-uas\033[0;39m"
+  echo -e " \033[1;37m・USB ベースファイル: usbutils\033[0;39m"
+  echo -e " \033[1;37m・USB ベースファイル: gdisk\033[0;39m"
+  echo -e " \033[1;37m・USB ベースファイル: libblkid1\033[0;39m"
+  echo -e " \033[1;37m・USB ベースファイル: kmod-usb-ledtrig-usbport\033[0;39m"
+  echo -e " \033[1;37m・USB ベースファイル: luci-app-ledtrig-usbport\033[0;39m"
+  echo -e " \033[1;37m・FAT32: dosfstools\033[0;39m"
+  echo -e " \033[1;37m・FAT32: kmod-fs-vfat\033[0;39m"
+  echo -e " \033[1;37m・ext4: e2fsprogs\033[0;39m"
+  echo -e " \033[1;37m・ext4: kmod-fs-ext4\033[0;39m"
+  echo -e " \033[1;37m・f2fs: f2fs-tools\033[0;39m"
+  echo -e " \033[1;37m・f2fs: kmod-fs-f2fs\033[0;39m"
+  echo -e " \033[1;37m・exFAT: exfat-fsck\033[0;39m"
+  echo -e " \033[1;37m・exFAT: kmod-fs-exfat\033[0;39m"
+  echo -e " \033[1;37m・NTFS: ntfs-3g\033[0;39m"
+  echo -e " \033[1;37m・NTFS: kmod-fs-ntfs3\033[0;39m"
+  echo -e " \033[1;37m・HFS & HFS+: hfsfsck\033[0;39m"
+  echo -e " \033[1;37m・HFS & HFS+: kmod-fs-hfs\033[0;39m"
+  echo -e " \033[1;37m・HFS & HFS+: kmod-fs-hfsplus\033[0;39m"
+  echo -e " \033[1;37m・HDDアイドル: hdparm\033[0;39m"
+  echo -e " \033[1;37m・HDDアイドル: hd-idle\033[0;39m"
+  echo -e " \033[1;37m・HDDアイドル: luci-app-hd-idle\033[0;39m"
+  echo -e " \033[1;37m・HDDアイドル: luci-i18n-hd-idle-ja\033[0;39m"
+  fi
   read -p " 選択を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
