@@ -177,7 +177,93 @@ fi
 if [ -z "$LIB" ]; then
 opkg install luci-lib-ipkg
 fi
- 
+
+# USB ベースファイル
+if [ -z "$block_mount" ]; then
+opkg install block-mount
+fi
+if [ -z "$kmod_usb_storage" ]; then
+opkg install kmod-usb-storage
+fi
+if [ -z "$kmod_usb_storage_uas" ]; then
+opkg install kmod-usb-storage-uas
+fi
+if [ -z "$usbutils" ]; then
+opkg install usbutils
+fi
+if [ -z "$gdisk" ]; then
+opkg install gdisk
+if [ -z "$libblkid1" ]; then
+opkg install libblkid1
+fi
+# USBポート_LEDトリガー
+if [ -z "$kmod_usb_ledtrig_usbport" ]; then
+opkg install kmod-usb-ledtrig-usbport
+fi
+if [ -z "$luci_app_ledtrig_usbport" ]; then
+opkg install luci-app-ledtrig-usbport
+fi
+
+# FAT32
+if [ -z "$dosfstools" ]; then
+opkg install dosfstools
+fi
+if [ -z "$kmod_fs_vfat" ]; then
+opkg install kmod-fs-vfat
+fi
+# ext4
+if [ -z "$e2fsprogs" ]; then
+opkg install e2fsprogs
+fi
+if [ -z "$kmod_fs_ext4" ]; then
+opkg install kmod-fs-ext4
+fi
+# f2fs
+if [ -z "$f2fs_tools" ]; then
+opkg install f2fs-tools
+fi
+if [ -z "$kmod_fs_f2fs" ]; then
+opkg install kmod-fs-f2fs
+fi
+# exFAT
+if [ -z "$exfat_fsck" ]; then
+opkg install exfat-fsck
+fi
+if [ -z "$kmod_fs_exfat" ]; then
+opkg install kmod-fs-exfat
+
+# NTFS
+if [ -z "$ntfs_3g" ]; then
+opkg install ntfs-3g
+fi
+if [ -z "$kmod_fs_ntfs3" ]; then
+opkg install kmod-fs-ntfs3
+fi
+# HFS & HFS+
+if [ -z "$hfsfsck" ]; then
+opkg install hfsfsck
+fi
+if [ -z "$kmod_fs_hfs" ]; then
+opkg install kmod-fs-hfs
+fi
+if [ -z "$kmod_fs_hfsplus" ]; then
+opkg install kmod-fs-hfsplus
+fi
+# ハードディスクアイドル
+if [ -z "$hdparm" ]; then
+opkg install hdparm
+fi
+if [ -z "$hd_idle" ]; then
+opkg install hd-idle
+fi
+if [ -z "$luci_app_hd_idle" ]; then
+opkg install luci-app-hd-idle
+fi
+if [ -z "$luci_i18n_hd_idle_ja" ]; then
+opkg install luci-i18n-hd-idle-ja
+fi
+
+
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
 if [ -s /etc/config-software/list-installed/Difference ]; then
@@ -685,8 +771,37 @@ do
   esac
 done
 fi
-_func_listinstalled_After
+_func_USB
 }
+
+# USB判定
+function _func_USB {
+str_USB=`dmesg | grep -s usb`
+if [ -n "$str_USB" ]; then
+LUCI=`opkg list-installed luci | awk '{ print $1 }'`
+if [ -z "$LUCI" ]; then
+while :
+do
+{
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mLuCIをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci: $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  }
+  case "${num}" in
+    "y" ) echo luci >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) LUCI='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+fi
+_func_lucii18nbaseja
+}
+
 
 function _func_listinstalled_After {
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
