@@ -3,7 +3,7 @@
 function _func_STUBBY {
 while :
 do
-  echo -e " \033[1;35mDNS over TLS (DoT) のインストールを開始します\033[0;39m"
+  echo -e " \033[1;35mDNS over TLS（DoT）のインストールを開始します\033[0;39m"
   echo -e " \033[1;37mインストール: stubby\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
@@ -54,7 +54,7 @@ exit
 function _func_STUBBY_Before {
 while :
 do
-  echo -e " \033[1;37mDNS over TLS (DoT) の設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mDNS over TLS（DoT）の設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: stubby\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -96,8 +96,8 @@ fi
 while :
 do
   echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": DNS over TLS (DoT) の設定を実行します
-  echo -e " \033[1;31m[b]\033[0;39m": DNS over TLS (DoT) の設定を以前の設定に復元します
+  echo -e " \033[1;34m[e]\033[0;39m": DNS over TLS（DoT）の設定を実行します
+  echo -e " \033[1;31m[b]\033[0;39m": DNS over TLS（DoT）の設定を以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or r]: " num
