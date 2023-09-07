@@ -469,28 +469,62 @@ _func_lucithemeopenwrt
 
 function _func_lucithemeopenwrt {
 THEME_OPENWRT=`opkg list-installed luci-theme-openwrt | awk '{ print $1 }'`
-THEME_MATERIAL=`opkg list-installed luci-theme-material | awk '{ print $1 }'`
-THEME_2020=`opkg list-installed luci-theme-openwrt-2020 | awk '{ print $1 }'`
 if [ -z "$THEME_OPENWRT" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mテーマをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mテーマ OpenWrtをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-openwrt: $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-theme-material: $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-theme-openwrt-2020: $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
-          echo luci-theme-material >> /etc/config-software/list-installed/Before
-          echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) THEME_OPENWRT='1'
-          THEME_MATERIAL='1'
-          THEME_2020='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_lucithemematerial
+}
+
+function _func_lucithemematerial {
+THEME_MATERIAL=`opkg list-installed luci-theme-material | awk '{ print $1 }'`
+if [ -z "$THEME_MATERIAL" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mテーマ マテリアルをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-theme-material: $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo luci-theme-material >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) THEME_MATERIAL='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_lucithemeopenwrt2020
+}
+
+function _func_lucithemeopenwrt2020 {
+THEME_2020=`opkg list-installed luci-theme-openwrt-2020 | awk '{ print $1 }'`
+if [ -z "$THEME_2020" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mテーマ OpenWrt2020をインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-theme-openwrt-2020: $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) THEME_2020='1'
           break ;;
     "q" ) exit ;;
   esac
