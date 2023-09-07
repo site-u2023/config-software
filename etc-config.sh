@@ -4,7 +4,7 @@ function _func_IPERF3
 while :
 do
   echo -e " \033[1;34mIPERF3設定のスクリプトをダウンロードしてインストールします\033[0;39m"
-  read -p " 宜しいですか? [y/n]: " num
+  read -e -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
           chmod +x /etc/init.d/iperf3
@@ -23,13 +23,13 @@ do
           echo -e " \033[1;36m無効: service iperf3 disable\033[0;39m"
           echo -e " \033[1;36m開始: service iperf3 start\033[0;39m"
           echo -e " \033[1;36m終了: service iperf3 stop\033[0;39m"
-          read -p " サービスを開始しますか? [y/n]: " snum
+          read -e -p " サービスを開始しますか? [y/n]: " snum
             case "${snum}" in
                 "y" ) echo -e " \033[1;36mIPERF3を開始します\033[0;39m"
                       service iperf3 start ;;
                 "n" ) break ;;
             esac 
-          read -p " 何かキーを押して下さい"
+          read -e -p " 何かキーを押して下さい"
           break ;;
     "n" ) break ;;
   esac
@@ -39,7 +39,7 @@ function _func_WiFi_location_service
 while :
 do
   echo -e " \033[1;33mWiFi位置情報サービスを停止します\033[0;39m"
-  read -p " 宜しいですか? [y/n]: " num
+  read -e -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) sed -i -e 's/\s*$//' /etc/config/wireless
           sed -i -e "/option ssid/s/'$//" /etc/config/wireless
@@ -50,7 +50,7 @@ do
           echo -e " \033[1;36m`uci show wireless.default_radio2.ssid`\033[0;39m"
           echo -e " \033[1;32m設定が完了しました\033[0;39m"
           echo -e " \033[1;33mクライアントのSSID末尾に _optout_nomap を追加して下さい\033[0;39m"
-          read -p " 何かキーを押して下さい"
+          read -e -p " 何かキーを押して下さい"
           break ;;
     "n" ) break ;;
   esac
@@ -68,7 +68,7 @@ do
   echo -e " \033[1;36m[6]\033[0;39m": 
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [1/2/3/4/5/6 or q]: " num
+  read -e -p " キーを選択してください [1/2/3/4/5/6 or q]: " num
   case "${num}" in
     "1" ) _func_IPERF3 ;;
     "2" ) _func_WiFi_location_service ;;
