@@ -787,7 +787,7 @@ gdisk=`opkg list-installed gdisk | awk '{ print $1 }'`
 libblkid1=`opkg list-installed libblkid1 | awk '{ print $1 }'`
 kmod_usb_ledtrig_usbport=`opkg list-installed kmod-usb-ledtrig-usbport | awk '{ print $1 }'`
 luci_app_ledtrig_usbport=`opkg list-installed luci-app-ledtrig-usbport | awk '{ print $1 }'`
-if [ -z "$block_mount" || "kmod-usb-storage" || "kmod-usb-storage-uas" || "usbutils" || "gdisk" || "libblkid1" || "kmod-usb-ledtrig-usbport" || "luci-app-ledtrig-usbport" ]; then
+if [ -z "$block_mount" || "$kmod_usb_storage" || "$kmod_usb_storage_uas" || "$usbutils" || "$gdisk" || "$libblkid1" || "$kmod_usb_ledtrig_usbport" || "$luci_app_ledtrig_usbport" ]; then
 while :
 do
 {
