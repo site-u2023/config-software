@@ -64,7 +64,7 @@ OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
  else
- read -p " 非対応バージョンのため終了します"
+ read -e -p " 非対応バージョンのため終了します"
  exit
 fi
 }
