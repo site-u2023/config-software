@@ -24,6 +24,14 @@ if [ -z "$SFTP" ]; then
 opkg install openssh-sftp-server
 fi
 
+# WEB-SSHクライアント
+if [ -z "$TTYD" ]; then
+opkg install luci-app-ttyd
+fi
+if [ -z "$TTYD_JA" ]; then
+opkg install openssh-sftp-server
+fi
+
 # CPU負荷分散
 if [ -z "$CPU" ]; then
 opkg install irqbalance
@@ -275,6 +283,34 @@ do
           echo $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
     "n" ) SFTP='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_luci_app_ttyd
+}
+
+
+function _luci_app_ttyd {
+TTYD=`opkg list-installed luci-app-ttyd | awk '{ print $1 }'`
+TTYD_JA=`opkg list-installed luci-i18n-ttyd-ja | awk '{ print $1 }'`
+if [ -z "$TTYD_JA" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mWEB-SSHクライアントをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-app-ttyd: $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-i18n-ttyd-ja: $((`opkg info luci-i18n-ttyd-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo luci-app-ttyd >> /etc/config-software/list-installed/Before
+   　　　 echo luci-i18n-ttyd-ja >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-i18n-ttyd-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) TTYD='1'
+          TTYD_JA='1'
           break ;;
     "q" ) exit ;;
   esac
