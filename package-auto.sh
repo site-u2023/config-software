@@ -16,8 +16,8 @@ luci-i18n-base-ja
 luci-i18n-opkg-ja
 luci-i18n-firewall-ja
 openssh-sftp-server
-luci-app-commands
-luci-i18n-commands-ja
+luci-app-ttyd
+luci-i18n-ttyd-ja
 irqbalance
 sqm-scripts
 luci-app-sqm
@@ -194,6 +194,8 @@ kmod-fs-hfs
 kmod-fs-hfsplus
 hdparm
 hd-idle
+luci-app-hd-idle
+luci-i18n-hd-idle-ja
 EOF
 　wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
   opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
@@ -221,6 +223,8 @@ EOF
   opkg install kmod-fs-hfsplus
   opkg install hdparm
   opkg install hd-idle
+  opkg install luci-app-hd-idle
+  opkg install luci-i18n-hd-idle-ja
 fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
