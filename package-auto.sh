@@ -170,6 +170,7 @@ rm /tmp/luci-theme-argon.ipk
 # USB
 if [ -n "$str_USB" ]; then
 cat << EOF >> /etc/config-software/list-installed/Before
+luci-app-disks-info
 block-mount
 kmod-usb-storage
 kmod-usb-storage-uas
@@ -194,6 +195,9 @@ kmod-fs-hfsplus
 hdparm
 hd-idle
 EOF
+　wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
+  opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
+  rm /tmp/luci-app-disks-info_0.4-2_all.ipk
   opkg install block-mount
   opkg install kmod-usb-storage
   opkg install kmod-usb-storage-uas
@@ -270,6 +274,7 @@ fi
   echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"
 str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
+  echo -e " \033[1;37m・ディスクインフォ（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・USB：ベースパッケージ \033[0;39m"
   echo -e " \033[1;37m・USB：LED\033[0;39m"
   echo -e " \033[1;37m・USB：FAT32 \033[0;39m"
