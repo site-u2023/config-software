@@ -79,7 +79,7 @@ fi
   echo -e " \033[1;33m[t]\033[0;39m": DNS over TLS（DoT）Stubbyのインストールと設定
   echo -e " \033[1;37m[q]\033[0;39m": 終了
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [g/b or q]: " num
+  read -p " キーを選択してください [g/b/h/t or q]: " num
   case "${num}" in
     "g" ) _func_AdGuard_INST ;;
     "b" ) _func_AdBlock_INST ;;
