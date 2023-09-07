@@ -86,7 +86,7 @@ uci commit sqm
 
 # ネットワーク統計インターフェイス
 opkg install luci-i18n-statistics-ja
-# /etc/init.d/rpcd restart
+/etc/init.d/collectd enable
 
 # 帯域幅モニター
 opkg install luci-i18n-nlbwmon-ja
