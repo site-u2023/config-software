@@ -178,7 +178,7 @@ if [ -z "$LIB" ]; then
 opkg install luci-lib-ipkg
 fi
 
-# USB ベースファイル
+# USB
 if [ -z "$block_mount" ]; then
 opkg install block-mount
 fi
@@ -779,21 +779,35 @@ _func_USB
 function _func_USB {
 str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
-LUCI=`opkg list-installed luci | awk '{ print $1 }'`
-if [ -z "$LUCI" ]; then
+block_mount=`opkg list-installed block-mount | awk '{ print $1 }'`
+kmod_usb_storage=`opkg list-installed kmod-usb-storage | awk '{ print $1 }'`
+kmod_usb_storage_uas=`opkg list-installed kmod-usb-storage-uas| awk '{ print $1 }'`
+usbutils=`opkg list-installed usbutils | awk '{ print $1 }'`
+gdisk=`opkg list-installed gdisk | awk '{ print $1 }'`
+libblkid1=`opkg list-installed libblkid1 | awk '{ print $1 }'`
+kmod_usb_ledtrig_usbport=`opkg list-installed kmod-usb-ledtrig-usbport | awk '{ print $1 }'`
+luci_app_ledtrig_usbport=`opkg list-installed luci-app-ledtrig-usbport | awk '{ print $1 }'`
+if [ -z "$block_mount" || "kmod-usb-storage" || "kmod-usb-storage-uas" || "usbutils" || "gdisk" || "libblkid1" || "kmod-usb-ledtrig-usbport" || "luci-app-ledtrig-usbport" ]; then
 while :
 do
 {
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mLuCIをインストールしますか\033[0;39m"
-  echo -e " \033[1;32mluci: $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mUSBベースパッケージをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mblock-mount : $((`opkg info block-mount | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-usb-storage : $((`opkg info kmod-usb-storage | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-usb-storage-uas : $((`opkg info kmod-usb-storage-uas | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32musbutils : $((`opkg info usbutils | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mgdisk : $((`opkg info gdisk | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mlibblkid1 : $((`opkg info libblkid1 | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-usb-ledtrig-usbport : $((`opkg info kmod-usb-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-app-ledtrig-usbport : $((`opkg info luci-app-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   }
   case "${num}" in
     "y" ) echo luci >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
-    "n" ) LUCI='1'
+    "n" ) USB_BASE='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -863,14 +877,14 @@ fi
   echo -e " \033[1;37m・テーマ ARGON: luci-theme-argon（カスタムフィード）\033[0;39m"
   str_USB=`dmesg | grep -s usb`
   if [ -n "$str_USB" ]; then
-  echo -e " \033[1;37m・USB ベースファイル: block-mount\033[0;39m"
-  echo -e " \033[1;37m・USB ベースファイル: kmod-usb-storage\033[0;39m"
-  echo -e " \033[1;37m・USB ベースファイル: kmod-usb-storage-uas\033[0;39m"
-  echo -e " \033[1;37m・USB ベースファイル: usbutils\033[0;39m"
-  echo -e " \033[1;37m・USB ベースファイル: gdisk\033[0;39m"
-  echo -e " \033[1;37m・USB ベースファイル: libblkid1\033[0;39m"
-  echo -e " \033[1;37m・USB ベースファイル: kmod-usb-ledtrig-usbport\033[0;39m"
-  echo -e " \033[1;37m・USB ベースファイル: luci-app-ledtrig-usbport\033[0;39m"
+  echo -e " \033[1;37m・USB: block-mount\033[0;39m"
+  echo -e " \033[1;37m・USB: kmod-usb-storage\033[0;39m"
+  echo -e " \033[1;37m・USB: kmod-usb-storage-uas\033[0;39m"
+  echo -e " \033[1;37m・USB: usbutils\033[0;39m"
+  echo -e " \033[1;37m・USB: gdisk\033[0;39m"
+  echo -e " \033[1;37m・USB: libblkid1\033[0;39m"
+  echo -e " \033[1;37m・USB: kmod-usb-ledtrig-usbport\033[0;39m"
+  echo -e " \033[1;37m・USB: luci-app-ledtrig-usbport\033[0;39m"
   echo -e " \033[1;37m・FAT32: dosfstools\033[0;39m"
   echo -e " \033[1;37m・FAT32: kmod-fs-vfat\033[0;39m"
   echo -e " \033[1;37m・ext4: e2fsprogs\033[0;39m"
