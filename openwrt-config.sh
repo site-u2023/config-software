@@ -4,7 +4,7 @@
 function _func_SYSTEM
 while :
 do
-  echo -e " \033[1;31mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;34mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh
@@ -17,7 +17,7 @@ done
 function _func_INTERNET
 while :
 do
-  echo -e " \033[1;32mインターネット接続設定のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;33mインターネット接続設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh
@@ -30,7 +30,7 @@ done
 function _func_PACKAGE
 while :
 do
-  echo -e " \033[1;35m推奨パッケージインストールのスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;32m推奨パッケージインストールのスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh
@@ -82,14 +82,14 @@ done
 function _func_QUIT
 while :
 do
-  echo -e " \033[1;37mこのスクリプト及び関連スクリプトを削除します\033[0;39m"
-  echo -e " \033[1;37m復元用ファイルは削除されません\033[0;39m"
+  echo -e " \033[7;40mこのスクリプト及び関連スクリプトを削除します\033[0;39m"
+  echo -e " \033[7;40m復元用ファイルは削除されません\033[0;39m"
   read -p " 削除しますか? [y/n or r]: " num
    case "${num}" in
     "y" ) rm -rf /etc/config-software
-          echo -e " \033[1;37mこのスクリプト及び関連スクリプトを削除して終了しました\033[0;39m"
+          echo -e " \033[7;40mこのスクリプト及び関連スクリプトを削除して終了しました\033[0;39m"
           exit ;;
-    "n" ) echo -e " \033[1;37m終了しました\033[0;39m"
+    "n" ) echo -e " \033[7;40m終了しました\033[0;39m"
           exit ;;
     "r" ) break ;;
    esac 
