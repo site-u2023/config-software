@@ -104,6 +104,8 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  exit
 fi
 
+while :
+do
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
@@ -114,7 +116,8 @@ fi
   echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software\033[0;39m" 
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " 何かキーを押して下さい"
-
+done 
+ 
 while :
 do
   echo -e " \033[1;33m推奨設定順序: システム > インターネット > パッケージ\033[0;39m"  
