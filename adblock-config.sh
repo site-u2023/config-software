@@ -47,7 +47,7 @@ opkg install tcpdump-mini
 
 wget --no-check-certificate -O /etc/config-software/adblock.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock.sh
 sh /etc/config-software/adblock.sh
-read -p " 何かキーを押してデバイスを再起動して下さい"
+read -e -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 }
@@ -60,7 +60,7 @@ do
   echo -e " \033[1;37mリムーブ: luci-app-adblock\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-adblock-ja\033[0;39m"
   echo -e " \033[1;37mリムーブ: tcpdump-mini\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -e -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdBlock_Restoration ;;
     "n" ) _func_AdBlock ;;
@@ -77,14 +77,14 @@ opkg remove luci-app-adblock
 opkg remove adblock
 opkg remove tcpdump-mini
 rm -rf /etc/adblock
-read -p " 何かキーを押してデバイスを再起動して下さい"
+read -e -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 }
 
 
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
- read -p " AdGuardがインストールされている為終了します"
+ read -e -p " AdGuardがインストールされている為終了します"
  exit
 fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
@@ -92,6 +92,6 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; the
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
  _func_AdBlock
 else
- read -p " バージョンが違うため終了します"
+ read -e -p " バージョンが違うため終了します"
  exit
 fi
