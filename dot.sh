@@ -1,6 +1,6 @@
 #! /bin/sh
 
-function _func_STUBBY
+function _func_STUBBY {
 while :
 do
   echo -e " \033[1;35mSTUBBYのインストールを開始します\033[0;39m"
@@ -10,9 +10,9 @@ do
     "n" ) exit ;;
   esac
 done
+}
 
-function _func_STUBBY_SET
-{
+function _func_STUBBY_SET {
 cp /etc/config/dhcp /etc/config/dhcp.dot.bak
 cp /etc/config/network /etc/config/network.dot.bak
 
@@ -44,13 +44,13 @@ uci commit
 sed -i "/exit 0/d" /etc/rc.local
 echo "/etc/init.d/stubby restart" >> /etc/rc.local 
 echo "exit 0" >> /etc/rc.local
-
-read -p " 何かキーを押してデバイスを再起動してください"
+echo -e " \033[1;37mインストールと設定が完了しました\033[0;39m"
+read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 }
 
-function _func_STUBBY_Before
+function _func_STUBBY_Before {
 while :
 do
   echo -e " \033[1;37mSTUBBYの設定を以前の設定に復元します\033[0;39m"
@@ -62,9 +62,9 @@ do
     "r" ) _func_STUBBY ;;
   esac
 done
+}
 
-function _func_STUBBY_Restoration
-{
+function _func_STUBBY_Restoration {
 opkg remove stubby
 cp /etc/config/dhcp.dot.bak /etc/config/dhcp
 cp /etc/config/network.dot.bak /etc/config/network
@@ -77,9 +77,14 @@ reboot
 exit
 }
 
-while :
-do
-{
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+ read -p " AdGuardがインストールされている為終了します"
+ exit
+fi
+if [ "https-dns-proxy" = "`opkg list-installed https-dns-proxy | awk '{ print $1 }'`" ]; then
+ read -p " https-dns-proxyがインストールされている為終了します"
+ exit
+fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
@@ -87,7 +92,8 @@ else
  read -p " バージョンが違うため終了します"
  exit
 fi
-}
+while :
+do
   echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]\033[0;39m": STUBBYの設定を実行します
   echo -e " \033[1;31m[b]\033[0;39m": STUBBYの設定を以前の設定に復元します
