@@ -314,7 +314,7 @@ while :
 do
 {
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mLuCIをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mLuCIをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci: $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   }
@@ -339,7 +339,7 @@ if [ -z "$LUCI_JA" ] || [ -z "$LUCI_JA_OPKG" ] || [ -z "$LUCI_JA_FIREWALL" ]; th
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mLuCI日本語化をインストールしますか\033[0;39m"
+  echo -e " \033[1;33mLuCI日本語化をインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-i18n-base-ja: $((`opkg info luci-i18n-base-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-opkg-ja: $((`opkg info luci-i18n-opkg-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-firewall-ja: $((`opkg info luci-i18n-firewall-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -369,7 +369,7 @@ if [ -z "$SFTP" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mSFTPサーバーをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mSFTPサーバーをインストールしますか\033[0;39m"
   echo -e " \033[1;32mopenssh-sftp-server: $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -392,7 +392,7 @@ if [ -z "$TTYD_JA" ] || [ -z "$TTYD_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mWEB-SSHクライアントをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mWEB-SSHクライアントをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-ttyd: $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-ttyd-ja: $((`opkg info luci-i18n-ttyd-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -420,7 +420,7 @@ if [ -z "$CPU" ]; then
 while :
 do
     echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-    echo -e " \033[1;32mCPU負荷分散をインストールしますか\033[0;39m"
+    echo -e " \033[1;33mCPU負荷分散をインストールしますか\033[0;39m"
     echo -e " \033[1;32mirqbalance: $((`opkg info irqbalance | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
     read -p " キーを選択してください [y/n or q]: " num
     case "${num}" in
@@ -445,7 +445,7 @@ if [ -z "$SQM" ] || [ -z "$SQM_APP" ] || [ -z "$SQM_APP_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mSQMをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mSQMをインストールしますか\033[0;39m"
   echo -e " \033[1;32msqm-scripts: $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-sqm: $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-sqm-ja: $((`opkg info luci-i18n-sqm-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -476,7 +476,7 @@ if [ -z "$STATUS" ] || [ -z "$STATUS_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mネットワーク統計インターフェイスをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mネットワーク統計インターフェイスをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-statistics: $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-statistics-ja: $((`opkg info luci-i18n-statistics-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -504,7 +504,7 @@ if [ -z "$NLBWMON" ] || [ -z "$NLBWMON_APP" ] || [ -z "$NLBWMON_APP_JA" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32m帯域幅モニターをインストールしますか\033[0;39m"
+  echo -e " \033[1;33m帯域幅モニターをインストールしますか\033[0;39m"
   echo -e " \033[1;32mnlbwmon: $((`opkg info nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-nlbwmon: $((`opkg info luci-app-nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-nlbwmon-ja: $((`opkg info luci-i18n-nlbwmon-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -536,7 +536,7 @@ if [ -z "$WIFISCHEDULE" ] || [ -z "$WIFISCHEDULE_APP" ] || [ -z "$WIFISCHEDULE_A
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mWiFiスケジュールをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mWiFiスケジュールをインストールしますか\033[0;39m"
   echo -e " \033[1;32mwifischedule: $((`opkg info wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-wifischedule: $((`opkg info luci-app-wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-wifischedule-ja: $((`opkg info luci-i18n-wifischedule-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -566,7 +566,7 @@ if [ -z "$THEME_OPENWRT" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mテーマ OpenWrtをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mテーマ OpenWrtをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-openwrt: $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -588,7 +588,7 @@ if [ -z "$THEME_MATERIAL" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mテーマ マテリアルをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mテーマ マテリアルをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-material: $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -610,7 +610,7 @@ if [ -z "$THEME_2020" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mテーマ OpenWrt2020をインストールしますか\033[0;39m"
+  echo -e " \033[1;33mテーマ OpenWrt2020をインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-openwrt-2020: $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -633,7 +633,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mログ情報をインストールしますか\033[0;39m"
+  echo -e " \033[1;33mログ情報をインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-log: $((5791/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -656,7 +656,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mCPUステータスをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mCPUステータスをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-cpu-status: $((1445/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -679,7 +679,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mCPUパフォーマンスをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mCPUパフォーマンスをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-cpu-perf: $((6519/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -702,7 +702,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32m温度センサーをインストールしますか\033[0;39m"
+  echo -e " \033[1;33m温度センサーをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-temp-status: $((2032/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -726,7 +726,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mインターネット可用性確認をインストールしますか\033[0;39m"
+  echo -e " \033[1;33mインターネット可用性確認をインストールしますか\033[0;39m"
   echo -e " \033[1;32minternet-detector: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-internet-detector: $((7771/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -755,7 +755,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mテーマARGONをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mテーマARGONをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-argon: $((388904/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-compat: $((46213/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-lib-ipkg: $((2062/1024))KB\033[0;39m"
@@ -799,7 +799,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32mディスクインフォをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mディスクインフォをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-disks-info: $((481/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
@@ -829,7 +829,7 @@ if [ -z "$block_mount" ] || [  -z "$kmod_usb_storage" ] || [  -z "$kmod_usb_stor
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mUSBベースパッケージをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mUSBベースパッケージをインストールしますか\033[0;39m"
   echo -e " \033[1;32mblock-mount : $((`opkg info block-mount | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-usb-storage : $((`opkg info kmod-usb-storage | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-usb-storage-uas : $((`opkg info kmod-usb-storage-uas | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -880,7 +880,7 @@ if [ -z "$dosfstools" ] || [ -z "$kmod_fs_vfat" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mFAT32をインストールしますか\033[0;39m"
+  echo -e " \033[1;33mFAT32をインストールしますか\033[0;39m"
   echo -e " \033[1;32mdosfstools: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-vfat: $((7771/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -907,7 +907,7 @@ if [ -z "$e2fsprogs" ] || [ -z "$kmod_fs_ext4" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mext4をインストールしますか\033[0;39m"
+  echo -e " \033[1;33mext4をインストールしますか\033[0;39m"
   echo -e " \033[1;32me2fsprogs: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-ext4: $((7771/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -934,7 +934,7 @@ if [ -z "$f2fs_tools" ] || [ -z "$kmod_fs_f2fs" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mf2fsをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mf2fsをインストールしますか\033[0;39m"
   echo -e " \033[1;32mf2fs-tools: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-f2fs: $((7771/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -961,7 +961,7 @@ if [ -z "$exfat_fsck" ] || [ -z "$kmod_fs_exfat" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mexFATをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mexFATをインストールしますか\033[0;39m"
   echo -e " \033[1;32mexfat-fsck: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-exfat: $((7771/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -988,7 +988,7 @@ if [ -z "$ntfs_3g" ] || [ -z "$kmod_fs_ntfs3" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mNTFSをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mNTFSをインストールしますか\033[0;39m"
   echo -e " \033[1;32mntfs-3g: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-ntfs3: $((7771/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -1015,7 +1015,7 @@ if [ -z "$hfsfsck" ] || [ -z "$kmod_fs_hfs" ]; then
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mHFS & HFS+をインストールしますか\033[0;39m"
+  echo -e " \033[1;33mHFS & HFS+をインストールしますか\033[0;39m"
   echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-hfs: $((7771/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
@@ -1044,7 +1044,7 @@ if [ -z "$hdparm" ] || [ -z "$hd_idle" ] || [ -z "$luci_app_hd_idle" ] || [ -z "
 while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-  echo -e " \033[1;32mHDDをインストールしますか\033[0;39m"
+  echo -e " \033[1;33mHDDをインストールしますか\033[0;39m"
   echo -e " \033[1;32mhd-idle: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-hd-idle: $((7771/1024))KB\033[0;39m"
   echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
