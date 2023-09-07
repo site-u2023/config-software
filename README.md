@@ -3,7 +3,7 @@
 This README is edited in Japanese.
 
 ### 構成
-- スクリプトセレクター
+- [新規設定用 オールインワンスクリプト 初心者対応](https://qiita.com/site_u/items/c6a50aa6dea965b5a774)
   - [システム初期設定（ホストネーム・パスワード等）](https://qiita.com/site_u/items/59c641c9dc0eec3b1324)
   - [インターネット（MAP-e・DS-LITE・PPPoE）接続設定](https://qiita.com/site_u/items/4b8076cb8c9b05bc3f9a)
     - OCNバーチャルコネクト自動設定
