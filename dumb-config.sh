@@ -50,7 +50,7 @@ wget --no-check-certificate -O /etc/config-software/dumb.sh https://raw.githubus
 sed -i -e "s/IPADDR='192.168.1.2'/IPADDR='${input_str_IPV4}'/g" /etc/config-software/dumb.sh
 sed -i -e "s/GATEWAY='192.168.1.1'/GATEWAY='${input_str_GATEWAY}'/g" /etc/config-software/dumb.sh
 sh /etc/config-software/dumb.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
+read -e -p " 何かキーを押してデバイスを再起動してください"
 reboot
 }
 
@@ -90,7 +90,7 @@ rm /etc/config-software/dumb.sh
 sed -i "/fping -g 192.168.1.0/24/d" /etc/rc.local
 sed -i "/fping -g 192.168.1.0/24/d" /etc/crontabs/root
 echo -e " \033[1;32m再起動後は ${input_str_IPV4} でログインして下さい\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
+read -e -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
 }
@@ -100,7 +100,7 @@ OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
 else
- read -p " バージョンが違うため終了します"
+ read -e -p " バージョンが違うため終了します"
  exit
 fi
 
@@ -112,7 +112,7 @@ do
   echo -e " \033[1;32m[b]\033[0;39m": 以前の設定に復元
   echo -e " \033[1;31m[q]\033[0;39m": 終了    
   echo -e " \033[1;37m--------------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or q]: " num
+  read -e -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
     "e" ) _func_Dumb_IPV4 ;;
     "b" ) _func_Dumb_Before ;;
