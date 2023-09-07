@@ -799,7 +799,7 @@ while :
 do
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
-  echo -e " \033[1;32m温度センサーをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mディスクインフォをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-disks-info: $((481/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
