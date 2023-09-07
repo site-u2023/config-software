@@ -100,7 +100,7 @@ for i in `seq 30 38` `seq 40 47` ; do
         printf "\033[${j};${i}m"
         printf "${j};${i}"
         printf "\033[0;39;49m"
-        printf " "
+        printf "   "
     done
     printf "\n"
 done
