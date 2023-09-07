@@ -1062,6 +1062,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
 else
   echo -e " \033[1;36mインストールはありません\033[0;39m"
   read -p " 何かキーを押して終了して下さい"
+  exit
 fi
 }
 
