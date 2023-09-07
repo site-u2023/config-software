@@ -4,7 +4,7 @@ NET_IF="lan"
 network_flush_cache
 network_get_ipaddr NET_ADDR "${NET_IF}"
 
-function _func_AdGuard
+function _func_AdGuard {
 while :
 do
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
@@ -45,8 +45,9 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
     "q" ) exit ;;
   esac
 done
+}
 
-function _func_AdGuard_Confirm
+function _func_AdGuard_Confirm {
 while :
 do
   echo -e " \033[1;35mAdGuardの設定とインストールを開始します\033[0;39m"
@@ -64,8 +65,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_AdGuard_PORT
+function _func_AdGuard_PORT {
 while :
 do
   echo -e "\033[1;37m AdGuard管理用ウェブインターフェイスのポート番号を入力して下さい\033[0;39m"
@@ -78,8 +80,9 @@ do
     "r" ) _func_AdGuard ;;
   esac
 done
+}
 
-function _func_AdGuard_USER
+function _func_AdGuard_USER {
 while :
 do
   echo -e "\033[1;37m AdGuard管理用ウェブインターフェイスのユーザー名を入力して下さい\033[0;39m"
@@ -92,8 +95,9 @@ do
     "r" ) _func_AdGuard ;;
   esac
 done
+}
 
-function _func_AdGuard_PASSWD
+function _func_AdGuard_PASSWD {
 while :
 do
   echo -e " \033[1;37mAdGuard管理用ウェブインターフェイスのパスワードを入力して下さい\033[0;39m"
@@ -106,8 +110,9 @@ do
     "r" ) _func_AdGuard ;;
   esac
 done
+}
 
-function _func_AdGuard_Confirm2
+function _func_AdGuard_Confirm2 {
 while :
 do
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
@@ -123,19 +128,22 @@ do
     "r" ) _func_AdGuard ;;
   esac
 done
+}
 
-function _func_AdGuard_SET
-{
+function _func_AdGuard_SET {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
+
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome stop
 fi
+
 if [ ${AD_WEB} != "ad_web" ]; then
 wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
 fi
+
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
@@ -146,10 +154,13 @@ sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
 sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml
+
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome start
 fi
+
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
+
 if [ ${AD_WEB} != "ad_web" ]; then
 read -p " 何かキーを押してインストールを開始して下さい"
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
@@ -157,7 +168,7 @@ sh /etc/config-software/adguard.sh
 echo "00 03 01 * * sed -i "service adguardhome stop" /etc/adguardhome.yaml" >> /etc/crontabs/root
 echo "01 03 01 * * sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml" >> /etc/crontabs/root
 echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> /etc/crontabs/root
-echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m
+echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
@@ -168,7 +179,7 @@ exit
 fi
 }
 
-function _func_AdGuard_Before
+function _func_AdGuard_Before {
 while :
 do
   echo -e " \033[1;37mAdGuardをリムーブして以前の設定に復元します\033[0;39m"
@@ -184,9 +195,9 @@ do
     "r" ) _func_AdGuard ;;
   else
 done
+}
 
-function _func_AdGuard_Restoration
-{
+function _func_AdGuard_Restoration {
 service adguardhome stop
 service adguardhome disable
 opkg remove adguardhome
@@ -207,6 +218,7 @@ read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 }
+
 
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
  read -p " AdBlockがインストールされている為終了します"
