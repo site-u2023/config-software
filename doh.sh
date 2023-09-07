@@ -71,7 +71,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
  exit
 fi
 if [ "stubby" = "`opkg list-installed stubby | awk '{ print $1 }'`" ]; then
- read -p " stubbyがインストールされている為終了します"
+ read -p " DNS over TLS (DoT) がインストールされている為終了します"
  exit
 fi
 OPENWRT_REL
