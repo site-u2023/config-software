@@ -804,18 +804,55 @@ do
   read -p " キーを選択してください [y/n or q]: " num
   }
   case "${num}" in
-    "y" ) echo luci >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+    "y" ) echo block-mount >> /etc/config-software/list-installed/Before
+          echo kmod-usb-storage >> /etc/config-software/list-installed/Before
+          echo kmod-usb-storage-uas >> /etc/config-software/list-installed/Before
+          echo usbutils >> /etc/config-software/list-installed/Before
+          echo gdisk >> /etc/config-software/list-installed/Before
+          echo libblkid1 >> /etc/config-software/list-installed/Before
+          echo kmod-usb-ledtrig-usbport >> /etc/config-software/list-installed/Before
+          echo luci-app-ledtrig-usbport >> /etc/config-software/list-installed/Before
+          echo $((`opkg info block-mount | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-usb-storage | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-usb-storage-uas | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info usbutils | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info gdisk | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info libblkid1 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-usb-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           break ;;
-    "n" ) USB_BASE='1'
+    "n" ) block_mount='1'
+          kmod_usb_storage='1'
+          kmod_usb_storage_uas='1'
+          usbutils='1'
+          gdisk='1'
+          libblkid1='1'
+          kmod_usb_ledtrig_usbport='1'
+          luci_app_ledtrig_usbport='1'
           break ;;
     "q" ) exit ;;
   esac
 done
 fi
 fi
-_func_lucii18nbaseja
+_func_FAT32
 }
+
+function _func_FAT32
+
+function _func_
+
+function _func_
+
+function _func_
+
+function _func_
+
+function _func_
+
+function _func_
+
+function _func_
 
 
 function _func_listinstalled_After {
