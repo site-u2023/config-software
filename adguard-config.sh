@@ -16,7 +16,7 @@ fi
   echo -e " \033[1;32m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -e -p " キーを選択して下さい [c/b or q]: " num
+  read -p " キーを選択して下さい [c/b or q]: " num
   case "${num}" in
     "c" ) 
 {
@@ -36,7 +36,7 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
    echo -e " \033[1;37mフラッシュ容量推奨値: 102400KB\033[0;39m"
    echo -e " \033[1;37mインストール可能です\033[0;39m"
   else
-   read -e -p " フラッシュ容量が足りない為終了します"
+   read -p " フラッシュ容量が足りない為終了します"
    exit
   fi
 }
@@ -166,7 +166,7 @@ echo "01 03 01 * * sed -i "/280blocker_domain_ag_/c \    url: https://280blocker
 echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> /etc/crontabs/root
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-read -e -p " 何かキーを押してデバイスを再起動して下さい"
+read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 else
@@ -184,7 +184,7 @@ do
   echo -e " \033[1;37mリムーブ: libaprutil\033[0;39m"
   echo -e " \033[1;37mリムーブ: libapr\033[0;39m"
   echo -e " \033[1;37mリムーブ: libexpat\033[0;39m"
-  read -e -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_Restoration ;;
     "n" ) _func_AdGuard ;;
@@ -210,7 +210,7 @@ rm /etc/config/firewall.adguard.bak
 rm /etc/config-software/adguard-config.sh
 rm /etc/config-software/adguard.sh
 echo -e " \033[1;32mリムーブと以前の設定に復元が完了しました\033[0;39m"
-read -e -p " 何かキーを押してデバイスを再起動して下さい"
+read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 }
