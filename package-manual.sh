@@ -67,10 +67,12 @@ fi
 # ネットワーク統計インターフェイス
 if [ -z "$STATUS" ]; then
 opkg install luci-app-statistics
+/etc/init.d/collectd enable
 fi
 if [ -z "$STATUS_JA" ]; then
 opkg install luci-i18n-statistics-ja
 fi
+
 
 # 帯域幅モニター
 if [ -z "$NLBWMON" ]; then
