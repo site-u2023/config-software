@@ -12,7 +12,8 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定とインストール（280blockerアドイン）
-  echo -e " \033[1;33m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
+  echo -e " \033[1;33m[w]\033[0;39m": 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）
+  echo -e " \033[1;32m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択して下さい [c/b or q]: " num
@@ -38,6 +39,8 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
   fi
 }
           _func_AdGuard_Confirm ;;
+    "w" ) AD_WEB='ad_web'
+          _func_AdGuard_Confirm ;;        
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
@@ -130,7 +133,9 @@ fi
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome stop
 fi
+if [ ${AD_WEB} != "ad_web" ]; then
 wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
+fi
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
@@ -145,6 +150,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 service adguardhome start
 fi
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
+if [ ${AD_WEB} != "ad_web" ]; then
 read -p " 何かキーを押してインストールを開始して下さい"
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sh /etc/config-software/adguard.sh
@@ -155,6 +161,9 @@ echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
+exit
+else
+read -p " 何かキーを押して終了して下さい"
 exit
 fi
 }
