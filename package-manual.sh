@@ -708,7 +708,7 @@ fi
   echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・インターネット可用性確認（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"
-  read -p " 開始します [y/n]: " num
+  read -p " 選択を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
     "n" ) exit ;;
