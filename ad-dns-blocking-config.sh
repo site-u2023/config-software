@@ -43,7 +43,7 @@ do
 done
 }
 
-function _func_DoT  {
+function _func_DoT {
 while :
 do
   echo -e " \033[1;32mDNS over TLS (DoT)設定のスクリプトをダウンロードします\033[0;39m"
