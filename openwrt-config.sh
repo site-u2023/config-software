@@ -95,7 +95,16 @@ do
    esac 
 done
 
-
+for i in `seq 30 38` `seq 40 47` ; do
+    for j in 0 1 2 4 5 7 ; do
+        printf "\033[${j};${i}m"
+        printf "${j};${i}"
+        printf "\033[0;39;49m"
+        printf " "
+    done
+    printf "\n"
+done
+sleep 0.5
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
