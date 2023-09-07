@@ -133,11 +133,17 @@ fi
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+service adguardhome stop
+fi
 sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
 sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+service adguardhome start
+fi
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
 read -p " 何かキーを押してインストールを開始して下さい"
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
