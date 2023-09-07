@@ -105,7 +105,7 @@ for i in `seq 30 38` `seq 40 47` ; do
     done
     printf "\n"
 done
-sleep 0.5
+sleep 1
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
