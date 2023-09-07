@@ -123,19 +123,19 @@ done
 
 function _func_AdGuard_SET
 {
-wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
-wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
-chmod +x /usr/bin/htpasswd
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
-opkg install --nodeps libaprutil
-opkg install --nodeps libapr
-opkg install --nodeps libexpat
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome stop
 fi
+wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
+wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
+chmod +x /usr/bin/htpasswd
+opkg install --nodeps libaprutil
+opkg install --nodeps libapr
+opkg install --nodeps libexpat
 sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
@@ -173,7 +173,7 @@ do
     "y" ) _func_AdGuard_Restoration ;;
     "n" ) _func_AdGuard ;;
     "r" ) _func_AdGuard ;;
-  esac
+  else
 done
 
 function _func_AdGuard_Restoration
