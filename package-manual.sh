@@ -291,7 +291,6 @@ fi
 _luci_app_ttyd
 }
 
-
 function _luci_app_ttyd {
 TTYD=`opkg list-installed luci-app-ttyd | awk '{ print $1 }'`
 TTYD_JA=`opkg list-installed luci-i18n-ttyd-ja | awk '{ print $1 }'`
