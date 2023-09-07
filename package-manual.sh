@@ -777,8 +777,15 @@ _func_USB
 
 # USB判定
 function _func_USB {
-str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
+_func_USB_BASE
+else
+_func_listinstalled_After
+fi
+}
+
+# USBベース
+function _func_USB_BASE {
 block_mount=`opkg list-installed block-mount | awk '{ print $1 }'`
 kmod_usb_storage=`opkg list-installed kmod-usb-storage | awk '{ print $1 }'`
 kmod_usb_storage_uas=`opkg list-installed kmod-usb-storage-uas| awk '{ print $1 }'`
@@ -790,7 +797,6 @@ luci_app_ledtrig_usbport=`opkg list-installed luci-app-ledtrig-usbport | awk '{ 
 if [ -z "$block_mount" ] || [  -z "$kmod_usb_storage" ] || [  -z "$kmod_usb_storage_uas" ] || [  -z "$usbutils" ] || [ -z "$gdisk" ] || [ -z  "$libblkid1" ] || [  -z "$kmod_usb_ledtrig_usbport" ] || [  -z "$luci_app_ledtrig_usbport" ]; then
 while :
 do
-{
   echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;32mUSBベースパッケージをインストールしますか\033[0;39m"
   echo -e " \033[1;32mblock-mount : $((`opkg info block-mount | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -802,7 +808,6 @@ do
   echo -e " \033[1;32mkmod-usb-ledtrig-usbport : $((`opkg info kmod-usb-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-ledtrig-usbport : $((`opkg info luci-app-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
-  }
   case "${num}" in
     "y" ) echo block-mount >> /etc/config-software/list-installed/Before
           echo kmod-usb-storage >> /etc/config-software/list-installed/Before
@@ -834,26 +839,207 @@ do
   esac
 done
 fi
-fi
-_func_listinstalled_After 
-# _func_FAT32
+_func_FAT32
 }
 
-function _func_FAT32
+function _func_FAT32 {
+dosfstools=`opkg list-installed dosfstools | awk '{ print $1 }'`
+kmod_fs_vfat=`opkg list-installed kmod-fs-vfat | awk '{ print $1 }'`
+if [ -z "$dosfstools" ] || [ -z "$kmod_fs_vfat" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mFAT32をインストールしますか\033[0;39m"
+  echo -e " \033[1;32mdosfstools: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-vfat: $((7771/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo dosfstools >> /etc/config-software/list-installed/Before
+          echo kmod-fs-vfat >> /etc/config-software/list-installed/Before
+          echo $((`opkg info dosfstools | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-vfat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) dosfstools='1'
+          kmod_fs_vfat='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_ext4
+}
 
-function _func_
+function _func_ext4 {
+e2fsprogs=`opkg list-installed e2fsprogs | awk '{ print $1 }'`
+kmod_fs_ext4=`opkg list-installed kmod-fs-ext4 | awk '{ print $1 }'`
+if [ -z "$e2fsprogs" ] || [ -z "$kmod_fs_ext4" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mext4をインストールしますか\033[0;39m"
+  echo -e " \033[1;32me2fsprogs: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-ext4: $((7771/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo e2fsprogs >> /etc/config-software/list-installed/Before
+          echo kmod-fs-ext4 >> /etc/config-software/list-installed/Before
+          echo $((`opkg info e2fsprogs | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-ext4 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) e2fsprogs='1'
+          kmod_fs_ext4='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_f2fs
+}
 
-function _func_
+function _func_f2fs {
+f2fs_tools=`opkg list-installed f2fs-tools | awk '{ print $1 }'`
+kmod_fs_f2fs=`opkg list-installed kmod-fs-f2fs | awk '{ print $1 }'`
+if [ -z "$f2fs_tools" ] || [ -z "$kmod_fs_f2fs" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mf2fsをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mf2fs-tools: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-f2fs: $((7771/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo f2fs-tools >> /etc/config-software/list-installed/Before
+          echo kmod-fs-f2fs >> /etc/config-software/list-installed/Before
+          echo $((`opkg info f2fs-tools | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-f2fs | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) f2fs_tools='1'
+          kmod_fs_f2fs='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_exFAT
+}
 
-function _func_
+function _func_exFAT {
+exfat_fsck=`opkg list-installed exfat-fsck | awk '{ print $1 }'`
+kmod_fs_exfat=`opkg list-installed kmod-fs-exfat | awk '{ print $1 }'`
+if [ -z "$exfat_fsck" ] || [ -z "$kmod_fs_exfat" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mexFATをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mexfat-fsck: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-exfat: $((7771/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo exfat-fsck >> /etc/config-software/list-installed/Before
+          echo kmod-fs-exfat >> /etc/config-software/list-installed/Before
+          echo $((`opkg info exfat-fsck | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-exfat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) exfat_fsck='1'
+          kmod_fs_exfat='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_NTFS
+}
 
-function _func_
+function _func_NTFS {
+ntfs_3g=`opkg list-installed ntfs-3g | awk '{ print $1 }'`
+kmod_fs_ntfs3=`opkg list-installed kmod-fs-ntfs3 | awk '{ print $1 }'`
+if [ -z "$ntfs_3g" ] || [ -z "$kmod_fs_ntfs3" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mNTFSをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mntfs-3g: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-ntfs3: $((7771/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo ntfs-3g >> /etc/config-software/list-installed/Before
+          echo kmod-fs-ntfs3 >> /etc/config-software/list-installed/Before
+          echo $((`opkg info ntfs-3g | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-ntfs3 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) ntfs_3g='1'
+          kmod_fs_ntfs3='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_HFS
+}
 
-function _func_
+function _func_HFS {
+hfsfsck=`opkg list-installed hfsfsck | awk '{ print $1 }'`
+kmod_fs_hfs=`opkg list-installed kmod-fs-hfs | awk '{ print $1 }'`
+if [ -z "$hfsfsck" ] || [ -z "$kmod_fs_hfs" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mHFS & HFS+をインストールしますか\033[0;39m"
+  echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-hfs: $((7771/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo hfsfsck >> /etc/config-software/list-installed/Before
+          echo kmod-fs-hfs >> /etc/config-software/list-installed/Before
+          echo $((`opkg info hfsfsck | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-hfs | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) hfsfsck='1'
+          kmod_fs_hfs='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_HDD
+}
 
-function _func_
-
-function _func_
+function _func_HDD {
+hdparm=`opkg list-installed hdparm | awk '{ print $1 }'`
+hd_idle=`opkg list-installed hd-idle | awk '{ print $1 }'`
+luci_app_hd_idle=`opkg list-installed luci-app-hd-idle | awk '{ print $1 }'`
+luci_i18n_hd_idle_ja=`opkg list-installed luci-i18n-hd-idle-ja | awk '{ print $1 }'`
+if [ -z "$hdparm" ] || [ -z "$hd_idle" ] || [ -z "$luci_app_hd_idle" ] || [ -z "$luci_i18n_hd_idle_ja" ]; then
+while :
+do
+  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+  echo -e " \033[1;32mHDDをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mhd-idle: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-app-hd-idle: $((7771/1024))KB\033[0;39m"
+  echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-i18n-hd-idle-ja: $((7771/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo hdparm >> /etc/config-software/list-installed/Before
+          echo hd-idle >> /etc/config-software/list-installed/Before
+          echo luci-app-hd-idle >> /etc/config-software/list-installed/Before
+          echo luci-i18n-hd-idle-ja >> /etc/config-software/list-installed/Before
+          echo $((`opkg info hdparm | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info hd-idle | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-app-hd-idle | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-i18n-hd-idle-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) hdparm='1'
+          hd_idle='1'
+          luci_app_hd_idle='1'
+          luci_i18n_hd_idle_ja='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_listinstalled_After
+}
 
 
 function _func_listinstalled_After {
