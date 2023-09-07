@@ -16,6 +16,8 @@ luci-i18n-base-ja
 luci-i18n-opkg-ja
 luci-i18n-firewall-ja
 openssh-sftp-server
+luci-app-commands
+luci-i18n-commands-ja
 irqbalance
 sqm-scripts
 luci-app-sqm
@@ -49,7 +51,11 @@ opkg install luci-i18n-firewall-ja
 
 # SFTP
 opkg install openssh-sftp-server
- 
+
+# TTYD
+opkg install luci-app-ttyd
+opkg install luci-i18n-ttyd-ja
+
 # CPU負荷分散
 CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
 if [ "$CPU_INFO" -gt 3 ]
@@ -250,6 +256,7 @@ fi
   echo -e " \033[1;37m・LuCi\033[0;39m"
   echo -e " \033[1;37m・LuCi日本語化\033[0;39m"
   echo -e " \033[1;37m・SFTPサーバー\033[0;39m"
+  echo -e " \033[1;37m・WEB-SSHクライアント\033[0;39m"
   echo -e " \033[1;37m・CPU負荷分散\033[0;39m"
   echo -e " \033[1;37m・SQM\033[0;39m"
   echo -e " \033[1;37m・ネットワーク統計インターフェイス\033[0;39m"
