@@ -69,7 +69,7 @@ done
 function _func_ETC
 while :
 do
-  echo -e " \033[1;36mその他のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;36m他のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software//etc-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh
@@ -137,7 +137,7 @@ do
   echo -e " \033[1;32m[p]\033[0;39m": 推奨パッケージインストール（USB自動判別）
   echo -e " \033[1;35m[a]\033[0;39m": アクセスポイント（Dumb / ブリッジ）設定
   echo -e " \033[1;31m[d]\033[0;39m": 広告ブロッカー・DNS暗号化インストール
-  echo -e " \033[1;36m[e]\033[0;39m": その他：IPERF3 / WiFi位置情報サービス停止
+  echo -e " \033[1;36m[e]\033[0;39m": 他：IPERF3 / WiFi位置情報サービス停止
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [s/i/p/a/d/e or q]: " num
