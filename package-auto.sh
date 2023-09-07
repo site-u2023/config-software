@@ -234,7 +234,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
  do
  echo -e "\033[1;33m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
  echo -e " \033[1;31mインストールに失敗しました\033[0;39m"
- read -p " インストールを再試行して下さい [y/n]: " num
+ read -e -p " インストールを再試行して下さい [y/n]: " num
   case "${num}" in
   "y" ) _func_INSTALL ;;
   "n" ) exit ;;
@@ -242,7 +242,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
 done
 else
  echo -e " \033[1;36mインストールが完了しました\033[0;39m"
- read -p " 何かキーを押してデバイスを再起動してください"
+ read -e -p " 何かキーを押してデバイスを再起動してください"
  reboot
 fi
 }
@@ -252,7 +252,7 @@ OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
  else
- read -p " バージョンが違うため終了します"
+ read -e -p " バージョンが違うため終了します"
  exit
 fi
 
@@ -289,7 +289,7 @@ if [ -n "$str_USB" ]; then
   echo -e " \033[1;37m・USB：HFS & HFS+\033[0;39m"
   echo -e " \033[1;37m・USB：HDD\033[0;39m"
 fi
-  read -p " パッケージのインストールを開始します [y/n]: " num
+  read -e -p " パッケージのインストールを開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
     "n" ) exit ;;
