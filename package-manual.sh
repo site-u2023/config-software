@@ -694,7 +694,7 @@ fi
   echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m選択インストール\033[0;39m"
   echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
-  echo -e " \033[1;37m・LuCi: luci\033[0;39m"
+  echo -e " \033[1;37m・LuCi: luci（スナップショット）\033[0;39m"
   echo -e " \033[1;37m・LuCi日本語化: luci-i18n-base-ja\033[0;39m"
   echo -e " \033[1;37m・SFTPサーバー: openssh-sftp-server\033[0;39m"
   echo -e " \033[1;37m・WEB-SSHクライアント: luci-app-ttyd\033[0;39m"
