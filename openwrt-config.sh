@@ -122,7 +122,7 @@ fi
   echo -e " \033[1;37mAugust 25, 2023\033[0;39m"
   echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
-  echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software\033[0;39m" 
+  echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software/\033[0;39m" 
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p "  何かキーを押して下さい"
   echo -e 
