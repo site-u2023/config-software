@@ -4,7 +4,7 @@
 function _func_HTTPS {
 while :
 do
-  echo -e " \033[1;35mDNS over HTTPS (DoH)のインストールと設定を開始します\033[0;39m"
+  echo -e " \033[1;35mDNS over HTTPS（DoH）のインストールと設定を開始します\033[0;39m"
   echo -e " \033[1;37mインストール: https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mインストール: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mインストール: luci-i18n-https-dns-proxy-ja\033[0;39m" 
@@ -43,7 +43,7 @@ exit
 function _func_HTTPS_Before {
 while :
 do
-  echo -e " \033[1;37mDNS over HTTPS (DoH)の設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mDNS over HTTPS（DoH）の設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-https-dns-proxy-ja\033[0;39m"
@@ -85,8 +85,8 @@ fi
 while :
 do
   echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": DNS over HTTPS (DoH)の設定を実行します
-  echo -e " \033[1;31m[b]\033[0;39m": DNS over HTTPS (DoH)の設定を以前の設定に復元します
+  echo -e " \033[1;34m[e]\033[0;39m": DNS over HTTPS（DoH）の設定を実行します
+  echo -e " \033[1;31m[b]\033[0;39m": DNS over HTTPS（DoH）の設定を以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [e/b or r]: " num
