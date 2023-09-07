@@ -187,7 +187,7 @@ do
     "y" ) _func_AdGuard_Restoration ;;
     "n" ) _func_AdGuard ;;
     "r" ) _func_AdGuard ;;
-  else
+  esac
 done
 }
 
