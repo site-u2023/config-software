@@ -95,7 +95,6 @@ do
    esac 
 done
 
-date
 for i in `seq 30 38` `seq 40 47` ; do
     for j in 0 1 2 4 5 7 ; do
         printf "\033[${j};${i}m"
@@ -116,6 +115,7 @@ fi
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
+  echo -e " \033[1;37mdate\033[0;39m"
   echo -e " \033[1;37mOpenWrt-CONFIG 03.5.1\033[0;39m"
   echo -e " \033[1;37mAugust 25, 2023\033[0;39m"
   echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
