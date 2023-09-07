@@ -56,9 +56,10 @@ function _func_AdBlock_Before
 while :
 do
   echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
-  echo -e " \033[1;37mリムーブ: AdBlock\033[0;39m"
+  echo -e " \033[1;37mリムーブ: adblock\033[0;39m"
+  echo -e " \033[1;37mリムーブ: luci-app-adblock\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-adblock-ja\033[0;39m"
-  echo -e " \033[1;37mリムーブ: tcpdump-miniをリムーブ\033[0;39m"
+  echo -e " \033[1;37mリムーブ: tcpdump-mini\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdBlock_Restoration ;;
