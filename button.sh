@@ -60,10 +60,17 @@ cat << "EOF" > /usr/bin/wifionoff
 [ "${BUTTON}" = "wps" ] && [ "${ACTION}" = "released" ] && {
     SW="$(uci -q get wireless.@wifi-device[0].disabled)"
     [ "${SW}" = "1" ] \
-        && uci set wireless.@wifi-device[0].disabled='0'; uci set wireless.@wifi-device[1].disabled='0' \
-        || uci set wireless.@wifi-device[0].disabled='1'; uci set wireless.@wifi-device[1].disabled='1'
-    uci commit wireless; /etc/init.d/network restart
+        && uci set wireless.@wifi-device[0].disabled='0' \
+        || uci set wireless.@wifi-device[0].disabled='1'
 }
+
+[ "${BUTTON}" = "wps" ] && [ "${ACTION}" = "released" ] && {
+    SW="$(uci -q get wireless.@wifi-device[1].disabled)"
+    [ "${SW}" = "1" ] \
+        && uci set wireless.@wifi-device[1].disabled='0' \
+        || uci set wireless.@wifi-device[1].disabled='1'
+}
+    uci commit wireless; /etc/init.d/network restart
 EOF
 chmod 755 /usr/bin/wifionoff
 
