@@ -17,7 +17,7 @@ done
 function _func_IPERF3 {
 while :
 do
-  echo -e " \033[1;34mIPERF3設定のスクリプトをダウンロードしてインストールします\033[0;39m"
+  echo -e " \033[1;33mIPERF3設定のスクリプトをダウンロードしてインストールします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
@@ -53,7 +53,7 @@ done
 function _func_WiFi_location_service {
 while :
 do
-  echo -e " \033[1;33mWiFi位置情報サービス停止設定を実行します\033[0;39m"
+  echo -e " \033[1;32mWiFi位置情報サービス停止設定を実行します\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) sed -i -e 's/\s*$//' /etc/config/wireless
@@ -88,9 +88,9 @@ do
     "1" ) _func_BUTTON ;;
     "2" ) _func_IPERF3 ;;
     "3" ) _func_WiFi_location_service ;;
-    "4" ) exit ;;
-    "5" ) exit ;;
-    "6" ) exit ;;
-    "q" ) exit ;;
+    "4" ) ;;
+    "5" ) ;;
+    "6" ) ;;
+    "q" ) ;;
   esac
  done
