@@ -69,7 +69,7 @@ cat << "EOF" > /usr/bin/wifionoff
 EOF
 chmod 755 /usr/bin/wifionoff
 WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
-WIFI_NO=3
+WIFI_NO='3'
 if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
 sed -i "/uci commit wireless/d" /usr/bin/wifionoff
 cat << "EOF" >> /usr/bin/wifionoff
