@@ -1,6 +1,20 @@
 #! /bin/sh
 
-function _func_IPERF3
+function _func__func_BUTTON {
+while :
+do
+  echo -e " \033[1;34mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
+  read -p " 宜しいですか? [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/config-software/main/button-config.sh
+          sh button-config.sh
+          break ;;
+    "n" ) break ;;
+  esac
+done
+}
+
+function _func_IPERF3 [
 while :
 do
   echo -e " \033[1;34mIPERF3設定のスクリプトをダウンロードしてインストールします\033[0;39m"
@@ -34,11 +48,12 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_WiFi_location_service
+function _func_WiFi_location_service {
 while :
 do
-  echo -e " \033[1;33mWiFi位置情報サービスを停止します\033[0;39m"
+  echo -e " \033[1;33mWiFi位置情報サービス停止設定を実行します\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) sed -i -e 's/\s*$//' /etc/config/wireless
@@ -55,14 +70,14 @@ do
     "n" ) break ;;
   esac
 done
-
+}
 
 while :
 do
   echo -e " \033[1;37metc -------------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[1]\033[0;39m": IPERF3インストール及びサービス追加
-  echo -e " \033[1;33m[2]\033[0;39m": WiFi位置情報サービス停止
-  echo -e " \033[1;32m[3]\033[0;39m": 
+  echo -e " \033[1;34m[1]\033[0;39m": ボタン設定とインストール
+  echo -e " \033[1;33m[2]\033[0;39m": IPERF3インストール及びサービス追加
+  echo -e " \033[1;32m[3]\033[0;39m": WiFi位置情報サービス停止設定
   echo -e " \033[1;35m[4]\033[0;39m": 
   echo -e " \033[1;31m[5]\033[0;39m": 
   echo -e " \033[1;36m[6]\033[0;39m": 
@@ -70,9 +85,9 @@ do
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " キーを選択してください [1/2/3/4/5/6 or q]: " num
   case "${num}" in
-    "1" ) _func_IPERF3 ;;
-    "2" ) _func_WiFi_location_service ;;
-    "3" ) exit ;;
+    "1" ) _func_BUTTON ;;
+    "2" ) _func_IPERF3 ;;
+    "3" ) _func_WiFi_location_service ;;
     "4" ) exit ;;
     "5" ) exit ;;
     "6" ) exit ;;
