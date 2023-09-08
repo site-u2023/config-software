@@ -22,7 +22,6 @@ cat << "EOF" > /etc/hotplug.d/button/buttons
 logger "the button was ${BUTTON} and the action was ${ACTION}"
 EOF
 echo -e " \033[1;37m該当ボタン調査を開始します\033[0;39m"
-echo -e ""
 echo -e " \033[1;32m`uname -n`\033[0;39m"の利用したいボタンを押して離して下さい
 echo -e ""
 read -p " ボタンを押して放したら何かキーを押して下さい"
