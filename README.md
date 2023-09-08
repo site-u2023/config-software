@@ -3,7 +3,6 @@
 This README is edited in Japanese.
 
 ### 構成
-- [スクリプトセレクター](### 構成
 - [スクリプトセレクター](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%BB%E3%83%AC%E3%82%AF%E3%82%BF%E3%83%BC%E8%A6%81onu%E7%9B%B4%E7%B5%90)
   - [システム初期設定（ホストネーム・パスワード等）](https://qiita.com/site_u/items/59c641c9dc0eec3b1324)
   - [インターネット（MAP-e・DS-LITE・PPPoE）接続設定](https://qiita.com/site_u/items/4b8076cb8c9b05bc3f9a)
