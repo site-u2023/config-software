@@ -16,13 +16,12 @@ done
 }
 
 function _func_button_investigation {
-
 mkdir -p /etc/hotplug.d/button
 # log調査用
 cat << "EOF" > /etc/hotplug.d/button/buttons
 logger "the button was ${BUTTON} and the action was ${ACTION}"
 EOF
-echo -e " \033[1;37mボタン調査を開始します\033[0;39m"
+echo -e " \033[1;37m該当ボタン調査を開始します\033[0;39m"
 echo -e " \033[1;37m利用可能ボタン\033[0;39m"
 ls /etc/rc.button/
 echo -e ""
@@ -77,7 +76,7 @@ while :
 do
   echo -e " \033[1;37mbutton-config ----------------------------------------\033[0;39m"
   echo -e " \033[1;34m[w]\033[0;39m": ボタン設定とインストール（wpsボタン用）
-  echo -e " \033[1;32m[c]\033[0;39m": ボタン設定とインストール後該当ボタン調査再設定
+  echo -e " \033[1;32m[c]\033[0;39m": 該当ボタン調査後ボタン設定とインストール
   echo -e " \033[1;31m[r]\033[0;39m": ボタン設定をリムーブし以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
