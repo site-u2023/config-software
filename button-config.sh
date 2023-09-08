@@ -74,7 +74,7 @@ while :
 do
   echo -e "\033[1;37m ボタン操作の最大受付時間を入力下さい\033[0;39m"
   echo -e "\033[1;33m 例: 10\033[0;39m"
-  read -p "最大時間（秒）: " str_HANDLER
+  read -p "最大時間（秒）: " str_MAX
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_SET ;;
