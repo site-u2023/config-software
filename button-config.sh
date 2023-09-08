@@ -16,8 +16,8 @@ done
 }
 
 function _func_button_investigation {
+echo -e " \033[1;32m参考URL: https://openwrt.org/docs/guide-user/hardware/hardware.button#examples\033[0;39m"
 mkdir -p /etc/hotplug.d/button
-# log調査用
 cat << "EOF" > /etc/hotplug.d/button/buttons
 logger "the button was ${BUTTON} and the action was ${ACTION}"
 EOF
