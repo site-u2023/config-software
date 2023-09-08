@@ -9,7 +9,10 @@ do
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
-          sh /etc/config-software/button.sh ;;
+          sh /etc/config-software/button.sh
+          echo -e " \033[1;36mインストールが完了しました\033[0;39m"
+          read -p " 何かキーを押してデバイスを再起動してください"
+          reboot ;;
     "n" ) exit;;
   esac
 done
@@ -48,6 +51,10 @@ case $str in
     echo -e " \033[1;32m${str_BUTTON}\033[0;39m"を設定します
     ;;
 esac
+sh /etc/config-software/button.sh
+echo -e " \033[1;36mインストールが完了しました\033[0;39m"
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
 }
 
 function _func_button_REMOVE {
