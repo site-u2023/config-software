@@ -9,9 +9,8 @@ do
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
-          sh /etc/config-software/button.sh
-          break ;;
-    "n" ) break ;;
+          sh /etc/config-software/button.sh ;;
+    "n" ) exit;;
   esac
 done
 }
@@ -25,9 +24,8 @@ read -p " 宜しいですか? [y/n]: " num
 case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
           sed -i -e "s/wps/${str_BUTTON}/g" /etc/config-software/button.sh
-          sh /etc/config-software/button.sh
-          break ;;
-    "n" ) break ;;
+          sh /etc/config-software/button.sh ;;
+    "n" ) exit ;;
   esac
 done
 echo -e " \033[1;37mボタン調査を開始します\033[0;39m"
@@ -63,8 +61,7 @@ do
           rm /etc/config/system.button.bak
           rm /etc/hotplug.d/button/buttons
           rm /etc/hotplug.d/button/00-button
-          rm /usr/bin/wifionoff
-          break ;;
+          rm /usr/bin/wifionoff ;;
     "n" ) break ;;
   esac
 done
