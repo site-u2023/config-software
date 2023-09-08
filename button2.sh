@@ -72,8 +72,7 @@ fi
 
 while :
 do
-  echo -e " \033[1;31m\033[0;39m" オリジナル
-  read -p " ボタン設定とインストールを開始します [y/n]: " num
+  read -p " ボタン設定とインストール（カスタム）を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_button_INSTALL ;;
     "n" ) exit ;;
