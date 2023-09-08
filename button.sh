@@ -92,7 +92,6 @@ uci set system.@button[-1].action="released"
 uci set system.@button[-1].handler="for i in \$(mount | awk '/dev\/sd[b-z]/{print \$1}'); do umount \${i}; done"
 uci set system.@button[-1].min="3"
 uci set system.@button[-1].max="7"
-uci commit system
 fi
 
 # restart 7～13秒 ボタンリリース
