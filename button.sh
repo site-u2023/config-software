@@ -70,6 +70,15 @@ uci set system.@button[-1].action="released"
 uci set system.@button[-1].handler="sleep 70 && touch /etc/banner && reboot"
 uci set system.@button[-1].min="8"
 uci set system.@button[-1].max="15"
+
+# 初期化 20秒ボタンリリース
+uci add system button
+uci set system.@button[-1].button=${BUTTON}
+uci set system.@button[-1].action="released"
+uci set system.@button[-1].handler="firstboot && reboot now"
+uci set system.@button[-1].min="18"
+uci set system.@button[-1].max="25"
+
 # set
 uci commit system
 /etc/init.d/system reload
