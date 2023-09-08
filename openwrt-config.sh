@@ -152,4 +152,4 @@ do
     "e" ) _func_ETC ;;
     "q" ) _func_QUIT ;;
   esac
- done 
+ done
