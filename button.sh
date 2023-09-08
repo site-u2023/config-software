@@ -72,7 +72,7 @@ cat << "EOF" > /usr/bin/wifionoff
 }
     uci commit wireless; /etc/init.d/network restart
 EOF
-{
+
 WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
 WIFI_NO=3
 if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
@@ -88,7 +88,7 @@ cat << "EOF" >> /usr/bin/wifionoff
     uci commit wireless; /etc/init.d/network restart
 EOF
 fi
-}
+
 chmod 755 /usr/bin/wifionoff
 
 wireless.default_radio1.disabled='1'
