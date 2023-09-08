@@ -49,7 +49,6 @@ uci set system.@button[-1].action="released"
 uci set system.@button[-1].handler="/usr/bin/wifionoff"
 uci set system.@button[-1].min="0"
 uci set system.@button[-1].max="2"
-uci commit system
 
 cat << "EOF" > /usr/bin/wifionoff
 #!/bin/sh
@@ -68,7 +67,7 @@ cat << "EOF" > /usr/bin/wifionoff
 }
     uci commit wireless; /etc/init.d/network restart
 EOF
-
+chmod 755 /usr/bin/wifionoff
 WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
 WIFI_NO=3
 if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
@@ -84,8 +83,6 @@ cat << "EOF" >> /usr/bin/wifionoff
     uci commit wireless; /etc/init.d/network restart
 EOF
 fi
-
-chmod 755 /usr/bin/wifionoff
 
 # USBストレージアンマウント 3～7秒 ボタンリリース
 if [ -n "$str_USB" ]; then
