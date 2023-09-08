@@ -107,12 +107,19 @@ OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
  else
- read -p " バージョンが違うため終了します"
+ read -p " バージョンが違う為終了します"
  exit
 fi
 
- while :
- do
+str_WPS=`ls /etc/rc.button/ | grep -s wps`
+echo $str_WPS
+if [ -z "$str_WPS" ]; then
+read -p " WPSボタンが無い為終了します"
+exit
+fi
+  
+while :
+do
   echo -e " \033[1;32m 1秒\033[0;39m" Wi-Fiオン・オフ ボタンリリース
   str_USB=`dmesg | grep -s usb`
   if [ -n "$str_USB" ]; then
