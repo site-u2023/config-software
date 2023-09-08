@@ -121,10 +121,7 @@ uci set system.@button[-1].max="23"
 # set
 uci commit system
 
-echo -e " \033[1;36mインストールが完了しました\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-
+exit
 }
 
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
