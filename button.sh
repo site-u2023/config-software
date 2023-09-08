@@ -111,12 +111,6 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  exit
 fi
 
-str_WPS=`ls /etc/rc.button/ | grep -s wps`
-if [ -z "$str_WPS" ]; then
-read -p " WPSボタンが無い為終了します"
-exit
-fi
-  
 while :
 do
   echo -e " \033[1;32m 1秒\033[0;39m" Wi-Fiオン・オフ ボタンリリース
@@ -126,7 +120,7 @@ do
   fi
   echo -e " \033[1;33m10秒\033[0;39m" デバイス再起動 ボタンリリース
   echo -e " \033[1;31m20秒\033[0;39m" デバイス初期化 ボタンリリース
-  read -p " ボタン設定とインストール（WPSボタン用）を開始します [y/n]: " num
+  read -p " ボタン設定とインストール（wpsボタン）を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_button_INSTALL ;;
     "n" ) exit ;;
