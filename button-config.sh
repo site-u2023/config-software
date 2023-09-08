@@ -39,11 +39,11 @@ case $str in
 esac
 while :
 do
-echo -e " \033[1;32mボタン設定とインストール（WPSボタン用）のスクリプトをダウンロードします\033[0;39m"
+echo -e " \033[1;32mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
 read -p " 宜しいですか? [y/n]: " num
 case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
-          sed -i -e "s/BUTTON='wps'/BUTTON='${str_BUTTON}'/g" /etc/config-software/button.sh
+          sed -i -e "s/wps/${str_BUTTON}/g" /etc/config-software/button.sh
           sh /etc/config-software/button.sh
           break ;;
     "n" ) break ;;
@@ -79,7 +79,7 @@ fi
 while :
 do
   echo -e " \033[1;37mbutton-config ----------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[w]\033[0;39m": ボタン設定とインストール（WPSボタン用）
+  echo -e " \033[1;34m[w]\033[0;39m": ボタン設定とインストール（wpsボタン用）
   echo -e " \033[1;32m[c]\033[0;39m": ボタン調査後ボタン設定とインストール
   echo -e " \033[1;31m[r]\033[0;39m": ボタン設定をリムーブし以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了
