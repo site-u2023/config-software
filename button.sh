@@ -2,6 +2,7 @@
 # OpenWrt >= 21.02:
 
 function _func_button_INSTALL {
+cp /etc/config/system /etc/config/system.button.bak
 
 # install
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
