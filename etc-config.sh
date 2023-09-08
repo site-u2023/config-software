@@ -1,6 +1,6 @@
 #! /bin/sh
 
-function _func__func_BUTTON {
+function _func_BUTTON {
 while :
 do
   echo -e " \033[1;34mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
