@@ -57,7 +57,7 @@ uci commit system
  
 cat << "EOF" > /usr/bin/wifionoff
 #!/bin/sh
-[ "${BUTTON}" = "BTN_1" ] && [ "${ACTION}" = "pressed" ] && {
+[ "${BUTTON}" = "wps" ] && [ "${ACTION}" = "released" ] && {
     SW="$(uci -q get wireless.@wifi-device[0].disabled)"
     [ "${SW}" = "1" ] \
         && uci set wireless.@wifi-device[0].disabled="0" \
