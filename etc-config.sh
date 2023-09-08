@@ -14,7 +14,7 @@ do
 done
 }
 
-function _func_IPERF3 [
+function _func_IPERF3 {
 while :
 do
   echo -e " \033[1;34mIPERF3設定のスクリプトをダウンロードしてインストールします\033[0;39m"
