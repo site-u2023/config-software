@@ -136,7 +136,7 @@ do
   fi
   echo -e " \033[1;33m10秒\033[0;39m" デバイス再起動 ボタンリリース
   echo -e " \033[1;31m20秒\033[0;39m" デバイス初期化 ボタンリリース
-  read -p " ボタン設定とインストールを開始します [y/n]: " num
+  read -p " ボタン設定とインストール（wpsボタン用）を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_button_INSTALL ;;
     "n" ) exit ;;
