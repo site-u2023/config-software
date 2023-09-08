@@ -54,7 +54,7 @@ uci set system.@button[-1].handler="/usr/bin/wifionoff"
 uci set system.@button[-1].min="0"
 uci set system.@button[-1].max="2"
 uci commit system
- 
+
 cat << "EOF" > /usr/bin/wifionoff
 #!/bin/sh
 [ "${BUTTON}" = "wps" ] && [ "${ACTION}" = "released" ] && {
