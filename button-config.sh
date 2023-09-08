@@ -17,6 +17,18 @@ done
 }
 
 function _func_button_investigation {
+while :
+do
+echo -e " \033[1;32mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
+read -p " 宜しいですか? [y/n]: " num
+case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
+          sed -i -e "s/wps/${str_BUTTON}/g" /etc/config-software/button.sh
+          sh /etc/config-software/button.sh
+          break ;;
+    "n" ) break ;;
+  esac
+done
 echo -e " \033[1;37mボタン調査を開始します\033[0;39m"
 echo -e " \033[1;37m利用可能ボタン\033[0;39m"
 ls /etc/rc.button/
@@ -37,18 +49,6 @@ case $str in
     echo -e " \033[1;32m${str_BUTTON}\033[0;39m"を設定します
     ;;
 esac
-while :
-do
-echo -e " \033[1;32mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
-read -p " 宜しいですか? [y/n]: " num
-case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
-          sed -i -e "s/wps/${str_BUTTON}/g" /etc/config-software/button.sh
-          sh /etc/config-software/button.sh
-          break ;;
-    "n" ) break ;;
-  esac
-done
 }
 
 function _func_button_REMOVE {
@@ -62,6 +62,7 @@ do
           rm /etc/config/system.button.bak
           rm /etc/hotplug.d/button/buttons
           rm /etc/hotplug.d/button/00-button
+          rm /usr/bin/wifionoff
           break ;;
     "n" ) break ;;
   esac
