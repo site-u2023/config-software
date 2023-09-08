@@ -13,10 +13,11 @@ This README is edited in Japanese.
     - v6 コネクト自動設定
     - PPPoE（iPv4・IPv6）: 要認証ID（ユーザー名）・パスワード
     - 終了
-  - [推奨パッケージインストール](https://qiita.com/site_u/items/a23d165201081817cb00)[（USB自動判別）](https://qiita.com/site_u/items/597199882dc4d56c2385#usb)
+  - [推奨パッケージインストール](https://qiita.com/site_u/items/a23d165201081817cb00)
     - 自動フルインストール（初心者対応）
     - 選択インストール
-  - [アクセスポイント（Dumb / ブリッジ）設定](https://qiita.com/site_u/items/0463c782be0acd6d23d3)
+    - [USB](https://qiita.com/site_u/items/597199882dc4d56c2385)
+- [アクセスポイント（Dumb / ブリッジ）設定](https://qiita.com/site_u/items/0463c782be0acd6d23d3)
   - [広告ブロッカー・DNS暗号化インストール](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc)
     - AdGuard
     - AdBlock
