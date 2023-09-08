@@ -12,7 +12,6 @@ fi
 opkg install kmod-button-hotplug
 
 mkdir -p /etc/hotplug.d/button
-
 # 00-button
 cat << "EOF" > /etc/hotplug.d/button/00-button
 source /lib/functions.sh
