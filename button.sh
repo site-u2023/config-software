@@ -72,6 +72,23 @@ cat << "EOF" > /usr/bin/wifionoff
 }
     uci commit wireless; /etc/init.d/network restart
 EOF
+{
+WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
+WIFI_NO=3
+if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
+sed -i "/uci commit wireless/d" /usr/bin/wifionoff
+cat << "EOF" >> /usr/bin/wifionoff
+
+[ "${BUTTON}" = "wps" ] && [ "${ACTION}" = "released" ] && {
+    SW="$(uci -q get wireless.@wifi-device[2].disabled)"
+    [ "${SW}" = "1" ] \
+        && uci set wireless.@wifi-device[2].disabled='0' \
+        || uci set wireless.@wifi-device[2].disabled='1'
+}
+    uci commit wireless; /etc/init.d/network restart
+EOF
+fi
+}
 chmod 755 /usr/bin/wifionoff
 
 wireless.default_radio1.disabled='1'
