@@ -104,8 +104,8 @@ for i in `seq 30 38` `seq 40 47` ; do
     done
     printf "\n"
 done
-
 sleep 1
+
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
  echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
@@ -116,14 +116,15 @@ fi
 
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-  echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37m`date`\033[0;39m"
+  echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37mOpenWrt-CONFIG 03.5.4\033[0;39m"
   echo -e " \033[1;37mAugust 25, 2023\033[0;39m"
   echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software/\033[0;39m" 
   echo -e " \033[1;37mhttps://github.com/site-u2023/config-software\033[0;39m" 
+  echo -e " \033[7;31m当スクリプトご利用に対し、一切の責任は負いかねます\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p "  何かキーを押して下さい"
   echo -e 
