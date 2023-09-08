@@ -65,7 +65,7 @@ do
   echo -e " \033[1;32m[r]\033[0;39m": ボタン設定をリムーブし以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [f/c or q]: " num 
+  read -p " キーを選択してください [w/c/r or q]: " num 
   case "${num}" in
     "w" ) _func_button_INST ;;
     "c" ) _func_button_investigation ;;
