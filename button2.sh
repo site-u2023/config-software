@@ -56,7 +56,7 @@ uci set system.@button[-1].max=${MAX}
 # set
 uci commit system
 
-echo -e " \033[1;36mインストールが完了しました\033[0;39m"
+echo -e " \033[1;36mインストールと設定が完了しました\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 
