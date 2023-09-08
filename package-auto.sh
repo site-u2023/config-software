@@ -12,6 +12,7 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/B
 
 cat << EOF > /etc/config-software/list-installed/Before
 luci
+luci-ssl
 luci-i18n-base-ja
 luci-i18n-opkg-ja
 luci-i18n-firewall-ja
@@ -43,7 +44,8 @@ EOF
 
 # LuCi
 opkg install luci
-
+# LiCi SSL
+opkg install luci-ssl
 # LuCi日本語化
 opkg install luci-i18n-base-ja 
 opkg install luci-i18n-opkg-ja
@@ -262,6 +264,7 @@ fi
   echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m自動フルインストール（初心者向け）\033[0;39m"
   echo -e " \033[1;37m・LuCi\033[0;39m"
+  echo -e " \033[1;37m・LuCi SSL\033[0;39m"
   echo -e " \033[1;37m・LuCi日本語化\033[0;39m"
   echo -e " \033[1;37m・SFTPサーバー\033[0;39m"
   echo -e " \033[1;37m・WEB-SSHクライアント\033[0;39m"
