@@ -10,10 +10,12 @@ fi
 opkg install kmod-button-hotplug
 
 mkdir -p /etc/hotplug.d/button
+
 # log調査用
 cat << "EOF" > /etc/hotplug.d/button/buttons
 logger "the button was ${BUTTON} and the action was ${ACTION}"
 EOF
+
 # 00-button
 cat << "EOF" > /etc/hotplug.d/button/00-button
 source /lib/functions.sh
@@ -47,38 +49,45 @@ EOF
 # WiFi ON ワンプッシュボタンリリース
 BUTTON='wps' # AOSS BUTTON
 
-# WiFi ON 1秒ボタンリリース
+# Toggle Wi-Fi using a script (ON-OFF) 0~3s release
 uci add system button
 uci set system.@button[-1].button=${BUTTON}
 uci set system.@button[-1].action="released"
-uci set system.@button[-1].handler="uci set wireless.radio0.disabled=0; uci set wireless.radio1.disabled=0; uci set wireless.radio2.disabled=0; uci commit; wifi"
+uci set system.@button[-1].handler="/usr/bin/wifionoff"
 uci set system.@button[-1].min="0"
-uci set system.@button[-1].max="2"
+uci set system.@button[-1].max="3"
+uci commit system
+ 
+cat << "EOF" > /usr/bin/wifionoff
+#!/bin/sh
+[ "${BUTTON}" = "BTN_1" ] && [ "${ACTION}" = "pressed" ] && {
+    SW="$(uci -q get wireless.@wifi-device[0].disabled)"
+    [ "${SW}" = "1" ] \
+        && uci set wireless.@wifi-device[0].disabled="0" \
+        || uci set wireless.@wifi-device[0].disabled="1"
+    wifi
+}
+EOF
+chmod u+x /usr/bin/wifionoff
 
-# WiFi OFF 5秒ボタンリリース
-uci add system button
-uci set system.@button[-1].button=${BUTTON}
-uci set system.@button[-1].action="released"
-uci set system.@button[-1].handler="uci set wireless.radio0.disabled=1; uci set wireless.radio1.disabled=1; uci set wireless.radio2.disabled=1; uci commit; wifi"
-uci set system.@button[-1].min="3"
-uci set system.@button[-1].max="7"
-
-# restart 10秒ボタンリリース
+# restart 7～13秒 ボタンリリース
 uci add system button
 uci set system.@button[-1].button=${BUTTON}
 uci set system.@button[-1].action="released"
 uci set system.@button[-1].handler="sleep 70 && touch /etc/banner && reboot"
-uci set system.@button[-1].min="8"
-uci set system.@button[-1].max="15"
+uci set system.@button[-1].min="7"
+uci set system.@button[-1].max="13"
 
-# 初期化 20秒ボタンリリース
+# 初期化 17～23秒 ボタンリリース
 uci add system button
 uci set system.@button[-1].button=${BUTTON}
 uci set system.@button[-1].action="released"
 uci set system.@button[-1].handler="firstboot && reboot now"
-uci set system.@button[-1].min="18"
-uci set system.@button[-1].max="25"
+uci set system.@button[-1].min="17"
+uci set system.@button[-1].max="23"
 
 # set
 uci commit system
 /etc/init.d/system reload
+
+
