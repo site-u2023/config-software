@@ -112,7 +112,6 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
 fi
 
 str_WPS=`ls /etc/rc.button/ | grep -s wps`
-echo $str_WPS
 if [ -z "$str_WPS" ]; then
 read -p " WPSボタンが無い為終了します"
 exit
