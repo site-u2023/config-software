@@ -46,6 +46,8 @@ This README is edited in Japanese.
       - [adblock-config.sh](https://github.com/site-u2023/config-software/blob/main/adblock-config.sh)
         - [adblock.sh](https://github.com/site-u2023/config-software/blob/main/adblock.sh)
     - [etc-config.sh](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
+      - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
+        - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
 
 ### スクリプトセレクター※要ONU直結
