@@ -91,10 +91,6 @@ fi
 
 chmod 755 /usr/bin/wifionoff
 
-wireless.default_radio1.disabled='1'
-uci delete wireless.radio0.disabled
-uci delete wireless.radio1.disabled
-
 # USBストレージアンマウント 3～7秒 ボタンリリース
 if [ -n "$str_USB" ]; then
 uci add system button
