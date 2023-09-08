@@ -7,7 +7,10 @@ function _func_listinstalled {
 if [ -z "$LUCI" ]; then
 opkg install luci
 fi
-
+# LuCi SSl
+if [ -z "$LUCI_SSL" ]; then
+opkg install luci-ssl
+fi
 # LuCi日本語化
 if [ -z "$LUCI_JA" ]; then
 opkg install luci-i18n-base-ja
@@ -330,6 +333,30 @@ do
   esac
 done
 fi
+_func_luci_ssl
+}
+
+function _func_luci_ssl {
+LUCI_SSL=`opkg list-installed luci-ssl | awk '{ print $1 }'`
+if [ -z "$LUCI_SSL" ]; then
+while :
+do
+{
+  echo -e " \033[1;33mLuCI SSLをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-ssl: $((`opkg info luci-ssl | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  }
+  case "${num}" in
+    "y" ) echo luci-ssl >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-ssl | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+          break ;;
+    "n" ) LUCI_SSL='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
 _func_lucii18nbaseja
 }
 
@@ -340,7 +367,6 @@ LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-ja | awk '{ print $1 }'
 if [ -z "$LUCI_JA" ] || [ -z "$LUCI_JA_OPKG" ] || [ -z "$LUCI_JA_FIREWALL" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mLuCI日本語化をインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-i18n-base-ja: $((`opkg info luci-i18n-base-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-opkg-ja: $((`opkg info luci-i18n-opkg-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -353,6 +379,7 @@ do
           echo $((`opkg info luci-i18n-base-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-opkg-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-firewall-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) LUCI_JA='1'
           LUCI_JA_OPKG='1'
@@ -370,13 +397,13 @@ SFTP=`opkg list-installed openssh-sftp-server | awk '{ print $1 }'`
 if [ -z "$SFTP" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mSFTPサーバーをインストールしますか\033[0;39m"
   echo -e " \033[1;32mopenssh-sftp-server: $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before
           echo $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) SFTP='1'
           break ;;
@@ -393,7 +420,6 @@ TTYD_JA=`opkg list-installed luci-i18n-ttyd-ja | awk '{ print $1 }'`
 if [ -z "$TTYD_JA" ] || [ -z "$TTYD_JA" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mWEB-SSHクライアントをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-ttyd: $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-ttyd-ja: $((`opkg info luci-i18n-ttyd-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -403,6 +429,7 @@ do
           echo luci-i18n-ttyd-ja >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-ttyd-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) TTYD='1'
           TTYD_JA='1'
@@ -421,13 +448,13 @@ if [ -z "$CPU" ]; then
  if [ "$CPU_INFO" -gt 3 ]; then
 while :
 do
-    echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
     echo -e " \033[1;33mCPU負荷分散をインストールしますか\033[0;39m"
     echo -e " \033[1;32mirqbalance: $((`opkg info irqbalance | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
     read -p " キーを選択してください [y/n or q]: " num
     case "${num}" in
       "y" ) echo irqbalance >> /etc/config-software/list-installed/Before
             echo $((`opkg info irqbalance | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+            echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
             break ;;
       "n" ) CPU='1'
             break ;;
@@ -446,7 +473,6 @@ SQM_APP_JA=`opkg list-installed luci-i18n-sqm-ja | awk '{ print $1 }'`
 if [ -z "$SQM" ] || [ -z "$SQM_APP" ] || [ -z "$SQM_APP_JA" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mSQMをインストールしますか\033[0;39m"
   echo -e " \033[1;32msqm-scripts: $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-sqm: $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -459,6 +485,7 @@ do
           echo $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-sqm-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) SQM='1'
           SQM_APP='1'
@@ -477,7 +504,6 @@ STATUS_JA=`opkg list-installed luci-i18n-statistics-ja | awk '{ print $1 }'`
 if [ -z "$STATUS" ] || [ -z "$STATUS_JA" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mネットワーク統計インターフェイスをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-statistics: $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-statistics-ja: $((`opkg info luci-i18n-statistics-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -487,6 +513,7 @@ do
           echo luci-i18n-statistics-ja >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-statistics-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) STATUS='1'
           STATUS_JA='1'
@@ -505,7 +532,6 @@ NLBWMON_APP_JA=`opkg list-installed luci-i18n-nlbwmon-ja | awk '{ print $1 }'`
 if [ -z "$NLBWMON" ] || [ -z "$NLBWMON_APP" ] || [ -z "$NLBWMON_APP_JA" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33m帯域幅モニターをインストールしますか\033[0;39m"
   echo -e " \033[1;32mnlbwmon: $((`opkg info nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-nlbwmon: $((`opkg info luci-app-nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -518,6 +544,7 @@ do
           echo $((`opkg info nlbwmon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-nlbwmon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-nlbwmon-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) NLBWMON='1'
           NLBWMON_APP='1'
@@ -537,7 +564,6 @@ WIFISCHEDULE_APP_JA=`opkg list-installed luci-i18n-wifischedule-ja | awk '{ prin
 if [ -z "$WIFISCHEDULE" ] || [ -z "$WIFISCHEDULE_APP" ] || [ -z "$WIFISCHEDULE_APP_JA" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mWiFiスケジュールをインストールしますか\033[0;39m"
   echo -e " \033[1;32mwifischedule: $((`opkg info wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-wifischedule: $((`opkg info luci-app-wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -550,6 +576,7 @@ do
           echo $((`opkg info wifischedule | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-wifischedule | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-wifischedule-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) WIFISCHEDULE='1'
           WIFISCHEDULE_APP='1'
@@ -567,13 +594,13 @@ THEME_OPENWRT=`opkg list-installed luci-theme-openwrt | awk '{ print $1 }'`
 if [ -z "$THEME_OPENWRT" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mテーマ OpenWrtをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-openwrt: $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) THEME_OPENWRT='1'
           break ;;
@@ -589,13 +616,13 @@ THEME_MATERIAL=`opkg list-installed luci-theme-material | awk '{ print $1 }'`
 if [ -z "$THEME_MATERIAL" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mテーマ マテリアルをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-material: $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-material >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) THEME_MATERIAL='1'
           break ;;
@@ -611,13 +638,13 @@ THEME_2020=`opkg list-installed luci-theme-openwrt-2020 | awk '{ print $1 }'`
 if [ -z "$THEME_2020" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mテーマ OpenWrt2020をインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-openwrt-2020: $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) THEME_2020='1'
           break ;;
@@ -633,7 +660,6 @@ LOG=`opkg list-installed luci-app-log | awk '{ print $1 }'`
 if [ -z "$LOG" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33mログ情報をインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-log: $((5791/1024))KB\033[0;39m"
@@ -641,6 +667,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before
           echo $((5791/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) LOG='1'
           break ;;
@@ -656,7 +683,6 @@ CPU_STATUS=`opkg list-installed luci-app-cpu-status | awk '{ print $1 }'`
 if [ -z "$CPU_STATUS" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33mCPUステータスをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-cpu-status: $((1445/1024))KB\033[0;39m"
@@ -664,6 +690,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before
           echo $((1445/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) CPU_STATUS='1'
           break ;;
@@ -679,7 +706,6 @@ CPU_PERFORMANCE=`opkg list-installed luci-app-cpu-perf | awk '{ print $1 }'`
 if [ -z "$CPU_PERFORMANCE" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33mCPUパフォーマンスをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-cpu-perf: $((6519/1024))KB\033[0;39m"
@@ -687,6 +713,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before
           echo $((0/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) CPU_PERFORMANCE='1'
           break ;;
@@ -702,7 +729,6 @@ TMP_STATUS=`opkg list-installed luci-app-temp-status | awk '{ print $1 }'`
 if [ -z "$TMP_STATUS" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33m温度センサーをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-temp-status: $((2032/1024))KB\033[0;39m"
@@ -710,6 +736,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before
           echo $((2032/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) TMP_STATUS='1'
           break ;;
@@ -726,7 +753,6 @@ DETECTER_APP=`opkg list-installed luci-app-internet-detector | awk '{ print $1 }
 if [ -z "$DETECTER" ] || [ -z "$DETECTER_APP" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33mインターネット可用性確認をインストールしますか\033[0;39m"
   echo -e " \033[1;32minternet-detector: $((10680/1024))KB\033[0;39m"
@@ -737,6 +763,7 @@ do
           echo luci-app-internet-detector >> /etc/config-software/list-installed/Before
           echo $((10680/1024)) >> /etc/config-software/list-installed/Flash
           echo $((7771/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) DETECTER='1'
           DETECTER_APP='1'
@@ -755,7 +782,6 @@ LIB=`opkg list-installed luci-lib-ipkg | awk '{ print $1 }'`
 if [ -z "$ARGON" ] || [ -z "$COMPAT" ] || [ -z "$LIB" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33mテーマARGONをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-theme-argon: $((388904/1024))KB\033[0;39m"
@@ -772,6 +798,7 @@ do
           echo $((388904/1024)) >> /etc/config-software/list-installed/Flash
           echo $((46213/1024)) >> /etc/config-software/list-installed/Flash
           echo $((2062/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) ARGON='1'
           COMPAT='1'
@@ -799,7 +826,6 @@ luci_app_disks_info=`opkg list-installed luci-app-disks-info | awk '{ print $1 }
 if [ -z "$luci_app_disks_info" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33mディスクインフォをインストールしますか\033[0;39m"
   echo -e " \033[1;32mluci-app-disks-info: $((481/1024))KB\033[0;39m"
@@ -807,6 +833,7 @@ do
   case "${num}" in
     "y" ) echo luci-app-disks-info >> /etc/config-software/list-installed/Before
           echo $((481/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) luci_app_disks_info='1'
           break ;;
@@ -830,7 +857,6 @@ luci_app_ledtrig_usbport=`opkg list-installed luci-app-ledtrig-usbport | awk '{ 
 if [ -z "$block_mount" ] || [  -z "$kmod_usb_storage" ] || [  -z "$kmod_usb_storage_uas" ] || [  -z "$usbutils" ] || [ -z "$gdisk" ] || [ -z  "$libblkid1" ] || [  -z "$kmod_usb_ledtrig_usbport" ] || [  -z "$luci_app_ledtrig_usbport" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mUSBベースパッケージをインストールしますか\033[0;39m"
   echo -e " \033[1;32mblock-mount : $((`opkg info block-mount | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-usb-storage : $((`opkg info kmod-usb-storage | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -858,6 +884,7 @@ do
           echo $((`opkg info libblkid1 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-usb-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) block_mount='1'
           kmod_usb_storage='1'
@@ -881,7 +908,6 @@ kmod_fs_vfat=`opkg list-installed kmod-fs-vfat | awk '{ print $1 }'`
 if [ -z "$dosfstools" ] || [ -z "$kmod_fs_vfat" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mFAT32をインストールしますか\033[0;39m"
   echo -e " \033[1;32mdosfstools: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-vfat: $((7771/1024))KB\033[0;39m"
@@ -891,6 +917,7 @@ do
           echo kmod-fs-vfat >> /etc/config-software/list-installed/Before
           echo $((`opkg info dosfstools | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-fs-vfat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) dosfstools='1'
           kmod_fs_vfat='1'
@@ -908,7 +935,6 @@ kmod_fs_ext4=`opkg list-installed kmod-fs-ext4 | awk '{ print $1 }'`
 if [ -z "$e2fsprogs" ] || [ -z "$kmod_fs_ext4" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mext4をインストールしますか\033[0;39m"
   echo -e " \033[1;32me2fsprogs: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-ext4: $((7771/1024))KB\033[0;39m"
@@ -918,6 +944,7 @@ do
           echo kmod-fs-ext4 >> /etc/config-software/list-installed/Before
           echo $((`opkg info e2fsprogs | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-fs-ext4 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) e2fsprogs='1'
           kmod_fs_ext4='1'
@@ -935,7 +962,6 @@ kmod_fs_f2fs=`opkg list-installed kmod-fs-f2fs | awk '{ print $1 }'`
 if [ -z "$f2fs_tools" ] || [ -z "$kmod_fs_f2fs" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mf2fsをインストールしますか\033[0;39m"
   echo -e " \033[1;32mf2fs-tools: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-f2fs: $((7771/1024))KB\033[0;39m"
@@ -945,6 +971,7 @@ do
           echo kmod-fs-f2fs >> /etc/config-software/list-installed/Before
           echo $((`opkg info f2fs-tools | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-fs-f2fs | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) f2fs_tools='1'
           kmod_fs_f2fs='1'
@@ -962,7 +989,6 @@ kmod_fs_exfat=`opkg list-installed kmod-fs-exfat | awk '{ print $1 }'`
 if [ -z "$exfat_fsck" ] || [ -z "$kmod_fs_exfat" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mexFATをインストールしますか\033[0;39m"
   echo -e " \033[1;32mexfat-fsck: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-exfat: $((7771/1024))KB\033[0;39m"
@@ -972,6 +998,7 @@ do
           echo kmod-fs-exfat >> /etc/config-software/list-installed/Before
           echo $((`opkg info exfat-fsck | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-fs-exfat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) exfat_fsck='1'
           kmod_fs_exfat='1'
@@ -989,7 +1016,6 @@ kmod_fs_ntfs3=`opkg list-installed kmod-fs-ntfs3 | awk '{ print $1 }'`
 if [ -z "$ntfs_3g" ] || [ -z "$kmod_fs_ntfs3" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mNTFSをインストールしますか\033[0;39m"
   echo -e " \033[1;32mntfs-3g: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-ntfs3: $((7771/1024))KB\033[0;39m"
@@ -999,6 +1025,7 @@ do
           echo kmod-fs-ntfs3 >> /etc/config-software/list-installed/Before
           echo $((`opkg info ntfs-3g | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-fs-ntfs3 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) ntfs_3g='1'
           kmod_fs_ntfs3='1'
@@ -1016,7 +1043,6 @@ kmod_fs_hfs=`opkg list-installed kmod-fs-hfs | awk '{ print $1 }'`
 if [ -z "$hfsfsck" ] || [ -z "$kmod_fs_hfs" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mHFS & HFS+をインストールしますか\033[0;39m"
   echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-hfs: $((7771/1024))KB\033[0;39m"
@@ -1026,6 +1052,7 @@ do
           echo kmod-fs-hfs >> /etc/config-software/list-installed/Before
           echo $((`opkg info hfsfsck | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-fs-hfs | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) hfsfsck='1'
           kmod_fs_hfs='1'
@@ -1045,7 +1072,6 @@ luci_i18n_hd_idle_ja=`opkg list-installed luci-i18n-hd-idle-ja | awk '{ print $1
 if [ -z "$hdparm" ] || [ -z "$hd_idle" ] || [ -z "$luci_app_hd_idle" ] || [ -z "$luci_i18n_hd_idle_ja" ]; then
 while :
 do
-  echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mHDDをインストールしますか\033[0;39m"
   echo -e " \033[1;32mhd-idle: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-hd-idle: $((7771/1024))KB\033[0;39m"
@@ -1061,6 +1087,7 @@ do
           echo $((`opkg info hd-idle | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-hd-idle | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-hd-idle-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) hdparm='1'
           hd_idle='1'
@@ -1114,7 +1141,8 @@ fi
   echo -e " \033[1;32m利用可能フラッシュサイズ: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37m選択インストール\033[0;39m"
   echo -e " \033[1;37mパッケージの選択を開始します\033[0;39m"
-  echo -e " \033[1;37m・LuCi: luci（スナップショット）\033[0;39m"
+  echo -e " \033[1;37m・LuCi: luci（スナップショットのみ）\033[0;39m"
+  echo -e " \033[1;37m・LuCi: luci SSL\033[0;39m"
   echo -e " \033[1;37m・LuCi日本語化: luci-i18n-base-ja\033[0;39m"
   echo -e " \033[1;37m・SFTPサーバー: openssh-sftp-server\033[0;39m"
   echo -e " \033[1;37m・WEB-SSHクライアント: luci-app-ttyd\033[0;39m"
