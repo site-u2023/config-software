@@ -6,7 +6,6 @@ function _func_button_INST {
 while :
 do
   echo -e " \033[1;34mボタン設定とインストール（WPSボタン用）のスクリプトをダウンロードします\033[0;39m"
-  echo -e " \033[1;34m調査の為ボタン設定とインストールが先に必要です\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
@@ -21,6 +20,7 @@ function _func_button_investigation {
 while :
 do
 echo -e " \033[1;32mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
+echo -e " \033[1;34m調査の為ボタン設定とインストールが先に必要です\033[0;39m"
 read -p " 宜しいですか? [y/n]: " num
 case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
