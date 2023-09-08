@@ -121,10 +121,11 @@ do
    case "${num}" in
     "y" ) opkg remove kmod-button-hotplug
           cp /etc/config/system.button.bak /etc/config/system
-          rm /etc/config/system.button.bak
-          rm /etc/hotplug.d/button/buttons
-          rm /etc/hotplug.d/button/00-button
-          rm /usr/bin/wifionoff ;;
+          rm -f /etc/config/system.button.bak
+          rm -f /etc/config/system.button2.bak
+          rm -f /etc/hotplug.d/button/butons
+          rm -f /etc/hotplug.d/button/00-button
+          rm -f /usr/bin/wifionoff ;;
     "n" ) break ;;
   esac
 done
