@@ -12,10 +12,7 @@ fi
 opkg install kmod-button-hotplug
 
 mkdir -p /etc/hotplug.d/button
-# log調査用
-cat << "EOF" > /etc/hotplug.d/button/buttons
-logger "the button was ${BUTTON} and the action was ${ACTION}"
-EOF
+
 # 00-button
 cat << "EOF" > /etc/hotplug.d/button/00-button
 source /lib/functions.sh
@@ -121,7 +118,10 @@ uci set system.@button[-1].max="23"
 # set
 uci commit system
 
-exit
+echo -e " \033[1;36mインストールが完了しました\033[0;39m"
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+
 }
 
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
