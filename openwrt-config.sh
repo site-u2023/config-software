@@ -118,12 +118,12 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37m`date`\033[0;39m"
-  echo -e " \033[1;37mOpenWrt-CONFIG 03.5.3\033[0;39m"
+  echo -e " \033[1;37mOpenWrt-CONFIG 03.5.4\033[0;39m"
   echo -e " \033[1;37mAugust 25, 2023\033[0;39m"
   echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
   echo -e " \033[1;37mスクリプト設置ディレクトリ: /etc/config-software/\033[0;39m" 
-  echo -e " \033[1;37mhttps://github.com/site-u2023/config-software/blob/main/README.md\033[0;39m" 
+  echo -e " \033[1;37mhttps://github.com/site-u2023/config-software\033[0;39m" 
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p "  何かキーを押して下さい"
   echo -e 
