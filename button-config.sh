@@ -9,28 +9,19 @@ do
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
-          sh /etc/config-software/button.sh
-          echo -e " \033[1;36mインストールが完了しました\033[0;39m"
-          read -p " 何かキーを押してデバイスを再起動してください"
-          reboot ;;
+          sh /etc/config-software/button.sh ;;
     "n" ) exit;;
   esac
 done
 }
 
 function _func_button_investigation {
-while :
-do
-echo -e " \033[1;32mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
-echo -e " \033[1;33m調査の為ボタン設定とインストールが先に必要です\033[0;39m"
-read -p " 宜しいですか? [y/n]: " num
-case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
-          sed -i -e "s/wps/${str_BUTTON}/g" /etc/config-software/button.sh
-          sh /etc/config-software/button.sh ;;
-    "n" ) exit ;;
-  esac
-done
+
+mkdir -p /etc/hotplug.d/button
+# log調査用
+cat << "EOF" > /etc/hotplug.d/button/buttons
+logger "the button was ${BUTTON} and the action was ${ACTION}"
+EOF
 echo -e " \033[1;37mボタン調査を開始します\033[0;39m"
 echo -e " \033[1;37m利用可能ボタン\033[0;39m"
 ls /etc/rc.button/
@@ -51,10 +42,10 @@ case $str in
     echo -e " \033[1;32m${str_BUTTON}\033[0;39m"を設定します
     ;;
 esac
+wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
+sed -i -e "s/wps/${str_BUTTON}/g" /etc/config-software/button.sh
 sh /etc/config-software/button.sh
-echo -e " \033[1;36mインストールが完了しました\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
+
 }
 
 function _func_button_REMOVE {
