@@ -60,12 +60,16 @@ cat << "EOF" > /usr/bin/wifionoff
 [ "${BUTTON}" = "wps" ] && [ "${ACTION}" = "released" ] && {
     SW="$(uci -q get wireless.@wifi-device[0].disabled)"
     [ "${SW}" = "1" ] \
-        && uci set wireless.@wifi-device[0].disabled="0" \
-        || uci set wireless.@wifi-device[0].disabled="1"
+        && uci set wireless.@wifi-device[0].disabled='0'; uci set wireless.@wifi-device[1].disabled='0' \
+        || uci set wireless.@wifi-device[0].disabled='1': uci set wireless.@wifi-device[0].disabled='1'
     wifi
 }
 EOF
-chmod u+x /usr/bin/wifionoff
+chmod 755 /usr/bin/wifionoff
+
+wireless.default_radio1.disabled='1'
+uci delete wireless.radio0.disabled
+uci delete wireless.radio1.disabled
 
 # USBストレージアンマウント 3～7秒 ボタンリリース
 if [ -n "$str_USB" ]; then
