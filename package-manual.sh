@@ -814,6 +814,31 @@ _func_USB
 # USB判定
 function _func_USB {
 if [ -n "$str_USB" ]; then
+luci_app_disks_info='1'
+block_mount='1'
+kmod_usb_storage='1'
+kmod_usb_storage_uas='1'
+usbutils='1'
+gdisk='1'
+libblkid1='1'
+kmod_usb_ledtrig_usbport='1'
+luci_app_ledtrig_usbport='1'
+dosfstools='1'
+          kmod_fs_vfat='1'
+e2fsprogs='1'
+          kmod_fs_ext4='1'
+f2fs_tools='1'
+          kmod_fs_f2fs='1'
+          exfat_fsck='1'
+          kmod_fs_exfat='1'
+ntfs_3g='1'
+          kmod_fs_ntfs3='1'
+hfsfsck='1'
+          kmod_fs_hfs='1'
+hdparm='1'
+          hd_idle='1'
+          luci_app_hd_idle='1'
+          luci_i18n_hd_idle_ja='1'
 _func_DISK_INFO
 else
 _func_listinstalled_After
