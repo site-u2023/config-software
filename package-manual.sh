@@ -843,8 +843,6 @@ hd_idle='1'
 luci_app_hd_idle='1'
 luci_i18n_hd_idle_ja='1'
 kmod-cdrom='1'
-kmod-nls-base='1'
-kmod-nls-utf8='1'
 
 _func_listinstalled_After
 fi
