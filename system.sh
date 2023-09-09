@@ -71,7 +71,7 @@ uci commit dhcp
 
 # Wi-Fi Aチャンネル
 WIFI_SSID_A='SSID_A'
-wifi_PASSWORD_A='password'
+WIFI_PASSWORD_A='password'
 uci set wireless.radio0.country='JP'
 uci set wireless.radio0.txpower='10'
 # uci set wireless.radio0.noscan='1'
@@ -80,7 +80,7 @@ uci set wireless.radio0.rts='2346'
 uci set wireless.radio0.cell_density='1'
 uci set wireless.default_radio0.encryption='sae-mixed'
 uci set wireless.default_radio0.ssid=${WIFI_SSID_A}
-uci set wireless.default_radio0.key=${wifi_PASSWORD_A}
+uci set wireless.default_radio0.key=${WIFI_PASSWORD_A}
 uci set wireless.default_radio0.multicast_to_unicast='1'
 uci set wireless.default_radio0.isolate='1'
 # uci set wireless.default_radio0.macaddr='random' # Random Mac Address
@@ -101,7 +101,7 @@ uci set wireless.default_radio1.multicast_to_unicast='1'
 uci set wireless.default_radio1.isolate='1'
 # uci set wireless.default_radio1.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio1.wpa_disable_eapol_key_retries='1'
-# Wi-Fi Bチャンネル
+# Wi-Fi Cチャンネル
 WIFI_SSID_C='SSID_C'
 WIFI_PASSWORD_C='password'
 uci set wireless.radio2.country='JP'
