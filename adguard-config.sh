@@ -140,9 +140,7 @@ fi
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome stop
 fi
-if [ ${AD_WEB} != "ad_web" ]; then
 wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
-fi
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
@@ -170,6 +168,7 @@ read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 else
+echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押して終了して下さい"
 exit
 fi
