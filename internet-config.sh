@@ -26,7 +26,7 @@ done
 function _func_MAP_e_VirtualConnect_confirmation
 while :
 do
-  echo -e " \033[1;37mOCNバーチャルコネクトの設定とインストールとを実行します\033[0;39m"
+  echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定とインストールとを実行します\033[0;39m"
   echo -e " \033[1;37mインストール: map 6kB\033[0;39m"
   echo -e " \033[1;37mインストール: bash 375kB\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
@@ -58,7 +58,7 @@ exit
 function _func_MAP_e_VirtualConnect_Before
 while :
 do
-  echo -e " \033[1;37mOCNバーチャルコネクトの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
@@ -94,7 +94,7 @@ done
 function _func_MAP_e_V6plus_confirmation
 while :
 do
-  echo -e " \033[1;37mV6プラス・IPv6オプションの設定を実行します\033[0;39m"
+  echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を実行します\033[0;39m"
   echo -e " \033[1;37mパッケージ: map サイズ: 6kBをインストールします\033[0;39m"
   echo -e " \033[1;37mパッケージ: bash サイズ: 375kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
@@ -126,7 +126,7 @@ exit
 function _func_MAP_e_V6plus_Before
 while :
 do
-  echo -e " \033[1;37mV6プラス・IPv6オプションの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
