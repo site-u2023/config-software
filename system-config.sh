@@ -56,7 +56,7 @@ function _func_WIFI_SSID_B
 while :
 do
   echo -e " \033[1;32mWi-Fi(wwan1)のSSIDを入力して下さい\033[0;39m"
-  rread -p " Wi-Fi(wwan1)のSSID: " input_str_WIFI_SSID_B
+  read -p " Wi-Fi(wwan1)のSSID: " input_str_WIFI_SSID_B
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
