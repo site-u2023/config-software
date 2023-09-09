@@ -868,7 +868,9 @@ uci set dhcp.wan6.dhcpv6='relay'
 uci set dhcp.wan6.ndp='relay'
 # WAN6 # Onry_V6plus
 uci set network.wan6=interface # Onry_V6plus
-uci set network.wan6.proto='static' # Onry_V6plus
+uci set network.wan6.proto='dhcpv6' # Onry_V6plus
+uci set network.wan6.reqaddress='try' # Onry_V6plus
+uci set network.wan6.reqprefix='auto' # Onry_V6plus
 uci set network.wan6.ip6prefix=${CE}::/56 # Onry_V6plus
 # WAN6RA # Onry_OCN
 WAN6RA='wan6ra' # Onry_OCN
@@ -893,8 +895,8 @@ uci set network.${WANMAP}.psidlen=${psidlen}
 uci set network.${WANMAP}.offset=${offset}
 uci set network.${WANMAP}.legacymap='1'
 uci set network.${WANMAP}.mtu='1460'
-uci set network.${WANMAP}.encaplimit='ignore' # Onry_V6plus
 uci set network.${WANMAP}.tunlink='wan6' # Onry_V6plus
+uci set network.${WANMAP}.encaplimit='ignore' # Onry_V6plus
 # FW
 ZOON_NO='1'
 uci del_list firewall.@zone[${ZOON_NO}].network='wan'
