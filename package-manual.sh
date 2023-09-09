@@ -837,10 +837,15 @@ ntfs_3g='1'
 kmod_fs_ntfs3='1'
 hfsfsck='1'
 kmod_fs_hfs='1'
+kmod-fs-hfsplus='1'
 hdparm='1'
 hd_idle='1'
 luci_app_hd_idle='1'
 luci_i18n_hd_idle_ja='1'
+kmod-cdrom='1'
+kmod-nls-base='1'
+kmod-nls-utf8='1'
+
 _func_listinstalled_After
 fi
 }
