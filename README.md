@@ -44,7 +44,7 @@ This README is edited in Japanese.
     - AdGuard
     - AdBlock
   - 他
-    - [ボタン](https://qiita.com/site_u/items/08764ce9473231482c17)
+    - [ボタン（スイッチ）](https://qiita.com/site_u/items/08764ce9473231482c17)
     - [IPERF3](https://qiita.com/site_u/items/599124e2904d1374c2c9#iperf3)
     - [WiFi位置情報サービス停止](https://qiita.com/site_u/items/3cd3fc65a789461262e8#%E4%BD%8D%E7%BD%AE%E6%83%85%E5%A0%B1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%81%9C%E6%AD%A2)
   - 終了
