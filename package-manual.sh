@@ -814,6 +814,8 @@ _func_USB
 # USB判定
 function _func_USB {
 if [ -n "$str_USB" ]; then
+_func_DISK_INFO
+else
 luci_app_disks_info='1'
 block_mount='1'
 kmod_usb_storage='1'
@@ -839,8 +841,6 @@ hdparm='1'
 hd_idle='1'
 luci_app_hd_idle='1'
 luci_i18n_hd_idle_ja='1'
-_func_DISK_INFO
-else
 _func_listinstalled_After
 fi
 }
