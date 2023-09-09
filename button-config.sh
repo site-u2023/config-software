@@ -5,7 +5,7 @@
 function _func_button_INST {
 while :
 do
-  echo -e " \033[1;34mボタン設定とインストール（WPSボタン用）のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;34mボタン（スイッチ）設定とインストール（WPSボタン用）のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button.sh
@@ -21,18 +21,18 @@ mkdir -p /etc/hotplug.d/button
 cat << "EOF" > /etc/hotplug.d/button/buttons
 logger "the button was ${BUTTON} and the action was ${ACTION}"
 EOF
-echo -e " \033[1;37m該当ボタン調査を開始します\033[0;39m"
-echo -e " \033[1;32m`uname -n`\033[0;39m"の利用したいボタンを押して離して下さい
+echo -e " \033[1;37mボタン（スイッチ）調査を開始します\033[0;39m"
+echo -e " \033[1;32m`uname -n`\033[0;39m"の利用したいボタン（スイッチ）を押して離して下さい
 echo -e ""
-read -p " ボタンを押して放したら何かキーを押して下さい"
+read -p " ボタン（スイッチ）を押して放し（切替）何かキーを押して下さい"
 str_BUTTON=`logread | tail -n 1  | grep button | awk '{ print $11 }'`
 str_ACTION=`logread | tail -n 1  | grep button | awk '{ print $16 }'`
 if [ -z "$str_BUTTON" ]; then
-echo -e " \033[1;33mボタンを押して放していない、または非対応ボタンです\033[0;39m"
+echo -e " \033[1;33mボタン（スイッチ）を押して放していない、または非対応ボタン（スイッチ）です\033[0;39m"
 read -p " 何かキーを押して下さい"
 exit
 fi
-echo -e " \033[1;35m${str_BUTTON}\033[0;39m"が調査したボタンです
+echo -e " \033[1;35m${str_BUTTON}\033[0;39m"が調査したボタン（スイッチ）です
 echo -e " \033[1;35m${str_ACTION}\033[0;39m"が調査したアクションです
 read -p " 何かキーを押して下さい"
 _func_HANDLER
@@ -87,7 +87,7 @@ function _func_SET {
 while :
 do
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  echo -e " \033[1;35mボタン名: ${str_BUTTON}\033[0;39m"
+  echo -e " \033[1;35mボタン（スイッチ）名: ${str_BUTTON}\033[0;39m"
   echo -e " \033[1;35mアクション: ${str_ACTION}\033[0;39m"
   echo -e " \033[1;32mコマンド: ${str_HANDLER}\033[0;39m"
   echo -e " \033[1;32m最小受付時間（秒）: ${str_MIN}\033[0;39m"
@@ -115,7 +115,7 @@ sh /etc/config-software/button2.sh
 function _func_button_REMOVE {
 while :
 do
-  echo -e " \033[1;31mボタン設定をリムーブし以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;31mボタン（スイッチ）設定をリムーブし以前の設定に復元します\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
    case "${num}" in
     "y" ) opkg remove kmod-button-hotplug
@@ -141,8 +141,8 @@ fi
 while :
 do
   echo -e " \033[1;37mbutton-config ----------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[w]\033[0;39m": ボタン設定とインストール（wpsボタン用）
-  echo -e " \033[1;32m[c]\033[0;39m": ボタン調査後ボタン設定とインストール（カスタム）
+  echo -e " \033[1;34m[w]\033[0;39m": ボタン（スイッチ）設定とインストール（wpsボタン用）
+  echo -e " \033[1;32m[c]\033[0;39m": ボタン（スイッチ）調査後ボタンとスイッチとインストール（カスタム）
   echo -e " \033[1;31m[r]\033[0;39m": ボタン設定をリムーブし以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
