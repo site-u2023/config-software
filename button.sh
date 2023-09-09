@@ -45,10 +45,10 @@ BUTTON='wps' # AOSS BUTTON
 # WiFi ON ワンプッシュボタンリリース
 uci add system button
 uci set system.@button[-1].button=${BUTTON}
-uci set system.@button[-1].action="released"
-uci set system.@button[-1].handler="/usr/bin/wifionoff"
-uci set system.@button[-1].min="0"
-uci set system.@button[-1].max="2"
+uci set system.@button[-1].action='released'
+uci set system.@button[-1].handler='/usr/bin/wifionoff'
+uci set system.@button[-1].min='0'
+uci set system.@button[-1].max='2'
 
 cat << "EOF" > /usr/bin/wifionoff
 #!/bin/sh
@@ -88,27 +88,27 @@ fi
 if [ -n "$str_USB" ]; then
 uci add system button
 uci set system.@button[-1].button=${BUTTON}
-uci set system.@button[-1].action="released"
+uci set system.@button[-1].action='released'
 uci set system.@button[-1].handler="for i in \$(mount | awk '/dev\/sd[b-z]/{print \$1}'); do umount \${i}; done"
-uci set system.@button[-1].min="3"
-uci set system.@button[-1].max="7"
+uci set system.@button[-1].min='3'
+uci set system.@button[-1].max='7'
 fi
 
 # restart 7～13秒 ボタンリリース
 uci add system button
 uci set system.@button[-1].button=${BUTTON}
-uci set system.@button[-1].action="released"
-uci set system.@button[-1].handler="reboot"
-uci set system.@button[-1].min="8"
-uci set system.@button[-1].max="13"
+uci set system.@button[-1].action='released'
+uci set system.@button[-1].handler='reboot'
+uci set system.@button[-1].min='8'
+uci set system.@button[-1].max='13'
 
 # 初期化 17～23秒 ボタンリリース
 uci add system button
 uci set system.@button[-1].button=${BUTTON}
-uci set system.@button[-1].action="released"
+uci set system.@button[-1].action='released'
 uci set system.@button[-1].handler="firstboot && reboot now"
-uci set system.@button[-1].min="18"
-uci set system.@button[-1].max="23"
+uci set system.@button[-1].min='18'
+uci set system.@button[-1].max='23'
 
 # set
 uci commit system
