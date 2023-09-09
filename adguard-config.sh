@@ -40,9 +40,9 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
    exit
   fi
 }
+          AD_INST='ad_inst'
           _func_AdGuard_Confirm ;;
-    "w" ) AD_WEB='ad_web'
-          _func_AdGuard_Confirm ;;        
+    "w" ) _func_AdGuard_Confirm ;;        
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
@@ -155,7 +155,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 service adguardhome start
 fi
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
-if [ ${AD_WEB} != "ad_web" ]; then
+if [ ${AD_INST} = "ad_inst" ]; then
 read -p " 何かキーを押してインストールを開始して下さい"
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sh /etc/config-software/adguard.sh
