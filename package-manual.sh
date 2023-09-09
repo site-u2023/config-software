@@ -842,7 +842,7 @@ hdparm='1'
 hd_idle='1'
 luci_app_hd_idle='1'
 luci_i18n_hd_idle_ja='1'
-kmod-cdrom='1'
+# kmod-cdrom='1'
 
 _func_listinstalled_After
 fi
@@ -1068,22 +1068,27 @@ _func_HFS
 function _func_HFS {
 hfsfsck=`opkg list-installed hfsfsck | awk '{ print $1 }'`
 kmod_fs_hfs=`opkg list-installed kmod-fs-hfs | awk '{ print $1 }'`
-if [ -z "$hfsfsck" ] || [ -z "$kmod_fs_hfs" ]; then
+kmod_fs_hfsplus=`opkg list-installed kmod-fs-hfsplus | awk '{ print $1 }'`
+if [ -z "$hfsfsck" ] || [ -z "$kmod_fs_hfs" ] || [ -z "$kmod_fs_hfsplus" ]; then
 while :
 do
   echo -e " \033[1;33mHFS & HFS+をインストールしますか\033[0;39m"
   echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-hfs: $((7771/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-hfsplus: $((5415/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
     "y" ) echo hfsfsck >> /etc/config-software/list-installed/Before
           echo kmod-fs-hfs >> /etc/config-software/list-installed/Before
+          echo kmod-fs-hfsplus >> /etc/config-software/list-installed/Before
           echo $((`opkg info hfsfsck | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info kmod-fs-hfs | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-hfsplus | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) hfsfsck='1'
           kmod_fs_hfs='1'
+          kmod_fs_hfsplus='1'
           break ;;
     "q" ) exit ;;
   esac
