@@ -28,7 +28,7 @@ read -p " ボタンを押して放したら何かキーを押して下さい"
 str_BUTTON=`logread | tail -n 1  | grep button | awk '{ print $11 }'`
 str_ACTION=`logread | tail -n 1  | grep button | awk '{ print $16 }'`
 if [ -z "$str_BUTTON" ]; then
-echo -e " \033[1;33mボタンを押して放していない、または非対応です\033[0;39m"
+echo -e " \033[1;33mボタンを押して放していない、または非対応ボタンです\033[0;39m"
 read -p " 何かキーを押して下さい"
 exit
 fi
