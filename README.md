@@ -1,3 +1,7 @@
+# OpenWrt For new settings All-in-one script Suitable for beginners
+
+Japanese notation
+
 ### スクリプトセレクター※要ONU直結
 推奨設定順序: システム > インターネット > パッケージ
 ```bash:/etc/config-software/openwrt-config.sh
