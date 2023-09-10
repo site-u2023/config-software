@@ -1,7 +1,7 @@
 #! /bin/sh
 
 
-function _func_MAP_e_VirtualConnect
+function _func_MAP_e_VirtualConnect {
 while :
 do
   echo -e " \033[1;33m要ONU直結\033[0;39m"
@@ -22,8 +22,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_VirtualConnect_confirmation
+function _func_MAP_e_VirtualConnect_confirmation {
 while :
 do
   echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定とインストールとを実行します\033[0;39m"
@@ -36,9 +37,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_VirtualConnect_SET
-{
+function _func_MAP_e_VirtualConnect_SET {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
@@ -55,7 +56,7 @@ reboot
 exit
 }
 
-function _func_MAP_e_VirtualConnect_Before
+function _func_MAP_e_VirtualConnect_Before {
 while :
 do
   echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
@@ -68,8 +69,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_V6plus
+function _func_MAP_e_V6plus {
 while :
 do
   echo -e " \033[1;33m要ONU直結\033[0;39m"
@@ -90,8 +92,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_V6plus_confirmation
+function _func_MAP_e_V6plus_confirmation {
 while :
 do
   echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を実行します\033[0;39m"
@@ -104,9 +107,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_V6plus_SET
-{
+function _func_MAP_e_V6plus_SET {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
@@ -123,7 +126,7 @@ reboot
 exit
 }
 
-function _func_MAP_e_V6plus_Before
+function _func_MAP_e_V6plus_Before {
 while :
 do
   echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
@@ -136,9 +139,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_Before_Restoration
-{
+function _func_MAP_e_Before_Restoration {
 cp /etc/config/network.map-e.old /etc/config/network
 rm /etc/config/network.map-e.old
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
@@ -149,7 +152,7 @@ reboot
 exit
 }
 
-function _func_MAP_e_Nichiban_map
+function _func_MAP_e_Nichiban_map {
 while :
 do
   echo -e " \033[1;37m ニチバン対策の設定を実行します\033[0;39m"
@@ -160,16 +163,16 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_Nichiban_map_SET
-{
+function _func_MAP_e_Nichiban_map_SET {
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 }
 
-function _func_MAP_e_Nichiban_map_Before
+function _func_MAP_e_Nichiban_map_Before {
 while :
 do
   echo -e " \033[1;37mニチバン対策の設定を以前の設定に復元します\033[0;39m"
@@ -180,9 +183,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_MAP_e_Nichiban_map_Restoration
-{
+function _func_MAP_e_Nichiban_map_Restoration {
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -190,38 +193,41 @@ reboot
 exit
 }
 
-function _func_DS_LITE_Transix
+function _func_DS_LITE_Transix {
 while :
 do
   echo -e " \033[1;32mトランジックス ---------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": トランジックスの設定を実行します
+  echo -e " \033[1;34m[e]\033[0;39m": （NTT東日本エリア）トランジックスの設定を実行します
+  echo -e " \033[1;32m[w]\033[0;39m": （NTT西日本エリア）トランジックスの設定を実行します
   echo -e " \033[1;31m[b]\033[0;39m": 以前の設定に復元します
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;32m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or r]: " num
+  read -p " キーを選択してください [e/w/b or r]: " num
   case "${num}" in
-    "e" ) _func_DS_LITE_Transix_confirmation ;;
+    "e" ) _func_DS_LITE_Transix_confirmation_east ;;
+    "w" ) _func_DS_LITE_Transix_confirmation_west ;;
     "b" ) _func_DS_LITE_Transix_Before ;;
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_Transix_confirmation
+function _func_DS_LITE_Transix_confirmation_east {
 while :
 do
-  echo -e " \033[1;37mトランジックスの設定を実行します\033[0;39m"
-  echo -e " \033[1;37mgw.transix.jp: 2404:8e00::feed:100\033[0;39m"  
+  echo -e " \033[1;34m（東日本エリア）トランジックスの設定を実行します\033[0;39m"
+  echo -e " \033[1;37mgw.transix.jp: 2404:8e00::feed:100\033[0;39m" 
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_DS_LITE_Transix_SET ;;
+    "y" ) _func_DS_LITE_Transix_east_SET ;;
     "n" ) _func_DS_LITE_Transix ;;
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_Transix_SET
-{
+function _func_DS_LITE_Transix_east_SET {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
@@ -235,7 +241,36 @@ reboot
 exit
 }
 
-function _func_DS_LITE_Transix_Before
+function _func_DS_LITE_Transix_confirmation_west {
+while :
+do
+  echo -e " \033[1;32m（西日本エリア）トランジックスの設定を実行します\033[0;39m"
+  echo -e " \033[1;37mgw.transix.jp: 2404:8e01::feed:100\033[0;39m" 
+  echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
+  read -p " 本当に宜しいですか? [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_DS_LITE_Transix_west_SET ;;
+    "n" ) _func_DS_LITE_Transix ;;
+    "r" ) break ;;
+  esac
+done
+}
+
+function _func_DS_LITE_Transix_west_SET {
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
+opkg install ds-lite
+wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+sed -i -e "s/AFTR_ADDRESS/2404:8e01::feed:100/g" /etc/config-software/ds-lite.sh
+sh /etc/config-software/ds-lite.sh 2> /dev/null
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit
+}
+
+function _func_DS_LITE_Transix_Before {
 while :
 do
   echo -e " \033[1;37mトランジックスの設定を以前の設定に復元します\033[0;39m"
@@ -247,8 +282,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_Xpass
+function _func_DS_LITE_Xpass {
 while :
 do
   echo -e " \033[1;35mクロスパス -------------------------------------------\033[0;39m"
@@ -263,8 +299,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_Xpass_confirmation
+function _func_DS_LITE_Xpass_confirmation {
 while :
 do
   echo -e " \033[1;37mクロスパスの設定を実行します\033[0;39m"
@@ -277,9 +314,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_Xpass_SET
-{
+function _func_DS_LITE_Xpass_SET {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
@@ -293,7 +330,7 @@ reboot
 exit
 }
 
-function _func_DS_LITE_Xpass_Before
+function _func_DS_LITE_Xpass_Before {
 while :
 do
   echo -e " \033[1;37mクロスパスの設定を以前の設定に復元します\033[0;39m"
@@ -305,8 +342,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_V6connect
+function _func_DS_LITE_V6connect {
 while :
 do
   echo -e " \033[1;31mv6 コネクト -----------------------------------------\033[0;39m"
@@ -321,8 +359,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_V6connect_confirmation
+function _func_DS_LITE_V6connect_confirmation {
 while :
 do
   echo -e " \033[1;37mv6 コネクトの設定を実行します\033[0;39m"
@@ -335,9 +374,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_V6connect_SET
-{
+function _func_DS_LITE_V6connect_SET {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
@@ -351,7 +390,7 @@ reboot
 exit
 }
 
-function _func_DS_LITE_V6connect_Before
+function _func_DS_LITE_V6connect_Before {
 while :
 do
   echo -e " \033[1;37mv6 コネクトの設定を以前の設定に復元します\033[0;39m"
@@ -363,9 +402,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DS_LITE_Before_Restoration
-{
+function _func_DS_LITE_Before_Restoration {
 cp /etc/config/network.dslite.old /etc/config/network
 rm /etc/config/network.dslite.old
 cp /lib/netifd/proto/dslite.sh.old /lib/netifd/proto/dslite.sh
@@ -375,7 +414,7 @@ reboot
 exit
 }
 
-function _func_PPPoE
+function _func_PPPoE {
 while :
 do
   echo -e " \033[1;33m認証ID（ユーザー名）及びパスワードを準備下さい\033[0;39m"
@@ -395,8 +434,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_ID
+function _func_PPPoE_ID {
 while :
 do
   echo -e "\033[1;37m IPv4接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
@@ -408,8 +448,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_PASSWORD
+function _func_PPPoE_PASSWORD {
 while :
 do
   echo -e "\033[1;37m IPv4接続の認証パスワードを入力して下さい\033[0;39m"
@@ -421,8 +462,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_confirmation
+function _func_PPPoE_confirmation {
 while :
 do
   echo -e " \033[1;34mPPPoE IPv4 ------------------------------------------\033[0;39m"
@@ -436,9 +478,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_SET
-{
+function _func_PPPoE_SET {
 cp /etc/config/network /etc/config/network.pppoe.bak
 uci set network.wan=interface
 uci set network.wan.proto='pppoe'
@@ -452,7 +494,7 @@ reboot
 exit
 }
 
-function _func_PPPo_Before
+function _func_PPPo_Before {
 while :
 do
   echo -e " \033[1;37mPPPoEのIPv4接続設定を以前の設定に復元します\033[0;39m"
@@ -463,9 +505,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPo_Before_Restoration
-{
+function _func_PPPo_Before_Restoration {
 cp /etc/config/network.pppoe.bak /etc/config/network
 rm /etc/config/network.pppoe.bak
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -473,7 +515,7 @@ reboot
 exit
 }
 
-function _func_PPPoE_ID4
+function _func_PPPoE_ID4 {
 while :
 do
   echo -e "\033[1;37m IPv4接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
@@ -485,8 +527,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_PASSWORD4
+function _func_PPPoE_PASSWORD4 {
 while :
 do
   echo -e "\033[1;37m IPv4接続の認証パスワードを入力して下さい\033[0;39m"
@@ -498,8 +541,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_ID6
+function _func_PPPoE_ID6 {
 while :
 do
   echo -e "\033[1;37m IPv6接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
@@ -511,8 +555,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_PASSWORD6
+function _func_PPPoE_PASSWORD6 {
 while :
 do
   echo -e "\033[1;37m IPv6接続の認証パスワードを入力して下さい\033[0;39m"
@@ -524,8 +569,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_confirmation6
+function _func_PPPoE_confirmation6 {
 while :
 do
   echo -e " \033[1;32mPPPoE IPv4 IPv6 -------------------------------------\033[0;39m"
@@ -541,9 +587,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPoE_SET6
-{
+function _func_PPPoE_SET6 {
 cp /etc/config/network /etc/config/network.pppoe6.bak
 uci set network.wan=interface
 uci set network.wan.proto='pppoe'
@@ -563,7 +609,7 @@ reboot
 exit
 }
 
-function _func_PPPo_Before6
+function _func_PPPo_Before6 {
 while :
 do
   echo -e " \033[1;37mPPPoEのIPv4及びIPv6接続設定を以前の設定に復元します\033[0;39m"
@@ -574,9 +620,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_PPPo_Before_Restoration6
-{
+function _func_PPPo_Before_Restoration6 {
 cp /etc/config/network.pppoe6.bak /etc/config/network
 rm /etc/config/network.pppoe6.bak
 read -p " 何かキーを押してデバイスを再起動してください"
