@@ -28,7 +28,7 @@ do
   esac
 done
 
-function _func_choice_INST
+function _func_after_INST
 while :
 do
   echo -e " \033[1;31mフラッシュ後にインストールしたパッケージ確認のスクリプトをダウンロードし実行します\033[0;39m"
@@ -63,7 +63,7 @@ do
   case "${num}" in
     "f" ) _func_full_INST ;;
     "c" ) _func_choice_INST ;;
-    "a" ) _func_choice_INST ;;
+    "a" ) _func_after_INST ;;
     "q" ) exit ;;
   esac
 done
