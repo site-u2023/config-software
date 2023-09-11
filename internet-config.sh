@@ -134,14 +134,13 @@ do
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 本当に宜しいですか? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_MAP_e_Before_Restoration ;;
+    "y" ) _func_MAP_e_Restoration ;;
     "n" ) _func_MAP_e_V6plus ;;
     "r" ) break ;;
   esac
 done
 }
-
-function _func_MAP_e_Before_Restoration {
+function _func_MAP_e_Restoration {
 cp /etc/config/network.map-e.old /etc/config/network
 rm /etc/config/network.map-e.old
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
