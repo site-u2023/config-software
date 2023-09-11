@@ -1,4 +1,7 @@
 #!/bin/sh
+
+echo -e " \033[1;31mフラッシュ後にインストールしたパッケージ\033[0;39m"
+
 FLASH_TIME="$(awk '
 $1 == "Installed-Time:" && ($2 < OLDEST || OLDEST=="") {
   OLDEST=$2
