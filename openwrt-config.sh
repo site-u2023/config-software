@@ -1,7 +1,7 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
-function _func_SYSTEM
+function _func_SYSTEM {
 while :
 do
   echo -e " \033[1;34mシステム初期設定のスクリプトをダウンロードします\033[0;39m"
@@ -13,8 +13,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_INTERNET
+function _func_INTERNET {
 while :
 do
   echo -e " \033[1;33mインターネット接続設定のスクリプトをダウンロードします\033[0;39m"
@@ -26,8 +27,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_PACKAGE
+function _func_PACKAGE {
 while :
 do
   echo -e " \033[1;32m推奨パッケージインストールのスクリプトをダウンロードします\033[0;39m"
@@ -39,8 +41,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_ACCESSPOINT
+function _func_ACCESSPOINT {
 while :
 do
   echo -e " \033[1;35mアクセスポイント設定のスクリプトをダウンロードします\033[0;39m"
@@ -52,8 +55,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_AD_DNS
+function _func_AD_DNS {
 while :
 do
   echo -e " \033[1;31mDNS暗号化・広告ブロッカーインストールのスクリプトをダウンロードします\033[0;39m"
@@ -65,8 +69,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_ETC
+function _func_ETC {
 while :
 do
   echo -e " \033[1;36m他のスクリプトをダウンロードします\033[0;39m"
@@ -78,8 +83,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_QUIT
+function _func_QUIT {
 while :
 do
   echo -e " \033[7;40mこのスクリプト及び関連スクリプトを削除します\033[0;39m"
@@ -94,6 +100,7 @@ do
     "r" ) break ;;
    esac 
 done
+}
 
 for i in `seq 30 38` `seq 40 47` ; do
     for j in 0 1 2 3 4 5 6 7 ; do
