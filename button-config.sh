@@ -127,7 +127,7 @@ do
           rm -f /usr/bin/wifionoff
           echo -e " \033[1;36mボタン（スイッチ）設定を以前の設定に復元しリムーブが完了しました\033[0;39m"
           read -p " 何かキーを押してデバイスを再起動してください"
-          reboot
+          reboot ;;
     "n" ) break ;;
   esac
 done
