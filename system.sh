@@ -83,7 +83,7 @@ uci set wireless.default_radio0.ssid=${WIFI_SSID_A}
 uci set wireless.default_radio0.key=${WIFI_PASSWORD_A}
 uci set wireless.default_radio0.multicast_to_unicast='1'
 uci set wireless.default_radio0.isolate='1'
-uci set wireless.default_radio1.multicast_to_unicast_all='1'
+uci set wireless.default_radio0.multicast_to_unicast_all='1'
 uci set wireless.default_radio0.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio0.wpa_disable_eapol_key_retries='1'
 # Wi-Fi Bチャンネル
@@ -117,8 +117,8 @@ uci set wireless.default_radio2.ssid=${WIFI_SSID_C}
 uci set wireless.default_radio2.key=${WIFI_PASSWORD_C}
 uci set wireless.default_radio2.multicast_to_unicast='1'
 uci set wireless.default_radio2.isolate='1'
-uci set wireless.default_radio1.multicast_to_unicast_all='1'
-uci set wireless.default_radio1.macaddr='random' # Random Mac Address
+uci set wireless.default_radio2.multicast_to_unicast_all='1'
+uci set wireless.default_radio2.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio1.wpa_disable_eapol_key_retries='1'
 # set
 uci delete wireless.radio0.disabled
