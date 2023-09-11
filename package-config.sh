@@ -2,7 +2,7 @@
 # OpenWrt >= 21.02:
 
 
-function _func_full_INST
+function _func_full_INST {
 while :
 do
   echo -e " \033[1;34自動フルインストールのスクリプトをダウンロードします\033[0;39m"
@@ -14,8 +14,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_choice_INST
+function _func_choice_INST {
 while :
 do
   echo -e " \033[1;33m選択インストールのスクリプトをダウンロードします\033[0;39m"
@@ -27,8 +28,9 @@ do
     "n" ) break ;;
   esac
 done
+}
 
-function _func_after_INST
+function _func_after_INST {
 while :
 do
   echo -e " \033[1;31mフラッシュ後にインストールしたパッケージ確認のスクリプトをダウンロードし実行します\033[0;39m"
@@ -41,6 +43,7 @@ do
     "n" ) break ;;
   esac
 done
+}
 
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
