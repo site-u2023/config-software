@@ -124,7 +124,8 @@ do
           rm -f /etc/config/system.button2.bak
           rm -f /etc/hotplug.d/button/butons
           rm -f /etc/hotplug.d/button/00-button
-          rm -f /usr/bin/wifionoff ;;
+          rm -f /usr/bin/wifionoff
+          exit ;;
     "n" ) break ;;
   esac
 done
