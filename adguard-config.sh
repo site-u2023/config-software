@@ -11,7 +11,10 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
   echo -e " \033[1;37mAdGuardは既にインストールされています\033[0;39m"
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定とインストール（280blockerアドイン）
+  echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定とインストール
+  echo -e " \033[1;34m[c]\033[0;39m": アドイン：AdGuard Japanese filter（有効）
+  echo -e " \033[1;34m[c]\033[0;39m": アドイン：280blocker（無効）
+  echo -e " \033[1;34m[c]\033[0;39m": アドイン：豆腐フィルタ（無効）
   echo -e " \033[1;33m[w]\033[0;39m": 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）
   echo -e " \033[1;32m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
