@@ -38,9 +38,11 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
     - フラッシュ後にインストールしたパッケージ確認
   - [アクセスポイント（Dumb / ブリッジ）設定](https://qiita.com/site_u/items/0463c782be0acd6d23d3)
   - [広告ブロッカー・DNS暗号化インストール](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc)
-    - [AdGuardの設定とインストール（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adguard)
+    - [AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adguard)
       - 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）
     - [AdBlockdのインストールと設定（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adblock)
+      - [AdBlockのインストールと設定（カスタムフィルターアドイン）]
+      - [AdBlock-fastのインストールと設定（カスタムフィルターアドイン）]
     - [DNS over HTTPS（DoH）のインストールと設定](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#https-dns-proxy)
     - [DNS over TLS（DoT）Stubbyのインストールと設定](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#stubby)
   - 他
@@ -68,6 +70,7 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
         - [adguard.sh](https://github.com/site-u2023/config-software/blob/main/adguard.sh)
       - [adblock-config.sh](https://github.com/site-u2023/config-software/blob/main/adblock-config.sh)
         - [adblock.sh](https://github.com/site-u2023/config-software/blob/main/adblock.sh)
+        - [adblock-fast.sh](https://github.com/site-u2023/config-software/blob/main/adblock-fast.sh)
     - [etc-config.sh](https://github.com/site-u2023/config-software/blob/main/etc-config.sh)
       - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
         - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
