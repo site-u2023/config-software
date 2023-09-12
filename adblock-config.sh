@@ -4,10 +4,10 @@ function _func_AdBlock {
 while :
 do
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdBlockは既にインストールされています\033[0;39m"
+  echo -e " \033[1;37mAdBlockが既にインストールされています\033[0;39m"
 fi
 if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdBlockは既にインストールされています\033[0;39m"
+  echo -e " \033[1;37mAdBlock-fastが既にインストールされています\033[0;39m"
 fi
   echo -e " \033[1;34mAdBlock ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[a]\033[0;39m": AdBlockのインストールと設定（カスタムフィルターアドイン）
