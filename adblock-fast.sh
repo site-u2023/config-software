@@ -8,6 +8,7 @@ opkg install kmod-ipt-nat6
 opkg --force-overwrite install gawk grep sed coreutils-sort
 
 uci set adblock-fast.config.enabled=1
+uci set adblock-fast.config.procd_trigger_wan6='1'
 uci set adblock-fast.file_url=file_url
 uci set adblock-fast.file_url.url='https://raw.githubusercontent.com/tofukko/filter/master/Adblock_Plus_list.txt'
 uci set adblock-fast.file_url.action='block'
