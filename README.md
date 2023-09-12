@@ -70,3 +70,5 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
       - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
         - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
+
+Qiita: [初心者備忘録 Windowsから導入](https://qiita.com/site_u/items/39fbac482c06c98b229b)
