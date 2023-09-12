@@ -1,6 +1,6 @@
 #! /bin/sh
 
-function _func_AdBlock
+function _func_AdBlock {
 while :
 do
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
@@ -18,19 +18,21 @@ fi
     "q" ) exit ;;
   esac
 done
+}
 
-function _func_AdBlock_Confirm
+function _func_AdBlock_Confirm {
 while :
 do
   UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
   if [ ! -e ${UPDATE} ]; then
   opkg update
   fi
-  echo -e " \033[1;32mインストール: adblock: $((`opkg info adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mインストール: luci-app-adblock: $((`opkg info luci-app-adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mインストール: luci-i18n-adblock-ja: $((`opkg info luci-i18n-adblock-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mインストール: tcpdump-mini: $((`opkg info tcpdump-mini | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;37mアドイン: 豆腐フィルタ（無効）\033[0;39m"
+  ADBLOCK_VERSION=`opkg info adguardhome | grep Version | awk '{ print $2 }'`
+  echo -e " \033[1;32mインストール: adblock $((`opkg info adblock | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADBLOCK_VERSION}\033[0;39m"
+  echo -e " \033[1;32mインストール: luci-app-adblock $((`opkg info luci-app-adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: luci-i18n-adblock-ja $((`opkg info luci-i18n-adblock-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: tcpdump-mini $((`opkg info tcpdump-mini | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mアドイン: 豆腐フィルタ（無効）\033[0;39m"
   echo -e " \033[1;35mAdBlockdの設定とインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
@@ -38,9 +40,9 @@ do
     "n" ) break ;;
   esac
 done
- 
-function _func_AdBlock_SET
-{
+}
+
+function _func_AdBlock_SET {
 opkg install adblock
 opkg install luci-app-adblock
 opkg install luci-i18n-adblock-ja
@@ -53,7 +55,7 @@ reboot
 exit
 }
 
-function _func_AdBlock_Before
+function _func_AdBlock_Before {
 while :
 do
   echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
@@ -68,9 +70,9 @@ do
     "r" ) _func_AdBlock ;;
   esac
 done
+}
 
-function _func_AdBlock_Restoration
-{
+function _func_AdBlock_Restoration {
 service adblock stop
 service adblock disable
 opkg remove luci-i18n-adblock-ja
@@ -86,7 +88,7 @@ exit
 
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
  read -p " AdGuardがインストールされている為終了します"
- exit
+# exit
 fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
