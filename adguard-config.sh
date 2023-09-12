@@ -53,17 +53,17 @@ function _func_AdGuard_Confirm {
 while :
 do
   echo -e " \033[1;35mAdGuardの設定とインストールを開始します\033[0;39m"
-  echo -e " \033[1;37m管理用ウェブインターフェイスポート番号入力\033[0;39m"
-  echo -e " \033[1;37m管理用ウェブインターフェイスユーザー名入力\033[0;39m"
-  echo -e " \033[1;37m管理用ウェブインターフェイスパスワード入力\033[0;39m"
-  echo -e " \033[1;37mインストール: adguardhome ${ADGUARD_VERSION} ${ADGUARD_SIZE}kB\033[0;39m"
-  echo -e " \033[1;37mインストール: htpasswd 63.90kB\033[0;39m"
-  echo -e " \033[1;37mインストール: libaprutil 75.04kB\033[0;39m"
-  echo -e " \033[1;37mインストール: libapr 92.12kB\033[0;39m"
-  echo -e " \033[1;37mインストール: libexpat 45.10kB\033[0;39m"
-  echo -e " \033[1;37mアドイン: AdGuard Japanese filter（有効）\033[0;39m"
-  echo -e " \033[1;37mアドイン: 280blocker（無効）\033[0;39m"
-  echo -e " \033[1;37mアドイン: 豆腐フィルタ（無効）\033[0;39m"
+  echo -e " \033[1;32m管理用ウェブインターフェイスポート番号入力\033[0;39m"
+  echo -e " \033[1;32m管理用ウェブインターフェイスユーザー名入力\033[0;39m"
+  echo -e " \033[1;32m管理用ウェブインターフェイスパスワード入力\033[0;39m"
+  echo -e " \033[1;32mインストール: adguardhome $((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADGUARD_VERSION}\033[0;39m"
+  echo -e " \033[1;32mインストール: htpasswd: 63.90KB\033[0;39m"
+  echo -e " \033[1;32mインストール: libaprutil $((`opkg info libaprutil | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: libapr $((`opkg info libapr | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: libexpat $((`opkg info libexpat | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mアドイン: AdGuard Japanese filter（有効）\033[0;39m"
+  echo -e " \033[1;32mアドイン: 280blocker（無効）\033[0;39m"
+  echo -e " \033[1;32mアドイン: 豆腐フィルタ（無効）\033[0;39m"
   read -p " 設定値の入力を開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_AdGuard_PORT ;;
