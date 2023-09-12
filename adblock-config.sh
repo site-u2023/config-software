@@ -53,14 +53,8 @@ UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
-opkg install adblock-fast
-opkg install luci-app-adblock-fast
-opkg install luci-i18n-adblock-fast-ja
-opkg install ip6tables-mod-nat
-opkg install kmod-ipt-nat6
-opkg --force-overwrite install gawk grep sed coreutils-sort
 wget --no-check-certificate -O /etc/config-software/adblock-fast.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-fast.sh
-sh /etc/config-software/adblock-fast.sh
+sh /etc/config-software/adblock-fast.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
