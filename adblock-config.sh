@@ -39,7 +39,7 @@ do
   echo -e " \033[1;32mインストール: luci-app-adblock-fast $((`opkg info luci-app-adblock-fast | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mインストール: luci-i18n-adblock-fast-ja $((`opkg info luci-i18n-adblock-fast-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mアドイン: 豆腐フィルタ（有効）\033[0;39m"
-  echo -e " \033[1;35mAdBlock-fastの設定とインストールを開始します\033[0;39m"
+  echo -e " \033[1;32mAdBlock-fastの設定とインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_AdBlock_fast_SET ;;
@@ -79,7 +79,7 @@ do
   echo -e " \033[1;32mインストール: luci-i18n-adblock-ja $((`opkg info luci-i18n-adblock-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mインストール: tcpdump-mini $((`opkg info tcpdump-mini | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mアドイン: 豆腐フィルタ（有効）\033[0;39m"
-  echo -e " \033[1;35mAdBlockの設定とインストールを開始します\033[0;39m"
+  echo -e " \033[1;34mAdBlockの設定とインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_AdBlock_SET ;;
@@ -107,7 +107,7 @@ exit
 function _func_AdBlock_fast_Before {
 while :
 do
-  echo -e " \033[1;37mAdblock-fastの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;33mAdblock-fastの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: adblock-fast\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-app-adblock-fast\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-adblock-fast-ja\033[0;39m"
@@ -139,7 +139,7 @@ exit
 function _func_AdBlock_Before {
 while :
 do
-  echo -e " \033[1;37mAdBlockの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;31mAdBlockの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: adblock\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-app-adblock\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-adblock-ja\033[0;39m"
