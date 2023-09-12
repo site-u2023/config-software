@@ -222,6 +222,10 @@ if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
  read -p " AdBlockがインストールされている為終了します"
  exit
 fi
+if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
+ read -p " AdBlock-fastがインストールされている為終了します"
+ exit
+fi
 if [ "https-dns-proxy" = "`opkg list-installed https-dns-proxy | awk '{ print $1 }'`" ]; then
  read -p " https-dns-proxyがインストールされている為終了します"
  exit
