@@ -151,14 +151,18 @@ filters:
     url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
     name: AdAway Default Blocklist
     id: 2
-  - enabled: false
+  - enabled: true
     url: https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_7_Japanese/filter.txt
     name: AdGuard Japanese filter
     id: 3
-  - enabled: true
+  - enabled: false
     url: https://280blocker.net/files/280blocker_domain_ag_202309.txt
     name: 280blocker
     id: 4
+  - enabled: false
+    url: https://raw.githubusercontent.com/tofukko/filter/master/Adblock_Plus_list.txt
+    name: 豆腐フィルタ
+    id: 5
 user_rules: []
 dhcp:
   enabled: false
