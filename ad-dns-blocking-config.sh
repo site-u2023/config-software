@@ -4,7 +4,7 @@
 function _func_AdGuard_INST {
 while :
 do
-  echo -e " \033[1;34mAdGuard設定のスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;34mAdGuard HOME設定のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config.sh
@@ -68,12 +68,12 @@ if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [
  exit
 fi
 }
-  echo -e " \033[7;33mAdGuardとAdBlockは排他利用\033[0;39m"
+  echo -e " \033[7;33mAdGuard HOMEとAdBlockは排他利用\033[0;39m"
   echo -e " \033[7;33mAdGuardとDNS over HTTPS（DoH）は排他利用\033[0;39m"
   echo -e " \033[7;33mAdGuardとDNS over TLS（DoT）は排他利用\033[0;39m"
   echo -e " \033[7;33mDNS over HTTPS（DoH）とDNS over TLS（DoT）は排他利用\033[0;39m"
   echo -e " \033[1;37mad dns blocking config ------------------------------\033[0;39m"
-  echo -e " \033[1;34m[g]\033[0;39m": AdGuardの設定とインストール（カスタムフィルターアドイン）
+  echo -e " \033[1;34m[g]\033[0;39m": AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）
   echo -e " \033[1;32m[b]\033[0;39m": AdBlockdのインストールと設定（カスタムフィルターアドイン）
   echo -e " \033[1;31m[h]\033[0;39m": DNS over HTTPS（DoH）のインストールと設定
   echo -e " \033[1;33m[t]\033[0;39m": DNS over TLS（DoT）Stubbyのインストールと設定
