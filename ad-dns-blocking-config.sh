@@ -73,8 +73,8 @@ fi
   echo -e " \033[1;33mAdGuardとDNS over TLS（DoT）は排他利用\033[0;39m"
   echo -e " \033[1;33mDNS over HTTPS（DoH）とDNS over TLS（DoT）は排他利用\033[0;39m"
   echo -e " \033[1;37mad dns blocking config ------------------------------\033[0;39m"
-  echo -e " \033[1;34m[g]\033[0;39m": AdGuardの設定とインストール（280blockerアドイン）
-  echo -e " \033[1;32m[b]\033[0;39m": AdBlockdのインストールと設定（豆腐フィルタアドイン）
+  echo -e " \033[1;34m[g]\033[0;39m": AdGuardの設定とインストール（カスタムフィルターアドイン）
+  echo -e " \033[1;32m[b]\033[0;39m": AdBlockdのインストールと設定（カスタムフィルターアドイン）
   echo -e " \033[1;31m[h]\033[0;39m": DNS over HTTPS（DoH）のインストールと設定
   echo -e " \033[1;33m[t]\033[0;39m": DNS over TLS（DoT）Stubbyのインストールと設定
   echo -e " \033[1;37m[q]\033[0;39m": 終了
