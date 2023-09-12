@@ -6,18 +6,64 @@ do
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdBlockは既にインストールされています\033[0;39m"
 fi
-  echo -e " \033[1;34mAdBlockd ---------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": AdBlockdのインストールと設定（カスタムフィルターアドイン）
-  echo -e " \033[1;31m[b]\033[0;39m": AdBlockdのリムーブと以前の設定に復元
-  echo -e " \033[1;33m[q]\033[0;39m": 終了    
+if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
+  echo -e " \033[1;37mAdBlockは既にインストールされています\033[0;39m"
+fi
+  echo -e " \033[1;34mAdBlock ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[a]\033[0;39m": AdBlockのインストールと設定（カスタムフィルターアドイン）
+  echo -e " \033[1;32m[f]\033[0;39m": AdBlock-fastのインストールと設定（カスタムフィルターアドイン）
+  echo -e " \033[1;31m[b]\033[0;39m": AdBlockのリムーブと以前の設定に復元
+  echo -e " \033[1;33m[t]\033[0;39m": AdBlock-fastのリムーブと以前の設定に復元
+  echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択して下さい [e/b or q]: " num
+  read -p " キーを選択して下さい [e/f/b/t or q]: " num
   case "${num}" in
-    "e" ) _func_AdBlock_Confirm ;;
+    "a" ) _func_AdBlock_Confirm ;;
+    "f" ) _func_AdBlock_fast_Confirm ;;
     "b" ) _func_AdBlock_Before ;;
+    "t" ) _func_AdBlock_fast_Before ;;
     "q" ) exit ;;
   esac
 done
+}
+
+function _func_AdBlock_fast_Confirm {
+while :
+do
+  UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+  if [ ! -e ${UPDATE} ]; then
+  opkg update
+  fi
+  ADBLOCK_FAST_VERSION=`opkg info adblock-fast | grep Version | awk '{ print $2 }'`
+  echo -e " \033[1;32mインストール: adblock-fast $((`opkg info adblock-fast | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADBLOCK_FAST_VERSION}\033[0;39m"
+  echo -e " \033[1;32mインストール: luci-app-adblock-fast $((`opkg info luci-app-adblock-fast | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: luci-i18n-adblock-fast-ja $((`opkg info luci-i18n-adblock-fast-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mアドイン: 豆腐フィルタ（有効）\033[0;39m"
+  echo -e " \033[1;35mAdBlock-fastの設定とインストールを開始します\033[0;39m"
+  read -p " 開始します [y/n]: " num
+  case "${num}" in
+    "y" ) _func_AdBlock_fast_SET ;;
+    "n" ) break ;;
+  esac
+done
+}
+
+function _func_AdBlock_fast_SET {
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
+opkg install adblock-fast
+opkg install luci-app-adblock-fast
+opkg install luci-i18n-adblock-fast-ja
+opkg install ip6tables-mod-nat
+opkg install kmod-ipt-nat6
+opkg --force-overwrite install gawk grep sed coreutils-sort
+wget --no-check-certificate -O /etc/config-software/adblock-fast.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-fast.sh
+sh /etc/config-software/adblock-fast.sh
+read -p " 何かキーを押してデバイスを再起動して下さい"
+reboot
+exit
 }
 
 function _func_AdBlock_Confirm {
@@ -27,13 +73,13 @@ do
   if [ ! -e ${UPDATE} ]; then
   opkg update
   fi
-  ADBLOCK_VERSION=`opkg info adguardhome | grep Version | awk '{ print $2 }'`
+  ADBLOCK_VERSION=`opkg info adblock | grep Version | awk '{ print $2 }'`
   echo -e " \033[1;32mインストール: adblock $((`opkg info adblock | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADBLOCK_VERSION}\033[0;39m"
   echo -e " \033[1;32mインストール: luci-app-adblock $((`opkg info luci-app-adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mインストール: luci-i18n-adblock-ja $((`opkg info luci-i18n-adblock-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mインストール: tcpdump-mini $((`opkg info tcpdump-mini | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mアドイン: 豆腐フィルタ（無効）\033[0;39m"
-  echo -e " \033[1;35mAdBlockdの設定とインストールを開始します\033[0;39m"
+  echo -e " \033[1;32mアドイン: 豆腐フィルタ（有効）\033[0;39m"
+  echo -e " \033[1;35mAdBlockの設定とインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
     "y" ) _func_AdBlock_SET ;;
@@ -43,13 +89,49 @@ done
 }
 
 function _func_AdBlock_SET {
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
 opkg install adblock
 opkg install luci-app-adblock
 opkg install luci-i18n-adblock-ja
 opkg install tcpdump-mini
-
 wget --no-check-certificate -O /etc/config-software/adblock.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock.sh
 sh /etc/config-software/adblock.sh
+read -p " 何かキーを押してデバイスを再起動して下さい"
+reboot
+exit
+}
+
+function _func_AdBlock_fast_Before {
+while :
+do
+  echo -e " \033[1;37mAdblock-fastの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mリムーブ: adblock-fast\033[0;39m"
+  echo -e " \033[1;37mリムーブ: luci-app-adblock-fast\033[0;39m"
+  echo -e " \033[1;37mリムーブ: luci-i18n-adblock-fast-ja\033[0;39m"
+  # echo -e " \033[1;37mリムーブ: tcpdump-mini\033[0;39m"
+  read -p " 本当に宜しいですか? [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_AdBlock_fast_Restoration ;;
+    "n" ) _func_AdBlock ;;
+    "r" ) _func_AdBlock ;;
+  esac
+done
+}
+
+function _func_AdBlock_fast_Restoration {
+service adblock-fast stop
+service adblock-fast disable
+opkg remove luci-i18n-adblock-fast-ja
+opkg remove luci-app-adblock-fast
+opkg remove adblock-fast
+# opkg remove tcpdump-mini
+opkg remove ip6tables-mod-nat
+opkg remove kmod-ipt-nat6
+opkg --force-overwrite remove gawk grep sed coreutils-sort
+rm -rf /etc/adblock-fast
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
@@ -58,7 +140,7 @@ exit
 function _func_AdBlock_Before {
 while :
 do
-  echo -e " \033[1;37mAdGuardの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mAdBlockの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: adblock\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-app-adblock\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-adblock-ja\033[0;39m"
