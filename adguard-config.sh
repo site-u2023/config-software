@@ -11,9 +11,9 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
   echo -e " \033[1;37mAdGuardは既にインストールされています\033[0;39m"
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]\033[0;39m": AdGuardの設定とインストール（カスタムフィルターアドイン）
+  echo -e " \033[1;34m[c]\033[0;39m": AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）
   echo -e " \033[1;33m[w]\033[0;39m": 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）
-  echo -e " \033[1;32m[b]\033[0;39m": AdGuardのリムーブと以前の設定に復元
+  echo -e " \033[1;32m[b]\033[0;39m": AdGuard HOMEのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " キーを選択して下さい [c/b or q]: " num
@@ -52,7 +52,7 @@ done
 function _func_AdGuard_Confirm {
 while :
 do
-  echo -e " \033[1;35mAdGuardの設定とインストールを開始します\033[0;39m"
+  echo -e " \033[1;35mAdGuard HOMEの設定とインストールを開始します\033[0;39m"
   echo -e " \033[1;32m管理用ウェブインターフェイスポート番号入力\033[0;39m"
   echo -e " \033[1;32m管理用ウェブインターフェイスユーザー名入力\033[0;39m"
   echo -e " \033[1;32m管理用ウェブインターフェイスパスワード入力\033[0;39m"
@@ -75,7 +75,7 @@ done
 function _func_AdGuard_PORT {
 while :
 do
-  echo -e "\033[1;37m AdGuard管理用ウェブインターフェイスのポート番号を入力して下さい\033[0;39m"
+  echo -e "\033[1;37m AdGuard HOME管理用ウェブインターフェイスのポート番号を入力して下さい\033[0;39m"
   echo -e "\033[1;33m 例: 8000\033[0;39m"
   read -p " ポート番号: " input_str_PORT
   read -p " 宜しいですか? [y/n or r]: " num
@@ -90,7 +90,7 @@ done
 function _func_AdGuard_USER {
 while :
 do
-  echo -e "\033[1;37m AdGuard管理用ウェブインターフェイスのユーザー名を入力して下さい\033[0;39m"
+  echo -e "\033[1;37m AdGuard HOME管理用ウェブインターフェイスのユーザー名を入力して下さい\033[0;39m"
   echo -e "\033[1;33m 例: root\033[0;39m"
   read -p " ユーザー名: " input_str_USER
   read -p " 宜しいですか? [y/n or r]: " num
@@ -105,7 +105,7 @@ done
 function _func_AdGuard_PASSWD {
 while :
 do
-  echo -e " \033[1;37mAdGuard管理用ウェブインターフェイスのパスワードを入力して下さい\033[0;39m"
+  echo -e " \033[1;37mAdGuard HOME管理用ウェブインターフェイスのパスワードを入力して下さい\033[0;39m"
   echo -e " \033[1;33m例: password\033[0;39m"
   read -p " パスワード: " input_str_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
@@ -180,7 +180,7 @@ fi
 function _func_AdGuard_Before {
 while :
 do
-  echo -e " \033[1;37mAdGuardをリムーブして以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mAdGuard HOMEをリムーブして以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mリムーブ: adguardhome\033[0;39m"
   echo -e " \033[1;37mリムーブ: htpasswd\033[0;39m"
   echo -e " \033[1;37mリムーブ: libaprutil\033[0;39m"
