@@ -127,7 +127,6 @@ service adblock-fast disable
 opkg remove luci-i18n-adblock-fast-ja
 opkg remove luci-app-adblock-fast
 opkg remove adblock-fast
-# opkg remove tcpdump-mini
 opkg remove ip6tables-mod-nat
 opkg remove kmod-ipt-nat6
 opkg --force-overwrite remove gawk grep sed coreutils-sort
