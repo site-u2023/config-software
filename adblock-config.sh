@@ -26,11 +26,11 @@ do
   if [ ! -e ${UPDATE} ]; then
   opkg update
   fi
-  echo -e " \033[1;32madblock: $((`opkg info adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-app-adblock: $((`opkg info luci-app-adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-adblock-ja: $((`opkg info luci-i18n-adblock-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mtcpdump-mini: $((`opkg info tcpdump-mini | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32m豆腐フィルタアドイン（有効）\033[0;39m"
+  echo -e " \033[1;32mインストール: adblock: $((`opkg info adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: luci-app-adblock: $((`opkg info luci-app-adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: luci-i18n-adblock-ja: $((`opkg info luci-i18n-adblock-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mインストール: tcpdump-mini: $((`opkg info tcpdump-mini | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;37mアドイン: 豆腐フィルタ（無効）\033[0;39m"
   echo -e " \033[1;35mAdBlockdの設定とインストールを開始します\033[0;39m"
   read -p " 開始します [y/n]: " num
   case "${num}" in
