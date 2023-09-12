@@ -41,8 +41,8 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
     - [AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adguard)
       - 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）
     - [AdBlockdのインストールと設定（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adblock)
-      - [AdBlockのインストールと設定（カスタムフィルターアドイン）]
-      - [AdBlock-fastのインストールと設定（カスタムフィルターアドイン）]
+      - AdBlockのインストールと設定（カスタムフィルターアドイン）
+      - AdBlock-fastのインストールと設定（カスタムフィルターアドイン）
     - [DNS over HTTPS（DoH）のインストールと設定](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#https-dns-proxy)
     - [DNS over TLS（DoT）Stubbyのインストールと設定](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#stubby)
   - 他
