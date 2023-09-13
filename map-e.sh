@@ -853,8 +853,8 @@ cp /etc/config/network /etc/config/network.map-e.old
 
 # DHCP LAN
 uci set dhcp.lan=dhcp
-uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ra='relay'
+uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ndp='relay'
 uci set dhcp.lan.force='1'
 
