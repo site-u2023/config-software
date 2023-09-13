@@ -30,6 +30,14 @@ fi
 # WEB-SSHクライアント
 if [ -z "$TTYD" ]; then
 opkg install luci-app-ttyd
+uci set ttyd.@ttyd[0]=ttyd
+uci set ttyd.@ttyd[0].interface='@lan'
+uci set ttyd.@ttyd[0].command='/bin/login -f root '
+uci set ttyd.@ttyd[0].ipv6='1'
+uci set ttyd.@ttyd[0].debug='7'
+uci set ttyd.@ttyd[0].url_arg='1'
+uci set ttyd.@ttyd[0].once='1'
+uci commit ttyd
 fi
 if [ -z "$TTYD_JA" ]; then
 opkg install luci-i18n-ttyd-ja
