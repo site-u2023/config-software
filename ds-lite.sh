@@ -25,6 +25,7 @@ uci set network.${DSLITE}=interface
 uci set network.${DSLITE}.proto='dslite'
 uci set network.${DSLITE}.peeraddr='AFTR_ADDRESS'
 uci set network.${DSLITE}.encaplimit='ignore'
+uci set network.${DSLITE}.mtu='1460'
 
 # FW
 ZOON_NO='1'
