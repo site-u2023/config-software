@@ -10,6 +10,9 @@ uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ndp='relay'
 uci set dhcp.lan.force='1'
 
+# WAN
+uci set network.wan.auto='0'
+
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
 uci set dhcp.wan6.interface='wan6'
@@ -24,7 +27,6 @@ DSLITE='ds_lite'
 uci set network.${DSLITE}=interface
 uci set network.${DSLITE}.proto='dslite'
 uci set network.${DSLITE}.peeraddr='AFTR_ADDRESS'
-uci set network.${DSLITE}.encaplimit='ignore'
 uci set network.${DSLITE}.mtu='1460'
 
 # FW
