@@ -6,8 +6,8 @@ do
   echo -e " \033[1;34mボタン設定とインストールのスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O button-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button-config.sh
-          sh button-config.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/button-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button-config.sh
+          sh /etc/config-software/button-config.sh
           break ;;
     "n" ) break ;;
   esac
