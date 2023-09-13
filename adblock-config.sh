@@ -28,12 +28,12 @@ done
 }
 
 function _func_AdBlock_fast_Confirm {
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
 while :
 do
-  UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-  if [ ! -e ${UPDATE} ]; then
-  opkg update
-  fi
   ADBLOCK_FAST_VERSION=`opkg info adblock-fast | grep Version | awk '{ print $2 }'`
   echo -e " \033[1;32mインストール: adblock-fast $((`opkg info adblock-fast | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADBLOCK_FAST_VERSION}\033[0;39m"
   echo -e " \033[1;32mインストール: luci-app-adblock-fast $((`opkg info luci-app-adblock-fast | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -49,10 +49,6 @@ done
 }
 
 function _func_AdBlock_fast_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ ! -e ${UPDATE} ]; then
-opkg update
-fi
 wget --no-check-certificate -O /etc/config-software/adblock-fast.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-fast.sh
 sh /etc/config-software/adblock-fast.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動して下さい"
@@ -61,12 +57,12 @@ exit
 }
 
 function _func_AdBlock_Confirm {
+UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
 while :
 do
-  UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-  if [ ! -e ${UPDATE} ]; then
-  opkg update
-  fi
   ADBLOCK_VERSION=`opkg info adblock | grep Version | awk '{ print $2 }'`
   echo -e " \033[1;32mインストール: adblock $((`opkg info adblock | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADBLOCK_VERSION}\033[0;39m"
   echo -e " \033[1;32mインストール: luci-app-adblock $((`opkg info luci-app-adblock | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -83,14 +79,6 @@ done
 }
 
 function _func_AdBlock_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ ! -e ${UPDATE} ]; then
-opkg update
-fi
-opkg install adblock
-opkg install luci-app-adblock
-opkg install luci-i18n-adblock-ja
-opkg install tcpdump-mini
 wget --no-check-certificate -O /etc/config-software/adblock.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock.sh
 sh /etc/config-software/adblock.sh
 read -p " 何かキーを押してデバイスを再起動して下さい"
