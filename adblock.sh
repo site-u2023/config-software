@@ -1,6 +1,11 @@
 #! /bin/sh
 
 
+opkg install adblock
+opkg install luci-app-adblock
+opkg install luci-i18n-adblock-ja
+opkg install tcpdump-mini
+
 uci set adblock.global.adb_backupdir="/etc/adblock"
 
 cp /etc/adblock/adblock.sources.gz /etc/adblock/adblock.sources.tofu.gz
