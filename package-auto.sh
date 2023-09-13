@@ -63,7 +63,6 @@ uci set ttyd.@ttyd[0].command='/bin/login -f root '
 uci set ttyd.@ttyd[0].ipv6='1'
 uci set ttyd.@ttyd[0].debug='7'
 uci set ttyd.@ttyd[0].url_arg='1'
-uci set ttyd.@ttyd[0].once='1'
 uci commit ttyd
 
 # CPU負荷分散
