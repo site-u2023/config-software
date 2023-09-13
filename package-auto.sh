@@ -57,6 +57,14 @@ opkg install openssh-sftp-server
 # TTYD
 opkg install luci-app-ttyd
 opkg install luci-i18n-ttyd-ja
+uci set ttyd.@ttyd[0]=ttyd
+uci set ttyd.@ttyd[0].interface='@lan'
+uci set ttyd.@ttyd[0].command='/bin/login -f root '
+uci set ttyd.@ttyd[0].ipv6='1'
+uci set ttyd.@ttyd[0].debug='7'
+uci set ttyd.@ttyd[0].url_arg='1'
+uci set ttyd.@ttyd[0].once='1'
+uci commit ttyd
 
 # CPU負荷分散
 CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
