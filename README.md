@@ -2,20 +2,30 @@
 
 Japanese notation
 
-### スクリプトセレクター※要ONU直結
-
 **不具合あればご連絡下さい**
 
+### スクリプトセレクター※要ONU直結
+![openwrt-config.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/a0f6ee12-1409-96d5-6259-3ac04a236da2.png)
+
 **推奨設定順序: システム > インターネット > パッケージ**
+
+config-softwareコマンド登録
+```sh
+cat <<"EOF" >> /usr/bin/confsoft
+#!/bin/sh
+mkdir -p /etc/config-software
+wget --no-check-certificate -O /etc/config-software/openwrt-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/openwrt-config.sh
+sh /etc/config-software/openwrt-config.sh
+EOF
+chmod +x /usr/bin/confsoft
+
 ```
-mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/openwrt-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/openwrt-config.sh; sh /etc/config-software/openwrt-config.sh
+config-softwareコマンド実行
+```sh
+confsoft
 
 ```
 ※強制終了：`Ctrl`+`c`
-
-
-![openwrt-config.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/a0f6ee12-1409-96d5-6259-3ac04a236da2.png)
-
 
 構成
 - [スクリプトセレクター](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%BB%E3%83%AC%E3%82%AF%E3%82%BF%E3%83%BC%E8%A6%81onu%E7%9B%B4%E7%B5%90)
