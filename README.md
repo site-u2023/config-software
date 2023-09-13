@@ -10,7 +10,7 @@ Japanese notation
 **推奨設定順序: システム > インターネット > パッケージ**
 
 config-softwareコマンド登録
-```sh
+```
 cat <<"EOF" >> /usr/bin/confsoft
 #!/bin/sh
 mkdir -p /etc/config-software
@@ -21,7 +21,7 @@ chmod +x /usr/bin/confsoft
 
 ```
 config-softwareコマンド実行
-```sh
+```
 confsoft
 
 ```
