@@ -1,10 +1,6 @@
 #! /bin/sh
 
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ ! -e ${UPDATE} ]; then
-opkg update
-fi
-  
+ 
 opkg install adblock-fast
 opkg install luci-app-adblock-fast
 opkg install luci-i18n-adblock-fast-ja
