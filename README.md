@@ -9,26 +9,28 @@ Japanese notation
 
 **推奨設定順序: システム > インターネット > パッケージ**
 
-config-softwareコマンド登録
-```
-cat <<"EOF" >> /usr/bin/confsoft
-#!/bin/sh
-mkdir -p /etc/config-software
-wget --no-check-certificate -O /etc/config-software/openwrt-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/openwrt-config.sh
-sh /etc/config-software/openwrt-config.sh
-EOF
-chmod +x /usr/bin/confsoft
+### 使用方法
+ttydのインストールと設定
+- [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
+```sh
+mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
 
 ```
-config-softwareコマンド実行
-```
+
+config-software実行
+- ttydから実行
+[192.168.1.1:8888](http://192.168.1.1:8888)
+※強制終了：`Ctrl`+`c`
+
+- コマンドから実行
+```sh
 confsoft
 
 ```
 ※強制終了：`Ctrl`+`c`
 
 config-softwareコマンド削除
-``` 
+```sh 
 
 rm -rf /usr/bin/confsoft
 
@@ -55,7 +57,7 @@ rm -rf /usr/bin/confsoft
     - フラッシュ後にインストールしたパッケージ確認
   - [アクセスポイント（Dumb / ブリッジ）設定](https://qiita.com/site_u/items/0463c782be0acd6d23d3)
   - [広告ブロッカー・DNS暗号化インストール](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc)
-    - [AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adguard)
+    - [AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adguard-home)
       - 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）
     - [AdBlockdのインストールと設定（カスタムフィルターアドイン）](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adblock)
       - AdBlockのインストールと設定（カスタムフィルターアドイン）
