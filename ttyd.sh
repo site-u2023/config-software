@@ -37,5 +37,4 @@ uci add_list ttyd.ttyd.client_option='theme={"background": "blue"}'
 uci add_list ttyd.ttyd.client_option='titleFixed=CONFIG-SOFTWARE'
 
 uci commit ttyd
-service ttyd enable
 service ttyd restart
