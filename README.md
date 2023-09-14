@@ -9,18 +9,16 @@ Japanese notation
 
 **推奨設定順序: システム > インターネット > パッケージ**
 
-### 使用方法
+### 設定
 ttydのインストールと設定
 - [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
 ```sh
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
 
 ```
-
-config-software実行
+### 実行
 - ttydから実行
-[192.168.1.1:8888](http://192.168.1.1:8888)
-※強制終了：`Ctrl`+`c`
+**[192.168.1.1:8888](http://192.168.1.1:8888)** 
 
 - コマンドから実行
 ```sh
@@ -29,14 +27,7 @@ confsoft
 ```
 ※強制終了：`Ctrl`+`c`
 
-config-softwareコマンド削除
-```sh 
-
-rm -rf /usr/bin/confsoft
-
-```
-
-構成
+### 構成
 - [スクリプトセレクター](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%BB%E3%83%AC%E3%82%AF%E3%82%BF%E3%83%BC%E8%A6%81onu%E7%9B%B4%E7%B5%90)
   - [システム初期設定（ホストネーム・パスワード等）](https://qiita.com/site_u/items/59c641c9dc0eec3b1324)
   - [インターネット（MAP-e・DS-LITE・PPPoE）接続設定](https://qiita.com/site_u/items/4b8076cb8c9b05bc3f9a)
@@ -70,7 +61,7 @@ rm -rf /usr/bin/confsoft
     - [WiFi位置情報サービス停止](https://qiita.com/site_u/items/3cd3fc65a789461262e8#%E4%BD%8D%E7%BD%AE%E6%83%85%E5%A0%B1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%81%9C%E6%AD%A2)
   - 終了
 
-スクリプト
+### スクリプト
 - [オールインワンスクリプト](https://github.com/site-u2023/config-software/blob/main/README.md)
   - [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/openwrt-config.sh)
     - [system-config.sh](https://github.com/site-u2023/config-software/blob/main/system-config.sh)
@@ -94,5 +85,13 @@ rm -rf /usr/bin/confsoft
       - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
         - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
+
+### 削除
+```sh 
+
+rm -rf /usr/bin/confsoft
+
+```
+
 
 Qiita: [初心者備忘録 Windowsから導入](https://qiita.com/site_u/items/39fbac482c06c98b229b)
