@@ -205,12 +205,12 @@ fi
 while :
 do
   echo -e " \033[1;37mシステム初期設定を開始します\033[0;39m"
-  echo -e " \033[1;34m・デバイスのホストネーム\033[0;39m"
-  echo -e " \033[1;33m・デバイスのパスワード\033[0;39m"
-  echo -e " \033[1;32m・WiFi ${WIFI_NO_A}のSSID\033[0;39m"
-  echo -e " \033[1;35m・WiFi ${WIFI_NO_A}のパスワード\033[0;39m"
-  echo -e " \033[1;31m・WiFi ${WIFI_NO_B}のSSID\033[0;39m"
-  echo -e " \033[1;36m・WiFi ${WIFI_NO_B}のパスワード\033[0;39m"
+  echo -e " \033[1;34mデバイスのホストネーム\033[0;39m"
+  echo -e " \033[1;33mデバイスのパスワード\033[0;39m"
+  echo -e " \033[1;32mWiFi ${WIFI_NO_A}のSSID\033[0;39m"
+  echo -e " \033[1;35mWiFi ${WIFI_NO_A}のパスワード\033[0;39m"
+  echo -e " \033[1;31mWiFi ${WIFI_NO_B}のSSID\033[0;39m"
+  echo -e " \033[1;36mWiFi ${WIFI_NO_B}のパスワード\033[0;39m"
   WIFI_DEVICE=`uci show wireless | grep 'wifi-device' | wc -l`
   WIFI_NO=3
   if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
