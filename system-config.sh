@@ -1,5 +1,6 @@
 #! /bin/sh
 
+
 function _func_HOSTNAME {
 while :
 do
@@ -17,7 +18,7 @@ done
 function _func_ROOT_PASSWD {
 while :
 do
-  echo -e " \033[1;34mデバイスのパスワードを入力して下さい\033[0;39m"
+  echo -e " \033[1;33mデバイスのパスワードを入力して下さい\033[0;39m"
   read -p " デバイスのパスワード: " input_str_ROOT_PASSWD
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
@@ -28,11 +29,11 @@ do
 done
 }
 
-function _func_WIFI_SSID_A{
+function _func_WIFI_SSID_A {
 while :
 do
-  echo -e " \033[1;32mWi-Fi(wwan0)のSSIDを入力して下さい\033[0;39m"
-  read -p " Wi-Fi(wwan0)のSSID: " input_str_WIFI_SSID_A
+  echo -e " \033[1;32mWi-Fi${WIFI_NO_A}のSSIDを入力して下さい\033[0;39m"
+  read -p " Wi-Fi${WIFI_NO_A}のSSID: " input_str_WIFI_SSID_A
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_A ;;
@@ -45,8 +46,8 @@ done
 function _func_WIFI_PASSWD_A {
 while :
 do
-  echo -e " \033[1;32mWi-Fi(wwan0)のパスワードを入力して下さい\033[0;39m"
-  read -p " Wi-Fi(wwan0)のパスワード: " input_str_WIFI_PASSWD_A
+  echo -e " \033[1;35mWi-Fi${WIFI_NO_A}のパスワードを入力して下さい\033[0;39m"
+  read -p " Wi-Fi${WIFI_NO_A}のパスワード: " input_str_WIFI_PASSWD_A
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_B ;;
@@ -59,8 +60,8 @@ done
 function _func_WIFI_SSID_B {
 while :
 do
-  echo -e " \033[1;32mWi-Fi(wwan1)のSSIDを入力して下さい\033[0;39m"
-  read -p " Wi-Fi(wwan1)のSSID: " input_str_WIFI_SSID_B
+  echo -e " \033[1;31mWi-Fi${WIFI_NO_B}のSSIDを入力して下さい\033[0;39m"
+  read -p " Wi-Fi${WIFI_NO_B}のSSID: " input_str_WIFI_SSID_B
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
@@ -73,8 +74,8 @@ done
 function _func_WIFI_PASSWD_B {
 while :
 do
-  echo -e " \033[1;32mWi-Fi(wwan1)のパスワードを入力して下さい\033[0;39m"
-  read -p " Wi-Fi(wwan1)のパスワード: " input_str_WIFI_PASSWD_B
+  echo -e " \033[1;36mWi-Fi${WIFI_NO_B}のパスワードを入力して下さい\033[0;39m"
+  read -p " Wi-Fi${WIFI_NO_B}のパスワード: " input_str_WIFI_PASSWD_B
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SEARCH ;;
@@ -95,8 +96,8 @@ function _func_WIFI_SEARCH {
 function _func_WIFI_SSID_C {
 while :
 do
-  echo -e " \033[1;35mWi-Fi(wwan2)のSSIDを入力して下さい\033[0;39m"
-  read -p " Wi-Fi(wwan2)のSSID: " input_str_WIFI_SSID_C
+  echo -e " \033[7;40mWi-Firadio2のSSIDを入力して下さい\033[0;39m"
+  read -p " Wi-Firadio2のSSID: " input_str_WIFI_SSID_C
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_C ;;
@@ -109,8 +110,8 @@ done
 function _func_WIFI_PASSWD_C {
 while :
 do
-  echo -e " \033[1;35mWi-Fi(wwan2)のパスワードを入力して下さい\033[0;39m"
-  read -p " Wi-Fi(wwan2)のパスワード: " input_str_WIFI_PASSWD_C
+  echo -e " \033[7;40mWi-Firadio2のパスワードを入力して下さい\033[0;39m"
+  read -p " Wi-Firadio2のパスワード: " input_str_WIFI_PASSWD_C
   read -p " 宜しいですか? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DEVICE_confirmation ;;
@@ -125,15 +126,15 @@ while :
 do 
   echo -e " \033[1;37mシステム設定 ----------------------------------------\033[0;39m"
   echo -e " \033[1;34mデバイスのホストネーム: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
-  echo -e " \033[1;34mデバイスのパスワード: ${input_str_ROOT_PASSWD}\033[0;39m"
-  echo -e " \033[1;32mWi-Fi(wwan0)のSSID: ${input_str_WIFI_SSID_A}\033[0;39m"
-  echo -e " \033[1;32mWi-Fi(wwan0)のパスワード: ${input_str_WIFI_PASSWD_A}\033[0;39m"
-  echo -e " \033[1;32mWi-Fi(wwan1)のSSID: ${input_str_WIFI_SSID_B}\033[0;39m"
-  echo -e " \033[1;32mWi-Fi(wwan1)のパスワード: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+  echo -e " \033[1;33mデバイスのパスワード: ${input_str_ROOT_PASSWD}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi${WIFI_NO_A}のSSID: ${input_str_WIFI_SSID_A}\033[0;39m"
+  echo -e " \033[1;35mWi-Fi${WIFI_NO_A}のパスワード: ${input_str_WIFI_PASSWD_A}\033[0;39m"
+  echo -e " \033[1;31mWi-Fi${WIFI_NO_B}のSSID: ${input_str_WIFI_SSID_B}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi${WIFI_NO_B}のパスワード: ${input_str_WIFI_PASSWD_B}\033[0;39m"
    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
     then
-  echo -e " \033[1;35mWi-Fi(wwan2)のSSID: ${input_str_WIFI_SSID_C}\033[0;39m"
-  echo -e " \033[1;35mWi-Fi(wwan2)のパスワード: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+  echo -e " \033[7;40mWi-Firadio2のSSID: ${input_str_WIFI_SSID_C}\033[0;39m"
+  echo -e " \033[7;40mWi-Firadio2のパスワード: ${input_str_WIFI_PASSWD_C}\033[0;39m"
    fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " これで宜しければ設定を開始します [y/n or q]: " num
@@ -161,21 +162,35 @@ function _func_DEVICE_SET {
   exit
 }
 
+WIFI_A=`uci show wireless | grep '5g'| cut -d'.' -f2 | awk '{ print $1 }'`
+WIFI_B=`uci show wireless | grep '2g'| cut -d'.' -f2 | awk '{ print $1 }'`
+if [ "radio0" = "${WIFI_A}" ]; then
+WIFI_NO_A='5G:radio0'
+fi
+if [ "radio1" = "${WIFI_A}" ]; then
+WIFI_NO_A='5G:radio1'
+fi
+if [ "radio0" = "${WIFI_B}" ]; then
+WIFI_NO_B='2G:radio0'
+fi
+if [ "radio1" = "${WIFI_B}" ]; then
+WIFI_NO_B='2G:radio1'
+fi
 while :
 do
   echo -e " \033[1;37mシステム初期設定を開始します\033[0;39m"
-  echo -e " \033[1;37m・デバイスのホストネーム\033[0;39m"
-  echo -e " \033[1;37m・デバイスのパスワード\033[0;39m"
-  echo -e " \033[1;37m・Wi-Fi(wwan0)のSSID\033[0;39m"
-  echo -e " \033[1;37m・Wi-Fi(wwan0)のパスワード\033[0;39m"
-  echo -e " \033[1;37m・Wi-Fi(wwan1)のSSID\033[0;39m"
-  echo -e " \033[1;37m・Wi-Fi(wwan1)のパスワード\033[0;39m"
-  WIFI_DEVICE=`fgrep 'wifi-device' /etc/config/wireless | wc -l`
+  echo -e " \033[1;34m・デバイスのホストネーム\033[0;39m"
+  echo -e " \033[1;33m・デバイスのパスワード\033[0;39m"
+  echo -e " \033[1;32m・Wi-Fi(${WIFI_NO_A})のSSID\033[0;39m"
+  echo -e " \033[1;35m・Wi-Fi(${WIFI_NO_A})のパスワード\033[0;39m"
+  echo -e " \033[1;31m・Wi-Fi(${WIFI_NO_B})のSSID\033[0;39m"
+  echo -e " \033[1;36m・Wi-Fi(${WIFI_NO_B})のパスワード\033[0;39m"
+  WIFI_DEVICE=`uci show wireless | grep 'wifi-device' | wc -l`
   WIFI_NO=3
-    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
-  echo -e " \033[1;37m・Wi-Fi(wwan2)のSSID\033[0;39m"
-  echo -e " \033[1;37m・Wi-Fi(wwan2)のパスワード\033[0;39m"
-    fi
+  if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
+  echo -e " \033[7;40m・Wi-Fi(radio2)のSSID\033[0;39m"
+  echo -e " \033[7;40m・Wi-Fi(radio2)のパスワード\033[0;39m"
+  fi
   read -p " 開始します [y/n]:" num
   case "${num}" in
     "y" ) _func_HOSTNAME ;;
