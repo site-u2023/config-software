@@ -1,6 +1,6 @@
 #! /bin/sh
 
-function _func_HOSTNAME
+function _func_HOSTNAME {
 while :
 do
   echo -e " \033[1;34mデバイスのホストネームを入力して下さい\033[0;39m"
@@ -12,8 +12,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_ROOT_PASSWD
+function _func_ROOT_PASSWD {
 while :
 do
   echo -e " \033[1;34mデバイスのパスワードを入力して下さい\033[0;39m"
@@ -25,8 +26,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_WIFI_SSID_A
+function _func_WIFI_SSID_A{
 while :
 do
   echo -e " \033[1;32mWi-Fi(wwan0)のSSIDを入力して下さい\033[0;39m"
@@ -38,8 +40,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_WIFI_PASSWD_A
+function _func_WIFI_PASSWD_A {
 while :
 do
   echo -e " \033[1;32mWi-Fi(wwan0)のパスワードを入力して下さい\033[0;39m"
@@ -51,8 +54,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_WIFI_SSID_B
+function _func_WIFI_SSID_B {
 while :
 do
   echo -e " \033[1;32mWi-Fi(wwan1)のSSIDを入力して下さい\033[0;39m"
@@ -64,8 +68,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_WIFI_PASSWD_B
+function _func_WIFI_PASSWD_B {
 while :
 do
   echo -e " \033[1;32mWi-Fi(wwan1)のパスワードを入力して下さい\033[0;39m"
@@ -77,9 +82,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_WIFI_SEARCH
-{
+function _func_WIFI_SEARCH {
     if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
      _func_WIFI_SSID_C
     else
@@ -87,7 +92,7 @@ function _func_WIFI_SEARCH
     fi
 }
 
-function _func_WIFI_SSID_C
+function _func_WIFI_SSID_C {
 while :
 do
   echo -e " \033[1;35mWi-Fi(wwan2)のSSIDを入力して下さい\033[0;39m"
@@ -99,8 +104,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_WIFI_PASSWD_C
+function _func_WIFI_PASSWD_C {
 while :
 do
   echo -e " \033[1;35mWi-Fi(wwan2)のパスワードを入力して下さい\033[0;39m"
@@ -112,8 +118,9 @@ do
     "r" ) break ;;
   esac
 done
+}
 
-function _func_DEVICE_confirmation
+function _func_DEVICE_confirmation {
 while :
 do 
   echo -e " \033[1;37mシステム設定 ----------------------------------------\033[0;39m"
@@ -136,9 +143,9 @@ do
     "q" ) exit ;;
   esac
 done
+}
 
-function _func_DEVICE_SET
-{
+function _func_DEVICE_SET {
   wget --no-check-certificate -O /etc/config-software/system.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system.sh
   sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/config-software/system.sh
   sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/config-software/system.sh
