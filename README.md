@@ -4,26 +4,21 @@ Japanese notation
 
 **不具合あればご連絡下さい**
 
-### スクリプトセレクター※要ONU直結
-![openwrt-config.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/a0f6ee12-1409-96d5-6259-3ac04a236da2.png)
-
 **推奨設定順序: システム > インターネット > パッケージ**
 
 ### 設定
 ttydのインストールと設定
 - [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
-```sh
+```
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
-
 ```
 ### 実行
 - ttydから実行
-**[192.168.1.1:8888](http://192.168.1.1:8888)** 
+**[`192.168.1.1:8888`](http://192.168.1.1:8888)**
 
 - コマンドから実行
-```sh
+```
 confsoft
-
 ```
 ※強制終了：`Ctrl`+`c`
 
@@ -77,6 +72,8 @@ confsoft
       - [dumb.sh](https://github.com/site-u2023/config-software/blob/main/dumb.sh)
     - [ad-dns-blocking-config.sh](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
       - [adguard-config.sh](https://github.com/site-u2023/config-software/blob/main/adguard-config.sh)
+        - [adguardhome.yaml](https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml)
+        - [htpasswd](https://github.com/site-u2023/config-software/blob/main/htpasswd)
         - [adguard.sh](https://github.com/site-u2023/config-software/blob/main/adguard.sh)
       - [adblock-config.sh](https://github.com/site-u2023/config-software/blob/main/adblock-config.sh)
         - [adblock.sh](https://github.com/site-u2023/config-software/blob/main/adblock.sh)
@@ -87,10 +84,8 @@ confsoft
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
 
 ### 削除
-```sh 
-
+```
 rm -rf /usr/bin/confsoft
-
 ```
 
 
