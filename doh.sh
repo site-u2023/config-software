@@ -74,14 +74,15 @@ if [ "stubby" = "`opkg list-installed stubby | awk '{ print $1 }'`" ]; then
  read -p " DNS over TLS (DoT) がインストールされている為終了します"
  exit
 fi
-OPENWRT_REL
-OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
+
+OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
+if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
-else
+ else
  read -p " バージョンが違うため終了します"
  exit
 fi
+
 while :
 do
   echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
