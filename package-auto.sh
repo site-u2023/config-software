@@ -256,10 +256,9 @@ else
 fi
 }
 
-
-OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "21" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
- echo -e " \033[1;32mバージョンチェック: OK\033[0;39m"
+OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
+if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ]; then
+ echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
  else
  read -p " バージョンが違うため終了します"
  exit
