@@ -162,10 +162,10 @@ function _func_DEVICE_SET {
   exit
 }
 
-WIFI_A=`uci show wireless | grep '5g'| cut -d'.' -f2 | awk '{ print $1 }'`
-WIFI_B=`uci show wireless | grep '2g'| cut -d'.' -f2 | awk '{ print $1 }'`
-WIFI_C=`uci show wireless | grep '5g'| cut -d'.' -f2 | awk '{ print $2 }'`
-WIFI_D=`uci show wireless | grep '2g'| cut -d'.' -f2 | awk '{ print $2 }'`
+WIFI_A=`uci show wireless | grep '5g' | cut -d'.' -f2 | awk '{ print $1 }'`
+WIFI_B=`uci show wireless | grep '2g' | cut -d'.' -f2 | awk '{ print $1 }'`
+WIFI_C=`uci show wireless | grep '5g' | cut -d'.' -f2 | awk '{ print $2 }'`
+WIFI_D=`uci show wireless | grep '2g' | cut -d'.' -f2 | awk '{ print $2 }'`
 if [ "radio0" = "${WIFI_A}" ]; then
 WIFI_NO_A='5G:radio0'
 fi
