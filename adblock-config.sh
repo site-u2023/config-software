@@ -153,11 +153,11 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
  read -p " AdGuardがインストールされている為終了します"
 # exit
 fi
-OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
+OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
+if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
- _func_AdBlock
-else
+  _func_AdBlock
+ else
  read -p " バージョンが違うため終了します"
  exit
 fi
