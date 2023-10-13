@@ -128,33 +128,18 @@ rm /tmp/luci-app-cpu-status_0.4-2_all.ipk
 # /etc/init.d/rpcd reload
 
 # CPUパフォーマンス
-OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ]; then
 wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-0_all.ipk
 opkg install /tmp/luci-app-cpu-perf_0.4-0_all.ipk
 rm /tmp/luci-app-cpu-perf_0.4-0_all.ipk
 /etc/init.d/rpcd restart
 /etc/init.d/cpu-perf start
-else
- wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-0_all.ipk
- opkg install /tmp/luci-app-cpu-perf_0.4-0_all.ipk
- rm /tmp/luci-app-cpu-perf_0.4-0_all.ipk
- # /etc/init.d/rpcd restart
- /etc/init.d/cpu-perf start
 fi
 
 # 温度センサー
-OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ]; then
-  wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/23.05/luci-app-temp-status_0.3-5_all.ipk
-  opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
-  rm /tmp/luci-app-temp-status_0.3-5_all.ipk
-  # /etc/init.d/rpcd reload
-else
-　wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
-　opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
-　rm /tmp/luci-app-temp-status_0.3-5_all.ipk
-　# /etc/init.d/rpcd reload
+wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
+opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
+rm /tmp/luci-app-temp-status_0.3-5_all.ipk
+/etc/init.d/rpcd reload
 fi
 
 # インターネット可用性確認
