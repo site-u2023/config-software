@@ -130,11 +130,11 @@ rm /tmp/luci-app-cpu-status_0.4-2_all.ipk
 # CPUパフォーマンス
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS:0:2}" = "23" ]; then
- wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/23.05/luci-app-cpu-perf_0.4-0_all.ipk
- opkg install /tmp/luci-app-cpu-perf_0.4-0_all.ipk
- rm /tmp/luci-app-cpu-perf_0.4-0_all.ipk
- # /etc/init.d/rpcd restart
- /etc/init.d/cpu-perf start
+wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-0_all.ipk
+opkg install /tmp/luci-app-cpu-perf_0.4-0_all.ipk
+rm /tmp/luci-app-cpu-perf_0.4-0_all.ipk
+/etc/init.d/rpcd restart
+/etc/init.d/cpu-perf start
 else
  wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-0_all.ipk
  opkg install /tmp/luci-app-cpu-perf_0.4-0_all.ipk
