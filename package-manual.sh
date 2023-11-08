@@ -121,25 +121,23 @@ fi
 
 # ログ情報
 if [ -z "$LOG" ]; then
-wget --no-check-certificate -O /tmp/luci-app-log_0.6-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.6-2_all.ipk
-opkg install /tmp/luci-app-log_0.6-2_all.ipk
-rm /tmp/luci-app-log_0.6-2_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-log_0.7-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.7-0_all.ipk
+opkg install /tmp/luci-app-log_0.7-0_all.ipk
+rm /tmp/luci-app-log_0.7-0_all.ipk
 fi
 
 # CPUステータス
 if [ -z "$CPU_STATUS" ]; then
-wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-2_all.ipk
-opkg install /tmp/luci-app-cpu-status_0.4-2_all.ipk
-rm /tmp/luci-app-cpu-status_0.4-2_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
+opkg install /tmp/luci-app-cpu-status_0.4-3_all.ipk
+rm /tmp/luci-app-cpu-status_0.4-3_all.ipk
 fi
 
 # CPUパフォーマンス
 if [ -z "$CPU_PERFORMANCE" ]; then
-wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-0_all.ipk
-opkg install /tmp/luci-app-cpu-perf_0.4-0_all.ipk
-rm /tmp/luci-app-cpu-perf_0.4-0_all.ipk
-/etc/init.d/rpcd restart
-/etc/init.d/cpu-perf start
+wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
+opkg install /tmp/luci-app-cpu-perf_0.4-1_all.ipk
+rm /tmp/luci-app-cpu-perf_0.4-1_all.ipk
 fi
 
 # 温度センサー
@@ -147,7 +145,6 @@ if [ -z "$TMP_STATUS" ]; then
 wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
 opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
 rm /tmp/luci-app-temp-status_0.3-5_all.ipk
-/etc/init.d/rpcd reload
 fi
 
 # インターネット可用性確認
