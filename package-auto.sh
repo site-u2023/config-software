@@ -116,21 +116,19 @@ opkg install luci-theme-openwrt-2020
 # カスタムフィード
 
 # ログ情報
-wget --no-check-certificate -O /tmp/luci-app-log_0.6-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.6-2_all.ipk
-opkg install /tmp/luci-app-log_0.6-2_all.ipk
-rm /tmp/luci-app-log_0.6-2_all.ipk
-# /etc/init.d/rpcd restart
+wget --no-check-certificate -O /tmp/luci-app-log_0.7-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.7-0_all.ipk
+opkg install /tmp/luci-app-log_0.7-0_all.ipk
+rm /tmp/luci-app-log_0.7-0_all.ipk
 
 # CPUステータス
-wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-2_all.ipk
-opkg install /tmp/luci-app-cpu-status_0.4-2_all.ipk
-rm /tmp/luci-app-cpu-status_0.4-2_all.ipk
-# /etc/init.d/rpcd reload
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
+opkg install /tmp/luci-app-cpu-status_0.4-3_all.ipk
+rm /tmp/luci-app-cpu-status_0.4-3_all.ipk
 
 # CPUパフォーマンス
-wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-0_all.ipk
-opkg install /tmp/luci-app-cpu-perf_0.4-0_all.ipk
-rm /tmp/luci-app-cpu-perf_0.4-0_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
+opkg install /tmp/luci-app-cpu-perf_0.4-1_all.ipk
+rm /tmp/luci-app-cpu-perf_0.4-1_all.ipk
 /etc/init.d/rpcd restart
 /etc/init.d/cpu-perf start
 fi
