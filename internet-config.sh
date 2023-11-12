@@ -598,7 +598,9 @@ uci set network.wan6=interface
 uci set network.wan6.proto='pppoe'
 uci set network.wan6.username=${input_str_ID6}
 uci set network.wan6.password=${input_str_PASSWORD6}
+uci set firewall.@rule[3].src_port='547'
 uci commit network
+uci commit firewall
 echo -e " \033[1;37m ${input_str_ID4}\033[0;39m"
 echo -e " \033[1;37m ${input_str_PASSWORD4}\033[0;39m"
 echo -e " \033[1;37m ${input_str_ID6}\033[0;39m"
