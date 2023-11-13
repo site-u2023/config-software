@@ -117,10 +117,13 @@ opkg install luci-theme-openwrt-2020
 fi
 
 # Attended Sysupgrade
-if [ -z "$Attendedsysupgrade" ]; then
+if [ -z "$Attended_common" ]; then
+opkg install attendedsysupgrade-common
+fi
+if [ -z "$Attended" ]; then
 opkg install luci-app-attendedsysupgrade
 fi
-if [ -z "$Attendedsysupgrade_ja" ]; then
+if [ -z "$Attended_ja" ]; then
 opkg install luci-i18n-attendedsysupgrade-ja
 fi
 if [ -z "$Auc" ]; then
@@ -654,28 +657,33 @@ _func_attendedsysupgrade
 }
 
 function _func_attendedsysupgrade {
-Attendedsysupgrade=`opkg install luci-app-attendedsysupgrade | awk '{ print $1 }'`
-Attendedsysupgrade_ja=`opkg install luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
+Attended_common=`opkg install attendedsysupgrade-common | awk '{ print $1 }'`
+Attended=`opkg install luci-app-attendedsysupgrade | awk '{ print $1 }'`
+Attended_ja=`opkg install luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
 Auc=`opkg install auc | awk '{ print $1 }'`
-if [ -z "$Attendedsysupgrade" ] || [ -z "$Attendedsysupgrade_ja" ] || [ -z "$Auc" ]; then
+if  [ -z "$Attended_common" ] |[ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
 while :
 do
   echo -e " \033[1;33mAttended Sysupgradeをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mattendedsysupgrade-common: $((`opkg info attendedsysupgrade-common | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-attendedsysupgrade: $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-attendedsysupgrade-ja: $((`opkg info luci-i18n-attendedsysupgrade-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mauc: $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-attendedsysupgrade >> /etc/config-software/list-installed/Before
+    "y" ) echo attendedsysupgrade-common >> /etc/config-software/list-installed/Before
+          echo luci-app-attendedsysupgrade >> /etc/config-software/list-installed/Before
           echo luci-i18n-attendedsysupgrade-ja >> /etc/config-software/list-installed/Before
           echo auc >> /etc/config-software/list-installed/Before
+          echo $((`opkg info attendedsysupgrade-common | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-attendedsysupgrade-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
-    "n" ) Attendedsysupgrade='1'
-          Attendedsysupgrade_ja='1'
+    "n" ) Attended_common='1'
+          Attended='1'
+          Attended_ja='1'
           Auc='1'
           break ;;
     "q" ) exit ;;
