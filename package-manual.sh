@@ -1215,6 +1215,7 @@ fi
   echo -e " \033[1;37m・テーマ OpenWrt: luci-theme-openwrt\033[0;39m"
   echo -e " \033[1;37m・テーマ マテリアル: luci-theme-material\033[0;39m"
   echo -e " \033[1;37m・テーマ OpenWrt2020: luci-theme-openwrt-2020\033[0;39m"
+  echo -e " \033[1;37m・Attended Sysupgrade\033[0;39m"
   echo -e " \033[1;37m・ログ情報: luci-app-log（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・CPUステータス: luci-app-cpu-status（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・CPUパフォーマンス: luci-app-cpu-perf（カスタムフィード）\033[0;39m"
