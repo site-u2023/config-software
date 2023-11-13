@@ -657,10 +657,10 @@ _func_attendedsysupgrade
 }
 
 function _func_attendedsysupgrade {
-Attended_common=`opkg install attendedsysupgrade-common | awk '{ print $1 }'`
-Attended=`opkg install luci-app-attendedsysupgrade | awk '{ print $1 }'`
-Attended_ja=`opkg install luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
-Auc=`opkg install auc | awk '{ print $1 }'`
+Attended_common=`opkg list-installed attendedsysupgrade-common | awk '{ print $1 }'`
+Attended=`opkg list-installed luci-app-attendedsysupgrade | awk '{ print $1 }'`
+Attended_ja=`opkg list-installed luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
+Auc=`opkg list-installed auc | awk '{ print $1 }'`
 if [ -z "$Attended_common" ] |[ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
 while :
 do
