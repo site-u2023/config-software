@@ -83,7 +83,6 @@ if [ -z "$STATUS_JA" ]; then
 opkg install luci-i18n-statistics-ja
 fi
 
-
 # 帯域幅モニター
 if [ -z "$NLBWMON" ]; then
 opkg install nlbwmon
@@ -115,6 +114,17 @@ opkg install luci-theme-material
 fi
 if [ -z "$THEME_2020" ]; then
 opkg install luci-theme-openwrt-2020
+fi
+
+# Attended Sysupgrade
+if [ -z "$attendedsysupgrade" ]; then
+opkg install luci-app-attendedsysupgrade
+fi
+if [ -z "$attendedsysupgrade_ja" ]; then
+opkg install luci-i18n-attendedsysupgrade-ja
+fi
+if [ -z "$auc" ]; then
+opkg install auc
 fi
 
 # カスタムフィード
@@ -180,7 +190,6 @@ wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://gi
 opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
 rm /tmp/luci-app-disks-info_0.4-2_all.ipk
 fi
-
 
 # USB
 if [ -z "$block_mount" ]; then
@@ -268,7 +277,6 @@ if [ -z "$luci_i18n_hd_idle_ja" ]; then
 opkg install luci-i18n-hd-idle-ja
 fi
 
-
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
 if [ -s /etc/config-software/list-installed/Difference ]; then
@@ -290,7 +298,6 @@ else
 fi
 
 }
-
 
 function _func_listinstalled_Before {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
@@ -638,6 +645,38 @@ do
           echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) THEME_2020='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_attendedsysupgrade
+}
+
+function _func_attendedsysupgrade {
+attendedsysupgrade=`opkg install luci-app-attendedsysupgrade | awk '{ print $1 }'`
+attendedsysupgrade_ja=`opkg install luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
+auc=`opkg install auc | awk '{ print $1 }'`
+if [ -z "$attendedsysupgrade" ] || [ -z "$attendedsysupgrade_ja" ] || [ -z "$auc" ]; then
+while :
+do
+  echo -e " \033[1;33mAttended Sysupgradeをインストールしますか\033[0;39m"
+  echo -e " \033[1;32mluci-app-attendedsysupgrade: $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-i18n-attendedsysupgrade-ja: $((`opkg info luci-i18n-attendedsysupgrade-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mauc: $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  read -p " キーを選択してください [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo luci-app-attendedsysupgrade >> /etc/config-software/list-installed/Before
+          echo luci-i18n-attendedsysupgrade-ja >> /etc/config-software/list-installed/Before
+          echo auc >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info luci-i18n-attendedsysupgrade-ja | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+          break ;;
+    "n" ) attendedsysupgrade='1'
+          attendedsysupgrade_ja='1'
+          auc='1'
           break ;;
     "q" ) exit ;;
   esac
