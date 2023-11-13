@@ -32,7 +32,7 @@ done
 function _func_PACKAGE {
 while :
 do
-  echo -e " \033[1;32m推奨パッケージインストールのスクリプトをダウンロードします\033[0;39m"
+  echo -e " \033[1;32m推奨パッケージインストール（自動or選択）のスクリプトをダウンロードします\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh
