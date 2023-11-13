@@ -661,7 +661,7 @@ Attended_common=`opkg install attendedsysupgrade-common | awk '{ print $1 }'`
 Attended=`opkg install luci-app-attendedsysupgrade | awk '{ print $1 }'`
 Attended_ja=`opkg install luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
 Auc=`opkg install auc | awk '{ print $1 }'`
-if  [ -z "$Attended_common" ] |[ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
+if [ -z "$Attended_common" ] |[ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
 while :
 do
   echo -e " \033[1;33mAttended Sysupgradeをインストールしますか\033[0;39m"
