@@ -117,13 +117,13 @@ opkg install luci-theme-openwrt-2020
 fi
 
 # Attended Sysupgrade
-if [ -z "$attendedsysupgrade" ]; then
+if [ -z "$Attendedsysupgrade" ]; then
 opkg install luci-app-attendedsysupgrade
 fi
-if [ -z "$attendedsysupgrade_ja" ]; then
+if [ -z "$Attendedsysupgrade_ja" ]; then
 opkg install luci-i18n-attendedsysupgrade-ja
 fi
-if [ -z "$auc" ]; then
+if [ -z "$Auc" ]; then
 opkg install auc
 fi
 
@@ -654,10 +654,10 @@ _func_attendedsysupgrade
 }
 
 function _func_attendedsysupgrade {
-attendedsysupgrade=`opkg install luci-app-attendedsysupgrade | awk '{ print $1 }'`
-attendedsysupgrade_ja=`opkg install luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
-auc=`opkg install auc | awk '{ print $1 }'`
-if [ -z "$attendedsysupgrade" ] || [ -z "$attendedsysupgrade_ja" ] || [ -z "$auc" ]; then
+Attendedsysupgrade=`opkg install luci-app-attendedsysupgrade | awk '{ print $1 }'`
+Attendedsysupgrade_ja=`opkg install luci-i18n-attendedsysupgrade-ja | awk '{ print $1 }'`
+Auc=`opkg install auc | awk '{ print $1 }'`
+if [ -z "$Attendedsysupgrade" ] || [ -z "$Attendedsysupgrade_ja" ] || [ -z "$Auc" ]; then
 while :
 do
   echo -e " \033[1;33mAttended Sysupgradeをインストールしますか\033[0;39m"
@@ -674,9 +674,9 @@ do
           echo $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
-    "n" ) attendedsysupgrade='1'
-          attendedsysupgrade_ja='1'
-          auc='1'
+    "n" ) Attendedsysupgrade='1'
+          Attendedsysupgrade_ja='1'
+          Auc='1'
           break ;;
     "q" ) exit ;;
   esac
