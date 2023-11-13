@@ -34,6 +34,8 @@ luci-i18n-wifischedule-ja
 luci-theme-openwrt
 luci-theme-material
 luci-theme-openwrt-2020
+luci-app-attendedsysupgrade
+auc
 luci-app-log
 luci-app-cpu-perf
 luci-app-temp-status
@@ -112,6 +114,11 @@ opkg install luci-theme-openwrt
 opkg install luci-theme-material
 # モダン
 opkg install luci-theme-openwrt-2020
+
+# Attended Sysupgrade
+opkg install luci-app-attendedsysupgrade
+opkg install luci-i18n-attendedsysupgrade-ja
+opkg install auc
 
 # カスタムフィード
 
@@ -268,6 +275,7 @@ fi
   echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・インターネット可用性確認（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・テーマ ARGON（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・Attended Sysupgrade\033[0;39m"
 str_USB=`dmesg | grep -s usb`
 if [ -n "$str_USB" ]; then
   echo -e " \033[1;37m・ディスクインフォ（カスタムフィード）\033[0;39m"
