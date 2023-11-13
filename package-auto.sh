@@ -34,7 +34,9 @@ luci-i18n-wifischedule-ja
 luci-theme-openwrt
 luci-theme-material
 luci-theme-openwrt-2020
+attendedsysupgrade-common
 luci-app-attendedsysupgrade
+luci-i18n-attendedsysupgrade-ja
 auc
 luci-app-log
 luci-app-cpu-perf
@@ -116,6 +118,7 @@ opkg install luci-theme-material
 opkg install luci-theme-openwrt-2020
 
 # Attended Sysupgrade
+opkg install attendedsysupgrade-common
 opkg install luci-app-attendedsysupgrade
 opkg install luci-i18n-attendedsysupgrade-ja
 opkg install auc
