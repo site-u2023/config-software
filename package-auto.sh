@@ -139,7 +139,6 @@ rm /tmp/luci-app-cpu-status_0.4-3_all.ipk
 wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
 opkg install /tmp/luci-app-cpu-perf_0.4-1_all.ipk
 rm /tmp/luci-app-cpu-perf_0.4-1_all.ipk
-/etc/init.d/rpcd restart
 /etc/init.d/cpu-perf start
 fi
 
@@ -147,7 +146,6 @@ fi
 wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
 opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
 rm /tmp/luci-app-temp-status_0.3-5_all.ipk
-/etc/init.d/rpcd reload
 fi
 
 # インターネット可用性確認
@@ -160,7 +158,6 @@ rm /tmp/internet-detector_1.0-3_all.ipk
 wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.0-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.0-1_all.ipk
 opkg install /tmp/luci-app-internet-detector_1.0-1_all.ipk
 rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
-/etc/init.d/rpcd restart
 
 # テーマ ARGON (テンプレート)
 opkg install luci-compat
@@ -168,7 +165,6 @@ opkg install luci-lib-ipkg
 wget --no-check-certificate -O /tmp/luci-theme-argon.ipk https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.1/luci-theme-argon_2.3.1_all.ipk
 opkg install /tmp/luci-theme-argon.ipk
 rm /tmp/luci-theme-argon.ipk
-# /etc/init.d/rpcd restart
 
 # USB
 if [ -n "$str_USB" ]; then
