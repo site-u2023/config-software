@@ -162,6 +162,7 @@ fi
 
 # インターネット可用性確認
 if [ -z "$DETECTER" ]; then
+opkg install mailsend
 wget --no-check-certificate -O /tmp/internet-detector_1.0-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.0-3_all.ipk
 opkg install /tmp/internet-detector_1.0-3_all.ipk
 rm /tmp/internet-detector_1.0-3_all.ipk
