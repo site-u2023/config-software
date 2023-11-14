@@ -64,12 +64,32 @@ do
           echo -e " \033[1;36m`uci show wireless.default_radio1.ssid`\033[0;39m"
           echo -e " \033[1;36m`uci show wireless.default_radio2.ssid`\033[0;39m"
           echo -e " \033[1;32m設定が完了しました\033[0;39m"
-          echo -e " \033[1;33mクライアントのSSID末尾に _optout_nomap を追加して下さい\033[0;39m"
+          echo -e " \033[1;33mクライアントのSSID末尾に _optout_nomap を追加して下さい\033[0;39m"      
           read -p " 何かキーを押して下さい"
           break ;;
     "n" ) break ;;
   esac
 done
+}
+
+function _func_SAMBA4 {
+while :
+do
+  echo -e " \033[1;32mSAMBA4及びWSDD2インストールを実行します\033[0;39m"
+  read -p " 宜しいですか? [y/n]: " num
+  case "${num}" in
+    "y" ) UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+          if [ ! -e ${UPDATE} ]; then
+          opkg update
+          fi
+          opkg install luci-app-samba4 luci-i18n-samba4-ja wsdd2
+          /etc/init.d/samba4 enable
+          /etc/init.d/samba4 start  
+          read -p " 何かキーを押して下さい"
+          break ;;
+    "n" ) break ;;
+  esac
+done  
 }
 
 while :
@@ -78,17 +98,17 @@ do
   echo -e " \033[1;34m[1]\033[0;39m": ボタン設定とインストール
   echo -e " \033[1;33m[2]\033[0;39m": IPERF3インストール及びサービス追加
   echo -e " \033[1;32m[3]\033[0;39m": WiFi位置情報サービス停止設定
-  echo -e " \033[1;35m[4]\033[0;39m": 
+  echo -e " \033[1;35m[4]\033[0;39m": SAMBA4及びWSDD2インストール
   echo -e " \033[1;31m[5]\033[0;39m": 
   echo -e " \033[1;36m[6]\033[0;39m": 
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [1/2/3 or q]: " num
+  read -p " キーを選択してください [1/2/3/4 or q]: " num
   case "${num}" in
     "1" ) _func_BUTTON ;;
     "2" ) _func_IPERF3 ;;
     "3" ) _func_WiFi_location_service ;;
-    "4" ) ;;
+    "4" ) _func_SAMBA4 ;;
     "5" ) ;;
     "6" ) ;;
     "q" ) exit ;;
