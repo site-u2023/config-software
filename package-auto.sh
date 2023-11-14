@@ -126,9 +126,9 @@ opkg install auc
 # カスタムフィード
 
 # ログ情報
-wget --no-check-certificate -O /tmp/luci-app-log_0.7-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.7-0_all.ipk
-opkg install /tmp/luci-app-log_0.7-0_all.ipk
-rm /tmp/luci-app-log_0.7-0_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-log_0.8-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.8-0_all.ipk
+opkg install /tmp/luci-app-log_0.8-0_all.ipk
+rm /tmp/luci-app-log_0.8-0_all.ipk
 
 # CPUステータス
 wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
