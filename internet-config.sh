@@ -4,6 +4,7 @@
 function _func_MAP_e_VirtualConnect {
 while :
 do
+  echo -e " \033[1;33mJapanese notation\033[0;39m"
   echo -e " \033[1;33m要ONU直結\033[0;39m"
   echo -e " \033[1;33mHGW非対応\033[0;39m"
   echo -e " \033[1;34mOCNバーチャルコネクト --------------------------------\033[0;39m"
