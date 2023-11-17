@@ -19,7 +19,7 @@ function _func_INTERNET {
 while :
 do
   echo -e " \033[1;33mDownload scripts for Internet connection\033[0;39m"
-  echo -e " \033[7;31mJapanese specification\033[0;39m"
+  echo -e " \033[7;33mJapanese specification\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh
