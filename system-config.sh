@@ -78,8 +78,23 @@ do
   read -p " WiFi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
   read -p " All right? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_WIFI_SEARCH ;;
+    "y" ) _func_WIFI_TWT ;;
     "n" ) _func_WIFI_PASSWD_B ;;
+    "r" ) break ;;
+  esac
+done
+}
+
+function _func_WIFI_TWT {
+while :
+do
+  echo -e " \033[1;37mPlease enter TWT ON\033[0;39m"
+  read -p " All right? [y/n or r]: " num
+  case "${num}" in
+    "y" ) sed -i -e "s/he_twt_required:0/he_twt_required:1/g" /lib/netifd/wireless/mac80211.sh
+          TWT=on
+          _func_WIFI_SEARCH ;;
+    "n" ) _func_WIFI_TWT ;;
     "r" ) break ;;
   esac
 done
@@ -131,6 +146,10 @@ do
   echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
   echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
   echo -e " \033[1;36mWiFi ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+   if [ "$TWT" = "on" ]
+    then
+  echo -e " \033[1;36mTWT ON\033[0;39m"
+   fi
    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
     then
   echo -e " \033[1;37mWiFi ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
@@ -211,6 +230,7 @@ do
   echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password\033[0;39m"
   echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID\033[0;39m"
   echo -e " \033[1;36mWiFi ${WIFI_NO_B} Password\033[0;39m"
+  echo -e " \033[1;36mTWT (Target Wake Time)\033[0;39m"
   WIFI_DEVICE=`uci show wireless | grep 'wifi-device' | wc -l`
   WIFI_NO=3
   if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
