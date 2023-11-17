@@ -90,7 +90,7 @@ while :
 do
   echo -e " \033[7;40mDelete this and related scripts\033[0;39m"
   echo -e " \033[7;40mRestoration files will not be deleted\033[0;39m"
-  read -p " 削除しますか? [y/n or r]: " num
+  read -p " Do you want to delete? [y/n or r]: " num
    case "${num}" in
     "y" ) rm -rf /etc/config-software
           echo -e " \033[7;40mThis script and related scripts have been deleted and terminated\033[0;39m"
