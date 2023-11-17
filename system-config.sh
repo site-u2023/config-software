@@ -32,8 +32,8 @@ done
 function _func_WIFI_SSID_A {
 while :
 do
-  echo -e " \033[1;32mPlease enter Wi-Fi${WIFI_NO_A}SSID\033[0;39m"
-  read -p " Wi-Fi${WIFI_NO_A}SSID: " input_str_WIFI_SSID_A
+  echo -e " \033[1;32mPlease enter Wi-Fi${WIFI_NO_A} SSID\033[0;39m"
+  read -p " Wi-Fi${WIFI_NO_A} SSID: " input_str_WIFI_SSID_A
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_A ;;
@@ -46,8 +46,8 @@ done
 function _func_WIFI_PASSWD_A {
 while :
 do
-  echo -e " \033[1;35mPlease enter WiFi ${WIFI_NO_A}password\033[0;39m"
-  read -p " WiFi ${WIFI_NO_A}Password: " input_str_WIFI_PASSWD_A
+  echo -e " \033[1;35mPlease enter WiFi ${WIFI_NO_A} password\033[0;39m"
+  read -p " WiFi ${WIFI_NO_A} Password: " input_str_WIFI_PASSWD_A
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_B ;;
@@ -60,8 +60,8 @@ done
 function _func_WIFI_SSID_B {
 while :
 do
-  echo -e " \033[1;31mPlease enter WiFi ${WIFI_NO_B}SSID\033[0;39m"
-  read -p " WiFi ${WIFI_NO_B}SSID: " input_str_WIFI_SSID_B
+  echo -e " \033[1;31mPlease enter WiFi ${WIFI_NO_B} SSID\033[0;39m"
+  read -p " WiFi ${WIFI_NO_B} SSID: " input_str_WIFI_SSID_B
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
@@ -74,8 +74,8 @@ done
 function _func_WIFI_PASSWD_B {
 while :
 do
-  echo -e " \033[1;36mPlease enter WiFi ${WIFI_NO_B}password\033[0;39m"
-  read -p " WiFi ${WIFI_NO_B}Password: " input_str_WIFI_PASSWD_B
+  echo -e " \033[1;36mPlease enter WiFi ${WIFI_NO_B} password\033[0;39m"
+  read -p " WiFi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SEARCH ;;
@@ -96,8 +96,8 @@ function _func_WIFI_SEARCH {
 function _func_WIFI_SSID_C {
 while :
 do
-  echo -e " \033[1;37mPlease enter WiFi ${WIFI_NO_C}SSID\033[0;39m"
-  read -p " WiFi ${WIFI_NO_C}SSID: " input_str_WIFI_SSID_C
+  echo -e " \033[1;37mPlease enter WiFi ${WIFI_NO_C} SSID\033[0;39m"
+  read -p " WiFi ${WIFI_NO_C} SSID: " input_str_WIFI_SSID_C
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_C ;;
@@ -110,8 +110,8 @@ done
 function _func_WIFI_PASSWD_C {
 while :
 do
-  echo -e " \033[1;37mPlease enter WiFi ${WIFI_NO_C}password\033[0;39m"
-  read -p " WiFi ${WIFI_NO_C}Password: " input_str_WIFI_PASSWD_C
+  echo -e " \033[1;37mPlease enter WiFi ${WIFI_NO_C} password\033[0;39m"
+  read -p " WiFi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DEVICE_confirmation ;;
@@ -127,14 +127,14 @@ do
   echo -e " \033[1;37msystem setup ----------------------------------------\033[0;39m"
   echo -e " \033[1;34mDevice hostname: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
   echo -e " \033[1;33mDevice Password: ${input_str_ROOT_PASSWD}\033[0;39m"
-  echo -e " \033[1;32mWiFi ${WIFI_NO_A}SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
-  echo -e " \033[1;35mWiFi ${WIFI_NO_A}Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
-  echo -e " \033[1;31mWiFi ${WIFI_NO_B}SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
-  echo -e " \033[1;36mWiFi ${WIFI_NO_B}Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+  echo -e " \033[1;32mWiFi ${WIFI_NO_A} SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
+  echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
+  echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
+  echo -e " \033[1;36mWiFi ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
     then
-  echo -e " \033[1;37mWiFi ${WIFI_NO_C}SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
-  echo -e " \033[1;37mWiFi ${WIFI_NO_C}Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+  echo -e " \033[1;37mWiFi ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
+  echo -e " \033[1;37mWiFi ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
    fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " All right? [y/n or q]: " num
@@ -207,15 +207,15 @@ do
   echo -e " \033[1;37mStart system initialization\033[0;39m"
   echo -e " \033[1;34mDevice hostname\033[0;39m"
   echo -e " \033[1;33mDevice Password\033[0;39m"
-  echo -e " \033[1;32mWiFi ${WIFI_NO_A}SSID\033[0;39m"
-  echo -e " \033[1;35mWiFi ${WIFI_NO_A}Password\033[0;39m"
-  echo -e " \033[1;31mWiFi ${WIFI_NO_B}SSID\033[0;39m"
-  echo -e " \033[1;36mWiFi ${WIFI_NO_B}Password\033[0;39m"
+  echo -e " \033[1;32mWiFi ${WIFI_NO_A} SSID\033[0;39m"
+  echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password\033[0;39m"
+  echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID\033[0;39m"
+  echo -e " \033[1;36mWiFi ${WIFI_NO_B} Password\033[0;39m"
   WIFI_DEVICE=`uci show wireless | grep 'wifi-device' | wc -l`
   WIFI_NO=3
   if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
-  echo -e " \033[1;37m・WiFi ${WIFI_NO_C}SSID\033[0;39m"
-  echo -e " \033[1;37m・WiFi ${WIFI_NO_C}Password\033[0;39m"
+  echo -e " \033[1;37m・WiFi ${WIFI_NO_C} SSID\033[0;39m"
+  echo -e " \033[1;37m・WiFi ${WIFI_NO_C} Password\033[0;39m"
   fi
   read -p " Start [y/n]:" num
   case "${num}" in
