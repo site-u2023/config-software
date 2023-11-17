@@ -139,13 +139,13 @@ fi
 while :
 do
   echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
-  echo -e " \033[1;33m[i]\033[0;39m": Internet connection setup (MAP-e, DS-LITE, PPPoE)
-  echo -e " \033[1;34m[s]\033[0;39m": Initial system setup (host name, password, etc.)
-  echo -e " \033[1;32m[p]\033[0;39m": Install recommended packages (automatic device identification)
-  echo -e " \033[1;31m[b]\033[0;39m": Install ad blocker and DNS encryption
-  echo -e " \033[1;35m[a]\033[0;39m": Access point connection setup (Dumb / Bridge)
-  echo -e " \033[1;36m[e]\033[0;39m": Other: BUTTON/IPERF3/SAMBA4/LBS
-  echo -e " \033[7;40m[q]\033[0;39m": Quit (Delete this script or not)
+  echo -e " \033[1;33m[i]: Internet connection setup (MAP-e, DS-LITE, PPPoE)\033[0;39m"
+  echo -e " \033[1;34m[s]: Initial system setup (host name, password, etc.)\033[0;39m"
+  echo -e " \033[1;32m[p]: Install recommended packages (automatic device identification)\033[0;39m"
+  echo -e " \033[1;31m[b]: Install ad blocker and DNS encryption\033[0;39m"
+  echo -e " \033[1;35m[a]: Access point connection setup (Dumb / Bridge)\033[0;39m"
+  echo -e " \033[1;36m[e]: Other: BUTTON/IPERF3/SAMBA4/LBS\033[0;39m"
+  echo -e " \033[7;40m[q]: Quit (Delete this script or not)\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " Press any key [i/s/p/b/a/e or q]: " num
   case "${num}" in
