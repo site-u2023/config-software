@@ -89,6 +89,7 @@ function _func_WIFI_TWT {
 while :
 do
   echo -e " \033[7;40mPlease enter TWT ON\033[0;39m"
+  echo -e " \033[7;40mOnly WiFi6\033[0;39m"
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) TWT=on
