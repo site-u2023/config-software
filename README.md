@@ -53,7 +53,8 @@ confsoft
   - 他
     - [ボタン設定とインストール](https://qiita.com/site_u/items/08764ce9473231482c17)
     - [IPERF3インストール及びサービス追加](https://qiita.com/site_u/items/599124e2904d1374c2c9#iperf3)
-    - [WiFi位置情報サービス停止](https://qiita.com/site_u/items/3cd3fc65a789461262e8#%E4%BD%8D%E7%BD%AE%E6%83%85%E5%A0%B1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%81%9C%E6%AD%A2)
+    - [WiFi位置情報サービス停止（LBS）](https://qiita.com/site_u/items/3cd3fc65a789461262e8#%E4%BD%8D%E7%BD%AE%E6%83%85%E5%A0%B1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%81%9C%E6%AD%A2)
+    - [SAMBA4](https://qiita.com/site_u/items/aa9164859a78cb4e3f8f)
   - 終了
 
 ### スクリプト
