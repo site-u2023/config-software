@@ -93,9 +93,9 @@ do
   read -p " Do you want to delete? [y/n or r]: " num
    case "${num}" in
     "y" ) rm -rf /etc/config-software
-          echo -e " \033[7;40mThis script and related scripts have been deleted and terminated\033[0;39m"
+          echo -e " \033[7;40m This script and related scripts have been deleted and quit\033[0;39m"
           exit ;;
-    "n" ) echo -e " \033[7;40mClosed\033[0;39m"
+    "n" ) echo -e " \033[7;40m Quit\033[0;39m"
           exit ;;
     "r" ) break ;;
    esac 
@@ -145,7 +145,7 @@ do
   echo -e " \033[1;31m[b]\033[0;39m": Install ad blocker and DNS encryption
   echo -e " \033[1;35m[a]\033[0;39m": Access point connection setup (Dumb / Bridge)
   echo -e " \033[1;36m[e]\033[0;39m": Other: BUTTON/IPERF3/SAMBA4/LBS
-  echo -e " \033[7;40m[q]\033[0;39m": Quit
+  echo -e " \033[7;40m[q]\033[0;39m": Quit (Delete this script or not)
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " Press any key [i/s/p/b/a/e or q]: " num
   case "${num}" in
