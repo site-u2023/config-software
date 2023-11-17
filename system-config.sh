@@ -78,23 +78,8 @@ do
   read -p " WiFi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
   read -p " All right? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_WIFI_TWT ;;
+    "y" ) _func_WIFI_SEARCH ;;
     "n" ) _func_WIFI_PASSWD_B ;;
-    "r" ) break ;;
-  esac
-done
-}
-
-function _func_WIFI_TWT {
-while :
-do
-  echo -e " \033[7;40mUse TWT (Only WiFi6)\033[0;39m"
-  echo -e " \033[7;40mTWT: ON\033[0;39m"
-  read -p " All right? [y/n or r]: " num
-  case "${num}" in
-    "y" ) TWT=on
-          _func_WIFI_SEARCH ;;
-    "n" ) _func_WIFI_TWT ;;
     "r" ) break ;;
   esac
 done
@@ -104,7 +89,7 @@ function _func_WIFI_SEARCH {
     if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
      _func_WIFI_SSID_C
     else
-     _func_DEVICE_confirmation
+     _func_WIFI_TWT
     fi
 }
 
@@ -129,8 +114,23 @@ do
   read -p " WiFi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
   read -p " All right? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_DEVICE_confirmation ;;
+    "y" ) _func_WIFI_TWT ;;
     "n" ) _func_WIFI_PASSWD_C ;;
+    "r" ) break ;;
+  esac
+done
+}
+
+function _func_WIFI_TWT {
+while :
+do
+  echo -e " \033[7;40mUse TWT (Only WiFi6)\033[0;39m"
+  echo -e " \033[7;40mTWT: ON\033[0;39m"
+  read -p " All right? [y/n or r]: " num
+  case "${num}" in
+    "y" ) TWT=on
+          _func_DEVICE_confirmation ;;
+    "n" ) _func_WIFI_TWT ;;
     "r" ) break ;;
   esac
 done
