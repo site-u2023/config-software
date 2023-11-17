@@ -4,7 +4,6 @@
 function _func_MAP_e_VirtualConnect {
 while :
 do
-  echo -e " \033[1;33mJapanese notation\033[0;39m"
   echo -e " \033[1;33m要ONU直結\033[0;39m"
   echo -e " \033[1;33mHGW非対応\033[0;39m"
   echo -e " \033[1;34mOCNバーチャルコネクト --------------------------------\033[0;39m"
@@ -642,6 +641,7 @@ fi
 
 while :
 do
+  echo -e " \033[1;33mJapanese notation\033[0;39m"
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
   echo -e " \033[1;34m[v]\033[0;39m": OCNバーチャルコネクト自動設定（ニチバン対策含む）
   echo -e " \033[1;33m[p]\033[0;39m": V6プラス・IPv6オプション自動設定（ニチバン対策含む）
