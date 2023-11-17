@@ -88,11 +88,10 @@ done
 function _func_WIFI_TWT {
 while :
 do
-  echo -e " \033[1;37mPlease enter TWT ON\033[0;39m"
+  echo -e " \033[7;40mPlease enter TWT ON\033[0;39m"
   read -p " All right? [y/n or r]: " num
   case "${num}" in
-    "y" ) sed -i -e "s/he_twt_required:0/he_twt_required:1/g" /lib/netifd/wireless/mac80211.sh
-          TWT=on
+    "y" ) TWT=on
           _func_WIFI_SEARCH ;;
     "n" ) _func_WIFI_TWT ;;
     "r" ) break ;;
@@ -146,14 +145,14 @@ do
   echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
   echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
   echo -e " \033[1;36mWiFi ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
-   if [ "$TWT" = "on" ]
-    then
-  echo -e " \033[1;36mTWT ON\033[0;39m"
-   fi
    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
     then
   echo -e " \033[1;37mWiFi ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
   echo -e " \033[1;37mWiFi ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+   fi
+   if [ "$TWT" = "on" ]
+    then
+  echo -e " \033[1;36mTWT ON\033[0;39m"
    fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " All right? [y/n or q]: " num
@@ -175,6 +174,10 @@ function _func_DEVICE_SET {
   sed -i -e "s/WIFI_PASSWORD_B='password'/WIFI_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_C='SSID_C'/WIFI_SSID_C=${input_str_WIFI_SSID_C}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_PASSWORD_C='password'/WIFI_PASSWORD_C=${input_str_WIFI_PASSWD_C}/g" /etc/config-software/system.sh
+   if [ "$TWT" = "on" ]
+    then
+  sed -i -e "s/he_twt_required:0/he_twt_required:1/g" /lib/netifd/wireless/mac80211.sh
+   fi
   sh /etc/config-software/system.sh 2> /dev/null
   read -p " Press any key (Reboot the device)"
   reboot
