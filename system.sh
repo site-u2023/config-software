@@ -64,6 +64,10 @@ uci add_list dhcp.lan.dns="2606:4700:4700::1111"
 uci add_list dhcp.lan.dns="2001:4860:4860::8888"
 uci add_list dhcp.lan.dns="2606:4700:4700::1001"
 uci add_list dhcp.lan.dns="2001:4860:4860::8844"
+#
+uci set dhcp.@dnsmasq[0].cachesize='2000'
+#
+uci set dhcp.lan.leasetime='24h'
 # set
 uci commit dhcp
 # /etc/init.d/dnsmasq restart
