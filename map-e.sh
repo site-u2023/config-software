@@ -925,6 +925,7 @@ echo -e "\033[1;32m ${WANMAP} ip6prefixlen: \033[0;39m"${ip6prefixlen}
 echo -e "\033[1;32m ${WANMAP} ealen: \033[0;39m"${ealen}
 echo -e "\033[1;32m ${WANMAP} psidlen: \033[0;39m"${psidlen}
 echo -e "\033[1;32m ${WANMAP} offset: \033[0;39m"${offset}
+
 # echo poots : ${ports}
 # echo pfx : $PFX
 # echo CE: $CE
