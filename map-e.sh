@@ -883,7 +883,7 @@ uci set network.${WAN6RA}=interface # Onry_OCN
 uci set network.${WAN6RA}.proto='static' # Onry_OCN
 uci set network.${WAN6RA}.device=${NET_L3D6} # Onry_OCN
 uci set network.${WAN6RA}.ip6gw=${CE}::1 # Onry_OCN
-uci set network.${WAN6RA}.ip6prefix=${CE}::/56 # Onry_OCN
+uci set network.${WAN6RA}.ip6prefix=${CE}::/64 # Onry_OCN
 uci add_list network.${WAN6RA}.ip6addr=${CE}::1001 # Onry_OCN
 
 # WANMAP
