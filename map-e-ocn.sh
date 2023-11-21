@@ -871,7 +871,7 @@ uci set network.${WAN6RA}=interface
 uci set network.${WAN6RA}.proto='static'
 uci set network.${WAN6RA}.device=${NET_L3D6}
 uci set network.${WAN6RA}.ip6gw=${CE}::1
-uci set network.${WAN6RA}.ip6prefix=${CE}::/56
+uci set network.${WAN6RA}.ip6prefix=${CE}::/64
 uci add_list network.${WAN6RA}.ip6addr=${CE}::1001
 
 # WANMAP
@@ -901,7 +901,7 @@ uci commit
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
 echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"${NET_L3D6}
 echo -e "\033[1;32m ${WAN6RA} ip6gw: \033[0;39m"${CE}::1
-echo -e "\033[1;32m ${WAN6RA} ip6prefix: \033[0;39m"${CE}::/56
+echo -e "\033[1;32m ${WAN6RA} ip6prefix: \033[0;39m"${CE}::/64
 echo -e "\033[1;32m ${WAN6RA} ip6addr: \033[0;39m"${CE}::1001
 echo -e "\033[1;32m ${WANMAP} peeraddr: \033[0;39m"${peeraddr}
 echo -e "\033[1;32m ${WANMAP} ip4prefixlen: \033[0;39m"${ip4prefixlen}
@@ -910,6 +910,7 @@ echo -e "\033[1;32m ${WANMAP} ip6prefixlen: \033[0;39m"${ip6prefixlen}
 echo -e "\033[1;32m ${WANMAP} ealen: \033[0;39m"${ealen}
 echo -e "\033[1;32m ${WANMAP} psidlen: \033[0;39m"${psidlen}
 echo -e "\033[1;32m ${WANMAP} offset: \033[0;39m"${offset}
+
 # echo poots : ${ports}
 # echo pfx : $PFX
 # echo CE: $CE
