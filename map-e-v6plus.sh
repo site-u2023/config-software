@@ -867,7 +867,7 @@ uci set dhcp.wan6.ndp='relay'
 # WAN6
 uci set network.wan6=interface
 uci set network.wan6.proto='dhcpv6'
-uci set network.wan6.ip6prefix=${CE}::/64
+uci set network.wan6.ip6prefix=${CE}::/56
 
 # WANMAP
 WANMAP='wanmap'
@@ -895,7 +895,7 @@ uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAP}
 uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
-echo -e "\033[1;32m wan6 ip6prefix: \033[0;39m"${CE}::/64
+echo -e "\033[1;32m wan6 ip6prefix: \033[0;39m"${CE}::/56
 echo -e "\033[1;32m ${WANMAP} peeraddr: \033[0;39m"${peeraddr}
 echo -e "\033[1;32m ${WANMAP} ip4prefixlen: \033[0;39m"${ip4prefixlen}
 echo -e "\033[1;32m ${WANMAP} ip6pfx: \033[0;39m"${ip6pfx}::
