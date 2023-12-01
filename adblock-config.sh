@@ -154,7 +154,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 # exit
 fi
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
-if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ]; then
+if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
   _func_AdBlock
  else
