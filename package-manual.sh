@@ -695,16 +695,16 @@ _func_luciapplog
 }
 
 function _func_luciapplog {
-LOG=`opkg list-installed luci-app-log | awk '{ print $1 }'`
+LOG=`opkg list-installed luci-app-log-viewer | awk '{ print $1 }'`
 if [ -z "$LOG" ]; then
 while :
 do
   echo -e " \033[1;34mカスタムフィード\033[0;39m"
   echo -e " \033[1;33mログ情報をインストールしますか\033[0;39m"
-  echo -e " \033[1;32mluci-app-log: $((5791/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-app-log-viewer: $((5791/1024))KB\033[0;39m"
   read -p " キーを選択してください [y/n or q]: " num
   case "${num}" in
-    "y" ) echo luci-app-log >> /etc/config-software/list-installed/Before
+    "y" ) echo luci-app-log-viewer >> /etc/config-software/list-installed/Before
           echo $((5791/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mインストールサイズ計: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
@@ -1225,7 +1225,7 @@ fi
   echo -e " \033[1;37m・テーマ マテリアル: luci-theme-material\033[0;39m"
   echo -e " \033[1;37m・テーマ OpenWrt2020: luci-theme-openwrt-2020\033[0;39m"
   echo -e " \033[1;37m・Attended Sysupgrade\033[0;39m"
-  echo -e " \033[1;37m・ログ情報: luci-app-log（カスタムフィード）\033[0;39m"
+  echo -e " \033[1;37m・ログ情報: luci-app-log-viewer（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・CPUステータス: luci-app-cpu-status（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・CPUパフォーマンス: luci-app-cpu-perf（カスタムフィード）\033[0;39m"
   echo -e " \033[1;37m・温度センサー（カスタムフィード）\033[0;39m"
