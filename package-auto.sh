@@ -38,7 +38,7 @@ attendedsysupgrade-common
 luci-app-attendedsysupgrade
 luci-i18n-attendedsysupgrade-ja
 auc
-luci-app-log
+luci-app-log-viewer
 luci-app-cpu-perf
 luci-app-temp-status
 internet-detector
