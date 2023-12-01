@@ -87,7 +87,7 @@ if [ "https-dns-proxy" = "`opkg list-installed https-dns-proxy | awk '{ print $1
  exit
 fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
-if [ "${OPENWRT_RELEAS:0:2}" = "23" ] || [ "${OPENWRT_RELEAS:0:2}" = "22" ]; then
+if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
 else
  read -p " バージョンが違うため終了します"
