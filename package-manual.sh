@@ -134,9 +134,9 @@ fi
 
 # ログ情報
 if [ -z "$LOG" ]; then
-wget --no-check-certificate -O /tmp/luci-app-log_0.8-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log_0.8-0_all.ipk
-opkg install /tmp/luci-app-log_0.8-0_all.ipk
-rm /tmp/luci-app-log_0.8-0_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-log-viewer_1.1-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-0_all.ipk
+opkg install /tmp/luci-app-log-viewer_1.1-0_all.ipk
+rm /tmp/luci-app-log-viewer_1.1-0_all.ipk
 fi
 
 # CPUステータス
