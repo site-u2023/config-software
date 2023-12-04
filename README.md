@@ -7,6 +7,21 @@ Japanese notation
 **推奨設定順序: システム > インターネット > パッケージ**
 
 ### 設定
+
+MAP-eなどIPv4未接続の場合
+※`https://github.com/`はV6利用で接続可能
+  - `設定用クライアントをLAN1に接続`
+```sh:IPv6利用設定
+uci add network device
+uci set network.@device[-1].name='lan1'
+uci set network.@device[-1].mtu='1500'
+uci set network.@device[-1].ipv6='1'
+uci set network.@device[-1].mtu6='1500'
+uci commit network
+/etc/init.d/network reload
+
+```
+
 ttydのインストールと設定
 - [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
 ```
