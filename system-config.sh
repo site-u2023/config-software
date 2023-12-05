@@ -234,7 +234,7 @@ function _func_DEVICE_SET {
    fi
    if [ "$input_str_COUNTRY" = "ja" ]
     then
-  sed -i -e "s/uci set system.@system[0].zonename='UTC'/uci set system.@system[0].zonename='Asia/Tokyo'/g" /etc/config-software/system.sh
+  sed -i -e "s|UTC|Asia/Tokyo|g" /etc/config-software/system.sh
    fi
   sh /etc/config-software/system.sh 2> /dev/null
   read -p " Press any key (Reboot the device)"
