@@ -243,7 +243,7 @@ fi
   echo -e " \033[1;37m・LuCi SSL\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
-  echo -e " \033[1;37m・Irqbalance (4 core systems or more)\033[0;39m"
+  echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
   echo -e " \033[1;37m・SQM\033[0;39m"
   echo -e " \033[1;37m・statistics\033[0;39m"
   echo -e " \033[1;37m・nlbwmon\033[0;39m"
@@ -253,7 +253,7 @@ fi
   echo -e " \033[1;37m・cpu status (custom feed)\033[0;39m"
   echo -e " \033[1;37m・cpu perf (custom feed)\033[0;39m"
   echo -e " \033[1;37m・temp status (custom feed)\033[0;39m"
-  echo -e " \033[1;37m・Internet detector (custom feed)\033[0;39m"
+  echo -e " \033[1;37m・internet detector (custom feed)\033[0;39m"
   echo -e " \033[1;37m・Theme ARGON (custom feed)\033[0;39m"
   echo -e " \033[1;37m・Attended Sysupgrade\033[0;39m"
 str_USB=`dmesg | grep -s usb`
