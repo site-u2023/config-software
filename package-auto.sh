@@ -39,6 +39,7 @@ do
   echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
   echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
   echo -e " \033[1;37mPlease enter country code\033[0;39m"
+  echo -e " \033[1;37mExample: ar\033[0;39m"
   read -p " Language: " input_str_Languages
   read -p " All right? [y/n or r]: " num
   echo -e " \033[1;32mLanguages: ${input_str_Languages}\033[0;39m"
