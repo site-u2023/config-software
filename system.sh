@@ -1,32 +1,32 @@
 #! /bin/sh
 
-# デバイス パスワード
+# Device Password
 ubus call luci setPassword '{ "username": "root", "password": "ROOT_PASSWD" }'
 
 # SSH access interface
 uci set dropbear.@dropbear[0].Interface='lan'
 uci commit dropbear
 
-# システム設定
-HOSTNAME='openwrt' # ルーター名
-DESCRIPTION=`cat /etc/openwrt_version` # 説明
-NOTES=`date` # 備考
+# system setup
+HOSTNAME='openwrt' # Router Name
+DESCRIPTION=`cat /etc/openwrt_version` # Description
+NOTES=`date` # Remarks
 uci set system.@system[0]=system
 uci set system.@system[0].hostname=${HOSTNAME}
 uci set system.@system[0].description="${DESCRIPTION}"
-uci set system.@system[0].timezone='JST-9'
-uci set system.@system[0].zonename='Asia/Tokyo'
-uci set system.@system[0].conloglevel='6' # ログ出力レベル:注意
-uci set system.@system[0].cronloglevel='9' # Cronログレベル:警告
-# NTPサーバー
+#uci set system.@system[0].timezone='JST-9'
+#uci set system.@system[0].zonename='Asia/Tokyo'
+uci set system.@system[0].conloglevel='6' # Log output level: caution
+uci set system.@system[0].cronloglevel='9' # Cron log level: warning
+# NTP server
 uci set system.ntp.enable_server='1'
 uci set system.ntp.use_dhcp='0'
 uci set system.ntp.interface='lan'
 uci delete system.ntp.server
-uci add_list system.ntp.server='0.jp.pool.ntp.org'
-uci add_list system.ntp.server='1.jp.pool.ntp.org'
-uci add_list system.ntp.server='2.jp.pool.ntp.org' 
-uci add_list system.ntp.server='3.jp.pool.ntp.org'
+uci add_list system.ntp.server='0.pool.ntp.org'
+uci add_list system.ntp.server='1.pool.ntp.org'
+uci add_list system.ntp.server='2.pool.ntp.org' 
+uci add_list system.ntp.server='3.pool.ntp.org'
 uci commit system
 /etc/init.d/system reload
 /etc/init.d/sysntpd restart
@@ -35,12 +35,12 @@ uci set system.@system[0].notes="${NOTES}"
 uci commit system
 /etc/init.d/system reload
 
-# ソフトウェア フローオフロード
+# Software flow offload
 uci set firewall.@defaults[0].flow_offloading='1'
 uci commit firewall
 # /etc/init.d/firewall restart
 
-# ハードウェア フローオフロード
+# Hardware flow offload
 Hardware_flow_offload=`grep 'mediatek' /etc/openwrt_release`
 if [ "${Hardware_flow_offload:16:8}" = "mediatek" ]; then
  uci set firewall.@defaults[0].flow_offloading_hw='1'
@@ -48,11 +48,11 @@ if [ "${Hardware_flow_offload:16:8}" = "mediatek" ]; then
  # /etc/init.d/firewall restart
 fi
 
-# パケットステアリング
+# packet steering
 uci set network.globals.packet_steering='1'
 uci commit network
 
-# カスタムDNS
+# custom DNS
 # delete
 uci -q delete dhcp.lan.dhcp_option
 uci -q delete dhcp.lan.dns
@@ -73,7 +73,7 @@ uci commit dhcp
 # /etc/init.d/dnsmasq restart
 # /etc/init.d/odhcpd restart
 
-# Wi-Fi Aチャンネル
+# Wi-Fi A channels
 COUNTRY='Country_Code'
 WIFI_SSID_A='SSID_A'
 WIFI_PASSWORD_A='password'
@@ -91,7 +91,7 @@ uci set wireless.default_radio0.isolate='1'
 uci set wireless.default_radio0.multicast_to_unicast_all='1'
 uci set wireless.default_radio0.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio0.wpa_disable_eapol_key_retries='1'
-# Wi-Fi Bチャンネル
+# Wi-Fi B channel
 COUNTRY='Country_Code'
 WIFI_SSID_B='SSID_B'
 WIFI_PASSWORD_B='password'
@@ -109,7 +109,7 @@ uci set wireless.default_radio1.isolate='1'
 uci set wireless.default_radio1.multicast_to_unicast_all='1'
 uci set wireless.default_radio1.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio1.wpa_disable_eapol_key_retries='1'
-# Wi-Fi Cチャンネル
+# Wi-Fi C channel
 COUNTRY='Country_Code'
 WIFI_SSID_C='SSID_C'
 WIFI_PASSWORD_C='password'
@@ -134,13 +134,13 @@ uci delete wireless.radio2.disabled
 uci commit wireless
 # /etc/init.d/network restart
 
-# PING宛先
+# PING Destination
 uci set luci.diag.dns='one.one.one.one'
 uci set luci.diag.ping='one.one.one.one'
 uci set luci.diag.route='one.one.one.one'
 uci commit luci
 # /etc/init.d/rpcd reload
 
-# CRON(再起動)
+# CRON (reboot)
 echo "00 04 * * * sleep 70 && touch /etc/banner && reboot" >> /etc/crontabs/root
 # /etc/init.d/cron restart
