@@ -32,42 +32,9 @@ done
 function _func_COUNTRY {
 while :
 do
-  echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
-  echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
-  echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
-  echo -e " \033[1;37mca: Català (Catalan)\033[0;39m"
-  echo -e " \033[1;37mcs: Čeština (Czech)\033[0;39m"
-  echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
-  echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
-  echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
-  echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
-  echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
-  echo -e " \033[1;37mfr: Français (French)\033[0;39m"
-  echo -e " \033[1;37mhe: עִבְרִית (Hebrew)\033[0;39m"
-  echo -e " \033[1;37mhu: Magyar (Hungarian)\033[0;39m"
-  echo -e " \033[1;37mit: Italiano (Italian)\033[0;39m"
-  echo -e " \033[1;37mja: 日本語 (Japanese)\033[0;39m"
-  echo -e " \033[1;37mko: 한국어 (Korean)\033[0;39m"
-  echo -e " \033[1;37mlt: Lietuvių (Lithuanian)\033[0;39m"
-  echo -e " \033[1;37mmr: Marāṭhī (Marathi)\033[0;39m"
-  echo -e " \033[1;37mms: Bahasa Melayu (Malay)\033[0;39m"
-  echo -e " \033[1;37mnl: Nederlands (Dutch)\033[0;39m"
-  echo -e " \033[1;37mno: Norsk (Norwegian)\033[0;39m"
-  echo -e " \033[1;37mpl: Polski (Polish)\033[0;39m"
-  echo -e " \033[1;37mpt: Português (Portuguese)\033[0;39m"
-  echo -e " \033[1;37mpt-br: Português do Brasil (Brazilian Portuguese)\033[0;39m"
-  echo -e " \033[1;37mro: Română (Romanian)\033[0;39m"
-  echo -e " \033[1;37mru: Русский (Russian)\033[0;39m"
-  echo -e " \033[1;37msk: Slovenčina (Slovak)\033[0;39m"
-  echo -e " \033[1;37msv: Svenska (Swedish)\033[0;39m"
-  echo -e " \033[1;37mtr: Türkçe (Turkish)\033[0;39m"
-  echo -e " \033[1;37muk: Українська (Ukrainian)\033[0;39m"
-  echo -e " \033[1;37mvi: Tiếng Việt (Vietnamese)\033[0;39m"
-  echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
-  echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
-  echo -e " \033[1;37mPlease enter country code\033[0;39m"
-  echo -e " \033[1;37mExample: ar\033[0;39m"
-  read -p " Country: " input_str_COUNTRY
+  echo -e " \033[1;37mPlease enter Wi-Fi Country Code\033[0;39m"
+  echo -e " \033[1;37mExample: jp\033[0;39m"
+  read -p " Wi-Fi Country Code: " input_str_COUNTRY
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_A ;;
@@ -94,8 +61,8 @@ done
 function _func_WIFI_PASSWD_A {
 while :
 do
-  echo -e " \033[1;35mPlease enter WiFi ${WIFI_NO_A} password\033[0;39m"
-  read -p " WiFi ${WIFI_NO_A} Password: " input_str_WIFI_PASSWD_A
+  echo -e " \033[1;35mPlease enter Wi-Fi ${WIFI_NO_A} password\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_A} Password: " input_str_WIFI_PASSWD_A
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_B ;;
@@ -108,8 +75,8 @@ done
 function _func_WIFI_SSID_B {
 while :
 do
-  echo -e " \033[1;31mPlease enter WiFi ${WIFI_NO_B} SSID\033[0;39m"
-  read -p " WiFi ${WIFI_NO_B} SSID: " input_str_WIFI_SSID_B
+  echo -e " \033[1;31mPlease enter Wi-Fi ${WIFI_NO_B} SSID\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_B} SSID: " input_str_WIFI_SSID_B
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
@@ -122,8 +89,8 @@ done
 function _func_WIFI_PASSWD_B {
 while :
 do
-  echo -e " \033[1;36mPlease enter WiFi ${WIFI_NO_B} password\033[0;39m"
-  read -p " WiFi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
+  echo -e " \033[1;36mPlease enter Wi-Fi ${WIFI_NO_B} password\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SEARCH ;;
@@ -144,8 +111,8 @@ function _func_WIFI_SEARCH {
 function _func_WIFI_SSID_C {
 while :
 do
-  echo -e " \033[1;37mPlease enter WiFi ${WIFI_NO_C} SSID\033[0;39m"
-  read -p " WiFi ${WIFI_NO_C} SSID: " input_str_WIFI_SSID_C
+  echo -e " \033[1;37mPlease enter Wi-Fi ${WIFI_NO_C} SSID\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_C} SSID: " input_str_WIFI_SSID_C
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_C ;;
@@ -158,8 +125,8 @@ done
 function _func_WIFI_PASSWD_C {
 while :
 do
-  echo -e " \033[1;37mPlease enter WiFi ${WIFI_NO_C} password\033[0;39m"
-  read -p " WiFi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
+  echo -e " \033[1;37mPlease enter Wi-Fi ${WIFI_NO_C} password\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_TWT ;;
@@ -190,15 +157,15 @@ do
   echo -e " \033[1;37msystem setup ----------------------------------------\033[0;39m"
   echo -e " \033[1;34mDevice hostname: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
   echo -e " \033[1;33mDevice Password: ${input_str_ROOT_PASSWD}\033[0;39m"
-  echo -e " \033[1;32mCountry: ${input_str_COUNTRY}\033[0;39m"
-  echo -e " \033[1;32mWiFi ${WIFI_NO_A} SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
-  echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
-  echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
-  echo -e " \033[1;36mWiFi ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi Country Code: ${input_str_COUNTRY}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${WIFI_NO_A} SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
+  echo -e " \033[1;35mWi-Fi ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
+  echo -e " \033[1;31mWi-Fi ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
    if [ "$WIFI_DEVICE" = "$WIFI_NO" ]
     then
-  echo -e " \033[1;37mWiFi ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
-  echo -e " \033[1;37mWiFi ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+  echo -e " \033[1;37mWi-Fi ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
+  echo -e " \033[1;37mWi-Fi ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
    fi
    if [ "$TWT" = "on" ]
     then
@@ -287,16 +254,17 @@ do
   echo -e " \033[1;37mStart system initialization\033[0;39m"
   echo -e " \033[1;34mDevice hostname\033[0;39m"
   echo -e " \033[1;33mDevice Password\033[0;39m"
-  echo -e " \033[1;32mWiFi ${WIFI_NO_A} SSID\033[0;39m"
-  echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password\033[0;39m"
-  echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID\033[0;39m"
-  echo -e " \033[1;36mWiFi ${WIFI_NO_B} Password\033[0;39m"
+  echo -e " \033[1;32mWi-Fi Country Code\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${WIFI_NO_A} SSID\033[0;39m"
+  echo -e " \033[1;35mWi-Fi ${WIFI_NO_A} Password\033[0;39m"
+  echo -e " \033[1;31mWi-Fi ${WIFI_NO_B} SSID\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${WIFI_NO_B} Password\033[0;39m"
   echo -e " \033[1;36mTWT (Target Wake Time)\033[0;39m"
   WIFI_DEVICE=`uci show wireless | grep 'wifi-device' | wc -l`
   WIFI_NO=3
   if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
-  echo -e " \033[1;37m・WiFi ${WIFI_NO_C} SSID\033[0;39m"
-  echo -e " \033[1;37m・WiFi ${WIFI_NO_C} Password\033[0;39m"
+  echo -e " \033[1;37m・Wi-Fi ${WIFI_NO_C} SSID\033[0;39m"
+  echo -e " \033[1;37m・Wi-Fi ${WIFI_NO_C} Password\033[0;39m"
   fi
   read -p " Start [y/n]:" num
   case "${num}" in
