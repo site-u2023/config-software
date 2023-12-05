@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo -e " \033[1;31mフラッシュ後にインストールしたパッケージ\033[0;39m"
+echo -e " \033[1;31mPackages installed after flashing\033[0;39m"
 
 FLASH_TIME="$(awk '
 $1 == "Installed-Time:" && ($2 < OLDEST || OLDEST=="") {
