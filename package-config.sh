@@ -47,21 +47,7 @@ do
 done
 }
 
-function _func_choice_INST_J {
-while :
-do
-  echo -e " \033[1;33mDownload selective installation scripts\033[0;39m"
-  read -p " All right? [y/n]: " num
-  case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/package-manual.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-manual.sh
-          sh /etc/config-software/package-manual.sh
-          break ;;
-    "n" ) break ;;
-  esac
-done
-}
-
-function _func_choice_INST_E {
+function _func_choice_INST {
 while :
 do
   echo -e " \033[1;33mDownload selective installation scripts\033[0;39m"
@@ -110,7 +96,7 @@ do
   read -p " Press any key [f/c/a or q]: " num 
   case "${num}" in
     "f" ) _func_full_INST ;;
-    "c" ) _func_choice_INST_J ;;
+    "c" ) _func_choice_INST ;;
     "a" ) _func_after_INST ;;
     "q" ) exit ;;
   esac
