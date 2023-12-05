@@ -18,6 +18,7 @@ do
     "q" ) exit ;;
   esac
 done
+}
 
 function _func_full_INST_J {
 while :
