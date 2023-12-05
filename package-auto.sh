@@ -1,6 +1,55 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
+
+function _func_Languages {
+while :
+do
+  echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
+  echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
+  echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
+  echo -e " \033[1;37mca: Català (Catalan)\033[0;39m"
+  echo -e " \033[1;37mcs: Čeština (Czech)\033[0;39m"
+  echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
+  echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
+  echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
+  echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
+  echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
+  echo -e " \033[1;37mfr: Français (French)\033[0;39m"
+  echo -e " \033[1;37mhe: עִבְרִית (Hebrew)\033[0;39m"
+  echo -e " \033[1;37mhu: Magyar (Hungarian)\033[0;39m"
+  echo -e " \033[1;37mit: Italiano (Italian)\033[0;39m"
+  echo -e " \033[1;37mja: 日本語 (Japanese)\033[0;39m"
+  echo -e " \033[1;37mko: 한국어 (Korean)\033[0;39m"
+  echo -e " \033[1;37mlt: Lietuvių (Lithuanian)\033[0;39m"
+  echo -e " \033[1;37mmr: Marāṭhī (Marathi)\033[0;39m"
+  echo -e " \033[1;37mms: Bahasa Melayu (Malay)\033[0;39m"
+  echo -e " \033[1;37mnl: Nederlands (Dutch)\033[0;39m"
+  echo -e " \033[1;37mno: Norsk (Norwegian)\033[0;39m"
+  echo -e " \033[1;37mpl: Polski (Polish)\033[0;39m"
+  echo -e " \033[1;37mpt: Português (Portuguese)\033[0;39m"
+  echo -e " \033[1;37mpt-br: Português do Brasil (Brazilian Portuguese)\033[0;39m"
+  echo -e " \033[1;37mro: Română (Romanian)\033[0;39m"
+  echo -e " \033[1;37mru: Русский (Russian)\033[0;39m"
+  echo -e " \033[1;37msk: Slovenčina (Slovak)\033[0;39m"
+  echo -e " \033[1;37msv: Svenska (Swedish)\033[0;39m"
+  echo -e " \033[1;37mtr: Türkçe (Turkish)\033[0;39m"
+  echo -e " \033[1;37muk: Українська (Ukrainian)\033[0;39m"
+  echo -e " \033[1;37mvi: Tiếng Việt (Vietnamese)\033[0;39m"
+  echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
+  echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
+  echo -e " \033[1;37mPlease enter country code\033[0;39m"
+  read -p " Language: " input_str_Languages
+  read -p " All right? [y/n or r]: " num
+  echo -e " \033[1;32mLanguages: ${input_str_Languages}\033[0;39m"
+  case "${num}" in
+    "y" ) _func_INSTALL ;;
+    "n" ) _func_Languages ;;
+    "r" ) exit ;;
+  esac
+done
+}
+
 function _func_INSTALL {
 UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
 if [ ! -e ${UPDATE} ]; then
@@ -13,21 +62,30 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/B
 cat << EOF > /etc/config-software/list-installed/Before
 luci
 luci-ssl
+luci-i18n-base-${input_str_Languages}
+luci-i18n-opkg-${input_str_Languages}
+luci-i18n-firewall-${input_str_Languages}
 openssh-sftp-server
 luci-app-ttyd
+luci-i18n-ttyd-${input_str_Languages}
 irqbalance
 sqm-scripts
 luci-app-sqm
+luci-i18n-sqm-${input_str_Languages}
 luci-app-statistics
+luci-i18n-statistics-${input_str_Languages}
 nlbwmon
 luci-app-nlbwmon
+luci-i18n-nlbwmon-${input_str_Languages}
 wifischedule
 luci-app-wifischedule
+luci-i18n-wifischedule-${input_str_Languages}
 luci-theme-openwrt
 luci-theme-material
 luci-theme-openwrt-2020
 attendedsysupgrade-common
 luci-app-attendedsysupgrade
+luci-i18n-attendedsysupgrade-${input_str_Languages}
 auc
 luci-app-log-viewer
 luci-app-cpu-perf
@@ -41,12 +99,17 @@ EOF
 opkg install luci
 # LiCi SSL
 opkg install luci-ssl
+# Language
+opkg install luci-i18n-base-${input_str_Languages} 
+opkg install luci-i18n-opkg-${input_str_Languages}
+opkg install luci-i18n-firewall-${input_str_Languages}
 
 # SFTP
 opkg install openssh-sftp-server
 
 # TTYD
 opkg install luci-app-ttyd
+opkg install luci-i18n-ttyd-${input_str_Languages}
 uci set ttyd.@ttyd[0]=ttyd
 uci set ttyd.@ttyd[0].interface='@lan'
 uci set ttyd.@ttyd[0].command='/bin/login -f root '
@@ -70,6 +133,7 @@ fi
 DOWNLOAD='0' #initial value
 UPLOAD='0' #initial value
 opkg install luci-app-sqm
+opkg install luci-i18n-sqm-${input_str_Languages}
 . /lib/functions/network.sh
 network_flush_cache
 network_find_wan6 NET_IF6
@@ -84,14 +148,17 @@ uci commit sqm
 
 # statistics
 opkg install luci-app-statistics
+opkg install luci-i18n-statistics-${input_str_Languages}
 /etc/init.d/collectd enable
 
 # nlbwmon
 opkg install luci-app-nlbwmon
+opkg install luci-i18n-nlbwmon-${input_str_Languages}
 
 # wifi schedule
 opkg install wifischedule
 opkg install luci-app-wifischedule
+opkg install luci-i18n-wifischedule-${input_str_Languages}
 
 # Additional Themes
 # OpnWrt
@@ -104,6 +171,7 @@ opkg install luci-theme-openwrt-2020
 # Attended Sysupgrade
 opkg install attendedsysupgrade-common
 opkg install luci-app-attendedsysupgrade
+opkg install luci-i18n-attendedsysupgrade-${input_str_Languages}
 opkg install auc
 
 # custom feed
@@ -175,6 +243,7 @@ kmod-fs-hfsplus
 hdparm
 hd-idle
 luci-app-hd-idle
+luci-i18n-hd-idle-${input_str_Languages}
 EOF
   wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
   opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
@@ -204,6 +273,7 @@ EOF
   opkg install hdparm
   opkg install hd-idle
   opkg install luci-app-hd-idle
+  opkg install luci-i18n-hd-idle-${input_str_Languages}
 fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
@@ -271,7 +341,7 @@ if [ -n "$str_USB" ]; then
 fi
   read -p " Start installing the package [y/n]: " num
   case "${num}" in
-    "y" ) _func_INSTALL ;;
+    "y" ) _func_Languages ;;
     "n" ) exit ;;
   esac
 done
