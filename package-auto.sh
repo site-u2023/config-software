@@ -313,7 +313,8 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
  read -p " Retry installation [y/n]: " num
   case "${num}" in
   "y" ) _func_INSTALL ;;
-  "n" ) exit ;;
+  "n" )  read -p " Press any key (to reboot the device)"
+         reboot ;;
   esac
 done
 else
