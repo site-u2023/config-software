@@ -74,9 +74,10 @@ uci commit dhcp
 # /etc/init.d/odhcpd restart
 
 # Wi-Fi Aチャンネル
+LANGUAGE='COUNTRY'
 WIFI_SSID_A='SSID_A'
 WIFI_PASSWORD_A='password'
-uci set wireless.radio0.country='JP'
+uci set wireless.radio0.country=${COUNTRY}
 uci set wireless.radio0.txpower='10'
 # uci set wireless.radio0.noscan='1'
 uci set wireless.radio0.frag='2347'
@@ -91,9 +92,10 @@ uci set wireless.default_radio0.multicast_to_unicast_all='1'
 uci set wireless.default_radio0.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio0.wpa_disable_eapol_key_retries='1'
 # Wi-Fi Bチャンネル
+LANGUAGE='COUNTRY'
 WIFI_SSID_B='SSID_B'
 WIFI_PASSWORD_B='password'
-uci set wireless.radio1.country='JP'
+uci set wireless.radio1.country=${COUNTRY}
 uci set wireless.radio1.txpower='10'
 # uci set wireless.radio1.noscan='1'
 uci set wireless.radio1.frag='2347'
@@ -108,9 +110,10 @@ uci set wireless.default_radio1.multicast_to_unicast_all='1'
 uci set wireless.default_radio1.macaddr='random' # Random Mac Address
 # uci set wireless.default_radio1.wpa_disable_eapol_key_retries='1'
 # Wi-Fi Cチャンネル
+LANGUAGE='COUNTRY'
 WIFI_SSID_C='SSID_C'
 WIFI_PASSWORD_C='password'
-uci set wireless.radio2.country='JP'
+uci set wireless.radio2.country=${COUNTRY}
 uci set wireless.radio2.txpower='10'
 # uci set wireless.radio2.noscan='1'
 uci set wireless.radio2.frag='2347'
