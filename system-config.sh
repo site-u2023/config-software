@@ -22,14 +22,14 @@ do
   read -p " Device Password: " input_str_ROOT_PASSWD
   read -p " All right? [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_Languages ;;
+    "y" ) _func_COUNTRY ;;
     "n" ) _func_ROOT_PASSWD ;;
     "r" ) break ;;
   esac
 done
 }
 
-function _func_Languages {
+function _func_COUNTRY {
 while :
 do
   echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
@@ -67,11 +67,11 @@ do
   echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
   echo -e " \033[1;37mPlease enter country code\033[0;39m"
   echo -e " \033[1;37mExample: ar\033[0;39m"
-  read -p " Country: " input_str_Languages
+  read -p " Country: " input_str_COUNTRY
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_A ;;
-    "n" ) _func_Languages ;;
+    "n" ) _func_COUNTRY ;;
     "r" ) exit ;;
   esac
 done
@@ -190,7 +190,7 @@ do
   echo -e " \033[1;37msystem setup ----------------------------------------\033[0;39m"
   echo -e " \033[1;34mDevice hostname: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
   echo -e " \033[1;33mDevice Password: ${input_str_ROOT_PASSWD}\033[0;39m"
-  echo -e " \033[1;32mCountry: ${input_str_Languages}\033[0;39m"
+  echo -e " \033[1;32mCountry: ${input_str_COUNTRY}\033[0;39m"
   echo -e " \033[1;32mWiFi ${WIFI_NO_A} SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
   echo -e " \033[1;35mWiFi ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
   echo -e " \033[1;31mWiFi ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
@@ -218,7 +218,7 @@ function _func_DEVICE_SET {
   wget --no-check-certificate -O /etc/config-software/system.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system.sh
   sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/config-software/system.sh
   sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/config-software/system.sh
-  sed -i -e "s/LANGUAGE='COUNTRY'/LANGUAGE=${input_str_Languages}/g" /etc/config-software/system.sh
+  sed -i -e "s/COUNTRY='Country_Code'/COUNTRY=${input_str_COUNTRY}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_A='SSID_A'/WIFI_SSID_A=${input_str_WIFI_SSID_A}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_PASSWORD_A='password'/WIFI_PASSWORD_A=${input_str_WIFI_PASSWD_A}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_B='SSID_B'/WIFI_SSID_B=${input_str_WIFI_SSID_B}/g" /etc/config-software/system.sh
