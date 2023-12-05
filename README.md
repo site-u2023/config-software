@@ -2,38 +2,68 @@
 
 Japanese notation
 
+# 新規設定用 オールインワンスクリプト 初心者対応
+
 **不具合あればご連絡下さい**
 
-**推奨設定順序: システム > インターネット > パッケージ**
+### スクリプトセレクター※要ONU直結
+![config-software.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/1da7b0b2-2706-41a1-56fe-ef8311761b20.png)
 
-### 設定
+### powershellでSSHを使う
+- powershell > `Win`+`x` > `a` > `はい`
+```powershell:powershell
+ssh root@192.168.1.1
 
-MAP-eなどIPv4未接続の場合
-※`https://github.com/`はV6利用で接続可能
-  - `設定用クライアントをLAN1に接続`
-```sh:IPv6利用設定
+```
+- `yes`
+
+<details><summary>SSHログイン出来ない場合</summary>
+
+`C:\Users\yourusername\.ssh\known_hosts`
+※Windows隠しファイル
+```powershell:powershell
+Clear-Content .ssh\known_hosts -Force
+
+```
+---
+
+</details>
+
+### ttydのインストールと設定
+- [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
+```sh:SSH
+mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
+
+```
+
+<details><summary>MAP-eなどIPv4未接続の場合</summary>
+
+※https://github.com/ はIPv6利用で接続可
+  - 設定用クライアントをLAN1に接続
+```sh:SSH
+# IPv6利用設定
 uci add network device
 uci set network.@device[-1].name='lan1'
 uci set network.@device[-1].mtu='1500'
 uci set network.@device[-1].ipv6='1'
 uci set network.@device[-1].mtu6='1500'
+#
 uci commit network
 /etc/init.d/network reload
 
 ```
+---
 
-ttydのインストールと設定
-- [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
-```
-mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
-```
-### 実行
-- ttydから実行
+</details>
+
+### ttydの実行
+- ttyd（ブラウザ）から実行
 **[`192.168.1.1:8888`](http://192.168.1.1:8888)**
 
 - コマンドから実行
-```
+```sh:SSH
 confsoft
+
 ```
 ※強制終了：`Ctrl`+`c`
 
@@ -100,9 +130,9 @@ confsoft
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
 
 ### 削除
-```
+```sh :SSH
 rm -rf /usr/bin/confsoft
-```
 
+```
 
 Qiita: [初心者備忘録 Windowsから導入](https://qiita.com/site_u/items/39fbac482c06c98b229b)
