@@ -140,7 +140,7 @@ fi
 while :
 do
   echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
-  echo -e " \033[1;33m[i]: Internet connection setup (MAP-e,DS-LITE,PPPoE)\033[0;39m"
+  echo -e " \033[1;33m[i]: Internet connection setup in Japan (MAP-e, DS-LITE, PPPoE)\033[0;39m"
   echo -e " \033[1;34m[s]: Initial system setup (host name,password,etc.)\033[0;39m"
   echo -e " \033[1;32m[p]: Install recommended packages (automatic device identification)\033[0;39m"
   echo -e " \033[1;31m[b]: Install ad blocker and DNS encryption\033[0;39m"
