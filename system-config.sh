@@ -232,6 +232,10 @@ function _func_DEVICE_SET {
   uci add_list wireless.radio1.hostapd_options='he_twt_responder=1'
   uci commit wireless
    fi
+   if [ "$input_str_COUNTRY" = "ja" ]
+    then
+  sed -i -e "s/uci set system.@system[0].zonename='UTC'/uci set system.@system[0].zonename='Asia/Tokyo'/g" /etc/config-software/system.sh
+   fi
   sh /etc/config-software/system.sh 2> /dev/null
   read -p " Press any key (Reboot the device)"
   reboot
