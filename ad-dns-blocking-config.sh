@@ -4,8 +4,8 @@
 function _func_AdGuard_INST {
 while :
 do
-  echo -e " \033[1;34mAdGuard HOME設定のスクリプトをダウンロードします\033[0;39m"
-  read -p " 宜しいですか? [y/n]: " num
+  echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
+  read -p " All right? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config.sh
           sh /etc/config-software/adguard-config.sh
@@ -18,8 +18,8 @@ done
 function _func_AdBlock_INST {
 while :
 do
-  echo -e " \033[1;32mAdBlock設定のスクリプトをダウンロードします\033[0;39m"
-  read -p " 宜しいですか? [y/n]: " num
+  echo -e " \033[1;32mDownload the AdBlock configuration script\033[0;39m"
+  read -p " All right? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adblock-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-config.sh
           sh /etc/config-software/adblock-config.sh
@@ -32,8 +32,8 @@ done
 function _func_DoH {
 while :
 do
-  echo -e " \033[1;32mDNS over HTTPS（DoH）設定のスクリプトをダウンロードします\033[0;39m"
-  read -p " 宜しいですか? [y/n]: " num
+  echo -e " \033[1;32mDNS over HTTPS（DoH）Download the configuration script\033[0;39m"
+  read -p " All right? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/doh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/doh.sh
           sh /etc/config-software/doh.sh
@@ -46,8 +46,8 @@ done
 function _func_DoT {
 while :
 do
-  echo -e " \033[1;32mDNS over TLS（DoT）設定のスクリプトをダウンロードします\033[0;39m"
-  read -p " 宜しいですか? [y/n]: " num
+  echo -e " \033[1;32mDNS over TLS（DoT）Download the configuration script\033[0;39m"
+  read -p " All right? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/dot.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dot.sh
           sh /etc/config-software/dot.sh
@@ -62,24 +62,24 @@ do
 {
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+ echo -e " \033[1;37mversion check: OK\033[0;39m"
  else
- read -p " バージョンが違うため終了します"
+ read -p " Exit due to different versions"
  exit
 fi
 }
-  echo -e " \033[7;33mAdGuard HOMEとAdBlockは排他利用\033[0;39m"
-  echo -e " \033[7;33mAdGuardとDNS over HTTPS（DoH）は排他利用\033[0;39m"
-  echo -e " \033[7;33mAdGuardとDNS over TLS（DoT）は排他利用\033[0;39m"
-  echo -e " \033[7;33mDNS over HTTPS（DoH）とDNS over TLS（DoT）は排他利用\033[0;39m"
+  echo -e " \033[7;33mAdGuard HOME and AdBlock are used exclusively\033[0;39m"
+  echo -e " \033[7;33mAdGuard and DNS over HTTPS (DoH) are used exclusively\033[0;39m"
+  echo -e " \033[7;33mAdGuard and DNS over TLS (DoT) are used exclusively\033[0;39m"
+  echo -e " \033[7;33mDNS over HTTPS (DoH) and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[1;37mad dns blocking config ------------------------------\033[0;39m"
-  echo -e " \033[1;34m[g]\033[0;39m": AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）
-  echo -e " \033[1;32m[b]\033[0;39m": AdBlockdのインストールと設定（カスタムフィルターアドイン）
-  echo -e " \033[1;31m[h]\033[0;39m": DNS over HTTPS（DoH）のインストールと設定
-  echo -e " \033[1;33m[t]\033[0;39m": DNS over TLS（DoT）Stubbyのインストールと設定
-  echo -e " \033[1;37m[q]\033[0;39m": 終了
+  echo -e " \033[1;34m[g]\033[0;39m": AdGuard HOME configuration and installation (custom filter add-ins)
+  echo -e " \033[1;32m[b]\033[0;39m": AdBlockd installation and configuration (custom filter add-ins)
+  echo -e " \033[1;31m[h]\033[0;39m": Installation and configuration of DNS over HTTPS (DoH)
+  echo -e " \033[1;33m[t]\033[0;39m": Installation and configuration of DNS over TLS (DoT) Stubby
+  echo -e " \033[1;37m[q]\033[0;39m": Quit
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [g/b/h/t or q]: " num
+  read -p " Press any key [g/b/h/t or q]: " num
   case "${num}" in
     "g" ) _func_AdGuard_INST ;;
     "b" ) _func_AdBlock_INST ;;
