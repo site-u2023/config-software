@@ -14,8 +14,7 @@ NOTES=`date` # Remarks
 uci set system.@system[0]=system
 uci set system.@system[0].hostname=${HOSTNAME}
 uci set system.@system[0].description="${DESCRIPTION}"
-#uci set system.@system[0].timezone='JST-9'
-#uci set system.@system[0].zonename='Asia/Tokyo'
+uci set system.@system[0].zonename='UTC'
 uci set system.@system[0].conloglevel='6' # Log output level: caution
 uci set system.@system[0].cronloglevel='9' # Cron log level: warning
 # NTP server
