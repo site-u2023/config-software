@@ -3,10 +3,10 @@
 function _func_Dumb_IPV4
 while :
 do
-  echo -e "\033[1;37m アクセスポイントのIPV4アドレスを入力して下さい\033[0;39m"
-  echo -e "\033[1;33m 例: 192.168.1.2\033[0;39m"
-  read -p " IPV4アドレス: " input_str_IPV4
-  read -p " 宜しいですか? [y/n or r]: " num
+  echo -e "\033[1;37m Enter IPV4 address of access point\033[0;39m"
+  echo -e "\033[1;33m Example: 192.168.1.2\033[0;39m"
+  read -p " IPV4 address: " input_str_IPV4
+  read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_GATEWAY ;;
     "n" ) _func_Dumb_IPV4 ;;
@@ -17,10 +17,10 @@ done
 function _func_Dumb_GATEWAY
 while :
 do
-  echo -e "\033[1;37m アクセスポイントのゲートウェイを入力して下さい\033[0;39m"
-  echo -e "\033[1;33m 例: 192.168.1.1\033[0;39m"
-  read -p " ゲートウェイ: " input_str_GATEWAY
-  read -p " 宜しいですか? [y/n or r]: " num
+  echo -e "\033[1;37m Enter the gateway of the access point\033[0;39m"
+  echo -e "\033[1;33m Example: 192.168.1.1\033[0;39m"
+  read -p " gateway: " input_str_GATEWAY
+  read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_confirmation ;;
     "n" ) _func_Dumb_GATEWAY ;;
@@ -31,12 +31,12 @@ done
 function _func_Dumb_confirmation
 while :
 do
-  echo -e " \033[1;37mアクセスポイント ------------------------------------\033[0;39m"
-  echo -e " \033[1;32mIPV4アドレス: ${input_str_IPV4}\033[0;39m"
-  echo -e " \033[1;32mゲートウェイ: ${input_str_GATEWAY}\033[0;39m"
-  echo -e " \033[1;37mパッケージ: fping サイズ: 17kBをインストールします\033[0;39m"
+  echo -e " \033[1;37maccess point ----------------------------------------\033[0;39m"
+  echo -e " \033[1;32mIPV4 address: ${input_str_IPV4}\033[0;39m"
+  echo -e " \033[1;32mgateway: ${input_str_GATEWAY}\033[0;39m"
+  echo -e " \033[1;37mpackage: fping Size: Install 17kB\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " これで宜しければ設定を開始します [y/n or r]: " num
+  read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_SET ;;
     "n" ) _func_Dumb_IPV4 ;;
@@ -50,15 +50,15 @@ wget --no-check-certificate -O /etc/config-software/dumb.sh https://raw.githubus
 sed -i -e "s/IPADDR='192.168.1.2'/IPADDR='${input_str_IPV4}'/g" /etc/config-software/dumb.sh
 sed -i -e "s/GATEWAY='192.168.1.1'/GATEWAY='${input_str_GATEWAY}'/g" /etc/config-software/dumb.sh
 sh /etc/config-software/dumb.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
+read -p " Press any key (to reboot the device)"
 reboot
 }
 
 function _func_Dumb_Before
 while :
 do
-  echo -e " \033[1;37mアクセスポイントの設定を以前の設定に復元します\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  echo -e " \033[1;37mRestore the access point configuration to its previous settings\033[0;39m"
+  read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_Before_Restoration ;;
     "n" ) _func_Dumb ;;
@@ -89,29 +89,29 @@ rm /etc/config/dropbear.dump.bak
 rm /etc/config-software/dumb.sh
 sed -i "/fping -g 192.168.1.0/24/d" /etc/rc.local
 sed -i "/fping -g 192.168.1.0/24/d" /etc/crontabs/root
-echo -e " \033[1;32m再起動後は ${input_str_IPV4} でログインして下さい\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
+echo -e " \033[1;32mAfter reboot, login with ${input_str_IPV4}\033[0;39m"
+read -p " Press any key (to reboot the device)い"
 reboot
 exit
 }
 
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+ echo -e " \033[1;37mversion check: OK\033[0;39m"
  else
- read -p " バージョンが違うため終了します"
+ read -p " Exit due to different versions"
  exit
 fi
 
 while :
 do
-  echo -e " \033[1;33mアクセスポイントのIPV4アドレス及びゲートウェイを準備下さい\033[0;39m"
-  echo -e " \033[1;37mアクセスポイント ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": アクセスポイントの設定
-  echo -e " \033[1;32m[b]\033[0;39m": 以前の設定に復元
-  echo -e " \033[1;31m[q]\033[0;39m": 終了    
+  echo -e " \033[1;33mPrepare the IPV4 address and gateway of the access point\033[0;39m"
+  echo -e " \033[1;37maccess point -------------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[e]: Access point settings\033[0;39m"
+  echo -e " \033[1;32m[b]: Restore previous settings\033[0;39m"
+  echo -e " \033[1;31m[q]: Quit\033[0;39m"    
   echo -e " \033[1;37m--------------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or q]: " num
+  read -p " Press any key [e/b or q]: " num
   case "${num}" in
     "e" ) _func_Dumb_IPV4 ;;
     "b" ) _func_Dumb_Before ;;
