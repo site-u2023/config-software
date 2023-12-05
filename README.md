@@ -133,4 +133,37 @@ rm -rf /usr/bin/confsoft
 
 ```
 
+
+### [LuCi](https://openwrt.org/jp/doc/howto/firstlogin#login_to_webui)
+- **[192.168.1.1](http://192.168.1.1/cgi-bin/luci/)**
+  - ユーザー名：`root`
+  - パスワード：`設定したパスワード`
+
+QRコード : 192.168.1.1
+
+![QR192.168.1.1.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/93eed9ce-7319-9332-99ba-74455b471cdd.png) 
+
+
+### [TTYD](https://openwrt.org/packages/pkgdata_owrt18_6/ttyd) [※オールインワンスクリプト設定に含む](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E8%A8%AD%E5%AE%9A)
+- **[192.168.1.1:7681](http://192.168.1.1:7681/)**
+  - ユーザー名：`root`
+  - パスワード：`設定したパスワード`
+
+QRコード : 192.168.1.1:7681
+
+![QR_062248.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/e7929d2e-d9b0-b599-33cf-55413d584b19.png)
+
+
+### [SFTP](https://openwrt.org/docs/guide-user/services/nas/sftp.server) ※要インストール（推奨パッケージ内）
+
+ファイラー(WinSCPでエクスプローラー風に利用)
+WinSCPを起動
+
+- セッション
+  - ホスト名：`192.168.1.1`
+  - ユーザー名：`root`
+  - パスワード：`設定したパスワード`
+  - `ログイン`をクリック
+
+
 Qiita: [初心者備忘録 Windowsから導入](https://qiita.com/site_u/items/39fbac482c06c98b229b)
