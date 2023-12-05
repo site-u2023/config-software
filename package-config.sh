@@ -7,8 +7,8 @@ while :
 do
   echo -e " \033[1;37mInstallation may fail\033[0;39m"
   echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[f]: Japanese localisation\033[0;39m"
-  echo -e " \033[1;33m[c]: English localisation\033[0;39m"
+  echo -e " \033[1;34m[j]: Japanese localisation\033[0;39m"
+  echo -e " \033[1;33m[e]: English localisation\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
   read -p " Press any key [j/e or q]: " num 
