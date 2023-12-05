@@ -5,7 +5,7 @@ Japanese notation
 **不具合あればご連絡下さい**
 
 ### スクリプトセレクター※要ONU直結
-![config-software.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/1da7b0b2-2706-41a1-56fe-ef8311761b20.png)
+![config-software.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/57dfcfee-8654-8782-40f9-3da30e69df61.png)
 
 ### powershellでSSHを使う
 - powershell > `Win`+`x` > `a` > `はい`
