@@ -33,6 +33,7 @@ function _func_COUNTRY {
 while :
 do
   echo -e " \033[1;37mPlease enter Wi-Fi Country Code\033[0;39m"
+  echo -e " \033[1;37mDatabase: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/db.txt\033[0;39m"
   echo -e " \033[1;37mExample: jp\033[0;39m"
   read -p " Wi-Fi Country Code: " input_str_COUNTRY
   read -p " All right? [y/n or r]: " num
