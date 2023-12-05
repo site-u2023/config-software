@@ -7,9 +7,9 @@ while :
 do
   echo -e " \033[1;37mInstallation may fail\033[0;39m"
   echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[f]\033[0;39m": Japanese localisation
-  echo -e " \033[1;33m[c]\033[0;39m": English localisation
-  echo -e " \033[1;37m[q]\033[0;39m": Quit
+  echo -e " \033[1;34m[f]: Japanese localisation\033[0;39m"
+  echo -e " \033[1;33m[c]: English localisation\033[0;39m"
+  echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
   read -p " Press any key [j/e or q]: " num 
   case "${num}" in
@@ -88,10 +88,10 @@ while :
 do
   echo -e " \033[1;37mInstallation may fail\033[0;39m"
   echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[f]\033[0;39m": Automatic full installation (Japanese or English)
-  echo -e " \033[1;33m[c]\033[0;39m": selective installation (Japanese)
-  echo -e " \033[1;31m[a]\033[0;39m": Confirmation of packages installed after flashing
-  echo -e " \033[1;37m[q]\033[0;39m": Quit
+  echo -e " \033[1;34m[f]: Automatic full installation (Japanese or English)\033[0;39m"
+  echo -e " \033[1;33m[c]: selective installation (Japanese)\033[0;39m"
+  echo -e " \033[1;31m[a]: Confirmation of packages installed after flashing\033[0;39m"
+  echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
   read -p " Press any key [f/c/a or q]: " num 
   case "${num}" in
