@@ -368,6 +368,8 @@ LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-${input_str_Languages} | awk '{
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-${input_str_Languages} | awk '{ print $1 }'`
 if [ -n "$input_str_Languages" ] || [ "$input_str_Languages" -ne "en" ]; then
 LANGUAGE='1'
+exit
+fi
 if [ -z "$LUCI_JA" ] || [ -z "$LUCI_JA_OPKG" ] || [ -z "$LUCI_JA_FIREWALL" ]; then
 while :
 do
@@ -392,7 +394,6 @@ do
     "q" ) exit ;;
   esac
 done
-fi
 fi
 _func_opensshsftpserver
 }
