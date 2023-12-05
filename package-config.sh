@@ -57,8 +57,8 @@ while :
 do
   echo -e " \033[1;37mInstallation may fail\033[0;39m"
   echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[f]: Automatic full installation (Global)\033[0;39m"
-  echo -e " \033[1;33m[c]: selective installation (Japanese)\033[0;39m"
+  echo -e " \033[1;34m[f]: Automatic full installation\033[0;39m"
+  echo -e " \033[1;33m[c]: selective installation\033[0;39m"
   echo -e " \033[1;31m[a]: Confirmation of packages installed after flashing\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
