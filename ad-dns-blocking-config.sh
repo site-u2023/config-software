@@ -73,11 +73,11 @@ fi
   echo -e " \033[7;33mAdGuard and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[7;33mDNS over HTTPS (DoH) and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[1;37mad dns blocking config ------------------------------\033[0;39m"
-  echo -e " \033[1;34m[g]\033[0;39m": AdGuard HOME configuration and installation (custom filter add-ins)
-  echo -e " \033[1;32m[b]\033[0;39m": AdBlockd installation and configuration (custom filter add-ins)
-  echo -e " \033[1;31m[h]\033[0;39m": Installation and configuration of DNS over HTTPS (DoH)
-  echo -e " \033[1;33m[t]\033[0;39m": Installation and configuration of DNS over TLS (DoT) Stubby
-  echo -e " \033[1;37m[q]\033[0;39m": Quit
+  echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation (custom filter add-ins)\033[0;39m"
+  echo -e " \033[1;32m[b]: AdBlockd installation and configuration (custom filter add-ins)\033[0;39m"
+  echo -e " \033[1;31m[h]: Installation and configuration of DNS over HTTPS (DoH)\033[0;39m"
+  echo -e " \033[1;33m[t]: Installation and configuration of DNS over TLS (DoT) Stubby\033[0;39m"
+  echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " Press any key [g/b/h/t or q]: " num
   case "${num}" in
