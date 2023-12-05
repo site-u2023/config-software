@@ -2,6 +2,8 @@
 
 Japanese notation
 
+Package installation multilingual support
+
 **不具合あればご連絡下さい**
 
 ### スクリプトセレクター※要ONU直結
