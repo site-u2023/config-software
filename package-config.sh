@@ -5,18 +5,63 @@
 function _func_full_INST {
 while :
 do
+  echo -e " \033[1;37mInstallation may fail\033[0;39m"
+  echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[f]\033[0;39m": Japanese localisation
+  echo -e " \033[1;33m[c]\033[0;39m": English localisation
+  echo -e " \033[1;37m[q]\033[0;39m": Quit
+  echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
+  read -p " Press any key [j/e or q]: " num 
+  case "${num}" in
+    "j" ) _func_full_INST_J ;;
+    "e" ) _func_full_INST_E ;;
+    "q" ) exit ;;
+  esac
+done
+
+function _func_full_INST_J {
+while :
+do
   echo -e " \033[1;34Download automatic full installation scripts\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/package-auto.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto.sh
-          sh /etc/config-software/package-auto.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/package-auto-j.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto-j.sh
+          sh /etc/config-software/package-auto-j.sh
           break ;;
     "n" ) break ;;
   esac
 done
 }
 
-function _func_choice_INST {
+function _func_full_INST_E {
+while :
+do
+  echo -e " \033[1;34Download automatic full installation scripts\033[0;39m"
+  read -p " All right? [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/config-software/package-auto-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto-e.sh
+          sh /etc/config-software/package-auto-e.sh
+          break ;;
+    "n" ) break ;;
+  esac
+done
+}
+
+function _func_choice_INST_J {
+while :
+do
+  echo -e " \033[1;33mDownload selective installation scripts\033[0;39m"
+  read -p " All right? [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/config-software/package-manual.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-manual.sh
+          sh /etc/config-software/package-manual.sh
+          break ;;
+    "n" ) break ;;
+  esac
+done
+}
+
+function _func_choice_INST_E {
 while :
 do
   echo -e " \033[1;33mDownload selective installation scripts\033[0;39m"
@@ -57,15 +102,15 @@ while :
 do
   echo -e " \033[1;37mInstallation may fail\033[0;39m"
   echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[f]\033[0;39m": Automatic full installation (recommended package all-in)
-  echo -e " \033[1;33m[c]\033[0;39m": selective installation
+  echo -e " \033[1;34m[f]\033[0;39m": Automatic full installation (Japanese or English)
+  echo -e " \033[1;33m[c]\033[0;39m": selective installation (Japanese)
   echo -e " \033[1;31m[a]\033[0;39m": Confirmation of packages installed after flashing
   echo -e " \033[1;37m[q]\033[0;39m": Quit
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
   read -p " Press any key [f/c/a or q]: " num 
   case "${num}" in
     "f" ) _func_full_INST ;;
-    "c" ) _func_choice_INST ;;
+    "c" ) _func_choice_INST_J ;;
     "a" ) _func_after_INST ;;
     "q" ) exit ;;
   esac
