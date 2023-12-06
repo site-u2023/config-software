@@ -17,7 +17,7 @@ function _func_STUBBY_SET {
 cp /etc/config/dhcp /etc/config/dhcp.dot.bak
 cp /etc/config/network /etc/config/network.dot.bak
 
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
