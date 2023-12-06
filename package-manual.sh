@@ -2,21 +2,6 @@
 # OpenWrt >= 21.02:
 
 
-function _func_Languages_check {
-while :
-do
-  echo -e " \033[1;37mLanguage --------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]: English (English)\033[0;39m"
-  echo -e " \033[1;32m[g]: Other than English\033[0;39m"
-  echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [e or g]: " num
-  case "${num}" in
-    "e" ) wget --no-check-certificate -O /etc/config-software/package-manual-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-manual-e.sh
-          sh /etc/config-software/package-manual-e.sh ;;
-    "g" ) _func_Languages_code ;;
-  esac
- done 
-
 function _func_Languages_code {
 while :
 do
@@ -182,7 +167,7 @@ _luci_app_ttyd
 function _luci_app_ttyd {
 TTYD=`opkg list-installed luci-app-ttyd | awk '{ print $1 }'`
 TTYD_JA=`opkg list-installed luci-i18n-ttyd-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$TTYD_JA" ] || [ -z "$TTYD_JA" ]; then
+if [ -z "$TTYD" ] || [ -z "$TTYD_JA" ]; then
 while :
 do
   echo -e " \033[1;33mInstall ttyd\033[0;39m"
@@ -249,10 +234,8 @@ do
           echo luci-app-sqm >> /etc/config-software/list-installed/Before
           echo $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          if [ "$input_str_Languages" -ne "en" ]; then
           echo luci-i18n-sqm-$input_str_Languages >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-i18n-sqm-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          fi
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) SQM='1'
@@ -428,7 +411,7 @@ Attended_common=`opkg list-installed attendedsysupgrade-common | awk '{ print $1
 Attended=`opkg list-installed luci-app-attendedsysupgrade | awk '{ print $1 }'`
 Attended_ja=`opkg list-installed luci-i18n-attendedsysupgrade-$input_str_Languages | awk '{ print $1 }'`
 Auc=`opkg list-installed auc | awk '{ print $1 }'`
-if [ -z "$Attended_common" ] |[ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
+if [ -z "$Attended_common" ] || [ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
 while :
 do
   echo -e " \033[1;33mInstall Attended Sysupgrade\033[0;39m"
@@ -1278,6 +1261,7 @@ fi
   echo -e " \033[1;37mAutomatic full installation (for novices)\033[0;39m"
   echo -e " \033[1;37m・LuCi (Snapshot only)\033[0;39m"
   echo -e " \033[1;37m・LuCi SSL\033[0;39m"
+  echo -e " \033[1;37m・LuCi Language\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
   echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
@@ -1309,7 +1293,7 @@ fi
   echo -e " \033[1;37mselective installation\033[0;39m"
   read -p " Start installing the package [y/n]: " num
   case "${num}" in
-    "y" ) _func_Languages_check ;;
+    "y" ) _func_Languages_code ;;
     "n" ) exit ;;
   esac
  done
