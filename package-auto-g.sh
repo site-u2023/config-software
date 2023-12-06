@@ -276,7 +276,6 @@ fi
   opkg install hd-idle
   opkg install luci-app-hd-idle
   opkg install luci-i18n-hd-idle-$input_str_Languages
-fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
