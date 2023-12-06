@@ -13,7 +13,6 @@ do
   echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
   echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
   echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
-  echo -e " \033[1;37men: English (English)\033[0;39m"
   echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
   echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
   echo -e " \033[1;37mfr: Français (French)\033[0;39m"
@@ -44,7 +43,7 @@ do
   echo -e " \033[1;37mExample: ar\033[0;39m"
   read -p " Language: " input_str_Languages
   read -p " All right? [y/n or r]: " num
-  echo -e " \033[1;32mLanguages: ${input_str_Languages}\033[0;39m"
+  echo -e " \033[1;32mLanguages: $input_str_Languages\033[0;39m"
   case "${num}" in
     "y" ) _func_INSTALL ;;
     "n" ) _func_Languages ;;
@@ -87,40 +86,32 @@ luci-app-temp-status
 internet-detector
 luci-app-internet-detector
 luci-theme-argon
+luci-i18n-base-$input_str_Languages
+luci-i18n-opkg-$input_str_Languages
+luci-i18n-firewall-$input_str_Languages
+luci-i18n-ttyd-$input_str_Languages
+luci-i18n-sqm-$input_str_Languages
+luci-i18n-statistics-$input_str_Languages
+luci-i18n-nlbwmon-$input_str_Languages
+luci-i18n-wifischedule-$input_str_Languages
+luci-i18n-attendedsysupgrade-$input_str_Languages
 EOF
-if [ "$input_str_Languages" -ne "en" ]; then
-cat << EOF > /etc/config-software/list-installed/Before
-luci-i18n-base-${input_str_Languages}
-luci-i18n-opkg-${input_str_Languages}
-luci-i18n-firewall-${input_str_Languages}
-luci-i18n-ttyd-${input_str_Languages}
-luci-i18n-sqm-${input_str_Languages}
-luci-i18n-statistics-${input_str_Languages}
-luci-i18n-nlbwmon-${input_str_Languages}
-luci-i18n-wifischedule-${input_str_Languages}
-luci-i18n-attendedsysupgrade-${input_str_Languages}
-EOF
-fi
 
 # LuCi
 opkg install luci
 # LiCi SSL
 opkg install luci-ssl
 # Language
-if [ "$input_str_Languages" -ne "en" ]; then
-opkg install luci-i18n-base-${input_str_Languages} 
-opkg install luci-i18n-opkg-${input_str_Languages}
-opkg install luci-i18n-firewall-${input_str_Languages}
-fi
+opkg install luci-i18n-base-$input_str_Languages
+opkg install luci-i18n-opkg-$input_str_Languages
+opkg install luci-i18n-firewall-$input_str_Languages
 
 # SFTP
 opkg install openssh-sftp-server
 
 # TTYD
 opkg install luci-app-ttyd
-if [ "$input_str_Languages" -ne "en" ]; then
-opkg install luci-i18n-ttyd-${input_str_Languages}
-fi
+opkg install luci-i18n-ttyd-$input_str_Languages
 uci set ttyd.@ttyd[0]=ttyd
 uci set ttyd.@ttyd[0].interface='@lan'
 uci set ttyd.@ttyd[0].command='/bin/login -f root '
@@ -144,9 +135,7 @@ fi
 DOWNLOAD='0' #initial value
 UPLOAD='0' #initial value
 opkg install luci-app-sqm
-if [ "$input_str_Languages" -ne "en" ]; then
-opkg install luci-i18n-sqm-${input_str_Languages}
-fi
+opkg install luci-i18n-sqm-$input_str_Languages
 . /lib/functions/network.sh
 network_flush_cache
 network_find_wan6 NET_IF6
@@ -161,23 +150,17 @@ uci commit sqm
 
 # statistics
 opkg install luci-app-statistics
-if [ "$input_str_Languages" -ne "en" ]; then
-opkg install luci-i18n-statistics-${input_str_Languages}
-fi
+opkg install luci-i18n-statistics-$input_str_Languages
 /etc/init.d/collectd enable
 
 # nlbwmon
 opkg install luci-app-nlbwmon
-if [ "$input_str_Languages" -ne "en" ]; then
-opkg install luci-i18n-nlbwmon-${input_str_Languages}
-fi
+opkg install luci-i18n-nlbwmon-$input_str_Languages
 
 # wifi schedule
 opkg install wifischedule
 opkg install luci-app-wifischedule
-if [ "$input_str_Languages" -ne "en" ]; then
-opkg install luci-i18n-wifischedule-${input_str_Languages}
-fi
+opkg install luci-i18n-wifischedule-$input_str_Languages
 
 # Additional Themes
 # OpnWrt
@@ -190,9 +173,7 @@ opkg install luci-theme-openwrt-2020
 # Attended Sysupgrade
 opkg install attendedsysupgrade-common
 opkg install luci-app-attendedsysupgrade
-if [ "$input_str_Languages" -ne "en" ]; then
-opkg install luci-i18n-attendedsysupgrade-${input_str_Languages}
-fi
+opkg install luci-i18n-attendedsysupgrade-$input_str_Languages
 opkg install auc
 
 # custom feed
@@ -264,11 +245,7 @@ kmod-fs-hfsplus
 hdparm
 hd-idle
 luci-app-hd-idle
-fi
-EOF
-if [ "$input_str_Languages" -ne "en" ]; then
-cat << EOF >> /etc/config-software/list-installed/Before
-luci-i18n-hd-idle-${input_str_Languages}
+luci-i18n-hd-idle-$input_str_Languages
 EOF
 fi
   wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
@@ -298,9 +275,7 @@ fi
   opkg install hdparm
   opkg install hd-idle
   opkg install luci-app-hd-idle
-  if [ "$input_str_Languages" -ne "en" ]; then
-  opkg install luci-i18n-hd-idle-${input_str_Languages}
-  fi
+  opkg install luci-i18n-hd-idle-$input_str_Languages
 fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
@@ -339,6 +314,7 @@ fi
   echo -e " \033[1;37mAutomatic full installation (for novices)\033[0;39m"
   echo -e " \033[1;37m・LuCi\033[0;39m"
   echo -e " \033[1;37m・LuCi SSL\033[0;39m"
+  echo -e " \033[1;37m・LuCi Language\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
   echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
