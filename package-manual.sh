@@ -361,11 +361,16 @@ do
   esac
 done
 fi
-_func_lucii18nbaseja
+_func_language_check
+}
+
+function _func_language_check {
+if [ "$input_str_Languages" = "en" ]; then
+_func_opensshsftpserver
+fi
 }
 
 function _func_lucii18nbaseja {
-if [ "$input_str_Languages" -ne "en" ]; then
 LUCI_JA=`opkg list-installed luci-i18n-base-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-${input_str_Languages} | awk '{ print $1 }'`
@@ -393,7 +398,6 @@ do
     "q" ) exit ;;
   esac
 done
-fi
 fi
 _func_opensshsftpserver
 }
