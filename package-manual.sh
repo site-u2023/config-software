@@ -113,7 +113,7 @@ _func_language_check
 }
 
 function _func_language_check {
-if [ "$input_str_Languages" = "en" ]; then
+if [ "${input_str_Languages}" = "en" ]; then
 _func_opensshsftpserver
 fi
 }
