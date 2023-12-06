@@ -363,13 +363,13 @@ _func_lucii18nbaseja
 }
 
 function _func_lucii18nbaseja {
+if [ -n "$input_str_Languages" ] || [ "$input_str_Languages" -ne "en" ]; then
+LANGUAGE='1'
+_func_opensshsftpserver
+fi
 LUCI_JA=`opkg list-installed luci-i18n-base-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-${input_str_Languages} | awk '{ print $1 }'`
-if [ -n "$input_str_Languages" ] || [ "$input_str_Languages" -ne "en" ]; then
-LANGUAGE='1'
-exit
-fi
 if [ -z "$LUCI_JA" ] || [ -z "$LUCI_JA_OPKG" ] || [ -z "$LUCI_JA_FIREWALL" ]; then
 while :
 do
