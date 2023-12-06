@@ -304,7 +304,7 @@ fi
 }
 
 function _func_listinstalled_Before {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
