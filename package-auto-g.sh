@@ -247,7 +247,6 @@ hd-idle
 luci-app-hd-idle
 luci-i18n-hd-idle-$input_str_Languages
 EOF
-fi
   wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
   opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
   rm /tmp/luci-app-disks-info_0.4-2_all.ipk
@@ -276,7 +275,7 @@ fi
   opkg install hd-idle
   opkg install luci-app-hd-idle
   opkg install luci-i18n-hd-idle-$input_str_Languages
-
+fi
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
 if [ -s /etc/config-software/list-installed/Difference ]; then
