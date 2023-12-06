@@ -2,69 +2,6 @@
 # OpenWrt >= 21.02:
 
 
-function _func_Languages_check {
-while :
-do
-  echo -e " \033[1;37mLanguage --------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]: English (English)\033[0;39m"
-  echo -e " \033[1;32m[g]: Other than English\033[0;39m"
-  echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [e/g or q]: " num
-  case "${num}" in
-    "e" )  ;;
-    "g" ) _func_Languages_code ;;
-  esac
- done 
-
-function _func_Languages_code {
-while :
-do
-  echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
-  echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
-  echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
-  echo -e " \033[1;37mca: Català (Catalan)\033[0;39m"
-  echo -e " \033[1;37mcs: Čeština (Czech)\033[0;39m"
-  echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
-  echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
-  echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
-  echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
-  echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
-  echo -e " \033[1;37mfr: Français (French)\033[0;39m"
-  echo -e " \033[1;37mhe: עִבְרִית (Hebrew)\033[0;39m"
-  echo -e " \033[1;37mhu: Magyar (Hungarian)\033[0;39m"
-  echo -e " \033[1;37mit: Italiano (Italian)\033[0;39m"
-  echo -e " \033[1;37mja: 日本語 (Japanese)\033[0;39m"
-  echo -e " \033[1;37mko: 한국어 (Korean)\033[0;39m"
-  echo -e " \033[1;37mlt: Lietuvių (Lithuanian)\033[0;39m"
-  echo -e " \033[1;37mmr: Marāṭhī (Marathi)\033[0;39m"
-  echo -e " \033[1;37mms: Bahasa Melayu (Malay)\033[0;39m"
-  echo -e " \033[1;37mnl: Nederlands (Dutch)\033[0;39m"
-  echo -e " \033[1;37mno: Norsk (Norwegian)\033[0;39m"
-  echo -e " \033[1;37mpl: Polski (Polish)\033[0;39m"
-  echo -e " \033[1;37mpt: Português (Portuguese)\033[0;39m"
-  echo -e " \033[1;37mpt-br: Português do Brasil (Brazilian Portuguese)\033[0;39m"
-  echo -e " \033[1;37mro: Română (Romanian)\033[0;39m"
-  echo -e " \033[1;37mru: Русский (Russian)\033[0;39m"
-  echo -e " \033[1;37msk: Slovenčina (Slovak)\033[0;39m"
-  echo -e " \033[1;37msv: Svenska (Swedish)\033[0;39m"
-  echo -e " \033[1;37mtr: Türkçe (Turkish)\033[0;39m"
-  echo -e " \033[1;37muk: Українська (Ukrainian)\033[0;39m"
-  echo -e " \033[1;37mvi: Tiếng Việt (Vietnamese)\033[0;39m"
-  echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
-  echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
-  echo -e " \033[1;37mPlease enter country code\033[0;39m"
-  echo -e " \033[1;37mLanguage packs will not install without code entry (Standard: English)\033[0;39m"
-  echo -e " \033[1;37mExample: ar\033[0;39m"
-  read -p " Language: " input_str_Languages
-  read -p " All right? [y/n or r]: " num
-  case "${num}" in
-    "y" ) _func_listinstalled_Before ;;
-    "n" ) _func_Languages ;;
-    "r" ) exit ;;
-  esac
-done
-}
-
 function _func_listinstalled_Before {
 UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
@@ -121,38 +58,6 @@ do
   esac
 done
 fi
-_func_lucii18nbaseja
-}
-
-function _func_lucii18nbaseja {
-LUCI_JA=`opkg list-installed luci-i18n-base-$input_str_Languages | awk '{ print $1 }'`
-LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-$input_str_Languages | awk '{ print $1 }'`
-LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$LUCI_JA" ] || [ -z "$LUCI_JA_OPKG" ] || [ -z "$LUCI_JA_FIREWALL" ]; then
-while :
-do
-  echo -e " \033[1;33mInstall LuCi language pack\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-base-$input_str_Languages: $((`opkg info luci-i18n-base-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-opkg-$input_str_Languages: $((`opkg info luci-i18n-opkg-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-firewall-$input_str_Languages: $((`opkg info luci-i18n-firewall-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
-  case "${num}" in
-    "y" ) echo luci-i18n-base-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo luci-i18n-opkg-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo luci-i18n-firewall-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-base-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-i18n-opkg-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-i18n-firewall-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-          break ;;
-    "n" ) LUCI_JA='1'
-          LUCI_JA_OPKG='1'
-          LUCI_JA_FIREWALL='1'
-          break ;;
-    "q" ) exit ;;
-  esac
-done
-fi
 _func_opensshsftpserver
 }
 
@@ -180,26 +85,20 @@ _luci_app_ttyd
 
 function _luci_app_ttyd {
 TTYD=`opkg list-installed luci-app-ttyd | awk '{ print $1 }'`
-TTYD_JA=`opkg list-installed luci-i18n-ttyd-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$TTYD_JA" ] || [ -z "$TTYD_JA" ]; then
+if [ -z "$TTYD" ]; then
 while :
 do
   echo -e " \033[1;33mInstall ttyd\033[0;39m"
   echo -e " \033[1;32mluci-app-ttyd: $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-ttyd-$input_str_Languages: $((`opkg info luci-i18n-ttyd-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " stop ja "
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-ttyd >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          if [ "${input_str_Languages}" -ne "en" ]; then
-          echo luci-i18n-ttyd-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-ttyd-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           fi
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) TTYD='1'
-          TTYD_JA='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -236,29 +135,22 @@ _func_sqmscripts
 function _func_sqmscripts {
 SQM=`opkg list-installed sqm-scripts | awk '{ print $1 }'`
 SQM_APP=`opkg list-installed luci-app-sqm | awk '{ print $1 }'`
-SQM_APP_JA=`opkg list-installed luci-i18n-sqm-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$SQM" ] || [ -z "$SQM_APP" ] || [ -z "$SQM_APP_JA" ]; then
+if [ -z "$SQM" ] || [ -z "$SQM_APP" ]; then
 while :
 do
   echo -e " \033[1;33mInstall SQM\033[0;39m"
   echo -e " \033[1;32msqm-scripts: $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-sqm: $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-sqm-$input_str_Languages: $((`opkg info luci-i18n-sqm-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo sqm-scripts >> /etc/config-software/list-installed/Before
           echo luci-app-sqm >> /etc/config-software/list-installed/Before
           echo $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          if [ "$input_str_Languages" -ne "en" ]; then
-          echo luci-i18n-sqm-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-sqm-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          fi
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) SQM='1'
           SQM_APP='1'
-          SQM_APP_JA='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -269,23 +161,18 @@ _func_luciappstatistics
 
 function _func_luciappstatistics {
 STATUS=`opkg list-installed luci-app-statistics | awk '{ print $1 }'`
-STATUS_JA=`opkg list-installed luci-i18n-statistics-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$STATUS" ] || [ -z "$STATUS_JA" ]; then
+if [ -z "$STATUS" ]; then
 while :
 do
   echo -e " \033[1;33mInstall statistics\033[0;39m"
   echo -e " \033[1;32mluci-app-statistics: $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-statistics-$input_str_Languages: $((`opkg info luci-i18n-statistics-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-statistics >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo luci-i18n-statistics-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-statistics-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) STATUS='1'
-          STATUS_JA='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -297,27 +184,22 @@ _func_nlbwmon
 function _func_nlbwmon {
 NLBWMON=`opkg list-installed nlbwmon | awk '{ print $1 }'`
 NLBWMON_APP=`opkg list-installed luci-app-nlbwmon | awk '{ print $1 }'`
-NLBWMON_APP_JA=`opkg list-installed luci-i18n-nlbwmon-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$NLBWMON" ] || [ -z "$NLBWMON_APP" ] || [ -z "$NLBWMON_APP_JA" ]; then
+if [ -z "$NLBWMON" ] || [ -z "$NLBWMON_APP" ]; then
 while :
 do
   echo -e " \033[1;33mInstall nlbwmon\033[0;39m"
   echo -e " \033[1;32mnlbwmon: $((`opkg info nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-nlbwmon: $((`opkg info luci-app-nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-nlbwmon-$input_str_Languages: $((`opkg info luci-i18n-nlbwmon-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo nlbwmon >> /etc/config-software/list-installed/schedule
           echo luci-app-nlbwmon >> /etc/config-software/list-installed/schedule
           echo $((`opkg info nlbwmon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-nlbwmon | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo luci-i18n-nlbwmon-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-nlbwmon-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) NLBWMON='1'
           NLBWMON_APP='1'
-          NLBWMON_APP_JA='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -329,27 +211,22 @@ _func_wifischedule
 function _func_wifischedule {
 WIFISCHEDULE=`opkg list-installed wifischedule | awk '{ print $1 }'`
 WIFISCHEDULE_APP=`opkg list-installed luci-app-wifischedule | awk '{ print $1 }'`
-WIFISCHEDULE_APP_JA=`opkg list-installed luci-i18n-wifischedule-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$WIFISCHEDULE" ] || [ -z "$WIFISCHEDULE_APP" ] || [ -z "$WIFISCHEDULE_APP_JA" ]; then
+if [ -z "$WIFISCHEDULE" ] || [ -z "$WIFISCHEDULE_APP" ]; then
 while :
 do
   echo -e " \033[1;33mInstall wifi schedule\033[0;39m"
   echo -e " \033[1;32mwifischedule: $((`opkg info wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-wifischedule: $((`opkg info luci-app-wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-wifischedule-$input_str_Languages: $((`opkg info luci-i18n-wifischedule-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo wifischedule >> /etc/config-software/list-installed/schedule
           echo luci-app-wifischedule >> /etc/config-software/list-installed/Before
           echo $((`opkg info wifischedule | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-wifischedule | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo luci-i18n-wifischedule-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-wifischedule-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) WIFISCHEDULE='1'
           WIFISCHEDULE_APP='1'
-          WIFISCHEDULE_APP_JA='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -427,15 +304,13 @@ _func_attendedsysupgrade
 function _func_attendedsysupgrade {
 Attended_common=`opkg list-installed attendedsysupgrade-common | awk '{ print $1 }'`
 Attended=`opkg list-installed luci-app-attendedsysupgrade | awk '{ print $1 }'`
-Attended_ja=`opkg list-installed luci-i18n-attendedsysupgrade-$input_str_Languages | awk '{ print $1 }'`
 Auc=`opkg list-installed auc | awk '{ print $1 }'`
-if [ -z "$Attended_common" ] |[ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
+if [ -z "$Attended_common" ] || [ -z "$Attended" ] || [ -z "$Auc" ]; then
 while :
 do
   echo -e " \033[1;33mInstall Attended Sysupgrade\033[0;39m"
   echo -e " \033[1;32mattendedsysupgrade-common: $((`opkg info attendedsysupgrade-common | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-attendedsysupgrade: $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-attendedsysupgrade-$input_str_Languages: $((`opkg info luci-i18n-attendedsysupgrade-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mauc: $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
@@ -444,14 +319,11 @@ do
           echo auc >> /etc/config-software/list-installed/Before
           echo $((`opkg info attendedsysupgrade-common | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo luci-i18n-attendedsysupgrade-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-attendedsysupgrade-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) Attended_common='1'
           Attended='1'
-          Attended_ja='1'
           Auc='1'
           break ;;
     "q" ) exit ;;
@@ -647,7 +519,6 @@ kmod-fs-hfsplus='1'
 hdparm='1'
 hd_idle='1'
 luci_app_hd_idle='1'
-luci_i18n_hd_idle_ja='1'
 
 _func_listinstalled_After
 fi
@@ -906,15 +777,13 @@ function _func_HDD {
 hdparm=`opkg list-installed hdparm | awk '{ print $1 }'`
 hd_idle=`opkg list-installed hd-idle | awk '{ print $1 }'`
 luci_app_hd_idle=`opkg list-installed luci-app-hd-idle | awk '{ print $1 }'`
-luci_i18n_hd_idle_ja=`opkg list-installed luci-i18n-hd-idle-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$hdparm" ] || [ -z "$hd_idle" ] || [ -z "$luci_app_hd_idle" ] || [ -z "$luci_i18n_hd_idle_ja" ]; then
+if [ -z "$hdparm" ] || [ -z "$hd_idle" ] || [ -z "$luci_app_hd_idle" ]; then
 while :
 do
   echo -e " \033[1;33mInstall HDD\033[0;39m"
   echo -e " \033[1;32mhd-idle: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-hd-idle: $((7771/1024))KB\033[0;39m"
   echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-hd-idle-$input_str_Languages: $((7771/1024))KB\033[0;39m"
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo hdparm >> /etc/config-software/list-installed/Before
@@ -923,14 +792,11 @@ do
           echo $((`opkg info hdparm | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info hd-idle | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-hd-idle | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo luci-i18n-hd-idle-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-i18n-hd-idle-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) hdparm='1'
           hd_idle='1'
           luci_app_hd_idle='1'
-          luci_i18n_hd_idle_ja='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -974,16 +840,6 @@ fi
 if [ -z "$LUCI_SSL" ]; then
 opkg install luci-ssl
 fi
-# LuCi Language
-if [ -z "$LUCI_JA" ]; then
-opkg install luci-i18n-base-$input_str_Languages
-fi
-if [ -z "$LUCI_JA_OPKG" ]; then
-opkg install luci-i18n-opkg-$input_str_Languages
-fi
-if [ -z "$LUCI_JA_FIREWALL" ]; then
-opkg install luci-i18n-firewall-$input_str_Languages
-fi
 
 # SFTP Server
 if [ -z "$SFTP" ]; then
@@ -1000,9 +856,6 @@ uci set ttyd.@ttyd[0].ipv6='1'
 uci set ttyd.@ttyd[0].debug='7'
 uci set ttyd.@ttyd[0].url_arg='1'
 uci commit ttyd
-fi
-if [ -z "$TTYD_JA" ]; then
-opkg install luci-i18n-ttyd-$input_str_Languages
 fi
 
 # Irqbalance
@@ -1033,17 +886,11 @@ fi
 if [ -z "$SQM_APP" ]; then
 opkg install luci-app-sqm
 fi
-if [ -z "$SQM_APP_JA" ]; then
-opkg install luci-i18n-sqm-$input_str_Languages
-fi
 
 # statistics
 if [ -z "$STATUS" ]; then
 opkg install luci-app-statistics
 /etc/init.d/collectd enable
-fi
-if [ -z "$STATUS_JA" ]; then
-opkg install luci-i18n-statistics-$input_str_Languages
 fi
 
 # nlbwmon
@@ -1053,9 +900,6 @@ fi
 if [ -z "$NLBWMON_APP" ]; then
 opkg install luci-app-nlbwmon
 fi
-if [ -z "$NLBWMON_APP_JA" ]; then
-opkg install luci-i18n-nlbwmon-$input_str_Languages
-fi
 
 # wifi schedule
 if [ -z "$WIFISCHEDULE" ]; then
@@ -1063,9 +907,6 @@ opkg install wifischedule
 fi
 if [ -z "$WIFISCHEDULE_APP" ]; then
 opkg install luci-app-wifischedule
-fi
-if [ -z "$WIFISCHEDULE_APP_JA" ]; then
-opkg install luci-i18n-wifischedule-$input_str_Languages
 fi
 
 # Themes
@@ -1085,9 +926,6 @@ opkg install attendedsysupgrade-common
 fi
 if [ -z "$Attended" ]; then
 opkg install luci-app-attendedsysupgrade
-fi
-if [ -z "$Attended_ja" ]; then
-opkg install luci-i18n-attendedsysupgrade-$input_str_Languages
 fi
 if [ -z "$Auc" ]; then
 opkg install auc
@@ -1240,9 +1078,6 @@ fi
 if [ -z "$luci_app_hd_idle" ]; then
 opkg install luci-app-hd-idle
 fi
-if [ -z "$luci_i18n_hd_idle_ja" ]; then
-opkg install luci-i18n-hd-idle-$input_str_Languages
-fi
 
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
 awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
@@ -1310,7 +1145,7 @@ fi
   echo -e " \033[1;37mselective installation\033[0;39m"
   read -p " Start installing the package [y/n]: " num
   case "${num}" in
-    "y" ) _func_Languages ;;
+    "y" ) _func_listinstalled_Before ;;
     "n" ) exit ;;
   esac
  done
