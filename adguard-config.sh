@@ -20,7 +20,7 @@ fi
   case "${num}" in
     "c" ) 
 {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
