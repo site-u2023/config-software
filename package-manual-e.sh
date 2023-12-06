@@ -95,7 +95,6 @@ do
   case "${num}" in
     "y" ) echo luci-app-ttyd >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          fi
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) TTYD='1'
