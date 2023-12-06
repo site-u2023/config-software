@@ -1128,7 +1128,7 @@ fi
   echo -e " \033[1;37m・internet detector (custom feed)\033[0;39m"
   echo -e " \033[1;37m・Theme ARGON (custom feed)\033[0;39m"
   echo -e " \033[1;37m・Attended Sysupgrade\033[0;39m"
-  str_USB=`dmesg | grep -s usb`
+  str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
   if [ -n "$str_USB" ]; then
   echo -e " \033[1;37m・Disk Info (custom feed)\033[0;39m"
   echo -e " \033[1;37m・USB：Base packages \033[0;39m"
