@@ -2,7 +2,7 @@ while :
 do
   echo -e " \033[1;33mLanguage --------------------------------------------\033[0;39m"
   echo -e " \033[1;36m[e]: English\033[0;39m"
-  echo -e " \033[1;31m[g]: Other than English\033[0;39m"
+  echo -e " \033[1;31m[g]: Other\033[0;39m"
   echo -e " \033[1;33m[g]: Quit\033[0;39m"
   echo -e " \033[1;33m-----------------------------------------------------\033[0;39m"
   read -p " Press any key [e/g or q]: " num
