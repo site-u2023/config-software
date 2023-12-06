@@ -13,7 +13,6 @@ do
   echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
   echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
   echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
-  echo -e " \033[1;37men: English (English)\033[0;39m"
   echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
   echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
   echo -e " \033[1;37mfr: Français (French)\033[0;39m"
