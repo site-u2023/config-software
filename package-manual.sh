@@ -365,9 +365,7 @@ _func_lucii18nbaseja
 }
 
 function _func_lucii18nbaseja {
-if [ "$input_str_Languages" = "en" ]; then
-_func_opensshsftpserver
-fi
+if [ "$input_str_Languages" -ne "en" ]; then
 LUCI_JA=`opkg list-installed luci-i18n-base-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-${input_str_Languages} | awk '{ print $1 }'`
@@ -395,6 +393,7 @@ do
     "q" ) exit ;;
   esac
 done
+fi
 fi
 _func_opensshsftpserver
 }
@@ -1286,7 +1285,7 @@ do
   echo -e " \033[1;37mExample: ar\033[0;39m"
   read -p " Language: " input_str_Languages
   read -p " All right? [y/n or r]: " num
-  echo -e " \033[1;32mLanguages: {$input_str_Languages}\033[0;39m"
+  echo -e " \033[1;32mLanguages: ${input_str_Languages}\033[0;39m"
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
     "n" ) _func_Languages ;;
