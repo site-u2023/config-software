@@ -1311,7 +1311,7 @@ fi
   echo -e " \033[1;37mselective installation\033[0;39m"
   read -p " Start installing the package [y/n]: " num
   case "${num}" in
-    "y" ) _func_Languages ;;
+    "y" ) _func_Languages_check ;;
     "n" ) exit ;;
   esac
  done
