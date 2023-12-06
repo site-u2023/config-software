@@ -112,7 +112,7 @@ _func_language_check
 }
 
 function _func_language_check {
-if [ "$input_str_Languages" = "en" ]; then
+if [ "${input_str_Languages}" = "en" ]; then
 _func_opensshsftpserver
 fi
 _func_lucii18nbaseja
@@ -174,7 +174,7 @@ _luci_app_ttyd
 
 function _luci_app_ttyd {
 TTYD=`opkg list-installed luci-app-ttyd | awk '{ print $1 }'`
-if [ "$input_str_Languages" -ne "en" ]; then
+if [ "${input_str_Languages}" -ne "en" ]; then
 TTYD_JA=`opkg list-installed luci-i18n-ttyd-$input_str_Languages | awk '{ print $1 }'`
 fi
 if [ -z "$TTYD_JA" ] || [ -z "$TTYD_JA" ]; then
@@ -182,14 +182,14 @@ while :
 do
   echo -e " \033[1;33mInstall ttyd\033[0;39m"
   echo -e " \033[1;32mluci-app-ttyd: $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  if [ "$input_str_Languages" -ne "en" ]; then
+  if [ "${input_str_Languages}" -ne "en" ]; then
   echo -e " \033[1;32mluci-i18n-ttyd-$input_str_Languages: $((`opkg info luci-i18n-ttyd-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   fi
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-ttyd >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          if [ "$input_str_Languages" -ne "en" ]; then
+          if [ "${input_str_Languages}" -ne "en" ]; then
           echo luci-i18n-ttyd-$input_str_Languages >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-i18n-ttyd-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           fi
