@@ -3,7 +3,6 @@
 
 
 function _func_Languages {
-while :
   echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
   echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
   echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
@@ -43,7 +42,6 @@ while :
   echo -e " \033[1;37mExample: ar\033[0;39m"
   read -p " Language: " input_str_Languages
   echo -e " \033[1;32m Languages: ${input_str_Languages}\033[0;39m"
-done
 while :
 do
   read -p " All right? [y/n or r]: " num
