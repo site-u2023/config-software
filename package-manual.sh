@@ -119,6 +119,7 @@ _func_lucii18nbaseja
 }
 
 function _func_lucii18nbaseja {
+read -p " stop "
 LUCI_JA=`opkg list-installed luci-i18n-base-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-${input_str_Languages} | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-${input_str_Languages} | awk '{ print $1 }'`
@@ -173,6 +174,7 @@ _luci_app_ttyd
 }
 
 function _luci_app_ttyd {
+read -p " stop ttyd "
 TTYD=`opkg list-installed luci-app-ttyd | awk '{ print $1 }'`
 if [ "$input_str_Languages" -ne "en" ]; then
 TTYD_JA=`opkg list-installed luci-i18n-ttyd-${input_str_Languages} | awk '{ print $1 }'`
