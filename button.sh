@@ -5,7 +5,7 @@ function _func_button_INSTALL {
 cp /etc/config/system /etc/config/system.button.bak
 
 # install
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
