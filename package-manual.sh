@@ -1291,7 +1291,8 @@ do
   echo -e " \033[1;37mExample: ar\033[0;39m"
   read -p " Language: " input_str_Languages
   read -p " All right? [y/n or r]: " num
-  echo -e " \033[1;32mLanguages: ${input_str_Languages}\033[0;39m"
+  echo -e " \033[1;32m Languages: ${input_str_Languages}\033[0;39m"
+  read -p "stop "
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
     "n" ) _func_Languages ;;
