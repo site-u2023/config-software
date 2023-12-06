@@ -22,7 +22,7 @@ do
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
           chmod +x /etc/init.d/iperf3
-          UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+          UPDATE="/tmp/opkg-lists/openwrt_telephony"
           if [ ! -e ${UPDATE} ]; then
           opkg update
           fi
@@ -78,7 +78,7 @@ do
   echo -e " \033[1;32mSAMBA4及びWSDD2インストールを実行します\033[0;39m"
   read -p " 宜しいですか? [y/n]: " num
   case "${num}" in
-    "y" ) UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+    "y" ) UPDATE="/tmp/opkg-lists/openwrt_telephony"
           if [ ! -e ${UPDATE} ]; then
           opkg update
           fi
