@@ -304,8 +304,55 @@ fi
 }
 
 
-
-
+function _func_Languages {
+while :
+do
+  echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
+  echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
+  echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
+  echo -e " \033[1;37mca: Català (Catalan)\033[0;39m"
+  echo -e " \033[1;37mcs: Čeština (Czech)\033[0;39m"
+  echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
+  echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
+  echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
+  echo -e " \033[1;37men: English (English)\033[0;39m"
+  echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
+  echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
+  echo -e " \033[1;37mfr: Français (French)\033[0;39m"
+  echo -e " \033[1;37mhe: עִבְרִית (Hebrew)\033[0;39m"
+  echo -e " \033[1;37mhu: Magyar (Hungarian)\033[0;39m"
+  echo -e " \033[1;37mit: Italiano (Italian)\033[0;39m"
+  echo -e " \033[1;37mja: 日本語 (Japanese)\033[0;39m"
+  echo -e " \033[1;37mko: 한국어 (Korean)\033[0;39m"
+  echo -e " \033[1;37mlt: Lietuvių (Lithuanian)\033[0;39m"
+  echo -e " \033[1;37mmr: Marāṭhī (Marathi)\033[0;39m"
+  echo -e " \033[1;37mms: Bahasa Melayu (Malay)\033[0;39m"
+  echo -e " \033[1;37mnl: Nederlands (Dutch)\033[0;39m"
+  echo -e " \033[1;37mno: Norsk (Norwegian)\033[0;39m"
+  echo -e " \033[1;37mpl: Polski (Polish)\033[0;39m"
+  echo -e " \033[1;37mpt: Português (Portuguese)\033[0;39m"
+  echo -e " \033[1;37mpt-br: Português do Brasil (Brazilian Portuguese)\033[0;39m"
+  echo -e " \033[1;37mro: Română (Romanian)\033[0;39m"
+  echo -e " \033[1;37mru: Русский (Russian)\033[0;39m"
+  echo -e " \033[1;37msk: Slovenčina (Slovak)\033[0;39m"
+  echo -e " \033[1;37msv: Svenska (Swedish)\033[0;39m"
+  echo -e " \033[1;37mtr: Türkçe (Turkish)\033[0;39m"
+  echo -e " \033[1;37muk: Українська (Ukrainian)\033[0;39m"
+  echo -e " \033[1;37mvi: Tiếng Việt (Vietnamese)\033[0;39m"
+  echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
+  echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
+  echo -e " \033[1;37mPlease enter country code\033[0;39m"
+  echo -e " \033[1;37mLanguage packs will not install without code entry\033[0;39m"
+  echo -e " \033[1;37mExample: ar\033[0;39m"
+  read -p " Language: " input_str_Languages
+  read -p " All right? [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_listinstalled_Before ;;
+    "n" ) _func_Languages ;;
+    "r" ) exit ;;
+  esac
+done
+}
 
 function _func_listinstalled_Before {
 UPDATE="/tmp/opkg-lists/openwrt_telephony"
@@ -1243,55 +1290,6 @@ else
 fi
 }
 
-function _func_Languages {
-while :
-do
-  echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
-  echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
-  echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
-  echo -e " \033[1;37mca: Català (Catalan)\033[0;39m"
-  echo -e " \033[1;37mcs: Čeština (Czech)\033[0;39m"
-  echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
-  echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
-  echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
-  echo -e " \033[1;37men: English (English)\033[0;39m"
-  echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
-  echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
-  echo -e " \033[1;37mfr: Français (French)\033[0;39m"
-  echo -e " \033[1;37mhe: עִבְרִית (Hebrew)\033[0;39m"
-  echo -e " \033[1;37mhu: Magyar (Hungarian)\033[0;39m"
-  echo -e " \033[1;37mit: Italiano (Italian)\033[0;39m"
-  echo -e " \033[1;37mja: 日本語 (Japanese)\033[0;39m"
-  echo -e " \033[1;37mko: 한국어 (Korean)\033[0;39m"
-  echo -e " \033[1;37mlt: Lietuvių (Lithuanian)\033[0;39m"
-  echo -e " \033[1;37mmr: Marāṭhī (Marathi)\033[0;39m"
-  echo -e " \033[1;37mms: Bahasa Melayu (Malay)\033[0;39m"
-  echo -e " \033[1;37mnl: Nederlands (Dutch)\033[0;39m"
-  echo -e " \033[1;37mno: Norsk (Norwegian)\033[0;39m"
-  echo -e " \033[1;37mpl: Polski (Polish)\033[0;39m"
-  echo -e " \033[1;37mpt: Português (Portuguese)\033[0;39m"
-  echo -e " \033[1;37mpt-br: Português do Brasil (Brazilian Portuguese)\033[0;39m"
-  echo -e " \033[1;37mro: Română (Romanian)\033[0;39m"
-  echo -e " \033[1;37mru: Русский (Russian)\033[0;39m"
-  echo -e " \033[1;37msk: Slovenčina (Slovak)\033[0;39m"
-  echo -e " \033[1;37msv: Svenska (Swedish)\033[0;39m"
-  echo -e " \033[1;37mtr: Türkçe (Turkish)\033[0;39m"
-  echo -e " \033[1;37muk: Українська (Ukrainian)\033[0;39m"
-  echo -e " \033[1;37mvi: Tiếng Việt (Vietnamese)\033[0;39m"
-  echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
-  echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
-  echo -e " \033[1;37mPlease enter country code\033[0;39m"
-  echo -e " \033[1;37mLanguage packs will not install without code entry\033[0;39m"
-  echo -e " \033[1;37mExample: ar\033[0;39m"
-  read -p " Language: " input_str_Languages
-  read -p " All right? [y/n or r]: " num
-  case "${num}" in
-    "y" ) _func_listinstalled_Before ;;
-    "n" ) _func_Languages ;;
-    "r" ) exit ;;
-  esac
-done
-}
 
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
