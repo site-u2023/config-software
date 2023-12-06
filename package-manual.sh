@@ -3,6 +3,8 @@
 
 
 function _func_Languages {
+while :
+do
   echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
   echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
   echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
@@ -38,13 +40,11 @@ function _func_Languages {
   echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
   echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
   echo -e " \033[1;37mPlease enter country code\033[0;39m"
-  echo -e " \033[1;37mLanguage packs will not install without code entry\033[0;39m"
+  echo -e " \033[1;37mLanguage packs will not install without code entry (Standard: English)\033[0;39m"
   echo -e " \033[1;37mExample: ar\033[0;39m"
   read -p " Language: " input_str_Languages
-  echo -e " \033[1;32m Languages: ${input_str_Languages}\033[0;39m"
-while :
-do
   read -p " All right? [y/n or r]: " num
+  echo -e " \033[1;32mLanguages: ${input_str_Languages}\033[0;39m"
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
     "n" ) _func_Languages ;;
