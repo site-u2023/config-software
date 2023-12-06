@@ -1,4 +1,3 @@
-function _func_Languages_check {
 while :
 do
   echo -e " \033[1;37mLanguage --------------------------------------------\033[0;39m"
