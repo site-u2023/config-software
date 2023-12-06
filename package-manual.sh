@@ -43,6 +43,7 @@ do
   echo -e " \033[1;37mLanguage packs will not install without code entry\033[0;39m"
   echo -e " \033[1;37mExample: ar\033[0;39m"
   read -p " Language: " input_str_Languages
+  echo -e " \033[1;32m Languages: ${input_str_Languages}\033[0;39m"
   read -p " All right? [y/n or r]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
