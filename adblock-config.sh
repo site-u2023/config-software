@@ -28,7 +28,7 @@ done
 }
 
 function _func_AdBlock_fast_Confirm {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
