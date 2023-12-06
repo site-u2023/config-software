@@ -8,7 +8,7 @@ sh /etc/config-software/openwrt-config.sh
 EOF
 chmod +x /usr/bin/confsoft
 
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
