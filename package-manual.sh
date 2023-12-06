@@ -193,10 +193,8 @@ do
   case "${num}" in
     "y" ) echo luci-app-ttyd >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          if [ "${input_str_Languages}" -ne "en" ]; then
           echo luci-i18n-ttyd-$input_str_Languages >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-i18n-ttyd-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          fi
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) TTYD='1'
