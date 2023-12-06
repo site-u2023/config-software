@@ -1,308 +1,6 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
-function _func_listinstalled {
-
-# LuCi
-if [ -z "$LUCI" ]; then
-opkg install luci
-fi
-# LuCi SSl
-if [ -z "$LUCI_SSL" ]; then
-opkg install luci-ssl
-fi
-# LuCi Language
-if [ -z "$LUCI_JA" ]; then
-opkg install luci-i18n-base-${input_str_Languages}
-fi
-if [ -z "$LUCI_JA_OPKG" ]; then
-opkg install luci-i18n-opkg-${input_str_Languages}
-fi
-if [ -z "$LUCI_JA_FIREWALL" ]; then
-opkg install luci-i18n-firewall-${input_str_Languages}
-fi
-
-# SFTP Server
-if [ -z "$SFTP" ]; then
-opkg install openssh-sftp-server
-fi
-
-# ttyd
-if [ -z "$TTYD" ]; then
-opkg install luci-app-ttyd
-uci set ttyd.@ttyd[0]=ttyd
-uci set ttyd.@ttyd[0].interface='@lan'
-uci set ttyd.@ttyd[0].command='/bin/login -f root '
-uci set ttyd.@ttyd[0].ipv6='1'
-uci set ttyd.@ttyd[0].debug='7'
-uci set ttyd.@ttyd[0].url_arg='1'
-uci commit ttyd
-fi
-if [ -z "$TTYD_JA" ]; then
-opkg install luci-i18n-ttyd-${input_str_Languages}
-fi
-
-# Irqbalance
-if [ -z "$CPU" ]; then
-opkg install irqbalance
-uci set irqbalance.irqbalance=irqbalance
-uci set irqbalance.irqbalance.enabled='1'
-uci commit irqbalance
-fi
-
-# SQM
-if [ -z "$SQM" ]; then
-opkg install sqm-scripts
-DOWNLOAD='0' #初期値
-UPLOAD='0' #初期値
-. /lib/functions/network.sh
-network_flush_cache
-network_find_wan6 NET_IF6
-network_get_physdev NET_L2D6 "${NET_IF6}"
-uci set sqm.@queue[0].enabled='1'
-uci set sqm.@queue[0].interface=${NET_L2D6}
-uci set sqm.@queue[0].download=${DOWNLOAD}
-uci set sqm.@queue[0].upload=${UPLOAD}
-uci commit sqm
-/etc/init.d/sqm start
-/etc/init.d/sqm enable
-fi
-if [ -z "$SQM_APP" ]; then
-opkg install luci-app-sqm
-fi
-if [ -z "$SQM_APP_JA" ]; then
-opkg install luci-i18n-sqm-${input_str_Languages}
-fi
-
-# statistics
-if [ -z "$STATUS" ]; then
-opkg install luci-app-statistics
-/etc/init.d/collectd enable
-fi
-if [ -z "$STATUS_JA" ]; then
-opkg install luci-i18n-statistics-${input_str_Languages}
-fi
-
-# nlbwmon
-if [ -z "$NLBWMON" ]; then
-opkg install nlbwmon
-fi
-if [ -z "$NLBWMON_APP" ]; then
-opkg install luci-app-nlbwmon
-fi
-if [ -z "$NLBWMON_APP_JA" ]; then
-opkg install luci-i18n-nlbwmon-${input_str_Languages}
-fi
-
-# wifi schedule
-if [ -z "$WIFISCHEDULE" ]; then
-opkg install wifischedule
-fi
-if [ -z "$WIFISCHEDULE_APP" ]; then
-opkg install luci-app-wifischedule
-fi
-if [ -z "$WIFISCHEDULE_APP_JA" ]; then
-opkg install luci-i18n-wifischedule-${input_str_Languages}
-fi
-
-# Themes
-if [ -z "$THEME_OPENWRT" ]; then
-opkg install luci-theme-openwrt
-fi
-if [ -z "$THEME_MATERIAL" ]; then
-opkg install luci-theme-material
-fi
-if [ -z "$THEME_2020" ]; then
-opkg install luci-theme-openwrt-2020
-fi
-
-# Attended Sysupgrade
-if [ -z "$Attended_common" ]; then
-opkg install attendedsysupgrade-common
-fi
-if [ -z "$Attended" ]; then
-opkg install luci-app-attendedsysupgrade
-fi
-if [ -z "$Attended_ja" ]; then
-opkg install luci-i18n-attendedsysupgrade-${input_str_Languages}
-fi
-if [ -z "$Auc" ]; then
-opkg install auc
-fi
-
-# custom feed
-
-# log viewer
-if [ -z "$LOG" ]; then
-wget --no-check-certificate -O /tmp/luci-app-log-viewer_1.1-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-1_all.ipk
-opkg install /tmp/luci-app-log-viewer_1.1-1_all.ipk
-rm /tmp/luci-app-log-viewer_1.1-1_all.ipk
-fi
-
-# cpu status
-if [ -z "$CPU_STATUS" ]; then
-wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
-opkg install /tmp/luci-app-cpu-status_0.4-3_all.ipk
-rm /tmp/luci-app-cpu-status_0.4-3_all.ipk
-fi
-
-# cpu perf
-if [ -z "$CPU_PERFORMANCE" ]; then
-wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
-opkg install /tmp/luci-app-cpu-perf_0.4-1_all.ipk
-rm /tmp/luci-app-cpu-perf_0.4-1_all.ipk
-fi
-
-# temp status
-if [ -z "$TMP_STATUS" ]; then
-wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
-opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
-rm /tmp/luci-app-temp-status_0.3-5_all.ipk
-fi
-
-# Internet detector
-if [ -z "$DETECTER" ]; then
-opkg install mailsend
-wget --no-check-certificate -O /tmp/internet-detector_1.0-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.0-3_all.ipk
-opkg install /tmp/internet-detector_1.0-3_all.ipk
-rm /tmp/internet-detector_1.0-3_all.ipk
-/etc/init.d/internet-detector start
-/etc/init.d/internet-detector enable
-fi
-if [ -z "$DETECTER_APP" ]; then
-wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.0-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.0-1_all.ipk
-opkg install /tmp/luci-app-internet-detector_1.0-1_all.ipk
-rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
-fi
-
-# Theme ARGON (template)
-if [ -z "$ARGON" ]; then
-wget --no-check-certificate -O /tmp/luci-theme-argon.ipk https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.1/luci-theme-argon_2.3.1_all.ipk
-opkg install /tmp/luci-theme-argon.ipk
-rm /tmp/luci-theme-argon.ipk
-fi
-if [ -z "$COMPAT" ]; then
-opkg install luci-compat
-fi
-if [ -z "$LIB" ]; then
-opkg install luci-lib-ipkg
-fi
-
-# disks info
-if [ -z "$luci_app_disks_info" ]; then
-wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
-opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
-rm /tmp/luci-app-disks-info_0.4-2_all.ipk
-fi
-
-# USB
-if [ -z "$block_mount" ]; then
-opkg install block-mount
-fi
-if [ -z "$kmod_usb_storage" ]; then
-opkg install kmod-usb-storage
-fi
-if [ -z "$kmod_usb_storage_uas" ]; then
-opkg install kmod-usb-storage-uas
-fi
-if [ -z "$usbutils" ]; then
-opkg install usbutils
-fi
-if [ -z "$gdisk" ]; then
-opkg install gdisk
-fi
-if [ -z "$libblkid1" ]; then
-opkg install libblkid1
-fi
-# USB LED USBPORT
-if [ -z "$kmod_usb_ledtrig_usbport" ]; then
-opkg install kmod-usb-ledtrig-usbport
-fi
-if [ -z "$luci_app_ledtrig_usbport" ]; then
-opkg install luci-app-ledtrig-usbport
-fi
-
-# FAT32
-if [ -z "$dosfstools" ]; then
-opkg install dosfstools
-fi
-if [ -z "$kmod_fs_vfat" ]; then
-opkg install kmod-fs-vfat
-fi
-# ext4
-if [ -z "$e2fsprogs" ]; then
-opkg install e2fsprogs
-fi
-if [ -z "$kmod_fs_ext4" ]; then
-opkg install kmod-fs-ext4
-fi
-# f2fs
-if [ -z "$f2fs_tools" ]; then
-opkg install f2fs-tools
-fi
-if [ -z "$kmod_fs_f2fs" ]; then
-opkg install kmod-fs-f2fs
-fi
-# exFAT
-if [ -z "$exfat_fsck" ]; then
-opkg install exfat-fsck
-fi
-if [ -z "$kmod_fs_exfat" ]; then
-opkg install kmod-fs-exfat
-fi
-# NTFS
-if [ -z "$ntfs_3g" ]; then
-opkg install ntfs-3g
-fi
-if [ -z "$kmod_fs_ntfs3" ]; then
-opkg install kmod-fs-ntfs3
-fi
-# HFS & HFS+
-if [ -z "$hfsfsck" ]; then
-opkg install hfsfsck
-fi
-if [ -z "$kmod_fs_hfs" ]; then
-opkg install kmod-fs-hfs
-fi
-if [ -z "$kmod_fs_hfsplus" ]; then
-opkg install kmod-fs-hfsplus
-fi
-# HDDアイドル
-if [ -z "$hdparm" ]; then
-opkg install hdparm
-fi
-if [ -z "$hd_idle" ]; then
-opkg install hd-idle
-fi
-if [ -z "$luci_app_hd_idle" ]; then
-opkg install luci-app-hd-idle
-fi
-if [ -z "$luci_i18n_hd_idle_ja" ]; then
-opkg install luci-i18n-hd-idle-${input_str_Languages}
-fi
-
-opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
-awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
-if [ -s /etc/config-software/list-installed/Difference ]; then
- while :
- do
- echo -e "\033[1;33m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
- echo -e " \033[1;31mInstallation failed\033[0;39m"
- read -p " Retry installation [y/n]: " num
-  case "${num}" in
-  "y" ) _func_listinstalled ;;
-  "n" )  read -p " Press any key (to reboot the device)"
-         reboot ;;
-  esac
-done
-else
- echo -e " \033[1;36mInstallation completed\033[0;39m"
- read -p " Press any key (to reboot the device)"
- reboot
-fi
-
-}
-
 
 function _func_Languages {
 while :
@@ -1290,6 +988,306 @@ else
 fi
 }
 
+function _func_listinstalled {
+
+# LuCi
+if [ -z "$LUCI" ]; then
+opkg install luci
+fi
+# LuCi SSl
+if [ -z "$LUCI_SSL" ]; then
+opkg install luci-ssl
+fi
+# LuCi Language
+if [ -z "$LUCI_JA" ]; then
+opkg install luci-i18n-base-${input_str_Languages}
+fi
+if [ -z "$LUCI_JA_OPKG" ]; then
+opkg install luci-i18n-opkg-${input_str_Languages}
+fi
+if [ -z "$LUCI_JA_FIREWALL" ]; then
+opkg install luci-i18n-firewall-${input_str_Languages}
+fi
+
+# SFTP Server
+if [ -z "$SFTP" ]; then
+opkg install openssh-sftp-server
+fi
+
+# ttyd
+if [ -z "$TTYD" ]; then
+opkg install luci-app-ttyd
+uci set ttyd.@ttyd[0]=ttyd
+uci set ttyd.@ttyd[0].interface='@lan'
+uci set ttyd.@ttyd[0].command='/bin/login -f root '
+uci set ttyd.@ttyd[0].ipv6='1'
+uci set ttyd.@ttyd[0].debug='7'
+uci set ttyd.@ttyd[0].url_arg='1'
+uci commit ttyd
+fi
+if [ -z "$TTYD_JA" ]; then
+opkg install luci-i18n-ttyd-${input_str_Languages}
+fi
+
+# Irqbalance
+if [ -z "$CPU" ]; then
+opkg install irqbalance
+uci set irqbalance.irqbalance=irqbalance
+uci set irqbalance.irqbalance.enabled='1'
+uci commit irqbalance
+fi
+
+# SQM
+if [ -z "$SQM" ]; then
+opkg install sqm-scripts
+DOWNLOAD='0' #初期値
+UPLOAD='0' #初期値
+. /lib/functions/network.sh
+network_flush_cache
+network_find_wan6 NET_IF6
+network_get_physdev NET_L2D6 "${NET_IF6}"
+uci set sqm.@queue[0].enabled='1'
+uci set sqm.@queue[0].interface=${NET_L2D6}
+uci set sqm.@queue[0].download=${DOWNLOAD}
+uci set sqm.@queue[0].upload=${UPLOAD}
+uci commit sqm
+/etc/init.d/sqm start
+/etc/init.d/sqm enable
+fi
+if [ -z "$SQM_APP" ]; then
+opkg install luci-app-sqm
+fi
+if [ -z "$SQM_APP_JA" ]; then
+opkg install luci-i18n-sqm-${input_str_Languages}
+fi
+
+# statistics
+if [ -z "$STATUS" ]; then
+opkg install luci-app-statistics
+/etc/init.d/collectd enable
+fi
+if [ -z "$STATUS_JA" ]; then
+opkg install luci-i18n-statistics-${input_str_Languages}
+fi
+
+# nlbwmon
+if [ -z "$NLBWMON" ]; then
+opkg install nlbwmon
+fi
+if [ -z "$NLBWMON_APP" ]; then
+opkg install luci-app-nlbwmon
+fi
+if [ -z "$NLBWMON_APP_JA" ]; then
+opkg install luci-i18n-nlbwmon-${input_str_Languages}
+fi
+
+# wifi schedule
+if [ -z "$WIFISCHEDULE" ]; then
+opkg install wifischedule
+fi
+if [ -z "$WIFISCHEDULE_APP" ]; then
+opkg install luci-app-wifischedule
+fi
+if [ -z "$WIFISCHEDULE_APP_JA" ]; then
+opkg install luci-i18n-wifischedule-${input_str_Languages}
+fi
+
+# Themes
+if [ -z "$THEME_OPENWRT" ]; then
+opkg install luci-theme-openwrt
+fi
+if [ -z "$THEME_MATERIAL" ]; then
+opkg install luci-theme-material
+fi
+if [ -z "$THEME_2020" ]; then
+opkg install luci-theme-openwrt-2020
+fi
+
+# Attended Sysupgrade
+if [ -z "$Attended_common" ]; then
+opkg install attendedsysupgrade-common
+fi
+if [ -z "$Attended" ]; then
+opkg install luci-app-attendedsysupgrade
+fi
+if [ -z "$Attended_ja" ]; then
+opkg install luci-i18n-attendedsysupgrade-${input_str_Languages}
+fi
+if [ -z "$Auc" ]; then
+opkg install auc
+fi
+
+# custom feed
+
+# log viewer
+if [ -z "$LOG" ]; then
+wget --no-check-certificate -O /tmp/luci-app-log-viewer_1.1-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-1_all.ipk
+opkg install /tmp/luci-app-log-viewer_1.1-1_all.ipk
+rm /tmp/luci-app-log-viewer_1.1-1_all.ipk
+fi
+
+# cpu status
+if [ -z "$CPU_STATUS" ]; then
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
+opkg install /tmp/luci-app-cpu-status_0.4-3_all.ipk
+rm /tmp/luci-app-cpu-status_0.4-3_all.ipk
+fi
+
+# cpu perf
+if [ -z "$CPU_PERFORMANCE" ]; then
+wget --no-check-certificate -O /tmp/luci-app-cpu-perf_0.4-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
+opkg install /tmp/luci-app-cpu-perf_0.4-1_all.ipk
+rm /tmp/luci-app-cpu-perf_0.4-1_all.ipk
+fi
+
+# temp status
+if [ -z "$TMP_STATUS" ]; then
+wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
+opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
+rm /tmp/luci-app-temp-status_0.3-5_all.ipk
+fi
+
+# Internet detector
+if [ -z "$DETECTER" ]; then
+opkg install mailsend
+wget --no-check-certificate -O /tmp/internet-detector_1.0-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.0-3_all.ipk
+opkg install /tmp/internet-detector_1.0-3_all.ipk
+rm /tmp/internet-detector_1.0-3_all.ipk
+/etc/init.d/internet-detector start
+/etc/init.d/internet-detector enable
+fi
+if [ -z "$DETECTER_APP" ]; then
+wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.0-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.0-1_all.ipk
+opkg install /tmp/luci-app-internet-detector_1.0-1_all.ipk
+rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
+fi
+
+# Theme ARGON (template)
+if [ -z "$ARGON" ]; then
+wget --no-check-certificate -O /tmp/luci-theme-argon.ipk https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.1/luci-theme-argon_2.3.1_all.ipk
+opkg install /tmp/luci-theme-argon.ipk
+rm /tmp/luci-theme-argon.ipk
+fi
+if [ -z "$COMPAT" ]; then
+opkg install luci-compat
+fi
+if [ -z "$LIB" ]; then
+opkg install luci-lib-ipkg
+fi
+
+# disks info
+if [ -z "$luci_app_disks_info" ]; then
+wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
+opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
+rm /tmp/luci-app-disks-info_0.4-2_all.ipk
+fi
+
+# USB
+if [ -z "$block_mount" ]; then
+opkg install block-mount
+fi
+if [ -z "$kmod_usb_storage" ]; then
+opkg install kmod-usb-storage
+fi
+if [ -z "$kmod_usb_storage_uas" ]; then
+opkg install kmod-usb-storage-uas
+fi
+if [ -z "$usbutils" ]; then
+opkg install usbutils
+fi
+if [ -z "$gdisk" ]; then
+opkg install gdisk
+fi
+if [ -z "$libblkid1" ]; then
+opkg install libblkid1
+fi
+# USB LED USBPORT
+if [ -z "$kmod_usb_ledtrig_usbport" ]; then
+opkg install kmod-usb-ledtrig-usbport
+fi
+if [ -z "$luci_app_ledtrig_usbport" ]; then
+opkg install luci-app-ledtrig-usbport
+fi
+
+# FAT32
+if [ -z "$dosfstools" ]; then
+opkg install dosfstools
+fi
+if [ -z "$kmod_fs_vfat" ]; then
+opkg install kmod-fs-vfat
+fi
+# ext4
+if [ -z "$e2fsprogs" ]; then
+opkg install e2fsprogs
+fi
+if [ -z "$kmod_fs_ext4" ]; then
+opkg install kmod-fs-ext4
+fi
+# f2fs
+if [ -z "$f2fs_tools" ]; then
+opkg install f2fs-tools
+fi
+if [ -z "$kmod_fs_f2fs" ]; then
+opkg install kmod-fs-f2fs
+fi
+# exFAT
+if [ -z "$exfat_fsck" ]; then
+opkg install exfat-fsck
+fi
+if [ -z "$kmod_fs_exfat" ]; then
+opkg install kmod-fs-exfat
+fi
+# NTFS
+if [ -z "$ntfs_3g" ]; then
+opkg install ntfs-3g
+fi
+if [ -z "$kmod_fs_ntfs3" ]; then
+opkg install kmod-fs-ntfs3
+fi
+# HFS & HFS+
+if [ -z "$hfsfsck" ]; then
+opkg install hfsfsck
+fi
+if [ -z "$kmod_fs_hfs" ]; then
+opkg install kmod-fs-hfs
+fi
+if [ -z "$kmod_fs_hfsplus" ]; then
+opkg install kmod-fs-hfsplus
+fi
+# HDDアイドル
+if [ -z "$hdparm" ]; then
+opkg install hdparm
+fi
+if [ -z "$hd_idle" ]; then
+opkg install hd-idle
+fi
+if [ -z "$luci_app_hd_idle" ]; then
+opkg install luci-app-hd-idle
+fi
+if [ -z "$luci_i18n_hd_idle_ja" ]; then
+opkg install luci-i18n-hd-idle-${input_str_Languages}
+fi
+
+opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/After
+awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/After /etc/config-software/list-installed/Before > /etc/config-software/list-installed/Difference
+if [ -s /etc/config-software/list-installed/Difference ]; then
+ while :
+ do
+ echo -e "\033[1;33m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
+ echo -e " \033[1;31mInstallation failed\033[0;39m"
+ read -p " Retry installation [y/n]: " num
+  case "${num}" in
+  "y" ) _func_listinstalled ;;
+  "n" )  read -p " Press any key (to reboot the device)"
+         reboot ;;
+  esac
+done
+else
+ echo -e " \033[1;36mInstallation completed\033[0;39m"
+ read -p " Press any key (to reboot the device)"
+ reboot
+fi
+}
 
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
