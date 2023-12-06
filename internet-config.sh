@@ -40,7 +40,7 @@ done
 }
 
 function _func_MAP_e_VirtualConnect_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
@@ -110,7 +110,7 @@ done
 }
 
 function _func_MAP_e_V6plus_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
@@ -227,7 +227,7 @@ done
 }
 
 function _func_DS_LITE_Transix_east_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
@@ -256,7 +256,7 @@ done
 }
 
 function _func_DS_LITE_Transix_west_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
@@ -316,7 +316,7 @@ done
 }
 
 function _func_DS_LITE_Xpass_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
@@ -376,7 +376,7 @@ done
 }
 
 function _func_DS_LITE_V6connect_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
