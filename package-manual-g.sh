@@ -40,7 +40,7 @@ do
   echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
   echo -e " \033[1;37mPlease enter country code\033[0;39m"
   echo -e " \033[1;37mLanguage packs will not install without code entry (Standard: English)\033[0;39m"
-  echo -e " \033[1;37mExample: ar\033[0;39m"
+  echo -e " \033[1;37mExample: ja\033[0;39m"
   read -p " Language: " input_str_Languages
   read -p " All right? [y/n or r]: " num
   case "${num}" in
