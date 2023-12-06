@@ -1,6 +1,6 @@
 while :
 do
-  echo -e " \033[1;33mpackage-auto Language -------------------------------\033[0;39m"
+  echo -e " \033[1;33mPackage auto Language -------------------------------\033[0;39m"
   echo -e " \033[1;36m[e]: English\033[0;39m"
   echo -e " \033[1;31m[o]: Other\033[0;39m"
   echo -e " \033[1;33m[q]: Quit\033[0;39m"
