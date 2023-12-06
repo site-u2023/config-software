@@ -363,13 +363,7 @@ do
   esac
 done
 fi
-_func_language_check
-}
-
-function _func_language_check {
-if [ "$input_str_Languages" = "en" ]; then
-_func_opensshsftpserver
-fi
+_func_lucii18nbaseja
 }
 
 function _func_lucii18nbaseja {
