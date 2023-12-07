@@ -131,9 +131,9 @@ fi
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
   if [ -n "$str_USB" ]; then
-    echo -e " \033[1;37mWith USB device\033[0;39m"
+    echo -e " \033[1;37mUSB device: have\033[0;39m"
   else
-    echo -e " \033[1;37mNo USB device\033[0;39m"
+    echo -e " \033[1;37mUSB device: have not\033[0;39m"
   fi
   echo -e " \033[1;37mDirectory to install scripts: /etc/config-software/\033[0;39m" 
   echo -e " \033[1;37mhttps://github.com/site-u2023/config-software\033[0;39m" 
