@@ -55,7 +55,7 @@ function _func_STUBBY_Before {
 while :
 do
   echo -e " \033[1;37mRestore DNS over TLS (DoT) settings to previous settings\033[0;39m"
-  echo -e " \033[1;37mREMOVE: stubby\033[0;39m"
+  echo -e " \033[1;37mRemove: stubby\033[0;39m"
   read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_STUBBY_Restoration ;;
