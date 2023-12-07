@@ -1,0 +1,146 @@
+#! /bin/sh
+
+function _func_Languages {
+while :
+do
+  echo -e " \033[1;37mar: العربية (Arabic)\033[0;39m"
+  echo -e " \033[1;37mbg: български (Bulgarian)\033[0;39m"
+  echo -e " \033[1;37mbn: বাংলা (Bengali)\033[0;39m"
+  echo -e " \033[1;37mca: Català (Catalan)\033[0;39m"
+  echo -e " \033[1;37mcs: Čeština (Czech)\033[0;39m"
+  echo -e " \033[1;37mda: Dansk (Danish)\033[0;39m"
+  echo -e " \033[1;37mde: Deutsch (German)\033[0;39m"
+  echo -e " \033[1;37mel: Ελληνικά (Greek)\033[0;39m"
+  echo -e " \033[1;37mes: Español (Spanish)\033[0;39m"
+  echo -e " \033[1;37mfi: Suomi (Finnish)\033[0;39m"
+  echo -e " \033[1;37mfr: Français (French)\033[0;39m"
+  echo -e " \033[1;37mhe: עִבְרִית (Hebrew)\033[0;39m"
+  echo -e " \033[1;37mhu: Magyar (Hungarian)\033[0;39m"
+  echo -e " \033[1;37mit: Italiano (Italian)\033[0;39m"
+  echo -e " \033[1;37mja: 日本語 (Japanese)\033[0;39m"
+  echo -e " \033[1;37mko: 한국어 (Korean)\033[0;39m"
+  echo -e " \033[1;37mlt: Lietuvių (Lithuanian)\033[0;39m"
+  echo -e " \033[1;37mmr: Marāṭhī (Marathi)\033[0;39m"
+  echo -e " \033[1;37mms: Bahasa Melayu (Malay)\033[0;39m"
+  echo -e " \033[1;37mnl: Nederlands (Dutch)\033[0;39m"
+  echo -e " \033[1;37mno: Norsk (Norwegian)\033[0;39m"
+  echo -e " \033[1;37mpl: Polski (Polish)\033[0;39m"
+  echo -e " \033[1;37mpt: Português (Portuguese)\033[0;39m"
+  echo -e " \033[1;37mpt-br: Português do Brasil (Brazilian Portuguese)\033[0;39m"
+  echo -e " \033[1;37mro: Română (Romanian)\033[0;39m"
+  echo -e " \033[1;37mru: Русский (Russian)\033[0;39m"
+  echo -e " \033[1;37msk: Slovenčina (Slovak)\033[0;39m"
+  echo -e " \033[1;37msv: Svenska (Swedish)\033[0;39m"
+  echo -e " \033[1;37mtr: Türkçe (Turkish)\033[0;39m"
+  echo -e " \033[1;37muk: Українська (Ukrainian)\033[0;39m"
+  echo -e " \033[1;37mvi: Tiếng Việt (Vietnamese)\033[0;39m"
+  echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
+  echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
+  echo -e " \033[1;37mPlease enter country code\033[0;39m"
+  echo -e " \033[1;37mLanguage packs will not install without code entry (Standard: English)\033[0;39m"
+  echo -e " \033[1;37mExample: ja\033[0;39m"
+  read -p " Language: " input_str_Languages
+  read -p " All right? [y/n or r]: " num
+  echo -e " \033[1;32mLanguages: $input_str_Languages\033[0;39m"
+  case "${num}" in
+    "y" ) _func_HTTPS ;;
+    "n" ) _func_Languages ;;
+    "r" ) exit ;;
+  esac
+done
+}
+
+function _func_HTTPS {
+while :
+do
+  echo -e " \033[1;35mStart installation and configuration of DNS over HTTPS (DoH)\033[0;39m"
+  echo -e " \033[1;37mInstall: https-dns-proxy\033[0;39m"
+  echo -e " \033[1;37mInstall: luci-app-https-dns-proxy\033[0;39m"
+  echo -e " \033[1;37mInstall: luci-i18n-https-dns-proxy-ja\033[0;39m" 
+  read -p " All right? [y/n]: " num
+  case "${num}" in
+    "y" ) _func_HTTPS_SET ;;
+    "n" ) exit ;;
+  esac
+done
+}
+
+function _func_HTTPS_SET {
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
+opkg install https-dns-proxy
+opkg install luci-app-https-dns-proxy
+opkg install luci-i18n-https-dns-proxy-$input_str_Languages
+
+while uci -q delete https-dns-proxy.@https-dns-proxy[0]; do :; done
+uci set https-dns-proxy.dns="https-dns-proxy"
+uci set https-dns-proxy.dns.bootstrap_dns="1.1.1.1,1.0.0.1"
+uci set https-dns-proxy.dns.resolver_url="https://cloudflare-dns.com/dns-query"
+uci set https-dns-proxy.dns.listen_addr="127.0.0.1"
+uci set https-dns-proxy.dns.listen_port="5053"
+
+uci commit https-dns-proxy
+/etc/init.d/rpcd restart
+/etc/init.d/https-dns-proxy restart
+echo -e " \033[1;37mInstallation and configuration complete\033[0;39m"
+read -p " Press any key"
+exit
+}
+
+function _func_HTTPS_Before {
+while :
+do
+  echo -e " \033[1;37mDNS over HTTPS（DoH）settings to previous settings\033[0;39m"
+  echo -e " \033[1;37mRemove: luci-app-https-dns-proxy\033[0;39m"
+  echo -e " \033[1;37mRemove: https-dns-proxy\033[0;39m"
+  read -p " Press any key [y/n or r]: " num
+
+  case "${num}" in
+    "y" ) _func_HTTPS_Restoration ;;
+    "n" ) _func_HTTPS ;;
+    "r" ) _func_HTTPS ;;
+  esac
+done
+}
+
+function _func_HTTPS_Restoration {
+opkg remove luci-app-https-dns-proxy
+opkg remove https-dns-proxy
+read -p " Press any key (to reboot the device)"
+reboot
+exit
+}
+
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+ read -p " AdGuard already installed"
+ exit
+fi
+if [ "stubby" = "`opkg list-installed stubby | awk '{ print $1 }'`" ]; then
+ read -p " DNS over TLS (DoT) already installed"
+ exit
+fi
+
+OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
+if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
+ echo -e " \033[1;37mVersion chec: OK\033[0;39m"
+ else
+ read -p " Different version"
+ exit
+fi
+
+while :
+do
+  echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[e]: DNS over HTTPS（DoH）configuration\033[0;39m"
+  echo -e " \033[1;31m[b]: DNS over HTTPS（DoH）settings to previous settings\033[0;39m"
+  echo -e " \033[1;33m[r]: Quit\033[0;39m"    
+  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
+  read -p " Press any key [e/b or r]: " num
+  case "${num}" in
+    "e" ) _func_Languages ;;
+    "b" ) _func_HTTPS_Before ;;
+    "r" ) exit ;;
+  esac
+done
