@@ -100,7 +100,7 @@ do
   echo -e " \033[1;31m[b]\033[0;39m": DNS over TLS (DoT) settings to previous settings
   echo -e " \033[1;33m[q]\033[0;39m": Quit    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or q]: " num
+  read -p " Press any key [e/b or q]: " num
   case "${num}" in
     "e" ) _func_STUBBY ;;
     "b" ) _func_STUBBY_Before ;;
