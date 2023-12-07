@@ -1,31 +1,5 @@
 #! /bin/sh
 
-function _func_AdBlock {
-while :
-do
-if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdBlockが既にインストールされています\033[0;39m"
-fi
-if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdBlock-fastが既にインストールされています\033[0;39m"
-fi
-  echo -e " \033[1;34mAdBlock ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[a]\033[0;39m": AdBlockのインストールと設定（カスタムフィルターアドイン）
-  echo -e " \033[1;32m[f]\033[0;39m": AdBlock-fastのインストールと設定（カスタムフィルターアドイン）
-  echo -e " \033[1;31m[b]\033[0;39m": AdBlockのリムーブと以前の設定に復元
-  echo -e " \033[1;33m[t]\033[0;39m": AdBlock-fastのリムーブと以前の設定に復元
-  echo -e " \033[1;37m[q]\033[0;39m": 終了    
-  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択して下さい [e/f/b/t or q]: " num
-  case "${num}" in
-    "a" ) _func_AdBlock_Confirm ;;
-    "f" ) _func_AdBlock_fast_Confirm ;;
-    "b" ) _func_AdBlock_Before ;;
-    "t" ) _func_AdBlock_fast_Before ;;
-    "q" ) exit ;;
-  esac
-done
-}
 
 function _func_AdBlock_fast_Confirm {
 UPDATE="/tmp/opkg-lists/openwrt_telephony"
@@ -151,7 +125,7 @@ exit
 
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
  read -p " AdGuardがインストールされている為終了します"
-exit
+ exit
 fi
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
@@ -161,3 +135,28 @@ if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPEN
  read -p " バージョンが違うため終了します"
  exit
 fi
+
+while :
+do
+if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
+  echo -e " \033[1;37mAdBlockが既にインストールされています\033[0;39m"
+fi
+if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
+  echo -e " \033[1;37mAdBlock-fastが既にインストールされています\033[0;39m"
+fi
+  echo -e " \033[1;34mAdBlock ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[a]\033[0;39m": AdBlockのインストールと設定（カスタムフィルターアドイン）
+  echo -e " \033[1;32m[f]\033[0;39m": AdBlock-fastのインストールと設定（カスタムフィルターアドイン）
+  echo -e " \033[1;31m[b]\033[0;39m": AdBlockのリムーブと以前の設定に復元
+  echo -e " \033[1;33m[t]\033[0;39m": AdBlock-fastのリムーブと以前の設定に復元
+  echo -e " \033[1;37m[q]\033[0;39m": 終了    
+  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
+  read -p " キーを選択して下さい [e/f/b/t or q]: " num
+  case "${num}" in
+    "a" ) _func_AdBlock_Confirm ;;
+    "f" ) _func_AdBlock_fast_Confirm ;;
+    "b" ) _func_AdBlock_Before ;;
+    "t" ) _func_AdBlock_fast_Before ;;
+    "q" ) exit ;;
+  esac
+done
