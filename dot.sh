@@ -96,9 +96,9 @@ fi
 while :
 do
   echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": DNS over TLS (DoT) configuration
-  echo -e " \033[1;31m[b]\033[0;39m": DNS over TLS (DoT) settings to previous settings
-  echo -e " \033[1;33m[q]\033[0;39m": Quit    
+  echo -e " \033[1;34m[e]: DNS over TLS (DoT) configuration\033[0;39m"
+  echo -e " \033[1;31m[b]: DNS over TLS (DoT) settings to previous settings\033[0;39m"
+  echo -e " \033[1;33m[q]: Quit\033[0;39m"    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " Press any key [e/b or q]: " num
   case "${num}" in
