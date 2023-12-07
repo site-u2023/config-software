@@ -90,7 +90,7 @@ fi
   echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;34m[j]: AdGuard HOME configuration and installation (Japan only)\033[0;39m"
   echo -e " \033[1;32m[b]: AdBlockd installation and configuration (Japan only)\033[0;39m"
-  echo -e " \033[1;31m[h]: DNS over HTTPS (DoH) configuration and installation (Japan only)\033[0;39m"
+  echo -e " \033[1;31m[h]: DNS over HTTPS (DoH) configuration and installation\033[0;39m"
   echo -e " \033[1;33m[t]: DNS over TLS (DoT) configuration and installation\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
