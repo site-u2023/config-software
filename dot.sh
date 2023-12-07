@@ -41,7 +41,7 @@ uci commit
 
 /etc/init.d/dnsmasq start
 /etc/init.d/network reload
-# ブート失敗対策
+# Boot failure countermeasures
 sed -i "/exit 0/d" /etc/rc.local
 echo "/etc/init.d/stubby restart" >> /etc/rc.local 
 echo "exit 0" >> /etc/rc.local
