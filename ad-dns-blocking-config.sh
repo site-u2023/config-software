@@ -1,6 +1,20 @@
 #! /bin/sh
 
 
+function _func_AdGuard_INST-G {
+while :
+do
+  echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
+  read -p " All right? [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config-g.sh
+          sh /etc/config-software/adguard-config.sh
+          break ;;
+    "n" ) break ;;
+  esac
+done
+}
+
 function _func_AdGuard_INST {
 while :
 do
@@ -73,15 +87,17 @@ fi
   echo -e " \033[7;33mAdGuard and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[7;33mDNS over HTTPS (DoH) and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[1;37mad dns blocking config ------------------------------\033[0;39m"
-  echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation (custom filter add-ins)\033[0;39m"
+  echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation\033[0;39m"
+  echo -e " \033[1;34m[j]: AdGuard HOME configuration and installation (Japan only: custom filter add-ins)\033[0;39m"
   echo -e " \033[1;32m[b]: AdBlockd installation and configuration (custom filter add-ins)\033[0;39m"
   echo -e " \033[1;31m[h]: Installation and configuration of DNS over HTTPS (DoH)\033[0;39m"
   echo -e " \033[1;33m[t]: Installation and configuration of DNS over TLS (DoT) Stubby\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [g/b/h/t or q]: " num
+  read -p " Press any key [g/j/b/h/t or q]: " num
   case "${num}" in
-    "g" ) _func_AdGuard_INST ;;
+    "g" ) _func_AdGuard_INST-G ;;
+    "j" ) _func_AdGuard_INST ;;
     "b" ) _func_AdBlock_INST ;;
     "h" ) _func_DoH ;;
     "t" ) _func_DoT ;;
