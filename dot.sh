@@ -3,9 +3,9 @@
 function _func_STUBBY {
 while :
 do
-  echo -e " \033[1;35mDNS over TLS（DoT）のインストールを開始します\033[0;39m"
-  echo -e " \033[1;37mインストール: stubby\033[0;39m"
-  read -p " 開始します [y/n]: " num
+  echo -e " \033[1;35mStart DNS over TLS (DoT) installation\033[0;39m"
+  echo -e " \033[1;37mInstall: stubby\033[0;39m"
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) _func_STUBBY_SET ;;
     "n" ) exit ;;
@@ -45,8 +45,8 @@ uci commit
 sed -i "/exit 0/d" /etc/rc.local
 echo "/etc/init.d/stubby restart" >> /etc/rc.local 
 echo "exit 0" >> /etc/rc.local
-echo -e " \033[1;37mインストールと設定が完了しました\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動して下さい"
+echo -e " \033[1;37mInstallation and configuration completed\033[0;39m"
+read -p " Press any key (to reboot the device)"
 reboot
 exit
 }
@@ -54,9 +54,9 @@ exit
 function _func_STUBBY_Before {
 while :
 do
-  echo -e " \033[1;37mDNS over TLS（DoT）の設定を以前の設定に復元します\033[0;39m"
-  echo -e " \033[1;37mリムーブ: stubby\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  echo -e " \033[1;37mRestore DNS over TLS (DoT) settings to previous settings\033[0;39m"
+  echo -e " \033[1;37mREMOVE: stubby\033[0;39m"
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_STUBBY_Restoration ;;
     "n" ) _func_STUBBY ;;
@@ -73,37 +73,37 @@ rm etc/config/dhcp.dot.bak
 rm /etc/config/network.dot.bak
 sed -i -e "s|/etc/init.d/stubby restart||g" /etc/rc.local
 rm /etc/config-software/dot.sh
-read -p " 何かキーを押してデバイスを再起動してください"
+read -p " Press any key (to reboot the device)"
 reboot
 exit
 }
 
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
- read -p " AdGuardがインストールされている為終了します"
+ read -p " AdGuard already installed"
  exit
 fi
 if [ "https-dns-proxy" = "`opkg list-installed https-dns-proxy | awk '{ print $1 }'`" ]; then
- read -p " https-dns-proxyがインストールされている為終了します"
+ read -p " https-dns-proxy already installed"
  exit
 fi
 OPENWRT_RELEAS=`grep -o '[0-9]*' /etc/openwrt_version`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+ echo -e " \033[1;37mVersion check: OK\033[0;39m"
 else
- read -p " バージョンが違うため終了します"
+ read -p " Different version"
  exit
 fi
 while :
 do
   echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]\033[0;39m": DNS over TLS（DoT）の設定を実行します
-  echo -e " \033[1;31m[b]\033[0;39m": DNS over TLS（DoT）の設定を以前の設定に復元します
-  echo -e " \033[1;33m[r]\033[0;39m": 戻る    
+  echo -e " \033[1;34m[e]\033[0;39m": DNS over TLS (DoT) configuration
+  echo -e " \033[1;31m[b]\033[0;39m": DNS over TLS (DoT) settings to previous settings
+  echo -e " \033[1;33m[q]\033[0;39m": Quit    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or r]: " num
+  read -p " キーを選択してください [e/b or q]: " num
   case "${num}" in
     "e" ) _func_STUBBY ;;
     "b" ) _func_STUBBY_Before ;;
-    "r" ) exit ;;
+    "q" ) exit ;;
   esac
 done
