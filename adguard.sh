@@ -5,7 +5,7 @@ cp /etc/config/network /etc/config/network.adguard.bak
 cp /etc/config/dhcp /etc/config/dhcp.adguard.bak
 cp /etc/config/firewall /etc/config/firewall.adguard.bak
 
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
