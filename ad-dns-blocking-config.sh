@@ -1,7 +1,7 @@
 #! /bin/sh
 
 
-function _func_AdGuard_INST-G {
+function _func_AdGuard_INST_G {
 while :
 do
   echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
@@ -96,7 +96,7 @@ fi
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " Press any key [g/j/b/h/t or q]: " num
   case "${num}" in
-    "g" ) _func_AdGuard_INST-G ;;
+    "g" ) _func_AdGuard_INST_G ;;
     "j" ) _func_AdGuard_INST ;;
     "b" ) _func_AdBlock_INST ;;
     "h" ) _func_DoH ;;
