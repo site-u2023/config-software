@@ -11,10 +11,10 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
   echo -e " \033[1;37mAdGuard already installed\033[0;39m"
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]\033[0;39m": AdGuard HOME configuration and installation
-  echo -e " \033[1;33m[s]\033[0;39m": Administrative web interface configuration (port, username and password only)
-  echo -e " \033[1;32m[b]\033[0;39m": Removing and restoring AdGuard HOME to previous settings
-  echo -e " \033[1;37m[q]\033[0;39m": Quit   
+  echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
+  echo -e " \033[1;33m[s]: Administrative web interface configuration (port, username and password only)\033[0;39m"
+  echo -e " \033[1;32m[b]: Removing and restoring AdGuard HOME to previous settings\033[0;39m"
+  echo -e " \033[1;37m[q]: Quit\033[0;39m"   
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " Press any key [c/s/b or q]: " num
   case "${num}" in
