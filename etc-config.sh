@@ -54,18 +54,16 @@ function _func_WiFi_location_service {
 while :
 do
   echo -e " \033[1;32mExecute Location Based Service (LBS) stop setting\033[0;39m"
+  echo -e " \033[1;36m`uci show wireless.default_radio0.ssid`\033[0;39m"
+  echo -e " \033[1;36m`uci show wireless.default_radio1.ssid`\033[0;39m"
+  echo -e " \033[1;36m`uci show wireless.default_radio2.ssid`\033[0;39m"
+  echo -e " \033[1;32mAdd _optout_nomap to the SSID name\033[0;39m"
   read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) sed -i -e 's/\s*$//' /etc/config/wireless
           sed -i -e "/option ssid/s/'$//" /etc/config/wireless
           sed -i -e "/option ssid/s/$/_optout_nomap'/g" /etc/config/wireless
-          /etc/init.d/network restart
-          echo -e " \033[1;36m`uci show wireless.default_radio0.ssid`\033[0;39m"
-          echo -e " \033[1;36m`uci show wireless.default_radio1.ssid`\033[0;39m"
-          echo -e " \033[1;36m`uci show wireless.default_radio2.ssid`\033[0;39m"
-          echo -e " \033[1;32mSetup is complete\033[0;39m"
-          echo -e " \033[1;33mAdd _optout_nomap to the end of the client SSID\033[0;39m"      
-          read -p " Press any key"
+          /etc/init.d/network restart   
           break ;;
     "n" ) break ;;
   esac
