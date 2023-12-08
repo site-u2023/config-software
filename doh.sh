@@ -84,7 +84,7 @@ fi
 
 while :
 do
-  echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
+  echo -e " \033[1;3mDoH ---------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: DNS over HTTPS（DoH）configuration\033[0;39m"
   echo -e " \033[1;31m[b]: DNS over HTTPS（DoH）settings to previous settings\033[0;39m"
   echo -e " \033[1;33m[r]: Quit\033[0;39m"    
