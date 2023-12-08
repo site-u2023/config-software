@@ -10,6 +10,7 @@ do
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdGuardが既にインストールされています\033[0;39m"
 fi
+  echo -e " \033[1;33mJapanese notation\033[0;39m"
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）\033[0;39m"
   echo -e " \033[1;33m[s]: 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）\033[0;39m"
