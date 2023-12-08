@@ -50,6 +50,10 @@ done
 }
 
 function _func_AdGuard_Confirm {
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
 while :
 do
   echo -e " \033[1;35mStart AdGuard HOME setup and installation\033[0;39m"
