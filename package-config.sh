@@ -58,7 +58,7 @@ do
   echo -e " \033[1;37mInstallation may fail\033[0;39m"
   echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
   echo -e " \033[1;34m[f]: Automatic full installation\033[0;39m"
-  echo -e " \033[1;33m[s]: selective installation\033[0;39m"
+  echo -e " \033[1;33m[s]: Selective installation\033[0;39m"
   echo -e " \033[1;31m[a]: Confirmation of packages installed after flashing\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
