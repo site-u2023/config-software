@@ -60,11 +60,11 @@ do
   echo -e " \033[1;32mAdministrative web interface port number entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface user name entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface password entry\033[0;39m"
-  echo -e " \033[1;32minstall: adguardhome $((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADGUARD_VERSION}\033[0;39m"
-  echo -e " \033[1;32minstall: htpasswd: 63.90KB\033[0;39m"
-  echo -e " \033[1;32minstall: libaprutil $((`opkg info libaprutil | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32minstall: libapr $((`opkg info libapr | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32minstallル: libexpat $((`opkg info libexpat | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mInstall: adguardhome $((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADGUARD_VERSION}\033[0;39m"
+  echo -e " \033[1;32mInstall: htpasswd: 63.90KB\033[0;39m"
+  echo -e " \033[1;32mInstall: libaprutil $((`opkg info libaprutil | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mInstall: libapr $((`opkg info libapr | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mInstallル: libexpat $((`opkg info libexpat | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Start inputting setpoints [y/n]: " num
   case "${num}" in
     "y" ) _func_AdGuard_PORT ;;
