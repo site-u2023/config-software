@@ -14,7 +14,6 @@ opkg update
 fi
 opkg install ttyd
 opkg install luci-app-ttyd
-opkg install luci-i18n-ttyd-ja
 
 uci set ttyd.@ttyd[0]=ttyd
 uci set ttyd.@ttyd[0].interface='@lan'
