@@ -131,9 +131,9 @@ fi
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
   if [ -n "$str_USB" ]; then
-    echo -e " \033[1;37mUSB device: have\033[0;39m"
+    echo -e " \033[1;37mUSB device: Have\033[0;39m"
   else
-    echo -e " \033[1;37mUSB device: have not\033[0;39m"
+    echo -e " \033[1;37mUSB device: Have not\033[0;39m"
   fi
   echo -e " \033[1;37mDirectory to install scripts: /etc/config-software/\033[0;39m" 
   echo -e " \033[1;37mhttps://github.com/site-u2023/config-software\033[0;39m" 
@@ -146,11 +146,11 @@ fi
 while :
 do
 
-  echo -e " \033[1;33mmultilingual support (Partially unchanged)\033[0;39m"
+  echo -e " \033[1;33Mmultilingual support (Partially unchanged)\033[0;39m"
   echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
   echo -e " \033[1;33m[i]: Internet connection setup in Japan (MAP-e, DS-LITE, PPPoE)\033[0;39m"
   echo -e " \033[1;34m[s]: Initial system setup (host name,password,etc.)\033[0;39m"
-  echo -e " \033[1;32m[p]: Install recommended packages (automatic device identification)\033[0;39m"
+  echo -e " \033[1;32m[p]: Install recommended packages (automatic or selective)\033[0;39m"
   echo -e " \033[1;31m[b]: Install ad blocker and DNS encryption\033[0;39m"
   echo -e " \033[1;35m[a]: Access point connection setup (Dumb/Bridge)\033[0;39m"
   echo -e " \033[1;36m[e]: Other: BUTTON,IPERF3,SAMBA4,LBS\033[0;39m"
