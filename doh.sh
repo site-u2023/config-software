@@ -9,7 +9,7 @@ do
   echo -e " \033[1;37mInstall: https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mInstall: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mInstall: luci-i18n-https-dns-proxy-ja\033[0;39m" 
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) _func_HTTPS_SET ;;
     "n" ) exit ;;
