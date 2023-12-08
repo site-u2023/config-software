@@ -4,7 +4,7 @@
 function _func_HOSTNAME {
 while :
 do
-  echo -e " \033[1;34mPlease enter the device hostame\033[0;39m"
+  echo -e " \033[1;33mPlease enter the device hostame\033[0;39m"
   read -p " Device Hostname: " input_str_SYSTEM_HOSTNAME
   read -p " All right? [y/n or r]: " num
   case "${num}" in
@@ -18,7 +18,7 @@ done
 function _func_ROOT_PASSWD {
 while :
 do
-  echo -e " \033[1;33mPlease enter the device password\033[0;39m"
+  echo -e " \033[1;34mPlease enter the device password\033[0;39m"
   read -p " Device Password: " input_str_ROOT_PASSWD
   read -p " All right? [y/n or r]: " num
   case "${num}" in
@@ -32,7 +32,7 @@ done
 function _func_COUNTRY {
 while :
 do
-  echo -e " \033[1;37mPlease enter Wi-Fi Country Code\033[0;39m"
+  echo -e " \033[1;32mPlease enter Wi-Fi Country Code\033[0;39m"
   echo -e " \033[1;37mDatabase: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/db.txt\033[0;39m"
   echo -e " \033[1;37mExample: jp\033[0;39m"
   read -p " Wi-Fi Country Code: " input_str_COUNTRY
@@ -62,7 +62,7 @@ done
 function _func_WIFI_PASSWD_A {
 while :
 do
-  echo -e " \033[1;35mPlease enter Wi-Fi ${WIFI_NO_A} password\033[0;39m"
+  echo -e " \033[1;31mPlease enter Wi-Fi ${WIFI_NO_A} password\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_A} Password: " input_str_WIFI_PASSWD_A
   read -p " All right? [y/n or r]: " num
   case "${num}" in
@@ -76,7 +76,7 @@ done
 function _func_WIFI_SSID_B {
 while :
 do
-  echo -e " \033[1;31mPlease enter Wi-Fi ${WIFI_NO_B} SSID\033[0;39m"
+  echo -e " \033[1;35mPlease enter Wi-Fi ${WIFI_NO_B} SSID\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_B} SSID: " input_str_WIFI_SSID_B
   read -p " All right? [y/n or r]: " num
   case "${num}" in
