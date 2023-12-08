@@ -6,7 +6,7 @@ function _func_full_INST {
 while :
 do
   echo -e " \033[1;34Download automatic full installation scripts\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/package-auto.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto.sh
           sh /etc/config-software/package-auto.sh
@@ -20,7 +20,7 @@ function _func_choice_INST {
 while :
 do
   echo -e " \033[1;33mDownload selective installation scripts\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/package-manual.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-manual.sh
           sh /etc/config-software/package-manual.sh
@@ -34,7 +34,7 @@ function _func_after_INST {
 while :
 do
   echo -e " \033[1;31mDownload and run the script to confirm the installed package after flashing\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/install-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/install-config.sh
           sh /etc/config-software/install-config.sh
@@ -56,7 +56,7 @@ fi
 while :
 do
   echo -e " \033[1;37mInstallation may fail\033[0;39m"
-  echo -e " \033[1;37mpackage-config ---------------------------------------\033[0;39m"
+  echo -e " \033[1;37mPackage-config ---------------------------------------\033[0;39m"
   echo -e " \033[1;34m[f]: Automatic full installation\033[0;39m"
   echo -e " \033[1;33m[s]: Selective installation\033[0;39m"
   echo -e " \033[1;31m[a]: Confirmation of packages installed after flashing\033[0;39m"
