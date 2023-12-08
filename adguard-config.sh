@@ -12,11 +12,11 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOMEの設定とインストール（カスタムフィルターアドイン）\033[0;39m"
-  echo -e " \033[1;33m[w]: 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）\033[0;39m"
+  echo -e " \033[1;33m[s]: 管理用ウェブインターフェイス設定（ポート・ユーザー名・パスワードのみ）\033[0;39m"
   echo -e " \033[1;32m[b]: AdGuard HOMEのリムーブと以前の設定に復元\033[0;39m"
   echo -e " \033[1;37m[q]: 終了\033[0;39m"
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択して下さい [c/b or q]: " num
+  read -p " キーを選択して下さい [c/s/b or q]: " num
   case "${num}" in
     "c" ) 
 {
@@ -42,7 +42,7 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
 }
           AD_INST='ad_inst'
           _func_AdGuard_Confirm ;;
-    "w" ) _func_AdGuard_Confirm ;;        
+    "s" ) _func_AdGuard_Admin ;;        
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
   esac
@@ -74,6 +74,22 @@ do
     "n" ) break ;;
   esac
 done
+}
+
+function _func_AdGuard_Admin {
+while :
+do
+  echo -e " \033[1;35mAdGuard HOMEの設定とインストールを開始します\033[0;39m"
+  echo -e " \033[1;32m管理用ウェブインターフェイスポート番号入力\033[0;39m"
+  echo -e " \033[1;32m管理用ウェブインターフェイスユーザー名入力\033[0;39m"
+  echo -e " \033[1;32m管理用ウェブインターフェイスパスワード入力\033[0;39m"
+  read -p " 設定値の入力を開始します [y/n]: " num
+  case "${num}" in
+    "y" ) _func_AdGuard_PORT ;;
+    "n" ) break ;;
+  esac
+done
+Admin='1'
 }
 
 function _func_AdGuard_PORT {
