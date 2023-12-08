@@ -144,6 +144,7 @@ fi
 if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdBlock-fastが既にインストールされています\033[0;39m"
 fi
+  echo -e " \033[1;33mJapanese notation\033[0;39m"
   echo -e " \033[1;34mAdBlock ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[a]\033[0;39m": AdBlockのインストールと設定（カスタムフィルターアドイン）
   echo -e " \033[1;32m[f]\033[0;39m": AdBlock-fastのインストールと設定（カスタムフィルターアドイン）
