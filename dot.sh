@@ -95,7 +95,7 @@ else
 fi
 while :
 do
-  echo -e " \033[1;3mSTUBBY ------------------------------------------------\033[0;39m"
+  echo -e " \033[1;3mDoT ---------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: DNS over TLS (DoT) configuration\033[0;39m"
   echo -e " \033[1;31m[b]: DNS over TLS (DoT) settings to previous settings\033[0;39m"
   echo -e " \033[1;33m[q]: Quit\033[0;39m"    
