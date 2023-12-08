@@ -89,7 +89,7 @@ done
 
 while :
 do
-  echo -e " \033[1;37metc -------------------------------------------------\033[0;39m"
+  echo -e " \033[1;37mETC -------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[1]:Button Setup and Installation\033[0;39m"
   echo -e " \033[1;33m[2]:IPERF3 installation and service addition\033[0;39m"
   echo -e " \033[1;32m[3]:Location Based Service (LBS) Stop\033[0;39m"
