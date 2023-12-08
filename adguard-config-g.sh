@@ -193,7 +193,7 @@ function _func_AdGuard_Before {
 while :
 do
   echo -e " \033[1;37mRemove and restore AdGuard HOME to its previous settings\033[0;39m"
-  echo -e " \033[1;37mc: adguardhome\033[0;39m"
+  echo -e " \033[1;37mRemove: adguardhome\033[0;39m"
   echo -e " \033[1;37mRemove: htpasswd\033[0;39m"
   echo -e " \033[1;37mRemove: libaprutil\033[0;39m"
   echo -e " \033[1;37mRemove: libapr\033[0;39m"
