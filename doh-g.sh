@@ -40,7 +40,7 @@ do
   echo -e " \033[1;37mLanguage packs will not install without code entry (Standard: English)\033[0;39m"
   echo -e " \033[1;37mExample: ja\033[0;39m"
   read -p " Language: " input_str_Languages
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key  [y/n or r]: " num
   echo -e " \033[1;32mLanguages: $input_str_Languages\033[0;39m"
   case "${num}" in
     "y" ) _func_HTTPS ;;
@@ -57,7 +57,7 @@ do
   echo -e " \033[1;37mInstall: https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mInstall: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mInstall: luci-i18n-https-dns-proxy-ja\033[0;39m" 
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) _func_HTTPS_SET ;;
     "n" ) exit ;;
