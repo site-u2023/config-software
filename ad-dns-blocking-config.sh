@@ -5,7 +5,7 @@ function _func_AdGuard_INST_G {
 while :
 do
   echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config-g.sh
           sh /etc/config-software/adguard-config.sh
@@ -19,7 +19,7 @@ function _func_AdGuard_INST {
 while :
 do
   echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config.sh
           sh /etc/config-software/adguard-config.sh
@@ -33,7 +33,7 @@ function _func_AdBlock_INST {
 while :
 do
   echo -e " \033[1;32mDownload the AdBlock configuration script\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adblock-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-config.sh
           sh /etc/config-software/adblock-config.sh
@@ -47,7 +47,7 @@ function _func_DoH {
 while :
 do
   echo -e " \033[1;32mDNS over HTTPS（DoH）Download the configuration script\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/doh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/doh.sh
           sh /etc/config-software/doh.sh
@@ -61,7 +61,7 @@ function _func_DoT {
 while :
 do
   echo -e " \033[1;32mDNS over TLS（DoT）Download the configuration script\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/dot.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dot.sh
           sh /etc/config-software/dot.sh
