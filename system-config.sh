@@ -6,7 +6,7 @@ while :
 do
   echo -e " \033[1;33mPlease enter the device hostame\033[0;39m"
   read -p " Device Hostname: " input_str_SYSTEM_HOSTNAME
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_ROOT_PASSWD ;;
     "n" ) _func_HOSTNAME ;;
@@ -20,7 +20,7 @@ while :
 do
   echo -e " \033[1;34mPlease enter the device password\033[0;39m"
   read -p " Device Password: " input_str_ROOT_PASSWD
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_COUNTRY ;;
     "n" ) _func_ROOT_PASSWD ;;
@@ -36,7 +36,7 @@ do
   echo -e " \033[1;37mDatabase: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/db.txt\033[0;39m"
   echo -e " \033[1;37mExample: jp\033[0;39m"
   read -p " Wi-Fi Country Code: " input_str_COUNTRY
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_A ;;
     "n" ) _func_COUNTRY ;;
@@ -50,7 +50,7 @@ while :
 do
   echo -e " \033[1;32mPlease enter Wi-Fi${WIFI_NO_A} SSID\033[0;39m"
   read -p " Wi-Fi${WIFI_NO_A} SSID: " input_str_WIFI_SSID_A
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_A ;;
     "n" ) _func_WIFI_SSID_A ;;
@@ -64,7 +64,7 @@ while :
 do
   echo -e " \033[1;31mPlease enter Wi-Fi ${WIFI_NO_A} password\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_A} Password: " input_str_WIFI_PASSWD_A
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_B ;;
     "n" ) _func_WIFI_PASSWD_A ;;
@@ -78,7 +78,7 @@ while :
 do
   echo -e " \033[1;35mPlease enter Wi-Fi ${WIFI_NO_B} SSID\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_B} SSID: " input_str_WIFI_SSID_B
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_B ;;
     "n" ) _func_WIFI_SSID_B ;;
@@ -92,7 +92,7 @@ while :
 do
   echo -e " \033[1;36mPlease enter Wi-Fi ${WIFI_NO_B} password\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SEARCH ;;
     "n" ) _func_WIFI_PASSWD_B ;;
@@ -114,7 +114,7 @@ while :
 do
   echo -e " \033[1;37mPlease enter Wi-Fi ${WIFI_NO_C} SSID\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_C} SSID: " input_str_WIFI_SSID_C
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_PASSWD_C ;;
     "n" ) _func_WIFI_SSID_C ;;
@@ -128,7 +128,7 @@ while :
 do
   echo -e " \033[1;37mPlease enter Wi-Fi ${WIFI_NO_C} password\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_TWT ;;
     "n" ) _func_WIFI_PASSWD_C ;;
@@ -142,7 +142,7 @@ while :
 do
   echo -e " \033[7;40mUse TWT (Only WiFi6)\033[0;39m"
   echo -e " \033[7;40mTWT: ON\033[0;39m"
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) TWT=on
           _func_DEVICE_confirmation ;;
@@ -155,8 +155,8 @@ done
 function _func_DEVICE_confirmation {
 while :
 do 
-  echo -e " \033[1;37msystem setup ----------------------------------------\033[0;39m"
-  echo -e " \033[1;34mDevice hostname: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
+  echo -e " \033[1;37mSystem setup ----------------------------------------\033[0;39m"
+  echo -e " \033[1;34mDevice Hostname: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
   echo -e " \033[1;33mDevice Password: ${input_str_ROOT_PASSWD}\033[0;39m"
   echo -e " \033[1;32mWi-Fi Country Code: ${input_str_COUNTRY}\033[0;39m"
   echo -e " \033[1;32mWi-Fi ${WIFI_NO_A} SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
@@ -173,7 +173,7 @@ do
   echo -e " \033[1;36mTWT ON\033[0;39m"
    fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
-  read -p " All right? [y/n or q]: " num
+  read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) _func_DEVICE_SET ;; 
     "n" ) _func_HOSTNAME ;;
@@ -253,7 +253,7 @@ fi
 while :
 do
   echo -e " \033[1;37mStart system initialization\033[0;39m"
-  echo -e " \033[1;33mDevice hostname\033[0;39m"
+  echo -e " \033[1;33mDevice Hostname\033[0;39m"
   echo -e " \033[1;34mDevice Password\033[0;39m"
   echo -e " \033[1;32mWi-Fi Country Code\033[0;39m"
   echo -e " \033[1;31mWi-Fi ${WIFI_NO_A} SSID\033[0;39m"
@@ -267,7 +267,7 @@ do
   echo -e " \033[1;37m・Wi-Fi ${WIFI_NO_C} SSID\033[0;39m"
   echo -e " \033[1;37m・Wi-Fi ${WIFI_NO_C} Password\033[0;39m"
   fi
-  read -p " Start [y/n]:" num
+  read -p " Press any key [y/n]:" num
   case "${num}" in
     "y" ) _func_HOSTNAME ;;
     "n" ) exit ;;
