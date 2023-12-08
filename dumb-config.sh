@@ -6,7 +6,7 @@ do
   echo -e "\033[1;37m Enter IPV4 address of access point\033[0;39m"
   echo -e "\033[1;33m Example: 192.168.1.2\033[0;39m"
   read -p " IPV4 address: " input_str_IPV4
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_GATEWAY ;;
     "n" ) _func_Dumb_IPV4 ;;
@@ -20,7 +20,7 @@ do
   echo -e "\033[1;37m Enter the gateway of the access point\033[0;39m"
   echo -e "\033[1;33m Example: 192.168.1.1\033[0;39m"
   read -p " gateway: " input_str_GATEWAY
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_confirmation ;;
     "n" ) _func_Dumb_GATEWAY ;;
@@ -31,12 +31,12 @@ done
 function _func_Dumb_confirmation
 while :
 do
-  echo -e " \033[1;37maccess point ----------------------------------------\033[0;39m"
+  echo -e " \033[1;37mAccess point ----------------------------------------\033[0;39m"
   echo -e " \033[1;32mIPV4 address: ${input_str_IPV4}\033[0;39m"
-  echo -e " \033[1;32mgateway: ${input_str_GATEWAY}\033[0;39m"
-  echo -e " \033[1;37mpackage: fping Size: Install 17kB\033[0;39m"
+  echo -e " \033[1;32mGateway: ${input_str_GATEWAY}\033[0;39m"
+  echo -e " \033[1;37mPackage: fping Size: Install 17kB\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_SET ;;
     "n" ) _func_Dumb_IPV4 ;;
@@ -58,7 +58,7 @@ function _func_Dumb_Before
 while :
 do
   echo -e " \033[1;37mRestore the access point configuration to its previous settings\033[0;39m"
-  read -p " All right? [y/n or r]: " num
+  read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_Before_Restoration ;;
     "n" ) _func_Dumb ;;
@@ -97,7 +97,7 @@ exit
 
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
- echo -e " \033[1;37mversion check: OK\033[0;39m"
+ echo -e " \033[1;37mVersion Check: OK\033[0;39m"
  else
  read -p " Exit due to different versions"
  exit
@@ -106,7 +106,7 @@ fi
 while :
 do
   echo -e " \033[1;33mPrepare the IPV4 address and gateway of the access point\033[0;39m"
-  echo -e " \033[1;37maccess point -------------------------------------------------\033[0;39m"
+  echo -e " \033[1;37mAccess point -------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: Access point settings\033[0;39m"
   echo -e " \033[1;32m[b]: Restore previous settings\033[0;39m"
   echo -e " \033[1;31m[q]: Quit\033[0;39m"    
