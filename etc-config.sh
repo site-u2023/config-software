@@ -82,7 +82,7 @@ do
           if [ ! -e ${UPDATE} ]; then
           opkg update
           fi
-          opkg install luci-app-samba4 luci-i18n-samba4-ja wsdd2
+          opkg install luci-app-samba4 wsdd2
           /etc/init.d/samba4 enable
           /etc/init.d/samba4 start  
           read -p " Press any key"
