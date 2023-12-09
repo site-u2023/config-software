@@ -126,7 +126,7 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37mOpenWrt-CONFIG\033[0;39m"
-  echo -e " \033[1;37mLast update: 202312072114\033[0;39m"
+  echo -e " \033[1;37mLast update: December 9, 2023 at 11:46 pm\033[0;39m"
   echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
@@ -146,7 +146,8 @@ fi
 while :
 do
 
-  echo -e " \033[1;33Mmultilingual support (Partially unchanged)\033[0;39m"
+  echo -e " \033[1;33MMultilingual support (Partially unchanged)\033[0;39m"
+　echo -e " \033[1;33Internet connection setup requires direct ONU connection\033[0;39m"
   echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
   echo -e " \033[1;33m[i]: Internet connection setup in Japan (MAP-e, DS-LITE, PPPoE)\033[0;39m"
   echo -e " \033[1;34m[s]: Initial system setup (host name,password,etc.)\033[0;39m"
