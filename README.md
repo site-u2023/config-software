@@ -52,7 +52,7 @@ uci commit network
 
 </details>
 
-### Running ttyd
+### Run ttyd
 - Run from ttyd (browser)
 **[`192.168.1.1:8888`](http://192.168.1.1:8888)**
 
