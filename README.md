@@ -77,7 +77,7 @@ confsoft
     - PPPoE (iPv4 and IPv6): Authentication ID (user name) and password required
       - Perform PPPoE IPv4 connection setup
       - Perform PPPoE IPv4 and IPv6 connection setup
-  - [Recommended Package Installation](https://qiita.com/site_u/items/a23d165201081817cb00)[（USB自動判別）](https://qiita.com/site_u/items/597199882dc4d56c2385#usb)
+  - [Recommended Package Installation](https://qiita.com/site_u/items/a23d165201081817cb00)[(USB auto-detection)](https://qiita.com/site_u/items/597199882dc4d56c2385#usb)
     - Automatic full installation (recommended package all-in)
     - Selective Install
     - Confirmation of packages installed after flashing
