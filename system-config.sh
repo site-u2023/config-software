@@ -267,7 +267,7 @@ do
   echo -e " \033[1;37m・Wi-Fi ${WIFI_NO_C} SSID\033[0;39m"
   echo -e " \033[1;37m・Wi-Fi ${WIFI_NO_C} Password\033[0;39m"
   fi
-  read -p " Press any key [y/n]:" num
+  read -p " Press any key [y or q]:" num
   case "${num}" in
     "y" ) _func_HOSTNAME ;;
     "n" ) exit ;;
