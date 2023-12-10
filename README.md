@@ -3,7 +3,7 @@
 :warning:**Please contact us if you have any problems**
 
 ### Script Selector
-![config-software](https://github.com/site-u2023/config-software/assets/140032047/83663e7c-4c32-4a80-afbd-98b790790e81)
+![openbwrt](https://github.com/site-u2023/config-software/assets/140032047/a192921a-b015-4a84-894e-cd0cd2d51583)
 
 ### Using SSH with powershell
 - powershell > `Win`+`x` > `a` > `yes`
