@@ -105,7 +105,7 @@ fi
 
 while :
 do
-  echo -e " \033[1;33mPrepare the IPV4 address and gateway of the access point\033[0;39m"
+  echo -e " \033[1;33mPrepare IPV4 address and gateway of access point\033[0;39m"
   echo -e " \033[1;37mAccess point -------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: Access point settings\033[0;39m"
   echo -e " \033[1;32m[b]: Restore previous settings\033[0;39m"
