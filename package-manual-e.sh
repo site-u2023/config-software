@@ -90,7 +90,6 @@ while :
 do
   echo -e " \033[1;33mInstall ttyd\033[0;39m"
   echo -e " \033[1;32mluci-app-ttyd: $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " stop ja "
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-ttyd >> /etc/config-software/list-installed/Before
