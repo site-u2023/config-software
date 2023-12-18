@@ -815,7 +815,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
     echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
     echo -e " \033[1;32mAvailable flash sizes: ${AVAILABLE_FLASH}KB\033[0;39m"
     echo -e " \033[1;37mStart installation of the selected package\033[0;39m"
-    read -p " 開始します [y/n or q]: " num
+    read -p " Press any key [y/n or q]: " num
      case "${num}" in
       "y" ) _func_listinstalled ;;
       "n" ) _func_listinstalled_Before ;;
