@@ -34,8 +34,9 @@ while :
 do
   echo -e " \033[1;32mPlease enter Wi-Fi Country Code\033[0;39m"
   echo -e " \033[1;37mDatabase: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/db.txt\033[0;39m"
-  echo -e " \033[1;37mExample: jp\033[0;39m"
-  read -p " Wi-Fi Country Code: " input_str_COUNTRY
+  echo -e " \033[1;37mExample: JP\033[0;39m"
+  read -p " Wi-Fi Country Code: " input_str_COUNTRYS
+  input_str_COUNTRY=`echo ${input_str_COUNTRYS} | awk '{print toupper($0)}'`
   read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_WIFI_SSID_A ;;
