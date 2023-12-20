@@ -126,7 +126,7 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37mOpenWrt-CONFIG\033[0;39m"
-  echo -e " \033[1;37mLast update: December 9, 2023 at 11:46 pm\033[0;39m"
+  echo -e " \033[1;37mLast update: 20 December 2023, 21:03 (JST)\033[0;39m"
   echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
