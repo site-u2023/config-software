@@ -64,7 +64,7 @@ function _func_WIFI_PASSWD_A {
 while :
 do
   echo -e " \033[1;31mPlease enter Wi-Fi ${WIFI_NO_A} password\033[0;39m"
-  echo -e " \033[1;32mPassword must be at least 8 characters\033[0;39m"
+  echo -e " \033[1;32mExpecting: key between 8 and 63 characters\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_A} Password: " input_str_WIFI_PASSWD_A
   read -p " Press any key [y/n or r]: " num
   case "${num}" in
@@ -93,7 +93,7 @@ function _func_WIFI_PASSWD_B {
 while :
 do
   echo -e " \033[1;36mPlease enter Wi-Fi ${WIFI_NO_B} password\033[0;39m"
-  echo -e " \033[1;32mPassword must be at least 8 characters\033[0;39m"
+  echo -e " \033[1;32mExpecting: key between 8 and 63 characters\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
   read -p " Press any key [y/n or r]: " num
   case "${num}" in
@@ -130,7 +130,7 @@ function _func_WIFI_PASSWD_C {
 while :
 do
   echo -e " \033[1;37mPlease enter Wi-Fi ${WIFI_NO_C} password\033[0;39m"
-  echo -e " \033[1;32mPassword must be at least 8 characters\033[0;39m"
+  echo -e " \033[1;32mExpecting: key between 8 and 63 characters\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
   read -p " Press any key [y/n or r]: " num
   case "${num}" in
