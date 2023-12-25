@@ -180,7 +180,6 @@ service adguardhome start
 fi
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
 if [ ${AD_INST} = "ad_inst" ]; then
-read -p " 何かキーを押してインストールを開始して下さい"
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sh /etc/config-software/adguard.sh
 echo "00 03 01 * * sed -i "service adguardhome stop" /etc/adguardhome.yaml" >> /etc/crontabs/root
@@ -193,7 +192,7 @@ reboot
 exit
 else
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-read -p " 何かキーを押して終了して下さい"
+read -p " 何かキーを押してデバイスを再起動して下さい"
 exit
 fi
 }
