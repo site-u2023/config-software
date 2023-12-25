@@ -121,7 +121,6 @@ if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPEN
  read -p " Exit due to different versions"
  exit
 fi
-
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
@@ -145,9 +144,8 @@ fi
   
 while :
 do
-
   echo -e " \033[1;33MMultilingual support (Partially unchanged)\033[0;39m"
-　echo -e " \033[1;33Internet connection setup requires device to be connected directly to ONU\033[0;39m"
+  echo -e " \033[1;33Internet connection setup requires device to be connected directly to ONU\033[0;39m"
   echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
   echo -e " \033[1;33m[i]: Internet connection setup in Japan (MAP-e, DS-LITE, PPPoE)\033[0;39m"
   echo -e " \033[1;34m[s]: Initial system setup (host name,password,etc.)\033[0;39m"
