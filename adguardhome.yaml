@@ -45,10 +45,10 @@ dns:
     - https://dns.google/dns-query
     - https://unfiltered.adguard-dns.com/dns-query
     - '# NTP service'
-    - '[/jp.pool.ntp.org/]1.1.1.1'
-    - '[/jp.pool.ntp.org/]1.0.0.1'
-    - '[/jp.pool.ntp.org/]2606:4700:4700::1111'
-    - '[/jp.pool.ntp.org/]2606:4700:4700::1001'
+    - '[/pool.ntp.org/]1.1.1.1'
+    - '[/pool.ntp.org/]1.0.0.1'
+    - '[/pool.ntp.org/]2606:4700:4700::1111'
+    - '[/pool.ntp.org/]2606:4700:4700::1001'
   upstream_dns_file: ""
   bootstrap_dns:
     - 1.1.1.1
