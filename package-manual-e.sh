@@ -933,9 +933,9 @@ fi
 
 # log viewer
 if [ -z "$LOG" ]; then
-wget --no-check-certificate -O /tmp/luci-app-log-viewer_1.1-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-1_all.ipk
-opkg install /tmp/luci-app-log-viewer_1.1-1_all.ipk
-rm /tmp/luci-app-log-viewer_1.1-1_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-log-viewer_1.1-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-2_all.ipk
+opkg install /tmp/luci-app-log-viewer_1.1-2_all.ipk
+rm /tmp/luci-app-log-viewer_1.1-2_all.ipk
 fi
 
 # cpu status
@@ -954,9 +954,9 @@ fi
 
 # temp status
 if [ -z "$TMP_STATUS" ]; then
-wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
-opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
-rm /tmp/luci-app-temp-status_0.3-5_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-temp-status_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.4-2_all.ipk
+opkg install /tmp/luci-app-temp-status_0.4-2_all.ipk
+rm /tmp/luci-app-temp-status_0.4-2_all.ipk
 fi
 
 # Internet detector
