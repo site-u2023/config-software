@@ -110,9 +110,9 @@ opkg install auc
 # custom feed
 
 # log viewer
-wget --no-check-certificate -O /tmp/luci-app-log-viewer_1.1-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-0_all.ipk
-opkg install /tmp/luci-app-log-viewer_1.1-0_all.ipk
-rm /tmp/luci-app-log-viewer_1.1-0_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-log-viewer_1.1-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-2_all.ipk
+opkg install /tmp/luci-app-log-viewer_1.1-2_all.ipk
+rm /tmp/luci-app-log-viewer_1.1-2_all.ipk
 
 # cpu status
 wget --no-check-certificate -O /tmp/luci-app-cpu-status_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
@@ -126,9 +126,9 @@ rm /tmp/luci-app-cpu-perf_0.4-1_all.ipk
 /etc/init.d/cpu-perf start
 
 # temp status
-wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
-opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
-rm /tmp/luci-app-temp-status_0.3-5_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-temp-status_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.4-2_all.ipk
+opkg install /tmp/luci-app-temp-status_0.4-2_all.ipk
+rm /tmp/luci-app-temp-status_0.4-2_all.ipk
 
 # Internet detector
 opkg install mailsend
