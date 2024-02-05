@@ -1108,16 +1108,16 @@ fi
 # Internet detector
 if [ -z "$DETECTER" ]; then
 opkg install mailsend
-wget --no-check-certificate -O /tmp/internet-detector_1.0-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.0-3_all.ipk
-opkg install /tmp/internet-detector_1.0-3_all.ipk
-rm /tmp/internet-detector_1.0-3_all.ipk
+wget --no-check-certificate -O /tmp/internet-detector_1.2-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.2-0_all.ipk
+opkg install /tmp/internet-detector_1.2-0_all.ipk
+rm /tmp/internet-detector_1.2-0_all.ipk
 /etc/init.d/internet-detector start
 /etc/init.d/internet-detector enable
 fi
 if [ -z "$DETECTER_APP" ]; then
-wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.0-1_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.0-1_all.ipk
-opkg install /tmp/luci-app-internet-detector_1.0-1_all.ipk
-rm /tmp/luci-app-internet-detector_1.0-1_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.2-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.2-0_all.ipk
+opkg install /tmp/luci-app-internet-detector_1.2-0_all.ipk
+rm /tmp/luci-app-internet-detector_1.2-0_all.ipk
 fi
 
 # Theme ARGON (template)
