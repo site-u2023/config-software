@@ -53,10 +53,12 @@ uci commit network
 </details>
 
 ### Run ttyd
-- Run from ttyd (browser)
-**[`192.168.1.1:8888`](http://192.168.1.1:8888)**
+- Run from browser
+
+  [192.168.1.1:8888](http://192.168.1.1:8888)
 
 - Run from command
+  
 ```sh:SSH
 confsoft
 
@@ -133,21 +135,22 @@ rm -rf /usr/bin/confsoft
 
 
 ### [LuCi](https://openwrt.org/jp/doc/howto/firstlogin#login_to_webui)
-- **[192.168.1.1](http://192.168.1.1/cgi-bin/luci/)**
+- Run from LuCi: [192.168.1.1](http://192.168.1.1/cgi-bin/luci/)
   - User Name：`root`
   - Password：`Password you set`
-
-QR Code: 192.168.1.1
+- Run from QR Code: 192.168.1.1
 
 ![QR192.168.1.1.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/93eed9ce-7319-9332-99ba-74455b471cdd.png) 
 
 
 ### [TTYD](https://openwrt.org/packages/pkgdata_owrt18_6/ttyd) :warning:[Included in all-in-one script configuration](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E8%A8%AD%E5%AE%9A)
-- **[192.168.1.1:7681](http://192.168.1.1:7681/)**
+- Run from browser: [http://192.168.1.1:7681/](http://192.168.1.1:7681/)
   - User Name：`root`
   - Password：`Password you set`
 
-QR Code: 192.168.1.1:7681
+- Run from LuCi: [http://192.168.1.1/cgi-bin/luci/admin/services/ttyd](http://192.168.1.1/cgi-bin/luci/admin/services/ttyd)
+
+- Run from QR Code: 192.168.1.1:7681
 
 ![QR_062248.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/e7929d2e-d9b0-b599-33cf-55413d584b19.png)
 
