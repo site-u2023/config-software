@@ -56,9 +56,9 @@ uci commit network
 - Run from browser
 
   [192.168.1.1:8888](http://192.168.1.1:8888)
+  - Permited only from LAN side
+  - No login authentication
 
- - Permitted only from LAN side
- - No login authentication
 :warning: Can be changed from ttyd settings
 
 - Run from command
