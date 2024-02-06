@@ -57,8 +57,11 @@ uci commit network
 
   [192.168.1.1:8888](http://192.168.1.1:8888)
 
+ - Permitted only from LAN side
+ - No login authentication
+:warning: Can be changed from ttyd settings
+
 - Run from command
-  
 ```sh:SSH
 confsoft
 
