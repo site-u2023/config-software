@@ -247,9 +247,9 @@ hd-idle
 luci-app-hd-idle
 luci-i18n-hd-idle-$input_str_Languages
 EOF
-  wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-2_all.ipk
-  opkg install /tmp/luci-app-disks-info_0.4-2_all.ipk
-  rm /tmp/luci-app-disks-info_0.4-2_all.ipk
+  wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-3_all.ipk
+  opkg install /tmp/luci-app-disks-info_0.4-3_all.ipk
+  rm /tmp/luci-app-disks-info_0.4-3_all.ipk
   opkg install block-mount
   opkg install kmod-usb-storage
   opkg install kmod-usb-storage-uas
