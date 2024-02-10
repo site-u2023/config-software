@@ -96,6 +96,7 @@ confsoft
       - Installation and configuration of AdBlock-fast (custom filter add-in)
     - [DNS over HTTPS (DoH) configuration and installation](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#https-dns-proxy)
     - [DNS over TLS (DoT) configuration and installation](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#stubby)
+  - [Home Assistant](https://qiita.com/site_u/items/c33defca3eae1e8c62b8)
   - Other
     - [Button Setup and Installation](https://qiita.com/site_u/items/08764ce9473231482c17)
     - [IPERF3 installation and service addition](https://qiita.com/site_u/items/599124e2904d1374c2c9#iperf3)
@@ -125,6 +126,7 @@ confsoft
       - [adblock-config.sh](https://github.com/site-u2023/config-software/blob/main/adblock-config.sh)
         - [adblock.sh](https://github.com/site-u2023/config-software/blob/main/adblock.sh)
         - [adblock-fast.sh](https://github.com/site-u2023/config-software/blob/main/adblock-fast.sh)
+    - [HomeAssistant](https://github.com/site-u2023/config-software/blob/main/homeassistant.sh)
     - [etc-config.sh](https://github.com/site-u2023/config-software/blob/main/etc-config.sh)
       - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
         - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
