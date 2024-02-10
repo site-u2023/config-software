@@ -89,7 +89,7 @@ done
 function _func_ETC {
 while :
 do
-  echo -e " \033[1;36mDownload other scripts\033[0;39m"
+  echo -e " \033[1;37mDownload other scripts\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/etc-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh
