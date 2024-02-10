@@ -14,7 +14,7 @@ AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37mRecommended Memory Capacity: 262144KB\033[0;39m"
   echo -e " \033[1;37mRecommended Flash Capacity: 262144KB\033[0;39m"
   echo -e " \033[1;36mHome Assistant ---------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]: Install Home Assistant\033[0;39m"
+  echo -e " \033[1;36m[c]: Install Home Assistant\033[0;39m"
   echo -e " \033[1;31m[b]: Delete Home Assistant\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"   
   echo -e " \033[1;36m------------------------------------------------------\033[0;39m"
