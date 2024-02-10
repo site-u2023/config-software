@@ -72,13 +72,27 @@ do
 done
 }
 
+function _func_HA {
+while :
+do
+  echo -e " \033[1;36mDownload scripts for Home Assistant\033[0;39m"
+  read -p " All right? [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/config-software/homeassistant.sh https://raw.githubusercontent.com/site-u2023/config-software/main/homeassistant.sh
+          sh /etc/config-software/homeassistant.sh
+          break ;;
+    "n" ) break ;;
+  esac
+done
+}
+
 function _func_ETC {
 while :
 do
   echo -e " \033[1;36mDownload other scripts\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software//etc-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/etc-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh
           sh /etc/config-software/etc-config.sh
           break ;;
     "n" ) break ;;
@@ -125,7 +139,7 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37mOpenWrt-CONFIG\033[0;39m"
-  echo -e " \033[1;37mLast update: 20 December 2023, 21:03 (JST)\033[0;39m"
+  echo -e " \033[1;37mLast update: February 10, 2024, 9:41 a.m. (JST)\033[0;39m"
   echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
@@ -152,16 +166,18 @@ do
   echo -e " \033[1;32m[p]: Install recommended packages (automatic or selective)\033[0;39m"
   echo -e " \033[1;31m[b]: Install ad blocker and DNS encryption\033[0;39m"
   echo -e " \033[1;35m[a]: Access point connection setup (Dumb/Bridge)\033[0;39m"
-  echo -e " \033[1;36m[e]: Other: BUTTON,IPERF3,SAMBA4,LBS\033[0;39m"
+  echo -e " \033[1;36m[h]: Install Home Assistant\033[0;39m"
+  echo -e " \033[1;37m[e]: Other: BUTTON,IPERF3,SAMBA4,LBS\033[0;39m"
   echo -e " \033[7;40m[q]: Quit (Delete this script or not)\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [i/s/p/b/a/e or q]: " num
+  read -p " Press any key [i/s/p/b/a/h/e or q]: " num
   case "${num}" in
     "i" ) _func_INTERNET ;;
     "s" ) _func_SYSTEM ;;
     "p" ) _func_PACKAGE ;;
     "b" ) _func_AD_DNS ;;
     "a" ) _func_ACCESSPOINT ;;
+    "h" ) _func_HA ;;
     "e" ) _func_ETC ;;
     "q" ) _func_QUIT ;;
   esac
