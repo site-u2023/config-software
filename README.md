@@ -3,9 +3,10 @@
 :warning:**Please contact us if you have any problems**
 
 ### Script Selector
-![openbwrt](https://github.com/site-u2023/config-software/assets/140032047/a192921a-b015-4a84-894e-cd0cd2d51583)
+![menu](https://github.com/site-u2023/config-software/assets/140032047/f77c79ed-4416-44d6-9ae9-ce9cebd8ad13)
 
-### Using SSH with powershell
+### Using SSH 
+with powershell
 - powershell > `Win`+`x` > `a` > `yes`
 ```powershell:powershell
 ssh root@192.168.1.1
