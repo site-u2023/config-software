@@ -114,6 +114,7 @@ fi
   case "${num}" in
     "g" ) _func_AdGuard_INST_G ;;
     "j" ) _func_AdGuard_INST ;;
+    "j" ) _func_AdGuard_INST_VM ;;
     "b" ) _func_AdBlock_INST ;;
     "h" ) _func_DoH ;;
     "t" ) _func_DoT ;;
