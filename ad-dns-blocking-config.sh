@@ -1,6 +1,20 @@
 #! /bin/sh
 
 
+function _func_AdGuard_INST_VM {
+while :
+do
+  echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
+  read -p " Press any key [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config-vm.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config-vm.sh
+          sh /etc/config-software/adguard-config-vm.sh
+          break ;;
+    "n" ) break ;;
+  esac
+done
+}
+
 function _func_AdGuard_INST_G {
 while :
 do
@@ -90,12 +104,13 @@ fi
   echo -e " \033[1;37mAd dns blocking config ------------------------------\033[0;39m"
   echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;34m[j]: AdGuard HOME configuration and installation (Japan only)\033[0;39m"
+  echo -e " \033[1;34m[v]: AdGuard HOME configuration and installation (Virtual Machine only)\033[0;39m"
   echo -e " \033[1;32m[b]: AdBlockd installation and configuration (Japan only)\033[0;39m"
   echo -e " \033[1;31m[h]: DNS over HTTPS (DoH) configuration and installation\033[0;39m"
   echo -e " \033[1;33m[t]: DNS over TLS (DoT) configuration and installation\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [g/j/b/h/t or q]: " num
+  read -p " Press any key [g/j/v/b/h/t or q]: " num
   case "${num}" in
     "g" ) _func_AdGuard_INST_G ;;
     "j" ) _func_AdGuard_INST ;;
