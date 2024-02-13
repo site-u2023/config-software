@@ -165,7 +165,7 @@ do
   echo -e " \033[1;33m[s]: Initial system setup (host name,password,etc.)\033[0;39m"
   echo -e " \033[1;32m[p]: Install recommended packages (automatic or selective)\033[0;39m"
   echo -e " \033[1;35m[b]: Install ad blocker and DNS encryption\033[0;39m"
-  echo -e " \033[1;32m[a]: Access point connection setup (Dumb/Bridge)\033[0;39m"
+  echo -e " \033[1;31m[a]: Access point connection setup (Dumb/Bridge)\033[0;39m"
   echo -e " \033[1;36m[h]: Install Home Assistant\033[0;39m"
   echo -e " \033[1;37m[e]: Other: BUTTON,IPERF3,SAMBA4,LBS\033[0;39m"
   echo -e " \033[7;40m[q]: Quit (Delete this script or not)\033[0;39m"
