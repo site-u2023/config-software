@@ -46,7 +46,6 @@ echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
    exit
   fi
 }
-          AD_INST='ad_inst'
           _func_AdGuard_Confirm ;;
     "s" ) _func_AdGuard_Admin ;;        
     "b" ) _func_AdGuard_Before ;;
@@ -56,6 +55,7 @@ done
 }
 
 function _func_AdGuard_Confirm {
+AD_INST="ad_inst"
 UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
@@ -166,9 +166,6 @@ UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
-if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-service adguardhome stop
-fi
 wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
 if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
@@ -181,6 +178,9 @@ chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+service adguardhome stop
+fi
 sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
@@ -196,13 +196,11 @@ echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
-exit
 fi
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
-exit
 }
 
 function _func_AdGuard_Before {
