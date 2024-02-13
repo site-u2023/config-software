@@ -197,10 +197,11 @@ echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADD
 read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
-else
+ else
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動して下さい"
+reboot
 exit
 fi
 }
