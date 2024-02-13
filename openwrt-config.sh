@@ -1,29 +1,29 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
-function _func_SYSTEM {
+function _func_INTERNET {
 while :
 do
-  echo -e " \033[1;34mDownload scripts for initial system\033[0;39m"
+  echo -e " \033[1;34mDownload scripts for Internet connection\033[0;39m"
+  echo -e " \033[7;33mJapanese specification\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh
-          sh /etc/config-software/system-config.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh
+          sh /etc/config-software/internet-config.sh
           break ;;
     "n" ) break ;;
   esac
 done
 }
 
-function _func_INTERNET {
+function _func_SYSTEM {
 while :
 do
-  echo -e " \033[1;33mDownload scripts for Internet connection\033[0;39m"
-  echo -e " \033[7;33mJapanese specification\033[0;39m"
+  echo -e " \033[1;33mDownload scripts for initial system\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh
-          sh /etc/config-software/internet-config.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh
+          sh /etc/config-software/system-config.sh
           break ;;
     "n" ) break ;;
   esac
@@ -44,28 +44,28 @@ do
 done
 }
 
-function _func_ACCESSPOINT {
+function _func_AD_DNS {
 while :
 do
-  echo -e " \033[1;35mDownload scripts for access point\033[0;39m"
+  echo -e " \033[1;35mDownload scripts for ad blocker and DNS encryption\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh
-          sh /etc/config-software/dumb-config.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/ad-dns-blocking-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocking-config.sh
+          sh /etc/config-software/ad-dns-blocking-config.sh
           break ;;
     "n" ) break ;;
   esac
 done
 }
 
-function _func_AD_DNS {
+function _func_ACCESSPOINT {
 while :
 do
-  echo -e " \033[1;31mDownload scripts for ad blocker and DNS encryption\033[0;39m"
+  echo -e " \033[1;31mDownload scripts for access point\033[0;39m"
   read -p " All right? [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/ad-dns-blocking-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocking-config.sh
-          sh /etc/config-software/ad-dns-blocking-config.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh
+          sh /etc/config-software/dumb-config.sh
           break ;;
     "n" ) break ;;
   esac
