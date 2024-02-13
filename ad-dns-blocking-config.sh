@@ -101,15 +101,15 @@ fi
   echo -e " \033[7;33mAdGuard and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[7;33mDNS over HTTPS (DoH) and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[7;31mAdGuard HOME settings may only use aarch64⁉\033[0;39m"
-  echo -e " \033[1;37mAd dns blocking config ------------------------------\033[0;39m"
+  echo -e " \033[1;35mAd dns blocking config ------------------------------\033[0;39m"
   echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation (aarch64)\033[0;39m"
-  echo -e " \033[1;34m[j]: AdGuard HOME configuration and installation (aarch64/ Japan)\033[0;39m"
-  echo -e " \033[1;34m[v]: AdGuard HOME configuration and installation (x86/64/ VM)\033[0;39m"
+  echo -e " \033[1;34m[j]: AdGuard HOME configuration and installation (aarch64/ Japan filter)\033[0;39m"
+  echo -e " \033[1;34m[v]: AdGuard HOME configuration and installation (x86/64)\033[0;39m"
   echo -e " \033[1;32m[b]: AdBlockd installation and configuration (Japan only)\033[0;39m"
   echo -e " \033[1;31m[h]: DNS over HTTPS (DoH) configuration and installation\033[0;39m"
   echo -e " \033[1;33m[t]: DNS over TLS (DoT) configuration and installation\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
-  echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
+  echo -e " \033[1;35m-----------------------------------------------------\033[0;39m"
   read -p " Press any key [g/j/v/b/h/t or q]: " num
   case "${num}" in
     "g" ) _func_AdGuard_INST_G ;;
