@@ -217,7 +217,7 @@ do
   echo -e " \033[1;37mリムーブ: libaprutil\033[0;39m"
   echo -e " \033[1;37mリムーブ: libapr\033[0;39m"
   echo -e " \033[1;37mリムーブ: libexpat\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " リムーブしますか？ [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_Restoration ;;
     "n" ) _func_AdGuard ;;
