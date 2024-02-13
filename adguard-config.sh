@@ -195,17 +195,17 @@ echo "01 03 01 * * sed -i "/280blocker_domain_ag_/c \    url: https://280blocker
 echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> /etc/crontabs/root
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動して下さい"
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome start
 fi
+read -p " 何かキーを押してデバイスを再起動して下さい"
 reboot
 exit
 else
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動して下さい"
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome start
+read -p " 何かキーを押してデバイスを再起動して下さい"
 fi
 exit
 fi
