@@ -171,7 +171,6 @@ echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-vm
  else
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
- exit
 fi
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
