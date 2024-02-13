@@ -37,17 +37,17 @@ AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
     echo -e " \033[1;37m利用可能フラッシュ容量: /overlayfs:/overlayがありません\033[0;39m"
     read -p " インストールを続行します"
     AD_INST='ad_inst'
-    _func_AdGuard_Confirm
+    _func_AdGuard_Confirm ;;
   fi
   if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
    echo -e " \033[1;37mメモリー容量推奨値: 51200KB\033[0;39m"
    echo -e " \033[1;37mフラッシュ容量推奨値: 102400KB\033[0;39m"
    echo -e " \033[1;37mインストール可能です\033[0;39m"
    AD_INST='ad_inst'
-   _func_AdGuard_Confirm
+   _func_AdGuard_Confirm ;;
   else
    read -p " フラッシュ容量が足りない為終了します"
-   exit
+   exit ;;
   fi
 }
     "s" ) _func_AdGuard_Admin ;;        
