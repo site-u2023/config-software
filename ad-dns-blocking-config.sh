@@ -1,20 +1,5 @@
 #! /bin/sh
 
-
-function _func_AdGuard_INST_VM {
-while :
-do
-  echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
-  read -p " Press any key [y/n]: " num
-  case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config-vm.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config-vm.sh
-          sh /etc/config-software/adguard-config-vm.sh
-          break ;;
-    "n" ) break ;;
-  esac
-done
-}
-
 function _func_AdGuard_INST_G {
 while :
 do
@@ -22,7 +7,7 @@ do
   read -p " Press any key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config-g.sh
-          sh /etc/config-software/adguard-config.sh
+          sh /etc/config-software/adguard-config-g.sh
           break ;;
     "n" ) break ;;
   esac
