@@ -35,6 +35,7 @@ echo -e " \033[1;37m利用可能フラッシュ容量: /overlayfs:/overlayがあ
 AVAILABLE_FLASH=${AVAILABLE_MEMORY}
   else
 echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
+  fi
 echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
   if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
    echo -e " \033[1;37mメモリー容量推奨値: 51200KB\033[0;39m"
