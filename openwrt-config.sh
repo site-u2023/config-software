@@ -138,7 +138,7 @@ fi
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  echo -e " \033[1;37mOpenWrt-CONFIG\033[0;39m"
+  echo -e " \033[1;37mOpenWrt-Config\033[0;39m"
   echo -e " \033[1;37mLast update: February 10, 2024, 9:41 a.m. (JST)\033[0;39m"
   echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
