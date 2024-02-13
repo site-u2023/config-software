@@ -159,7 +159,7 @@ done
 function _func_DEVICE_confirmation {
 while :
 do 
-  echo -e " \033[1;37mSystem setup ----------------------------------------\033[0;39m"
+  echo -e " \033[1;33mSystem setup ----------------------------------------\033[0;39m"
   echo -e " \033[1;34mDevice Hostname: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
   echo -e " \033[1;33mDevice Password: ${input_str_ROOT_PASSWD}\033[0;39m"
   echo -e " \033[1;32mWi-Fi Country Code: ${input_str_COUNTRY}\033[0;39m"
@@ -176,7 +176,7 @@ do
     then
   echo -e " \033[1;36mTWT ON\033[0;39m"
    fi
-  echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
+  echo -e " \033[1;33m----------------------------------------------------\033[0;39m"
   read -p " Press any key [y/n or q]: " num
   case "${num}" in
     "y" ) _func_DEVICE_SET ;; 
