@@ -106,11 +106,11 @@ fi
 while :
 do
   echo -e " \033[1;33mPrepare IPV4 address and gateway of access point\033[0;39m"
-  echo -e " \033[1;37mAccess point -------------------------------------------------\033[0;39m"
+  echo -e " \033[1;31mAccess point -------------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: Access point settings\033[0;39m"
   echo -e " \033[1;32m[b]: Restore previous settings\033[0;39m"
   echo -e " \033[1;31m[q]: Quit\033[0;39m"    
-  echo -e " \033[1;37m--------------------------------------------------------------\033[0;39m"
+  echo -e " \033[1;31m--------------------------------------------------------------\033[0;39m"
   read -p " Press any key [e/b or q]: " num
   case "${num}" in
     "e" ) _func_Dumb_IPV4 ;;
