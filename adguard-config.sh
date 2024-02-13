@@ -165,7 +165,14 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 service adguardhome stop
 fi
 wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
+DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
+if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
+echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
+wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-vm
+ else
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
+ exit
+fi
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
