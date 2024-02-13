@@ -29,7 +29,7 @@ AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
 ADGUARD_VERSION=`opkg info adguardhome | grep Version | awk '{ print $2 }'`
 ADGUARD_SIZE=$((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))
-echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
   if [ -z "${AVAILABLE_FLASH}" ]; then
 echo -e " \033[1;37m利用可能フラッシュ容量: /overlayfs:/overlayがありません\033[0;39m"
   else
