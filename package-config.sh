@@ -55,13 +55,13 @@ fi
 
 while :
 do
-  echo -e " \033[1;37mInstallation may fail\033[0;39m"
+  echo -e " \033[1;32mInstallation may fail\033[0;39m"
   echo -e " \033[1;37mPackage-config ---------------------------------------\033[0;39m"
   echo -e " \033[1;34m[f]: Automatic full installation\033[0;39m"
   echo -e " \033[1;33m[s]: Selective installation\033[0;39m"
   echo -e " \033[1;31m[a]: Confirmation of packages installed after flashing\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
-  echo -e " \033[1;37m------------------------------------------------------\033[0;39m"
+  echo -e " \033[1;32m------------------------------------------------------\033[0;39m"
   read -p " Press any key [f/s/a or q]: " num 
   case "${num}" in
     "f" ) _func_full_INST ;;
