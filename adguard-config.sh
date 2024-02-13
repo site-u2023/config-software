@@ -32,17 +32,24 @@ ADGUARD_SIZE=$((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))
 echo -e " \033[1;37m利用可能メモリー容量: ${AVAILABLE_MEMORY}KB\033[0;39m"
 echo -e " \033[1;37m利用可能フラッシュ容量: ${AVAILABLE_FLASH}KB\033[0;39m"
 echo -e " \033[1;37mインストール容量: ${ADGUARD_SIZE}KB\033[0;39m"
+AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+  if [ -z "${AVAILABLE_FLASH}" ]; then
+    echo -e " \033[1;37m利用可能フラッシュ容量: /overlayfs:/overlayがありません\033[0;39m"
+    read -p " インストールを続行します"
+    AD_INST='ad_inst'
+    _func_AdGuard_Confirm
+  fi
   if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
    echo -e " \033[1;37mメモリー容量推奨値: 51200KB\033[0;39m"
    echo -e " \033[1;37mフラッシュ容量推奨値: 102400KB\033[0;39m"
    echo -e " \033[1;37mインストール可能です\033[0;39m"
+   AD_INST='ad_inst'
+   _func_AdGuard_Confirm
   else
    read -p " フラッシュ容量が足りない為終了します"
    exit
   fi
 }
-          AD_INST='ad_inst'
-          _func_AdGuard_Confirm ;;
     "s" ) _func_AdGuard_Admin ;;        
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
