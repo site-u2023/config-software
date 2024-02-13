@@ -186,9 +186,6 @@ sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
 sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml
-if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-service adguardhome start
-fi
 echo -e " \033[1;32m管理用ウェブインターフェイスの設定が完了しました\033[0;39m"
 if [ ${AD_INST} = "ad_inst" ]; then
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
@@ -199,11 +196,17 @@ echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> 
 echo -e " \033[1;32mインストールと設定が完了しました\033[0;39m"
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動して下さい"
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+service adguardhome start
+fi
 reboot
 exit
 else
 echo -e " \033[1;32m管理用ウェブインターフェイス: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " 何かキーを押してデバイスを再起動して下さい"
+if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
+service adguardhome start
+fi
 exit
 fi
 }
