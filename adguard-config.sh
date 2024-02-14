@@ -110,7 +110,7 @@ done
 function _func_AdGuard_PORT {
 while :
 do
-  echo -e "\033[1;37m Enter port number of Web interface\033[0;39m"
+  echo -e "\033[1;37m Web interfaceEnter port number\033[0;39m"
   echo -e "\033[1;33m Example: 8000\033[0;39m"
   read -p " port number: " input_str_PORT
   read -p " Press any key [y/n or r]: " num
@@ -125,7 +125,7 @@ done
 function _func_AdGuard_USER {
 while :
 do
-  echo -e "\033[1;37m Enter your AdGuard HOME administrative web interface user name\033[0;39m"
+  echo -e "\033[1;37m Web interface user name\033[0;39m"
   echo -e "\033[1;33m Example: root\033[0;39m"
   read -p " user name: " input_str_USER
   read -p " Press any key [y/n or r]: " num
@@ -140,7 +140,7 @@ done
 function _func_AdGuard_PASSWD {
 while :
 do
-  echo -e " \033[1;37mEnter your password for the AdGuard HOME administrative web interface\033[0;39m"
+  echo -e " \033[1;37mWeb interface password\033[0;39m"
   echo -e " \033[1;33mExample: password\033[0;39m"
   read -p " password: " input_str_PASSWD
   read -p " Press any key [y/n or r]: " num
