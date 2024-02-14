@@ -1,19 +1,5 @@
 #! /bin/sh
 
-function _func_AdGuard_INST_G {
-while :
-do
-  echo -e " \033[1;34mDownload the AdGuard HOME configuration script\033[0;39m"
-  read -p " Press any key [y/n]: " num
-  case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/adguard-config-g.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config-g.sh
-          sh /etc/config-software/adguard-config-g.sh
-          break ;;
-    "n" ) break ;;
-  esac
-done
-}
-
 function _func_AdGuard_INST {
 while :
 do
@@ -93,10 +79,9 @@ fi
   echo -e " \033[1;33m[t]: DNS over TLS (DoT) configuration and installation\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"
   echo -e " \033[1;35m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [g/j/b/h/t or q]: " num
+  read -p " Press any key [g/b/h/t or q]: " num
   case "${num}" in
     "g" ) _func_AdGuard_INST_G ;;
-    "j" ) _func_AdGuard_INST ;;
     "b" ) _func_AdBlock_INST ;;
     "h" ) _func_DoH ;;
     "t" ) _func_DoT ;;
