@@ -159,7 +159,6 @@ fi
 while :
 do
   echo -e " \033[1;33mMultilingual support (Partially unchanged)\033[0;39m"
-  echo -e " \033[1;33mInternet connection setup requires device to be connected directly to ONU\033[0;39m"
   echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
   echo -e " \033[1;34m[i]: Internet connection setup in Japan (MAP-e, DS-LITE, PPPoE)\033[0;39m"
   echo -e " \033[1;33m[s]: Initial system setup (host name,password,etc.)\033[0;39m"
