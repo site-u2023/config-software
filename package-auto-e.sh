@@ -14,6 +14,8 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/B
 cat << EOF > /etc/config-software/list-installed/Before
 luci
 luci-ssl
+dashboard
+dashboard-ja
 openssh-sftp-server
 luci-app-ttyd
 irqbalance
@@ -42,6 +44,10 @@ EOF
 opkg install luci
 # LiCi SSL
 opkg install luci-ssl
+
+# Dashboard
+opkg install luci-mod-dashboard
+opkg install luci-i18n-dashboard-ja
 
 # SFTP
 opkg install openssh-sftp-server
@@ -240,6 +246,7 @@ fi
   echo -e " \033[1;37mAutomatic full installation (for novices)\033[0;39m"
   echo -e " \033[1;37m・LuCi\033[0;39m"
   echo -e " \033[1;37m・LuCi SSL\033[0;39m"
+  echo -e " \033[1;37m・Dashboard\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
   echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
