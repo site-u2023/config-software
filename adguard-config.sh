@@ -110,7 +110,7 @@ done
 function _func_AdGuard_PORT {
 while :
 do
-  echo -e "\033[1;37m Enter the port number of the AdGuard HOME administrative web interface\033[0;39m"
+  echo -e "\033[1;37m Enter port number of Web interface\033[0;39m"
   echo -e "\033[1;33m Example: 8000\033[0;39m"
   read -p " port number: " input_str_PORT
   read -p " Press any key [y/n or r]: " num
