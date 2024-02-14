@@ -15,7 +15,6 @@ cat << EOF > /etc/config-software/list-installed/Before
 luci
 luci-ssl
 dashboard
-dashboard-ja
 openssh-sftp-server
 luci-app-ttyd
 irqbalance
@@ -47,7 +46,6 @@ opkg install luci-ssl
 
 # Dashboard
 opkg install luci-mod-dashboard
-opkg install luci-i18n-dashboard-ja
 
 # SFTP
 opkg install openssh-sftp-server
