@@ -12,7 +12,7 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
-  echo -e " \033[1;33m[s]: Administrative web interface configuration (port, username and password only)\033[0;39m"
+  echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
   echo -e " \033[1;32m[b]: Removing and restoring AdGuard HOME to previous settings\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"   
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
@@ -72,7 +72,7 @@ do
   echo -e " \033[1;32mInstallル: libexpat $((`opkg info libexpat | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Start inputting setpoints [y/n]: " num
   case "${num}" in
-    "y" ) _func_AdGuard_PORT ;;
+    "y" ) _func_AdGuard_Filter ;;
     "n" ) break ;;
   esac
 done
@@ -87,8 +87,22 @@ do
   echo -e " \033[1;32mAdministrative web interface password entry\033[0;39m"
   read -p " Start inputting setpoints [y/n]: " num
   case "${num}" in
-    "y" ) _func_AdGuard_PORT ;;
+    "y" ) _func_AdGuard_Filter ;;
     "n" ) break ;;
+  esac
+done
+}
+
+function _func_AdGuard_Filter {
+while :
+do
+  echo -e " \033[1;37mSet Japanese filter\033[0;39m"
+  read -p " Press any key [y/n or r]: " num
+  case "${num}" in
+    "y" ) JAPAN_FILTER="japan_filter" ;
+          _func_AdGuard_PORT ;;
+    "n" ) _func_AdGuard_Filter ;;
+    "r" ) _func_AdGuard ;;    
   esac
 done
 }
@@ -161,7 +175,15 @@ UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
-wget --no-check-certificate -O /etc/adguardhome.yaml https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
+if [ -n "${JAPAN_FILTER}" ]; then
+wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
+sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml-new
+echo "00 03 01 * * sed -i "service adguardhome stop" /etc/adguardhome.yaml" >> /etc/crontabs/root
+echo "01 03 01 * * sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml" >> /etc/crontabs/root
+echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> /etc/crontabs/root
+ else
+wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
+fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
 if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
 echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
@@ -175,29 +197,17 @@ opkg install --nodeps libapr
 opkg install --nodeps libexpat
 if [ -n "${AD_INST}" ]; then
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
-service adguardhome stop
 sh /etc/config-software/adguard.sh
-sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
-sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
-Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
-sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
-sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml
-echo "00 03 01 * * sed -i "service adguardhome stop" /etc/adguardhome.yaml" >> /etc/crontabs/root
-echo "01 03 01 * * sed -i "/280blocker_domain_ag_/c \    url: https://280blocker.net/files/280blocker_domain_ag_`date '+%Y%m01' | awk '{print substr($0, 1, 6)}'`.txt" /etc/adguardhome.yaml" >> /etc/crontabs/root
-echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> /etc/crontabs/root
-echo -e " \033[1;32mInstallation and configuration are complete\033[0;39m"
-echo -e " \033[1;32mhttp://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-read -p " Press any key (to reboot the device)"
-reboot
 fi
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome stop
 fi
+cp /etc/adguardhome.yaml-new /etc/adguardhome.yaml
 sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
-echo -e " \033[1;32mAdministrative web interface configuration is complete\033[0;39m"
+echo -e " \033[1;32mInstallation or configuration are complete\033[0;39m"
 echo -e " \033[1;32mhttp://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " Press any key (to reboot the device)"
 reboot
