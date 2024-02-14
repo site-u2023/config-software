@@ -64,6 +64,7 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/B
 cat << EOF > /etc/config-software/list-installed/Before
 luci
 luci-ssl
+luci-mod-dashboard
 openssh-sftp-server
 luci-app-ttyd
 irqbalance
@@ -86,6 +87,7 @@ luci-app-temp-status
 internet-detector
 luci-app-internet-detector
 luci-theme-argon
+luci-i18n-dashboard-$input_str_Languages
 luci-i18n-base-$input_str_Languages
 luci-i18n-opkg-$input_str_Languages
 luci-i18n-firewall-$input_str_Languages
@@ -105,6 +107,10 @@ opkg install luci-ssl
 opkg install luci-i18n-base-$input_str_Languages
 opkg install luci-i18n-opkg-$input_str_Languages
 opkg install luci-i18n-firewall-$input_str_Languages
+
+# Dashboard
+opkg install luci-mod-dashboard
+opkg install luci-i18n-dashboard-$input_str_Languages
 
 # SFTP
 opkg install openssh-sftp-server
@@ -312,6 +318,7 @@ fi
   echo -e " \033[1;37m・LuCi\033[0;39m"
   echo -e " \033[1;37m・LuCi SSL\033[0;39m"
   echo -e " \033[1;37m・LuCi Language\033[0;39m"
+  echo -e " \033[1;37m・Dashboard\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
   echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
