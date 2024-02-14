@@ -101,7 +101,7 @@ do
   case "${num}" in
     "y" ) JAPAN_FILTER="japan_filter" ;
           _func_AdGuard_PORT ;;
-    "n" ) _func_AdGuard_Filter ;;
+    "n" ) _func_AdGuard_PORT ;;
     "r" ) _func_AdGuard ;;    
   esac
 done
