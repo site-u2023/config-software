@@ -10,6 +10,12 @@ do
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdGuard already installed\033[0;39m"
 fi
+DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
+if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
+  echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
+  else
+  echo -e " \033[1;37mArchitecture: aarch64\033[0;39m" 
+fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
@@ -186,7 +192,6 @@ wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubuserc
 fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
 if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
-echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-vm
  else
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
@@ -202,6 +207,7 @@ fi
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome stop
 fi
+cp /etc/adguardhome.yaml /etc/adguardhome.yaml.old
 cp /etc/adguardhome.yaml-new /etc/adguardhome.yaml
 sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
