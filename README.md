@@ -79,7 +79,7 @@
 
 </details>
 
-### setting 
+### Setting up
 Using SSH with powershell
 - powershell > `Win`+`x` > `a` > `yes`
 ```powershell:powershell
