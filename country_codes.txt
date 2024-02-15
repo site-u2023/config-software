@@ -1,4 +1,3 @@
-Code	Country Name
 US	United States
 CA	Canada
 JP3	Japan
