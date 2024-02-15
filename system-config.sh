@@ -31,7 +31,6 @@ done
 function _func_COUNTRY {
 while :
 do
-  wget --no-check-certificate -O /etc/config-software/country_codes.txt https://raw.githubusercontent.com/site-u2023/config-software/main/country_codes.txt
   cat /etc/config-software/country_codes.txt
   echo -e " \033[1;32mPlease enter Wi-Fi Country Code\033[0;39m"
   echo -e " \033[1;37mExample: JP\033[0;39m"
@@ -265,7 +264,8 @@ do
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
   read -p " Please select key [y or q]:" num
   case "${num}" in
-    "y" ) _func_HOSTNAME ;;
+    "y" ) wget --no-check-certificate -O /etc/config-software/country_codes.txt https://raw.githubusercontent.com/site-u2023/config-software/main/country_codes.txt
+          _func_HOSTNAME ;;
     "n" ) exit ;;
   esac
 done
