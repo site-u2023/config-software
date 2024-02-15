@@ -18,7 +18,7 @@ AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;31m[b]: Delete Home Assistant\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"   
   echo -e " \033[1;36m------------------------------------------------------\033[0;39m"
-  read -p " Press any key [c/b or q]: " num
+  read -p " Please select key [c/b or q]: " num
   case "${num}" in
     "c" ) _func_HomeAssistant_Confirm ;;    
     "b" ) _func_HomeAssistant_Before ;;
@@ -31,7 +31,7 @@ function _func_HomeAssistant_Confirm {
 while :
 do
   echo -e " \033[1;35mStart Home Assistant installation\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_HomeAssistant_Install ;;
     "n" ) _func_HomeAssistant ;;
@@ -53,7 +53,7 @@ function _func_HomeAssistant_Before {
 while :
 do
   echo -e " \033[1;37mDelete Home Assistant\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_HomeAssistant_Restoration ;;
     "n" ) _func_HomeAssistant ;;
