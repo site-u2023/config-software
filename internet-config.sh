@@ -13,7 +13,7 @@ do
   echo -e " \033[1;35m[o]\033[0;39m": ニチバン対策の設定を以前の設定に復元
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b/n/o or r]: " num
+  read -p " 選択してください [e/b/n/o or r]: " num
   case "${num}" in
     "e" ) _func_MAP_e_VirtualConnect_confirmation ;;
     "b" ) _func_MAP_e_VirtualConnect_Before ;;
@@ -30,7 +30,7 @@ do
   echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定とインストールとを実行します\033[0;39m"
   echo -e " \033[1;37mインストール: map 6kB\033[0;39m"
   echo -e " \033[1;37mインストール: bash 375kB\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_VirtualConnect_SET ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
@@ -62,7 +62,7 @@ do
   echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Restoration ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
@@ -83,7 +83,7 @@ do
   echo -e " \033[1;35m[o]\033[0;39m": ニチバン対策の設定を以前の設定に復元
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;33m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b/n/o or r]: " num
+  read -p " 選択してください [e/b/n/o or r]: " num
   case "${num}" in
     "e" ) _func_MAP_e_V6plus_confirmation ;;
     "b" ) _func_MAP_e_V6plus_Before ;;
@@ -100,7 +100,7 @@ do
   echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を実行します\033[0;39m"
   echo -e " \033[1;37mパッケージ: map サイズ: 6kBをインストールします\033[0;39m"
   echo -e " \033[1;37mパッケージ: bash サイズ: 375kBをインストールします\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_V6plus_SET ;;
     "n" ) _func_MAP_e_V6plus ;;
@@ -132,7 +132,7 @@ do
   echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Restoration ;;
     "n" ) _func_MAP_e_V6plus ;;
@@ -155,7 +155,7 @@ function _func_MAP_e_Nichiban_map {
 while :
 do
   echo -e " \033[1;37m ニチバン対策の設定を実行します\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Nichiban_map_SET ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
@@ -175,7 +175,7 @@ function _func_MAP_e_Nichiban_map_Before {
 while :
 do
   echo -e " \033[1;37mニチバン対策の設定を以前の設定に復元します\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Nichiban_map_Restoration ;;
     "n" ) _func_MAP_e_VirtualConnect ;;
@@ -201,7 +201,7 @@ do
   echo -e " \033[1;31m[b]\033[0;39m": 以前の設定に復元
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;32m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/w/b or r]: " num
+  read -p " 選択してください [e/w/b or r]: " num
   case "${num}" in
     "e" ) _func_DS_LITE_Transix_confirmation_east ;;
     "w" ) _func_DS_LITE_Transix_confirmation_west ;;
@@ -217,7 +217,7 @@ do
   echo -e " \033[1;34m（東日本エリア）トランジックスの設定を実行します\033[0;39m"
   echo -e " \033[1;37mgw.transix.jp: 2404:8e00::feed:100\033[0;39m" 
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Transix_east_SET ;;
     "n" ) _func_DS_LITE_Transix ;;
@@ -246,7 +246,7 @@ do
   echo -e " \033[1;32m（西日本エリア）トランジックスの設定を実行します\033[0;39m"
   echo -e " \033[1;37mgw.transix.jp: 2404:8e01::feed:100\033[0;39m" 
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Transix_west_SET ;;
     "n" ) _func_DS_LITE_Transix ;;
@@ -274,7 +274,7 @@ while :
 do
   echo -e " \033[1;37mトランジックスの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: ds-liteはリムーブしません\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Before_Restoration ;;
     "n" ) _func_DS_LITE_Transix ;;
@@ -291,7 +291,7 @@ do
   echo -e " \033[1;31m[b]\033[0;39m": 以前の設定に復元
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;35m------------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or r]: " num
+  read -p " 選択してください [e/b or r]: " num
   case "${num}" in
     "e" ) _func_DS_LITE_Xpass_confirmation ;;
     "b" ) _func_DS_LITE_Xpass_Before ;;
@@ -306,7 +306,7 @@ do
   echo -e " \033[1;37mクロスパスの設定を実行します\033[0;39m"
   echo -e " \033[1;37mxpass: 2001:f60:0:200::1:1\033[0;39m"
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Xpass_SET ;;
     "n" ) _func_DS_LITE_Xpass ;;
@@ -334,7 +334,7 @@ while :
 do
   echo -e " \033[1;37mクロスパスの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: ds-liteはリムーブしません\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Before_Restoration ;;
     "n" ) _func_DS_LITE_Xpass ;;
@@ -351,7 +351,7 @@ do
   echo -e " \033[1;31m[b]\033[0;39m": 以前の設定に復元
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;31m-----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [e/b or r]: " num
+  read -p " 選択してください [e/b or r]: " num
   case "${num}" in
     "e" ) _func_DS_LITE_V6connect_confirmation ;;
     "b" ) _func_DS_LITE_V6connect_Before ;;
@@ -366,7 +366,7 @@ do
   echo -e " \033[1;37mv6 コネクトの設定を実行します\033[0;39m"
   echo -e " \033[1;37mdslite.v6connect.net: 2001:c28:5:301::11\033[0;39m"
   echo -e " \033[1;37mパッケージ: ds-lite サイズ: 1kBをインストールします\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_V6connect_SET ;;
     "n" ) _func_DS_LITE_V6connect ;;
@@ -394,7 +394,7 @@ while :
 do
   echo -e " \033[1;37mv6 コネクトの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: ds-liteはリムーブしません\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_DS_LITE_Before_Restoration ;;
     "n" ) _func_DS_LITE_V6connect ;;
@@ -424,7 +424,7 @@ do
   echo -e " \033[1;35m[w]\033[0;39m": PPPoEのIPv4及びIPv6接続を以前の設定に復元
   echo -e " \033[1;33m[r]\033[0;39m": 戻る    
   echo -e " \033[1;36m-----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [4/6/b/w or r]: " num
+  read -p " 選択してください [4/6/b/w or r]: " num
   case "${num}" in
     "4" ) _func_PPPoE_ID ;;
     "6" ) _func_PPPoE_ID4 ;;
@@ -440,7 +440,7 @@ while :
 do
   echo -e "\033[1;37m IPv4接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
   read -p " PAP・CHAユーザー名: " input_str_ID
-  read -p " 宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_PASSWORD ;;
     "n" ) _func_PPPoE_ID ;;
@@ -454,7 +454,7 @@ while :
 do
   echo -e "\033[1;37m IPv4接続の認証パスワードを入力して下さい\033[0;39m"
   read -p " PAP・CHAパスワード: " input_str_PASSWORD
-  read -p " 宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_confirmation ;;
     "n" ) _func_PPPoE_PASSWORD ;;
@@ -470,7 +470,7 @@ do
   echo -e " \033[1;37m PAP・CHA認証ID（ユーザー名）: ${input_str_ID}\033[0;39m"
   echo -e " \033[1;37m PAP・CHA認証パスワード      : ${input_str_PASSWORD}\033[0;39m"
   echo -e " \033[1;34m-----------------------------------------------------\033[0;39m"
-  read -p " これで宜しければ設定を開始します [y/n or r]: " num
+  read -p " 設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_SET ;;
     "n" ) _func_PPPoE ;;
@@ -497,7 +497,7 @@ function _func_PPPo_Before {
 while :
 do
   echo -e " \033[1;37mPPPoEのIPv4接続設定を以前の設定に復元します\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPo_Before_Restoration ;;
     "n" ) _func_PPPoE ;;
@@ -519,7 +519,7 @@ while :
 do
   echo -e "\033[1;37m IPv4接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
   read -p " PAP・CHAユーザー名: " input_str_ID4
-  read -p " 宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_PASSWORD4 ;;
     "n" ) _func_PPPoE_ID4 ;;
@@ -533,7 +533,7 @@ while :
 do
   echo -e "\033[1;37m IPv4接続の認証パスワードを入力して下さい\033[0;39m"
   read -p " PAP・CHAパスワード: " input_str_PASSWORD4
-  read -p " 宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_ID6 ;;
     "n" ) _func_PPPoE_PASSWORD4 ;;
@@ -547,7 +547,7 @@ while :
 do
   echo -e "\033[1;37m IPv6接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
   read -p " PAP・CHAユーザー名: " input_str_ID6
-  read -p " 宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_PASSWORD6 ;;
     "n" ) _func_PPPoE_ID6 ;;
@@ -561,7 +561,7 @@ while :
 do
   echo -e "\033[1;37m IPv6接続の認証パスワードを入力して下さい\033[0;39m"
   read -p " PAP・CHAパスワード: " input_str_PASSWORD6
-  read -p " 宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_confirmation6 ;;
     "n" ) _func_PPPoE_PASSWORD6 ;;
@@ -579,7 +579,7 @@ do
   echo -e " \033[1;37m PAP・CHA IPv6認証ID（ユーザー名） : ${input_str_ID6}\033[0;39m"
   echo -e " \033[1;37m PAP・CHA IPv6認証パスワード       : ${input_str_PASSWORD6}\033[0;39m"
   echo -e " \033[1;32m-----------------------------------------------------\033[0;39m"
-  read -p " これで宜しければ設定を開始します [y/n or r]: " num
+  read -p " 設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_SET6 ;;
     "n" ) _func_PPPoE ;;
@@ -614,7 +614,7 @@ function _func_PPPo_Before6 {
 while :
 do
   echo -e " \033[1;37mPPPoEのIPv4及びIPv6接続設定を以前の設定に復元します\033[0;39m"
-  read -p " 本当に宜しいですか? [y/n or r]: " num
+  read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPo_Before_Restoration6 ;;
     "n" ) _func_PPPoE ;;
@@ -652,7 +652,7 @@ do
   echo -e " \033[1;36m[o]\033[0;39m": PPPoE（iPv4・IPv6）: 要認証ID（ユーザー名）・パスワード
   echo -e " \033[7;40m[q]\033[0;39m": 終了
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
-  read -p " キーを選択してください [v/p/t/x/c/o or q]: " num
+  read -p " 選択してください [v/p/t/x/c/o or q]: " num
   case "${num}" in
     "v" ) _func_MAP_e_VirtualConnect ;;
     "p" ) _func_MAP_e_V6plus ;;
