@@ -53,7 +53,7 @@ uci commit network
 
 </details>
 
-### Run ttyd
+### Run Script
 - Run from browser
 
   [192.168.1.1:8888](http://192.168.1.1:8888)
@@ -69,7 +69,8 @@ confsoft
 ```
 :warning: forced termination：`Ctrl`+`c`
 
-### Configuration
+<details><summary>Configuration</summary>
+
 :warning:Japanese notation
 - [Script Selector](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%BB%E3%83%AC%E3%82%AF%E3%82%BF%E3%83%BC%E8%A6%81onu%E7%9B%B4%E7%B5%90)
   - [Initial system setup (host name, password, etc.)](https://qiita.com/site_u/items/59c641c9dc0eec3b1324)
@@ -105,7 +106,12 @@ confsoft
     - [SAMBA4 and WSDD2 installation](https://qiita.com/site_u/items/aa9164859a78cb4e3f8f)
   - Quit
 
-### Scripts
+---
+
+</details>
+
+<details><summary>Scripts</summary>
+
 - [all-in-one scripts](https://github.com/site-u2023/config-software/blob/main/README.md)
   - [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/openwrt-config.sh)
     - [system-config.sh](https://github.com/site-u2023/config-software/blob/main/system-config.sh)
@@ -132,6 +138,10 @@ confsoft
       - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
         - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
+
+---
+
+</details>
 
 ### Remove
 ```sh :SSH
