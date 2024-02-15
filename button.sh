@@ -113,17 +113,16 @@ uci set system.@button[-1].max='23'
 # set
 uci commit system
 
-echo -e " \033[1;36mインストールと設定が完了しました\033[0;39m"
-read -p " 何かキーを押してデバイスを再起動してください"
+read -p " Press any key (to reboot the device)"
 reboot
 
 }
 
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+ echo -e " \033[1;37mversion check: OK\033[0;39m"
  else
- read -p " バージョンが違うため終了します"
+ read -p " Different version"
  exit
 fi
 
@@ -136,7 +135,7 @@ do
   fi
   echo -e " \033[1;33m10秒\033[0;39m" デバイス再起動 ボタン（スイッチ）リリース
   echo -e " \033[1;31m20秒\033[0;39m" デバイス初期化 ボタン（スイッチ）リリース
-  read -p " ボタン（スイッチ）設定とインストール（wpsボタン用）を開始します [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) _func_button_INSTALL ;;
     "n" ) exit ;;
