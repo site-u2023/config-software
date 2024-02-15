@@ -62,7 +62,7 @@ _func_dashboard
 }
 
 function _func_dashboard {
-SFTP=`opkg list-installed luci-mod-dashboard | awk '{ print $1 }'`
+DB=`opkg list-installed luci-mod-dashboard | awk '{ print $1 }'`
 if [ -z "$DB" ]; then
 while :
 do
