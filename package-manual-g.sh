@@ -140,6 +140,33 @@ do
   esac
 done
 fi
+_func_dashboard
+}
+
+function _func_dashboard {
+DB=`opkg list-installed luci-mod-dashboard | awk '{ print $1 }'`
+DB_JA=`opkg list-installed luci-i18n-dashboard-$input_str_Languages | awk '{ print $1 }'`
+if [ -z "$DB" ] || [ -z "$DB_JA" ]; then
+while :
+do
+  echo -e " \033[1;33mInstall Dashboard\033[0;39m"
+  echo -e " \033[1;32mDashboard: $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-i18n-dashboard-$input_str_Languages: $((`opkg info luci-i18n-dashboard-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  read -p " Press any key [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo luci-mod-dashboard >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+          echo luci-mod-dashboard-$input_str_Languages >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-mod-dashboard-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          break ;;
+    "n" ) DB='1'
+          DB_JA='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
 _func_opensshsftpserver
 }
 
@@ -162,10 +189,10 @@ do
   esac
 done
 fi
-_luci_app_ttyd
+_func_luci_app_ttyd
 }
 
-function _luci_app_ttyd {
+function _func_luci_app_ttyd {
 TTYD=`opkg list-installed luci-app-ttyd | awk '{ print $1 }'`
 TTYD_JA=`opkg list-installed luci-i18n-ttyd-$input_str_Languages | awk '{ print $1 }'`
 if [ -z "$TTYD" ] || [ -z "$TTYD_JA" ]; then
@@ -967,6 +994,14 @@ if [ -z "$LUCI_JA_FIREWALL" ]; then
 opkg install luci-i18n-firewall-$input_str_Languages
 fi
 
+# Dashboard
+if [ -z "$DB" ]; then
+opkg install luci-mod-dashboard
+fi
+if [ -z "$DB_JA" ]; then
+opkg install luci-i18n-dashboard-ja
+fi
+
 # SFTP Server
 if [ -z "$SFTP" ]; then
 opkg install openssh-sftp-server
@@ -1263,6 +1298,7 @@ fi
   echo -e " \033[1;37m・LuCi (Snapshot only)\033[0;39m"
   echo -e " \033[1;37m・LuCi SSL\033[0;39m"
   echo -e " \033[1;37m・LuCi Language\033[0;39m"
+  echo -e " \033[1;37m・Dashboard\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
   echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
