@@ -216,45 +216,35 @@ function _func_DEVICE_SET {
   exit
 }
 
-WIFI_A=`uci show wireless | grep '5g' | cut -d'.' -f2 | awk '{ print $1 }'`
-WIFI_B=`uci show wireless | grep '2g' | cut -d'.' -f2 | awk '{ print $1 }'`
-WIFI_C=`uci show wireless | grep '5g' | cut -d'.' -f2 | awk '{ print $2 }'`
-WIFI_D=`uci show wireless | grep '2g' | cut -d'.' -f2 | awk '{ print $2 }'`
+WIFI_A=`uci show wireless | grep "band='2g'" | cut -d'.' -f2 | awk '{ print $1 }'`
+WIFI_B=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
+WIFI_C=`uci show wireless | grep "band='6g'" | cut -d'.' -f2 | awk '{ print $1 }'`
 if [ "radio0" = "${WIFI_A}" ]; then
-WIFI_NO_A='5G:radio0'
+WIFI_NO_A='2G:radio0'
 fi
 if [ "radio1" = "${WIFI_A}" ]; then
-WIFI_NO_B='5G:radio1'
+WIFI_NO_B='2G:radio1'
 fi
 if [ "radio2" = "${WIFI_A}" ]; then
-WIFI_NO_C='5G:radio2'
+WIFI_NO_C='2G:radio2'
 fi
 if [ "radio0" = "${WIFI_B}" ]; then
-WIFI_NO_A='2G:radio0'
-fi
-if [ "radio1" = "${WIFI_B}" ]; then
-WIFI_NO_B='2G:radio1'
-fi
-if [ "radio2" = "${WIFI_B}" ]; then
-WIFI_NO_C='2G:radio2'
-fi
-if [ "radio0" = "${WIFI_C}" ]; then
 WIFI_NO_A='5G:radio0'
 fi
-if [ "radio1" = "${WIFI_C}" ]; then
+if [ "radio1" = "${WIFI_B}" ]; then
 WIFI_NO_B='5G:radio1'
 fi
-if [ "radio2" = "${WIFI_C}" ]; then
+if [ "radio2" = "${WIFI_B}" ]; then
 WIFI_NO_C='5G:radio2'
 fi
-if [ "radio0" = "${WIFI_D}" ]; then
-WIFI_NO_A='2G:radio0'
+if [ "radio0" = "${WIFI_C}" ]; then
+WIFI_NO_A='6G:radio0'
 fi
-if [ "radio1" = "${WIFI_D}" ]; then
-WIFI_NO_B='2G:radio1'
+if [ "radio1" = "${WIFI_C}" ]; then
+WIFI_NO_B='6G:radio1'
 fi
-if [ "radio2" = "${WIFI_D}" ]; then
-WIFI_NO_C='2G:radio2'
+if [ "radio2" = "${WIFI_C}" ]; then
+WIFI_NO_C='6G:radio2'
 fi
 while :
 do
