@@ -206,14 +206,14 @@ rm /tmp/luci-app-temp-status_all.ipk
 
 # Internet detector
 opkg install mailsend
-wget --no-check-certificate -O /tmp/internet-detector_1.2-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.2-0_all.ipk
-opkg install /tmp/internet-detector_1.2-0_all.ipk
-rm /tmp/internet-detector_1.2-0_all.ipk
+wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.2-0_all.ipk
+opkg install /tmp/internet-detector_all.ipk
+rm /tmp/internet-detector_all.ipk
 /etc/init.d/internet-detector start
 /etc/init.d/internet-detector enable
-wget --no-check-certificate -O /tmp/luci-app-internet-detector_1.2-0_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.2-0_all.ipk
-opkg install /tmp/luci-app-internet-detector_1.2-0_all.ipk
-rm /tmp/luci-app-internet-detector_1.2-0_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.2-0_all.ipk
+opkg install /tmp/luci-app-internet-detector_all.ipk
+rm /tmp/luci-app-internet-detector_all.ipk
 
 # Theme ARGON (template)
 opkg install luci-compat
@@ -252,9 +252,9 @@ hd-idle
 luci-app-hd-idle
 luci-i18n-hd-idle-$input_str_Languages
 EOF
-wget --no-check-certificate -O /tmp/luci-app-disks-info_0.4-3_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-3_all.ipk
-opkg install /tmp/luci-app-disks-info_0.4-3_all.ipk
-rm /tmp/luci-app-disks-info_0.4-3_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-3_all.ipk
+opkg install /tmp/luci-app-disks-info_all.ipk
+rm /tmp/luci-app-disks-info_all.ipk
   opkg install block-mount
   opkg install kmod-usb-storage
   opkg install kmod-usb-storage-uas
