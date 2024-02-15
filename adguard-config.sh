@@ -22,7 +22,7 @@ fi
   echo -e " \033[1;32m[b]: Removing and restoring AdGuard HOME to previous settings\033[0;39m"
   echo -e " \033[1;37m[q]: Quit\033[0;39m"   
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " Press any key [c/s/b or q]: " num
+  read -p " Please select key [c/s/b or q]: " num
   case "${num}" in
     "c" ) 
 {
@@ -103,7 +103,7 @@ function _func_AdGuard_Filter {
 while :
 do
   echo -e " \033[1;37mSet Japanese filter\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) JAPAN_FILTER="japan_filter" ;
           _func_AdGuard_PORT ;;
@@ -119,7 +119,7 @@ do
   echo -e "\033[1;37m Web interfaceEnter port number\033[0;39m"
   echo -e "\033[1;33m Example: 8000\033[0;39m"
   read -p " port number: " input_str_PORT
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_USER ;;
     "n" ) _func_AdGuard_PORT ;;
@@ -134,7 +134,7 @@ do
   echo -e "\033[1;37m Web interface user name\033[0;39m"
   echo -e "\033[1;33m Example: root\033[0;39m"
   read -p " user name: " input_str_USER
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_PASSWD ;;
     "n" ) _func_AdGuard_USER ;;
@@ -149,7 +149,7 @@ do
   echo -e " \033[1;37mWeb interface password\033[0;39m"
   echo -e " \033[1;33mExample: password\033[0;39m"
   read -p " password: " input_str_PASSWD
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_Confirm2 ;;
     "n" ) _func_AdGuard_PASSWD ;;
@@ -167,7 +167,7 @@ do
   echo -e " \033[1;32mPassword: ${input_str_PASSWD}\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;32mAdministrative Web Interface: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_SET ;;
     "n" ) _func_AdGuard_PORT ;;
@@ -228,7 +228,7 @@ do
   echo -e " \033[1;37mRemove: libaprutil\033[0;39m"
   echo -e " \033[1;37mRemove: libapr\033[0;39m"
   echo -e " \033[1;37mRemove: libexpat\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_Restoration ;;
     "n" ) _func_AdGuard ;;
