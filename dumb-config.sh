@@ -6,7 +6,7 @@ do
   echo -e "\033[1;37m Enter IPV4 address of access point\033[0;39m"
   echo -e "\033[1;33m Example: 192.168.1.2\033[0;39m"
   read -p " IPV4 address: " input_str_IPV4
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_GATEWAY ;;
     "n" ) _func_Dumb_IPV4 ;;
@@ -17,10 +17,10 @@ done
 function _func_Dumb_GATEWAY
 while :
 do
-  echo -e "\033[1;37m Enter the gateway of the access point\033[0;39m"
+  echo -e "\033[1;37m Enter gateway of access point\033[0;39m"
   echo -e "\033[1;33m Example: 192.168.1.1\033[0;39m"
   read -p " gateway: " input_str_GATEWAY
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_confirmation ;;
     "n" ) _func_Dumb_GATEWAY ;;
@@ -36,7 +36,7 @@ do
   echo -e " \033[1;32mGateway: ${input_str_GATEWAY}\033[0;39m"
   echo -e " \033[1;37mPackage: fping Size: Install 17kB\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_SET ;;
     "n" ) _func_Dumb_IPV4 ;;
@@ -57,7 +57,7 @@ reboot
 function _func_Dumb_Before
 while :
 do
-  echo -e " \033[1;37mRestore the access point configuration to its previous settings\033[0;39m"
+  echo -e " \033[1;37mRestore access point settings to previous settings\033[0;39m"
   read -p " Press any key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_Dumb_Before_Restoration ;;
@@ -111,7 +111,7 @@ do
   echo -e " \033[1;32m[b]: Restore previous settings\033[0;39m"
   echo -e " \033[1;31m[q]: Quit\033[0;39m"    
   echo -e " \033[1;31m--------------------------------------------------------------\033[0;39m"
-  read -p " Press any key [e/b or q]: " num
+  read -p " Please select key [e/b or q]: " num
   case "${num}" in
     "e" ) _func_Dumb_IPV4 ;;
     "b" ) _func_Dumb_Before ;;
