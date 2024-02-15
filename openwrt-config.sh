@@ -6,7 +6,7 @@ while :
 do
   echo -e " \033[1;34mDownload scripts for Internet connection\033[0;39m"
   echo -e " \033[7;33mJapanese specification\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh
           sh /etc/config-software/internet-config.sh
@@ -20,7 +20,7 @@ function _func_SYSTEM {
 while :
 do
   echo -e " \033[1;33mDownload scripts for initial system\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh
           sh /etc/config-software/system-config.sh
@@ -34,7 +34,7 @@ function _func_PACKAGE {
 while :
 do
   echo -e " \033[1;32mDownload script for package setup (automatic or selective)\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh
           sh /etc/config-software/package-config.sh
@@ -48,7 +48,7 @@ function _func_AD_DNS {
 while :
 do
   echo -e " \033[1;35mDownload scripts for ad blocker and DNS encryption\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/ad-dns-blocking-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocking-config.sh
           sh /etc/config-software/ad-dns-blocking-config.sh
@@ -62,7 +62,7 @@ function _func_ACCESSPOINT {
 while :
 do
   echo -e " \033[1;31mDownload scripts for access point\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh
           sh /etc/config-software/dumb-config.sh
@@ -76,7 +76,7 @@ function _func_HA {
 while :
 do
   echo -e " \033[1;36mDownload scripts for Home Assistant\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/homeassistant.sh https://raw.githubusercontent.com/site-u2023/config-software/main/homeassistant.sh
           sh /etc/config-software/homeassistant.sh
@@ -90,7 +90,7 @@ function _func_ETC {
 while :
 do
   echo -e " \033[1;37mDownload other scripts\033[0;39m"
-  read -p " All right? [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/etc-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh
           sh /etc/config-software/etc-config.sh
@@ -105,7 +105,7 @@ while :
 do
   echo -e " \033[7;40mDelete this and related scripts\033[0;39m"
   echo -e " \033[7;40mRestoration files will not be deleted\033[0;39m"
-  read -p " Do you want to delete? [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
    case "${num}" in
     "y" ) rm -rf /etc/config-software
           rm -rf /usr/bin/confsoft
@@ -140,7 +140,7 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37mOpenWrt-Config\033[0;39m"
-  echo -e " \033[1;37mLast update: February 14, 2024, 4:33 p.m. (JST)\033[0;39m"
+  echo -e " \033[1;37mLast update: February 15, 2024, 9:00 p.m. (JST)\033[0;39m"
   echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
@@ -170,7 +170,7 @@ do
   echo -e " \033[1;37m[e]: Other: BUTTON,IPERF3,SAMBA4,LBS\033[0;39m"
   echo -e " \033[7;40m[q]: Quit (Delete this script or not)\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [i/s/p/b/a/h/e or q]: " num
+  read -p " Please select key [i/s/p/b/a/h/e or q]: " num
   case "${num}" in
     "i" ) _func_INTERNET ;;
     "s" ) _func_SYSTEM ;;
