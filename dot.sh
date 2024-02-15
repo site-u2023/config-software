@@ -5,7 +5,7 @@ while :
 do
   echo -e " \033[1;35mStart DNS over TLS (DoT) installation\033[0;39m"
   echo -e " \033[1;37mInstall: stubby\033[0;39m"
-  read -p " Press any key [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) _func_STUBBY_SET ;;
     "n" ) exit ;;
@@ -56,7 +56,7 @@ while :
 do
   echo -e " \033[1;37mRestore DNS over TLS (DoT) settings to previous settings\033[0;39m"
   echo -e " \033[1;37mRemove: stubby\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_STUBBY_Restoration ;;
     "n" ) _func_STUBBY ;;
@@ -100,7 +100,7 @@ do
   echo -e " \033[1;31m[b]: DNS over TLS (DoT) settings to previous settings\033[0;39m"
   echo -e " \033[1;33m[q]: Quit\033[0;39m"    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " Press any key [e/b or q]: " num
+  read -p " Please select key [e/b or q]: " num
   case "${num}" in
     "e" ) _func_STUBBY ;;
     "b" ) _func_STUBBY_Before ;;
