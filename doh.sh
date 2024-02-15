@@ -9,7 +9,7 @@ do
   echo -e " \033[1;37mInstall: https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mInstall: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mInstall: luci-i18n-https-dns-proxy-ja\033[0;39m" 
-  read -p " Press any key [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) _func_HTTPS_SET ;;
     "n" ) exit ;;
@@ -47,7 +47,7 @@ do
   echo -e " \033[1;37mDNS over HTTPS（DoH）settings to previous settings\033[0;39m"
   echo -e " \033[1;37mRemove: luci-app-https-dns-proxy\033[0;39m"
   echo -e " \033[1;37mRemove: https-dns-proxy\033[0;39m"
-  read -p " Press any key [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
 
   case "${num}" in
     "y" ) _func_HTTPS_Restoration ;;
@@ -89,7 +89,7 @@ do
   echo -e " \033[1;31m[b]: DNS over HTTPS（DoH）settings to previous settings\033[0;39m"
   echo -e " \033[1;33m[r]: Quit\033[0;39m"    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " Press any key [e/b or r]: " num
+  read -p " Please select key [e/b or r]: " num
   case "${num}" in
     "e" ) _func_HTTPS ;;
     "b" ) _func_HTTPS_Before ;;
