@@ -3,71 +3,7 @@
 :warning:**Please contact us if you have any problems**
 
 ### Script Selector
-![menu](https://github.com/site-u2023/config-software/assets/140032047/f77c79ed-4416-44d6-9ae9-ce9cebd8ad13)
-
-### Using SSH 
-with powershell
-- powershell > `Win`+`x` > `a` > `yes`
-```powershell:powershell
-ssh root@192.168.1.1
-
-```
-- `yes`
-
-<details><summary>:exclamation:If you cannot SSH login</summary>
-
-`C:\Users\yourusername\.ssh\known_hosts`
-※Windows Hidden Files
-```powershell:powershell
-Clear-Content .ssh\known_hosts -Force
-
-```
----
-
-</details>
-
-### ttyd installation and configuration
-- [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
-```sh:SSH
-mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
-
-```
-:warning:Internet connection setup requires device to be connected directly to ONU (Japan Only)
-<details><summary>:exclamation:MAP-e or other IPv4 unconnected</summary>
-
-https://github.com/ can be connected using IPv6
-  - Connect client for setup to LAN1
-```sh:SSH
-# IPv6 Usage Settings
-uci add network device
-uci set network.@device[-1].name='lan1'
-uci set network.@device[-1].mtu='1500'
-uci set network.@device[-1].ipv6='1'
-uci set network.@device[-1].mtu6='1500'
-#
-uci commit network
-/etc/init.d/network reload
-
-```
----
-
-</details>
-
-### Run Script
-- Run from browser
-
-  [192.168.1.1:8888](http://192.168.1.1:8888)
-  - Permited only from LAN side
-  - No login authentication
-
-:warning: Can be changed from ttyd settings
-
-- Run from command
-```sh:SSH
-confsoft
-
-```
-:warning: forced termination：`Ctrl`+`c`
+![selector](https://github.com/site-u2023/config-software/assets/140032047/38302c2c-58a2-48dc-99de-917830c29d24)
 
 <details><summary>Configuration</summary>
 
@@ -142,6 +78,70 @@ confsoft
 ---
 
 </details>
+
+### Using SSH 
+with powershell
+- powershell > `Win`+`x` > `a` > `yes`
+```powershell:powershell
+ssh root@192.168.1.1
+
+```
+- `yes`
+
+<details><summary>:exclamation:If you cannot SSH login</summary>
+
+`C:\Users\yourusername\.ssh\known_hosts`
+※Windows Hidden Files
+```powershell:powershell
+Clear-Content .ssh\known_hosts -Force
+
+```
+---
+
+</details>
+
+### ttyd installation and configuration
+- [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
+```sh:SSH
+mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
+
+```
+:warning:Internet connection setup requires device to be connected directly to ONU (Japan Only)
+<details><summary>:exclamation:MAP-e or other IPv4 unconnected</summary>
+
+https://github.com/ can be connected using IPv6
+  - Connect client for setup to LAN1
+```sh:SSH
+# IPv6 Usage Settings
+uci add network device
+uci set network.@device[-1].name='lan1'
+uci set network.@device[-1].mtu='1500'
+uci set network.@device[-1].ipv6='1'
+uci set network.@device[-1].mtu6='1500'
+#
+uci commit network
+/etc/init.d/network reload
+
+```
+---
+
+</details>
+
+### Run Script
+- Run from browser
+
+  [192.168.1.1:8888](http://192.168.1.1:8888)
+  - Permited only from LAN side
+  - No login authentication
+
+:warning: Can be changed from ttyd settings
+
+- Run from command
+```sh:SSH
+confsoft
+
+```
+:warning: forced termination：`Ctrl`+`c`
 
 ### Remove
 ```sh :SSH
