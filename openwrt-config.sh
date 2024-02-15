@@ -108,6 +108,7 @@ do
   read -p " Do you want to delete? [y/n or r]: " num
    case "${num}" in
     "y" ) rm -rf /etc/config-software
+          rm -rf /usr/bin/confsoft
           echo -e " \033[7;40m This script and related scripts have been deleted and quit\033[0;39m"
           exit ;;
     "n" ) echo -e " \033[7;40m Quit\033[0;39m"
