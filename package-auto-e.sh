@@ -273,7 +273,7 @@ if [ -n "$str_USB" ]; then
   echo -e " \033[1;37m・USB：HFS & HFS+\033[0;39m"
   echo -e " \033[1;37m・USB：HDD\033[0;39m"
 fi
-  read -p " Start installing the package [y/n]: " num
+  read -p " Start installing package [y/n]: " num
   case "${num}" in
     "y" ) _func_INSTALL ;;
     "n" ) exit ;;
