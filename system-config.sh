@@ -220,31 +220,31 @@ WIFI_A=`uci show wireless | grep "band='2g'" | cut -d'.' -f2 | awk '{ print $1 }
 WIFI_B=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
 WIFI_C=`uci show wireless | grep "band='6g'" | cut -d'.' -f2 | awk '{ print $1 }'`
 if [ "radio0" = "${WIFI_A}" ]; then
-WIFI_NO_A='2G:radio0'
+WIFI_NO_A='2G'
 fi
 if [ "radio1" = "${WIFI_A}" ]; then
-WIFI_NO_B='2G:radio1'
+WIFI_NO_B='2G'
 fi
 if [ "radio2" = "${WIFI_A}" ]; then
-WIFI_NO_C='2G:radio2'
+WIFI_NO_C='2G'
 fi
 if [ "radio0" = "${WIFI_B}" ]; then
-WIFI_NO_A='5G:radio0'
+WIFI_NO_A='5G'
 fi
 if [ "radio1" = "${WIFI_B}" ]; then
-WIFI_NO_B='5G:radio1'
+WIFI_NO_B='5G'
 fi
 if [ "radio2" = "${WIFI_B}" ]; then
-WIFI_NO_C='5G:radio2'
+WIFI_NO_C='5G'
 fi
 if [ "radio0" = "${WIFI_C}" ]; then
-WIFI_NO_A='6G:radio0'
+WIFI_NO_A='6G'
 fi
 if [ "radio1" = "${WIFI_C}" ]; then
-WIFI_NO_B='6G:radio1'
+WIFI_NO_B='6G'
 fi
 if [ "radio2" = "${WIFI_C}" ]; then
-WIFI_NO_C='6G:radio2'
+WIFI_NO_C='6G'
 fi
 while :
 do
@@ -252,15 +252,15 @@ do
   echo -e " \033[1;34mDevice Hostname\033[0;39m"
   echo -e " \033[1;33mDevice Password\033[0;39m"
   echo -e " \033[1;32mWi-Fi Country Code\033[0;39m"
-  echo -e " \033[1;35mWi-Fi ${WIFI_NO_A} SSID\033[0;39m"
-  echo -e " \033[1;31mWi-Fi ${WIFI_NO_A} Password\033[0;39m"
-  echo -e " \033[1;36mWi-Fi ${WIFI_NO_B} SSID\033[0;39m"
-  echo -e " \033[1;37mWi-Fi ${WIFI_NO_B} Password\033[0;39m"
+  echo -e " \033[1;35mWi-Fi radio0${WIFI_NO_A} SSID\033[0;39m"
+  echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
+  echo -e " \033[1;36mWi-Fi radio1 ${WIFI_NO_B} SSID\033[0;39m"
+  echo -e " \033[1;37mWi-Fi radio1 ${WIFI_NO_B} Password\033[0;39m"
   WIFI_DEVICE=`uci show wireless | grep 'wifi-device' | wc -l`
   WIFI_NO=3
   if [ "$WIFI_DEVICE" = "$WIFI_NO" ]; then
-  echo -e " \033[1;44mWi-Fi ${WIFI_NO_C} SSID\033[0;39m"
-  echo -e " \033[1;42mWi-Fi ${WIFI_NO_C} Password\033[0;39m"
+  echo -e " \033[1;44mWi-Fi radio2 ${WIFI_NO_C} SSID\033[0;39m"
+  echo -e " \033[1;42mWi-Fi radio2 ${WIFI_NO_C} Password\033[0;39m"
   fi
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
   read -p " Please select key [y or q]:" num
