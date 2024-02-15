@@ -145,6 +145,7 @@ confsoft
 
 ### Remove
 ```sh :SSH
+rm -rf /etc/config-software
 rm -rf /usr/bin/confsoft
 
 ```
