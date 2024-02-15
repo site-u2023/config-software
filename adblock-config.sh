@@ -14,7 +14,7 @@ do
   echo -e " \033[1;32mインストール: luci-i18n-adblock-fast-ja $((`opkg info luci-i18n-adblock-fast-ja | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mアドイン: 豆腐フィルタ（有効）\033[0;39m"
   echo -e " \033[1;32mAdBlock-fastの設定とインストールを開始します\033[0;39m"
-  read -p " 宜しいですか [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) _func_AdBlock_fast_SET ;;
     "n" ) break ;;
@@ -25,7 +25,7 @@ done
 function _func_AdBlock_fast_SET {
 wget --no-check-certificate -O /etc/config-software/adblock-fast.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-fast.sh
 sh /etc/config-software/adblock-fast.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動して下さい"
+read -p " Please any key"
 reboot
 exit
 }
@@ -44,7 +44,7 @@ do
   echo -e " \033[1;32mインストール: tcpdump-mini $((`opkg info tcpdump-mini | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mアドイン: 豆腐フィルタ（有効）\033[0;39m"
   echo -e " \033[1;34mAdBlockの設定とインストールを開始します\033[0;39m"
-  read -p " 宜しいですか [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) _func_AdBlock_SET ;;
     "n" ) break ;;
@@ -55,7 +55,7 @@ done
 function _func_AdBlock_SET {
 wget --no-check-certificate -O /etc/config-software/adblock.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock.sh
 sh /etc/config-software/adblock.sh
-read -p " 何かキーを押してデバイスを再起動して下さい"
+read -p " Press any key (to reboot the device)"
 reboot
 exit
 }
@@ -68,7 +68,7 @@ do
   echo -e " \033[1;37mリムーブ: luci-app-adblock-fast\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-adblock-fast-ja\033[0;39m"
   # echo -e " \033[1;37mリムーブ: tcpdump-mini\033[0;39m"
-  read -p " 宜しいですか [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdBlock_fast_Restoration ;;
     "n" ) _func_AdBlock ;;
@@ -87,7 +87,7 @@ opkg remove ip6tables-mod-nat
 opkg remove kmod-ipt-nat6
 opkg --force-overwrite remove gawk grep sed coreutils-sort
 rm -rf /etc/adblock-fast
-read -p " 何かキーを押してデバイスを再起動して下さい"
+read -p " Press any key (to reboot the device)"
 reboot
 exit
 }
@@ -100,7 +100,7 @@ do
   echo -e " \033[1;37mリムーブ: luci-app-adblock\033[0;39m"
   echo -e " \033[1;37mリムーブ: luci-i18n-adblock-ja\033[0;39m"
   echo -e " \033[1;37mリムーブ: tcpdump-mini\033[0;39m"
-  read -p " 宜しいですか [y/n or r]: " num
+  read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdBlock_Restoration ;;
     "n" ) _func_AdBlock ;;
@@ -117,32 +117,31 @@ opkg remove luci-app-adblock
 opkg remove adblock
 opkg remove tcpdump-mini
 rm -rf /etc/adblock
-read -p " 何かキーを押してデバイスを再起動して下さい"
+read -p " Press any key (to reboot the device)"
 reboot
 exit
 }
 
-
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
- read -p " AdGuardがインストールされている為終了します"
+ read -p " AdGuard already installed"
  exit
 fi
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
- echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
+ echo -e " \033[1;37mversion check: OK\033[0;39m"
   _func_AdBlock
  else
- read -p " バージョンが違うため終了します"
+ read -p " Different version"
  exit
 fi
 
 while :
 do
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdBlockが既にインストールされています\033[0;39m"
+  read -p " AdBlock already installed"
 fi
 if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdBlock-fastが既にインストールされています\033[0;39m"
+  read -p " AdBlock-fast already installed"
 fi
   echo -e " \033[1;33mJapanese notation\033[0;39m"
   echo -e " \033[1;34mAdBlock ----------------------------------------------\033[0;39m"
@@ -152,7 +151,7 @@ fi
   echo -e " \033[1;33m[t]\033[0;39m": AdBlock-fastのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " 選択して下さい [e/f/b/t or q]: " num
+  read -p " Please select key [e/f/b/t or q]: " num
   case "${num}" in
     "a" ) _func_AdBlock_Confirm ;;
     "f" ) _func_AdBlock_fast_Confirm ;;
