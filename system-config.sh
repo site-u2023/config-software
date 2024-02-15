@@ -251,7 +251,7 @@ do
   echo -e " \033[1;34mDevice Hostname\033[0;39m"
   echo -e " \033[1;33mDevice Password\033[0;39m"
   echo -e " \033[1;32mWi-Fi Country Code\033[0;39m"
-  echo -e " \033[1;35mWi-Fi radio0${WIFI_NO_A} SSID\033[0;39m"
+  echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
   echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
   echo -e " \033[1;36mWi-Fi radio1 ${WIFI_NO_B} SSID\033[0;39m"
   echo -e " \033[1;37mWi-Fi radio1 ${WIFI_NO_B} Password\033[0;39m"
