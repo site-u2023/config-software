@@ -4,7 +4,7 @@ function _func_BUTTON {
 while :
 do
   echo -e " \033[1;34mDownload button configuration and installation scripts\033[0;39m"
-  read -p " Press any key [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/config-software/button-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/button-config.sh
           sh /etc/config-software/button-config.sh
@@ -17,8 +17,8 @@ done
 function _func_IPERF3 {
 while :
 do
-  echo -e " \033[1;33mDownload and install the IPERF3 configuration script\033[0;39m"
-  read -p " Press any key [y/n]: " num
+  echo -e " \033[1;33mDownload and install IPERF3 configuration script\033[0;39m"
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
           chmod +x /etc/init.d/iperf3
@@ -55,7 +55,7 @@ while :
 do
   echo -e " \033[1;32mExecute Location Based Service (LBS) stop setting\033[0;39m"
   echo -e " \033[1;32mAdd _optout_nomap to the SSID name\033[0;39m"
-  read -p " Press any key [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) sed -i -e 's/\s*$//' /etc/config/wireless
           sed -i -e "/option ssid/s/'$//" /etc/config/wireless
@@ -71,7 +71,7 @@ function _func_SAMBA4 {
 while :
 do
   echo -e " \033[1;32mPerform SAMBA4 and WSDD2 installation\033[0;39m"
-  read -p " Press any key [y/n]: " num
+  read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) UPDATE="/tmp/opkg-lists/openwrt_telephony"
           if [ ! -e ${UPDATE} ]; then
@@ -98,7 +98,7 @@ do
   echo -e " \033[1;36m[6]\033[0;39m" 
   echo -e " \033[7;40m[q]:Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Press any key [1/2/3/4 or q]: " num
+  read -p " Please select key [1/2/3/4 or q]: " num
   case "${num}" in
     "1" ) _func_BUTTON ;;
     "2" ) _func_IPERF3 ;;
