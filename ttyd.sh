@@ -37,3 +37,4 @@ uci add_list ttyd.ttyd.client_option='titleFixed=CONFIG-SOFTWARE'
 
 uci commit ttyd
 service ttyd restart
+/etc/init.d/rpcd restart
