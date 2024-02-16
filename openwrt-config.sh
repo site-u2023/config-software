@@ -140,7 +140,7 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37mOpenWrt-Config\033[0;39m"
-  echo -e " \033[1;37mLast update: February 15, 2024, 9:00 p.m. (JST)\033[0;39m"
+  echo -e " \033[1;37mLast update: February 16, 2024, 4:36 p.m. (JST)\033[0;39m"
   echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
@@ -162,7 +162,7 @@ do
   echo -e " \033[1;33mMultilingual support (Partially unchanged)\033[0;39m"
   echo -e " \033[1;37mopenwrt-config --------------------------------------\033[0;39m"
   echo -e " \033[1;34m[i]: Internet connection setup in Japan (MAP-e, DS-LITE, PPPoE)\033[0;39m"
-  echo -e " \033[1;33m[s]: Initial system setup (host name,password,etc.)\033[0;39m"
+  echo -e " \033[1;33m[s]: Initial system setup (host name,password,wifi,etc.)\033[0;39m"
   echo -e " \033[1;32m[p]: Install recommended packages (automatic or selective)\033[0;39m"
   echo -e " \033[1;35m[b]: Install ad blocker and DNS encryption\033[0;39m"
   echo -e " \033[1;31m[a]: Access point connection setup (Dumb/Bridge)\033[0;39m"
