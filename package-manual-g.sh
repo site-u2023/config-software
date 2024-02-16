@@ -155,10 +155,10 @@ do
   read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-mod-dashboard >> /etc/config-software/list-installed/Before
-          echo $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           echo luci-mod-dashboard-$input_str_Languages >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-mod-dashboard-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) DB='1'
           DB_JA='1'
