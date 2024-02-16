@@ -144,24 +144,24 @@ _func_dashboard
 }
 
 function _func_dashboard {
-DB=`opkg list-installed luci-mod-dashboard | awk '{ print $1 }'`
-DB_JA=`opkg list-installed luci-i18n-dashboard-$input_str_Languages | awk '{ print $1 }'`
-if [ -z "$DB" ] || [ -z "$DB_JA" ]; then
+DBB=`opkg list-installed luci-mod-dashboard | awk '{ print $1 }'`
+DBB_JA=`opkg list-installed luci-i18n-dashboard-$input_str_Languages | awk '{ print $1 }'`
+if [ -z "$DBB" ] || [ -z "$DBB_JA" ]; then
 while :
 do
   echo -e " \033[1;33mInstall Dashboard\033[0;39m"
-  echo -e " \033[1;32mDashboard: $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+  echo -e " \033[1;32mluci-mod-dashboard: $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-dashboard-$input_str_Languages: $((`opkg info luci-i18n-dashboard-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-mod-dashboard >> /etc/config-software/list-installed/Before
-          echo luci-mod-dashboard-$input_str_Languages >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-mod-dashboard-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo luci-i18n-dashboard-$input_str_Languages >> /etc/config-software/list-installed/Before
+          echo $((`opkg info luci-i18n-dashboard-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
-    "n" ) DB='1'
-          DB_JA='1'
+    "n" ) DBB='1'
+          DBB_JA='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -995,11 +995,11 @@ opkg install luci-i18n-firewall-$input_str_Languages
 fi
 
 # Dashboard
-if [ -z "$DB" ]; then
+if [ -z "$DBB" ]; then
 opkg install luci-mod-dashboard
 fi
-if [ -z "$DB_JA" ]; then
-opkg install luci-i18n-dashboard-ja
+if [ -z "$DBB_JA" ]; then
+opkg install luci-i18n-dashboard-$input_str_Languages
 fi
 
 # SFTP Server
