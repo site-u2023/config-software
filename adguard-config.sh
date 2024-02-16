@@ -16,6 +16,7 @@ if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
   else
   echo -e " \033[1;37mArchitecture: aarch64\033[0;39m" 
 fi
+  echo -e " \033[1;37mSupports aarch64 and x86/64\033[0;39m"
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
