@@ -78,7 +78,8 @@ do
   echo -e " \033[1;32mInstallル: libexpat $((`opkg info libexpat | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Start inputting setpoints [y/n]: " num
   case "${num}" in
-    "y" ) _func_AdGuard_Filter ;;
+    "y" ) JA_FILTER='set'
+          _func_AdGuard_Filter ;;
     "n" ) break ;;
   esac
 done
@@ -165,6 +166,9 @@ do
   echo -e " \033[1;32mPort Number: ${input_str_PORT}\033[0;39m"
   echo -e " \033[1;32mUser Name: ${input_str_USER}\033[0;39m"
   echo -e " \033[1;32mPassword: ${input_str_PASSWD}\033[0;39m"
+  if [ "set" = "${JA_FILTER}" ]; then
+  echo -e " \033[1;32mFilter: japanese\033[0;39m"
+  fi
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;32mAdministrative Web Interface: http://${NET_ADDR}:${input_str_PORT}\033[0;39m"
   read -p " Please select key [y/n or r]: " num
