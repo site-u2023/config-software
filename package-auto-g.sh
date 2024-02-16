@@ -185,22 +185,22 @@ opkg install auc
 # custom feed
 
 # log viewer
-wget --no-check-certificate -O /tmp/luci-app-log-viewer_all.ipk -A 'luci-app-log-viewer_*_all.ipk' https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
+wget --no-check-certificate -O /tmp/luci-app-log-viewer_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-2_all.ipk
 opkg install /tmp/luci-app-log-viewer_all.ipk
 rm /tmp/luci-app-log-viewer_all.ipk
 
 # cpu status
-wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk -A 'luci-app-cpu-status_*_all.ipk' https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
 opkg install /tmp/luci-app-cpu-status_all.ipk
 rm /tmp/luci-app-cpu-status_all.ipk
 
 # cpu perf
-wget --no-check-certificate -O /tmp/luci-app-cpu-perf_all.ipk -A 'luci-app-cpu-perf_*_all.ipk' https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
+wget --no-check-certificate -O /tmp/luci-app-cpu-perf_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
 opkg install /tmp/luci-app-cpu-perf_all.ipk
 rm /tmp/luci-app-cpu-perf_all.ipk
 
 # temp status
-wget --no-check-certificate -O /tmp/luci-app-temp-status_all.ipk -A 'luci-app-temp-status_*_all.ipk' https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
+wget --no-check-certificate -O /tmp/luci-app-temp-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.4-2_all.ipk
 opkg install /tmp/luci-app-temp-status_all.ipk
 rm /tmp/luci-app-temp-status_all.ipk
 
@@ -252,6 +252,7 @@ hd-idle
 luci-app-hd-idle
 luci-i18n-hd-idle-$input_str_Languages
 EOF
+# opkg update
 wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-3_all.ipk
 opkg install /tmp/luci-app-disks-info_all.ipk
 rm /tmp/luci-app-disks-info_all.ipk
