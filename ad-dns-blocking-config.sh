@@ -71,7 +71,7 @@ fi
   echo -e " \033[7;33mAdGuard and DNS over HTTPS (DoH) are used exclusively\033[0;39m"
   echo -e " \033[7;33mAdGuard and DNS over TLS (DoT) are used exclusively\033[0;39m"
   echo -e " \033[7;33mDNS over HTTPS (DoH) and DNS over TLS (DoT) are used exclusively\033[0;39m"
-  echo -e " \033[7;31mAdGuard HOME settings may only use aarch64⁉\033[0;39m"
+  echo -e " \033[1;37mSupports aarch64 and x86/64\033[0;39m"
   echo -e " \033[1;35mAd dns blocking config ------------------------------\033[0;39m"
   echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;32m[b]: AdBlockd installation and configuration (Japan only)\033[0;39m"
