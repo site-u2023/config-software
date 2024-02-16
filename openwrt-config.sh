@@ -152,7 +152,7 @@ fi
   echo -e " \033[1;37mDirectory to install scripts: /etc/config-software/\033[0;39m" 
   echo -e " \033[1;37mhttps://github.com/site-u2023/config-software\033[0;39m" 
   echo -e " \033[1;37mhttps://qiita.com/site_u\033[0;39m" 
-  echo -e " \033[7;31mWe take no responsibility for the use of this script\033[0;39m"
+  echo -e " \033[6;41mWe take no responsibility for the use of this script\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p "  Press any key"
   echo -e 
