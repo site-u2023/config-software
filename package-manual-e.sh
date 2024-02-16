@@ -960,21 +960,21 @@ fi
 
 # log viewer
 if [ -z "$LOG" ]; then
-wget --no-check-certificate -O /tmp/luci-app-log-viewer_all.ipk -A 'luci-app-log-viewer_*_all.ipk' https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
+wget --no-check-certificate -O /tmp/luci-app-log-viewer_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-2_all.ipk
 opkg install /tmp/luci-app-log-viewer_all.ipk
 rm /tmp/luci-app-log-viewer_all.ipk
 fi
 
 # cpu status
 if [ -z "$CPU_STATUS" ]; then
-wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk -A 'luci-app-cpu-status_*_all.ipk' https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
 opkg install /tmp/luci-app-cpu-status_all.ipk
 rm /tmp/luci-app-cpu-status_all.ipk
 fi
 
 # cpu perf
 if [ -z "$CPU_PERFORMANCE" ]; then
-wget --no-check-certificate -O /tmp/luci-app-cpu-perf_all.ipk -A 'luci-app-cpu-perf_*_all.ipk' https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
+wget --no-check-certificate -O /tmp/luci-app-cpu-perf_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
 opkg install /tmp/luci-app-cpu-perf_all.ipk
 rm /tmp/luci-app-cpu-perf_all.ipk
 fi
@@ -1016,6 +1016,7 @@ fi
 
 # disks info
 if [ -z "$luci_app_disks_info" ]; then
+# opkg update
 wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-3_all.ipk
 opkg install /tmp/luci-app-disks-info_all.ipk
 rm /tmp/luci-app-disks-info_all.ipk
