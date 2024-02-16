@@ -22,7 +22,7 @@ do
   echo -e " \033[1;32mInstallable size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
   echo -e " \033[1;33mInstall LuCI\033[0;39m"
   echo -e " \033[1;32mluci: $((`opkg info luci | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   }
   case "${num}" in
     "y" ) echo luci >> /etc/config-software/list-installed/Before
@@ -45,7 +45,7 @@ do
 {
   echo -e " \033[1;33mInstall LuCI SSL\033[0;39m"
   echo -e " \033[1;32mluci-ssl: $((`opkg info luci-ssl | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   }
   case "${num}" in
     "y" ) echo luci-ssl >> /etc/config-software/list-installed/Before
@@ -68,7 +68,7 @@ while :
 do
   echo -e " \033[1;33mInstall Dashboard\033[0;39m"
   echo -e " \033[1;32mDashboard: $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-mod-dashboard >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-mod-dashboard | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -90,7 +90,7 @@ while :
 do
   echo -e " \033[1;33mInstall SFTP server\033[0;39m"
   echo -e " \033[1;32mopenssh-sftp-server: $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo openssh-sftp-server >> /etc/config-software/list-installed/Before
           echo $((`opkg info openssh-sftp-server | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -112,7 +112,7 @@ while :
 do
   echo -e " \033[1;33mInstall ttyd\033[0;39m"
   echo -e " \033[1;32mluci-app-ttyd: $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-ttyd >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-ttyd | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -136,7 +136,7 @@ while :
 do
     echo -e " \033[1;33mInstall irqbalance\033[0;39m"
     echo -e " \033[1;32mirqbalance: $((`opkg info irqbalance | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-    read -p " Press any key [y/n or q]: " num
+    read -p " Please select key [y/n or q]: " num
     case "${num}" in
       "y" ) echo irqbalance >> /etc/config-software/list-installed/Before
             echo $((`opkg info irqbalance | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -161,7 +161,7 @@ do
   echo -e " \033[1;33mInstall SQM\033[0;39m"
   echo -e " \033[1;32msqm-scripts: $((`opkg info sqm-scripts | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-sqm: $((`opkg info luci-app-sqm | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo sqm-scripts >> /etc/config-software/list-installed/Before
           echo luci-app-sqm >> /etc/config-software/list-installed/Before
@@ -186,7 +186,7 @@ while :
 do
   echo -e " \033[1;33mInstall statistics\033[0;39m"
   echo -e " \033[1;32mluci-app-statistics: $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-statistics >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-app-statistics | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -210,7 +210,7 @@ do
   echo -e " \033[1;33mInstall nlbwmon\033[0;39m"
   echo -e " \033[1;32mnlbwmon: $((`opkg info nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-nlbwmon: $((`opkg info luci-app-nlbwmon | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo nlbwmon >> /etc/config-software/list-installed/schedule
           echo luci-app-nlbwmon >> /etc/config-software/list-installed/schedule
@@ -237,7 +237,7 @@ do
   echo -e " \033[1;33mInstall wifi schedule\033[0;39m"
   echo -e " \033[1;32mwifischedule: $((`opkg info wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-wifischedule: $((`opkg info luci-app-wifischedule | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo wifischedule >> /etc/config-software/list-installed/schedule
           echo luci-app-wifischedule >> /etc/config-software/list-installed/Before
@@ -262,7 +262,7 @@ while :
 do
   echo -e " \033[1;33mInstall Themes openWrt\033[0;39m"
   echo -e " \033[1;32mluci-theme-openwrt: $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-openwrt >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-theme-openwrt | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -284,7 +284,7 @@ while :
 do
   echo -e " \033[1;33mInstall Themes material\033[0;39m"
   echo -e " \033[1;32mluci-theme-material: $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-material >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-theme-material | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -306,7 +306,7 @@ while :
 do
   echo -e " \033[1;33mInstall Themes  OpenWrt2020\033[0;39m"
   echo -e " \033[1;32mluci-theme-openwrt-2020: $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-openwrt-2020 >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-theme-openwrt-2020 | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
@@ -332,7 +332,7 @@ do
   echo -e " \033[1;32mattendedsysupgrade-common: $((`opkg info attendedsysupgrade-common | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-attendedsysupgrade: $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mauc: $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo attendedsysupgrade-common >> /etc/config-software/list-installed/Before
           echo luci-app-attendedsysupgrade >> /etc/config-software/list-installed/Before
@@ -361,7 +361,7 @@ do
   echo -e " \033[1;34mcustom feed\033[0;39m"
   echo -e " \033[1;33mInstall log viewer\033[0;39m"
   echo -e " \033[1;32mluci-app-log-viewer: $((5791/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-log-viewer >> /etc/config-software/list-installed/Before
           echo $((5791/1024)) >> /etc/config-software/list-installed/Flash
@@ -384,7 +384,7 @@ do
   echo -e " \033[1;34mcustom feed\033[0;39m"
   echo -e " \033[1;33mInstall cpu status\033[0;39m"
   echo -e " \033[1;32mluci-app-cpu-status: $((1445/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-cpu-status >> /etc/config-software/list-installed/Before
           echo $((1445/1024)) >> /etc/config-software/list-installed/Flash
@@ -407,7 +407,7 @@ do
   echo -e " \033[1;34mcustom feed\033[0;39m"
   echo -e " \033[1;33mInstall cpu perf\033[0;39m"
   echo -e " \033[1;32mluci-app-cpu-perf: $((6519/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-cpu-perf >> /etc/config-software/list-installed/Before
           echo $((0/1024)) >> /etc/config-software/list-installed/Flash
@@ -430,7 +430,7 @@ do
   echo -e " \033[1;34mcustom feed\033[0;39m"
   echo -e " \033[1;33mInstall temp status\033[0;39m"
   echo -e " \033[1;32mluci-app-temp-status: $((2032/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-temp-status >> /etc/config-software/list-installed/Before
           echo $((2032/1024)) >> /etc/config-software/list-installed/Flash
@@ -455,7 +455,7 @@ do
   echo -e " \033[1;33mInstall internet detector\033[0;39m"
   echo -e " \033[1;32minternet-detector: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-internet-detector: $((7771/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo internet-detector >> /etc/config-software/list-installed/Before
           echo luci-app-internet-detector >> /etc/config-software/list-installed/Before
@@ -488,7 +488,7 @@ do
   echo -e " \033[1;32mluci-theme-argon\033[0;39m"
   echo -e " \033[1;32mluci-compat\033[0;39m"
   echo -e " \033[1;32mluci-lib-ipkg\033[0;39m"  
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-theme-argon >> /etc/config-software/list-installed/Before
           echo luci-compat >> /etc/config-software/list-installed/Before
@@ -553,7 +553,7 @@ do
   echo -e " \033[1;34mcustom feed\033[0;39m"
   echo -e " \033[1;33mInstall Disks Info\033[0;39m"
   echo -e " \033[1;32mluci-app-disks-info: $((481/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-app-disks-info >> /etc/config-software/list-installed/Before
           echo $((481/1024)) >> /etc/config-software/list-installed/Flash
@@ -590,7 +590,7 @@ do
   echo -e " \033[1;32mlibblkid1 : $((`opkg info libblkid1 | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-usb-ledtrig-usbport : $((`opkg info kmod-usb-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-ledtrig-usbport : $((`opkg info luci-app-ledtrig-usbport | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo block-mount >> /etc/config-software/list-installed/Before
           echo kmod-usb-storage >> /etc/config-software/list-installed/Before
@@ -635,7 +635,7 @@ do
   echo -e " \033[1;33mInstall FAT32\033[0;39m"
   echo -e " \033[1;32mdosfstools: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-vfat: $((7771/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo dosfstools >> /etc/config-software/list-installed/Before
           echo kmod-fs-vfat >> /etc/config-software/list-installed/Before
@@ -662,7 +662,7 @@ do
   echo -e " \033[1;33mInstall ext4\033[0;39m"
   echo -e " \033[1;32me2fsprogs: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-ext4: $((7771/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo e2fsprogs >> /etc/config-software/list-installed/Before
           echo kmod-fs-ext4 >> /etc/config-software/list-installed/Before
@@ -689,7 +689,7 @@ do
   echo -e " \033[1;33mInstall f2fs\033[0;39m"
   echo -e " \033[1;32mf2fs-tools: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-f2fs: $((7771/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo f2fs-tools >> /etc/config-software/list-installed/Before
           echo kmod-fs-f2fs >> /etc/config-software/list-installed/Before
@@ -716,7 +716,7 @@ do
   echo -e " \033[1;33mInstall exFAT\033[0;39m"
   echo -e " \033[1;32mexfat-fsck: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-exfat: $((7771/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo exfat-fsck >> /etc/config-software/list-installed/Before
           echo kmod-fs-exfat >> /etc/config-software/list-installed/Before
@@ -743,7 +743,7 @@ do
   echo -e " \033[1;33mInstall NTFS\033[0;39m"
   echo -e " \033[1;32mntfs-3g: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-ntfs3: $((7771/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo ntfs-3g >> /etc/config-software/list-installed/Before
           echo kmod-fs-ntfs3 >> /etc/config-software/list-installed/Before
@@ -772,7 +772,7 @@ do
   echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-hfs: $((7771/1024))KB\033[0;39m"
   echo -e " \033[1;32mkmod-fs-hfsplus: $((5415/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo hfsfsck >> /etc/config-software/list-installed/Before
           echo kmod-fs-hfs >> /etc/config-software/list-installed/Before
@@ -804,7 +804,7 @@ do
   echo -e " \033[1;32mhd-idle: $((10680/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-hd-idle: $((7771/1024))KB\033[0;39m"
   echo -e " \033[1;32mhfsfsck: $((10680/1024))KB\033[0;39m"
-  read -p " Press any key [y/n or q]: " num
+  read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo hdparm >> /etc/config-software/list-installed/Before
           echo hd-idle >> /etc/config-software/list-installed/Before
@@ -836,7 +836,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
     echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
     echo -e " \033[1;32mAvailable flash sizes: ${AVAILABLE_FLASH}KB\033[0;39m"
     echo -e " \033[1;37mStart installation of the selected package\033[0;39m"
-    read -p " Press any key [y/n or q]: " num
+    read -p " Please select key [y/n or q]: " num
      case "${num}" in
       "y" ) _func_listinstalled ;;
       "n" ) _func_listinstalled_Before ;;
@@ -845,7 +845,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
   done
 else
   echo -e " \033[1;36mNo installations\033[0;39m"
-  read -p " Press any key"
+  read -p " Please select key"
   exit
 fi
 }
@@ -1114,13 +1114,13 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
  read -p " Retry installation [y/n]: " num
   case "${num}" in
   "y" ) _func_listinstalled ;;
-  "n" )  read -p " Press any key (to reboot the device)"
+  "n" )  read -p " Please any key (to reboot the device)"
          reboot ;;
   esac
 done
 else
  echo -e " \033[1;36mInstallation completed\033[0;39m"
- read -p " Press any key (to reboot the device)"
+ read -p " Please any key (to reboot the device)"
  reboot
 fi
 }
@@ -1169,7 +1169,7 @@ fi
   echo -e " \033[1;37m・USB：HDD\033[0;39m"
   fi
   echo -e " \033[1;37mselective installation\033[0;39m"
-  read -p " Start installing the package [y/n]: " num
+  read -p " Start installing package [y/n]: " num
   case "${num}" in
     "y" ) _func_listinstalled_Before ;;
     "n" ) exit ;;
