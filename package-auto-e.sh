@@ -111,7 +111,7 @@ opkg install attendedsysupgrade-common
 opkg install luci-app-attendedsysupgrade
 opkg install auc
 
-# custom feed
+# custom feed (log viewer, cpu status, cpu perf, temp status, Internet detector, disk info)
 wget --no-check-certificate -O /etc/config-software/pacage_list https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
 
 # log viewer
