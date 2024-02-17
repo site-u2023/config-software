@@ -958,9 +958,9 @@ awk -F, 'FNR==NR{a[$1]++; next} !a[$1]' /etc/config-software/list-installed/Afte
 if [ -s /etc/config-software/list-installed/Difference ]; then
   while :
   do
-    echo -e "\033[1;33m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
-    echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-    echo -e " \033[1;32mAvailable flash sizes: ${AVAILABLE_FLASH}KB\033[0;39m"
+    echo -e "\033[1;34m`cat /etc/config-software/list-installed/Difference`\033[0;39m"
+    echo -e " \033[1;35mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+    echo -e " \033[1;35mAvailable flash sizes: ${AVAILABLE_FLASH}KB\033[0;39m"
     echo -e " \033[1;37mStart installation of the selected package\033[0;39m"
     read -p " Please select key [y/n or q]: " num
      case "${num}" in
@@ -971,7 +971,7 @@ if [ -s /etc/config-software/list-installed/Difference ]; then
   done
 else
   echo -e " \033[1;36mNo installations\033[0;39m"
-  read -p " Please select key"
+  read -p " Please any key"
   exit
 fi
 }
