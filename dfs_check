@@ -12,6 +12,6 @@ start() {
 }
 stop() {
   echo stop dfs_check
-  sed -i  "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
+  sed -i "/dfs_check.sh/d" /etc/crontabs/root
   /etc/init.d/cron restart
 }
