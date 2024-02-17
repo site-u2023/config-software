@@ -87,6 +87,35 @@ do
 done  
 }
 
+function _func_DFS {
+while :
+do
+  echo -e " \033[1;33mDownload and install DFS_Check configuration script\033[0;39m"
+  read -p " Please select key [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/dfs_check.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs_check.sh
+          wget --no-check-certificate -O /etc/init.d/dfs_check https://raw.githubusercontent.com/site-u2023/config-software/main/dfs_check
+          chmod +x /etc/dfs_check.sh
+          chmod +x /etc/init.d/dfs_check
+          RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
+          if [ ${RADIO} = "radio1" ]; then
+          CH="1"
+          else
+          CH-"0"
+          fi
+          DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
+          sed -i -e "s/radio0/${RADIO}/g" /etc/dfs_check.sh
+          sed -i -e "s/phy0-ap0/${DEV}/g" /etc/dfs_check.sh
+          service dfs_check enable
+          service dfs_check start
+          read -p " Press any key"
+          break ;;
+    "n" ) break ;;
+  esac
+done
+}
+
+
 while :
 do
   echo -e " \033[1;37mETC -------------------------------------------------\033[0;39m"
@@ -94,17 +123,17 @@ do
   echo -e " \033[1;33m[2]:IPERF3 installation and service addition\033[0;39m"
   echo -e " \033[1;32m[3]:Location Based Service (LBS) Stop\033[0;39m"
   echo -e " \033[1;35m[4]:SAMBA4 and WSDD2 installation\033[0;39m"
-  echo -e " \033[1;31m[5]\033[0;39m"
+  echo -e " \033[1;31m[5]:DFS Check\033[0;39m"
   echo -e " \033[1;36m[6]\033[0;39m" 
   echo -e " \033[7;40m[q]:Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Please select key [1/2/3/4 or q]: " num
+  read -p " Please select key [1/2/3/4/5 or q]: " num
   case "${num}" in
     "1" ) _func_BUTTON ;;
     "2" ) _func_IPERF3 ;;
     "3" ) _func_WiFi_location_service ;;
     "4" ) _func_SAMBA4 ;;
-    "5" ) ;;
+    "5" ) _func_DFS ;;
     "6" ) ;;
     "q" ) exit ;;
   esac
