@@ -39,13 +39,16 @@ do
   echo -e " \033[1;37mzh-cn: 简体中文 (Chinese Simplified)\033[0;39m"
   echo -e " \033[1;37mzh-tw: 繁體中文 (Chinese Traditional)\033[0;39m"
   echo -e " \033[1;37mPlease enter country code\033[0;39m"
-  echo -e " \033[1;37mLanguage packs will not install without code entry (Standard: English)\033[0;39m"
+  echo -e " \033[1;37mLanguage packs will not install without code entry\033[0;39m"
   echo -e " \033[1;37mExample: ja\033[0;39m"
   read -p " Language: " input_str_Languages
   read -p " Press any key [y/n or r]: " num
   echo -e " \033[1;32mLanguages: $input_str_Languages\033[0;39m"
   case "${num}" in
-    "y" ) _func_INSTALL ;;
+    "y" ) if [ -z "$input_str_Languages" ]; then
+          _func_Languages
+          fi
+          _func_INSTALL ;;
     "n" ) _func_Languages ;;
     "r" ) exit ;;
   esac
