@@ -1165,8 +1165,9 @@ rm /tmp/luci-app-internet-detector_all.ipk
 fi
 
 # Theme ARGON (template)
+ARGON_VERSION='2.3.1'
 if [ -z "$ARGON" ]; then
-wget --no-check-certificate -O /tmp/luci-theme-argon.ipk https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.1/luci-theme-argon_2.3.1_all.ipk
+wget --no-check-certificate -O /tmp/luci-theme-argon.ipk https://github.com/jerrykuku/luci-theme-argon/releases/download/v${ARGON_VERSION}/luci-theme-argon_${ARGON_VERSION}_all.ipk
 opkg install /tmp/luci-theme-argon.ipk
 rm /tmp/luci-theme-argon.ipk
 fi
