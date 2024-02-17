@@ -3,8 +3,6 @@
 START=99
 STOP=01
 
-pidfile=/var/run/dfs_check
-
 start() {
   echo start dfs_check
   echo "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
