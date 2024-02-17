@@ -112,35 +112,41 @@ opkg install luci-app-attendedsysupgrade
 opkg install auc
 
 # custom feed
+wget --no-check-certificate -O /etc/config-software/pacage_list https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
 
 # log viewer
-wget --no-check-certificate -O /tmp/luci-app-log-viewer_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-log-viewer_1.1-2_all.ipk
+LOG_VIEWER=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-log-viewer") ,41)}'`
+wget --no-check-certificate -O /tmp/luci-app-log-viewer_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LOG_VIEWER}
 opkg install /tmp/luci-app-log-viewer_all.ipk
 rm /tmp/luci-app-log-viewer_all.ipk
 
 # cpu status
-wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status_0.4-3_all.ipk
+CPU_STATUS=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-cpu-status") ,46)}'`
+wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${CPU_STATUS}
 opkg install /tmp/luci-app-cpu-status_all.ipk
 rm /tmp/luci-app-cpu-status_all.ipk
 
 # cpu perf
-wget --no-check-certificate -O /tmp/luci-app-cpu-perf_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-perf_0.4-1_all.ipk
+CPU_PERF=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-cpu-perf") ,39)}'`
+wget --no-check-certificate -O /tmp/luci-app-cpu-perf_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${CPU_PERF}
 opkg install /tmp/luci-app-cpu-perf_all.ipk
 rm /tmp/luci-app-cpu-perf_all.ipk
 
 # temp status
-wget --no-check-certificate -O /tmp/luci-app-temp-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.4-2_all.ipk
+TEMP_STATUS=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-temp-status") ,42)}'`
+wget --no-check-certificate -O /tmp/luci-app-temp-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${TEMP_STATUS}
 opkg install /tmp/luci-app-temp-status_all.ipk
 rm /tmp/luci-app-temp-status_all.ipk
 
 # Internet detector
 opkg install mailsend
-wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/internet-detector_1.2-0_all.ipk
+INTERNET_DETECTOR=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/internet-detector") ,39)}'`
+wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR}
 opkg install /tmp/internet-detector_all.ipk
 rm /tmp/internet-detector_all.ipk
-/etc/init.d/internet-detector start
 /etc/init.d/internet-detector enable
-wget --no-check-certificate -O /tmp/luci-app-internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-internet-detector_1.2-0_all.ipk
+LUCI_APP_INTERNET_DETECTER=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-internet-detector") ,48)}'`
+wget --no-check-certificate -O /tmp/luci-app-internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_INTERNET_DETECTER}
 opkg install /tmp/luci-app-internet-detector_all.ipk
 rm /tmp/luci-app-internet-detector_all.ipk
 
@@ -174,9 +180,10 @@ hd-idle
 luci-app-hd-idle
 EOF
 
-wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-disks-info_0.4-3_all.ipk
-opkg install /tmp/luci-app-disks-info_all.ipk
-rm /tmp/luci-app-disks-info_all.ipk
+　LUCI_APP_DISKA_INFO=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-disks-info") ,41)}'`
+　wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_DISKA_INFO}
+　opkg install /tmp/luci-app-disks-info_all.ipk
+　rm /tmp/luci-app-disks-info_all.ipk
   opkg install block-mount
   opkg install kmod-usb-storage
   opkg install kmod-usb-storage-uas
