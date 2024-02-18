@@ -205,7 +205,12 @@ function _func_DEVICE_SET {
   if [ "$TWT" = "on" ]; then
   sed -i -e "s/he_twt_required:0/he_twt_required:1/g" /lib/netifd/wireless/mac80211.sh
   uci add_list wireless.radio0.hostapd_options='he_twt_responder=1'
+   if [ "$WIFI_DEVICE" = "2" ] || [ "$WIFI_DEVICE" = "3" ]; then
   uci add_list wireless.radio1.hostapd_options='he_twt_responder=1'
+   fi
+   if [ "$WIFI_DEVICE" = "3" ]; then
+   uci add_list wireless.radio2.hostapd_options='he_twt_responder=1'
+   fi
   uci commit wireless
   fi
   if [ "$input_str_COUNTRY" = "JP" ]; then
