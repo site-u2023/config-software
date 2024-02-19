@@ -40,6 +40,7 @@
     - [IPERF3 installation and service addition](https://qiita.com/site_u/items/599124e2904d1374c2c9#iperf3)
     - [Location Based Service (LBS) Stop](https://qiita.com/site_u/items/3cd3fc65a789461262e8#%E4%BD%8D%E7%BD%AE%E6%83%85%E5%A0%B1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%81%9C%E6%AD%A2)
     - [SAMBA4 and WSDD2 installation](https://qiita.com/site_u/items/aa9164859a78cb4e3f8f)
+    - [DFS Check](https://qiita.com/site_u/items/f42be7c0953187b9428a#dfs-check)
   - Quit
 
 ---
@@ -48,7 +49,7 @@
 
 <details><summary>Scripts</summary>
 
-- [all-in-one scripts](https://github.com/site-u2023/config-software/blob/main/README.md)
+- [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/README.md)
   - [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/openwrt-config.sh)
     - [system-config.sh](https://github.com/site-u2023/config-software/blob/main/system-config.sh)
       - [system.sh](https://github.com/site-u2023/config-software/blob/main/system.sh)
@@ -57,14 +58,20 @@
       - [ds-lite.sh](https://github.com/site-u2023/config-software/blob/main/ds-lite.sh)
     - [package-config.sh](https://github.com/site-u2023/config-software/blob/main/package-config.sh)
       - [package-auto.sh](https://github.com/site-u2023/config-software/blob/main/package-auto.sh)
+        - [package-auto-e.sh](https://github.com/site-u2023/config-software/blob/main/package-auto-e.sh)
+        - [package-manual-g.sh](https://github.com/site-u2023/config-software/blob/main/package-manual-g.sh)
       - [package-manual.sh](https://github.com/site-u2023/config-software/blob/main/package-manual.sh)
+        - [package-manual-e.sh](https://github.com/site-u2023/config-software/blob/main/package-manual-e.sh)
+        - [package-manual-g.sh](https://github.com/site-u2023/config-software/blob/main/package-manual-g.sh)
       - [install-config.sh](https://github.com/site-u2023/config-software/blob/main/install-config.sh)
     - [dumb-config.sh](https://github.com/site-u2023/config-software/blob/main/dumb-config.sh)
       - [dumb.sh](https://github.com/site-u2023/config-software/blob/main/dumb.sh)
     - [ad-dns-blocking-config.sh](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
       - [adguard-config.sh](https://github.com/site-u2023/config-software/blob/main/adguard-config.sh)
         - [adguardhome.yaml](https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml)
+        - [adguardhome.yaml-g](https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g)
         - [htpasswd](https://github.com/site-u2023/config-software/blob/main/htpasswd)
+        - [htpasswd-x86](https://github.com/site-u2023/config-software/blob/main/htpasswd-x86)
         - [adguard.sh](https://github.com/site-u2023/config-software/blob/main/adguard.sh)
       - [adblock-config.sh](https://github.com/site-u2023/config-software/blob/main/adblock-config.sh)
         - [adblock.sh](https://github.com/site-u2023/config-software/blob/main/adblock.sh)
@@ -74,7 +81,8 @@
       - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
         - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
-
+      - [dfs_check.sh](https://github.com/site-u2023/config-software/blob/main/dfs_check.sh)
+      - [dfs_check](https://github.com/site-u2023/config-software/blob/main/dfs_check)
 ---
 
 </details>
