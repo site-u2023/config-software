@@ -15,8 +15,8 @@ DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
 if  [ "${DISTRIB_ARCH}" = "aar" ] || [ "${DISTRIB_ARCH}" = "arm" ] || [ "${DISTRIB_ARCH}" = "x86" ]; then
   echo -e " \033[1;37mSupports aarch64 and arm, x86/64\033[0;39m"
  else
- read -p " Unsupported Architectures"
- exit
+  read -p " Unsupported Architectures"
+  exit
 fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
