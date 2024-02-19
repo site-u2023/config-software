@@ -297,26 +297,26 @@ if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPEN
 fi
 UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
-opkg update
+ opkg update
 fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
 ADGUARD_VERSION=`opkg info adguardhome | grep Version | awk '{ print $2 }'`
 ADGUARD_SIZE=$((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))
 echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
-  if [ -z "${AVAILABLE_FLASH}" ]; then
-echo -e " \033[1;37mAvailable Flash Space: No overlay\033[0;39m"
+if [ -z "${AVAILABLE_FLASH}" ]; then
+ echo -e " \033[1;37mAvailable Flash Space: No overlay\033[0;39m"
 AVAILABLE_FLASH=${AVAILABLE_MEMORY}
-  else
-echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
-  fi
+else
+ echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
+fi
 echo -e " \033[1;37mInstalled Capacity: ${ADGUARD_SIZE}KB\033[0;39m"
-  if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
-   echo -e " \033[1;37mRecommended Memory Capacity: 51200KB\033[0;39m"
-   echo -e " \033[1;37mRecommended Flash Capacity: 102400KB\033[0;39m"
-   echo -e " \033[1;37minstallable\033[0;39m"
-   _func_AdGuard
-  else
-   read -p " Exit due to insufficient flash space"
-   exit
-  fi
+if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
+ echo -e " \033[1;37mRecommended Memory Capacity: 51200KB\033[0;39m"
+ echo -e " \033[1;37mRecommended Flash Capacity: 102400KB\033[0;39m"
+ echo -e " \033[1;37minstallable\033[0;39m"
+ _func_AdGuard
+else
+ read -p " Exit due to insufficient flash space"
+exit
+fi
