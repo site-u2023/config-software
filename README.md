@@ -49,7 +49,7 @@
 
 <details><summary>Scripts</summary>
 
-- [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/README.md)
+- [README.md](https://github.com/site-u2023/config-software/blob/main/README.md)
   - [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/openwrt-config.sh)
     - [system-config.sh](https://github.com/site-u2023/config-software/blob/main/system-config.sh)
       - [system.sh](https://github.com/site-u2023/config-software/blob/main/system.sh)
