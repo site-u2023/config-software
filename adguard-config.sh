@@ -5,9 +5,6 @@ network_flush_cache
 network_get_ipaddr NET_ADDR "${NET_IF}"
 
 function _func_AdGuard {
-while :
-do
-
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdGuard already installed\033[0;39m"
 fi
@@ -17,12 +14,8 @@ fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH | awk '{print substr($0,index($0,"=") )}'`
 if  [ "${DISTRIB_ARCH}" = "='aarch64_cortex-a53'" ] || [ "${DISTRIB_ARCH}" = "='arm_cortex-a7_neon-vfpv4'" ] || [ "${DISTRIB_ARCH}" = "='x86_64'" ]; then
   echo -e " \033[1;37mSupported Architectures\033[0;39m"
- else
-  echo -e " \033[1;37mPackage architectures\033[0;39m"
-  echo -e " \033[1;37mhttps://openwrt.org/packages/architectures\033[0;39m" 
-  read -p " Unsupported Architectures"
-  exit
-fi
+while :
+do
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
@@ -31,37 +24,45 @@ fi
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
   read -p " Please select key [c/s/b or q]: " num
   case "${num}" in
-    "c" ) 
-{
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
-opkg update
-fi
-AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
-AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-ADGUARD_VERSION=`opkg info adguardhome | grep Version | awk '{ print $2 }'`
-ADGUARD_SIZE=$((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))
-echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
-  if [ -z "${AVAILABLE_FLASH}" ]; then
-echo -e " \033[1;37mAvailable Flash Space: No overlay\033[0;39m"
-AVAILABLE_FLASH=${AVAILABLE_MEMORY}
-  else
-echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
-  fi
-echo -e " \033[1;37mInstalled Capacity: ${ADGUARD_SIZE}KB\033[0;39m"
-  if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
-   echo -e " \033[1;37mRecommended Memory Capacity: 51200KB\033[0;39m"
-   echo -e " \033[1;37mRecommended Flash Capacity: 102400KB\033[0;39m"
-   echo -e " \033[1;37minstallable\033[0;39m"
-  else
-   read -p " Exit due to insufficient flash space"
-   exit
-  fi
-}
-          _func_AdGuard_Confirm ;;
+    "c" ) _func_AdGuard_Confirm ;;
     "s" ) _func_AdGuard_Admin ;;        
     "b" ) _func_AdGuard_Before ;;
     "q" ) exit ;;
+  esac
+done
+ else
+  echo -e " \033[1;37mhttps://openwrt.org/packages/architectures\033[0;39m" 
+  echo -e " \033[1;37mUnsupported Web interface configuration\033[0;39m" 
+while :
+do
+  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[c]: AdGuard HOME installation\033[0;39m"
+  echo -e " \033[1;32m[b]: Removing and restoring AdGuard HOME to previous settings\033[0;39m"
+  echo -e " \033[1;37m[q]: Quit\033[0;39m"   
+  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
+  read -p " Please select key [c/b or q]: " num
+  case "${num}" in
+    "c" ) _func_AdGuard_Only ;;      
+    "b" ) _func_AdGuard_Before ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+}
+
+function _func_AdGuard_Only {
+while :
+do
+  echo -e " \033[1;32mInstall: adguardhome $((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADGUARD_VERSION}\033[0;39m"
+  read -p " Please select key [y/n]: " num
+  case "${num}" in
+    "y" ) wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
+          sh /etc/config-software/adguard.sh
+          echo -e " \033[1;32mInstallation complete\033[0;39m"
+          echo -e " \033[1;32mhttp://${NET_ADDR}:3000\033[0;39m"
+          read -p " Press any key (to reboot the device)"
+          reboot ;;    
+    "n" ) break ;;
   esac
 done
 }
@@ -227,7 +228,7 @@ sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.y
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
-echo -e " \033[1;32mInstallation and configuration are complete\033[0;39m"
+echo -e " \033[1;32mInstallation and configuration complete\033[0;39m"
 echo -e " \033[1;32mhttp://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " Press any key (to reboot the device)"
 reboot
@@ -293,8 +294,32 @@ fi
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
 if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
  echo -e " \033[1;37mversion check: OK\033[0;39m"
-  _func_AdGuard
  else
  read -p " Different version"
  exit
 fi
+UPDATE="/tmp/opkg-lists/openwrt_telephony"
+if [ ! -e ${UPDATE} ]; then
+opkg update
+fi
+AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
+AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
+ADGUARD_VERSION=`opkg info adguardhome | grep Version | awk '{ print $2 }'`
+ADGUARD_SIZE=$((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))
+echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
+  if [ -z "${AVAILABLE_FLASH}" ]; then
+echo -e " \033[1;37mAvailable Flash Space: No overlay\033[0;39m"
+AVAILABLE_FLASH=${AVAILABLE_MEMORY}
+  else
+echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
+  fi
+echo -e " \033[1;37mInstalled Capacity: ${ADGUARD_SIZE}KB\033[0;39m"
+  if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
+   echo -e " \033[1;37mRecommended Memory Capacity: 51200KB\033[0;39m"
+   echo -e " \033[1;37mRecommended Flash Capacity: 102400KB\033[0;39m"
+   echo -e " \033[1;37minstallable\033[0;39m"
+   _func_AdGuard
+  else
+   read -p " Exit due to insufficient flash space"
+   exit
+  fi
