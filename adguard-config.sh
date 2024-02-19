@@ -11,11 +11,15 @@ do
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdGuard already installed\033[0;39m"
 fi
-DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
-if  [ "${DISTRIB_ARCH}" = "aar" ] || [ "${DISTRIB_ARCH}" = "arm" ] || [ "${DISTRIB_ARCH}" = "x86" ]; then
-  echo -e " \033[1;37mSupports aarch64 and arm, x86/64\033[0;39m"
+  echo -e " \033[1;37mSupports aarch64_cortex-a53\033[0;39m"
+  echo -e " \033[1;37mSupports arm_cortex-a7_neon-vfpv4\033[0;39m"
+  echo -e " \033[1;37mSupports x86_64\033[0;39m"
+DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH | awk '{print substr($0,index($0,"=") )}'`
+if  [ "${DISTRIB_ARCH}" = "='aarch64_cortex-a53'" ] || [ "${DISTRIB_ARCH}" = "='arm_cortex-a7_neon-vfpv4'" ] || [ "${DISTRIB_ARCH}" = "='x86_64'" ]; then
+  echo -e " \033[1;37mSupported Architectures\033[0;39m"
  else
-  echo -e " \033[1;37mSupports aarch64 and arm, x86/64\033[0;39m"
+  echo -e " \033[1;37mPackage architectures\033[0;39m"
+  echo -e " \033[1;37mhttps://openwrt.org/packages/architectures\033[0;39m" 
   read -p " Unsupported Architectures"
   exit
 fi
@@ -197,14 +201,13 @@ echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> 
  else
 wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
 fi
-DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
-if  [ "${DISTRIB_ARCH}" = "aar" ] ; then
+if  [ "${DISTRIB_ARCH}" = "='aarch64_cortex-a53'" ]; then
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 fi
-if  [ "${DISTRIB_ARCH}" = "arm" ] ; then
+if  [ "${DISTRIB_ARCH}" = "='arm_cortex-a7_neon-vfpv4'" ]; then
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-arm
 fi
-if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
+if  [ "${DISTRIB_ARCH}" = "='x86_64'" ]; then
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-x86
 fi
 chmod +x /usr/bin/htpasswd
