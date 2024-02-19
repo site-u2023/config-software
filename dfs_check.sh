@@ -1,4 +1,5 @@
 #! /bin/sh
+# # this script based https://github.com/NilsRo/Openwrt-radio-check
 CHECK=$(iw dev phy0-ap0 info | awk '/channel/{print $2}')
 if [ -z ${CHECK} ]; then
         printf "Wifi restart because of DFS bug!\n"
