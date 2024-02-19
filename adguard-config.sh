@@ -197,7 +197,7 @@ echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> 
 wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
 fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
-if  [ "${DISTRIB_ARCH}" = "aarch64" ] ; then
+if  [ "${DISTRIB_ARCH}" = "aar" ] ; then
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 fi
 if  [ "${DISTRIB_ARCH}" = "arm" ] ; then
