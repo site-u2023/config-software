@@ -17,7 +17,7 @@ fi
 if  [ "${DISTRIB_ARCH}" = "arm" ] ; then
   echo -e " \033[1;37mArchitecture: arm\033[0;39m"
 fi
-if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
+if  [ "${DISTRIB_ARCH}" = "x86/64" ] ; then
   echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
 fi
   echo -e " \033[1;37mSupports aarch64 and arm, x86/64\033[0;39m"
