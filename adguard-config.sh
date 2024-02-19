@@ -197,7 +197,7 @@ wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubuserc
 fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
 if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
-wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-vm
+wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-x86
  else
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 fi
