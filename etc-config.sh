@@ -97,17 +97,42 @@ do
           wget --no-check-certificate -O /etc/init.d/dfs_check https://raw.githubusercontent.com/site-u2023/config-software/main/dfs_check
           chmod +x /etc/dfs_check.sh
           chmod +x /etc/init.d/dfs_check
-          RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
-          if [ ${RADIO} = "radio1" ]; then
-          CH="1"
-          else
-          CH-"0"
+          DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 2`
+          CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
+          echo $CHECK
+          if [ ${CHECK} -ge "100" ]; then
+          sed -i -e "s/radio0/radio2/g" /etc/dfs_check.sh
+          sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
+          echo "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
+          echo "DFS Check setup is complete"
+          read -p " Press any key"
+          exit
           fi
-          DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
-          sed -i -e "s/radio0/${RADIO}/g" /etc/dfs_check.sh
-          sed -i -e "s/phy0-ap0/${DEV}/g" /etc/dfs_check.sh
-          service dfs_check enable
-          service dfs_check start
+          DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 1`
+          CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
+          echo $CHECK
+          if [ ${CHECK} -ge "100" ]; then
+          sed -i -e "s/radio0/radio1/g" /etc/dfs_check.sh
+          sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
+          echo "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
+          echo "DFS Check setup is complete"
+          read -p " Press any key"
+          exit
+          fi
+          DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 0`
+          CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
+          echo $CHECK
+          if [ ${CHECK} -ge "100" ]; then
+          sed -i -e "s/radio0/radio0/g" /etc/dfs_check.sh
+          sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
+          echo "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
+          echo "DFS Check setup is complete"
+          read -p " Press any key"
+          exit
+          fi
+          service dfs_check disable
+          service dfs_check stop
+          echo "Check your Wi-Fi settings"
           read -p " Press any key"
           break ;;
     "n" ) break ;;
