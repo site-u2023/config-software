@@ -99,7 +99,6 @@ do
           chmod +x /etc/init.d/dfs_check
           DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 2`
           CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
-          echo $CHECK
           if [ ${CHECK} -ge "100" ]; then
           sed -i -e "s/radio0/radio2/g" /etc/dfs_check.sh
           sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
@@ -110,7 +109,6 @@ do
           fi
           DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 1`
           CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
-          echo $CHECK
           if [ ${CHECK} -ge "100" ]; then
           sed -i -e "s/radio0/radio1/g" /etc/dfs_check.sh
           sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
@@ -121,7 +119,6 @@ do
           fi
           DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 0`
           CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
-          echo $CHECK
           if [ ${CHECK} -ge "100" ]; then
           sed -i -e "s/radio0/radio0/g" /etc/dfs_check.sh
           sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
