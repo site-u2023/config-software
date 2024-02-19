@@ -11,12 +11,16 @@ if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ];
   echo -e " \033[1;37mAdGuard already installed\033[0;39m"
 fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
+if  [ "${DISTRIB_ARCH}" = "aarch64" ] ; then
+  echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
+fi
+if  [ "${DISTRIB_ARCH}" = "arm" ] ; then
+  echo -e " \033[1;37mArchitecture: arm\033[0;39m"
+fi
 if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
   echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
-  else
-  echo -e " \033[1;37mArchitecture: aarch64\033[0;39m" 
 fi
-  echo -e " \033[1;37mSupports aarch64 and x86/64\033[0;39m"
+  echo -e " \033[1;37mSupports aarch64 and arm, x86/64\033[0;39m"
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
@@ -196,10 +200,14 @@ echo "02 03 01 * * sed -i "service adguardhome start" /etc/adguardhome.yaml" >> 
 wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
 fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
+if  [ "${DISTRIB_ARCH}" = "aarch64" ] ; then
+wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
+fi
+if  [ "${DISTRIB_ARCH}" = "arm" ] ; then
+wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-arm
+fi
 if  [ "${DISTRIB_ARCH}" = "x86" ] ; then
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-x86
- else
-wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
 fi
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
