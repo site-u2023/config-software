@@ -7,20 +7,17 @@ network_get_ipaddr NET_ADDR "${NET_IF}"
 function _func_AdGuard {
 while :
 do
+
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdGuard already installed\033[0;39m"
 fi
 DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH  | cut -c 15-17`
-if  [ "${DISTRIB_ARCH}" = "aarch64" ] ; then
-  echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
-fi
-if  [ "${DISTRIB_ARCH}" = "arm" ] ; then
-  echo -e " \033[1;37mArchitecture: arm\033[0;39m"
-fi
-if  [ "${DISTRIB_ARCH}" = "x86/64" ] ; then
-  echo -e " \033[1;37mArchitecture: x86_64\033[0;39m"
-fi
+if  [ "${DISTRIB_ARCH}" = "aar" ] || [ "${DISTRIB_ARCH}" = "arm" ] || [ "${DISTRIB_ARCH}" = "x86" ]; then
   echo -e " \033[1;37mSupports aarch64 and arm, x86/64\033[0;39m"
+ else
+ read -p " Unsupported Architectures"
+ exit
+fi
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
   echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
