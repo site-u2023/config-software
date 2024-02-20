@@ -970,7 +970,7 @@ fi
 
 # cpu status
 if [ -z "$CPU_STATUS" ]; then
-CPU_STATUS_V=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-cpu-status_0") ,46)}'`
+CPU_STATUS_V=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-cpu-status_0") ,41)}'`
 wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${CPU_STATUS_V}
 opkg install /tmp/luci-app-cpu-status_all.ipk
 rm /tmp/luci-app-cpu-status_all.ipk
