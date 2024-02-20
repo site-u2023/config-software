@@ -122,7 +122,7 @@ opkg install /tmp/luci-app-log-viewer_all.ipk
 rm /tmp/luci-app-log-viewer_all.ipk
 
 # cpu status
-CPU_STATUS=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-cpu-status") ,46)}'`
+CPU_STATUS=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-cpu-status_0") ,46)}'`
 wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${CPU_STATUS}
 opkg install /tmp/luci-app-cpu-status_all.ipk
 rm /tmp/luci-app-cpu-status_all.ipk
