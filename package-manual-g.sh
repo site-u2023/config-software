@@ -1152,7 +1152,7 @@ fi
 # Internet detector
 if [ -z "$DETECTER" ]; then
 INTERNET_DETECTOR=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/internet-detector_1") ,39)}'`
-wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR_V}
+wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR}
 opkg install /tmp/internet-detector_all.ipk
 rm /tmp/internet-detector_all.ipk
 /etc/init.d/internet-detector enable
