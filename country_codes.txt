@@ -61,7 +61,6 @@ SI	Slovenia
 TH	Thailand
 UY	Uruguay
 PA	Panama
-RU	Russia
 EG	Egypt
 TT	Trinidad and Tobago
 TR	Turkey
