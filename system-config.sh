@@ -193,6 +193,61 @@ done
 
 function _func_DEVICE_SET {
   wget --no-check-certificate -O /etc/config-software/system.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system.sh
+    if [ "$input_str_COUNTRY" = "JP" ]; then
+  sed -i -e "s|UTC|Asia/Tokyo|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "CN" ]; then
+  sed -i -e "s|UTC|Asia/Shanghai|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "HK" ]; then
+  sed -i -e "s|UTC|Asia/Hong Kong|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "US" ]; then
+  echo -e " \033[1;37mYou probably live in Hawaii\033[0;39m"
+  echo -e " \033[1;37mPlease change to your local time zone\033[0;39m"
+  sed -i -e "s|UTC|Pacific/Honolulu|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "TW" ]; then
+  sed -i -e "s|UTC|Asia/Taipei|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "KR" ]; then
+  sed -i -e "s|UTC|Asia/Seoul|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "RU" ]; then
+  sed -i -e "s|UTC|Europe/Moscow|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "ID" ]; then
+  sed -i -e "s|UTC|Asia/Jakarta|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "VN" ]; then
+  sed -i -e "s|UTC|Asia/Jakarta|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "DE" ]; then
+  sed -i -e "s|UTC|Europe/Berlin|g" /etc/config-software/system.sh
+  fi
+  if [ "$input_str_COUNTRY" = "FR" ]; then
+  sed -i -e "s|UTC|Europe/Paris|g" /etc/config-software/system.sh
+  fi 
+  if [ "$input_str_COUNTRY" = "AU" ]; then
+  sed -i -e "s|UTC|Australia/Melbourne|g" /etc/config-software/system.sh
+  fi 
+  if [ "$input_str_COUNTRY" = "CA" ]; then
+  echo -e " \033[1;37mIs Alaska ok?\033[0;39m"
+  echo -e " \033[1;37mPlease change to your local time zone\033[0;39m"
+  sed -i -e "s|UTC|America/Anchorage|g" /etc/config-software/system.sh
+  fi 
+  if [ "$input_str_COUNTRY" = "IN" ]; then
+  sed -i -e "s|UTC|Asia/Kolkata|g" /etc/config-software/system.sh
+  fi 
+  if [ "$input_str_COUNTRY" = "TR" ]; then
+  sed -i -e "s|UTC|Europe/Istanbul|g" /etc/config-software/system.sh
+  fi 
+  if [ "$input_str_COUNTRY" = "SG" ]; then
+  sed -i -e "s|UTC|Asia/Singapore	|g" /etc/config-software/system.sh
+  fi 
+  if [ -z "$input_str_COUNTRY" ]; then
+  echo -e " \033[5;43mPlease change time zone manually\033[0;39m"
+  fi
   sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/config-software/system.sh
   sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/config-software/system.sh
   sed -i -e "s/Country_Code/${input_str_COUNTRY}/g" /etc/config-software/system.sh
@@ -212,11 +267,6 @@ function _func_DEVICE_SET {
    uci add_list wireless.radio2.hostapd_options='he_twt_responder=1'
    fi
   uci commit wireless
-  fi
-  if [ "$input_str_COUNTRY" = "JP" ]; then
-  sed -i -e "s|UTC|Asia/Tokyo|g" /etc/config-software/system.sh
-  else
-  echo -e " \033[7;40mPlease change time zone manually\033[0;39m"
   fi
   sh /etc/config-software/system.sh 2> /dev/null
   read -p " Press any key (Reboot the device)"
