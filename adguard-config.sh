@@ -225,6 +225,7 @@ sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.y
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
+sed -i -e "s/192.168.1.1:54/${NET_ADDR}/g" /etc/adguardhome.yaml
 echo -e " \033[1;32mInstallation and configuration complete\033[0;39m"
 echo -e " \033[1;32mhttp://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " Press any key (to reboot the device)"
