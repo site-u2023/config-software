@@ -60,6 +60,7 @@ UPDATE="/tmp/opkg-lists/openwrt_telephony"
 if [ ! -e ${UPDATE} ]; then
 opkg update
 fi
+opkg install wget-ssl	
 mkdir -p /etc/config-software/list-installed
 echo 0 > /etc/config-software/list-installed/Flash
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
@@ -1150,7 +1151,6 @@ fi
 
 # Internet detector
 if [ -z "$DETECTER" ]; then
-opkg install mailsend
 INTERNET_DETECTOR_V=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/internet-detector") ,39)}'`
 wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR_V}
 opkg install /tmp/internet-detector_all.ipk
