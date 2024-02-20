@@ -7,7 +7,7 @@ if [ -z ${CHECK} ]; then
         sleep 2
         wifi up radio0
 else
-        if [ $(uci get wireless.radio1.channel) -ne ${CHECK} ]; then
+        if [ $(uci get wireless.radio0.channel) -ne ${CHECK} ]; then
                 printf "Wifi restart because of channel!\n"
                 wifi down radio0
                 sleep 2
