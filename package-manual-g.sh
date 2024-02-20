@@ -563,7 +563,7 @@ do
   esac
 done
 fi
-_func_internetdetector
+_func_lucithemeargon
 }
 
 function _func_internetdetector {
