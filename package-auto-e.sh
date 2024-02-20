@@ -140,8 +140,7 @@ opkg install /tmp/luci-app-temp-status_all.ipk
 rm /tmp/luci-app-temp-status_all.ipk
 
 # Internet detector
-opkg install mailsend
-INTERNET_DETECTOR=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/internet-detector") ,39)}'`
+INTERNET_DETECTOR=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/internet-detector_1") ,39)}'`
 wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR}
 opkg install /tmp/internet-detector_all.ipk
 rm /tmp/internet-detector_all.ipk
