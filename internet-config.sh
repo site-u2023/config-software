@@ -27,7 +27,7 @@ done
 function _func_MAP_e_VirtualConnect_confirmation {
 while :
 do
-  echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定とインストールとを実行します\033[0;39m"
+  echo -e " \033[1;37mOCNバーチャルコネクトの設定とインストールとを実行します\033[0;39m"
   echo -e " \033[1;37mインストール: map 6kB\033[0;39m"
   echo -e " \033[1;37mインストール: bash 375kB\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
@@ -59,7 +59,7 @@ exit
 function _func_MAP_e_VirtualConnect_Before {
 while :
 do
-  echo -e " \033[1;37mOCNバーチャルコネクト（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mOCNバーチャルコネクトの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
@@ -79,8 +79,8 @@ do
   echo -e " \033[1;33mV6プラス・IPv6オプション -----------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: V6プラス・IPv6オプションの設定を実行（マルチセッション対応）\033[0;39m"
   echo -e " \033[1;31m[b]: 以前の設定に復元\033[0;39m"
-  echo -e " \033[1;32m[n]: ニチバン対策の設定のみ実行\033[0;39m"
-  echo -e " \033[1;35m[o]: ニチバン対策の設定を以前の設定に復元\033[0;39m"
+  echo -e " \033[1;32m[n]: マルチセッション対応設定のみ実行\033[0;39m"
+  echo -e " \033[1;35m[o]: マルチセッション対応設定を以前の設定に復元\033[0;39m"
   echo -e " \033[1;33m[r]: 戻る\033[0;39m"
   echo -e " \033[1;33m------------------------------------------------------\033[0;39m"
   read -p " 選択してください [e/b/n/o or r]: " num
@@ -97,7 +97,7 @@ done
 function _func_MAP_e_V6plus_confirmation {
 while :
 do
-  echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を実行します\033[0;39m"
+  echo -e " \033[1;37mV6プラス・IPv6オプションの設定を実行します\033[0;39m"
   echo -e " \033[1;37mパッケージ: map サイズ: 6kBをインストールします\033[0;39m"
   echo -e " \033[1;37mパッケージ: bash サイズ: 375kBをインストールします\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
@@ -129,7 +129,7 @@ exit
 function _func_MAP_e_V6plus_Before {
 while :
 do
-  echo -e " \033[1;37mV6プラス・IPv6オプション（ニチバン対策含む）の設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mV6プラス・IPv6オプションの設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
@@ -154,7 +154,7 @@ exit
 function _func_MAP_e_Nichiban_map {
 while :
 do
-  echo -e " \033[1;37m ニチバン対策の設定を実行します\033[0;39m"
+  echo -e " \033[1;37m マルチセッション対応の設定を実行します\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Nichiban_map_SET ;;
@@ -174,7 +174,7 @@ reboot
 function _func_MAP_e_Nichiban_map_Before {
 while :
 do
-  echo -e " \033[1;37mニチバン対策の設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mマルチセッション対応の設定を以前の設定に復元します\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
     "y" ) _func_MAP_e_Nichiban_map_Restoration ;;
