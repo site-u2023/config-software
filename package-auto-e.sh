@@ -36,7 +36,7 @@ luci-app-log-viewer
 luci-app-cpu-perf
 luci-app-temp-status
 #internet-detector
-#luci-app-internet-detector
+luci-app-internet-detector
 luci-theme-argon
 EOF
 
@@ -140,15 +140,15 @@ opkg install /tmp/luci-app-temp-status_all.ipk
 rm /tmp/luci-app-temp-status_all.ipk
 
 # Internet detector
-#INTERNET_DETECTOR=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/internet-detector_1") ,39)}'`
-#wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR}
-#opkg install /tmp/internet-detector_all.ipk
-#rm /tmp/internet-detector_all.ipk
-#/etc/init.d/internet-detector enable
-#LUCI_APP_INTERNET_DETECTER=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-internet-detector") ,48)}'`
-#wget --no-check-certificate -O /tmp/luci-app-internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_INTERNET_DETECTER}
-#opkg install /tmp/luci-app-internet-detector_all.ipk
-#rm /tmp/luci-app-internet-detector_all.ipk
+INTERNET_DETECTOR=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/internet-detector_1") ,39)}'`
+wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR}
+opkg install /tmp/internet-detector_all.ipk
+rm /tmp/internet-detector_all.ipk
+/etc/init.d/internet-detector enable
+LUCI_APP_INTERNET_DETECTER=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-internet-detector") ,48)}'`
+wget --no-check-certificate -O /tmp/luci-app-internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_INTERNET_DETECTER}
+opkg install /tmp/luci-app-internet-detector_all.ipk
+rm /tmp/luci-app-internet-detector_all.ipk
 
 # USB
 if [ -n "$str_USB" ]; then
