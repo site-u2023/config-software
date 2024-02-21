@@ -7,7 +7,7 @@ do
   echo -e " \033[1;33m要ONU直結\033[0;39m"
   echo -e " \033[1;33mHGW非対応\033[0;39m"
   echo -e " \033[1;34mOCNバーチャルコネクト --------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]: OCNバーチャルコネクトのインストールと設定（マルチセッション対応）\033[0;39m"
+  echo -e " \033[1;34m[e]: OCNバーチャルコネクトのインストールと設定 (マルチセッション対応)\033[0;39m"
   echo -e " \033[1;31m[b]: OCNバーチャルコネクトのリムーブと以前の設定に復元\033[0;39m"
   echo -e " \033[1;32m[n]: ニチバン対策の設定のみ実行\033[0;39m"
   echo -e " \033[1;35m[o]: ニチバン対策の設定を以前の設定に復元\033[0;39m"
@@ -77,7 +77,7 @@ do
   echo -e " \033[1;33m要ONU直結\033[0;39m"
   echo -e " \033[1;33mHGW非対応\033[0;39m"
   echo -e " \033[1;33mV6プラス・IPv6オプション -----------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]: V6プラス・IPv6オプションの設定を実行（マルチセッション対応）\033[0;39m"
+  echo -e " \033[1;34m[e]: V6プラス・IPv6オプションの設定を実行 (マルチセッション対応)\033[0;39m"
   echo -e " \033[1;31m[b]: 以前の設定に復元\033[0;39m"
   echo -e " \033[1;32m[n]: マルチセッション対応設定のみ実行\033[0;39m"
   echo -e " \033[1;35m[o]: マルチセッション対応設定を以前の設定に復元\033[0;39m"
@@ -416,7 +416,7 @@ exit
 function _func_PPPoE {
 while :
 do
-  echo -e " \033[1;33m認証ID（ユーザー名）及びパスワードを準備下さい\033[0;39m"
+  echo -e " \033[1;33m認証ID (ユーザー名)及びパスワードを準備下さい\033[0;39m"
   echo -e " \033[1;36mPPPoE -----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[4]: PPPoEのIPv4接続の設定を実行\033[0;39m"
   echo -e " \033[1;32m[6]: PPPoEのIPv4及びIPv6接続の設定を実行\033[0;39m"
@@ -438,7 +438,7 @@ done
 function _func_PPPoE_ID {
 while :
 do
-  echo -e "\033[1;37m IPv4接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
+  echo -e "\033[1;37m IPv4接続の認証ID (ユーザー名)を入力して下さい\033[0;39m"
   read -p " PAP・CHAユーザー名: " input_str_ID
   read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
@@ -467,11 +467,11 @@ function _func_PPPoE_confirmation {
 while :
 do
   echo -e " \033[1;34mPPPoE IPv4 ------------------------------------------\033[0;39m"
-  echo -e " \033[1;37m PAP・CHA認証ID（ユーザー名）: ${input_str_ID}\033[0;39m"
-  echo -e " \033[1;37m PAP・CHA認証パスワード      : ${input_str_PASSWORD}\033[0;39m"
+  echo -e " \033[1;37m PAP・CHA認証ID (ユーザー名): ${input_str_ID}\033[0;39m"
+  echo -e " \033[1;37m PAP・CHA認証パスワード     : ${input_str_PASSWORD}\033[0;39m"
   echo -e " \033[1;34m-----------------------------------------------------\033[0;39m"
   read -p " 設定を開始します [y/n or r]: " num
-  case "${num}" in
+  case "${num}" in 
     "y" ) _func_PPPoE_SET ;;
     "n" ) _func_PPPoE ;;
     "r" ) break ;;
@@ -517,7 +517,7 @@ exit
 function _func_PPPoE_ID4 {
 while :
 do
-  echo -e "\033[1;37m IPv4接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
+  echo -e "\033[1;37m IPv4接続の認証ID ユーザー名を入力して下さい\033[0;39m"
   read -p " PAP・CHAユーザー名: " input_str_ID4
   read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
@@ -545,7 +545,7 @@ done
 function _func_PPPoE_ID6 {
 while :
 do
-  echo -e "\033[1;37m IPv6接続の認証ID（ユーザー名）を入力して下さい\033[0;39m"
+  echo -e "\033[1;37m IPv6接続の認証ID (ユーザー名)を入力して下さい\033[0;39m"
   read -p " PAP・CHAユーザー名: " input_str_ID6
   read -p " 宜しいですか [y/n or r]: " num
   case "${num}" in
@@ -574,10 +574,10 @@ function _func_PPPoE_confirmation6 {
 while :
 do
   echo -e " \033[1;32mPPPoE IPv4 IPv6 -------------------------------------\033[0;39m"
-  echo -e " \033[1;37m PAP・CHA IPv4認証ID（ユーザー名） : ${input_str_ID4}\033[0;39m"
-  echo -e " \033[1;37m PAP・CHA IPv4認証パスワード       : ${input_str_PASSWORD4}\033[0;39m"
-  echo -e " \033[1;37m PAP・CHA IPv6認証ID（ユーザー名） : ${input_str_ID6}\033[0;39m"
-  echo -e " \033[1;37m PAP・CHA IPv6認証パスワード       : ${input_str_PASSWORD6}\033[0;39m"
+  echo -e " \033[1;37m PAP・CHA IPv4認証ID (ユーザー名): ${input_str_ID4}\033[0;39m"
+  echo -e " \033[1;37m PAP・CHA IPv4認証パスワード     : ${input_str_PASSWORD4}\033[0;39m"
+  echo -e " \033[1;37m PAP・CHA IPv6認証ID (ユーザー名): ${input_str_ID6}\033[0;39m"
+  echo -e " \033[1;37m PAP・CHA IPv6認証パスワード     : ${input_str_PASSWORD6}\033[0;39m"
   echo -e " \033[1;32m-----------------------------------------------------\033[0;39m"
   read -p " 設定を開始します [y/n or r]: " num
   case "${num}" in
@@ -644,12 +644,12 @@ do
   echo -e " \033[1;33mJapanese notation\033[0;39m"
   echo -e " \033[1;33m要ONU直結\033[0;39m"
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[v]: OCNバーチャルコネクト自動設定（マルチセッション対応）\033[0;39m"
-  echo -e " \033[1;33m[p]: V6プラス・IPv6オプション自動設定（マルチセッション対応）\033[0;39m"
+  echo -e " \033[1;34m[v]: OCNバーチャルコネクト自動設定 (マルチセッション対応)\033[0;39m"
+  echo -e " \033[1;33m[p]: V6プラス・IPv6オプション自動設定 (マルチセッション対応)\033[0;39m"
   echo -e " \033[1;32m[t]: トランジックス自動設定\033[0;39m"
   echo -e " \033[1;35m[x]: クロスパス自動設定\033[0;39m"
   echo -e " \033[1;31m[c]: v6 コネクト自動設定\033[0;39m"
-  echo -e " \033[1;36m[o]: PPPoE（iPv4・IPv6）: 要認証ID（ユーザー名）・パスワード\033[0;39m"
+  echo -e " \033[1;36m[o]: PPPoE (iPv4・IPv6): 要認証ID (ユーザー名)・パスワード\033[0;39m"
   echo -e " \033[7;40m[q]: 終了\033[0;39m"
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " 選択してください [v/p/t/x/c/o or q]: " num
