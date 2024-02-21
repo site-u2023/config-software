@@ -219,7 +219,9 @@ fi
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
 service adguardhome stop
 fi
+if [ -e "/etc/adguardhome.yaml" ]; then
 cp /etc/adguardhome.yaml /etc/adguardhome.yaml.old
+fi
 cp /etc/adguardhome.yaml-new /etc/adguardhome.yaml
 sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
