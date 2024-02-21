@@ -443,7 +443,7 @@ do
   esac
 done
 fi
-_func_lucithemeargon
+_func_internetdetector
 }
 
 function _func_internetdetector {
