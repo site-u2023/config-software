@@ -66,9 +66,9 @@ done
 }
 
 function _func_HTTPS_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
+if [ -e ${UPDATE} ]; then
 opkg update
+UPDATE="1"
 fi
 opkg install https-dns-proxy
 opkg install luci-app-https-dns-proxy
