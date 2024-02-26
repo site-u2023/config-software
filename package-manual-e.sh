@@ -3,7 +3,10 @@
 
 
 function _func_listinstalled_Before {
+if [ -e ${UPDATE} ]; then
 opkg update
+UPDATE="1"
+fi
 opkg install wget-ssl	
 mkdir -p /etc/config-software/list-installed
 echo 0 > /etc/config-software/list-installed/Flash
@@ -1020,7 +1023,6 @@ fi
 
 # disks info
 if [ -z "$luci_app_disks_info" ]; then
-# opkg update
 LUCI_APP_DISKA_INFO_V=`cat /etc/config-software/pacage_list | awk '{print substr($0,index($0,"current/luci-app-disks-info") ,41)}'`
 wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_DISKA_INFO_V}
 opkg install /tmp/luci-app-disks-info_all.ipk
