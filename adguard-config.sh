@@ -66,8 +66,10 @@ done
 
 function _func_AdGuard_Confirm {
 AD_INST="ad_inst"
+if [ -e ${UPDATE} ]; then
 opkg update
 UPDATE="1"
+fi
 while :
 do
   echo -e " \033[1;35mStart AdGuard HOME setup and installation\033[0;39m"
@@ -298,6 +300,7 @@ if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPEN
 fi
 if [ -e ${UPDATE} ]; then
 opkg update
+UPDATE="1"
 fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
