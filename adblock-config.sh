@@ -2,10 +2,8 @@
 
 
 function _func_AdBlock_fast_Confirm {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
+UPDATE="1"
 while :
 do
   ADBLOCK_FAST_VERSION=`opkg info adblock-fast | grep Version | awk '{ print $2 }'`
@@ -31,8 +29,7 @@ exit
 }
 
 function _func_AdBlock_Confirm {
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ ! -e ${UPDATE} ]; then
+if [ -e ${UPDATE} ]; then
 opkg update
 fi
 while :
