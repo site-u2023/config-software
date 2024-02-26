@@ -1,6 +1,7 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
 
+function _func_INSTALL {
 opkg update
 opkg install wget-ssl	
 mkdir -p /etc/config-software/list-installed
