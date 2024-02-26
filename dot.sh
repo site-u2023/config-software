@@ -16,14 +16,12 @@ done
 function _func_STUBBY_SET {
 cp /etc/config/dhcp /etc/config/dhcp.dot.bak
 cp /etc/config/network /etc/config/network.dot.bak
-
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
+if [ -e ${UPDATE} ]; then
 opkg update
+UPDATE="1"
 fi
 opkg install stubby
 /etc/init.d/dnsmasq stop
-
 uci set dhcp.@dnsmasq[0].noresolv="1"
 uci set dhcp.@dnsmasq[0].localuse="1"
 uci -q delete dhcp.@dnsmasq[0].server
@@ -36,9 +34,7 @@ uci set network.wan.peerdns='0'
 uci set network.wan.dns='127.0.0.1'
 uci set network.wan6.peerdns='0'
 uci set network.wan6.dns='0::1'
-
 uci commit
-
 /etc/init.d/dnsmasq start
 /etc/init.d/network reload
 # Boot failure countermeasures
