@@ -56,7 +56,10 @@ done
 }
 
 function _func_INSTALL {
+if [ -e ${UPDATE} ]; then
 opkg update
+UPDATE="1"
+fi
 opkg install wget-ssl	
 mkdir -p /etc/config-software/list-installed
 echo 0 > /etc/config-software/list-installed/Flash
