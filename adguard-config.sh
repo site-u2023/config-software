@@ -66,10 +66,8 @@ done
 
 function _func_AdGuard_Confirm {
 AD_INST="ad_inst"
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
+UPDATE="1"
 while :
 do
   echo -e " \033[1;35mStart AdGuard HOME setup and installation\033[0;39m"
@@ -186,9 +184,9 @@ done
 }
 
 function _func_AdGuard_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
+if [ -e ${UPDATE} ]; then
 opkg update
+UPDATE="1"
 fi
 if [ -n "${JAPAN_FILTER}" ]; then
 wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
@@ -298,9 +296,8 @@ if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPEN
  read -p " Different version"
  exit
 fi
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
- opkg update
+if [ -e ${UPDATE} ]; then
+opkg update
 fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
