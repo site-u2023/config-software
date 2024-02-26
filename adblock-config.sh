@@ -2,8 +2,10 @@
 
 
 function _func_AdBlock_fast_Confirm {
+if [ -e ${UPDATE} ]; then
 opkg update
 UPDATE="1"
+fi
 while :
 do
   ADBLOCK_FAST_VERSION=`opkg info adblock-fast | grep Version | awk '{ print $2 }'`
