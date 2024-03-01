@@ -7,7 +7,7 @@
 network_flush_cache
 network_find_wan6 NET_IF6
 network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
-network_get_device NET_L3D6 "${NET_IF6}"
+network_get_physdev NET_L2D6 "${NET_IF6}"
 new_ip6_prefix=${NET_ADDR6}
 
 declare -A ruleprefix31=(
@@ -860,7 +860,6 @@ uci set dhcp.lan.force='1'
 
 # WAN
 uci set network.wan.auto='0'
-uci set network.wan.device='wan'
 
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
@@ -873,7 +872,7 @@ uci set dhcp.wan6.ndp='relay'
 
 # WAN6
 uci set network.wan6=interface
-uci set network.wan6.device='wan'
+uci set network.wan6.device=${NET_L2D6}
 uci set network.wan6.proto='dhcpv6' # Onry_V6plus
 uci set network.wan6.reqaddress='try' # Onry_V6plus
 uci set network.wan6.reqprefix='auto' # Onry_V6plus
@@ -882,9 +881,8 @@ uci set network.wan6.ip6prefix=${CE}::/56 # Onry_V6plus
 # WAN6RA # Onry_OCN
 WAN6RA='wan6ra' # Onry_OCN
 uci set network.${WAN6RA}=interface # Onry_OCN
-uci set network.${WAN6RA}.device='wan' # Onry_OCN
+uci set network.${WAN6RA}.device=${NET_L2D6} # Onry_OCN
 uci set network.${WAN6RA}.proto='static' # Onry_OCN
-uci set network.${WAN6RA}.device=${NET_L3D6} # Onry_OCN
 uci set network.${WAN6RA}.ip6gw=${CE}::1 # Onry_OCN
 uci set network.${WAN6RA}.ip6prefix=${CE}::/56 # Onry_OCN
 uci add_list network.${WAN6RA}.ip6addr=${CE}::1001 # Onry_OCN
@@ -917,7 +915,7 @@ uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
 echo -e "\033[1;32m wan6 ip6prefix: \033[0;39m"${CE}::/56 # Onry_V6plus
-echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"${NET_L3D6} # Onry_OCN
+echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"${NET_L2D6} # Onry_OCN
 echo -e "\033[1;32m ${WAN6RA} ip6gw: \033[0;39m"${CE}::1 # Onry_OCNN
 echo -e "\033[1;32m ${WAN6RA} ip6prefix: \033[0;39m"${CE}::/56 # Onry_OCN
 echo -e "\033[1;32m ${WAN6RA} ip6addr: \033[0;39m"${CE}::1001 # Onry_OCN
