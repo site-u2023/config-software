@@ -855,7 +855,6 @@ uci set dhcp.lan.force='1'
 
 # WAN
 uci set network.wan.auto='0'
-uci set network.wan.device='wan'
 
 # DHCP WAN6
 uci set network.wan6=interface
@@ -873,7 +872,6 @@ WAN6RA='wan6ra'
 uci set network.${WAN6RA}=interface
 uci set network.${WAN6RA}.device='wan'
 uci set network.${WAN6RA}.proto='static'
-uci set network.${WAN6RA}.device=${NET_L3D6}
 uci set network.${WAN6RA}.ip6gw=${CE}::1
 uci set network.${WAN6RA}.ip6prefix=${CE}::/56
 uci add_list network.${WAN6RA}.ip6addr=${CE}::1001
@@ -903,7 +901,7 @@ uci add_list firewall.@zone[${ZOON_NO}].network=${WAN6RA}
 uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
-echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"${NET_L3D6}
+echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"wan
 echo -e "\033[1;32m ${WAN6RA} ip6gw: \033[0;39m"${CE}::1
 echo -e "\033[1;32m ${WAN6RA} ip6prefix: \033[0;39m"${CE}::/56
 echo -e "\033[1;32m ${WAN6RA} ip6addr: \033[0;39m"${CE}::1001
