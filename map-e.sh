@@ -910,6 +910,18 @@ uci del_list firewall.@zone[${ZOON_NO}].network='wan'
 uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAP}
 uci add_list firewall.@zone[${ZOON_NO}].network=${WAN6RA} # Onry_OCN
 
+# delete
+uci -q delete dhcp.lan.dhcp_option
+uci -q delete dhcp.lan.dns
+# IPV4
+uci add_list dhcp.lan.dhcp_option="6,1.1.1.1,8.8.8.8"
+uci add_list dhcp.lan.dhcp_option="6,1.0.0.1,8.8.4.4"
+# IPV6
+uci add_list dhcp.lan.dns="2606:4700:4700::1111"
+uci add_list dhcp.lan.dns="2001:4860:4860::8888"
+uci add_list dhcp.lan.dns="2606:4700:4700::1001"
+uci add_list dhcp.lan.dns="2001:4860:4860::8844"
+
 uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
