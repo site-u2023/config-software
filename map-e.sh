@@ -7,7 +7,6 @@
 network_flush_cache
 network_find_wan6 NET_IF6
 network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
-network_get_device NET_L3D6 "${NET_IF6}"
 new_ip6_prefix=${NET_ADDR6}
 
 declare -A ruleprefix31=(
