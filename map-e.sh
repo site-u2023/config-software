@@ -870,7 +870,7 @@ uci set dhcp.wan6.ra='relay'
 uci set dhcp.wan6.dhcpv6='relay'
 uci set dhcp.wan6.ndp='relay'
 
-# WAN6 # Onry_V6plus
+# WAN6
 uci set network.wan6=interface
 uci set network.wan6.device='wan'
 uci set network.wan6.proto='dhcpv6' # Onry_V6plus
