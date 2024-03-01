@@ -862,6 +862,8 @@ uci set dhcp.lan.force='1'
 uci set network.wan.auto='0'
 
 # DHCP WAN6
+uci set network.wan6=interface
+uci set network.wan6.device='wan'
 uci set dhcp.wan6=dhcp
 uci set dhcp.wan6.interface='wan6'
 uci set dhcp.wan6.ignore='1'
@@ -871,7 +873,6 @@ uci set dhcp.wan6.dhcpv6='relay'
 uci set dhcp.wan6.ndp='relay'
 
 # WAN6 # Onry_V6plus
-uci set network.wan6=interface # Onry_V6plus
 uci set network.wan6.proto='dhcpv6' # Onry_V6plus
 uci set network.wan6.reqaddress='try' # Onry_V6plus
 uci set network.wan6.reqprefix='auto' # Onry_V6plus
@@ -880,6 +881,7 @@ uci set network.wan6.ip6prefix=${CE}::/56 # Onry_V6plus
 # WAN6RA # Onry_OCN
 WAN6RA='wan6ra' # Onry_OCN
 uci set network.${WAN6RA}=interface # Onry_OCN
+uci set network.${WAN6RA}.device='wan'
 uci set network.${WAN6RA}.proto='static' # Onry_OCN
 uci set network.${WAN6RA}.device=${NET_L3D6} # Onry_OCN
 uci set network.${WAN6RA}.ip6gw=${CE}::1 # Onry_OCN
@@ -909,18 +911,6 @@ ZOON_NO='1'
 uci del_list firewall.@zone[${ZOON_NO}].network='wan'
 uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAP}
 uci add_list firewall.@zone[${ZOON_NO}].network=${WAN6RA} # Onry_OCN
-
-# delete
-uci -q delete dhcp.lan.dhcp_option
-uci -q delete dhcp.lan.dns
-# IPV4
-uci add_list dhcp.lan.dhcp_option="6,1.1.1.1,8.8.8.8"
-uci add_list dhcp.lan.dhcp_option="6,1.0.0.1,8.8.4.4"
-# IPV6
-uci add_list dhcp.lan.dns="2606:4700:4700::1111"
-uci add_list dhcp.lan.dns="2001:4860:4860::8888"
-uci add_list dhcp.lan.dns="2606:4700:4700::1001"
-uci add_list dhcp.lan.dns="2001:4860:4860::8844"
 
 uci commit
 
