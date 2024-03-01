@@ -858,8 +858,8 @@ uci set network.wan.auto='0'
 
 # DHCP WAN6
 uci set network.wan6=interface
-uci set dhcp.wan6.interface='wan6'
 uci set network.wan6.device='wan'
+uci set dhcp.wan6.interface='wan6'
 uci set dhcp.wan6=dhcp
 uci set dhcp.wan6.ignore='1'
 uci set dhcp.wan6.master='1'
