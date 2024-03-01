@@ -860,6 +860,7 @@ uci set dhcp.lan.force='1'
 
 # WAN
 uci set network.wan.auto='0'
+uci set network.wan.device='wan'
 
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
