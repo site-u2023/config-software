@@ -79,10 +79,7 @@ rm /usr/sbin/wpa_supplicant
 # done
 # }
 # 複数の AP にわたってホスト名を表示できるようにする
-UPDATE="/tmp/opkg-lists/openwrt_telephony.sig"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
 opkg install fping
 sed -i "/exit 0/d" /etc/rc.local
 echo "fping -g $FPING.0/24" >> /etc/rc.local 
