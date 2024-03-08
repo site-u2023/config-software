@@ -87,8 +87,6 @@ rm /etc/config/dropbear.dump.bak
 /etc/init.d/firewall enable
 /etc/init.d/firewall start
 rm /etc/config-software/dumb.sh
-sed -i "/fping -g 192.168.1.0/24/d" /etc/rc.local
-sed -i "/fping -g 192.168.1.0/24/d" /etc/crontabs/root
 echo -e " \033[1;32mAfter reboot, login with ${input_str_IPV4}\033[0;39m"
 read -p " Press any key (to reboot the device)"
 reboot
