@@ -3,13 +3,6 @@
 IPADDR='192.168.1.2'
 GATEWAY='192.168.1.1'
 
-# scripts
-. /lib/functions/network.sh
-network_flush_cache
-network_find_wan6 NET_IF6
-network_get_physdev NET_L2D6 "${NET_IF6}"
-# network_find_wan NET_IF
-# network_get_physdev NET_L2D "${NET_IF}"
 # ネットワークを変更する
 cp /etc/config/system /etc/config/system.dump.bak
 cp /etc/config/network /etc/config/network.dump.bak
@@ -17,13 +10,15 @@ cp /etc/config/dhcp /etc/config/dhcp.dump.bak
 cp /etc/config/firewall /etc/config/firewall.dump.bak
 cp /etc/config/wireless /etc/config/wireless.dump.bak
 cp /etc/config/dropbear /etc/config/dropbear.dump.bak
-uci add_list network.@device[0].ports=${NET_L2D6}
 uci delete network.wan
 uci delete network.wan6
 uci delete network.lan
 uci delete system.ntp.server
 uci -q delete network.globals.ula_prefix
 # IPV4
+
+uci add_list network.@device[0].ports='wan'
+
 BRIDGE='bridge'
 uci set network.${BRIDGE}=interface
 uci set network.${BRIDGE}.proto='static'
@@ -80,9 +75,9 @@ rm /usr/sbin/wpa_supplicant
 # 複数の AP にわたってホスト名を表示できるようにする
 opkg update
 opkg install fping
-FPING=`echo $IPADDR | cut -d'.' -f1,2,3`
+opkg install arp-scan
 sed -i "/exit 0/d" /etc/rc.local
-echo "fping -g $FPING.0/24" >> /etc/rc.local 
+echo "arp-scan -qxlN -I br-lan | awk '{print $1}' | xargs fping -q -c1" >> /etc/rc.local 
 echo "exit 0" >> /etc/rc.local
-echo "0 */1 * * * fping -g $FPING.0/24" >> /etc/crontabs/root
-echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
+echo "0 */1 * * * arp-scan -qxlN -I br-lan | awk '{print $1}' | xargs fping -q -c1" >> /etc/crontabs/root
+echo -e "\033[1;35m ${BRIDGE} device: br-lan\033[0;39m"
