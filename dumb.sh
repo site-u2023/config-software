@@ -77,6 +77,12 @@ rm /usr/sbin/wpa_supplicant
 #   fi
 # done
 # }
-
-
+# 複数の AP にわたってホスト名を表示できるようにする
+opkg update
+opkg install fping
+FPING=`echo $IPADDR | cut -d'.' -f1,2,3`
+sed -i "/exit 0/d" /etc/rc.local
+echo "fping -g $FPING.0/24" >> /etc/rc.local 
+echo "exit 0" >> /etc/rc.local
+echo "0 */1 * * * fping -g $FPING.0/24" >> /etc/crontabs/root
 echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
