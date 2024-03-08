@@ -22,10 +22,7 @@ do
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
           chmod +x /etc/init.d/iperf3
-          UPDATE="/tmp/opkg-lists/openwrt_telephony"
-          if [ ! -e ${UPDATE} ]; then
           opkg update
-          fi
           opkg install iperf3
           NET_IF="lan"
           . /lib/functions/network.sh
@@ -73,10 +70,7 @@ do
   echo -e " \033[1;32mPerform SAMBA4 and WSDD2 installation\033[0;39m"
   read -p " Please select key [y/n]: " num
   case "${num}" in
-    "y" ) UPDATE="/tmp/opkg-lists/openwrt_telephony"
-          if [ ! -e ${UPDATE} ]; then
-          opkg update
-          fi
+    "y" ) opkg update
           opkg install luci-app-samba4 wsdd2
           /etc/init.d/samba4 enable
           /etc/init.d/samba4 start  
