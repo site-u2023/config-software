@@ -18,6 +18,7 @@ function _func_IPERF3 {
 while :
 do
   echo -e " \033[1;33mDownload and install IPERF3 configuration script\033[0;39m"
+  echo -e " \033[1;33mDUMP not supported\033[0;39m"
   read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
