@@ -2,7 +2,6 @@
 
 IPADDR='192.168.1.2'
 GATEWAY='192.168.1.1'
-FPING=`echo $IPADDR | cut -d'.' -f1,2,3`
 
 # scripts
 . /lib/functions/network.sh
@@ -78,12 +77,6 @@ rm /usr/sbin/wpa_supplicant
 #   fi
 # done
 # }
-# 複数の AP にわたってホスト名を表示できるようにする
-opkg update
-opkg install fping
-sed -i "/exit 0/d" /etc/rc.local
-echo "fping -g $FPING.0/24" >> /etc/rc.local 
-echo "exit 0" >> /etc/rc.local
-echo "0 */1 * * * fping -g $FPING.0/24" >> /etc/crontabs/root
+
 
 echo -e "\033[1;35m ${BRIDGE} device: \033[0;39m"${NET_L2D6}
