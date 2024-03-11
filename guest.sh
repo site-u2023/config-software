@@ -43,7 +43,7 @@ restart() {
     exit 0
 }
 stop() {
-    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:S:${SSID};T:${SECURITY};P:${PASSWORD};;" 
+    qrencode --foreground=FF0000 -o /www/wifi.svg -t SVG "Guest service is suspended."
     echo Service STOP > /tmp/.guest_password
     uci -q delete wireless.guest
     uci commit wireless
