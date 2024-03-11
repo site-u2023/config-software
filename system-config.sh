@@ -291,6 +291,7 @@ function _func_DEVICE_SET {
   if [ "$GUEST" = "on" ]; then
   wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
   bash /etc/config-software/guest.sh 2> /dev/null
+  service wifi_guest enable
   qrencode -t UTF8 "http://192.168.1.1/cgi-bin/wifi_guest_qr"
   echo -e " \033[1;32mGest: http://192.168.1.1/cgi-bin/wifi_guest_qr\033[0;39m"
   fi
