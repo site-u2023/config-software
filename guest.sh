@@ -1,7 +1,4 @@
-opkg update
-opkg install qrencode
-opkg install bash
-
+#!/bin/sh
 
 cat << "EOF" > /etc/init.d/wifi_guest
 #!/bin/bash /etc/rc.common
@@ -57,8 +54,6 @@ stop() {
 
 EOF
 chmod +x /etc/init.d/wifi_guest
-service wifi_guest enable
-service wifi_guest start
 
 
 cat << "EOF" > /www/cgi-bin/wifi_guest_qr
