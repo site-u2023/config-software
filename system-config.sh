@@ -343,6 +343,7 @@ do
   echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
   echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
+  echo -e " \033[1;41mGuest Wi-Fi\033[0;39m"
   fi
   if [ "$WIFI_DEVICE" = "2" ]; then
   echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
@@ -350,6 +351,7 @@ do
   echo -e " \033[1;36mWi-Fi radio1 ${WIFI_NO_B} SSID\033[0;39m"
   echo -e " \033[1;37mWi-Fi radio1 ${WIFI_NO_B} Password\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
+  echo -e " \033[1;41mGuest Wi-Fi\033[0;39m"
   fi
   if [ "$WIFI_DEVICE" = "3" ]; then
   echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
@@ -359,6 +361,7 @@ do
   echo -e " \033[1;44mWi-Fi radio2 ${WIFI_NO_C} SSID\033[0;39m"
   echo -e " \033[1;42mWi-Fi radio2 ${WIFI_NO_C} Password\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
+  echo -e " \033[1;41mGuest Wi-Fi\033[0;39m"
   fi
   if [ "$WIFI_DEVICE" = "0" ]; then
   echo -e " \033[1;41mWi-Fi not found\033[0;39m"
