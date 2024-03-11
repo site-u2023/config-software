@@ -152,8 +152,24 @@ do
   read -p " Please select key [1 or 2]: " num
   case "${num}" in
     "1" ) TWT='on'
-         _func_DEVICE_confirmation ;;
+         _func_GUEST ;;
     "2" ) TWT=''
+         _func_GUEST ;;
+  esac
+done
+}
+
+function _func_GUEST {
+while :
+do
+  echo -e " \033[1;41mUse GUEST\033[0;39m"
+  echo -e " \033[1;34m[1]: ON\033[0;39m"
+  echo -e " \033[1;31m[2]: OFF\033[0;39m"
+  read -p " Please select key [1 or 2]: " num
+  case "${num}" in
+    "1" ) GUEST='on'
+         _func_DEVICE_confirmation ;;
+    "2" ) GUEST=''
          _func_DEVICE_confirmation ;;
   esac
 done
@@ -180,6 +196,9 @@ do
   fi
   if [ -n "$TWT" ]; then
   echo -e " \033[1;41mTWT ON\033[0;39m"
+  fi
+    if [ -n "$GUEST" ]; then
+  echo -e " \033[1;41mGUEST ON\033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " Please select key [y/n or q]: " num
@@ -269,6 +288,12 @@ function _func_DEVICE_SET {
   uci commit wireless
   fi
   sh /etc/config-software/system.sh 2> /dev/null
+  if [ "$GUEST" = "on" ]; then
+  wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
+  bash /etc/config-software/guest.sh 2> /dev/null
+  qrencode -t UTF8 "http://192.168.1.1/cgi-bin/wifi_guest_qr"
+  echo -e " \033[1;32mGest: http://192.168.1.1/cgi-bin/wifi_guest_qr\033[0;39m"
+  fi
   read -p " Press any key (Reboot the device)"
   reboot
 }
