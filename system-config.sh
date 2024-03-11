@@ -162,7 +162,7 @@ done
 function _func_GUEST {
 while :
 do
-  echo -e " \033[1;41mUse GUEST\033[0;39m"
+  echo -e " \033[1;41mUse Wi-Fi GUEST\033[0;39m"
   echo -e " \033[1;34m[1]: ON\033[0;39m"
   echo -e " \033[1;31m[2]: OFF\033[0;39m"
   read -p " Please select key [1 or 2]: " num
@@ -195,10 +195,10 @@ do
   echo -e " \033[1;42mWi-Fi ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
   fi
   if [ -n "$TWT" ]; then
-  echo -e " \033[1;41mTWT ON\033[0;39m"
+  echo -e " \033[1;41mTWT: ON\033[0;39m"
   fi
     if [ -n "$GUEST" ]; then
-  echo -e " \033[1;41mGUEST ON\033[0;39m"
+  echo -e " \033[1;41mWi-Fi GUEST: ON\033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " Please select key [y/n or q]: " num
@@ -362,7 +362,7 @@ do
   echo -e " \033[1;44mWi-Fi radio2 ${WIFI_NO_C} SSID\033[0;39m"
   echo -e " \033[1;42mWi-Fi radio2 ${WIFI_NO_C} Password\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
-  echo -e " \033[1;41mGuest Wi-Fi\033[0;39m"
+  echo -e " \033[1;41mWi-Fi GUEST\033[0;39m"
   fi
   if [ "$WIFI_DEVICE" = "0" ]; then
   echo -e " \033[1;41mWi-Fi not found\033[0;39m"
