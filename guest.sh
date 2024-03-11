@@ -74,7 +74,7 @@ echo '<body bgcolor="blue">'
 echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
 echo "<h1>Guest Wi-Fi</h1>"
 echo "<p>SSID: <b>guest</b></p>"
-echo "<p>PASSWORD: <b>${PASSWORD}</b></p>"
+echo "<p>RANDOM PASSWORD: <b>${PASSWORD}</b></p>"
 echo '<img src=../wifi.svg style="width:33%"></img><br>'
 echo "</div>"
 echo "</body>"
