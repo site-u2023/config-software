@@ -295,6 +295,7 @@ function _func_DEVICE_SET {
   opkg install bash
   bash /etc/config-software/guest.sh 2> /dev/null
   service wifi_guest enable
+  service wifi_guest stop
   fi
   qrencode -t UTF8 "http://192.168.1.1/"
   echo -e " \033[1;32mLuCi: http://192.168.1.1/\033[0;39m"
