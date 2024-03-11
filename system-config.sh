@@ -92,7 +92,7 @@ do
     "r" ) break ;;
   esac
 done
-_func_WIFI_TWT
+_func_GUEST
 fi
 }
 
@@ -125,7 +125,7 @@ do
   esac
 done
 fi
-_func_WIFI_TWT
+_func_GUEST
 }
 
 function _func_WIFI_PASSWD_C {
@@ -136,9 +136,25 @@ do
   read -p " Wi-Fi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_WIFI_TWT ;;
+    "y" ) _func_GUEST ;;
     "n" ) _func_WIFI_PASSWD_C ;;
     "r" ) break ;;
+  esac
+done
+}
+
+function _func_GUEST {
+while :
+do
+  echo -e " \033[1;43mUse Wi-Fi GUEST\033[0;39m"
+  echo -e " \033[1;34m[1]: ON\033[0;39m"
+  echo -e " \033[1;31m[2]: OFF\033[0;39m"
+  read -p " Please select key [1 or 2]: " num
+  case "${num}" in
+    "1" ) GUEST='on'
+         _func_WIFI_TWT ;;
+    "2" ) GUEST=''
+         _func_WIFI_TWT ;;
   esac
 done
 }
@@ -152,24 +168,8 @@ do
   read -p " Please select key [1 or 2]: " num
   case "${num}" in
     "1" ) TWT='on'
-         _func_GUEST ;;
-    "2" ) TWT=''
-         _func_GUEST ;;
-  esac
-done
-}
-
-function _func_GUEST {
-while :
-do
-  echo -e " \033[1;41mUse Wi-Fi GUEST\033[0;39m"
-  echo -e " \033[1;34m[1]: ON\033[0;39m"
-  echo -e " \033[1;31m[2]: OFF\033[0;39m"
-  read -p " Please select key [1 or 2]: " num
-  case "${num}" in
-    "1" ) GUEST='on'
          _func_DEVICE_confirmation ;;
-    "2" ) GUEST=''
+    "2" ) TWT=''
          _func_DEVICE_confirmation ;;
   esac
 done
@@ -194,11 +194,11 @@ do
   echo -e " \033[1;44mWi-Fi ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
   echo -e " \033[1;42mWi-Fi ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
   fi
+  if [ -n "$GUEST" ]; then
+  echo -e " \033[1;43mWi-Fi GUEST: ON\033[0;39m"
+  fi
   if [ -n "$TWT" ]; then
   echo -e " \033[1;41mTWT: ON\033[0;39m"
-  fi
-    if [ -n "$GUEST" ]; then
-  echo -e " \033[1;41mWi-Fi GUEST: ON\033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " Please select key [y/n or q]: " num
