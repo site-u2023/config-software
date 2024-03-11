@@ -290,14 +290,16 @@ function _func_DEVICE_SET {
   sh /etc/config-software/system.sh 2> /dev/null
   opkg update
   opkg install qrencode
-  qrencode -t UTF8 "http://192.168.1.1/"
-  echo -e " \033[1;32mGest: http://192.168.1.1/\033[0;39m"
   if [ "$GUEST" = "on" ]; then
   wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
   opkg install bash
   bash /etc/config-software/guest.sh 2> /dev/null
   service wifi_guest enable
-  echo -e " \033[1;32mGest: http://192.168.1.1/cgi-bin/wifi_guest_qr\033[0;39m"
+  fi
+  qrencode -t UTF8 "http://192.168.1.1/"
+  echo -e " \033[1;32mLuCi: http://192.168.1.1/\033[0;39m"
+  if [ "$GUEST" = "on" ]; then
+  echo -e " \033[1;32mGest QR: http://192.168.1.1/cgi-bin/wifi_guest_qr\033[0;39m"
   fi
   read -p " Press any key (Reboot the device)"
   reboot
