@@ -288,11 +288,15 @@ function _func_DEVICE_SET {
   uci commit wireless
   fi
   sh /etc/config-software/system.sh 2> /dev/null
+  opkg update
+  opkg install qrencode
+  qrencode -t UTF8 "http://192.168.1.1/"
+  echo -e " \033[1;32mGest: http://192.168.1.1/\033[0;39m"
   if [ "$GUEST" = "on" ]; then
   wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
+  opkg install bash
   bash /etc/config-software/guest.sh 2> /dev/null
   service wifi_guest enable
-  qrencode -t UTF8 "http://192.168.1.1/cgi-bin/wifi_guest_qr"
   echo -e " \033[1;32mGest: http://192.168.1.1/cgi-bin/wifi_guest_qr\033[0;39m"
   fi
   read -p " Press any key (Reboot the device)"
@@ -343,16 +347,16 @@ do
   echo -e " \033[1;32mWi-Fi Country Code\033[0;39m"
   echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
   echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
+  echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
-  echo -e " \033[1;41mGuest Wi-Fi\033[0;39m"
   fi
   if [ "$WIFI_DEVICE" = "2" ]; then
   echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
   echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
   echo -e " \033[1;36mWi-Fi radio1 ${WIFI_NO_B} SSID\033[0;39m"
   echo -e " \033[1;37mWi-Fi radio1 ${WIFI_NO_B} Password\033[0;39m"
+  echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
-  echo -e " \033[1;41mGuest Wi-Fi\033[0;39m"
   fi
   if [ "$WIFI_DEVICE" = "3" ]; then
   echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
@@ -361,8 +365,8 @@ do
   echo -e " \033[1;37mWi-Fi radio1 ${WIFI_NO_B} Password\033[0;39m"
   echo -e " \033[1;44mWi-Fi radio2 ${WIFI_NO_C} SSID\033[0;39m"
   echo -e " \033[1;42mWi-Fi radio2 ${WIFI_NO_C} Password\033[0;39m"
+  echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
-  echo -e " \033[1;41mWi-Fi GUEST\033[0;39m"
   fi
   if [ "$WIFI_DEVICE" = "0" ]; then
   echo -e " \033[1;41mWi-Fi not found\033[0;39m"
