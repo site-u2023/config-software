@@ -75,7 +75,7 @@ echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helveti
 echo "<h1>Guest Wi-Fi</h1>"
 echo "<p>SSID: <b>guest</b></p>"
 echo "<p>PASSWORD: <b>${PASSWORD}</b></p>"
-echo '<img src=../wifi.svg style="width:25%"></img><br>'
+echo '<img src=../wifi.svg style="width:33%"></img><br>'
 echo "<p>The password is randomly changed when the service is started or restarted.</b></p>"
 echo "</div>"
 echo "</body>"
