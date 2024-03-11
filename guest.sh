@@ -13,7 +13,7 @@ STOP=01
 start() {
     PASSWORD=`date | md5sum | head -c 8; echo;`
     echo $PASSWORD > /tmp/.guest_password
-    qrencode -o /www/wifi.svg -t SVG "WIFI:S:${SSID};T:${SECURITY};P:${PASSWORD};;"  
+    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:S:${SSID};T:${SECURITY};P:${PASSWORD};;"  
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
@@ -35,7 +35,7 @@ start() {
 restart() {
     PASSWORD=`date | md5sum | head -c 8; echo;`
     echo $PASSWORD > /tmp/.guest_password
-    qrencode -o /www/wifi.svg -t SVG "WIFI:S:${SSID};T:${SECURITY};P:${PASSWORD};;"  
+    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:S:${SSID};T:${SECURITY};P:${PASSWORD};;"   
     uci set wireless.guest.key="${PASSWORD}"
     uci commit wireless
     wifi reload
@@ -43,7 +43,7 @@ restart() {
     exit 0
 }
 stop() {
-    qrencode -o /www/wifi.svg -t SVG "Guest service is suspended."
+    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:S:${SSID};T:${SECURITY};P:${PASSWORD};;" 
     echo Service STOP > /tmp/.guest_password
     uci -q delete wireless.guest
     uci commit wireless
