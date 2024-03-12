@@ -15,11 +15,12 @@ STOP=01
 start() {
     echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
     echo please deactivate the service on your device. > /tmp/.guest_comment2
-    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
+    PASSWORD=`openssl rand -hex 4`
+    echo $PASSWORD > /tmp/.guest_password
+    FOREGROUND=`openssl rand -hex 3`
+    qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
     echo $TYPE > /tmp/.guest_type
     echo $SSID > /tmp/.guest_ssid
-    PASSWORD=`date | md5sum | head -c 8; echo;`
-    echo $PASSWORD > /tmp/.guest_password
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
@@ -92,3 +93,4 @@ echo "</body>"
 echo "</html>"
 EOF
 chmod +x /www/cgi-bin/wifi_guest_qr
+
