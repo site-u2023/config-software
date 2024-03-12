@@ -13,13 +13,13 @@ START=99
 STOP=01
 
 start() {
+    echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
+    echo please deactivate the service on your device. > /tmp/.guest_comment2
+    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
     echo $TYPE > /tmp/.guest_type
     echo $SSID > /tmp/.guest_ssid
     PASSWORD=`date | md5sum | head -c 8; echo;`
     echo $PASSWORD > /tmp/.guest_password
-    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
-    echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
-    echo please deactivate the service on your device. > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
@@ -39,13 +39,13 @@ start() {
     exit 0
 }
 restart() {
+    echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
+    echo please deactivate the service on your device. > /tmp/.guest_comment2
+    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
     echo $TYPE > /tmp/.guest_type
     echo $SSID > /tmp/.guest_ssid
     PASSWORD=`date | md5sum | head -c 8; echo;`
     echo $PASSWORD > /tmp/.guest_password
-    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
-    echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
-    echo please deactivate the service on your device. > /tmp/.guest_comment2
     uci set wireless.guest.key="${PASSWORD}"
     uci commit wireless
     wifi reload
@@ -53,12 +53,12 @@ restart() {
     exit 0
 }
 stop() {
+    echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
+    echo please activate the service on your device. > /tmp/.guest_comment2
+    qrencode --foreground=FF0000 -o /www/wifi.svg -t SVG "Guest service is suspended"
     echo CURRENTLY CLOSED > /tmp/.guest_type
     echo > /tmp/.guest_ssid
     echo > /tmp/.guest_password
-    qrencode --foreground=FF0000 -o /www/wifi.svg -t SVG "Guest service is suspended"
-    echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
-    echo please activate the service on your device. > /tmp/.guest_comment2
     uci -q delete wireless.guest
     uci commit wireless
     wifi reload
