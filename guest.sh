@@ -18,7 +18,7 @@ start() {
     PASSWORD=`openssl rand -hex 4`
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
-    qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
+    qrencode --foreground="${FOREGROUND}" -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
     echo $TYPE > /tmp/.guest_type
     echo $SSID > /tmp/.guest_ssid
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
