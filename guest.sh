@@ -42,7 +42,7 @@ start() {
 stop() {
     echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
     echo please activate the service on your device. > /tmp/.guest_comment2
-    qrencode --foreground=FF0000 -o /www/wifi.svg -t SVG "Guest service is suspended"
+    qrencode --foreground="000000" --background="FF0000" -o /www/wifi.svg -t SVG "Guest service is suspended"
     echo '<font color="red">CURRENTLY CLOSED</font>' > /tmp/.guest_type
     echo > /tmp/.guest_ssid
     echo > /tmp/.guest_password
