@@ -67,8 +67,6 @@ stop() {
 }
 EOF
 chmod +x /etc/init.d/wifi_guest
-service wifi_guest enable
-service wifi_guest start
 
 
 cat << "EOF" > /www/cgi-bin/wifi_guest_qr
