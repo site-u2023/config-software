@@ -77,7 +77,6 @@ echo '<meta name="viewport" content="width=device-width, height=device-height, i
 echo '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">'
 echo '<meta http-equiv="Pragma" content="no-cache">'
 echo '<meta http-equiv="Expires" content="0">'
-echo '<meta http-equiv="refresh" content="10">'
 echo "</head>"
 echo '<body bgcolor="blue">'
 echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
@@ -93,4 +92,32 @@ echo "</body>"
 echo "</html>"
 EOF
 chmod +x /www/cgi-bin/wifi_guest_qr
+
+
+cat << "EOF" > /www/guest.html
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+                <meta http-equiv="Expires" content="0" />
+		<meta http-equiv="refresh" content="0; URL=cgi-bin/wifi_guest_qr" />
+		<style type="text/css">
+			body { background: white; font-family: arial, helvetica, sans-serif; }
+			a { color: black; }
+
+			@media (prefers-color-scheme: dark) {
+				body { background: black; }
+				a { color: white; }
+			}
+		</style>
+	</head>
+	<body>
+		<a href="cgi-bin/wifi_guest_qr">LuCI - Lua Configuration Interface</a>
+	</body>
+</html>
+
+EOF
+chmod +r /www/guest.html
 
