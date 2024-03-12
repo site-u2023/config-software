@@ -76,6 +76,7 @@ echo '<meta name="viewport" content="width=device-width, height=device-height, i
 echo '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">'
 echo '<meta http-equiv="Pragma" content="no-cache">'
 echo '<meta http-equiv="Expires" content="0">'
+echo '<meta http-equiv="refresh" content="60">'
 echo "</head>"
 echo '<body bgcolor="blue">'
 echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
