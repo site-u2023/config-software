@@ -7,7 +7,7 @@ cat << "EOF" > /etc/init.d/wifi_guest
 TYPE="WPA2"
 TRDISABLE="1"
 SSID="guest_optout_nomap"
-ENCRYPTION="psk2"
+ENCRYPTION="psk-mixed"
 
 START=99
 STOP=01
