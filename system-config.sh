@@ -301,7 +301,7 @@ function _func_DEVICE_SET {
   qrencode -t UTF8 "http://192.168.1.1/"
   echo -e " \033[1;32mLuCi: http://192.168.1.1/\033[0;39m"
   if [ "$GUEST" = "on" ]; then
-  echo -e " \033[1;32mGest QR: http://192.168.1.1/cgi-bin/wifi_guest_qr\033[0;39m"
+  echo -e " \033[1;32mGest QR: http://192.168.1.1/guest.html\033[0;39m"
   fi
   read -p " Press any key (Reboot the device)"
   reboot
