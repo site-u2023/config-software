@@ -73,8 +73,9 @@ echo '<html lang="UTF-8">'
 echo "<head>"
 echo "<title>Guest Wi-Fi</title>"
 echo '<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">'
+echo '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">'
 echo '<meta http-equiv="Pragma" content="no-cache">'
-echo '<meta http-equiv="Cache-Control" content="no-cache">'
+echo '<meta http-equiv="Expires" content="0">'
 echo "</head>"
 echo '<body bgcolor="blue">'
 echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
