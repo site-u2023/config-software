@@ -38,25 +38,11 @@ start() {
     logger "perimeter Wi-Fi Guest ON"
     exit 0
 }
-restart() {
-    echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
-    echo please deactivate the service on your device. > /tmp/.guest_comment2
-    qrencode --foreground=0000FF -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
-    echo $TYPE > /tmp/.guest_type
-    echo $SSID > /tmp/.guest_ssid
-    PASSWORD=`date | md5sum | head -c 8; echo;`
-    echo $PASSWORD > /tmp/.guest_password
-    uci set wireless.guest.key="${PASSWORD}"
-    uci commit wireless
-    wifi reload
-    logger "perimeter Wi-Fi Guest RESTART"
-    exit 0
-}
 stop() {
     echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
     echo please activate the service on your device. > /tmp/.guest_comment2
     qrencode --foreground=FF0000 -o /www/wifi.svg -t SVG "Guest service is suspended"
-    echo CURRENTLY CLOSED > /tmp/.guest_type
+    echo '<font color="red">CURRENTLY CLOSED</font>' > /tmp/.guest_type
     echo > /tmp/.guest_ssid
     echo > /tmp/.guest_password
     uci -q delete wireless.guest
@@ -67,6 +53,8 @@ stop() {
 }
 EOF
 chmod +x /etc/init.d/wifi_guest
+service wifi_guest enable
+service wifi_guest start
 
 
 cat << "EOF" > /www/cgi-bin/wifi_guest_qr
@@ -83,7 +71,7 @@ echo ""
 echo "<!DOCTYPE html>"
 echo '<html lang="UTF-8">'
 echo "<head>"
-echo "<title>Wi-Fi Guest</title>"
+echo "<title>Guest Wi-Fi</title>"
 echo '<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">'
 echo '<meta http-equiv="refresh" content="360" />'
 echo "</head>"
