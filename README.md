@@ -41,6 +41,7 @@
     - [Location Based Service (LBS) Stop](https://qiita.com/site_u/items/3cd3fc65a789461262e8#%E4%BD%8D%E7%BD%AE%E6%83%85%E5%A0%B1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%81%9C%E6%AD%A2)
     - [SAMBA4 and WSDD2 installation](https://qiita.com/site_u/items/aa9164859a78cb4e3f8f)
     - [DFS Check](https://qiita.com/site_u/items/f42be7c0953187b9428a#dfs-check)
+    - [Guest servicing (QR code issuance and random password)](https://qiita.com/site_u/items/f42be7c0953187b9428a#%E3%82%B2%E3%82%B9%E3%83%88%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%8C%96-qr%E3%82%B3%E3%83%BC%E3%83%89%E7%99%BA%E8%A1%8C%E3%81%A8%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89)
   - Quit
 
 ---
@@ -83,6 +84,7 @@
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
       - [dfs_check.sh](https://github.com/site-u2023/config-software/blob/main/dfs_check.sh)
       - [dfs_check](https://github.com/site-u2023/config-software/blob/main/dfs_check)
+      - [guest.sh](https://github.com/site-u2023/config-software/blob/main/guest.sh)
 ---
 
 </details>
