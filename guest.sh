@@ -6,7 +6,7 @@ cat << "EOF" > /etc/init.d/wifi_guest
 
 TYPE="WPA2"
 TRDISABLE="1"
-SSID="optout_nomap"
+SSID="_optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60" # サービス停止までの時間
 
@@ -19,7 +19,7 @@ start() {
     echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
     echo please deactivate the service on your device. > /tmp/.guest_comment2
     echo $TYPE > /tmp/.guest_type
-    RANDOM_SSID="`openssl rand -base64 6` ${SSID}"
+    RANDOM_SSID="`openssl rand -base64 6`${SSID}"
     echo ${RANDOM_SSID} > /tmp/.guest_ssid
     PASSWORD=`openssl rand -hex 4`
     echo $PASSWORD > /tmp/.guest_password
