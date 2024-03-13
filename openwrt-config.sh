@@ -167,7 +167,7 @@ do
   echo -e " \033[1;35m[b]: Install ad blocker and DNS encryption\033[0;39m"
   echo -e " \033[1;31m[a]: Access point connection setup (Dumb/Bridge)\033[0;39m"
   echo -e " \033[1;36m[h]: Install Home Assistant\033[0;39m"
-  echo -e " \033[1;37m[e]: Other: BUTTON,IPERF3,SAMBA4,LBS,DFS_Check\033[0;39m"
+  echo -e " \033[1;37m[e]: Other: BUTTON, IPERF3, SAMBA4, LBS, DFS Check, Guest Wi-Fi\033[0;39m"
   echo -e " \033[7;40m[q]: Quit (Delete this script or not)\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " Please select key [i/s/p/b/a/h/e or q]: " num
