@@ -288,17 +288,16 @@ function _func_DEVICE_SET {
   uci commit wireless
   fi
   sh /etc/config-software/system.sh 2> /dev/null
-  opkg update
-  opkg install qrencode
   if [ "$GUEST" = "on" ]; then
-  wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
+  opkg update
   opkg install bash
   opkg install openssl-util
+  opkg install qrencode
+  wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
   bash /etc/config-software/guest.sh 2> /dev/null
   service wifi_guest enable
   service wifi_guest stop
   fi
-  qrencode -t UTF8 "http://${input_str_SYSTEM_HOSTNAME}/"
   echo -e " \033[1;32mLuCi: http://${input_str_SYSTEM_HOSTNAME}/\033[0;39m"
   if [ "$GUEST" = "on" ]; then
   echo -e " \033[1;32mGest QR: http://${input_str_SYSTEM_HOSTNAME}/guest.html\033[0;39m"
