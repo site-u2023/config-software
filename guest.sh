@@ -23,7 +23,7 @@ start() {
     echo $TYPE > /tmp/.guest_type
     RANDOM_SSID="`openssl rand -base64 6`${SSID}"
     echo ${RANDOM_SSID} > /tmp/.guest_ssid
-    PASSWORD=`openssl rand -hex 4`
+    PASSWORD=`openssl rand -base64 6`
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
     qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
