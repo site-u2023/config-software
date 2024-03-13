@@ -139,13 +139,13 @@ do
   read -p " Please select key [y/n]: " num
   case "${num}" in
     "y" ) opkg update
-          opkg install qrencode
-          opkg install openssl-util	
           opkg install bash
+          opkg install openssl-util
+          opkg install qrencode
           wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
           bash /etc/config-software/guest.sh 2> /dev/null
           service wifi_guest enable
-          service wifi_guest start 
+          service wifi_guest stop
           HOSTMANE=`uci get system.@system[0].hostname`
           echo -e " \033[1;32mGest QR: http://${HOSTMANE}/guest.html\033[0;39m"
           read -p " Press any key"
