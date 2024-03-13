@@ -113,7 +113,7 @@ a { color: white; }
 </style>
 </head>
 <body>
-<a href="cgi-bin/wifi_guest_qr">LuCI - Lua Configuration Interface</a>
+<a href="cgi-bin/wifi_guest_qr/style.css?ver=240313" rel="stylesheet">LuCI - Lua Configuration Interface</a>
 </body>
 </html>
 EOF
