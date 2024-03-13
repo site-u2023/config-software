@@ -14,6 +14,8 @@ START=99
 STOP=01
 
 start() {
+    DEL=`atq | awk '{ print $1 }'  | sed -n 1p`
+    atrm ${DEL}
     echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
     echo please deactivate the service on your device. > /tmp/.guest_comment2
     PASSWORD=`openssl rand -hex 4`
