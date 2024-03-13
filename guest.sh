@@ -8,6 +8,7 @@ TYPE="WPA2"
 TRDISABLE="1"
 SSID="guest_optout_nomap"
 ENCRYPTION="psk-mixed"
+TIMEOUT="60"
 
 START=99
 STOP=01
@@ -18,7 +19,8 @@ start() {
     PASSWORD=`openssl rand -hex 4`
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
-    qrencode --foreground="${FOREGROUND}" -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
+    qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
+    echo Guest Wi-Fi automatically stops after 60 minutes. > /tmp/.guest_comment3
     echo $TYPE > /tmp/.guest_type
     echo $SSID > /tmp/.guest_ssid
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
@@ -37,6 +39,8 @@ start() {
     uci commit wireless
     wifi reload
     logger "perimeter Wi-Fi Guest ON"
+    echo "service wifi_guest stop" | at now +${TIMEOUT} minutes
+    logger "perimeter Wi-Fi Guest OFF"
     exit 0
 }
 stop() {
@@ -49,7 +53,7 @@ stop() {
     uci -q delete wireless.guest
     uci commit wireless
     wifi reload
-    logger "perimeter Wi-Fi Guest OFF"
+    logger "perimeter Guest Wi-Fi OFF"
     exit 0
 }
 EOF
@@ -66,6 +70,7 @@ SSID=$(</tmp/.guest_ssid)
 PASSWORD=$(</tmp/.guest_password)
 COMMENT=$(</tmp/.guest_comment)
 COMMENT2=$(</tmp/.guest_comment2)
+COMMENT3=$(</tmp/.guest_comment3)
 
 echo "Content-Type: text/html"
 echo ""
@@ -84,6 +89,7 @@ echo "<h1>Guest Wi-Fi</h1>"
 echo "<p><b><font color="yellow">${COMMENT}</font></b></p>"
 echo "<p><b><font color="yellow">${COMMENT2}</font></b></p>"
 echo '<img src=../wifi.svg style="width:33%"></img><br>'
+echo "<p><b><font color="yellow">${COMMENT3}</font></b></p>"
 echo "<p><b>${TYPE}</b></p>"
 echo "<p><b>${SSID}</b></p>"
 echo "<p><b>${PASSWORD}</b></p>"
@@ -118,3 +124,4 @@ a { color: white; }
 </html>
 EOF
 chmod +r /www/guest.html
+echo -e " \033[1;37mIf a white QR code appears, it's a miracle.\033[0;39m"
