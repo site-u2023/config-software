@@ -26,7 +26,7 @@ start() {
     PASSWORD=`openssl rand -base64 6`
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
-    qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
+    qrencode --foreground=${FOREGROUND} -o /www/qr.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
     echo " color="yellow">Guest Wi-Fi ends @"  > /tmp/.guest_comment3
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
@@ -59,7 +59,7 @@ stop() {
     fi
     echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
     echo please activate the service on your device. > /tmp/.guest_comment2
-    qrencode --foreground="0000FF" --background="808080" -o /www/wifi.svg -t SVG "Guest service is suspended"
+    qrencode --foreground="0000FF" --background="808080" -o /www/qr.svg -t SVG "Guest service is suspended"
     echo " color="red">Guest Wi-Fi is closed"  > /tmp/.guest_comment3
     echo '<font></font>' > /tmp/.guest_type
     echo > /tmp/.guest_ssid
@@ -102,7 +102,7 @@ echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helveti
 echo "<h1>Guest Wi-Fi</h1>"
 echo "<p><b><font>${COMMENT}</font></b></p>"
 echo "<p><b><font>${COMMENT2}</font></b></p>"
-echo '<img src=../wifi.svg style="width:33%"></img><br>'
+echo '<img src=../qr.svg style="width:25%"></img><br>'
 echo "<p><b><font${COMMENT3}${TIMEOUT}.</font></b></p>"
 echo "<p><b>${TYPE}</b></p>"
 echo "<p><b>${SSID}</b></p>"
