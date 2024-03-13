@@ -6,7 +6,7 @@ cat << "EOF" > /etc/init.d/wifi_guest
 
 TYPE="WPA2"
 TRDISABLE="1"
-SSID="guest_optout_nomap"
+SSID="optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60" # サービス停止までの時間
 
@@ -18,20 +18,21 @@ start() {
     atrm ${DEL}
     echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
     echo please deactivate the service on your device. > /tmp/.guest_comment2
+    echo $TYPE > /tmp/.guest_type
+    RANDOM_SSID="`openssl rand -base64 6` ${SSID}"
+    echo ${RANDOM_SSID} > /tmp/.guest_ssid
     PASSWORD=`openssl rand -hex 4`
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
-    qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
+    qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
     echo " color="yellow">Guest Wi-Fi ends @"  > /tmp/.guest_comment3
-    echo $TYPE > /tmp/.guest_type
-    echo $SSID > /tmp/.guest_ssid
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
     uci set wireless.guest.device="${WIFI_DEV}"
     uci set wireless.guest.mode="ap"
     uci set wireless.guest.network="lan"
-    uci set wireless.guest.ssid="${SSID}"
+    uci set wireless.guest.ssid="${RANDOM_SSID}"
     uci set wireless.guest.encryption="${ENCRYPTION}"
     uci set wireless.guest.key="${PASSWORD}"
     uci set wireless.guest.macaddr="random"
@@ -45,6 +46,7 @@ start() {
     logger "perimeter Wi-Fi Guest OFF"
     exit 0
 }
+
 restart() {
     exit 0
 }
@@ -60,8 +62,6 @@ stop() {
     uci commit wireless
     wifi reload
     logger "perimeter Guest Wi-Fi OFF"
-    DEL=`atq | awk '{ print $1 }'  | sed -n 1p`
-    atrm ${DEL}
     exit 0
 }
 
