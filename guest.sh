@@ -61,7 +61,7 @@ stop() {
     echo please activate the service on your device. > /tmp/.guest_comment2
     qrencode --foreground="0000FF" --background="808080" -o /www/qr.svg -t SVG "Guest service is suspended"
     echo " color="red">Guest Wi-Fi is closed"  > /tmp/.guest_comment3
-    echo '<font></font>' > /tmp/.guest_type
+    echo > /tmp/.guest_type
     echo > /tmp/.guest_ssid
     echo > /tmp/.guest_password
     uci -q delete wireless.guest
