@@ -296,8 +296,8 @@ function _func_DEVICE_SET {
   opkg install at
   wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
   bash /etc/config-software/guest.sh 2> /dev/null
-  service wifi_guest enable
-  service wifi_guest stop
+  service guest_wifi enable
+  service guest_wifi stop
   fi
   echo -e " \033[1;32mLuCi: http://${input_str_SYSTEM_HOSTNAME}/\033[0;39m"
   if [ "$GUEST" = "on" ]; then
