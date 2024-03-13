@@ -8,7 +8,7 @@ TYPE="WPA2"
 TRDISABLE="1"
 SSID="guest_optout_nomap"
 ENCRYPTION="psk-mixed"
-TIMEOUT="60"
+TIMEOUT="60" # サービス停止までの時間
 
 START=99
 STOP=01
@@ -20,7 +20,7 @@ start() {
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
     qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
-    echo Guest Wi-Fi automatically stops after 60 minutes. > /tmp/.guest_comment3
+    echo " color="yellow">Guest Wi-Fi ends at "  > /tmp/.guest_comment3
     echo $TYPE > /tmp/.guest_type
     echo $SSID > /tmp/.guest_ssid
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
@@ -47,15 +47,19 @@ stop() {
     echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
     echo please activate the service on your device. > /tmp/.guest_comment2
     qrencode --foreground="000000" --background="FF0000" -o /www/wifi.svg -t SVG "Guest service is suspended"
-    echo '<font color="red">CURRENTLY CLOSED</font>' > /tmp/.guest_type
+    echo " color="red">Guest Wi-Fi is closed"  > /tmp/.guest_comment3
+    echo '<font></font>' > /tmp/.guest_type
     echo > /tmp/.guest_ssid
     echo > /tmp/.guest_password
     uci -q delete wireless.guest
     uci commit wireless
     wifi reload
     logger "perimeter Guest Wi-Fi OFF"
+    DEL=`atq | awk '{ print $1 }'  | sed -n 1p`
+    atrm ${DEL}
     exit 0
 }
+
 EOF
 chmod +x /etc/init.d/wifi_guest
 service wifi_guest enable
@@ -71,6 +75,7 @@ PASSWORD=$(</tmp/.guest_password)
 COMMENT=$(</tmp/.guest_comment)
 COMMENT2=$(</tmp/.guest_comment2)
 COMMENT3=$(</tmp/.guest_comment3)
+TIMEOUT=`atq | awk '{ print $5 }'  | cut -d':' -f1,2`
 
 echo "Content-Type: text/html"
 echo ""
@@ -89,7 +94,7 @@ echo "<h1>Guest Wi-Fi</h1>"
 echo "<p><b><font>${COMMENT}</font></b></p>"
 echo "<p><b><font>${COMMENT2}</font></b></p>"
 echo '<img src=../wifi.svg style="width:33%"></img><br>'
-echo "<p><b><font color="yellow">${COMMENT3}</font></b></p>"
+echo "<p><b><font${COMMENT3}${TIMEOUT}.</font></b></p>"
 echo "<p><b>${TYPE}</b></p>"
 echo "<p><b>${SSID}</b></p>"
 echo "<p><b>${PASSWORD}</b></p>"
