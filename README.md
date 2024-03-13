@@ -161,7 +161,8 @@ rm -rf /usr/bin/confsoft
 ```
 
 
-### [LuCi](https://openwrt.org/jp/doc/howto/firstlogin#login_to_webui)
+### [LuCi](https://qiita.com/site_u/items/a23d165201081817cb00#luciweb%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2)
+
 - Run from LuCi: [192.168.1.1](http://192.168.1.1/cgi-bin/luci/)
   - User Name：`root`
   - Password：`Password you set`
@@ -170,22 +171,22 @@ rm -rf /usr/bin/confsoft
 ![QR192.168.1.1.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/93eed9ce-7319-9332-99ba-74455b471cdd.png) 
 
 
-### [TTYD](https://openwrt.org/packages/pkgdata_owrt18_6/ttyd) :warning:[Included in all-in-one script configuration](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E8%A8%AD%E5%AE%9A)
-- Run from browser: [http://192.168.1.1:7681/](http://192.168.1.1:7681/)
-  - User Name：`root`
-  - Password：`Password you set`
+### [TTYD](https://qiita.com/site_u/items/a23d165201081817cb00#ttyd)
+Filer (used like Explorer with WinSCP)
 
-- Run from LuCi: [http://192.168.1.1/cgi-bin/luci/admin/services/ttyd](http://192.168.1.1/cgi-bin/luci/admin/services/ttyd)
+- Run from browser: [http://192.168.1.1:7681/](http://192.168.1.1:7681/)
+
+- Run from LuCi: [192.168.1.1/cgi-bin/luci/admin/services/ttyd](http://192.168.1.1/cgi-bin/luci/admin/services/ttyd)
 
 - Run from QR Code: 192.168.1.1:7681
 
 ![QR_062248.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3412833/e7929d2e-d9b0-b599-33cf-55413d584b19.png)
 
 
-### [SFTP](https://openwrt.org/docs/guide-user/services/nas/sftp.server) :warning:Installation required (in recommended package)
+### [SFTP](https://qiita.com/site_u/items/a23d165201081817cb00#sftp-server)
 
-- SFTP Download: [WinSCP](https://winscp.net/eng/download.php)
-  Filer (used like Explorer with WinSCP)
+- Download: [WinSCP](https://winscp.net/eng/download.php)
+  
   Start WinSCP
 
 - Session
@@ -194,6 +195,15 @@ rm -rf /usr/bin/confsoft
   - Password：`Password you set`
   - login `Click `
 
+### [Guest Wi-Fi](https://qiita.com/site_u/items/f42be7c0953187b9428a#%E3%82%B2%E3%82%B9%E3%83%88%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%8C%96-qr%E3%82%B3%E3%83%BC%E3%83%89%E7%99%BA%E8%A1%8C%E3%81%A8%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89)
+
+- QR Code Issuance
+http://192.168.1.1/guest.html
+
+### [AdGuard HOME](https://qiita.com/site_u/items/cf34ea1ee9a1971272bc#adguard-home)
+
+- initial value
+http://192.168.1.1:3000/
 
 
 
