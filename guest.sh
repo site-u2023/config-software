@@ -15,7 +15,9 @@ STOP=01
 
 start() {
     DEL=`atq | awk '{ print $1 }'  | sed -n 1p`
+    if [ ${DEL} ]; then
     atrm ${DEL}
+    fi
     echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
     echo please deactivate the service on your device. > /tmp/.guest_comment2
     echo $TYPE > /tmp/.guest_type
@@ -52,7 +54,9 @@ restart() {
 }
 stop() {
     DEL=`atq | awk '{ print $1 }'  | sed -n 1p`
+    if [ ${DEL} ]; then
     atrm ${DEL}
+    fi
     echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
     echo please activate the service on your device. > /tmp/.guest_comment2
     qrencode --foreground="0000FF" --background="808080" -o /www/wifi.svg -t SVG "Guest service is suspended"
@@ -69,6 +73,7 @@ stop() {
 
 EOF
 chmod +x /etc/init.d/wifi_guest
+
 
 cat << "EOF" > /www/cgi-bin/wifi_guest_qr
 #!/bin/bash
