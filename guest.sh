@@ -1,10 +1,5 @@
 #!/bin/sh
 
-opkg update
-opkg install bash
-opkg install openssl-util
-opkg install qrencode
-opkg install at
 
 cat << "EOF" > /etc/init.d/wifi_guest
 #!/bin/bash /etc/rc.common
