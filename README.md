@@ -3,7 +3,7 @@
 :warning:**Please contact us if you have any problems**
 
 ### Script Selector
-![selector](https://github.com/site-u2023/config-software/assets/140032047/75f6df97-08f7-49cb-814d-8f7a9278b25d)
+![config](https://github.com/site-u2023/config-software/assets/140032047/0e7be2b8-7f81-44c7-9452-432fda1f7db8)
 
 <details><summary>Configuration</summary>
 
