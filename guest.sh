@@ -43,6 +43,9 @@ start() {
     logger "perimeter Wi-Fi Guest OFF"
     exit 0
 }
+restart() {
+    exit 0
+}
 stop() {
     echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
     echo please activate the service on your device. > /tmp/.guest_comment2
