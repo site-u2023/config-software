@@ -132,6 +132,28 @@ do
 done
 }
 
+function _func_GUEST {
+while :
+do
+  echo -e " \033[1;32mGuest Wi-Fi installation\033[0;39m"
+  read -p " Please select key [y/n]: " num
+  case "${num}" in
+    "y" ) opkg update
+          opkg install qrencode
+          opkg install openssl-util	
+          opkg install bash
+          wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
+          bash /etc/config-software/guest.sh 2> /dev/null
+          service wifi_guest enable
+          service wifi_guest start 
+          HOSTMANE=`uci get system.@system[0].hostname`
+          echo -e " \033[1;32mGest QR: http://${HOSTMANE}/guest.html\033[0;39m"
+          read -p " Press any key"
+          break ;;
+    "n" ) break ;;
+  esac
+done  
+}
 
 while :
 do
@@ -141,7 +163,7 @@ do
   echo -e " \033[1;32m[3]:Location Based Service (LBS) Stop\033[0;39m"
   echo -e " \033[1;35m[4]:SAMBA4 and WSDD2 installation\033[0;39m"
   echo -e " \033[1;31m[5]:DFS Check\033[0;39m"
-  echo -e " \033[1;36m[6]\033[0;39m" 
+  echo -e " \033[1;36m[6]:Guest Wi-Fi\033[0;39m" 
   echo -e " \033[7;40m[q]:Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   read -p " Please select key [1/2/3/4/5 or q]: " num
@@ -151,7 +173,7 @@ do
     "3" ) _func_WiFi_location_service ;;
     "4" ) _func_SAMBA4 ;;
     "5" ) _func_DFS ;;
-    "6" ) ;;
+    "6" ) _func_GUEST ;;
     "q" ) exit ;;
   esac
  done
