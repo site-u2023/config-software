@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-cat << "EOF" > /etc/init.d/wifi_guest
+cat << "EOF" > /etc/init.d/guest_wifi
 #!/bin/bash /etc/rc.common
 
 TYPE="WPA2"
@@ -72,10 +72,10 @@ stop() {
 }
 
 EOF
-chmod +x /etc/init.d/wifi_guest
+chmod +x /etc/init.d/guest_wifi
 
 
-cat << "EOF" > /www/cgi-bin/wifi_guest_qr
+cat << "EOF" > /www/cgi-bin/guest
 #!/bin/bash
 
 TYPE=$(</tmp/.guest_type)
@@ -111,7 +111,7 @@ echo "</div>"
 echo "</body>"
 echo "</html>"
 EOF
-chmod +x /www/cgi-bin/wifi_guest_qr
+chmod +x /www/cgi-bin/guest
 
 
 cat << "EOF" > /www/guest.html
@@ -122,7 +122,7 @@ cat << "EOF" > /www/guest.html
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<meta http-equiv="refresh" content="0; URL=cgi-bin/wifi_guest_qr" />
+<meta http-equiv="refresh" content="0; URL=cgi-bin/guest" />
 <style type="text/css">
 body { background: white; font-family: arial, helvetica, sans-serif; }
 a { color: black; }
@@ -133,7 +133,7 @@ a { color: white; }
 </style>
 </head>
 <body>
-<a href="cgi-bin/wifi_guest_qr/style.css?ver=240313" rel="stylesheet">LuCI - Lua Configuration Interface</a>
+<a href="cgi-bin/guest/style.css?ver=240313" rel="stylesheet">LuCI - Lua Configuration Interface</a>
 </body>
 </html>
 EOF
