@@ -86,8 +86,8 @@ echo "</head>"
 echo '<body bgcolor="blue">'
 echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
 echo "<h1>Guest Wi-Fi</h1>"
-echo "<p><b><font color="yellow">${COMMENT}</font></b></p>"
-echo "<p><b><font color="yellow">${COMMENT2}</font></b></p>"
+echo "<p><b><font>${COMMENT}</font></b></p>"
+echo "<p><b><font>${COMMENT2}</font></b></p>"
 echo '<img src=../wifi.svg style="width:33%"></img><br>'
 echo "<p><b><font color="yellow">${COMMENT3}</font></b></p>"
 echo "<p><b>${TYPE}</b></p>"
