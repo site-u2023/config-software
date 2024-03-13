@@ -1,5 +1,10 @@
 #!/bin/sh
 
+opkg update
+opkg install bash
+opkg install openssl-util
+opkg install qrencode
+opkg install at
 
 cat << "EOF" > /etc/init.d/wifi_guest
 #!/bin/bash /etc/rc.common
@@ -20,7 +25,7 @@ start() {
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
     qrencode --foreground=${FOREGROUND} -o /www/wifi.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${SSID};P:${PASSWORD};;" 
-    echo " color="yellow">Guest Wi-Fi ends at "  > /tmp/.guest_comment3
+    echo " color="yellow">Guest Wi-Fi ends @"  > /tmp/.guest_comment3
     echo $TYPE > /tmp/.guest_type
     echo $SSID > /tmp/.guest_ssid
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
@@ -46,7 +51,7 @@ start() {
 stop() {
     echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
     echo please activate the service on your device. > /tmp/.guest_comment2
-    qrencode --foreground="000000" --background="FF0000" -o /www/wifi.svg -t SVG "Guest service is suspended"
+    qrencode --foreground="0000FF" --background="808080" -o /www/wifi.svg -t SVG "Guest service is suspended"
     echo " color="red">Guest Wi-Fi is closed"  > /tmp/.guest_comment3
     echo '<font></font>' > /tmp/.guest_type
     echo > /tmp/.guest_ssid
