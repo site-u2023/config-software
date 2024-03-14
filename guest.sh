@@ -26,7 +26,7 @@ start() {
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
     qrencode --foreground=${FOREGROUND} -o /www/qr.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
-    echo "color="yellow">Stops after "${TIMEOUT}" min. @"  > /tmp/.guest_comment2
+    echo "color="yellow">Stops after "${TIMEOUT}" min @"  > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
