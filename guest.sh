@@ -14,7 +14,7 @@ START=99
 STOP=01
 
 start() {
-    DEL=`atq | awk '{ print $1 }'  | sed -n 1p`
+    DEL=`atq | awk '{ print $1 }' | sed -n 1p`
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
@@ -51,7 +51,7 @@ restart() {
     exit 0
 }
 stop() {
-    DEL=`atq | awk '{ print $1 }'  | sed -n 1p`
+    DEL=`atq | awk '{ print $1 }' | sed -n 1p`
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
