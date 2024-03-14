@@ -142,12 +142,13 @@ do
           opkg install bash
           opkg install openssl-util
           opkg install qrencode
+          opkg install at
           wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
           bash /etc/config-software/guest.sh 2> /dev/null
-          service wifi_guest enable
-          service wifi_guest stop
+          service wifi_guest start
           HOSTMANE=`uci get system.@system[0].hostname`
-          echo -e " \033[1;32mGest QR: http://${HOSTMANE}/guest.html\033[0;39m"
+          echo -e " \033[1;32mGuest Wi-Fi: http://${HOSTMANE}/guest.html\033[0;39m"
+          echo -e " \033[1;32mQR code: http://${HOSTMANE}/qr.svg\033[0;39m"
           read -p " Press any key"
           break ;;
     "n" ) break ;;
