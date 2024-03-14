@@ -18,15 +18,15 @@ start() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo "Please disable the service don't use guest Wi-Fi." > /root/.guest_comment1
-    echo $TYPE > /root/.guest_type
+    echo "Please disable the service don't use guest Wi-Fi." > /tmp/.guest_comment1
+    echo $TYPE > /tmp/.guest_type
     RANDOM_SSID="`openssl rand -base64 6`${SSID}"
-    echo ${RANDOM_SSID} > /root/.guest_ssid
+    echo ${RANDOM_SSID} > /tmp/.guest_ssid
     PASSWORD=`openssl rand -base64 6`
-    echo $PASSWORD > /root/.guest_password
+    echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
     qrencode --foreground=${FOREGROUND} -o /www/qr.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
-    echo "color="yellow">Stops after "${TIMEOUT}" min @"  > /root/.guest_comment2
+    echo "color="yellow">Stops after "${TIMEOUT}" min @"  > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
@@ -55,12 +55,12 @@ stop() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo "Please enable the service to use guest Wi-Fi." > /root/.guest_comment1
+    echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment1
     qrencode --foreground="0000FF" --background="808080" -o /www/qr.svg -t SVG "Guest service is suspended"
-    echo "color="red">Out of service"  > /root/.guest_comment2
-    echo > /root/.guest_type
-    echo > /root/.guest_ssid
-    echo > /root/.guest_password
+    echo "color="red">Out of service"  > /tmp/.guest_comment2
+    echo > /tmp/.guest_type
+    echo > /tmp/.guest_ssid
+    echo > /tmp/.guest_password
     uci -q delete wireless.guest
     uci commit wireless
     wifi reload
@@ -74,11 +74,11 @@ chmod +x /etc/init.d/guest_wifi
 cat << "EOF" > /www/cgi-bin/guest
 #!/bin/bash
 
-TYPE=$(</root/.guest_type)
-SSID=$(</root/.guest_ssid)
-PASSWORD=$(</root/.guest_password)
-COMMENT1=$(</root/.guest_comment1)
-COMMENT2=$(</root/.guest_comment2)
+TYPE=$(</tmp/.guest_type)
+SSID=$(</tmp/.guest_ssid)
+PASSWORD=$(</tmp/.guest_password)
+COMMENT1=$(</tmp/.guest_comment1)
+COMMENT2=$(</tmp/.guest_comment2)
 TIMEOUT=`atq | awk '{ print $5 }' | cut -d':' -f1,2`
 
 echo "Content-Type: text/html"
