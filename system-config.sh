@@ -301,7 +301,8 @@ function _func_DEVICE_SET {
   fi
   echo -e " \033[1;32mLuCi: http://${input_str_SYSTEM_HOSTNAME}/\033[0;39m"
   if [ "$GUEST" = "on" ]; then
-  echo -e " \033[1;32mGest QR: http://${input_str_SYSTEM_HOSTNAME}/guest.html\033[0;39m"
+  echo -e " \033[1;32mGuest Wi-Fi: http://${input_str_SYSTEM_HOSTNAME}/guest.html\033[0;39m"
+  echo -e " \033[1;32mQR code: http://${input_str_SYSTEM_HOSTNAME}/qr.svg\033[0;39m"
   fi
   read -p " Press any key (Reboot the device)"
   reboot
