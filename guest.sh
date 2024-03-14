@@ -44,7 +44,6 @@ start() {
     wifi reload
     logger "perimeter Wi-Fi Guest ON"
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
-    logger "perimeter Wi-Fi Guest OFF"
     exit 0
 }
 
