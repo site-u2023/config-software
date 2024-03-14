@@ -18,8 +18,7 @@ start() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo If you do not wish to use guest Wi-Fi, > /tmp/.guest_comment
-    echo please deactivate the service on your device. > /tmp/.guest_comment2
+    echo "Please disable the service don't use guest Wi-Fi." > /tmp/.guest_comment1
     echo $TYPE > /tmp/.guest_type
     RANDOM_SSID="`openssl rand -base64 6`${SSID}"
     echo ${RANDOM_SSID} > /tmp/.guest_ssid
@@ -27,7 +26,7 @@ start() {
     echo $PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
     qrencode --foreground=${FOREGROUND} -o /www/qr.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
-    echo " color="yellow">Guest Wi-Fi ends @"  > /tmp/.guest_comment3
+    echo "color="yellow">Stops after "${TIMEOUT}" min. @"  > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
@@ -57,10 +56,9 @@ stop() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo If you wish to use Guest Wi-Fi, > /tmp/.guest_comment
-    echo please activate the service on your device. > /tmp/.guest_comment2
+    echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment1
     qrencode --foreground="0000FF" --background="808080" -o /www/qr.svg -t SVG "Guest service is suspended"
-    echo " color="red">Guest Wi-Fi is closed"  > /tmp/.guest_comment3
+    echo "color="red">Out of service"  > /tmp/.guest_comment2
     echo > /tmp/.guest_type
     echo > /tmp/.guest_ssid
     echo > /tmp/.guest_password
@@ -70,7 +68,6 @@ stop() {
     logger "perimeter Guest Wi-Fi OFF"
     exit 0
 }
-
 EOF
 chmod +x /etc/init.d/guest_wifi
 
@@ -81,9 +78,8 @@ cat << "EOF" > /www/cgi-bin/guest
 TYPE=$(</tmp/.guest_type)
 SSID=$(</tmp/.guest_ssid)
 PASSWORD=$(</tmp/.guest_password)
-COMMENT=$(</tmp/.guest_comment)
+COMMENT1=$(</tmp/.guest_comment1)
 COMMENT2=$(</tmp/.guest_comment2)
-COMMENT3=$(</tmp/.guest_comment3)
 TIMEOUT=`atq | awk '{ print $5 }'  | cut -d':' -f1,2`
 
 echo "Content-Type: text/html"
@@ -100,10 +96,9 @@ echo "</head>"
 echo '<body bgcolor="blue">'
 echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
 echo "<h1>Guest Wi-Fi</h1>"
-echo "<p><b><font>${COMMENT}</font></b></p>"
-echo "<p><b><font>${COMMENT2}</font></b></p>"
+echo "<p><b><font>${COMMENT1}</font></b></p>"
 echo '<img src=../qr.svg style="width:25%"></img><br>'
-echo "<p><b><font${COMMENT3}${TIMEOUT}.</font></b></p>"
+echo "<p><b><font ${COMMENT2}${TIMEOUT}.</font></b></p>"
 echo "<p><b>${TYPE}</b></p>"
 echo "<p><b>${SSID}</b></p>"
 echo "<p><b>${PASSWORD}</b></p>"
