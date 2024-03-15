@@ -1173,8 +1173,7 @@ fi
 
  while :
  do
-  echo -e " \033[1;32mAvailable flash sizes: ${AVAILABLE_FLASH}KB\033[0;39m"
-  echo -e " \033[1;37mAutomatic full installation (for novices)\033[0;39m"
+  echo -e " \033[1;37mSelective installation\033[0;39m"
   echo -e " \033[1;37m・LuCi (Snapshot only)\033[0;39m"
   echo -e " \033[1;37m・LuCi SSL\033[0;39m"
   echo -e " \033[1;37m・Dashboard\033[0;39m"
