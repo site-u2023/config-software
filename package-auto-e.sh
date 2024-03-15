@@ -17,6 +17,7 @@ luci-ssl
 dashboard
 openssh-sftp-server
 luci-app-ttyd
+coreutils
 irqbalance
 sqm-scripts
 luci-app-sqm
@@ -59,6 +60,9 @@ uci set ttyd.@ttyd[0].ipv6='1'
 uci set ttyd.@ttyd[0].debug='7'
 uci set ttyd.@ttyd[0].url_arg='1'
 uci commit ttyd
+
+# BUSYBOX
+opkg install coreutils
 
 # Irqbalance
 CPU_INFO=`fgrep 'processor' /proc/cpuinfo | wc -l`
@@ -247,6 +251,7 @@ fi
   echo -e " \033[1;37m・Dashboard\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
+  echo -e " \033[1;37m・coreutils\033[0;39m"
   echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
   echo -e " \033[1;37m・SQM\033[0;39m"
   echo -e " \033[1;37m・statistics\033[0;39m"
