@@ -220,6 +220,31 @@ do
   esac
 done
 fi
+_func_coreutils
+}
+
+function _func_coreutils {
+CORE=`opkg list-installed coreutils | awk '{ print $1 }'`
+if [ -z "$CORE" ]; then
+ CORE=`fgrep 'processor' /proc/cpuinfo | wc -l`
+ if [ "$CORE" -gt 3 ]; then
+while :
+do
+    echo -e " \033[1;33mInstall coreutils\033[0;39m"
+    echo -e " \033[1;32mcoreutils: $((`opkg info coreutils | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+    read -p " Please select key [y/n or q]: " num
+    case "${num}" in
+      "y" ) echo irqbalance >> /etc/config-software/list-installed/Before
+            echo $((`opkg info coreutils | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+            echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+            break ;;
+      "n" ) CORE='1'
+            break ;;
+      "q" ) exit ;;
+    esac
+done
+ fi
+fi
 _func_irqbalance
 }
 
@@ -745,33 +770,6 @@ do
   esac
 done
 fi
-_func_FAT32
-}
-
-function _func_FAT32 {
-dosfstools=`opkg list-installed dosfstools | awk '{ print $1 }'`
-kmod_fs_vfat=`opkg list-installed kmod-fs-vfat | awk '{ print $1 }'`
-if [ -z "$dosfstools" ] || [ -z "$kmod_fs_vfat" ]; then
-while :
-do
-  echo -e " \033[1;33mInstall FAT32\033[0;39m"
-  echo -e " \033[1;32mdosfstools: $((10680/1024))KB\033[0;39m"
-  echo -e " \033[1;32mkmod-fs-vfat: $((7771/1024))KB\033[0;39m"
-  read -p " Please select key [y/n or q]: " num
-  case "${num}" in
-    "y" ) echo dosfstools >> /etc/config-software/list-installed/Before
-          echo kmod-fs-vfat >> /etc/config-software/list-installed/Before
-          echo $((`opkg info dosfstools | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info kmod-fs-vfat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
-          break ;;
-    "n" ) dosfstools='1'
-          kmod_fs_vfat='1'
-          break ;;
-    "q" ) exit ;;
-  esac
-done
-fi
 _func_ext4
 }
 
@@ -821,6 +819,33 @@ do
           break ;;
     "n" ) f2fs_tools='1'
           kmod_fs_f2fs='1'
+          break ;;
+    "q" ) exit ;;
+  esac
+done
+fi
+_func_FAT32
+}
+
+function _func_FAT32 {
+dosfstools=`opkg list-installed dosfstools | awk '{ print $1 }'`
+kmod_fs_vfat=`opkg list-installed kmod-fs-vfat | awk '{ print $1 }'`
+if [ -z "$dosfstools" ] || [ -z "$kmod_fs_vfat" ]; then
+while :
+do
+  echo -e " \033[1;33mInstall FAT32\033[0;39m"
+  echo -e " \033[1;32mdosfstools: $((10680/1024))KB\033[0;39m"
+  echo -e " \033[1;32mkmod-fs-vfat: $((7771/1024))KB\033[0;39m"
+  read -p " Please select key [y/n or q]: " num
+  case "${num}" in
+    "y" ) echo dosfstools >> /etc/config-software/list-installed/Before
+          echo kmod-fs-vfat >> /etc/config-software/list-installed/Before
+          echo $((`opkg info dosfstools | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo $((`opkg info kmod-fs-vfat | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+          echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
+          break ;;
+    "n" ) dosfstools='1'
+          kmod_fs_vfat='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -1024,6 +1049,11 @@ uci commit ttyd
 fi
 if [ -z "$TTYD_JA" ]; then
 opkg install luci-i18n-ttyd-$input_str_Languages
+fi
+
+coreutils
+if [ -z "$CORE" ]; then
+opkg install coreutils
 fi
 
 # Irqbalance
@@ -1311,6 +1341,7 @@ fi
   echo -e " \033[1;37m・Dashboard\033[0;39m"
   echo -e " \033[1;37m・SFTP server\033[0;39m"
   echo -e " \033[1;37m・ttyd\033[0;39m"
+  echo -e " \033[1;37m・coreutils\033[0;39m"
   echo -e " \033[1;37m・irqbalance (4 core systems or more)\033[0;39m"
   echo -e " \033[1;37m・SQM\033[0;39m"
   echo -e " \033[1;37m・statistics\033[0;39m"
