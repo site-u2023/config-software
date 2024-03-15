@@ -18,15 +18,15 @@ start() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo "Please disable the service don't use guest Wi-Fi." > /tmp/.guest_comment1
-    echo $TYPE > /tmp/.guest_type
+    echo "Please disable the service don't use guest Wi-Fi." > /root/.guest_comment1
+    echo $TYPE > /root/.guest_type
     RANDOM_SSID="`openssl rand -base64 6`${SSID}"
-    echo ${RANDOM_SSID} > /tmp/.guest_ssid
+    echo ${RANDOM_SSID} > /root/.guest_ssid
     PASSWORD=`openssl rand -base64 6`
-    echo $PASSWORD > /tmp/.guest_password
+    echo $PASSWORD > /root/.guest_password
     FOREGROUND=`openssl rand -hex 3`
-    qrencode --foreground=${FOREGROUND} -o /www/qr.svg -t SVG "WIFI:T:${TYPE};R:${TRDISABLE};S:${RANDOM_SSID};P:${PASSWORD};;" 
-    echo "color="yellow">Stops after "${TIMEOUT}" min @"  > /tmp/.guest_comment2
+    qrencode --foreground=${FOREGROUND} --inline --type=SVG --output=- --size 3 "WIFI:S:${RANDOM_SSID};T:${TYPE};R:${TRDISABLE};P:${PASSWORD};;" > /root/.guest_qr
+    echo "color="yellow">Stops after "${TIMEOUT}" min @"  > /root/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
@@ -55,18 +55,19 @@ stop() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment1
-    qrencode --foreground="0000FF" --background="808080" -o /www/qr.svg -t SVG "Guest service is suspended"
-    echo "color="red">Out of service"  > /tmp/.guest_comment2
-    echo > /tmp/.guest_type
-    echo > /tmp/.guest_ssid
-    echo > /tmp/.guest_password
+    echo "Please enable the service to use guest Wi-Fi." > /root/.guest_comment1
+    qrencode --foreground="808080" --background="0000FF" --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:WPA2;R:1;P:Out of service.;;" > /root/.guest_qr
+    echo "color="red">Out of service"  > /root/.guest_comment2
+    echo > /root/.guest_type
+    echo > /root/.guest_ssid
+    echo > /root/.guest_password
     uci -q delete wireless.guest
     uci commit wireless
     wifi reload
     logger "perimeter Guest Wi-Fi OFF"
     exit 0
 }
+
 EOF
 chmod +x /etc/init.d/guest_wifi
 
@@ -74,11 +75,12 @@ chmod +x /etc/init.d/guest_wifi
 cat << "EOF" > /www/cgi-bin/guest
 #!/bin/bash
 
-TYPE=$(</tmp/.guest_type)
-SSID=$(</tmp/.guest_ssid)
-PASSWORD=$(</tmp/.guest_password)
-COMMENT1=$(</tmp/.guest_comment1)
-COMMENT2=$(</tmp/.guest_comment2)
+QR=$(</root/.guest_qr)
+TYPE=$(</root/.guest_type)
+SSID=$(</root/.guest_ssid)
+PASSWORD=$(</root/.guest_password)
+COMMENT1=$(</root/.guest_comment1)
+COMMENT2=$(</root/.guest_comment2)
 TIMEOUT=`atq | awk '{ print $5 }' | cut -d':' -f1,2`
 
 echo "Content-Type: text/html"
@@ -95,12 +97,12 @@ echo "</head>"
 echo '<body bgcolor="blue">'
 echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
 echo "<h1>Guest Wi-Fi</h1>"
-echo "<p><b><font>${COMMENT1}</font></b></p>"
-echo '<img src=../qr.svg style="width:25%"></img><br>'
-echo "<p><b><font ${COMMENT2}${TIMEOUT}.</font></b></p>"
-echo "<p><b>${TYPE}</b></p>"
-echo "<p><b>${SSID}</b></p>"
-echo "<p><b>${PASSWORD}</b></p>"
+echo "<p><font>${COMMENT1}</font></p>"
+echo "${QR}<br>"
+echo "<p><font ${COMMENT2}<b>${TIMEOUT}.</b></font></p>"
+echo "<p>${TYPE}</p>"
+echo "<p>${SSID}</p>"
+echo "<p>${PASSWORD}</p>"
 echo "</div>"
 echo "</body>"
 echo "</html>"
