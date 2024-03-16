@@ -6,9 +6,11 @@ cat << "EOF" > /etc/init.d/guest_wifi
 
 TYPE="WPA2"
 TRDISABLE="1"
-SSID="_optout_nomap"
+SSID_F="guest@"
+SSID_B="_optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60"
+INTERFACE="lan"
 
 START=99
 STOP=01
@@ -21,7 +23,7 @@ start() {
     echo "Please disable the service don't use guest Wi-Fi." > /root/.guest_comment1
     echo ${TYPE} > /root/.guest_type
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
-    TIMEOUT_SSID="guest@`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID}"
+    TIMEOUT_SSID=""SSID_F"`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
     echo ${TIMEOUT_SSID} > /root/.guest_ssid
     RANDOM_PASSWORD=`openssl rand -base64 6`
     echo $RANDOM_PASSWORD > /root/.guest_password
@@ -33,7 +35,7 @@ start() {
     uci set wireless.guest="wifi-iface"
     uci set wireless.guest.device="${WIFI_DEV}"
     uci set wireless.guest.mode="ap"
-    uci set wireless.guest.network="lan"
+    uci set wireless.guest.network="${INTERFACE}"
     uci set wireless.guest.ssid="${TIMEOUT_SSID}"
     uci set wireless.guest.encryption="${ENCRYPTION}"
     uci set wireless.guest.key="${RANDOM_PASSWORD}"
