@@ -81,7 +81,6 @@ SSID=$(</root/.guest_ssid)
 PASSWORD=$(</root/.guest_password)
 COMMENT1=$(</root/.guest_comment1)
 COMMENT2=$(</root/.guest_comment2)
-TIMEOUT=`atq | awk '{ print $5 }' | cut -d':' -f1,2`
 
 echo "Content-Type: text/html"
 echo ""
