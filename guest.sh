@@ -23,7 +23,7 @@ start() {
     echo "Please disable the service don't use guest Wi-Fi." > /root/.guest_comment1
     echo ${TYPE} > /root/.guest_type
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
-    TIMEOUT_SSID=""SSID_F"`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
+    TIMEOUT_SSID=""${SSID_F}"`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
     echo ${TIMEOUT_SSID} > /root/.guest_ssid
     RANDOM_PASSWORD=`openssl rand -base64 6`
     echo $RANDOM_PASSWORD > /root/.guest_password
