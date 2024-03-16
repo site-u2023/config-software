@@ -28,7 +28,7 @@ start() {
     RANDOM_PASSWORD=`openssl rand -base64 6`
     echo $RANDOM_PASSWORD > /root/.guest_password
     FOREGROUND=`openssl rand -hex 3`
-    qrencode --foreground=${FOREGROUND} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /root/.guest_qr
+    qrencode --foreground=${FOREGROUND} --inline --type=SVG --output=- --size 4 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /root/.guest_qr
     echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /root/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
@@ -58,7 +58,7 @@ stop() {
     atrm ${DEL}
     fi
     echo "Please enable the service to use guest Wi-Fi." > /root/.guest_comment1
-    qrencode --foreground="808080" --background="0000FF" --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:${TYPE};R:1;P:Out of service.;;" > /root/.guest_qr
+    qrencode --foreground="808080" --background="0000FF" --inline --type=SVG --output=- --size 4 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /root/.guest_qr
     echo "<font color="red">Out of service.</font>"  > /root/.guest_comment2
     echo > /root/.guest_type
     echo > /root/.guest_ssid
@@ -126,3 +126,5 @@ cat << "EOF" > /www/guest.html
 EOF
 chmod +r /www/guest.html
 echo -e " \033[1;37mIf a white QR code appears, it's a miracle.\033[0;39m"
+
+
