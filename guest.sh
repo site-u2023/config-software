@@ -86,7 +86,7 @@ TIMEOUT=`atq | awk '{ print $5 }' | cut -d':' -f1,2`
 echo "Content-Type: text/html"
 echo ""
 echo "<!DOCTYPE html>"
-echo '<html lang="ja">'
+echo '<html lang="en">'
 echo "<head>"
 echo "<title>Guest Wi-Fi</title>"
 echo '<meta charset="UTF-8" name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">'
