@@ -6,7 +6,7 @@ cat << "EOF" > /etc/init.d/guest_wifi
 
 TYPE="WPA2"
 TRDISABLE="1"
-SSID_F="guest@"
+SSID_F="ゲスト"
 SSID_B="_optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60"
@@ -23,12 +23,12 @@ start() {
     echo "Please disable the service don't use guest Wi-Fi." > /tmp/.guest_comment1
     echo ${TYPE} > /tmp/.guest_type
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
-    TIMEOUT_SSID=""${SSID_F}"`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
+    TIMEOUT_SSID=""${SSID_F}"@`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
     echo ${TIMEOUT_SSID} > /tmp/.guest_ssid
     RANDOM_PASSWORD=`openssl rand -base64 6`
     echo $RANDOM_PASSWORD > /tmp/.guest_password
     FOREGROUND=`openssl rand -hex 3`
-    qrencode --foreground=${FOREGROUND} --inline --type=SVG --output=- --size 4 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
+    qrencode --foreground=${FOREGROUND} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
     echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
@@ -58,7 +58,7 @@ stop() {
     atrm ${DEL}
     fi
     echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment1
-    qrencode --foreground="808080" --background="0000FF" --inline --type=SVG --output=- --size 4 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /tmp/.guest_qr
+    qrencode --foreground="808080" --background="0000FF" --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /tmp/.guest_qr
     echo "<font color="red">Out of service.</font>"  > /tmp/.guest_comment2
     echo > /tmp/.guest_type
     echo > /tmp/.guest_ssid
@@ -76,35 +76,33 @@ chmod +x /etc/init.d/guest_wifi
 cat << "EOF" > /www/cgi-bin/guest
 #!/bin/bash
 
+SSID=$(</tmp/.guest_ssid )
 QR=$(</tmp/.guest_qr)
-SSID=$(</tmp/.guest_ssid)
 PASSWORD=$(</tmp/.guest_password)
 COMMENT1=$(</tmp/.guest_comment1)
 COMMENT2=$(</tmp/.guest_comment2)
-TIMEOUT=`atq | awk '{ print $5 }' | cut -d':' -f1,2`
 
-echo "Content-Type: text/html"
-echo ""
-echo "<!DOCTYPE html>"
-echo '<html lang="en">'
-echo "<head>"
-echo "<title>Guest Wi-Fi</title>"
-echo '<meta charset="UTF-8" name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">'
-echo '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">'
-echo '<meta http-equiv="Pragma" content="no-cache">'
-echo '<meta http-equiv="Expires" content="0">'
-echo "</head>"
-echo '<body bgcolor="blue">'
-echo "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;'>"
-echo "<h1>Guest Wi-Fi</h1>"
-echo "<p><font>${COMMENT1}</font></p>"
-echo "<p>${QR}</p>"
-echo "<p>${COMMENT2}</p>"
-echo "<p>${SSID}</p>"
-echo "<p>${PASSWORD}</p>"
-echo "</div>"
-echo "</body>"
-echo "</html>"
+printf "%s\n" "Content-Type: text/html"
+printf "%s\n" ""
+printf "%s\n" "<?xml version="1.0" encoding="utf-8"?>"
+printf "%s\n" "<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">"
+printf "%s\n" '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="ja">'
+printf "%s\n" "<head>"
+printf "%s\n" "<title>QR Wi-Fi</title>"
+printf "%s\n" "<meta charset="UTF-8" name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">"
+printf "%s\n" "<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">"
+printf "%s\n" "<meta http-equiv="Pragma" content="no-cache">"
+printf "%s\n" "<meta http-equiv="Expires" content="0">"
+printf "%s\n" "</head>"
+printf "%s\n" "<body bgcolor="blue">"
+printf "%s\n" "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:30px;font-weight:500;'>"
+printf "%s\n" "<h1>QR Wi-Fi</h1>"
+printf "%s\n" "<h5>${COMMENT1}</h5>"
+printf "%s\n" "${QR}"
+printf "%s\n" "<h5>${COMMENT2}<br />${SSID}<br />${PASSWORD}</h5>"
+printf "%s\n" "</div>"
+printf "%s\n" "</body>"
+printf "%s\n" "</html>"
 EOF
 chmod +x /www/cgi-bin/guest
 
@@ -112,7 +110,7 @@ chmod +x /www/cgi-bin/guest
 cat << "EOF" > /www/guest.html
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
