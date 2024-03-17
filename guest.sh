@@ -86,7 +86,7 @@ printf "%s\n" "Content-Type: text/html"
 printf "%s\n" ""
 printf "%s\n" "<?xml version="1.0" encoding="utf-8"?>"
 printf "%s\n" "<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">"
-printf "%s\n" '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">'
+printf "%s\n" "<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">"
 printf "%s\n" "<head>"
 printf "%s\n" "<title>Guest Wi-Fi</title>"
 printf "%s\n" "<meta charset="UTF-8" name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">"
