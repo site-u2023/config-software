@@ -10,7 +10,6 @@ SSID_F="guest"
 SSID_B="_optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60"
-PASSWD='a-zA-Z0-9`~!@#$%^&*()_+-={}[]|;<,>.?/'
 INTERFACE="lan"
 
 START=99
@@ -26,10 +25,9 @@ start() {
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
     TIMEOUT_SSID=""${SSID_F}"@`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
     echo ${TIMEOUT_SSID} > /tmp/.guest_ssid
-    RANDOM_PASSWORD=`cat /dev/random | env LC_CTYPE=C tr -cd ${PASSWD} | head -c 8`
+    RANDOM_PASSWORD=`cat /dev/random | env LC_CTYPE=C tr -cd 'a-fA-F0-9' | head -c 8`
     echo $RANDOM_PASSWORD > /tmp/.guest_password
-    FOREGROUND=`cat /dev/random | env LC_CTYPE=C tr -cd 'a-f0-9' | head -c 6`
-    qrencode --foreground=${FOREGROUND} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
+    qrencode --foreground=${RANDOM_PASSWORD} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
     echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
