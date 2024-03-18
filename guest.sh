@@ -6,10 +6,11 @@ cat << "EOF" > /etc/init.d/guest_wifi
 
 TYPE="WPA2"
 TRDISABLE="1"
-SSID_F="guest"
+SSID_F="ゲスト"
 SSID_B="_optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60"
+PASSWD='a-zA-Z0-9`~!@#$%^&*()_+-={}[]|;<,>.?/'
 INTERFACE="lan"
 
 START=99
@@ -25,9 +26,9 @@ start() {
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
     TIMEOUT_SSID=""${SSID_F}"@`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
     echo ${TIMEOUT_SSID} > /tmp/.guest_ssid
-    RANDOM_PASSWORD=`openssl rand -base64 6`
+    RANDOM_PASSWORD=`cat /dev/random | env LC_CTYPE=C tr -cd ${PASSWD} | head -c 8`
     echo $RANDOM_PASSWORD > /tmp/.guest_password
-    FOREGROUND=`openssl rand -hex 3`
+    FOREGROUND=`cat /dev/random | env LC_CTYPE=C tr -cd 'a-f0-9' | head -c 6`
     qrencode --foreground=${FOREGROUND} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
     echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
@@ -58,7 +59,7 @@ stop() {
     atrm ${DEL}
     fi
     echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment1
-    qrencode --foreground="808080" --background="0000FF" --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /tmp/.guest_qr
+    qrencode --foreground="0000FF" --background="808080" --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /tmp/.guest_qr
     echo "<font color="red">Out of service.</font>"  > /tmp/.guest_comment2
     echo > /tmp/.guest_type
     echo > /tmp/.guest_ssid
