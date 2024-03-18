@@ -27,7 +27,7 @@ start() {
     echo ${TIMEOUT_SSID} > /tmp/.guest_ssid
     RANDOM_PASSWORD=`cat /dev/random | env LC_CTYPE=C tr -cd 'a-fA-F0-9' | head -c 8`
     echo $RANDOM_PASSWORD > /tmp/.guest_password
-    qrencode --foreground=${RANDOM_PASSWORD} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
+    qrencode --foreground=${RANDOM_PASSWORD:0:6} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
     echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
