@@ -80,7 +80,7 @@ reboot
 exit 0
 }
 
-echo "nro光 MAP-eの設定を開始します"
+echo "nuro光 MAP-eの設定を開始します"
 
 if [ ${NURO_V6} = 240d:000f:0000 ]; then
 BRADDR="2001:3b8:200:ff9::1"
