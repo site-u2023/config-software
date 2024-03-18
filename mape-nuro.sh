@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 . /lib/functions/network.sh
 network_flush_cache
