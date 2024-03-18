@@ -122,4 +122,5 @@ cat << "EOF" > /www/guest.html
 </html>
 EOF
 chmod +r /www/guest.html
+
 echo -e " \033[1;37mIf a white QR code appears, it's a miracle.\033[0;39m"
