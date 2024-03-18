@@ -291,7 +291,6 @@ function _func_DEVICE_SET {
   if [ "$GUEST" = "on" ]; then
   opkg update
   opkg install bash
-  opkg install openssl-util
   opkg install qrencode
   opkg install at
   wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
