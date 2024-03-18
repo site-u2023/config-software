@@ -25,8 +25,8 @@ start() {
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
     TIMEOUT_SSID=""${SSID_F}"@`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
     echo ${TIMEOUT_SSID} > /tmp/.guest_ssid
-    RANDOM_PASSWORD=`head /dev/urandom | env LC_CTYPE=C tr -cd 'a-fA-F0-9'| cut -b 1-8`
-    echo $RANDOM_PASSWORD > /tmp/.guest_password
+    RANDOM_PASSWORD=`head /dev/urandom | env LC_CTYPE=C tr -cd 'a-fA-F0-9'| cut -b -8`
+    echo ${RANDOM_PASSWORD} > /tmp/.guest_password
     qrencode --foreground=${RANDOM_PASSWORD:0:6} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
     echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
