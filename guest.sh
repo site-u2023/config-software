@@ -22,7 +22,6 @@ start() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-
     echo ${TYPE} > /tmp/.guest_type
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
     echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment1
