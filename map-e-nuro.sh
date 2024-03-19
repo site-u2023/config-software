@@ -184,7 +184,7 @@ cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
 
 function _func_RECOVERY {
 echo -e " \033[7;40mリカバリー\033[0;39m"
-cp /etc/config/network.map-e-nuro.old /etc/config/network.map-e-nuro
+cp /etc/config/network.map-e-nuro.old /etc/config/network
 rm /etc/config/network.map-e-nuro.old
 /etc/init.d/network reload
 }
