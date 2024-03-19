@@ -6,11 +6,13 @@ cat << "EOF" > /etc/init.d/guest_wifi
 
 TYPE="WPA2"
 TRDISABLE="1"
-SSID_F="guest"
+SSID_F="お客様"
 SSID_B="_optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60"
 INTERFACE="lan"
+BGCOLOR="0000FF"
+echo "<body bgcolor=#${BGCOLOR}>" > /tmp/.guest_bgcolor
 
 START=99
 STOP=01
@@ -57,7 +59,7 @@ stop() {
     atrm ${DEL}
     fi
     echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment1
-    qrencode --foreground="0000FF" --background="808080" --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /tmp/.guest_qr
+    qrencode --foreground=${BGCOLOR} --background=808080 --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /tmp/.guest_qr
     echo "<font color="red">Out of service.</font>"  > /tmp/.guest_comment2
     echo > /tmp/.guest_type
     echo > /tmp/.guest_ssid
@@ -80,6 +82,7 @@ QR=$(</tmp/.guest_qr)
 PASSWORD=$(</tmp/.guest_password)
 COMMENT1=$(</tmp/.guest_comment1)
 COMMENT2=$(</tmp/.guest_comment2)
+BGCOLOR=$(</tmp/.guest_bgcolor)
 
 printf "%s\n" "Content-Type: text/html"
 printf "%s\n" ""
@@ -93,7 +96,7 @@ printf "%s\n" "<meta http-equiv="Cache-Control" content="no-cache, no-store, mus
 printf "%s\n" "<meta http-equiv="Pragma" content="no-cache">"
 printf "%s\n" "<meta http-equiv="Expires" content="0">"
 printf "%s\n" "</head>"
-printf "%s\n" "<body bgcolor="blue">"
+printf "%s\n" "${BGCOLOR}"
 printf "%s\n" "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:30px;font-weight:500;'>"
 printf "%s\n" "<h1>Guest Wi-Fi</h1>"
 printf "%s\n" "<h5>${COMMENT1}</h5>"
