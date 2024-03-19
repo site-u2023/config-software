@@ -208,6 +208,8 @@ function _func_RECOVERY_MULTISESSION {
 echo -e " \033[7;40mリカバリー マルチセッション\033[0;39m"
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
+/etc/init.d/firewall restart
+/etc/init.d/network restart
 }
 
 if [ ${NURO_V6} = 240d:000f:0000 ]; then
