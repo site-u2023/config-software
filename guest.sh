@@ -22,15 +22,16 @@ start() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo "Please disable the service don't use guest Wi-Fi." > /tmp/.guest_comment1
+
     echo ${TYPE} > /tmp/.guest_type
     echo "service guest_wifi stop" | at now +${TIMEOUT} minutes
+    echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment1
     TIMEOUT_SSID="${SSID_F}@`atq | awk '{ print $5 }' | cut -d':' -f1,2`${SSID_B}"
     echo ${TIMEOUT_SSID} > /tmp/.guest_ssid
     RANDOM_PASSWORD=`head /dev/urandom | env LC_CTYPE=C tr -cd 'a-fA-F0-9'| cut -b -8`
     echo ${RANDOM_PASSWORD} > /tmp/.guest_password
     qrencode --foreground=${RANDOM_PASSWORD:0:6} --inline --type=SVG --output=- --size 3 "WIFI:S:${TIMEOUT_SSID};T:${TYPE};R:${TRDISABLE};P:${RANDOM_PASSWORD};;" > /tmp/.guest_qr
-    echo "<font color="yellow">Stops after "${TIMEOUT}" min.</font>" > /tmp/.guest_comment2
+    echo "Please disable the service don't use guest Wi-Fi." > /tmp/.guest_comment2
     WIFI_DEV="$(uci get wireless.@wifi-iface[0].device)"
     uci -q delete wireless.guest
     uci set wireless.guest="wifi-iface"
@@ -58,9 +59,9 @@ stop() {
     if [ ${DEL} ]; then
     atrm ${DEL}
     fi
-    echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment1
+    echo "<font color="red">Out of service.</font>"  > /tmp/.guest_comment1
     qrencode --foreground=${BGCOLOR} --background=808080 --inline --type=SVG --output=- --size 3 "WIFI:S:Out of service.;T:${TYPE};R:${TRDISABLE};P:Out of service.;;" > /tmp/.guest_qr
-    echo "<font color="red">Out of service.</font>"  > /tmp/.guest_comment2
+    echo "Please enable the service to use guest Wi-Fi." > /tmp/.guest_comment2
     echo > /tmp/.guest_type
     echo > /tmp/.guest_ssid
     echo > /tmp/.guest_password
@@ -99,9 +100,9 @@ printf "%s\n" "</head>"
 printf "%s\n" "${BGCOLOR}"
 printf "%s\n" "<div style='text-align:center;color:#fff;font-family:UnitRoundedOT,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:30px;font-weight:500;'>"
 printf "%s\n" "<h1>Guest Wi-Fi</h1>"
-printf "%s\n" "<h5>${COMMENT1}</h5>"
+printf "%s\n" "<h5>${COMMENT1}<br />${SSID}<br />${PASSWORD}</h5>"
 printf "%s\n" "${QR}"
-printf "%s\n" "<h5>${COMMENT2}<br />${SSID}<br />${PASSWORD}</h5>"
+printf "%s\n" "<h5>${COMMENT2}</h5>"
 printf "%s\n" "</div>"
 printf "%s\n" "</body>"
 printf "%s\n" "</html>"
