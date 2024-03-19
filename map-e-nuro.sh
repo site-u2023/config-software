@@ -12,6 +12,7 @@ opkg install map
 echo -e " \033[1;36mパターンA (V6プラスタイプ)\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
+cp /etc/config/network /etc/config/dhcp.map-e-nuro.old
 cp /etc/config/firewall /etc/config/firewall.map-e-nuro.old
 # DHCP LAN
 uci set dhcp.lan=dhcp
@@ -95,6 +96,7 @@ opkg install map
 echo -e " \033[1;31mパターンB (OCNタイプ)\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
+cp /etc/config/network /etc/config/dhcp.map-e-nuro.old
 cp /etc/config/firewall /etc/config/firewall.map-e-nuro.old
 # DHCP LAN
 uci set dhcp.lan=dhcp
@@ -187,10 +189,13 @@ cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
 function _func_RECOVERY {
 echo -e " \033[7;40mリカバリー\033[0;39m"
 cp /etc/config/network.map-e-nuro.old /etc/config/network
+cp /etc/config/network.map-e-nuro.old /etc/config/dhcp
 cp /etc/config/firewall.map-e-nuro.old /etc/config/network
 rm /etc/config/network.map-e-nuro.old
+rm /etc/config/network.map-e-nuro.old
 rm /etc/config/firewall.map-e-nuro.old
-/etc/init.d/network reload
+/etc/init.d/firewall restart
+/etc/init.d/network restart
 }
 
 
