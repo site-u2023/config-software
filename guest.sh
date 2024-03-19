@@ -11,7 +11,7 @@ SSID_B="_optout_nomap"
 ENCRYPTION="psk-mixed"
 TIMEOUT="60"
 INTERFACE="lan"
-BGCOLOR="0000FF"
+BGCOLOR="000000"
 echo "<body bgcolor=#${BGCOLOR}>" > /tmp/.guest_bgcolor
 
 START=99
