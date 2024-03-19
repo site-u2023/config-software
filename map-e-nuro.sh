@@ -9,7 +9,7 @@ NURO_V6=`echo ${NET_ADDR6} | cut -d: -f1-3`
 function _func_NURO_A {
 opkg update
 opkg install map
-echo -e " \033[1;36mパターンA (V6プラスタイプ)\033[0;39m"
+echo -e " \033[1;34mパターンA (V6プラスタイプ)\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
 cp /etc/config/network /etc/config/dhcp.map-e-nuro.old
@@ -182,6 +182,7 @@ exit 0
 }
 
 function _func_MULTISESSION {
+echo -e " \032[1;32mマルチセッション (ニチバン対策)\033[0;39m"
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 }
@@ -204,6 +205,7 @@ rm /etc/config/firewall.map-e-nuro.old
 }
 
 function _func_RECOVERY_MULTISESSION {
+echo -e " \033[7;40mリカバリー マルチセッション\033[0;39m"
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
 }
@@ -236,9 +238,9 @@ do
   echo -e " \033[1;37mnuro光 MAP-eの設定を開始します\033[0;39m"
   echo -e " \033[1;37mIPv6アドレス: ${NET_ADDR6}\033[0;39m"
   echo -e " \033[1;37muro光 -----------------------------------------------\033[0;39m"
-  echo -e " \033[1;36m[a]: パターンA (V6プラスタイプ)\033[0;39m"
+  echo -e " \033[1;34m[a]: パターンA (V6プラスタイプ)\033[0;39m"
   echo -e " \033[1;31m[b]: パターンB (OCNタイプ)\033[0;39m"
-  echo -e " \033[1;36m[n]: マルチセッション (ニチバン対策)\033[0;39m" 
+  echo -e " \033[1;32m[n]: マルチセッション (ニチバン対策)\033[0;39m" 
   echo -e " \033[1;33m[p]: 利用可能ポート確認\033[0;39m"
   echo -e " \033[7;40m[r]: リカバリー\033[0;39m"
   echo -e " \033[7;40m[m]: リカバリー マルチセッション\033[0;39m"
