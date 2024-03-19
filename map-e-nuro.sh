@@ -181,6 +181,11 @@ reboot
 exit 0
 }
 
+function _func_MULTISESSION {
+cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
+wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
+}
+
 function _func_PORT {
 echo -e " \033[1;33m利用可能ポート\033[0;39m"
 cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
@@ -198,6 +203,10 @@ rm /etc/config/firewall.map-e-nuro.old
 /etc/init.d/network restart
 }
 
+function _func_RECOVERY_MULTISESSION {
+cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
+rm /lib/netifd/proto/map.sh.old
+}
 
 if [ ${NURO_V6} = 240d:000f:0000 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
@@ -229,15 +238,20 @@ do
   echo -e " \033[1;37muro光 -----------------------------------------------\033[0;39m"
   echo -e " \033[1;36m[a]: パターンA (V6プラスタイプ)\033[0;39m"
   echo -e " \033[1;31m[b]: パターンB (OCNタイプ)\033[0;39m"
+  echo -e " \033[1;36m[n]: マルチセッション (ニチバン対策)\033[0;39m" 
   echo -e " \033[1;33m[p]: 利用可能ポート確認\033[0;39m"
   echo -e " \033[7;40m[r]: リカバリー\033[0;39m"
+  echo -e " \033[7;40m[m]: リカバリー マルチセッション\033[0;39m"
+  _func_RECOVERY_PORT
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Please select key [e/o/p or r]: " num
+  read -p " Please select key [a/b/n/p/r/m or r]: " num
   case "${num}" in
     "a" ) _func_NURO_A ;;
     "b" ) _func_NURO_B ;;
+    "n" ) _func_MULTISESSION ;;
     "p" ) _func_PORT ;;
     "r" ) _func_RECOVERY ;;
+    "m" ) _func_RECOVERY_MULTISESSION ;;
   esac
  done 
 
