@@ -7,6 +7,8 @@ network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
 NURO_V6=`echo ${NET_ADDR6} | cut -d: -f1-3`
 
 function _func_NURO_A {
+opkg update
+opkg install map
 echo -e " \033[1;36mパターンA (V6プラスタイプ)\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
@@ -87,6 +89,8 @@ exit 0
 }
 
 function _func_NURO_B {
+opkg update
+opkg install map
 echo -e " \033[1;31mパターンB (OCNタイプ)\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
@@ -185,8 +189,6 @@ rm /etc/config/network.map-e-nuro.old
 /etc/init.d/network reload
 }
 
-opkg update
-opkg install map
 
 if [ ${NURO_V6} = 240d:000f:0000 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
