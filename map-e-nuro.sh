@@ -174,10 +174,12 @@ exit 0
 }
 
 function _func_PORT {
+echo -e " \033[1;33m利用可能ポート\033[0;39m"
 cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
 }
 
 function _func_RECOVERY {
+echo -e " \033[7;40mリカバリー\033[0;39m"
 cp /etc/config/network.map-e-nuro.old /etc/config/network.map-e-nuro
 rm /etc/config/network.map-e-nuro.old
 /etc/init.d/network reload
@@ -211,7 +213,7 @@ exit 0
 
 while :
 do
-  echo -e " \033[1;33mnuro光 MAP-eの設定を開始します\033[0;39m"
+  echo -e " \033[1;37mnuro光 MAP-eの設定を開始します\033[0;39m"
   echo -e " \033[1;37muro光 -----------------------------------------------\033[0;39m"
   echo -e " \033[1;36m[a]: パターンA (V6プラスタイプ)\033[0;39m"
   echo -e " \033[1;31m[b]: パターンB (OCNタイプ)\033[0;39m"
