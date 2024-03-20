@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # TEST
 
 . /lib/functions/network.sh
