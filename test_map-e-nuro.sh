@@ -1,6 +1,5 @@
 #!/bin/bash
-# TEST
-
+# this script based http://ipv4.web.fc2.com/map-e.html & https://benedicam-te.blogspot.com/
 . /lib/functions/network.sh
 network_flush_cache
 network_find_wan6 NET_IF6
