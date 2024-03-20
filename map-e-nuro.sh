@@ -79,7 +79,7 @@ uci -q delete dhcp.lan.dhcp_option
 uci add_list network.lan.dns='118.238.201.33' #	dns1.nuro.jp
 uci add_list network.lan.dns='152.165.245.17' #	dns1.nuro.jp
 #uci add_list network.lan.dns='118.238.201.49' # dns2.nuro.jp
-#uci add_list network.lan.dns='152.165.245.1'# dns2.nuro.jp
+#uci add_list network.lan.dns='152.165.245.1' # dns2.nuro.jp
 uci add_list dhcp.lan.dhcp_option='6,1.1.1.1,8.8.8.8'
 uci add_list dhcp.lan.dhcp_option='6,1.0.0.1,8.8.4.4'
 # IPV6
@@ -172,7 +172,7 @@ uci -q delete dhcp.lan.dhcp_option
 uci add_list network.lan.dns='118.238.201.33' #	dns1.nuro.jp
 uci add_list network.lan.dns='152.165.245.17' #	dns1.nuro.jp
 #uci add_list network.lan.dns='118.238.201.49' # dns2.nuro.jp
-#uci add_list network.lan.dns='152.165.245.1'# dns2.nuro.jp
+#uci add_list network.lan.dns='152.165.245.1' # dns2.nuro.jp
 uci add_list dhcp.lan.dhcp_option='6,1.1.1.1,8.8.8.8'
 uci add_list dhcp.lan.dhcp_option='6,1.0.0.1,8.8.4.4'
 # IPV6
