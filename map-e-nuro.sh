@@ -3,13 +3,18 @@
 . /lib/functions/network.sh
 network_flush_cache
 network_find_wan6 NET_IF6
+network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
 network_get_prefix6 NET_PFX6 "${NET_IF6}"
 network_get_prefix6 NET_PREFIX6 "${NET_IF6}"
+NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
 
-if [ -n "${NET_PFX6}" ]; then
+if [ -n "${NET_ADDR6}" ]; then
 NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
 fi
 if [ -n "${NET_PREFIX6}" ]; then
+NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
+fi
+if [ -n "${NET_PFX6}" ]; then
 NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
 fi
 
