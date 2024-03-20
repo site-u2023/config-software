@@ -245,8 +245,7 @@ BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:3000"
 IPV4_PREFIX="219.104.176.0"
 fi
-echo "未対応"
-exit 0
+
 
 while :
 do
