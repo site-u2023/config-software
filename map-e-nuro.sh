@@ -1,5 +1,5 @@
 #!/bin/sh
-# Vr.2.00
+# Vr.2.01
 
 . /lib/functions/network.sh
 network_flush_cache
