@@ -5,7 +5,7 @@
 network_flush_cache
 network_find_wan6 NET_IF6
 network_get_prefix6 NET_PFX6 "${NET_IF6}"
-NURO_V6=`echo "${NET_PFX6}" | cut -d: -f1-3`
+NURO_V6=`echo "${NET_PFX6}" | cut -b -11`
 
 
 function _func_NURO_A {
@@ -225,22 +225,22 @@ reboot
 exit 0
 }
 
-if [ ${NURO_V6} = 240d:000f:0000 ]; then
+if [ ${NURO_V6} = 240d:000f:0 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:0000"
 IPV4_PREFIX="219.104.128.0"
 fi
-if [ ${NURO_V6} = 240d:000f:1000 ]; then
+if [ ${NURO_V6} = 240d:000f:1 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:1000"
 IPV4_PREFIX="219.104.144.0"
 fi
-if [ ${NURO_V6} = 240d:000f:2000 ]; then
+if [ ${NURO_V6} = 240d:000f:2 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:2000"
 IPV4_PREFIX="219.104.160.0"
 fi
-if [ ${NURO_V6} = 240d:000f:3000 ]; then
+if [ ${NURO_V6} = 240d:000f:3 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:3000"
 IPV4_PREFIX="219.104.176.0"
@@ -251,7 +251,7 @@ exit 0
 while :
 do
   echo -e " \033[1;37mnuro光 MAP-eの設定を開始します\033[0;39m"
-  echo -e " \033[1;37mIPv6アドレス: ${NURO_V6}\033[0;39m"
+  echo -e " \033[1;37mIPv6アドレス: ${NET_PFX6}\033[0;39m"
   echo -e " \033[1;37muro光 -----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[a]: パターンA (V6プラスタイプ)\033[0;39m"
   echo -e " \033[1;31m[b]: パターンB (OCNタイプ)\033[0;39m"
