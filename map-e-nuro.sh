@@ -7,8 +7,12 @@ network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
 NURO_V6=`echo ${NET_ADDR6} | cut -d: -f1-3`
 
 function _func_NURO_A {
-opkg update
-opkg install map
+INSTALL_MAP=`opkg list-installed map`
+if [ ${INSTALL_MAP:0:3} = map ]; then
+echo "map is installed"
+else
+opkg update && opkg install map
+fi
 echo -e " \033[1;34mパターンA (V6プラスタイプ)\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
@@ -85,14 +89,19 @@ echo -e "\033[1;32m ${WANMAP} ip6prefixlen: \033[0;39m"36
 echo -e "\033[1;32m ${WANMAP} ealen: \033[0;39m"20
 echo -e "\033[1;32m ${WANMAP} psidlen: \033[0;39m"8
 echo -e "\033[1;32m ${WANMAP} offset: \033[0;39m"4
+
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit 0
 }
 
 function _func_NURO_B {
-opkg update
-opkg install map
+INSTALL_MAP=`opkg list-installed map`
+if [ ${INSTALL_MAP:0:3} = map ]; then
+echo "map is installed"
+else
+opkg update && opkg install map
+fi
 echo -e " \033[1;31mパターンB (OCNタイプ)\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
@@ -200,16 +209,18 @@ cp /etc/config/firewall.map-e-nuro.old /etc/config/network
 rm /etc/config/network.map-e-nuro.old
 rm /etc/config/network.map-e-nuro.old
 rm /etc/config/firewall.map-e-nuro.old
-/etc/init.d/firewall restart
-/etc/init.d/network restart
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit 0
 }
 
 function _func_RECOVERY_MULTISESSION {
 echo -e " \033[7;40mリカバリー マルチセッション\033[0;39m"
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
-/etc/init.d/firewall restart
-/etc/init.d/network restart
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit 0
 }
 
 if [ ${NURO_V6} = 240d:000f:0000 ]; then
