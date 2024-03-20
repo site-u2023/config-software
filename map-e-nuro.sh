@@ -245,7 +245,11 @@ BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:3000"
 IPV4_PREFIX="219.104.176.0"
 fi
-
+if [ -z ${NURO_V6} ]; then
+echo IPv6を取得出来ません
+read -p " IPv6を取得出来ません"
+exit 0
+fi
 
 while :
 do
