@@ -8,13 +8,13 @@ network_get_prefix6 NET_PFX6 "${NET_IF6}"
 network_get_prefix6 NET_PREFIX6 "${NET_IF6}"
 
 if [ -n "${NET_ADDR6}" ]; then
-NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
+NURO_V6=`echo "${NET_ADDR6}" | cut -d: -f1-3`
 fi
 if [ -n "${NET_PFX6}" ]; then
-NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
+NURO_V6=`echo "${NET_PFX6}" | cut -d: -f1-3`
 fi
 if [ -n "${NET_PREFIX6}" ]; then
-NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
+NURO_V6=`echo "${NET_PREFIX6}" | cut -d: -f1-3`
 fi
 
 
@@ -261,7 +261,7 @@ exit 0
 while :
 do
   echo -e " \033[1;37mnuro光 MAP-eの設定を開始します\033[0;39m"
-  echo -e " \033[1;37mIPv6アドレス: ${NET_ADDR6}\033[0;39m"
+  echo -e " \033[1;37mIPv6アドレス: ${NURO_V6}\033[0;39m"
   echo -e " \033[1;37muro光 -----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[a]: パターンA (V6プラスタイプ)\033[0;39m"
   echo -e " \033[1;31m[b]: パターンB (OCNタイプ)\033[0;39m"
