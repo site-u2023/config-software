@@ -3,8 +3,9 @@
 . /lib/functions/network.sh
 network_flush_cache
 network_find_wan6 NET_IF6
-network_get_ipaddr6 NET_ADDR6 "${NET_IF6}"
-NURO_V6=`echo ${NET_ADDR6} | cut -d: -f1-3`
+network_get_prefix6 NET_PREFIX6 "${NET_IF6}"
+NURO_V6=`echo ${NET_PREFIX6} | cut -d: -f1-3`
+
 
 function _func_NURO_A {
 INSTALL_MAP=`opkg list-installed map`
