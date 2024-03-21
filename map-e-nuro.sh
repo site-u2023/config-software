@@ -246,31 +246,40 @@ reboot
 exit 0
 }
 
+RULE_A=240d:000f:0000
+RULE_B=240d:000f:1000
+RULE_C=240d:000f:2000
+RULE_D=240d:000f:3000
 if [ -z ${NURO_V6} ]; then
 read -p " IPv6を取得出来ません"
 exit 0
+else
+    if [ ${NURO_V6} = ${RULE_A} ] || [ ${NURO_V6} = ${RULE_B} ] || [ ${NURO_V6} = ${RULE_C} ] || [ ${NURO_V6} = ${RULE_D} ]; then
+        if [ ${NURO_V6} = ${RULE_A} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:0000"
+        IPV4_PREFIX="219.104.128.0"
+        fi
+        if [ ${NURO_V6} = ${RULE_B} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:1000"
+        IPV4_PREFIX="219.104.144.0"
+        fi
+        if [ ${NURO_V6} = ${RULE_C} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:2000"
+        IPV4_PREFIX="219.104.160.0"
+        fi
+        if [ ${NURO_V6} = ${RULE_D} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:3000"
+        IPV4_PREFIX="219.104.176.0"
+        fi
+    else
+    read -p " 非対応のIPV6アドレスです"
+    exit 0
+    fi
 fi
-if [ ${NURO_V6} = 240d:000f:0000 ]; then
-BR_ADDR="2001:3b8:200:ff9::1"
-IPV6_PREFIX="240d:000f:0000"
-IPV4_PREFIX="219.104.128.0"
-fi
-if [ ${NURO_V6} = 240d:000f:1000 ]; then
-BR_ADDR="2001:3b8:200:ff9::1"
-IPV6_PREFIX="240d:000f:1000"
-IPV4_PREFIX="219.104.144.0"
-fi
-if [ ${NURO_V6} = 240d:000f:2000 ]; then
-BR_ADDR="2001:3b8:200:ff9::1"
-IPV6_PREFIX="240d:000f:2000"
-IPV4_PREFIX="219.104.160.0"
-fi
-if [ ${NURO_V6} = 240d:000f:3000 ]; then
-BR_ADDR="2001:3b8:200:ff9::1"
-IPV6_PREFIX="240d:000f:3000"
-IPV4_PREFIX="219.104.176.0"
-fi
-
 
 while :
 do
