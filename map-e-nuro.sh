@@ -1,11 +1,32 @@
 #!/bin/sh
-# Vr.2.01
+# Vr.3.00
+# License: CC0
 
 . /lib/functions/network.sh
 network_flush_cache
 network_find_wan6 NET_IF6
 network_get_prefix6 NET_PFX6 "${NET_IF6}"
-NURO_V6=`echo "${NET_PFX6}" | cut -b -11`
+
+#set -e
+export LANG=C
+expr "$NET_PFX6" : '[[:xdigit:]:]\{2,\}$' >/dev/null
+echo $NET_PFX6 |grep -sqEv '[[:xdigit:]]{5}|:::|::.*::' 
+cn=$(echo $NET_PFX6 |grep -o : |wc -l)
+test $cn -ge 2 -a $cn -le 7
+NET_PFX6=$(echo $NET_PFX6 |sed '
+    s/^:/0000:/
+    s/:$/:0000/
+    s/.*/:&:/
+    :add0
+    s/:\([^:]\{1,3\}\):/:0\1:/g
+    t add0
+    s/:\(.*\):/\1/' )
+if echo $NET_PFX6 |grep -sq :: ; then
+    NET_PFX6=$(echo $NET_PFX6 |sed s/::/:$(echo -n :::::: |tail -c $((8-cn)) |sed 's/:/0000:/g')/ )
+else
+        test $cn -eq 7
+fi
+NURO_V6=`echo $NET_PFX6 | cut -d : -f1-3`
 
 
 function _func_NURO_A {
@@ -225,22 +246,22 @@ reboot
 exit 0
 }
 
-if [ ${NURO_V6} = 240d:000f:0 ]; then
+if [ ${NURO_V6} = 240d:000f:0000 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:0000"
 IPV4_PREFIX="219.104.128.0"
 fi
-if [ ${NURO_V6} = 240d:000f:1 ]; then
+if [ ${NURO_V6} = 240d:000f:1000 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:1000"
 IPV4_PREFIX="219.104.144.0"
 fi
-if [ ${NURO_V6} = 240d:000f:2 ]; then
+if [ ${NURO_V6} = 240d:000f:2000 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:2000"
 IPV4_PREFIX="219.104.160.0"
 fi
-if [ ${NURO_V6} = 240d:000f:3 ]; then
+if [ ${NURO_V6} = 240d:000f:3000 ]; then
 BR_ADDR="2001:3b8:200:ff9::1"
 IPV6_PREFIX="240d:000f:3000"
 IPV4_PREFIX="219.104.176.0"
@@ -273,5 +294,4 @@ do
     "m" ) _func_RECOVERY_MULTISESSION ;;
   esac
  done 
-
 
