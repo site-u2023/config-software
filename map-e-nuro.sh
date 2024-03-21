@@ -247,7 +247,7 @@ exit 0
 }
 
 if [ -z ${NURO_V6} ]; then
-echo IPv6を取得出来ません
+read -p " IPv6を取得出来ません"
 exit 0
 fi
 if [ ${NURO_V6} = 240d:000f:0000 ]; then
