@@ -26,7 +26,7 @@ if echo $NET_PFX6 |grep -sq :: ; then
 else
         test $cn -eq 7
 fi
-NURO_V6=`echo $NET_PFX6 | cut -d : -f1-3`
+NURO_V6=`echo $NET_PFX6 |cut -d : -f1-3`
 
 
 function _func_NURO_A {
