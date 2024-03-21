@@ -225,7 +225,7 @@ cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
 }
 
 function _func_RECOVERY {
-echo -e " \033[7;40mリカバリー\033[0;39m"
+echo -e " \033[1;41mリカバリー\033[0;39m"
 cp /etc/config/network.map-e-nuro.old /etc/config/network
 cp /etc/config/network.map-e-nuro.old /etc/config/dhcp
 cp /etc/config/firewall.map-e-nuro.old /etc/config/network
@@ -238,7 +238,7 @@ exit 0
 }
 
 function _func_RECOVERY_MULTISESSION {
-echo -e " \033[7;40mリカバリー マルチセッション\033[0;39m"
+echo -e " \033[1;43mリカバリー マルチセッション\033[0;39m"
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -291,10 +291,11 @@ do
   echo -e " \033[1;31m[b]: パターンB (OCNタイプ)\033[0;39m"
   echo -e " \033[1;32m[n]: マルチセッション (ニチバン対策)\033[0;39m" 
   echo -e " \033[1;33m[p]: 利用可能ポート確認\033[0;39m"
-  echo -e " \033[7;40m[r]: リカバリー\033[0;39m"
-  echo -e " \033[7;40m[m]: リカバリー マルチセッション\033[0;39m"
+  echo -e " \033[1;41m[r]: リカバリー\033[0;39m"
+  echo -e " \033[1;43m[m]: リカバリー マルチセッション\033[0;39m"
+  echo -e " \033[7;40m[q]: 退出\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Please select key [a/b/n/p/r/m or r]: " num
+  read -p " Please select key [a/b/n/p/r/m or q]: " num
   case "${num}" in
     "a" ) _func_NURO_A ;;
     "b" ) _func_NURO_B ;;
@@ -302,6 +303,7 @@ do
     "p" ) _func_PORT ;;
     "r" ) _func_RECOVERY ;;
     "m" ) _func_RECOVERY_MULTISESSION ;;
+    "q" ) _func_PORT ;;
   esac
  done 
 
