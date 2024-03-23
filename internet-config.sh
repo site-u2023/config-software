@@ -196,6 +196,11 @@ reboot
 exit
 }
 
+function _func_MAP_e_Nuro {
+wget --no-check-certificate -O /etc/config-software/map-e-nuro.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-nuro.sh
+sh /etc/config-software/map-e-nuro.sh
+}
+
 function _func_DS_LITE_Transix {
 while :
 do
@@ -650,16 +655,18 @@ do
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
   echo -e " \033[1;34m[v]: OCNバーチャルコネクト自動設定 (マルチセッション対応)\033[0;39m"
   echo -e " \033[1;33m[p]: V6プラス・IPv6オプション自動設定 (マルチセッション対応)\033[0;39m"
+  echo -e " \033[1;33m[n]: NURO光 MAP-e自動設定 (検証中)\033[0;39m"  
   echo -e " \033[1;32m[t]: トランジックス自動設定\033[0;39m"
   echo -e " \033[1;35m[x]: クロスパス自動設定\033[0;39m"
   echo -e " \033[1;31m[c]: v6 コネクト自動設定\033[0;39m"
   echo -e " \033[1;36m[o]: PPPoE (iPv4・IPv6): 要認証ID (ユーザー名)・パスワード\033[0;39m"
   echo -e " \033[7;40m[q]: 終了\033[0;39m"
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
-  read -p " 選択してください [v/p/t/x/c/o or q]: " num
+  read -p " 選択してください [v/p//n/t/x/c/o or q]: " num
   case "${num}" in
     "v" ) _func_MAP_e_VirtualConnect ;;
     "p" ) _func_MAP_e_V6plus ;;
+    "n" ) _func_MAP_e_Nuro ;;
     "t" ) _func_DS_LITE_Transix ;;
     "x" ) _func_DS_LITE_Xpass ;;
     "c" ) _func_DS_LITE_V6connect ;;
