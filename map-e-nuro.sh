@@ -99,7 +99,6 @@ uci add_list dhcp.lan.dns='2606:4700:4700::1001'
 uci add_list dhcp.lan.dns='2001:4860:4860::8844'
 uci commit
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
-echo -e "\033[1;32m wan6 ip6prefix: \033[0;39m"${IPV6_PREFIX}::/56
 echo -e "\033[1;32m ${WANMAP} peeraddr: \033[0;39m"${BR_ADDR}
 echo -e "\033[1;32m ${WANMAP} ip4prefixlen: \033[0;39m"20
 echo -e "\033[1;32m ${WANMAP} ip6pfx: \033[0;39m"${IPV6_PREFIX}::
