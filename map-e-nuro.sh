@@ -48,7 +48,7 @@ uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ndp='relay'
 uci set dhcp.lan.force='1'
 # WAN
-uci set network.wan.auto='0'
+uci set network.wan.auto='1'
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
 uci set dhcp.wan6.interface='wan6'
@@ -137,7 +137,7 @@ uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ndp='relay'
 uci set dhcp.lan.force='1'
 # WAN
-uci set network.wan.auto='0'
+uci set network.wan.auto='1'
 # DHCP WAN6
 uci set network.wan6=interface
 uci set network.wan6.device='wan'
