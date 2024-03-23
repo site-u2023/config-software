@@ -229,9 +229,9 @@ echo -e " \033[1;41mリカバリー\033[0;39m"
 cp /etc/config/network.map-e-nuro.old /etc/config/network
 cp /etc/config/dhcp.map-e-nuro.old /etc/config/dhcp
 cp /etc/config/firewall.map-e-nuro.old /etc/config/firewall
-rm /etc/config/network.map-e-nuro.old
-rm /etc/config/dhcp.map-e-nuro.old
-rm /etc/config/firewall.map-e-nuro.old
+#rm /etc/config/network.map-e-nuro.old
+#rm /etc/config/dhcp.map-e-nuro.old
+#rm /etc/config/firewall.map-e-nuro.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit 0
@@ -240,7 +240,7 @@ exit 0
 function _func_RECOVERY_MULTISESSION {
 echo -e " \033[1;43mリカバリー マルチセッション\033[0;39m"
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
-rm /lib/netifd/proto/map.sh.old
+#rm /lib/netifd/proto/map.sh.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit 0
