@@ -1,4 +1,5 @@
 #!/bin/sh
+# Information provided by https://github.com/tinysun
 # Vr.4.00
 # License: CC0
 
