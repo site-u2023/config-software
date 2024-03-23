@@ -844,6 +844,9 @@ BR=$peeraddr
 
 # network backup
 cp /etc/config/network /etc/config/network.MAP_e_VirtualConnect.old
+cp /etc/config/network /etc/config/network.map-e.oldMAP_e_VirtualConnect.old
+cp /etc/config/network /etc/config/dhcp.MAP_e_VirtualConnect.old
+cp /etc/config/firewall /etc/config/firewall.MAP_e_VirtualConnect.old
 
 # DHCP LAN
 uci set dhcp.lan=dhcp
