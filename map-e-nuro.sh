@@ -1,5 +1,5 @@
 #!/bin/sh
-# Vr.3.02
+# Vr.3.03
 # License: CC0
 
 . /lib/functions/network.sh
@@ -247,38 +247,38 @@ exit 0
 }
 
 
-RULE_A=240d:000f:0
-RULE_B=240d:000f:1
-RULE_C=240d:000f:2
-RULE_D=240d:000f:3
+RULE_0=240d:000f:0
+RULE_1=240d:000f:1
+RULE_2=240d:000f:2
+RULE_3=240d:000f:3
 if [ -z ${NURO_V6} ]; then
 read -p " IPv6を取得出来ません"
 exit 0
 else
-    if [ ${NURO_V6} = ${RULE_A} ] || [ ${NURO_V6} = ${RULE_B} ] || [ ${NURO_V6} = ${RULE_C} ] || [ ${NURO_V6} = ${RULE_D} ]; then
-        if [ ${NURO_V6} = ${RULE_A} ]; then
+    if [ ${NURO_V6} = ${RULE_0} ] || [ ${NURO_V6} = ${RULE_1} ] || [ ${NURO_V6} = ${RULE_2} ] || [ ${NURO_V6} = ${RULE_3} ]; then
+        if [ ${NURO_V6} = ${RULE_0} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:0000"
         IPV4_PREFIX="219.104.128.0"
-        echo "rulr A"
+        echo "rulr 0"
         fi
-        if [ ${NURO_V6} = ${RULE_B} ]; then
+        if [ ${NURO_V6} = ${RULE_1} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:1000"
         IPV4_PREFIX="219.104.144.0"
-        echo "rule B"
+        echo "rule 1"
         fi
-        if [ ${NURO_V6} = ${RULE_C} ]; then
+        if [ ${NURO_V6} = ${RULE_2} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:2000"
         IPV4_PREFIX="219.104.160.0"
-        echo "rule C"
+        echo "rule 2"
         fi
-        if [ ${NURO_V6} = ${RULE_D} ]; then
+        if [ ${NURO_V6} = ${RULE_3} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:3000"
         IPV4_PREFIX="219.104.176.0"
-        echo "rule D"
+        echo "rule 3"
         fi
     else
     echo  ${NURO_V6}
