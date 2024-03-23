@@ -166,7 +166,7 @@ else
         fi
     else
     echo  ${NURO_V6}
-    read -p " 非対応のIPV6アドレスです"
+    read -p " 未対応のIPV6アドレスです"
     exit 0
     fi
 fi
