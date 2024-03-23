@@ -142,7 +142,11 @@ done
 }
 function _func_MAP_e_Restoration {
 cp /etc/config/network.map-e.old /etc/config/network
+cp /etc/config/dhcp.map-e.old /etc/config/dhcp
+cp /etc/config/firewall.map-e.old /etc/config/firewall
 rm /etc/config/network.map-e.old
+rm /etc/config/dhcp.map-e.old
+rm /etc/config/firewall.map-e.old
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 rm /lib/netifd/proto/map.sh.old
 rm /etc/config-software/map-e.sh
