@@ -7,7 +7,26 @@ network_flush_cache
 network_find_wan6 NET_IF6
 network_get_prefix6 NET_PFX6 "${NET_IF6}"
 
-NURO_V6=`echo $NET_PFX6 |cut -d : -f1-3`
+#set -e
+export LANG=C
+expr "$NET_PFX6" : '[[:xdigit:]:]\{2,\}$' >/dev/null
+echo $NET_PFX6 |grep -sqEv '[[:xdigit:]]{5}|:::|::.*::' 
+cn=$(echo $NET_PFX6 |grep -o : |wc -l)
+test $cn -ge 2 -a $cn -le 7
+NET_PFX6=$(echo $NET_PFX6 |sed '
+    s/^:/0000:/
+    s/:$/:0000/
+    s/.*/:&:/
+    :add0
+    s/:\([^:]\{1,3\}\):/:0\1:/g
+    t add0
+    s/:\(.*\):/\1/' )
+if echo $NET_PFX6 |grep -sq :: ; then
+    NET_PFX6=$(echo $NET_PFX6 |sed s/::/:$(echo -n :::::: |tail -c $((8-cn)) |sed 's/:/0000:/g')/ )
+else
+        test $cn -eq 7
+fi
+NURO_V6=`echo $NET_PFX6 |cut -b -11`
 
 
 function _func_NURO_A {
@@ -227,35 +246,39 @@ reboot
 exit 0
 }
 
-RULE_0=240d:f:
-RULE_A=240d:f:0
-RULE_B=240d:f:1000
-RULE_C=240d:f:2000
-RULE_D=240d:f:3000
+
+RULE_A=240d:000f:0
+RULE_B=240d:000f:1
+RULE_C=240d:000f:2
+RULE_D=240d:000f:3
 if [ -z ${NURO_V6} ]; then
 read -p " IPv6を取得出来ません"
 exit 0
 else
-    if [ ${NURO_V6} = ${RULE_0} ] || [ ${NURO_V6} = ${RULE_A} ] || [ ${NURO_V6} = ${RULE_B} ] || [ ${NURO_V6} = ${RULE_C} ] || [ ${NURO_V6} = ${RULE_D} ]; then
-        if [ ${NURO_V6} = ${RULE_0} ] || [ ${NURO_V6} = ${RULE_A} ]; then
+    if [ ${NURO_V6} = ${RULE_A} ] || [ ${NURO_V6} = ${RULE_B} ] || [ ${NURO_V6} = ${RULE_C} ] || [ ${NURO_V6} = ${RULE_D} ]; then
+        if [ ${NURO_V6} = ${RULE_A} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:0000"
         IPV4_PREFIX="219.104.128.0"
+        echo "rulr A"
         fi
         if [ ${NURO_V6} = ${RULE_B} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:1000"
         IPV4_PREFIX="219.104.144.0"
+        echo "rule B"
         fi
         if [ ${NURO_V6} = ${RULE_C} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:2000"
         IPV4_PREFIX="219.104.160.0"
+        echo "rule C"
         fi
         if [ ${NURO_V6} = ${RULE_D} ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:3000"
         IPV4_PREFIX="219.104.176.0"
+        echo "rule D"
         fi
     else
     echo  ${NURO_V6}
