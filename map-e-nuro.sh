@@ -1,5 +1,5 @@
 #!/bin/sh
-# Vr.3.01
+# Vr.3.02
 # License: CC0
 
 . /lib/functions/network.sh
