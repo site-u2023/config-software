@@ -112,11 +112,6 @@ reboot
 exit 0
 }
 
-function _func_PORT {
-echo -e " \033[1;33m利用可能ポート\033[0;39m"
-cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
-}
-
 function _func_RECOVERY {
 echo -e " \033[1;41mリカバリー\033[0;39m"
 cp /etc/config/network.map-e-nuro.old /etc/config/network
@@ -175,17 +170,14 @@ while :
 do
   echo -e " \033[1;37mnuro光 MAP-eの設定を開始します\033[0;39m"
   echo -e " \033[1;37m NET_PFX6: ${NET_PFX6}\033[0;39m"
-  echo -e " \033[1;37m PREFIX  : ${NURO_V6}\033[0;39m"
   echo -e " \033[1;37muro光 -----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[n]: nuro map-e\033[0;39m"
-  echo -e " \033[1;33m[p]: 利用可能ポート確認\033[0;39m"
   echo -e " \033[1;41m[r]: リカバリー\033[0;39m"
   echo -e " \033[7;40m[q]: 退出\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Please select key [n/p/r or q]: " num
+  read -p " Please select key [n/r or q]: " num
   case "${num}" in
     "n" ) _func_NURO ;;
-    "p" ) _func_PORT ;;
     "r" ) _func_RECOVERY ;;
     "q" ) exit 0 ;;
   esac
