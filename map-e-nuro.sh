@@ -227,10 +227,10 @@ cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
 function _func_RECOVERY {
 echo -e " \033[1;41mリカバリー\033[0;39m"
 cp /etc/config/network.map-e-nuro.old /etc/config/network
-cp /etc/config/network.map-e-nuro.old /etc/config/dhcp
-cp /etc/config/firewall.map-e-nuro.old /etc/config/network
+cp /etc/config/dhcp.map-e-nuro.old /etc/config/dhcp
+cp /etc/config/firewall.map-e-nuro.old /etc/config/firewall
 rm /etc/config/network.map-e-nuro.old
-rm /etc/config/network.map-e-nuro.old
+rm /etc/config/dhcp.map-e-nuro.old
 rm /etc/config/firewall.map-e-nuro.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
