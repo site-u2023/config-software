@@ -154,7 +154,7 @@ uci set network.${WAN6RA}=interface
 uci set network.${WAN6RA}.device='wan'
 uci set network.${WAN6RA}.proto='static'
 uci set network.${WAN6RA}.ip6gw=${IPV6_PREFIX}::1
-uci set network.${WAN6RA}.ip6prefix=${IPV6_PREFIX}}::/56
+uci set network.${WAN6RA}.ip6prefix=${IPV6_PREFIX}::/56
 uci add_list network.${WAN6RA}.ip6addr=${IPV6_PREFIX}::1001
 # WANMAP
 WANMAP='wanmap'
