@@ -131,8 +131,6 @@ _func_coreutils
 function _func_coreutils {
 CORE=`opkg list-installed coreutils | awk '{ print $1 }'`
 if [ -z "$CORE" ]; then
- CORE=`fgrep 'processor' /proc/cpuinfo | wc -l`
- if [ "$CORE" -gt 3 ]; then
 while :
 do
     echo -e " \033[1;33mInstall coreutils\033[0;39m"
@@ -148,7 +146,6 @@ do
       "q" ) exit ;;
     esac
 done
- fi
 fi
 _func_irqbalance
 }
