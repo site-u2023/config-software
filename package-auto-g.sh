@@ -89,7 +89,7 @@ auc
 luci-app-log-viewer
 luci-app-cpu-perf
 luci-app-temp-status
-#internet-detector
+internet-detector
 luci-app-internet-detector
 luci-theme-argon
 luci-i18n-dashboard-$input_str_Languages
