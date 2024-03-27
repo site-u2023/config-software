@@ -11,11 +11,14 @@ uci commit dropbear
 HOSTNAME='openwrt' # Router Name
 DESCRIPTION=`cat /etc/openwrt_version` # Description
 NOTES=`date` # Remarks
-TIMEZOON='UTC'
+ZOONNAME='UTC'
+TIMEZOON='JST-9'
+
 uci set system.@system[0]=system
 uci set system.@system[0].hostname=${HOSTNAME}
 uci set system.@system[0].description="${DESCRIPTION}"
-uci set system.@system[0].zonename=${TIMEZOON}
+uci set system.@system[0].zonename=${ZOONNAME}
+uci set system.@system[0].timezone=${TIMEZOON}
 uci set system.@system[0].conloglevel='6' # Log output level: caution
 uci set system.@system[0].cronloglevel='9' # Cron log level: warning
 # NTP server
