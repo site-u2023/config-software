@@ -35,7 +35,7 @@ auc
 luci-app-log-viewer
 luci-app-cpu-perf
 luci-app-temp-status
-#internet-detector
+internet-detector
 luci-app-internet-detector
 luci-theme-argon
 EOF
