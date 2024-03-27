@@ -212,7 +212,7 @@ done
 
 function _func_DEVICE_SET {
   wget --no-check-certificate -O /etc/config-software/system.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system.sh
-    if [ "$input_str_COUNTRY" = "JP" ]; then
+  if [ "$input_str_COUNTRY" = "JP" ]; then
   sed -i -e "s|UTC|Asia/Tokyo|g" /etc/config-software/system.sh
   fi
   if [ "$input_str_COUNTRY" = "CN" ]; then
