@@ -1192,7 +1192,7 @@ rm /tmp/internet-detector_all.ipk
 fi
 if [ -z "$DETECTER_APP" ]; then
 LUCI_APP_INTERNET_DETECTER_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-internet-detector") ,48)}'`
-echo $LUCI_APP_INTERNET_DETECTER_V
+#echo $LUCI_APP_INTERNET_DETECTER_V
 wget --no-check-certificate -O /tmp/luci-app-internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_INTERNET_DETECTER_V}
 opkg install /tmp/luci-app-internet-detector_all.ipk
 rm /tmp/luci-app-internet-detector_all.ipk
@@ -1215,7 +1215,7 @@ fi
 # disks info
 if [ -z "$luci_app_disks_info" ]; then
 LUCI_APP_DISKA_INFO_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-disks-info") ,41)}'`
-echo $LUCI_APP_DISKA_INFO_V
+#echo $LUCI_APP_DISKA_INFO_V
 wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_DISKA_INFO_V}
 opkg install /tmp/luci-app-disks-info_all.ipk
 rm /tmp/luci-app-disks-info_all.ipk
