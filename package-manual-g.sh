@@ -60,7 +60,6 @@ if [ -e ${UPDATE} ]; then
 opkg update
 UPDATE="1"
 fi
-opkg install wget-ssl	
 mkdir -p /etc/config-software/list-installed
 echo 0 > /etc/config-software/list-installed/Flash
 opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/Before
