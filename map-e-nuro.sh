@@ -1,5 +1,5 @@
 #!/bin/sh
-# Information provided by https://github.com/tinysun
+# Information provided by https://github.com/tinysun & https://qiita.com/obsolete-standard/items/e410530cecb0a21d3ecc
 # Vr.4.00
 # License: CC0
 
