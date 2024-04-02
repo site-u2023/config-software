@@ -842,6 +842,8 @@ IPV4=${octet[0]}.${octet[1]}.${octet[2]}.${octet[3]}
 PSID=$psid
 BR=$peeraddr
 
+WAN6_DEVICE=`uci get network.wan6.device`
+
 # network backup
 cp /etc/config/network /etc/config/network.MAP_e_VirtualConnect.old
 cp /etc/config/dhcp /etc/config/dhcp.MAP_e_VirtualConnect.old
@@ -859,7 +861,7 @@ uci set network.wan.auto='0'
 
 # DHCP WAN6
 uci set network.wan6=interface
-uci set network.wan6.device='wan'
+uci set network.wan6.device=${WAN6_DEVICE}
 uci set dhcp.wan6.interface='wan6'
 uci set dhcp.wan6=dhcp
 uci set dhcp.wan6.ignore='1'
@@ -871,7 +873,7 @@ uci set dhcp.wan6.ndp='relay'
 # WAN6RA
 WAN6RA='wan6ra'
 uci set network.${WAN6RA}=interface
-uci set network.${WAN6RA}.device='wan'
+uci set network.${WAN6RA}.device=${WAN6_DEVICE}
 uci set network.${WAN6RA}.proto='static'
 uci set network.${WAN6RA}.ip6gw=${CE}::1
 uci set network.${WAN6RA}.ip6prefix=${CE}::/56
@@ -902,7 +904,7 @@ uci add_list firewall.@zone[${ZOON_NO}].network=${WAN6RA}
 uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
-echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"wan
+echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"${WAN6_DEVICE}
 echo -e "\033[1;32m ${WAN6RA} ip6gw: \033[0;39m"${CE}::1
 echo -e "\033[1;32m ${WAN6RA} ip6prefix: \033[0;39m"${CE}::/56
 echo -e "\033[1;32m ${WAN6RA} ip6addr: \033[0;39m"${CE}::1001
