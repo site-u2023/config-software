@@ -847,6 +847,8 @@ IPV4=${octet[0]}.${octet[1]}.${octet[2]}.${octet[3]}
 PSID=$psid
 BR=$peeraddr
 
+WAN6_DEVICE=`uci get network.wan6.device`
+
 # network backup
 cp /etc/config/network /etc/config/network.map-e.old
 cp /etc/config/network /etc/config/dhcp.map-e.old
@@ -873,7 +875,7 @@ uci set dhcp.wan6.ndp='relay'
 
 # WAN6
 uci set network.wan6=interface
-uci set network.wan6.device='wan'
+uci set network.wan6.device=${WAN6_DEVICE}
 uci set network.wan6.proto='dhcpv6' # Onry_V6plus
 uci set network.wan6.reqaddress='try' # Onry_V6plus
 uci set network.wan6.reqprefix='auto' # Onry_V6plus
@@ -882,7 +884,7 @@ uci set network.wan6.ip6prefix=${CE}::/56 # Onry_V6plus
 # WAN6RA # Onry_OCN
 WAN6RA='wan6ra' # Onry_OCN
 uci set network.${WAN6RA}=interface # Onry_OCN
-uci set network.${WAN6RA}.device='wan' # Onry_OCN
+uci set network.${WAN6RA}.device=${WAN6_DEVICE} # Onry_OCN
 uci set network.${WAN6RA}.proto='static' # Onry_OCN
 uci set network.${WAN6RA}.ip6gw=${CE}::1 # Onry_OCN
 uci set network.${WAN6RA}.ip6prefix=${CE}::/56 # Onry_OCN
@@ -916,7 +918,7 @@ uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
 echo -e "\033[1;32m wan6 ip6prefix: \033[0;39m"${CE}::/56 # Onry_V6plus
-echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m"wan # Onry_OCN
+echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m${WAN6_DEVICE} # Onry_OCN
 echo -e "\033[1;32m ${WAN6RA} ip6gw: \033[0;39m"${CE}::1 # Onry_OCNN
 echo -e "\033[1;32m ${WAN6RA} ip6prefix: \033[0;39m"${CE}::/56 # Onry_OCN
 echo -e "\033[1;32m ${WAN6RA} ip6addr: \033[0;39m"${CE}::1001 # Onry_OCN
