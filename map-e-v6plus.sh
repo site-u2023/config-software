@@ -842,6 +842,8 @@ IPV4=${octet[0]}.${octet[1]}.${octet[2]}.${octet[3]}
 PSID=$psid
 BR=$peeraddr
 
+WAN6_DEVICE=`uci get network.wan6.device`
+
 # network backup
 cp /etc/config/network /etc/config/network.map-e-v6plus.old
 cp /etc/config/network /etc/config/network.map-e-v6plus.old
@@ -868,7 +870,7 @@ uci set dhcp.wan6.ndp='relay'
 
 # WAN6
 uci set network.wan6=interface
-uci set network.wan6.device='wan'
+uci set network.wan6.device=${WAN6_DEVICE}
 uci set network.wan6.proto='dhcpv6'
 uci set network.wan6.ip6prefix=${CE}::/56
 
