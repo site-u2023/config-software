@@ -140,7 +140,7 @@ fi
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
   echo -e " \033[1;37mOpenWrt-Config\033[0;39m"
-  echo -e " \033[1;37mLast update: March 13, 2024, 11:11 a.m.(JST)\033[0;39m"
+  echo -e " \033[1;37mLast update: April 2, 2024, 10:51 a.m.(JST)\033[0;39m"
   echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
   echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
   str_USB=`dmesg | ls /sys/bus/usb/devices | grep -s usb`
