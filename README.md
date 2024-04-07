@@ -138,6 +138,7 @@ uci commit network
 </details>
 
 ### Run Script
+
 Permited only from LAN side
 No login authentication
 :warning: Can be changed from ttyd settings
