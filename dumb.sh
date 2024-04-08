@@ -3,6 +3,8 @@
 IPADDR='192.168.1.2'
 GATEWAY='192.168.1.1'
 
+LAN_DEVICE=`uci get network.lan.device`
+
 # ネットワークを変更する
 cp /etc/config/system /etc/config/system.dump.bak
 cp /etc/config/network /etc/config/network.dump.bak
@@ -16,8 +18,6 @@ uci delete network.lan
 uci delete system.ntp.server
 uci -q delete network.globals.ula_prefix
 # IPV4
-
-LAN_DEVICE=`uci get network.lan.device`
 
 uci add_list network.@device[0].ports='wan'
 
