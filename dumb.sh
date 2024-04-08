@@ -17,12 +17,14 @@ uci delete system.ntp.server
 uci -q delete network.globals.ula_prefix
 # IPV4
 
+LAN_DEVICE=`uci get network.lan.device`
+
 uci add_list network.@device[0].ports='wan'
 
 BRIDGE='bridge'
 uci set network.${BRIDGE}=interface
 uci set network.${BRIDGE}.proto='static'
-uci set network.${BRIDGE}.device='br-lan'
+uci set network.${BRIDGE}.device=${LAN_DEVICE}
 uci set network.${BRIDGE}.ipaddr=${IPADDR}
 uci set network.${BRIDGE}.netmask='255.255.255.0'
 uci set network.${BRIDGE}.gateway=${GATEWAY}
