@@ -156,13 +156,9 @@ filters:
     name: AdGuard Japanese filter
     id: 3
   - enabled: false
-    url: https://280blocker.net/files/280blocker_domain_ag_202309.txt
-    name: 280blocker
-    id: 4
-  - enabled: false
     url: https://raw.githubusercontent.com/tofukko/filter/master/Adblock_Plus_list.txt
     name: 豆腐フィルタ
-    id: 5
+    id: 4
 user_rules: []
 dhcp:
   enabled: false
