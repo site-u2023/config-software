@@ -88,7 +88,7 @@ do
   echo -e " \033[1;33mDownload and install DFS_Check configuration script\033[0;39m"
   read -p " Please select key [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/dfs_config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs_config.sh
+    "y" ) wget --no-check-certificate -O /etc/config-software/dfs-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-config.sh
           service dfs_check enable
           service dfs_check start
           echo "Check your Wi-Fi settings"
