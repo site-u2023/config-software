@@ -187,8 +187,11 @@ uci set wireless.default_${RADIO_CC}.macaddr='random' # Random Mac Address
 # uci set wireless.default_${RADIO_C}.wpa_disable_eapol_key_retries='1'
 # set
 uci delete wireless.${RADIO_A}.disabled
+uci delete wireless.${RADIO_AA}.disabled
 uci delete wireless.${RADIO_B}.disabled
+uci delete wireless.${RADIO_BB}.disabled
 uci delete wireless.${RADIO_C}.disabled
+uci delete wireless.${RADIO_CC}.disabled
 uci commit wireless
 # /etc/init.d/network restart
 
