@@ -29,12 +29,12 @@ done
 }
 
 function _func_COUNTRY {
-if [ "$WIFI_DEVICE" = "1" ] || [ "$WIFI_DEVICE" = "2" ] || [ "$WIFI_DEVICE" = "3" ]; then
+if [ ! -z ${WIFI_NO_A} ]; then
 while :
 do
   wget --no-check-certificate -O /etc/config-software/country_codes.txt https://raw.githubusercontent.com/site-u2023/config-software/main/country_codes.txt
   cat /etc/config-software/country_codes.txt
-  echo -e " \033[1;32mPlease enter Wi-Fi Country Code\033[0;39m"
+  echo -e " \033[1;35mPlease enter Wi-Fi Country Code\033[0;39m"
   echo -e " \033[1;37mExample: JP\033[0;39m"
   read -p " Wi-Fi Country Code: " input_str_COUNTRYS
   input_str_COUNTRY=`echo ${input_str_COUNTRYS} | awk '{print toupper($0)}'`
@@ -45,15 +45,14 @@ do
     "r" ) exit ;;
   esac
 done
-  else
-_func_DEVICE_confirmation
 fi
 }
 
 function _func_WIFI_SSID_A {
+if [ ! -z ${WIFI_NO_A} ]; then
 while :
 do
-  echo -e " \033[1;35mPlease enter Wi-Fi${WIFI_NO_A} SSID\033[0;39m"
+  echo -e " \033[1;32mPlease enter Wi-Fi ${RADIO_A} ${WIFI_NO_A} SSID\033[0;39m"
   read -p " Wi-Fi${WIFI_NO_A} SSID: " input_str_WIFI_SSID_A
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
@@ -62,28 +61,62 @@ do
     "r" ) break ;;
   esac
 done
+fi
+_func_WIFI_SSID_B 
 }
 
 function _func_WIFI_PASSWD_A {
 while :
 do
-  echo -e " \033[1;31mPlease enter Wi-Fi ${WIFI_NO_A} password\033[0;39m"
+  echo -e " \033[1;36mPlease enter Wi-Fi ${RADIO_A} ${WIFI_NO_A} password\033[0;39m"
   echo -e " \033[1;35mExpecting: key between 8 and 63 characters\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_A} Password: " input_str_WIFI_PASSWD_A
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_WIFI_SSID_B ;;
+    "y" ) _func_WIFI_SSID_AA ;;
     "n" ) _func_WIFI_PASSWD_A ;;
     "r" ) break ;;
   esac
 done
 }
 
-function _func_WIFI_SSID_B {
-if [ "$WIFI_DEVICE" = "2" ] || [ "$WIFI_DEVICE" = "3" ]; then
+function _func_WIFI_SSID_AA {
+if [ ! -z ${WIFI_NO_AA} ]; then
 while :
 do
-  echo -e " \033[1;36mPlease enter Wi-Fi ${WIFI_NO_B} SSID\033[0;39m"
+  echo -e " \033[1;32mPlease enter Wi-Fi ${RADIO_AA} ${WIFI_NO_AA} SSID\033[0;39m"
+  read -p " Wi-Fi${WIFI_NO_AA} SSID: " input_str_WIFI_SSID_AA
+  read -p " Please select key [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_WIFI_PASSWD_AA ;;
+    "n" ) _func_WIFI_SSID_AA ;;
+    "r" ) break ;;
+  esac
+done
+fi
+_func_WIFI_SSID_B 
+}
+
+function _func_WIFI_PASSWD_AA {
+while :
+do
+  echo -e " \033[1;36mPlease enter Wi-Fi ${RADIO_AA} ${WIFI_NO_AA} password\033[0;39m"
+  echo -e " \033[1;35mExpecting: key between 8 and 63 characters\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_AA} Password: " input_str_WIFI_PASSWD_AA
+  read -p " Please select key [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_WIFI_SSID_B ;;
+    "n" ) _func_WIFI_PASSWD_AA ;;
+    "r" ) break ;;
+  esac
+done
+}
+
+function _func_WIFI_SSID_B {
+if [ ! -z ${WIFI_NO_B} ]; then
+while :
+do
+  echo -e " \033[1;32mPlease enter Wi-Fi ${RADIO_B} ${WIFI_NO_B} SSID\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_B} SSID: " input_str_WIFI_SSID_B
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
@@ -92,30 +125,62 @@ do
     "r" ) break ;;
   esac
 done
-_func_GUEST
 fi
+_func_WIFI_SSID_C
 }
 
 function _func_WIFI_PASSWD_B {
 while :
 do
-  echo -e " \033[1;37mPlease enter Wi-Fi ${WIFI_NO_B} password\033[0;39m"
+  echo -e " \033[1;36mPlease enter Wi-Fi ${RADIO_B} ${WIFI_NO_B} password\033[0;39m"
   echo -e " \033[1;35mExpecting: key between 8 and 63 characters\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_B} Password: " input_str_WIFI_PASSWD_B
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_WIFI_SSID_C ;;
+    "y" ) _func_WIFI_SSID_BB ;;
     "n" ) _func_WIFI_PASSWD_B ;;
     "r" ) break ;;
   esac
 done
 }
 
-function _func_WIFI_SSID_C {
-if [ "$WIFI_DEVICE" = "3" ]; then
+function _func_WIFI_SSID_BB {
+if [ ! -z ${WIFI_NO_BB} ]; then
 while :
 do
-  echo -e " \033[1;44mPlease enter Wi-Fi ${WIFI_NO_C} SSID\033[0;39m"
+  echo -e " \033[1;32mPlease enter Wi-Fi ${RADIO_BB} ${WIFI_NO_BB} SSID\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_BB} SSID: " input_str_WIFI_SSID_BB
+  read -p " Please select key [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_WIFI_PASSWD_BB ;;
+    "n" ) _func_WIFI_SSID_BB ;;
+    "r" ) break ;;
+  esac
+done
+fi
+_func_WIFI_SSID_C
+}
+
+function _func_WIFI_PASSWD_BB {
+while :
+do
+  echo -e " \033[1;36mPlease enter Wi-Fi ${RADIO_BB} ${WIFI_NO_BB} password\033[0;39m"
+  echo -e " \033[1;35mExpecting: key between 8 and 63 characters\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_BB} Password: " input_str_WIFI_PASSWD_BB
+  read -p " Please select key [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_WIFI_SSID_C ;;
+    "n" ) _func_WIFI_PASSWD_BB ;;
+    "r" ) break ;;
+  esac
+done
+}
+
+function _func_WIFI_SSID_C {
+if [ ! -z ${WIFI_NO_C} ]; then
+while :
+do
+  echo -e " \033[1;32mPlease enter Wi-Fi ${RADIO_C} ${WIFI_NO_C} SSID\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_C} SSID: " input_str_WIFI_SSID_C
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
@@ -129,15 +194,49 @@ _func_GUEST
 }
 
 function _func_WIFI_PASSWD_C {
+if [ ! -z ${WIFI_NO_C} ]; then
 while :
 do
-  echo -e " \033[1;42mPlease enter Wi-Fi ${WIFI_NO_C} password\033[0;39m"
+  echo -e " \033[1;36mPlease enter Wi-Fi ${RADIO_C} ${WIFI_NO_C} password\033[0;39m"
   echo -e " \033[1;35mExpecting: key between 8 and 63 characters\033[0;39m"
   read -p " Wi-Fi ${WIFI_NO_C} Password: " input_str_WIFI_PASSWD_C
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
-    "y" ) _func_GUEST ;;
+    "y" ) _func_WIFI_SSID_CC ;;
     "n" ) _func_WIFI_PASSWD_C ;;
+    "r" ) break ;;
+  esac
+done
+fi
+}
+
+function _func_WIFI_SSID_CC {
+if [ ! -z ${WIFI_NO_CC} ]; then
+while :
+do
+  echo -e " \033[1;32mPlease enter Wi-Fi ${RADIO_CC} ${WIFI_NO_CC} SSID\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_CC} SSID: " input_str_WIFI_SSID_CC
+  read -p " Please select key [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_WIFI_PASSWD_CC ;;
+    "n" ) _func_WIFI_SSID_CC ;;
+    "r" ) break ;;
+  esac
+done
+fi
+_func_GUEST 
+}
+
+function _func_WIFI_PASSWD_CC {
+while :
+do
+  echo -e " \033[1;36mPlease enter Wi-Fi ${RADIO_CC} ${WIFI_NO_CC} password\033[0;39m"
+  echo -e " \033[1;35mExpecting: key between 8 and 63 characters\033[0;39m"
+  read -p " Wi-Fi ${WIFI_NO_CC} Password: " input_str_WIFI_PASSWD_CC
+  read -p " Please select key [y/n or r]: " num
+  case "${num}" in
+    "y" ) _func_GUEST ;;
+    "n" ) _func_WIFI_PASSWD_CC ;;
     "r" ) break ;;
   esac
 done
@@ -148,12 +247,12 @@ while :
 do
   echo -e " \033[1;43mUse Wi-Fi GUEST\033[0;39m"
   echo -e " \033[1;34m[1]: ON\033[0;39m"
-  echo -e " \033[1;31m[2]: OFF\033[0;39m"
-  read -p " Please select key [1 or 2]: " num
+  echo -e " \033[1;31m[0]: OFF\033[0;39m"
+  read -p " Please select key [1 or 0]: " num
   case "${num}" in
     "1" ) GUEST='on'
          _func_WIFI_TWT ;;
-    "2" ) GUEST=''
+    "0" ) GUEST=''
          _func_WIFI_TWT ;;
   esac
 done
@@ -164,12 +263,12 @@ while :
 do
   echo -e " \033[1;41mUse TWT (Only WiFi6)\033[0;39m"
   echo -e " \033[1;34m[1]: ON\033[0;39m"
-  echo -e " \033[1;31m[2]: OFF\033[0;39m"
-  read -p " Please select key [1 or 2]: " num
+  echo -e " \033[1;31m[0]: OFF\033[0;39m"
+  read -p " Please select key [1 or 0]: " num
   case "${num}" in
     "1" ) TWT='on'
          _func_DEVICE_confirmation ;;
-    "2" ) TWT=''
+    "0" ) TWT=''
          _func_DEVICE_confirmation ;;
   esac
 done
@@ -181,18 +280,30 @@ do
   echo -e " \033[1;37mSystem setup ----------------------------------------\033[0;39m"
   echo -e " \033[1;34mDevice Hostname: ${input_str_SYSTEM_HOSTNAME}\033[0;39m"
   echo -e " \033[1;33mDevice Password: ${input_str_ROOT_PASSWD}\033[0;39m"
-  if [ "$WIFI_DEVICE" = "1" ] || [ "$WIFI_DEVICE" = "2" ] || [ "$WIFI_DEVICE" = "3" ]; then
-  echo -e " \033[1;32mWi-Fi Country Code: ${input_str_COUNTRY}\033[0;39m"
-  echo -e " \033[1;35mWi-Fi ${WIFI_NO_A} SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
-  echo -e " \033[1;31mWi-Fi ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
+  echo -e " \033[1;35mWi-Fi Country Code: ${input_str_COUNTRY}\033[0;39m"
+  if [ ! -z ${WIFI_NO_A} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_A} ${WIFI_NO_A} SSID: ${input_str_WIFI_PASSWD_A}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_A} ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
   fi
-  if [ "$WIFI_DEVICE" = "2" ] || [ "$WIFI_DEVICE" = "3" ]; then
-  echo -e " \033[1;36mWi-Fi ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
-  echo -e " \033[1;37mWi-Fi ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+  if [ ! -z ${WIFI_NO_AA} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_AA} ${WIFI_NO_AA} SSID: ${input_str_WIFI_PASSWD_AA}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_AA} ${WIFI_NO_AA} Password: ${input_str_WIFI_PASSWD_AA}\033[0;39m"
   fi
-  if [ "$WIFI_DEVICE" = "3" ]; then
-  echo -e " \033[1;44mWi-Fi ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
-  echo -e " \033[1;42mWi-Fi ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+  if [ ! -z ${WIFI_NO_B} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_B} ${WIFI_NO_B} SSID: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_B} ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_BB} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_BB} ${WIFI_NO_BB} SSID: ${input_str_WIFI_PASSWD_BB}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_BB} ${WIFI_NO_BB} Password: ${input_str_WIFI_PASSWD_BB}\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_C} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_C} ${WIFI_NO_C} SSID: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_C} ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_CC} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} SSID: ${input_str_WIFI_PASSWD_CC}\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} Password: ${input_str_WIFI_PASSWD_CC}\033[0;39m"
   fi
   if [ -n "$GUEST" ]; then
   echo -e " \033[1;43mWi-Fi GUEST: ON\033[0;39m"
@@ -286,12 +397,24 @@ function _func_DEVICE_SET {
   sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/config-software/system.sh
   sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/config-software/system.sh
   sed -i -e "s/Country_Code/${input_str_COUNTRY}/g" /etc/config-software/system.sh
+  sed -i -e "s/RADIO_A='radio'/RADIO_A=${RADIO_A}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_A='SSID_A'/WIFI_SSID_A=${input_str_WIFI_SSID_A}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_PASSWORD_A='password'/WIFI_PASSWORD_A=${input_str_WIFI_PASSWD_A}/g" /etc/config-software/system.sh
+  sed -i -e "s/RADIO_AA='radio'/RADIO_AA=${RADIO_AA}/g" /etc/config-software/system.sh
+  sed -i -e "s/WIFI_SSID_AA='SSID_AA'/WIFI_SSID_AA=${input_str_WIFI_SSID_AA}/g" /etc/config-software/system.sh
+  sed -i -e "s/WIFI_PASSWORD_AA='password'/WIFI_PASSWORD_AA=${input_str_WIFI_PASSWD_AA}/g" /etc/config-software/system.sh
+  sed -i -e "s/RADIO_B='radio'/RADIO_B=${RADIO_B}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_B='SSID_B'/WIFI_SSID_B=${input_str_WIFI_SSID_B}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_PASSWORD_B='password'/WIFI_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" /etc/config-software/system.sh
+  sed -i -e "s/RADIO_BB='radio'/RADIO_BB=${RADIO_B}/g" /etc/config-software/system.sh
+  sed -i -e "s/WIFI_SSID_BB='SSID_BB'/WIFI_SSID_BB=${input_str_WIFI_SSID_BB}/g" /etc/config-software/system.sh
+  sed -i -e "s/WIFI_PASSWORD_BB='password'/WIFI_PASSWORD_BB=${input_str_WIFI_PASSWD_BB}/g" /etc/config-software/system.sh
+  sed -i -e "s/RADIO_C='radio'/RADIO_C=${RADIO_C}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_C='SSID_C'/WIFI_SSID_C=${input_str_WIFI_SSID_C}/g" /etc/config-software/system.sh
-  sed -i -e "s/WIFI_PASSWORD_C='password'/WIFI_PASSWORD_C=${input_str_WIFI_PASSWD_C}/g" /etc/config-software/system.sh  
+  sed -i -e "s/WIFI_PASSWORD_C='password'/WIFI_PASSWORD_C=${input_str_WIFI_PASSWD_C}/g" /etc/config-software/system.sh
+  sed -i -e "s/RADIO_CC='radio'/RADIO_CC=${RADIO_CC}/g" /etc/config-software/system.sh
+  sed -i -e "s/WIFI_SSID_CC='SSID_CC'/WIFI_SSID_CC=${input_str_WIFI_SSID_CC}/g" /etc/config-software/system.sh
+  sed -i -e "s/WIFI_PASSWORD_CC='password'/WIFI_PASSWORD_CC=${input_str_WIFI_PASSWD_CC}/g" /etc/config-software/system.sh
   if [ "$TWT" = "on" ]; then
   sed -i -e "s/he_twt_required:0/he_twt_required:1/g" /lib/netifd/wireless/mac80211.sh
   uci add_list wireless.radio0.hostapd_options='he_twt_responder=1'
@@ -331,65 +454,112 @@ do
   if [ -n /etc/config/wireless ]; then
   touch /etc/config/wireless
   fi
-  WIFI_A=`uci show wireless | grep "band='2g'" | cut -d'.' -f2 | awk '{ print $1 }'`
-  WIFI_B=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
-  WIFI_C=`uci show wireless | grep "band='6g'" | cut -d'.' -f2 | awk '{ print $1 }'`
-  WIFI_DEVICE=`uci show wireless | grep 'wifi-device' | wc -l`
+  WIFI_A=`uci show wireless | grep "band='2g'" | cut -d'.' -f2 | awk '{ print $1 }' | sed -n '1p'`
+  WIFI_AA=`uci show wireless | grep "band='2g'" | cut -d'.' -f2 | awk '{ print $1 }' | sed -n '2p'`
+  WIFI_B=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }' | sed -n '1p'`
+  WIFI_BB=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }' | sed -n '2p'`
+  WIFI_C=`uci show wireless | grep "band='6g'" | cut -d'.' -f2 | awk '{ print $1 }' | sed -n '1p'`
+  WIFI_CC=`uci show wireless | grep "band='6g'" | cut -d'.' -f2 | awk '{ print $1 }' | sed -n '2P'`
   if [ "radio0" = "${WIFI_A}" ]; then
   WIFI_NO_A='2G'
+  RADIO_A='radio0'
+  fi
+  if [ "radio0" = "${WIFI_AA}" ]; then
+  WIFI_NO_AA='2G'
+  RADIO_AA='radio0'
   fi
   if [ "radio1" = "${WIFI_A}" ]; then
-  WIFI_NO_B='2G'
+  WIFI_NO_A='2G'
+  RADIO_A='radio1'
+  fi
+  if [ "radio1" = "${WIFI_AA}" ]; then
+  WIFI_NO_AA='2G'
+  RADIO_AA='radio1'
   fi
   if [ "radio2" = "${WIFI_A}" ]; then
-  WIFI_NO_C='2G'
+  WIFI_NO_A='2G'
+  RADIO_A='radio2'
+  fi
+  if [ "radio2" = "${WIFI_AA}" ]; then
+  WIFI_NO_AA='2G'
+  RADIO_AA='radio2'
   fi
   if [ "radio0" = "${WIFI_B}" ]; then
-  WIFI_NO_A='5G'
+  WIFI_NO_B='5G'
+  RADIO_B='radio0'
+  fi
+  if [ "radio0" = "${WIFI_BB}" ]; then
+  WIFI_NO_BB='5G'
+  RADIO_BB='radio0'
   fi
   if [ "radio1" = "${WIFI_B}" ]; then
   WIFI_NO_B='5G'
+  RADIO_B='radio1'
+  fi
+  if [ "radio1" = "${WIFI_BB}" ]; then
+  WIFI_NO_BB='5G'
+  RADIO_BB='radio1'
   fi
   if [ "radio2" = "${WIFI_B}" ]; then
-  WIFI_NO_C='5G'
+  WIFI_NO_B='5G'
+  RADIO_B='radio2'
+  fi
+  if [ "radio2" = "${WIFI_BB}" ]; then
+  WIFI_NO_BB='5G'
+  RADIO_BB='radio2'
   fi
   if [ "radio0" = "${WIFI_C}" ]; then
-  WIFI_NO_A='6G'
+  WIFI_NO_C='6G'
+  RADIO_C='radio0'
+  fi
+  if [ "radio0" = "${WIFI_CC}" ]; then
+  WIFI_NO_CC='6G'
+  RADIO_CC='radio0'
   fi
   if [ "radio1" = "${WIFI_C}" ]; then
-  WIFI_NO_B='6G'
+  WIFI_NO_C='6G'
+  RADIO_C='radio1'
+  fi
+  if [ "radio1" = "${WIFI_CC}" ]; then
+  WIFI_NO_CC='6G'
+  RADIO_CC='radio1'
   fi
   if [ "radio2" = "${WIFI_C}" ]; then
   WIFI_NO_C='6G'
+  RADIO_C='radio2'
   fi
-  if [ "$WIFI_DEVICE" = "1" ]; then
-  echo -e " \033[1;32mWi-Fi Country Code\033[0;39m"
-  echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
-  echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
+  if [ "radio2" = "${WIFI_CC}" ]; then
+  WIFI_NO_CC='6G'
+  RADIO_CC='radio2'
+  fi
+  
+  echo -e " \033[1;35mWi-Fi Country Code\033[0;39m"
+  if [ ! -z ${WIFI_NO_A} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_A} ${WIFI_NO_A} SSID\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_A} ${WIFI_NO_A} Password\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_AA} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_AA} ${WIFI_NO_AA} SSID\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_AA} ${WIFI_NO_AA} Password\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_B} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_B} ${WIFI_NO_B} SSID\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_B} ${WIFI_NO_B} Password\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_BB} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_BB} ${WIFI_NO_BB} SSID\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_BB} ${WIFI_NO_BB} Password\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_C} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_C} ${WIFI_NO_C} SSID\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_C} ${WIFI_NO_C} Password\033[0;39m"
+  fi
+  if [ ! -z ${WIFI_NO_CC} ]; then
+  echo -e " \033[1;32mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} SSID\033[0;39m"
+  echo -e " \033[1;36mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} Password\033[0;39m"
+  fi
   echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
-  fi
-  if [ "$WIFI_DEVICE" = "2" ]; then
-  echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
-  echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
-  echo -e " \033[1;36mWi-Fi radio1 ${WIFI_NO_B} SSID\033[0;39m"
-  echo -e " \033[1;37mWi-Fi radio1 ${WIFI_NO_B} Password\033[0;39m"
-  echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
-  echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
-  fi
-  if [ "$WIFI_DEVICE" = "3" ]; then
-  echo -e " \033[1;35mWi-Fi radio0 ${WIFI_NO_A} SSID\033[0;39m"
-  echo -e " \033[1;31mWi-Fi radio0 ${WIFI_NO_A} Password\033[0;39m"
-  echo -e " \033[1;36mWi-Fi radio1 ${WIFI_NO_B} SSID\033[0;39m"
-  echo -e " \033[1;37mWi-Fi radio1 ${WIFI_NO_B} Password\033[0;39m"
-  echo -e " \033[1;44mWi-Fi radio2 ${WIFI_NO_C} SSID\033[0;39m"
-  echo -e " \033[1;42mWi-Fi radio2 ${WIFI_NO_C} Password\033[0;39m"
-  echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
-  echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
-  fi
-  if [ "$WIFI_DEVICE" = "0" ]; then
-  echo -e " \033[1;41mWi-Fi not found\033[0;39m"
-  fi
   read -p " Please select key [y or q]:" num
   case "${num}" in
     "y" ) _func_HOSTNAME ;;
