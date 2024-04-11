@@ -88,42 +88,9 @@ do
   echo -e " \033[1;33mDownload and install DFS_Check configuration script\033[0;39m"
   read -p " Please select key [y/n]: " num
   case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/dfs_check.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs_check.sh
-          wget --no-check-certificate -O /etc/init.d/dfs_check https://raw.githubusercontent.com/site-u2023/config-software/main/dfs_check
-          chmod +x /etc/dfs_check.sh
-          chmod +x /etc/init.d/dfs_check
-          DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 2`
-          CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
-          if [ ${CHECK} -ge "100" ]; then
-          sed -i -e "s/radio0/radio2/g" /etc/dfs_check.sh
-          sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
-          echo "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
-          echo "DFS Check setup is complete"
-          read -p " Press any key"
-          exit
-          fi
-          DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 1`
-          CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
-          if [ ${CHECK} -ge "100" ]; then
-          sed -i -e "s/radio0/radio1/g" /etc/dfs_check.sh
-          sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
-          echo "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
-          echo "DFS Check setup is complete"
-          read -p " Press any key"
-          exit
-          fi
-          DEV=`iw dev | awk '/Interface/{print $2}' | awk '{print substr($0,1,index($0,"-") )}' | grep 0`
-          CHECK=$(iw dev ${DEV}ap0 info | awk '/channel/{print $2}')
-          if [ ${CHECK} -ge "100" ]; then
-          sed -i -e "s/radio0/radio0/g" /etc/dfs_check.sh
-          sed -i -e "s/phy0-/${DEV}/g" /etc/dfs_check.sh
-          echo "*/15 * * * * sh /etc/dfs_check.sh" >> /etc/crontabs/root
-          echo "DFS Check setup is complete"
-          read -p " Press any key"
-          exit
-          fi
-          service dfs_check disable
-          service dfs_check stop
+    "y" ) wget --no-check-certificate -O /etc/config-software/main/dfs_config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs_config.sh
+          service dfs_check enable
+          service dfs_check start
           echo "Check your Wi-Fi settings"
           read -p " Press any key"
           break ;;
