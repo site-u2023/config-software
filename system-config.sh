@@ -417,13 +417,8 @@ function _func_DEVICE_SET {
   sed -i -e "s/WIFI_PASSWORD_CC='password'/WIFI_PASSWORD_CC=${input_str_WIFI_PASSWD_CC}/g" /etc/config-software/system.sh
   if [ "$TWT" = "on" ]; then
   sed -i -e "s/he_twt_required:0/he_twt_required:1/g" /lib/netifd/wireless/mac80211.sh
-  uci add_list wireless.radio0.hostapd_options='he_twt_responder=1'
-   if [ "$WIFI_DEVICE" = "2" ] || [ "$WIFI_DEVICE" = "3" ]; then
-  uci add_list wireless.radio1.hostapd_options='he_twt_responder=1'
-   fi
-   if [ "$WIFI_DEVICE" = "3" ]; then
-   uci add_list wireless.radio2.hostapd_options='he_twt_responder=1'
-   fi
+  uci add_list wireless.${RADIO_B}.hostapd_options='he_twt_responder=1'
+  uci add_list wireless.${RADIO_BB}.hostapd_options='he_twt_responder=1'
   uci commit wireless
   fi
   sh /etc/config-software/system.sh 2> /dev/null
