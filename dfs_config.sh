@@ -1,5 +1,4 @@
 #! /bin/sh
-mkdir -p /etc/config-software
 cat << "EOF" > /etc/config-software/dfs_check.sh
 #! /bin/sh
 # this script based  https://github.com/NilsRo/Openwrt-radio-check
