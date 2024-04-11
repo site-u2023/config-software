@@ -406,7 +406,7 @@ function _func_DEVICE_SET {
   sed -i -e "s/RADIO_B='radio'/RADIO_B=${RADIO_B}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_B='SSID_B'/WIFI_SSID_B=${input_str_WIFI_SSID_B}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_PASSWORD_B='password'/WIFI_PASSWORD_B=${input_str_WIFI_PASSWD_B}/g" /etc/config-software/system.sh
-  sed -i -e "s/RADIO_BB='radio'/RADIO_BB=${RADIO_B}/g" /etc/config-software/system.sh
+  sed -i -e "s/RADIO_BB='radio'/RADIO_BB=${RADIO_BB}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_BB='SSID_BB'/WIFI_SSID_BB=${input_str_WIFI_SSID_BB}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_PASSWORD_BB='password'/WIFI_PASSWORD_BB=${input_str_WIFI_PASSWD_BB}/g" /etc/config-software/system.sh
   sed -i -e "s/RADIO_C='radio'/RADIO_C=${RADIO_C}/g" /etc/config-software/system.sh
