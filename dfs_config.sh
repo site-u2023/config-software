@@ -61,7 +61,3 @@ stop() {
 }
 EOF
 chmod +x /etc/init.d/dfs_check
-
-
-service dfs_check enable
-service dfs_check start
