@@ -54,6 +54,7 @@
   - [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/openwrt-config.sh)
     - [system-config.sh](https://github.com/site-u2023/config-software/blob/main/system-config.sh)
       - [system.sh](https://github.com/site-u2023/config-software/blob/main/system.sh)
+      - [dfs-config.sh](https://github.com/site-u2023/config-software/blob/main/dfs-config.sh)
     - [internet-config.sh](https://github.com/site-u2023/config-software/blob/main/internet-config.sh)
       - [map-e.sh](https://github.com/site-u2023/config-software/blob/main/map-e.sh)
       - [ds-lite.sh](https://github.com/site-u2023/config-software/blob/main/ds-lite.sh)
