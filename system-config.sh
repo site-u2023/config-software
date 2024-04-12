@@ -245,7 +245,7 @@ done
 function _func_GUEST {
 while :
 do
-  echo -e " \033[1;43mUse Wi-Fi GUEST\033[0;39m"
+  echo -e " \033[1;41mUse Wi-Fi GUEST\033[0;39m"
   echo -e " \033[1;31m[0]: OFF\033[0;39m"
   echo -e " \033[1;34m[1]: ON\033[0;39m"
   read -p " Please select key [0/ 1 or r]: " num
@@ -325,7 +325,7 @@ do
   echo -e " \033[1;36mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} Password: ${input_str_WIFI_PASSWD_CC}\033[0;39m"
   fi
   if [ -n "$GUEST" ]; then
-  echo -e " \033[1;43mWi-Fi GUEST: ON\033[0;39m"
+  echo -e " \033[1;41mWi-Fi GUEST: ON\033[0;39m"
   fi
   if [ -n "$TWT" ]; then
   echo -e " \033[1;41mTWT: ON\033[0;39m"
@@ -581,7 +581,7 @@ do
   echo -e " \033[1;32mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} SSID\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} Password\033[0;39m"
   fi
-  echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
+  echo -e " \033[1;41mWi-Fi GUEST\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
   echo -e " \033[1;41mDFS CHECK\033[0;39m"
   read -p " Please select key [y or q]:" num
