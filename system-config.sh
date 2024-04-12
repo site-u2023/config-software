@@ -267,9 +267,9 @@ do
   echo -e " \033[1;34m[1]: ON\033[0;39m"
   read -p " Please select key [0/ 1 or r]: " num
   case "${num}" in
-    "0" ) TWT='' ;;
+    "0" ) TWT=''
           _func_DFS_CHECK ;;
-    "1" ) TWT='on' ;;
+    "1" ) TWT='on'
           _func_DFS_CHECK ;;
     "r" ) break ;;    
   esac
@@ -284,9 +284,9 @@ do
   echo -e " \033[1;34m[1]: ON\033[0;39m"
   read -p " Please select key [0/ 1 or r]: " num
   case "${num}" in
-    "0" ) DFS='' ;;
+    "0" ) DFS=''
           _func_DEVICE_confirmation ;;
-    "1" ) DFS='on' ;;
+    "1" ) DFS='on'
           _func_DEVICE_confirmation ;;
     "r" ) break ;;   
   esac
