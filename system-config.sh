@@ -246,14 +246,15 @@ function _func_GUEST {
 while :
 do
   echo -e " \033[1;43mUse Wi-Fi GUEST\033[0;39m"
-  echo -e " \033[1;34m[1]: ON\033[0;39m"
   echo -e " \033[1;31m[0]: OFF\033[0;39m"
-  read -p " Please select key [1 or 0]: " num
+  echo -e " \033[1;34m[1]: ON\033[0;39m"
+  read -p " Please select key [0/ 1 or r]: " num
   case "${num}" in
-    "1" ) GUEST='on'
-         _func_WIFI_TWT ;;
     "0" ) GUEST=''
-         _func_WIFI_TWT ;;
+          _func_WIFI_TWT ;;
+    "1" ) GUEST='on' 
+          _func_WIFI_TWT ;;
+    "r" ) break ;;     
   esac
 done
 }
@@ -262,14 +263,32 @@ function _func_WIFI_TWT {
 while :
 do
   echo -e " \033[1;41mUse TWT (Only WiFi6)\033[0;39m"
-  echo -e " \033[1;34m[1]: ON\033[0;39m"
   echo -e " \033[1;31m[0]: OFF\033[0;39m"
-  read -p " Please select key [1 or 0]: " num
+  echo -e " \033[1;34m[1]: ON\033[0;39m"
+  read -p " Please select key [0/ 1 or r]: " num
   case "${num}" in
-    "1" ) TWT='on'
-         _func_DEVICE_confirmation ;;
-    "0" ) TWT=''
-         _func_DEVICE_confirmation ;;
+    "0" ) TWT='' ;;
+          _func_DFS_CHECK ;;
+    "1" ) TWT='on' ;;
+          _func_DFS_CHECK ;;
+    "r" ) break ;;    
+  esac
+done
+}
+
+function _func_DFS_CHECK {
+while :
+do
+  echo -e " \033[1;41mUse DFS_CHECK\033[0;39m"
+  echo -e " \033[1;31m[0]: OFF\033[0;39m"
+  echo -e " \033[1;34m[1]: ON\033[0;39m"
+  read -p " Please select key [0/ 1 or r]: " num
+  case "${num}" in
+    "0" ) DFS='' ;;
+          _func_DEVICE_confirmation ;;
+    "1" ) DFS='on' ;;
+          _func_DEVICE_confirmation ;;
+    "r" ) break ;;   
   esac
 done
 }
@@ -310,6 +329,9 @@ do
   fi
   if [ -n "$TWT" ]; then
   echo -e " \033[1;41mTWT: ON\033[0;39m"
+  fi
+  if [ -n "$DFS" ]; then
+  echo -e " \033[1;41mDFS: ON\033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " Please select key [y/n or q]: " num
@@ -420,6 +442,12 @@ function _func_DEVICE_SET {
   uci add_list wireless.${RADIO_B}.hostapd_options='he_twt_responder=1'
   uci add_list wireless.${RADIO_BB}.hostapd_options='he_twt_responder=1'
   uci commit wireless
+  fi
+  if [ "$DFS" = "on" ]; then
+  wget --no-check-certificate -O /etc/config-software/dfs-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-config.sh
+  sh /etc/config-software/dfs-config.sh 2> /dev/null
+  service dfs_check enable
+  service dfs_check start
   fi
   sh /etc/config-software/system.sh 2> /dev/null
   if [ "$GUEST" = "on" ]; then
@@ -555,6 +583,7 @@ do
   fi
   echo -e " \033[1;43mWi-Fi GUEST\033[0;39m"
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
+  echo -e " \033[1;41mDFS CHECK\033[0;39m"
   read -p " Please select key [y or q]:" num
   case "${num}" in
     "y" ) _func_HOSTNAME ;;
