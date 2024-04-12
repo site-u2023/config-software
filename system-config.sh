@@ -261,6 +261,7 @@ done
 }
 
 function _func_WIFI_TWT {
+if [ ${WIFI_NO_B} = '5G' ]; then
 while :
 do
   echo -e " \033[1;41mUse TWT (Only WiFi6)\033[0;39m"
@@ -275,6 +276,8 @@ do
     "r" ) break ;;    
   esac
 done
+fi
+_func_DEVICE_confirmation
 }
 
 function _func_DFS_CHECK {
@@ -583,9 +586,13 @@ do
   echo -e " \033[1;32mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} SSID\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} Password\033[0;39m"
   fi
+  if [ ! -z ${WIFI_NO_A} ] || [ ! -z ${WIFI_NO_B} ] || [ ! -z ${WIFI_NO_C} ]; then
   echo -e " \033[1;41mWi-Fi GUEST\033[0;39m"
+  fi
+  if [ ${WIFI_NO_B} = '5G' ]; then
   echo -e " \033[1;41mTWT (Target Wake Time)\033[0;39m"
   echo -e " \033[1;41mDFS CHECK\033[0;39m"
+  fi
   read -p " Please select key [y or q]:" num
   case "${num}" in
     "y" ) _func_HOSTNAME ;;
