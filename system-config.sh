@@ -471,7 +471,8 @@ function _func_DEVICE_SET {
 mkdir -p /etc/config-software
 while :
 do
-  echo -e " \033[1;37mStart system initialization\033[0;39m"
+  echo -e " \033[1;37mSystem setup started\033[0;39m"
+  echo -e " \033[1;37mBasic Settings\033[0;39m"
   echo -e " \033[1;34mDevice Hostname\033[0;39m"
   echo -e " \033[1;33mDevice Password\033[0;39m"
   if [ -n /etc/config/wireless ]; then
