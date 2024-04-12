@@ -29,7 +29,7 @@ done
 }
 
 function _func_COUNTRY {
-if [ ! -z ${WIFI_NO_A} ]; then
+if [ ! -z ${WIFI_NO_A} ] || [ ! -z ${WIFI_NO_B} ] || [ ! -z ${WIFI_NO_C} ]; then
 while :
 do
   wget --no-check-certificate -O /etc/config-software/country_codes.txt https://raw.githubusercontent.com/site-u2023/config-software/main/country_codes.txt
@@ -46,6 +46,7 @@ do
   esac
 done
 fi
+_func_DEVICE_confirmation
 }
 
 function _func_WIFI_SSID_A {
