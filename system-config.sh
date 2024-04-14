@@ -457,13 +457,11 @@ function _func_DEVICE_SET {
   wget --no-check-certificate -O /etc/config-software/dfs-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-config.sh
   sh /etc/config-software/dfs-config.sh 2> /dev/null
   service dfs_check enable
-  service dfs_check start
   fi
   if [ "$DFS_NEW" = "on" ]; then
   wget --no-check-certificate -O /etc/config-software/dfs-check-new-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-check-new-config.sh
   sh /etc/config-software/dfs-check-new-config.sh 2> /dev/null
   service dfs_check enable
-  service dfs_check start
   fi
   sh /etc/config-software/system.sh 2> /dev/null
   if [ "$GUEST" = "on" ]; then
