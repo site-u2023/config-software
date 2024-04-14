@@ -51,19 +51,27 @@ if [ -n "$DATE_DISABLED" ] && [ -z "$DATE_ENABLED" ]; then
 fi
 if [ -n "$DATE_DISABLED" ] && [ -n "$DATE_ENABLED" ]; then
     if [ "$DATE_DISABLED" -lt "$DATE_ENABLED" ]; then
-        printf "Wifi channel recovery because of DFS OFF!\n"
-        uci set wireless.${RADIO}.channel=${CHANNEL}
-        uci set wireless.${RADIO}.htmode=${MODE}${BAND}
-        uci commit wireless
-        wifi reload ${RADIO}
-        exit 0
+        TIME=`expr $((${DATE} - ${DATE_ENABLED}))`
+    	if [ ${TIME} -lt ${SCHEDULE} ]; then
+            printf "Wifi channel recovery because of DFS OFF!\n"
+            uci set wireless.${RADIO}.channel=${CHANNEL}
+            uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+            uci commit wireless
+            wifi reload ${RADIO}
+            exit 0
+        fi
     else
-        printf "Wifi channel change because of DFS ON!\n"
-        uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
-        uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
-        uci commit wireless
-        wifi reload ${RADIO}
-        exit 0
+        if [ "$DATE_ENABLED" -lt "$DATE_DISABLED" ]; then
+            TIME=`expr $((${DATE} - ${DATE_DISABLED}))`
+        	if [ ${TIME} -lt ${SCHEDULE} ]; then
+                printf "Wifi channel change because of DFS ON!\n"
+                uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
+                uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
+                uci commit wireless
+                wifi reload ${RADIO}
+                exit 0
+            fi
+        fi
     fi
 fi
 if [ -n "$DATE_ENABLED" ]; then
@@ -74,7 +82,7 @@ if [ -n "$DATE_ENABLED" ]; then
         uci set wireless.${RADIO}.htmode=${MODE}${BAND}
         uci commit wireless
         wifi reload ${RADIO}
-    exit 0
+        exit 0
     fi
 fi
 EOF
@@ -111,5 +119,3 @@ stop() {
 }
 EOF
 chmod +x /etc/init.d/dfs_check_new
-
-
