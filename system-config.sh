@@ -338,10 +338,10 @@ do
   echo -e " \033[1;41mTWT: ON\033[0;39m"
   fi
   if [ -n "$DFS" ]; then
-  echo -e " \033[1;41mDFS: ON\033[0;39m"
+  echo -e " \033[1;41mDFS Check: ON\033[0;39m"
   fi
   if [ -n "$DFS_NEW" ]; then
-  echo -e " \033[1;41mDFS: ON\033[0;39m"
+  echo -e " \033[1;41mDFS Check NEW β Version: ON\033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " Please select key [y/n or q]: " num
