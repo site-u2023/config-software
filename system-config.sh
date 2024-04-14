@@ -286,11 +286,14 @@ do
   echo -e " \033[1;41mUse DFS_CHECK\033[0;39m"
   echo -e " \033[1;31m[0]: OFF\033[0;39m"
   echo -e " \033[1;34m[1]: ON\033[0;39m"
-  read -p " Please select key [0/ 1 or r]: " num
+  echo -e " \033[1;34m[b]: β Version\033[0;39m"
+  read -p " Please select key [0/ 1 /b or r]: " num
   case "${num}" in
     "0" ) DFS=''
           _func_DEVICE_confirmation ;;
     "1" ) DFS='on'
+          _func_DEVICE_confirmation ;;
+    "b" ) DFS_NEW='on'
           _func_DEVICE_confirmation ;;
     "r" ) break ;;   
   esac
@@ -335,6 +338,9 @@ do
   echo -e " \033[1;41mTWT: ON\033[0;39m"
   fi
   if [ -n "$DFS" ]; then
+  echo -e " \033[1;41mDFS: ON\033[0;39m"
+  fi
+  if [ -n "$DFS_NEW" ]; then
   echo -e " \033[1;41mDFS: ON\033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
@@ -450,6 +456,12 @@ function _func_DEVICE_SET {
   if [ "$DFS" = "on" ]; then
   wget --no-check-certificate -O /etc/config-software/dfs-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-config.sh
   sh /etc/config-software/dfs-config.sh 2> /dev/null
+  service dfs_check enable
+  service dfs_check start
+  fi
+  if [ "$DFS_NEW" = "on" ]; then
+  wget --no-check-certificate -O /etc/config-software/dfs-check-new-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-check-new-config.sh
+  sh /etc/config-software/dfs-check-new-config.sh 2> /dev/null
   service dfs_check enable
   service dfs_check start
   fi
