@@ -447,6 +447,7 @@ function _func_DEVICE_SET {
   sed -i -e "s/RADIO_CC='radio'/RADIO_CC=${RADIO_CC}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_SSID_CC='SSID_CC'/WIFI_SSID_CC=${input_str_WIFI_SSID_CC}/g" /etc/config-software/system.sh
   sed -i -e "s/WIFI_PASSWORD_CC='password'/WIFI_PASSWORD_CC=${input_str_WIFI_PASSWD_CC}/g" /etc/config-software/system.sh
+  sh /etc/config-software/system.sh 2> /dev/null
   if [ "$TWT" = "on" ]; then
   sed -i -e "s/he_twt_required:0/he_twt_required:1/g" /lib/netifd/wireless/mac80211.sh
   uci add_list wireless.${RADIO_B}.hostapd_options='he_twt_responder=1'
@@ -463,7 +464,6 @@ function _func_DEVICE_SET {
   sh /etc/config-software/dfs-check-new-config.sh 2> /dev/null
   service dfs_check enable
   fi
-  sh /etc/config-software/system.sh 2> /dev/null
   if [ "$GUEST" = "on" ]; then
   opkg update
   opkg install bash
