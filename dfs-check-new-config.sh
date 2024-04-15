@@ -35,14 +35,12 @@ else
         wifi reload ${RADIO}
     fi
 fi
-DATE=`date '+%H:%M:%S'`
-DATE=`date +%s -d ${DATE}`
+DATE=`date +%s`
 DATE_DISABLED=`exec logread | grep "DFS->DISABLED" | tail -n 1 | awk '{ print $4 }'`
-DATE_DISABLED=`date +%s -d ${DATE_DISABLED}` 2> /dev/null
 DATE_ENABLED=`exec logread | grep "DFS->ENABLED" | tail -n 1 | awk '{ print $4 }'`
-DATE_ENABLED=`date +%s -d ${DATE_ENABLED}` 2> /dev/null
 if [ -n "$DATE_DISABLED" ] && [ -z "$DATE_ENABLED" ]; then
-    TIME=`expr $((${DATE} - ${DATE_DISABLED}))`
+    DATE_DISABLEDS=`date +%s -d ${DATE_DISABLED}`
+    TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
 	if [ ${TIME} -lt ${SCHEDULE} ]; then
         printf "Wifi channel change because of DFS ON!\n"
         uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
@@ -54,7 +52,8 @@ if [ -n "$DATE_DISABLED" ] && [ -z "$DATE_ENABLED" ]; then
 fi
 if [ -n "$DATE_DISABLED" ] && [ -n "$DATE_ENABLED" ]; then
     if [ "$DATE_DISABLED" -lt "$DATE_ENABLED" ]; then
-        TIME=`expr $((${DATE} - ${DATE_ENABLED}))`
+        DATE_ENABLEDS=`date +%s -d ${DATE_ENABLED}`
+        TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
     	if [ ${TIME} -lt ${SCHEDULE} ]; then
             printf "Wifi channel recovery because of DFS OFF!\n"
             uci set wireless.${RADIO}.channel=${CHANNEL}
@@ -65,7 +64,8 @@ if [ -n "$DATE_DISABLED" ] && [ -n "$DATE_ENABLED" ]; then
         fi
     else
         if [ "$DATE_ENABLED" -lt "$DATE_DISABLED" ]; then
-            TIME=`expr $((${DATE} - ${DATE_DISABLED}))`
+            DATE_DISABLEDS=`date +%s -d ${DATE_DISABLED}`
+            TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
         	if [ ${TIME} -lt ${SCHEDULE} ]; then
                 printf "Wifi channel change because of DFS ON!\n"
                 uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
@@ -78,7 +78,8 @@ if [ -n "$DATE_DISABLED" ] && [ -n "$DATE_ENABLED" ]; then
     fi
 fi
 if [ -n "$DATE_ENABLED" ]; then
-    TIME=`expr $((${DATE} - ${DATE_ENABLED}))`
+    DATE_ENABLEDS=`date +%s -d ${DATE_ENABLED}`
+    TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
     if [ ${TIME} -lt ${SCHEDULE} ]; then
         printf "Wifi channel recovery because of DFS OFF!\n"
         uci set wireless.${RADIO}.channel=${CHANNEL}
@@ -122,3 +123,5 @@ stop() {
 }
 EOF
 chmod +x /etc/init.d/dfs_check_new
+
+
