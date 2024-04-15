@@ -8,7 +8,7 @@ DFS_CHANNEL="auto"
 DFS_BAND="40"
 
 read INTERVAL < /tmp/config-software/interval.txt
-SCHEDULE=$((INTERVAL*121))
+SCHEDULE=`expr $((${INTERVAL} * 121))`
 RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
 CHS=`echo ${RADIO} | wc -w`
 if [ ${CHS} = 2 ];then
