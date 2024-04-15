@@ -30,7 +30,7 @@ if [ -z ${IW_CHANNEL} ]; then
     printf "Wifi restart because of DFS bug!\n"
     wifi reload ${RADIO}
 else
-    if [ $(uci get wireless.${RADIO}.channel) -ne ${CHANNEL} ] || [ $(uci get wireless.${RADIO}.htmode) = ${HTMODE} ]; then
+    if [ $(uci get wireless.${RADIO}.channel) -ne ${CHANNEL} ] || [ $(uci get wireless.${RADIO}.htmode) != ${HTMODE} ]; then
         printf "Wifi restart because of channel!\n"
         wifi reload ${RADIO}
     fi
