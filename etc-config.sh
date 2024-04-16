@@ -85,20 +85,12 @@ done
 function _func_DFS {
 while :
 do
-  echo -e " \033[1;33mDownload and install DFS_Check configuration script\033[0;39m"
-  echo -e " \033[1;31m[d]: DFS Check\033[0;39m"
-  echo -e " \033[1;34m[b]: DFS Check NEW β Version\033[0;39m"
-  read -p " Please select key [d/b or n]: " num
+  echo -e " \033[1;33mDownload and install DFS Check NEW configuration script\033[0;39m"
+  echo -e " \033[1;34m[b]: DFS Check NEW\033[0;39m"
+  read -p " Please select key [d or n]: " num
   case "${num}" in
     "d" ) wget --no-check-certificate -O /etc/config-software/dfs-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-config.sh
           sh /etc/config-software/dfs-config.sh 2> /dev/null
-          service dfs_check enable
-          service dfs_check start
-          echo "Check your Wi-Fi settings"
-          read -p " Press any key"
-          break ;;
-    "b" ) wget --no-check-certificate -O /etc/config-software/dfs-check-new-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-check-new-config.sh
-          sh /etc/config-software/dfs-check-new-config.sh 2> /dev/null
           service dfs_check enable
           service dfs_check start
           echo "Check your Wi-Fi settings"
@@ -141,7 +133,7 @@ do
   echo -e " \033[1;33m[2]:IPERF3 installation and service addition\033[0;39m"
   echo -e " \033[1;32m[3]:Location Based Service (LBS) Stop\033[0;39m"
   echo -e " \033[1;35m[4]:SAMBA4 and WSDD2 installation\033[0;39m"
-  echo -e " \033[1;31m[5]:DFS Check\033[0;39m"
+  echo -e " \033[1;31m[5]:DFS Check NEW\033[0;39m"
   echo -e " \033[1;36m[6]:Guest Wi-Fi\033[0;39m" 
   echo -e " \033[7;40m[q]:Quit\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
