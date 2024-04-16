@@ -155,7 +155,6 @@ chmod +x /etc/init.d/dfs_check_new
 
 cat <<"EOF" >> /usr/bin/dfslog
 #!/bin/sh
-sh /etc/config-software/dfs-config.sh
 echo DFS Check NOW ---------------------------------
 echo DFS Check NOW log:
 exec logread | grep "DFS Check NEW" | awk '{ print $1,$2,$3,$4,$5,$8,$9,$10,$11 }'
