@@ -9,6 +9,7 @@ cat << "EOF" > /etc/config-software/dfs_check_new.sh
 
 DFS_CHANNEL="auto"
 DFS_BAND="40"
+DFS_INTERVAL="15"
 
 read INTERVAL < /tmp/config-software/interval.txt
 SCHEDULE=`expr $((${INTERVAL} * 121))`
@@ -27,65 +28,81 @@ CH=`echo ${RADIO} | grep -o "[0-9]*"`
 DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
 IW_CHANNEL=$(iw dev ${DEV} info | awk '/channel/{print $2}')
 if [ -z ${IW_CHANNEL} ]; then
-    printf "Wifi restart because of DFS bug!\n"
+    logger "DFS Check NEW:bug"
     wifi reload ${RADIO}
 else
     if [ $(uci get wireless.${RADIO}.channel) -ne ${CHANNEL} ] || [ $(uci get wireless.${RADIO}.htmode) != ${HTMODE} ]; then
-        printf "Wifi restart because of channel!\n"
+        logger "DFS Check NEW:verification"
         wifi reload ${RADIO}
     fi
 fi
 DATE=`date +%s`
-DATE_DISABLED=`exec logread | grep "DFS->DISABLED" | tail -n 1 | awk '{ print $4 }'`
-DATE_ENABLED=`exec logread | grep "DFS->ENABLED" | tail -n 1 | awk '{ print $4 }'`
-if [ -n "$DATE_DISABLED" ] && [ -z "$DATE_ENABLED" ]; then
-    DATE_DISABLEDS=`date +%s -d ${DATE_DISABLED}`
+DATE_DISABLE=`exec logread | grep "DFS->DISABLED" | tail -n 1 | awk '{ print $4 }'`
+DATE_ENABLE=`exec logread | grep "DFS->ENABLED" | tail -n 1 | awk '{ print $4 }'`
+if [ -n "${DATE_DISABLE}" ] && [ -z "${DATE_ENABLE}" ]; then
+    DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
     TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
 	if [ ${TIME} -lt ${SCHEDULE} ]; then
-        printf "Wifi channel change because of DFS ON!\n"
+        logger "DFS Check NEW:enable"
         uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
         uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
         uci commit wireless
         wifi reload ${RADIO}
+        sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+        echo "*/${DFS_INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS ON" >> /etc/crontabs/root
+        /etc/init.d/cron restart
+        echo ${DFS_INTERVAL} > /tmp/config-software/interval.txt
         exit 0
 	fi
 fi
-if [ -n "$DATE_DISABLED" ] && [ -n "$DATE_ENABLED" ]; then
-    if [ "$DATE_DISABLED" -lt "$DATE_ENABLED" ]; then
-        DATE_ENABLEDS=`date +%s -d ${DATE_ENABLED}`
+if [ -n "${DATE_DISABLE}" ] && [ -n "${DATE_ENABLE}" ]; then
+    if [ "${DATE_DISABLE}" -lt "${DATE_ENABLE}" ]; then
+        DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
         TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
     	if [ ${TIME} -lt ${SCHEDULE} ]; then
-            printf "Wifi channel recovery because of DFS OFF!\n"
+            logger "DFS Check NEW:disable"
             uci set wireless.${RADIO}.channel=${CHANNEL}
             uci set wireless.${RADIO}.htmode=${MODE}${BAND}
             uci commit wireless
             wifi reload ${RADIO}
+            sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+            echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS ON" >> /etc/crontabs/root
+            /etc/init.d/cron restart
+            echo ${INTERVAL} > /tmp/config-software/interval.txt
             exit 0
         fi
     else
-        if [ "$DATE_ENABLED" -lt "$DATE_DISABLED" ]; then
-            DATE_DISABLEDS=`date +%s -d ${DATE_DISABLED}`
+        if [ "${DATE_ENABLE}" -lt "${DATE_DISABLE}" ]; then
+            DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
             TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
         	if [ ${TIME} -lt ${SCHEDULE} ]; then
-                printf "Wifi channel change because of DFS ON!\n"
+                logger "DFS Check NEW:enable"
                 uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
                 uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
                 uci commit wireless
                 wifi reload ${RADIO}
+                sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+                echo "*/${DFS_INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS ON" >> /etc/crontabs/root
+                /etc/init.d/cron restart
+                echo ${DFS_INTERVAL} > /tmp/config-software/interval.txt
                 exit 0
             fi
         fi
     fi
 fi
-if [ -n "$DATE_ENABLED" ]; then
-    DATE_ENABLEDS=`date +%s -d ${DATE_ENABLED}`
+if [ -n "${DATE_ENABLE}" ]; then
+    DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
     TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
     if [ ${TIME} -lt ${SCHEDULE} ]; then
-        printf "Wifi channel recovery because of DFS OFF!\n"
+        logger "DFS Check NEW:disable"
         uci set wireless.${RADIO}.channel=${CHANNEL}
         uci set wireless.${RADIO}.htmode=${MODE}${BAND}
         uci commit wireless
         wifi reload ${RADIO}
+        sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+        echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS ON" >> /etc/crontabs/root
+        /etc/init.d/cron restart
+        echo ${INTERVAL} > /tmp/config-software/interval.txt
         exit 0
     fi
 fi
@@ -97,25 +114,33 @@ cat << "EOF" > /etc/init.d/dfs_check_new
 #!/bin/sh /etc/rc.common
 
 INTERVAL="5" # DFS check interval (minutes)
-    
+
 START=99
 STOP=01
     
 start() {
-    logger "perimeter DFS Check ON"
+    logger "DFS Check NEW:start"
+    rm -rf /tmp/config-software
     sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
-    /etc/init.d/cron restart
     echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW ON" >> /etc/crontabs/root
+    /etc/init.d/cron restart
     mkdir -p /tmp/config-software/
     echo ${INTERVAL} > /tmp/config-software/interval.txt
-    /etc/init.d/cron restart
     exit 0
 }
 restart() {
+    logger "DFS Check NEW:restart"
+    rm -rf /tmp/config-software
+    sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+    echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW ON" >> /etc/crontabs/root
+    /etc/init.d/cron restart
+    mkdir -p /tmp/config-software/
+    echo ${INTERVAL} > /tmp/config-software/interval.txt
+    sh /etc/config-software/dfs_check_new.sh
     exit 0
 }
 stop() {
-    logger "perimeter DFS Check NEW OFF"
+    logger "DFS Check NEW:stop"
     sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
     /etc/init.d/cron restart
     rm -rf /tmp/config-software
