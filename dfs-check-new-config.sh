@@ -180,21 +180,32 @@ chmod +x /usr/bin/dfslog
 # インターバル時間設定変更スクリプト
 cat <<"EOF" > /usr/bin/dfstime
 #! /bin/sh
-while :
-do
-  ORIGINAL=`cat /etc/init.d/dfs_check_new | awk '{print substr($0,index($0,"=") )}'`
-  ORIGINAL=`echo ${ORIGINAL}  | grep -o "[0-9]*" | head -1`
-  echo -e " \033[1;37mInterval time setting\033[0;39m"
-  echo -e " \033[1;37mNow Interval: ${ORIGINAL} min\033[0;39m"
-  read -p " Interval time (min): " input_INTERVAL
-  read -p " Please select key [y or q]: " num
-  case "${num}" in
-    "y" ) sed -i -e "s/INTERVAL=${ORIGINAL}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
-		  service dfs_check_new start
-          echo " Set time: ${input_INTERVAL} min"
-		  exit 0 ;;
-	"q" ) exit 0 ;;
-  esac
-done
+if [ -n "$1" ]; then
+    ogger "DFS Check NEW: Interval change"
+	description_INTERVAL="$1"
+	ORIGIN1=`cat /etc/init.d/dfs_check_new | awk '{print substr($0,index($0,"=") )}'`
+	ORIGIN2=`echo ${ORIGIN1}  | grep -o "[0-9]*" | head -1`
+	sed -i -e "s/INTERVAL=${ORIGIN2}/INTERVAL=${description_INTERVAL}/g" /etc/init.d/dfs_check_new
+	service dfs_check_new start
+	exit 0
+else
+	while :
+	do
+		ORIGINA=`cat /etc/init.d/dfs_check_new | awk '{print substr($0,index($0,"=") )}'`
+		ORIGINB=`echo ${ORIGINA}  | grep -o "[0-9]*" | head -1`
+		echo -e " \033[1;37mInterval time setting\033[0;39m"
+		echo -e " \033[1;37mNow Interval: ${ORIGINB} min\033[0;39m"
+		read -p " Interval time (min): " input_INTERVAL
+		read -p " Please select key [y or q]: " num
+		case "${num}" in
+		"y" ) ogger "DFS Check NEW: Interval change"
+              sed -i -e "s/INTERVAL=${ORIGINB}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
+			  service dfs_check_new start
+			  echo " Set time: ${input_INTERVAL} min"
+		      exit 0 ;;
+	    "q" ) exit 0 ;;
+	    esac
+    done
+fi
 EOF
 chmod +x /usr/bin/dfstime
