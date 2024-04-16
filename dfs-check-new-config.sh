@@ -132,14 +132,6 @@ start() {
     exit 0
 }
 restart() {
-    logger "DFS Check NEW:restart"
-    rm -rf /tmp/config-software
-    sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
-    echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
-    /etc/init.d/cron restart
-    mkdir -p /tmp/config-software/
-    echo ${INTERVAL} > /tmp/config-software/interval.txt
-    sh /etc/config-software/dfs_check_new.sh
     exit 0
 }
 stop() {
