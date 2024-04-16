@@ -90,10 +90,13 @@ do
   read -p " Please select key [d or n]: " num
   case "${num}" in
     "d" ) wget --no-check-certificate -O /etc/config-software/dfs-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-config.sh
+          wget --no-check-certificate -O /etc/config-software/dfs-log.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-log.sh
           sh /etc/config-software/dfs-config.sh 2> /dev/null
+          sh /etc/config-software/dfs-log.sh 2> /dev/null
           service dfs_check enable
           service dfs_check start
           echo "Check your Wi-Fi settings"
+          echo "How to check logs: dfslog"
           read -p " Press any key"
           break ;;
     "n" ) break ;;
