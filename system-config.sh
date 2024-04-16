@@ -335,7 +335,7 @@ do
   echo -e " \033[1;41mTWT: ON\033[0;39m"
   fi
   if [ -n "$DFS_NEW" ]; then
-  echo -e " \033[1;41mDFS Check NEW β Version: ON\033[0;39m"
+  echo -e " \033[1;41mDFS Check NEW\033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " Please select key [y/n or q]: " num
@@ -465,6 +465,9 @@ function _func_DEVICE_SET {
   echo -e " \033[1;32mLuCi: http://${input_str_SYSTEM_HOSTNAME}.lan\033[0;39m"
   if [ "$GUEST" = "on" ]; then
   echo -e " \033[1;32mGuest Wi-Fi: http://${input_str_SYSTEM_HOSTNAME}.lan/guest.html\033[0;39m"
+  fi
+  if [ "$DFS_NEW" = "on" ]; then
+  echo -e " \033[1;32mDFS Check NOW: How to check logs 'dfslog'\033[0;39m"
   fi
   read -p " Press any key (Reboot the device)"
   reboot
