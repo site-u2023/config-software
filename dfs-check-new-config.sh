@@ -164,21 +164,21 @@ chmod +x /etc/init.d/dfs_check_new
 
 
 # 動作確認スクリプト
-cat <<"EOF" >> /usr/bin/dfslog
+cat <<"EOF" > /usr/bin/dfslog
 #!/bin/sh
-echo DFS Check NOW -----------------------
-echo DFS Check NOW log:
+echo -e "\033[1;36mDFS Check NOW -----------------------\033[0;39m"
+echo -e "\033[1;37mlog:\033[0;39m"
 exec logread | grep "DFS Check NEW" | awk '{ print $1,$2,$3,$4,$5,$11 }'
-echo DFS operating status:
+echo -e "\033[1;37mstatus:\033[0;39m"
 exec logread | grep "DFS->DISABLED" | tail -n 1 | awk '{ print $1,$2,$3,$4,$5,$11 }'
 exec logread | grep "DFS->ENABLED"  | tail -n 1 | awk '{ print $1,$2,$3,$4,$5,$11 }'
-echo --------------------------------------
+echo -e "\033[1;36m--------------------------------------\033[0;39m"
 EOF
 chmod +x /usr/bin/dfslog
 
 
 # インターバル時間設定変更スクリプト
-cat <<"EOF" >> /usr/bin/dfstime
+cat <<"EOF" > /usr/bin/dfstime
 #! /bin/sh
 while :
 do
@@ -198,5 +198,3 @@ do
 done
 EOF
 chmod +x /usr/bin/dfstime
-
-
