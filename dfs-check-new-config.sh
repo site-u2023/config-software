@@ -147,13 +147,13 @@ chmod +x /etc/init.d/dfs_check_new
 
 cat <<"EOF" >> /usr/bin/dfslog
 #!/bin/sh
-echo DFS Check NOW ---------------------------------
+echo DFS Check NOW -----------------------
 echo DFS Check NOW log:
-exec logread | grep "DFS Check NEW" | awk '{ print $1,$2,$3,$4,$5,$8,$9,$10,$11 }'
+exec logread | grep "DFS Check NEW" | awk '{ print $1,$2,$3,$4,$5,$11 }'
 echo DFS operating status:
 exec logread | grep "DFS->DISABLED" | tail -n 1 | awk '{ print $1,$2,$3,$4,$5,$11 }'
 exec logread | grep "DFS->ENABLED"  | tail -n 1 | awk '{ print $1,$2,$3,$4,$5,$11 }'
-echo -----------------------------------------------
+echo --------------------------------------
 EOF
 chmod +x /usr/bin/dfslog
 
