@@ -181,7 +181,7 @@ chmod +x /usr/bin/dfslog
 cat <<"EOF" > /usr/bin/dfstime
 #! /bin/sh
 if [ -n "$1" ]; then
-    logger "DFS Check NEW: Interval change"
+    logger "DFS Check NEW: Interval_change"
 	description_INTERVAL="$1"
 	ORIGIN=`cat /etc/init.d/dfs_check_new | awk '{print substr($0,index($0,"=") )}'`
 	ORIGIN1=`echo ${ORIGIN}  | grep -o "[0-9]*" | head -1`
@@ -198,7 +198,7 @@ else
 		read -p " Interval time (min): " input_INTERVAL
 		read -p " Please select key [y or q]: " num
 		case "${num}" in
-		"y" ) logger "DFS Check NEW: Interval change"
+		"y" ) logger "DFS Check NEW: Interval_change"
               sed -i -e "s/INTERVAL=${ORIGIN1}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
 			  service dfs_check_new start
 			  echo " Set time: ${input_INTERVAL} min"
