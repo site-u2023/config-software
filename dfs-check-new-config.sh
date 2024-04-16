@@ -134,7 +134,7 @@ cat << "EOF" > /etc/init.d/dfs_check_new
 #!/bin/sh /etc/rc.common
 
 # インターバル時間設定
-INTERVAL="5" # DFS check interval (minutes)
+INTERVAL=5 # DFS check interval (minutes)
 
 START=99
 STOP=01
@@ -175,4 +175,28 @@ exec logread | grep "DFS->ENABLED"  | tail -n 1 | awk '{ print $1,$2,$3,$4,$5,$1
 echo --------------------------------------
 EOF
 chmod +x /usr/bin/dfslog
+
+
+# インターバル時間設定変更スクリプト
+cat <<"EOF" >> /usr/bin/dfstime
+#! /bin/sh
+while :
+do
+  ORIGINAL=`cat /etc/init.d/dfs_check_new | awk '{print substr($0,index($0,"=") )}'`
+  ORIGINAL=`echo ${ORIGINAL}  | grep -o "[0-9]*" | head -1`
+  echo -e " \033[1;37mInterval time setting\033[0;39m"
+  echo -e " \033[1;37mNow Interval: ${ORIGINAL} min\033[0;39m"
+  read -p " Interval time (min): " input_INTERVAL
+  read -p " Please select key [y or q]: " num
+  case "${num}" in
+    "y" ) sed -i -e "s/INTERVAL=${ORIGINAL}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
+		  service dfs_check_new start
+          echo " Set time: ${input_INTERVAL} min"
+		  exit 0 ;;
+	"q" ) exit 0 ;;
+  esac
+done
+EOF
+chmod +x /usr/bin/dfstime
+
 
