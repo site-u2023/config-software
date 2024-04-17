@@ -1,7 +1,7 @@
 #! /bin/sh
-
 RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
-uci set wireless.${RADIO}.channels='36 40 44 48'
+uci delete wireless.${RADIO}.channels 2>/dev/null
+uci add_list wireless.${RADIO}.channels='36 40 44 48'
 uci commit wireless
 wifi reload ${RADIO}
 mkdir -p /etc/config-software/
