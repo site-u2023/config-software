@@ -10,6 +10,9 @@
 :warning:Japanese notation
 - [Script Selector](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%BB%E3%83%AC%E3%82%AF%E3%82%BF%E3%83%BC%E8%A6%81onu%E7%9B%B4%E7%B5%90)
   - [Initial system setup (host name, password, wifi, etc.)](https://qiita.com/site_u/items/59c641c9dc0eec3b1324)
+    - [Dynamic frequency selection (DFS)](https://qiita.com/site_u/items/f42be7c0953187b9428a#dynamic-frequency-selection-dfs)
+    - [Guest Wi-Fi (QR code)](https://qiita.com/site_u/items/f42be7c0953187b9428a#guest-wi-fi-qr-code)
+    - [Target Wake Time (TWT)](https://qiita.com/site_u/items/f42be7c0953187b9428a#target-wake-time-twt)
   - [Internet connection setup in Japan (MAP-e, DS-LITE, PPPoE)](https://qiita.com/site_u/items/4b8076cb8c9b05bc3f9a)
     - OCN Virtual Connect automatic configuration (including Nichiban measures)
       - Only Nichiban countermeasure settings are executed
@@ -40,7 +43,9 @@
     - [IPERF3 installation and service addition](https://qiita.com/site_u/items/599124e2904d1374c2c9#iperf3)
     - [Location Based Service (LBS) Stop](https://qiita.com/site_u/items/3cd3fc65a789461262e8#%E4%BD%8D%E7%BD%AE%E6%83%85%E5%A0%B1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%81%9C%E6%AD%A2)
     - [SAMBA4 and WSDD2 installation](https://qiita.com/site_u/items/aa9164859a78cb4e3f8f)
-    - [DFS Check](https://qiita.com/site_u/items/f42be7c0953187b9428a#dfs-check)
+    - [Dynamic frequency selection (DFS)](https://qiita.com/site_u/items/f42be7c0953187b9428a#dynamic-frequency-selection-dfs)
+    - [Guest Wi-Fi (QR code)](https://qiita.com/site_u/items/f42be7c0953187b9428a#guest-wi-fi-qr-code)
+    - [Target Wake Time (TWT)](https://qiita.com/site_u/items/f42be7c0953187b9428a#target-wake-time-twt)
     - [Guest servicing (QR code issuance and random password)](https://qiita.com/site_u/items/f42be7c0953187b9428a#%E3%82%B2%E3%82%B9%E3%83%88%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%8C%96-qr%E3%82%B3%E3%83%BC%E3%83%89%E7%99%BA%E8%A1%8C%E3%81%A8%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89)
   - Quit
 
@@ -54,7 +59,7 @@
   - [openwrt-config.sh](https://github.com/site-u2023/config-software/blob/main/openwrt-config.sh)
     - [system-config.sh](https://github.com/site-u2023/config-software/blob/main/system-config.sh)
       - [system.sh](https://github.com/site-u2023/config-software/blob/main/system.sh)
-      - [dfs-config.sh](https://github.com/site-u2023/config-software/blob/main/dfs-config.sh)
+      - [dfs-check-new-config.sh](https://github.com/site-u2023/config-software/blob/main/dfs-check-new-config.sh)
     - [internet-config.sh](https://github.com/site-u2023/config-software/blob/main/internet-config.sh)
       - [map-e.sh](https://github.com/site-u2023/config-software/blob/main/map-e.sh)
       - [ds-lite.sh](https://github.com/site-u2023/config-software/blob/main/ds-lite.sh)
@@ -83,8 +88,7 @@
       - [button-config.sh](https://github.com/site-u2023/config-software/blob/main/button-config.sh)
         - [button.sh](https://github.com/site-u2023/config-software/blob/main/button.sh)
       - [iperf3](https://github.com/site-u2023/config-software/blob/main/ad-dns-blocking-config.sh)
-      - [dfs_check.sh](https://github.com/site-u2023/config-software/blob/main/dfs_check.sh)
-      - [dfs_check](https://github.com/site-u2023/config-software/blob/main/dfs_check)
+      - [dfs-check-new-config.sh](https://github.com/site-u2023/config-software/blob/main/dfs-check-new-config.sh)
       - [guest.sh](https://github.com/site-u2023/config-software/blob/main/guest.sh)
 ---
 
