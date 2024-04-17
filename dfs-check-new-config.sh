@@ -121,15 +121,24 @@ INTERVAL=5 # DFS check interval (minutes)
 
 START=99
 STOP=01
-    
+     
 start() {
-    logger "DFS Check NEW: start"
-    rm -rf /tmp/config-software
+    mkdir -p /tmp/config-software/
+    echo ${INTERVAL} > /tmp/config-software/interval.txt
+    DATE=`date +%s`
+    BOOT=`uptime -s | awk '{ print $2 }'`
+    BOOTS=`date +%s -d "${BOOT}"`
+    DFS=`expr $((${BOOTS} + 60))`
+    if [ "${DATE}" -lt "${DFS}" ]; then
+        logger "DFS Check NEW: boot_Interval_${INTERVAL}min"
+        sleep 75
+        sh /etc/config-software/dfs_check_new.sh
+    else
+        logger "DFS Check NEW: start_Interval_${INTERVAL}min"
+    fi
     sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
     echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
     /etc/init.d/cron restart
-    mkdir -p /tmp/config-software/
-    echo ${INTERVAL} > /tmp/config-software/interval.txt
     exit 0
 }
 restart() {
@@ -155,28 +164,28 @@ echo -e "\033[1;37mstatus:\033[0;39m"
 exec logread | grep "DFS->DISABLED" | tail -n 1 | awk '{ print $1,$2,$3,$4,$5,$11 }'
 exec logread | grep "DFS->ENABLED"  | tail -n 1 | awk '{ print $1,$2,$3,$4,$5,$11 }'
 echo -e "\033[1;36m--------------------------------------\033[0;39m"
+read INTERVAL < /tmp/config-software/interval.txt
+echo -e "\033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
+CHANNEL=`tail -n 1 /tmp/config-software/channel.txt`
+echo -e "\033[1;37mNow channel: ${CHANNEL} Ch\033[0;39m"
 EOF
 chmod +x /usr/bin/dfslog
 
 
 cat <<"EOF" > /usr/bin/dfstime
 #! /bin/sh
+read INTERVAL < /tmp/config-software/interval.txt
 if [ -n "$1" ]; then
 	description_INTERVAL="$1"
-    logger "DFS Check NEW: Interval_${description_INTERVAL}min"
-	ORIGIN=`cat /etc/init.d/dfs_check_new | awk '{print substr($0,index($0,"=") )}'`
-	ORIGIN1=`echo ${ORIGIN}  | grep -o "[0-9]*" | head -1`
-	sed -i -e "s/INTERVAL=${ORIGIN1}/INTERVAL=${description_INTERVAL}/g" /etc/init.d/dfs_check_new
+	sed -i -e "s/INTERVAL=${INTERVAL}/INTERVAL=${description_INTERVAL}/g" /etc/init.d/dfs_check_new
 	service dfs_check_new start
     echo " Set time: ${description_INTERVAL} min"
 	exit 0
 else
 	while :
 	do
-		ORIGIN=`cat /etc/init.d/dfs_check_new | awk '{print substr($0,index($0,"=") )}'`
-		ORIGIN1=`echo ${ORIGIN}  | grep -o "[0-9]*" | head -1`
 		echo -e " \033[1;37mInterval time setting\033[0;39m"
-		echo -e " \033[1;37mNow Interval: ${ORIGIN1} min\033[0;39m"
+        echo -e " \033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
         read -p " Interval time change (y or q): " input_CHANGE
         if [ "${input_CHANGE}" = "q" ]; then
             exit 0
@@ -184,8 +193,7 @@ else
 		read -p " Interval time (min): " input_INTERVAL
 		read -p " Please select key [y or q]: " num
 		case "${num}" in
-		"y" ) logger "DFS Check NEW: Interval_${input_INTERVAL}min"
-              sed -i -e "s/INTERVAL=${ORIGIN1}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
+		"y" ) sed -i -e "s/INTERVAL=${INTERVAL}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
 			  service dfs_check_new start
 			  echo " Set time: ${input_INTERVAL} min"
 		      exit 0 ;;
