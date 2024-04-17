@@ -195,6 +195,10 @@ else
 		ORIGIN1=`echo ${ORIGIN}  | grep -o "[0-9]*" | head -1`
 		echo -e " \033[1;37mInterval time setting\033[0;39m"
 		echo -e " \033[1;37mNow Interval: ${ORIGIN1} min\033[0;39m"
+        read -p " Interval time change (y or q): " input_CHANGE
+        if [ "${input_CHANGE}" = "q" ]; then
+            exit 0
+        fi
 		read -p " Interval time (min): " input_INTERVAL
 		read -p " Please select key [y or q]: " num
 		case "${num}" in
