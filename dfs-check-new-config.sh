@@ -71,7 +71,7 @@ BAND=`echo ${HTMODE} | grep -o "[0-9]*"`
 CH=`echo ${RADIO} | grep -o "[0-9]*"`
 DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
 IWCHANNEL=$(iw dev ${DEV} info | awk '/channel/{print $2}')
-if [ -z ${IWCHANNEL} ]; then
+if [ -z "${IWCHANNEL}" ]; then
     wifi reload ${RADIO}
     logger "DFS Check NEW: not_exist"
 fi
