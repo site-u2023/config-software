@@ -36,9 +36,9 @@ else
         wifi reload ${RADIO}
     fi
 fi
-DATE=`date +%s`
-DATE_DISABLE=`exec logread | grep "DFS->DISABLED" | tail -n 1 | awk '{ print $4 }'`
-DATE_ENABLE=`exec logread | grep "DFS->ENABLED" | tail -n 1 | awk '{ print $4 }'`
+DATE=`date -u +%s`
+DATE_DISABLE=`exec logread | grep "DFS->DISABLED" | awk '{ print $1,$2,$3,$4,"UTC",$5 }'`
+DATE_ENABLE=`exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,"UTC",$5 }'`
 if [ -n "${DATE_DISABLE}" ] && [ -z "${DATE_ENABLE}" ]; then
     if [ $(uci get wireless.${RADIO}.channel) -ne ${DFS_CHANNEL} ] && [ $(uci get wireless.${RADIO}.htmode) != ${MODE}${DFS_BAND} ]; then
         DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
@@ -126,7 +126,7 @@ start() {
     mkdir -p /tmp/config-software/
     echo ${INTERVAL} > /tmp/config-software/interval.txt
     DATE=`date +%s`
-    BOOT=`uptime -s | awk '{ print $2 }'`
+    BOOT=`uptime -s | awk '{ print $1,$2 }'`
     BOOTS=`date +%s -d "${BOOT}"`
     DFS=`expr $((${BOOTS} + 60))`
     if [ "${DATE}" -lt "${DFS}" ]; then
