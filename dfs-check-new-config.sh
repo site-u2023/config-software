@@ -1,5 +1,7 @@
-#! /bin/sh
+opkg update
+opkg install coreutils-date
 
+#! /bin/sh
 
 cat << "EOF" > /etc/init.d/dfs_check_new
 #!/bin/sh /etc/rc.common
