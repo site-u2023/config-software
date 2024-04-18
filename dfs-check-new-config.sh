@@ -178,7 +178,7 @@ read RADIO < /tmp/config-software/radio.txt
 CH=`echo ${RADIO} | grep -o "[0-9]*"`
 DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
 PHY=`echo ${DEV} | awk -F'-' '{print $1}'`
-exec logread | grep "/var/run/hostapd-${PHY}.conf" | awk '{ print $1,$2,$3,$4,$5,$14 }'
+exec logread | grep "/var/run/hostapd-${PHY}.conf" | awk '{ print $1,$2,$3,$4,$5,"hostapd-'${PHY}'" }'
 echo -e "\033[1;37mstatus:\033[0;39m"
 exec logread | grep "DFS->DISABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
 exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
