@@ -162,7 +162,11 @@ echo -e "\033[1;36mDFS Check NOW -----------------------\033[0;39m"
 echo -e "\033[1;37mLOG:\033[0;39m"
 exec logread | grep "DFS Check NEW" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 10
 echo -e "\033[1;37mCONFIG CHANGE:\033[0;39m"
-read RADIO < /tmp/config-software/radio.txt
+RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
+CHS=`echo ${RADIO} | wc -w`
+if [ ${CHS} = 2 ];then
+    RADIO=`echo ${RADIO}| awk '{print $2}'`
+fi
 CH=`echo ${RADIO} | grep -o "[0-9]*"`
 DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
 PHY=`echo ${DEV} | awk -F'-' '{print $1}'`
@@ -174,11 +178,6 @@ exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -
 echo -e "\033[1;36m--------------------------------------\033[0;39m"
 read INTERVAL < /tmp/config-software/interval.txt
 echo -e "\033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
-RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
-CHS=`echo ${RADIO} | wc -w`
-if [ ${CHS} = 2 ];then
-    RADIO=`echo ${RADIO}| awk '{print $2}'`
-fi
 CHANNEL=`uci get wireless.${RADIO}.channel`
 echo -e "\033[1;37mNow Channel: ${CHANNEL} Ch\033[0;39m"
 HTMODE=`uci get wireless.${RADIO}.htmode`
