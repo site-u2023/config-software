@@ -191,7 +191,7 @@ echo -e "\033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
 read CHANNEL < /tmp/config-software/channel.txt
 echo -e "\033[1;37mNow channel: ${CHANNEL} Ch\033[0;39m"
 read HTMODE < /tmp/config-software/htmode.txt
-echo -e "\033[1;37mNow htmode: ${HTMODE} Ch\033[0;39m"
+echo -e "\033[1;37mNow htmode: ${HTMODE}\033[0;39m"
 EOF
 chmod +x /usr/bin/dfslog
 
