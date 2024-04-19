@@ -60,14 +60,58 @@ chmod +x /etc/init.d/dfs_check_new
 mkdir -p /etc/config-software/
 cat << "EOF" > /etc/config-software/dfs_check_new.sh
 #! /bin/sh
+
+DATE=`date +%s`
+read INTERVAL < /tmp/config-software/interval.txt
 read SCHEDULE < /tmp/config-software/schedule.txt
 read RADIO < /tmp/config-software/radio.txt
-read CHANNEL < /tmp/config-software/channel.txt
-read HTMODE < /tmp/config-software/htmode.txt
 read DFS_CHANNEL < /tmp/config-software/dfs_channel.txt
 read DFS_BAND < /tmp/config-software/dfs_band.txt
+read CHANNEL < /tmp/config-software/channel.txt
+read HTMODE < /tmp/config-software/htmode.txt
 MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
 BAND=`echo ${HTMODE} | grep -o "[0-9]*"`
+
+function _DISABLE {
+if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
+    TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
+    if [ ${TIME} -lt ${SCHEDULE} ]; then
+        uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
+        uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
+        uci commit wireless
+        wifi reload ${RADIO}
+        logger "DFS Check NEW: DFS_Check_ON"
+        sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+        /etc/init.d/cron restart
+        sleep 1800
+        uci set wireless.${RADIO}.channel=${CHANNEL}
+        uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+        uci commit wireless
+        wifi reload ${RADIO}
+        echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
+        /etc/init.d/cron restart
+        logger "DFS Check NEW: DFS_Check_OFF"        
+    fi
+fi
+exit 0
+}
+
+function _ENABLE {
+if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${DFS_BAND} ]; then
+    TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
+    if [ ${TIME} -lt ${SCHEDULE} ]; then
+        uci set wireless.${RADIO}.channel=${CHANNEL}
+        uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+        uci commit wireless
+        wifi reload ${RADIO}
+        echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
+        /etc/init.d/cron restart
+        logger "DFS Check NEW: DFS_Check_OFF"
+    fi
+fi
+exit 0
+}
+
 CH=`echo ${RADIO} | grep -o "[0-9]*"`
 DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
 IWCHANNEL=$(iw dev ${DEV} info | awk '/channel/{print $2}')
@@ -75,12 +119,10 @@ if [ -z "${IWCHANNEL}" ]; then
     wifi reload ${RADIO}
     logger "DFS Check NEW: Abnormality"
 fi
+
 PHY=`echo ${DEV} | awk -F'-' '{print $1}'`
-HOSTPAD=`exec logread | grep "/var/run/hostapd-${PHY}.conf" | awk '{ print $1,$2,$3,$4,"JST",$5 }'| tail -n 1`
-DATE_DISABLE=`exec logread | grep "DFS->DISABLED" | awk '{ print $1,$2,$3,$4,"JST",$5 }' | tail -n 1`
-DATE_ENABLE=`exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,"JST",$5 }' | tail -n 1`
+HOSTPAD=`exec logread | grep "/var/run/hostapd-${PHY}.conf" | awk '{ print $1,$2,$3,$4,$5 }'| tail -n 1`
 if [ -n "${HOSTPAD}" ]; then
-    DATE=`date +%s`
     HOSTPADS=`date +%s -d "${HOSTPAD}"`
     TIME=`expr $((${DATE} - ${HOSTPADS}))`
     if [ ${TIME} -lt ${SCHEDULE} ]; then
@@ -93,81 +135,25 @@ if [ -n "${HOSTPAD}" ]; then
         logger "DFS Check NEW: Channel_Changes"
     fi
 fi
+
+DATE_DISABLE=`exec logread | grep "DFS->DISABLED" | awk '{ print $1,$2,$3,$4,$5 }' | tail -n 1`
+DATE_ENABLE=`exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5 }' | tail -n 1`
+DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
+DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
 if [ -n "${DATE_DISABLE}" ] && [ -z "${DATE_ENABLE}" ]; then
-    if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
-        DATE=`date +%s`
-        DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
-        TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
-    	if [ ${TIME} -lt ${SCHEDULE} ]; then
-            uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
-            uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
-            uci commit wireless
-            wifi reload ${RADIO}
-            logger "DFS Check NEW: DFS_Check_ON"
-            exit 0
-        fi
-    else
-        exit 0
-	fi
+    _DISABLE
 fi
 if [ -n "${DATE_DISABLE}" ] && [ -n "${DATE_ENABLE}" ]; then
-    DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
-    DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
-    if [ "${DATE_DISABLEDS}" -lt "${DATE_ENABLEDS}" ]; then
-        if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] || [ ${BAND} = ${DFS_BAND} ]; then
-            DATE=`date +%s`
-            TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
-        	if [ ${TIME} -lt ${SCHEDULE} ]; then
-                uci set wireless.${RADIO}.channel=${CHANNEL}
-                uci set wireless.${RADIO}.htmode=${MODE}${BAND}
-                uci commit wireless
-                wifi reload ${RADIO}
-                logger "DFS Check NEW: DFS_Check_OFF"
-                exit 0
-            fi
-        else
-            exit 0
-        fi
+    if [ "${DATE_ENABLEDS}" -lt "${DATE_DISABLEDS}" ]; then
+        _DISABLE
     else
-        DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
-        DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
-        if [ "${DATE_ENABLEDS}" -lt "${DATE_DISABLEDS}" ]; then
-            if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
-                DATE=`date +%s`
-                TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
-            	if [ ${TIME} -lt ${SCHEDULE} ]; then
-                    uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
-                    uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
-                    uci commit wireless
-                    wifi reload ${RADIO}
-                    logger "DFS Check NEW: DFS_Check_ON"
-                    exit 0
-                fi
-            else
-                exit 0  
-            fi
-        fi
+        _ENABLE
     fi
 fi
 if [ -n "${DATE_ENABLE}" ]; then
-   if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${DFS_BAND} ]; then
-        DATE=`date +%s`
-        DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
-        TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
-        if [ ${TIME} -lt ${SCHEDULE} ]; then
-            uci set wireless.${RADIO}.channel=${CHANNEL}
-            uci set wireless.${RADIO}.htmode=${MODE}${BAND}
-            uci commit wireless
-            wifi reload ${RADIO}
-            logger "DFS Check NEW: DFS_Check_ON"
-            exit 0
-        fi
-    else
-        exit 0
-    fi
+    _ENABLE
 fi
 EOF
-chmod +x /etc/config-software/dfs_check_new.sh
 
 
 cat <<"EOF" > /usr/bin/dfslog
@@ -188,9 +174,14 @@ exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -
 echo -e "\033[1;36m--------------------------------------\033[0;39m"
 read INTERVAL < /tmp/config-software/interval.txt
 echo -e "\033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
-read CHANNEL < /tmp/config-software/channel.txt
+RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
+CHS=`echo ${RADIO} | wc -w`
+if [ ${CHS} = 2 ];then
+    RADIO=`echo ${RADIO}| awk '{print $2}'`
+fi
+CHANNEL=`uci get wireless.${RADIO}.channel`
 echo -e "\033[1;37mNow Channel: ${CHANNEL} Ch\033[0;39m"
-read HTMODE < /tmp/config-software/htmode.txt
+HTMODE=`uci get wireless.${RADIO}.htmode`
 echo -e "\033[1;37mNow Htmode: ${HTMODE}\033[0;39m"
 EOF
 chmod +x /usr/bin/dfslog
