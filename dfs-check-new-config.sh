@@ -16,7 +16,7 @@ STOP=01
 start() {
     mkdir -p /tmp/config-software/
     echo ${INTERVAL} > /tmp/config-software/interval.txt
-    expr $((${INTERVAL} * 61)) > /tmp/config-software/schedule.txt
+    expr $((${INTERVAL} * 60)) > /tmp/config-software/schedule.txt
     RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
     CHS=`echo ${RADIO} | wc -w`
     if [ ${CHS} = 2 ];then
