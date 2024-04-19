@@ -94,7 +94,7 @@ if [ -n "${HOSTPAD}" ]; then
     fi
 fi
 if [ -n "${DATE_DISABLE}" ] && [ -z "${DATE_ENABLE}" ]; then
-    if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${MODE}${DFS_BAND} ]; then
+    if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
         DATE=`date +%s`
         DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
         TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
@@ -113,7 +113,7 @@ fi
 if [ -n "${DATE_DISABLE}" ] && [ -n "${DATE_ENABLE}" ]; then
     if [ "${DATE_DISABLE}" -lt "${DATE_ENABLE}" ]; then
         DATE=`date +%s`
-        if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] || [ ${BAND} = ${MODE}${DFS_BAND} ]; then
+        if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] || [ ${BAND} = ${DFS_BAND} ]; then
             DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
             TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
         	if [ ${TIME} -lt ${SCHEDULE} ]; then
@@ -129,7 +129,7 @@ if [ -n "${DATE_DISABLE}" ] && [ -n "${DATE_ENABLE}" ]; then
         fi
     else
         if [ "${DATE_ENABLE}" -lt "${DATE_DISABLE}" ]; then
-            if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${MODE}${DFS_BAND} ]; then
+            if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
                 DATE=`date +%s`
                 DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
                 TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
@@ -148,7 +148,7 @@ if [ -n "${DATE_DISABLE}" ] && [ -n "${DATE_ENABLE}" ]; then
     fi
 fi
 if [ -n "${DATE_ENABLE}" ]; then
-   if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${MODE}${DFS_BAND} ]; then
+   if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${DFS_BAND} ]; then
         DATE=`date +%s`
         DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
         TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
@@ -222,3 +222,4 @@ else
 fi
 EOF
 chmod +x /usr/bin/dfstime
+
