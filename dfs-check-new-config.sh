@@ -34,10 +34,10 @@ start() {
     if [ "${DATE}" -lt "${DFS}" ]; then
         logger "DFS Check NEW: Boot_Interval_${INTERVAL}min"
         sleep 75
-        sh /etc/config-software/dfs_check_new.sh
     else
         logger "DFS Check NEW: Start_Interval_${INTERVAL}min"
     fi
+    sh /etc/config-software/dfs_check_new.sh
     sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
     echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
     /etc/init.d/cron restart
