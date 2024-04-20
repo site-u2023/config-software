@@ -196,7 +196,7 @@ read INTERVAL < /tmp/config-software/interval.txt
 if [ -n "$1" ]; then
 	description_INTERVAL="$1"
 	sed -i -e "s/INTERVAL=${INTERVAL}/INTERVAL=${description_INTERVAL}/g" /etc/init.d/dfs_check_new
-    echo ${INTERVAL} > /tmp/config-software/interval.txt
+    echo ${description_INTERVAL} > /tmp/config-software/interval.txt
 	sh /etc/config-software/dfs_check_new.sh
     echo " Set time: ${description_INTERVAL} min"
 	exit 0
@@ -213,7 +213,7 @@ else
 		read -p " Please select key [y or q]: " num
 		case "${num}" in
 		"y" ) sed -i -e "s/INTERVAL=${INTERVAL}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
-              echo ${INTERVAL} > /tmp/config-software/interval.txt
+              echo ${input_INTERVAL} > /tmp/config-software/interval.txt
 			  sh /etc/config-software/dfs_check_new.sh
 			  echo " Set time: ${input_INTERVAL} min"
 		      exit 0 ;;
