@@ -37,7 +37,7 @@ start() {
     else
         logger "DFS Check NEW: Start_Interval_${INTERVAL}min"
     fi
-    sh /etc/config-software/dfs_check_new.sh
+	sh /etc/config-software/dfs_check_new.sh
     sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
     echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
     /etc/init.d/cron restart
@@ -72,50 +72,50 @@ read HTMODE < /tmp/config-software/htmode.txt
 MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
 BAND=`echo ${HTMODE} | grep -o "[0-9]*"`
 
-function _DISABLE {
-if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
-    TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
-    if [ ${TIME} -lt ${SCHEDULE} ]; then
-        uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
-        uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
-        uci commit wireless
-        wifi reload ${RADIO}
-        logger "DFS Check NEW: DFS_Check_ON"
-        sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
-        /etc/init.d/cron restart
-        sleep 30m
-        uci set wireless.${RADIO}.channel=${CHANNEL}
-        uci set wireless.${RADIO}.htmode=${MODE}${BAND}
-        uci commit wireless
-        wifi reload ${RADIO}
-        echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
-        /etc/init.d/cron restart
-        logger "DFS Check NEW: DFS_Check_OFF"
-	return 0
-    else
-        return 1
-    fi
-fi
-exit 0
+function _DISABLE() {
+	local CHANNEL DFS_CHANNEL RADIO BAND DFS_BAND TIME SCHEDULE INTERVAL
+	if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
+    	TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
+    	if [ ${TIME} -lt ${SCHEDULE} ]; then
+        	uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
+        	uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
+        	uci commit wireless
+        	wifi reload ${RADIO}
+        	logger "DFS Check NEW: DFS_Check_ON"
+        	sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+        	/etc/init.d/cron restart
+        	sleep 30m
+        	uci set wireless.${RADIO}.channel=${CHANNEL}
+        	uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+        	uci commit wireless
+        	wifi reload ${RADIO}
+        	echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
+        	/etc/init.d/cron restart
+        	logger "DFS Check NEW: DFS_Check_OFF"
+			return 0
+    	else
+        	return 1
+    	fi
+	fi
 }
 
-function _ENABLE {
-if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${DFS_BAND} ]; then
-    TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
-    if [ ${TIME} -lt ${SCHEDULE} ]; then
-        uci set wireless.${RADIO}.channel=${CHANNEL}
-        uci set wireless.${RADIO}.htmode=${MODE}${BAND}
-        uci commit wireless
-        wifi reload ${RADIO}
-        echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
-        /etc/init.d/cron restart
-        logger "DFS Check NEW: DFS_Check_OFF"
-	return 0
-    else
-        return 1
-    fi
-fi
-exit 0
+function _ENABLE() {
+	local CHANNEL DFS_CHANNEL RADIO BAND DFS_BAND TIME SCHEDULE INTERVAL
+	if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${DFS_BAND} ]; then
+    	TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
+    	if [ ${TIME} -lt ${SCHEDULE} ]; then
+        	uci set wireless.${RADIO}.channel=${CHANNEL}
+        	uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+        	uci commit wireless
+        	wifi reload ${RADIO}
+        	echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
+        	/etc/init.d/cron restart
+        	logger "DFS Check NEW: DFS_Check_OFF"
+			return 0
+    	else
+        	return 1
+    	fi
+	fi
 }
 
 CH=`echo ${RADIO} | grep -o "[0-9]*"`
@@ -146,10 +146,10 @@ DATE_DISABLE=`exec logread | grep "DFS->DISABLED" | awk '{ print $1,$2,$3,$4,$5 
 DATE_ENABLE=`exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5 }' | tail -n 1`
 DATE_DISABLEDS=`date +%s -d "${DATE_DISABLE}"`
 DATE_ENABLEDS=`date +%s -d "${DATE_ENABLE}"`
-if [ -n "${DATE_DISABLE}" ] && [ -z "${DATE_ENABLE}" ]; then
+if [[ -n "${DATE_DISABLE}" && -z "${DATE_ENABLE}" ]]; then
     _DISABLE
 fi
-if [ -n "${DATE_DISABLE}" ] && [ -n "${DATE_ENABLE}" ]; then
+if [[ -n "${DATE_DISABLE}" && -n "${DATE_ENABLE}" ]]; then
     if [ "${DATE_ENABLEDS}" -lt "${DATE_DISABLEDS}" ]; then
         _DISABLE
     else
