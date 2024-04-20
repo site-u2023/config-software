@@ -92,7 +92,7 @@ function _DISABLE() {
         	echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
         	/etc/init.d/cron restart
         	logger "DFS Check NEW: DFS_Check_OFF"
-			return 0
+		return 0
     	else
         	return 1
     	fi
@@ -111,7 +111,7 @@ function _ENABLE() {
         	echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
         	/etc/init.d/cron restart
         	logger "DFS Check NEW: DFS_Check_OFF"
-			return 0
+		return 0
     	else
         	return 1
     	fi
