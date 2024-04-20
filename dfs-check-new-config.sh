@@ -167,7 +167,7 @@ cat <<"EOF" > /usr/bin/dfslog
 echo -e "\033[1;36mDFS Check NOW -----------------------\033[0;39m"
 echo -e "\033[1;37mLOG:\033[0;39m"
 exec logread | grep "DFS Check NEW" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 10
-echo -e "\033[1;37mCONFIG CHANGE:\033[0;39m"
+echo -e "\033[1;37mHOSTPAD:\033[0;39m"
 RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
 CHS=`echo ${RADIO} | wc -w`
 if [ ${CHS} = 2 ];then
