@@ -83,7 +83,7 @@ if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
         logger "DFS Check NEW: DFS_Check_ON"
         sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
         /etc/init.d/cron restart
-        sleep 1800
+        sleep 30m
         uci set wireless.${RADIO}.channel=${CHANNEL}
         uci set wireless.${RADIO}.htmode=${MODE}${BAND}
         uci commit wireless
