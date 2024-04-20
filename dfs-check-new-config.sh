@@ -73,7 +73,6 @@ MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
 BAND=`echo ${HTMODE} | grep -o "[0-9]*"`
 
 function _DISABLE() {
-	local CHANNEL DFS_CHANNEL RADIO BAND DFS_BAND TIME SCHEDULE INTERVAL
 	if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
     	TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
     	if [ ${TIME} -lt ${SCHEDULE} ]; then
@@ -92,7 +91,7 @@ function _DISABLE() {
         	echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
         	/etc/init.d/cron restart
         	logger "DFS Check NEW: DFS_Check_OFF"
-	 	return 0
+            return 0
     	else
         	return 1
     	fi
@@ -100,7 +99,6 @@ function _DISABLE() {
 }
 
 function _ENABLE() {
-	local CHANNEL DFS_CHANNEL RADIO BAND DFS_BAND TIME SCHEDULE INTERVAL
 	if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${DFS_BAND} ]; then
     	TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
     	if [ ${TIME} -lt ${SCHEDULE} ]; then
@@ -111,7 +109,7 @@ function _ENABLE() {
         	echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
         	/etc/init.d/cron restart
         	logger "DFS Check NEW: DFS_Check_OFF"
-	 	return 0
+            return 0
     	else
         	return 1
     	fi
@@ -198,7 +196,7 @@ read INTERVAL < /tmp/config-software/interval.txt
 if [ -n "$1" ]; then
 	description_INTERVAL="$1"
 	sed -i -e "s/INTERVAL=${INTERVAL}/INTERVAL=${description_INTERVAL}/g" /etc/init.d/dfs_check_new
-	service dfs_check_new start
+	sh /etc/config-software/dfs_check_new.sh
     echo " Set time: ${description_INTERVAL} min"
 	exit 0
 else
@@ -214,7 +212,7 @@ else
 		read -p " Please select key [y or q]: " num
 		case "${num}" in
 		"y" ) sed -i -e "s/INTERVAL=${INTERVAL}/INTERVAL=${input_INTERVAL}/g" /etc/init.d/dfs_check_new
-			  service dfs_check_new start
+			  sh /etc/config-software/dfs_check_new.sh
 			  echo " Set time: ${input_INTERVAL} min"
 		      exit 0 ;;
 	    "q" ) exit 0 ;;
