@@ -138,7 +138,7 @@ if [ -n "${HOSTPAD}" ]; then
         read HTMODE < /tmp/config-software/htmode.txt
         MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
         BAND=`echo ${HTMODE} | grep -o "[0-9]*"`
-        logger "DFS Check NEW: Channel_Changes"
+        logger "DFS Check NEW: Channel_Check"
     fi
 fi
 
