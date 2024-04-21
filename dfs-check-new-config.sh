@@ -71,42 +71,42 @@ function _CONFIG() {
 
 function _DISABLE() {
 	if [ ${CHANNEL} -ne ${DFS_CHANNEL} ] || [ ${BAND} != ${DFS_BAND} ]; then
-    		TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
-    		if [ ${TIME} -lt ${SCHEDULE} ]; then
-			uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
-  			uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
-        		uci commit wireless
-        		wifi reload ${RADIO}
-        		logger "DFS Check NEW: DFS_Check_ON"
-        		sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
-        		/etc/init.d/cron restart
-        		sleep 30m
-        		uci set wireless.${RADIO}.channel=${CHANNEL}
-        		uci set wireless.${RADIO}.htmode=${MODE}${BAND}
-			uci commit wireless
-  			wifi reload ${RADIO}
-        		echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
-        		/etc/init.d/cron restart
-        		logger "DFS Check NEW: DFS_Check_OFF"
-        		return 0
-		fi
-	fi
+    	TIME=`expr $((${DATE} - ${DATE_DISABLEDS}))`
+    	if [ ${TIME} -lt ${SCHEDULE} ]; then
+            uci set wireless.${RADIO}.channel=${DFS_CHANNEL}
+            uci set wireless.${RADIO}.htmode=${MODE}${DFS_BAND}
+            uci commit wireless
+            wifi reload ${RADIO}
+            logger "DFS Check NEW: DFS_Check_ON"
+            sed -i "/dfs_check_new.sh/d" /etc/crontabs/root
+            /etc/init.d/cron restart
+            sleep 30m
+            uci set wireless.${RADIO}.channel=${CHANNEL}
+            uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+            uci commit wireless
+            wifi reload ${RADIO}
+            echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
+            /etc/init.d/cron restart
+            logger "DFS Check NEW: DFS_Check_OFF"
+            return 0
+        fi
+    fi
 }
 
 function _ENABLE() {
 	if [ ${CHANNEL} -eq ${DFS_CHANNEL} ] && [ ${BAND} = ${DFS_BAND} ]; then
-    	TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
-    	if [ ${TIME} -lt ${SCHEDULE} ]; then
-        	uci set wireless.${RADIO}.channel=${CHANNEL}
-				uci set wireless.${RADIO}.htmode=${MODE}${BAND}
-        		uci commit wireless
-        		wifi reload ${RADIO}
-            	echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
-        		/etc/init.d/cron restart
-           		logger "DFS Check NEW: DFS_Check_OFF"
-        		return 0
-		  fi
-	fi
+        TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
+        if [ ${TIME} -lt ${SCHEDULE} ]; then
+            uci set wireless.${RADIO}.channel=${CHANNEL}
+            uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+            uci commit wireless
+            wifi reload ${RADIO}
+            echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
+            /etc/init.d/cron restart
+            logger "DFS Check NEW: DFS_Check_OFF"
+            return 0
+        fi
+    fi
 }
 
 read INTERVAL < /tmp/config-software/interval.txt
@@ -219,4 +219,8 @@ else
 fi
 EOF
 chmod +x /usr/bin/dfstime
+
+
+service dfs_check_new enable
+service dfs_check_new start
 
