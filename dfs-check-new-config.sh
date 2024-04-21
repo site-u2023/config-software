@@ -221,6 +221,3 @@ EOF
 chmod +x /usr/bin/dfstime
 
 
-service dfs_check_new enable
-service dfs_check_new start
-
