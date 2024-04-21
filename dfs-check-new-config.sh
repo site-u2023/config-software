@@ -98,7 +98,7 @@ function _ENABLE() {
     	TIME=`expr $((${DATE} - ${DATE_ENABLEDS}))`
     	if [ ${TIME} -lt ${SCHEDULE} ]; then
             uci set wireless.${RADIO}.channel=${CHANNEL}
-        	uci set wireless.${RADIO}.htmode=${MODE}${BAND}
+uci set wireless.${RADIO}.htmode=${MODE}${BAND}
         	uci commit wireless
         	wifi reload ${RADIO}
             echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check_new.sh # DFS Check NEW enable" >> /etc/crontabs/root
