@@ -1,5 +1,5 @@
 #! /bin/sh
-
+# License: CC0
 
 function _func_MAP_e_VirtualConnect {
 while :
