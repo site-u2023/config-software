@@ -196,14 +196,14 @@ do
   echo -e " \033[1;41m[x]: マルチセッション対応（ニチバン対策）リカバリー\033[0;39m"
   echo -e " \033[7;40m[q]: 退出\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Please select key [n/r/m//p/x or q]: " num
+  read -p " Please select key [n/r/m/p/x or q]: " num
   case "${num}" in
     "n" ) _func_NURO ;;
     "r" ) _func_RECOVERY ;;
-    "m" } _func_NICHIBAN ;;
-    "p" } _func_NICHIBAN_PORT ;;
-    "x" } _func_NICHIBAN_RECOVERY ;;
+    "m" ) _func_NICHIBAN ;;
+    "p" ) _func_NICHIBAN_PORT ;;
+    "x" ) _func_NICHIBAN_RECOVERY ;;
     "q" ) exit 0 ;;
   esac
- done 
+done
 
