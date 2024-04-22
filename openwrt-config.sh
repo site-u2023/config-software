@@ -1,5 +1,6 @@
 #! /bin/sh
 # OpenWrt >= 21.02:
+# License: CC0
 
 function _func_INTERNET {
 while :
