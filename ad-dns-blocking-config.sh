@@ -1,4 +1,5 @@
 #! /bin/sh
+# License: CC0
 
 function _func_AdGuard_INST {
 while :
