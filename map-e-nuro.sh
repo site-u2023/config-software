@@ -33,11 +33,11 @@ NURO_V6=`echo $NET_PFX6 |cut -b -11`
 function _func_NURO {
 INSTALL_MAP=`opkg list-installed map`
 if [ ${INSTALL_MAP:0:3} = map ]; then
-echo "map is installed"
+    echo "map is installed"
 else
 opkg update && opkg install map
 fi
-echo -e " \033[1;34mnuro map-e\033[0;39m"
+    echo -e " \033[1;34mnuro map-e\033[0;39m"
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
 cp /etc/config/network /etc/config/dhcp.map-e-nuro.old
@@ -135,6 +135,7 @@ exit 0
 
 function _func_NICHIBAN_PORT {
 cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
+read -p " 何かキーを押してください"
 }
 
 function _func_NICHIBAN_RECOVERY {
@@ -148,9 +149,10 @@ RULE_0=240d:000f:0
 RULE_1=240d:000f:1
 RULE_2=240d:000f:2
 RULE_3=240d:000f:3
+
 if [ -z ${NURO_V6} ]; then
-read -p " IPv6を取得出来ません"
-exit 0
+    read -p " IPv6を取得出来ません"
+    exit 0
 else
     if [ ${NURO_V6} = ${RULE_0} ] || [ ${NURO_V6} = ${RULE_1} ] || [ ${NURO_V6} = ${RULE_2} ] || [ ${NURO_V6} = ${RULE_3} ]; then
         if [ ${NURO_V6} = ${RULE_0} ]; then
@@ -178,9 +180,9 @@ else
         echo "rule 3"
         fi
     else
-    echo  ${NURO_V6}
-    read -p " 未対応のIPV6アドレスです"
-    exit 0
+        echo  ${NURO_V6}
+        read -p " 未対応のIPV6アドレスです"
+        exit 0
     fi
 fi
 
