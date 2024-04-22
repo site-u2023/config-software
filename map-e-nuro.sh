@@ -1,6 +1,6 @@
 #!/bin/sh
 # Information provided by https://github.com/tinysun & https://qiita.com/obsolete-standard/items/e410530cecb0a21d3ecc
-# Vr.4.00
+# Vr.4.01
 # License: CC0
 
 . /lib/functions/network.sh
@@ -125,6 +125,24 @@ reboot
 exit 0
 }
 
+function _func_NICHIBAN {
+cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
+wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit 0
+}
+
+function _func_NICHIBAN_PORT {
+cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
+}
+
+function _func_NICHIBAN_RECOVERY {
+cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit 0
+}
 
 RULE_0=240d:000f:0
 RULE_1=240d:000f:1
@@ -172,13 +190,19 @@ do
   echo -e " \033[1;37mNET_PFX6: ${NET_PFX6}\033[0;39m"
   echo -e " \033[1;37mnuro光 ----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[n]: nuro map-e\033[0;39m"
-  echo -e " \033[1;41m[r]: リカバリー\033[0;39m"
+  echo -e " \033[1;44m[r]: nuro map-e リカバリー\033[0;39m"
+  echo -e " \033[1;31m[m]: マルチセッション対応（ニチバン対策）\033[0;39m"
+  echo -e " \033[1;31m[m]: 利用可能ポート確認\033[0;39m"
+  echo -e " \033[1;41m[x]: マルチセッション対応（ニチバン対策）リカバリー\033[0;39m"
   echo -e " \033[7;40m[q]: 退出\033[0;39m"
   echo -e " \033[1;37m-----------------------------------------------------\033[0;39m"
-  read -p " Please select key [n/r or q]: " num
+  read -p " Please select key [n/r/m//p/x or q]: " num
   case "${num}" in
     "n" ) _func_NURO ;;
     "r" ) _func_RECOVERY ;;
+    "m" } _func_NICHIBAN ;;
+    "p" } _func_NICHIBAN_PORT ;;
+    "x" } _func_NICHIBAN_RECOVERY ;;
     "q" ) exit 0 ;;
   esac
  done 
