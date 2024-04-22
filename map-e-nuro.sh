@@ -106,7 +106,6 @@ echo -e "\033[1;32m ${WANMAP} ip6prefixlen: \033[0;39m"36
 echo -e "\033[1;32m ${WANMAP} ealen: \033[0;39m"20
 echo -e "\033[1;32m ${WANMAP} psidlen: \033[0;39m"8
 echo -e "\033[1;32m ${WANMAP} offset: \033[0;39m"4
-
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 return 0
