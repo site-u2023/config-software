@@ -35,7 +35,7 @@ INSTALL_MAP=`opkg list-installed map`
 if [ ${INSTALL_MAP:0:3} = map ]; then
     echo "map is installed"
 else
-opkg update && opkg install map
+    opkg update && opkg install map
 fi
     echo -e " \033[1;34mnuro map-e\033[0;39m"
 # network backup
@@ -109,7 +109,7 @@ echo -e "\033[1;32m ${WANMAP} offset: \033[0;39m"4
 
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
-exit 0
+return 0
 }
 
 function _func_RECOVERY {
@@ -122,7 +122,7 @@ cp /etc/config/firewall.map-e-nuro.old /etc/config/firewall
 #rm /etc/config/firewall.map-e-nuro.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
-exit 0
+return 0
 }
 
 function _func_NICHIBAN {
@@ -130,19 +130,20 @@ cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
-exit 0
+return 0
 }
 
 function _func_NICHIBAN_PORT {
 cat /tmp/map-wanmap.rules | awk '/PORTSETS/'
 read -p " 何かキーを押してください"
+return 0
 }
 
 function _func_NICHIBAN_RECOVERY {
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
-exit 0
+return 0
 }
 
 RULE_0=240d:000f:0
@@ -154,33 +155,30 @@ if [ -z ${NURO_V6} ]; then
     read -p " IPv6を取得出来ません"
     exit 0
 else
-    if [ ${NURO_V6} = ${RULE_0} ] || [ ${NURO_V6} = ${RULE_1} ] || [ ${NURO_V6} = ${RULE_2} ] || [ ${NURO_V6} = ${RULE_3} ]; then
+    if [[ ${NURO_V6} = ${RULE_0} || ${NURO_V6} = ${RULE_1} || ${NURO_V6} = ${RULE_2} || ${NURO_V6} = ${RULE_3} ]]; then
         if [ ${NURO_V6} = ${RULE_0} ]; then
-        BR_ADDR="2001:3b8:200:ff9::1"
-        IPV6_PREFIX="240d:000f:0000"
-        IPV4_PREFIX="219.104.128.0"
-        echo "rulr 0"
-        fi
-        if [ ${NURO_V6} = ${RULE_1} ]; then
-        BR_ADDR="2001:3b8:200:ff9::1"
-        IPV6_PREFIX="240d:000f:1000"
-        IPV4_PREFIX="219.104.144.0"
-        echo "rule 1"
-        fi
-        if [ ${NURO_V6} = ${RULE_2} ]; then
-        BR_ADDR="2001:3b8:200:ff9::1"
-        IPV6_PREFIX="240d:000f:2000"
-        IPV4_PREFIX="219.104.160.0"
-        echo "rule 2"
-        fi
-        if [ ${NURO_V6} = ${RULE_3} ]; then
-        BR_ADDR="2001:3b8:200:ff9::1"
-        IPV6_PREFIX="240d:000f:3000"
-        IPV4_PREFIX="219.104.176.0"
-        echo "rule 3"
+            BR_ADDR="2001:3b8:200:ff9::1"
+            IPV6_PREFIX="240d:000f:0000"
+            IPV4_PREFIX="219.104.128.0"
+            echo "rulr 0"
+        elif [ ${NURO_V6} = ${RULE_1} ]; then
+            BR_ADDR="2001:3b8:200:ff9::1"
+            IPV6_PREFIX="240d:000f:1000"
+            IPV4_PREFIX="219.104.144.0"
+            echo "rule 1"
+        elif [ ${NURO_V6} = ${RULE_2} ]; then
+            BR_ADDR="2001:3b8:200:ff9::1"
+            IPV6_PREFIX="240d:000f:2000"
+            IPV4_PREFIX="219.104.160.0"
+            echo "rule 2"
+        elif [ ${NURO_V6} = ${RULE_3} ]; then
+            BR_ADDR="2001:3b8:200:ff9::1"
+            IPV6_PREFIX="240d:000f:3000"
+            IPV4_PREFIX="219.104.176.0"
+            echo "rule 3"
         fi
     else
-        echo  ${NURO_V6}
+        echo  "${NURO_V6}"
         read -p " 未対応のIPV6アドレスです"
         exit 0
     fi
