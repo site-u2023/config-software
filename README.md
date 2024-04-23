@@ -230,7 +230,7 @@ Filer (used like Explorer with WinSCP)
 - initial value:
 **[openwrt.lan:3000](http://openwrt.lan:3000)** [(192.168.1.1:3000)](http://192.168.1.1:3000)
 
-# initialization
+### initialization
 
 ### [Factory reset (initialization)](https://openwrt.org/docs/guide-user/troubleshooting/failsafe_and_factory_reset#soft_factory_reset)
 ```sh
@@ -247,4 +247,4 @@ y
 Press and hold the reset button on the device for 5 seconds
 
 
-# Qiita: [Beginner's memorandum Introduced from Windows](https://qiita.com/site_u/items/39fbac482c06c98b229b)
+Qiita: [Beginner's memorandum Introduced from Windows](https://qiita.com/site_u/items/39fbac482c06c98b229b)
