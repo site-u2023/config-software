@@ -102,8 +102,6 @@
 
 Shortcuts are activated with administrative privileges.
 
-- Forced Paste
-
 ```sh:powershell
 $LNKFILE = ([Environment]::GetFolderPath("Desktop") + "\Powershell.lnk")
 $WshShell = New-Object -comObject WScript.Shell
@@ -116,11 +114,14 @@ $Shortcut.Save()
 
 ```
 
+- Forced Paste
+
 ### Using SSH with powershell
 ```powershell:powershell
 ssh root@192.168.1.1
 
 ```
+
 - `yes`
 
 <details><summary>:exclamation:If you cannot SSH login</summary>
