@@ -94,7 +94,7 @@
 
 </details>
 
-## All-in-one script for new setup Beginner support
+## New settings All-in-one script Suitable for beginners
 
 ### [SSH access](https://openwrt.org/docs/guide-quick-start/sshadministration) with [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/what-is-windows-powershell?view=powershell-7.4)
 
