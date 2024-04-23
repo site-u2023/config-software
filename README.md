@@ -94,9 +94,26 @@
 
 </details>
 
-### Setting
-Using SSH with powershell
-- powershell > `Win`+`x` > `a` > `yes`
+### Powershell activation:
+
+**Key entry: `Win`+`x` > `a` > `yes`**
+
+### Create Shortcut
+
+*Shortcuts are activated with administrative privileges.
+```sh:powershell
+$LNKFILE = ([Environment]::GetFolderPath("Desktop") + "\Powershell.lnk")
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$LNKFILE")
+$Shortcut.TargetPath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+$Shortcut.Arguments = '-NoProfile -ExecutionPolicy unrestricted -Command "Start-Process PowerShell.exe -Verb runas"'
+$Shortcut.IconLocation = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,0"
+$Shortcut.WorkingDirectory = "."
+$Shortcut.Save()
+
+```
+
+### Using SSH with powershell
 ```powershell:powershell
 ssh root@192.168.1.1
 
