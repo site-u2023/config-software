@@ -94,7 +94,7 @@
 
 </details>
 
-### Powershell activation:
+### Powershell activation
 
 **Key entry: `Win`+`x` > `a` > `yes`**
 
