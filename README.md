@@ -94,6 +94,8 @@
 
 </details>
 
+## All-in-one script for new setup Beginner support
+
 ### [SSH access](https://openwrt.org/docs/guide-quick-start/sshadministration) with [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/what-is-windows-powershell?view=powershell-7.4)
 
 - [Starting PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4) (Key entry): `Win`+`x` > `a` > `yes`
@@ -182,6 +184,7 @@ rm -rf /usr/bin/confsoft
 
 ```
 
+## Access
 
 ### [LuCi](https://qiita.com/site_u/items/a23d165201081817cb00#luciweb%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2)
 
@@ -230,7 +233,7 @@ Filer (used like Explorer with WinSCP)
 - initial value:
 **[openwrt.lan:3000](http://openwrt.lan:3000)** [(192.168.1.1:3000)](http://192.168.1.1:3000)
 
-### initialization
+## Initialization
 
 ### [Factory reset (initialization)](https://openwrt.org/docs/guide-user/troubleshooting/failsafe_and_factory_reset#soft_factory_reset)
 ```sh
