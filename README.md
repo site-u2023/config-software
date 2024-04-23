@@ -248,4 +248,6 @@ firstboot && reboot now
 Press and hold the reset button on the device for 5 seconds
 
 
-## Qiita: [Beginner's memorandum Introduced from Windows](https://qiita.com/site_u/items/39fbac482c06c98b229b)
+## Qiita
+
+[Beginner's memorandum Introduced from Windows](https://qiita.com/site_u/items/39fbac482c06c98b229b)
