@@ -94,13 +94,8 @@
 
 </details>
 
-### Powershell activation
+### [SSH access](https://openwrt.org/docs/guide-quick-start/sshadministration) with [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/what-is-windows-powershell?view=powershell-7.4)
 
-**Key entry: `Win`+`x` > `a` > `yes`**
-
-### Create Shortcut
-
-[PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/what-is-windows-powershell?view=powershell-7.4)
 - [Starting PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4) (Key entry): `Win`+`x` > `a` > `yes`
 ※[Installing PowerShell on Windows](https://learn.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4)（Windows 11 is standard）
 
@@ -132,8 +127,6 @@ Clear-Content .ssh\known_hosts -Force
 ---
 
 </details>
-
-:::
  
 ### ttyd installation and configuration
 
