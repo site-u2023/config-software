@@ -101,7 +101,7 @@
 - [Starting PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4) (Key entry): `Win`+`x` > `a` > `yes`
   ※[Installing PowerShell on Windows](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4)（Windows 11 is standard）
 
-<details><summary>Create startup shortcut for [ ssh root@192.168.1.1 ] (desktop)</summary>
+<details><summary>Create startup shortcut for ssh root@192.168.1.1(desktop)</summary>
 
 ```sh:powershell: ssh
 $LNKFILE = ([Environment]::GetFolderPath("Desktop") + "\192.168.1.1.lnk")
