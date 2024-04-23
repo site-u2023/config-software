@@ -116,7 +116,7 @@ $Shortcut.Save()
 - `Forced Paste`
 - `yes`
 
-<details><summary>If you cannot SSH:exclamation:</summary>
+<details><summary>:exclamation:If you cannot SSH</summary>
 
 `C:\Users\yourusername\.ssh\known_hosts`
 ※Windows Hidden Files
