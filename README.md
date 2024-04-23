@@ -132,7 +132,8 @@ Clear-Content .ssh\known_hosts -Force
 
 </details>
  
-ttyd installation and configuration
+### ttyd installation and configuration
+
 - [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
 ```sh:SSH
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
@@ -155,6 +156,7 @@ uci commit network
 /etc/init.d/network reload
 
 ```
+
 ---
 
 </details>
