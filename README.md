@@ -114,7 +114,7 @@ $Shortcut.Save()
 
 ```
 
-- Forced Paste
+- `Forced Paste`
 
 ### Using SSH with powershell
 ```powershell:powershell
