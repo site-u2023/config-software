@@ -100,14 +100,18 @@
 
 ### Create Shortcut
 
-Shortcuts are activated with administrative privileges.
+[PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/what-is-windows-powershell?view=powershell-7.4)
+- [Starting PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4) (Key entry): `Win`+`x` > `a` > `yes`
+※[Installing PowerShell on Windows](https://learn.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4)（Windows 11 is standard）
 
-```sh:powershell
-$LNKFILE = ([Environment]::GetFolderPath("Desktop") + "\Powershell.lnk")
+- Create startup shortcut for `ssh root@192.168.1.1` (desktop)
+
+```sh:powershell: ssh
+$LNKFILE = ([Environment]::GetFolderPath("Desktop") + "\192.168.1.1.lnk")
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$LNKFILE")
 $Shortcut.TargetPath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-$Shortcut.Arguments = '-NoProfile -ExecutionPolicy unrestricted -Command "Start-Process PowerShell.exe -Verb runas"'
+$Shortcut.Arguments = '-windowstyle hidden -ExecutionPolicy RemoteSigned "start ssh root@192.168.1.1"'
 $Shortcut.IconLocation = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,0"
 $Shortcut.WorkingDirectory = "."
 $Shortcut.Save()
@@ -115,16 +119,9 @@ $Shortcut.Save()
 ```
 
 - `Forced Paste`
-
-### Using SSH with powershell
-```powershell:powershell
-ssh root@192.168.1.1
-
-```
-
 - `yes`
 
-<details><summary>:exclamation:If you cannot SSH login</summary>
+<details><summary>If you cannot SSH:exclamation:</summary>
 
 `C:\Users\yourusername\.ssh\known_hosts`
 ※Windows Hidden Files
@@ -135,6 +132,8 @@ Clear-Content .ssh\known_hosts -Force
 ---
 
 </details>
+
+:::
  
 ### ttyd installation and configuration
 
