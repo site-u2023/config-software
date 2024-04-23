@@ -100,7 +100,10 @@
 
 ### Create Shortcut
 
-*Shortcuts are activated with administrative privileges.
+Shortcuts are activated with administrative privileges.
+
+- Forced Paste
+
 ```sh:powershell
 $LNKFILE = ([Environment]::GetFolderPath("Desktop") + "\Powershell.lnk")
 $WshShell = New-Object -comObject WScript.Shell
