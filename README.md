@@ -239,7 +239,7 @@ firstboot && reboot now
 
 ```
 `This will erase all settings and remove any installed packages. Are you sure? [N/y]`
-`y`
+- `y`
 
 ### [Device reset button](https://openwrt.org/docs/guide-user/troubleshooting/failsafe_and_factory_reset#reset_button)
 Press and hold the reset button on the device for 5 seconds
