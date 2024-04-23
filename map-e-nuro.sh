@@ -82,8 +82,8 @@ uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAP}
 uci -q delete dhcp.lan.dns
 uci -q delete dhcp.lan.dhcp_option
 # IPV4
-uci add_list network.lan.dns='118.238.201.33' #	dns1.nuro.jp
-uci add_list network.lan.dns='152.165.245.17' #	dns1.nuro.jp
+uci add_list network.lan.dns='118.238.201.33' # dns1.nuro.jp
+uci add_list network.lan.dns='152.165.245.17' # dns1.nuro.jp
 #uci add_list network.lan.dns='118.238.201.49' # dns2.nuro.jp
 #uci add_list network.lan.dns='152.165.245.1' # dns2.nuro.jp
 uci add_list dhcp.lan.dhcp_option='6,1.1.1.1,8.8.8.8'
