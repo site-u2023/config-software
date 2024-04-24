@@ -12,7 +12,6 @@ STOP=01
      
 start() {
     sleep 75s
-    rm -rf /tmp/config-software/channel
     mkdir -p /tmp/config-software/
     RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
     CHS=`echo ${RADIO} | wc -w`
@@ -29,7 +28,7 @@ start() {
     echo ${FB_BAND} > /tmp/config-software/fb_band
     echo ${MODE} > /tmp/config-software/mode
     echo ${FB_CHANNEL} > /tmp/config-software/fb_channel
-    echo ${CHANNEL} >> /tmp/config-software/channel
+    echo ${CHANNEL} > /tmp/config-software/channel
     echo ${HTMODE} > /tmp/config-software/htmode
     logger "DFS Check: Start"
     sed -i "/dfs_check.sh/d" /etc/crontabs/root
