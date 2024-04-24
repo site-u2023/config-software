@@ -12,6 +12,7 @@ STOP=01
      
 start() {
     sleep 75s
+    rm -rf /tmp/config-software/channel
     mkdir -p /tmp/config-software/
     RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
     CHS=`echo ${RADIO} | wc -w`
