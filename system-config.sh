@@ -449,8 +449,8 @@ function _func_DEVICE_SET {
   uci commit wireless
   fi
   if [ "$DFS_NEW" = "on" ]; then
-  wget --no-check-certificate -O /etc/config-software/dfs-check-new-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-check-new-config.sh
-  sh /etc/config-software/dfs-check-new-config.sh 2> /dev/null
+  wget --no-check-certificate -O /etc/config-software/dfs-check-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-check-config.sh
+  sh /etc/config-software/dfs-check-config.sh 2> /dev/null
   service dfs_check enable
   fi
   if [ "$GUEST" = "on" ]; then
