@@ -142,6 +142,7 @@ exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -
 echo -e "\033[1;36mWi-Fi ----------------------------------\033[0;39m"
 read INTERVAL < /tmp/config-software/interval
 echo -e "\033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
+read RADIO < /tmp/config-software/radio
 CHANNEL=$(uci get wireless.${RADIO}.channel)
 echo -e "\033[1;37mNow Channel: ${CHANNEL} Ch\033[0;39m"
 HTMODE=$(uci get wireless.${RADIO}.htmode)
