@@ -71,7 +71,6 @@ if [ $? = 0 ]; then
     MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
     echo ${CHANNEL} > /tmp/config-software/channel
     echo ${HTMODE} > /tmp/config-software/htmode
-
     uci set wireless.${RADIO}.channel=${FB_CHANNEL}
     uci set wireless.${RADIO}.htmode=${MODE}${FB_BAND}
     uci commit wireless
