@@ -20,16 +20,11 @@ start() {
     fi
     CH=`echo ${RADIO} | grep -o "[0-9]*"`
     DEV=`iw dev | awk '/Interface/{print $2}' | grep ${CH}`
-    CHANNEL=$(uci get wireless.${RADIO}.channel)
-    HTMODE=$(uci get wireless.${RADIO}.htmode)
     echo ${INTERVAL} > /tmp/config-software/interval
     echo ${DEV} > /tmp/config-software/dev
     echo ${RADIO} > /tmp/config-software/radio
     echo ${FB_BAND} > /tmp/config-software/fb_band
-    echo ${MODE} > /tmp/config-software/mode
     echo ${FB_CHANNEL} > /tmp/config-software/fb_channel
-    echo ${CHANNEL} > /tmp/config-software/channel
-    echo ${HTMODE} > /tmp/config-software/htmode
     logger "DFS Check: Start"
     sed -i "/dfs_check.sh/d" /etc/crontabs/root
     echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check.sh # DFS Check" >> /etc/crontabs/root
@@ -54,6 +49,7 @@ mkdir -p /etc/config-software/
 cat << "EOF" > /etc/config-software/dfs_check.sh
 #! /bin/sh
 
+read RADIO < /tmp/config-software/radio
 read DEV < /tmp/config-software/dev
 IW_CHANNEL=`iw dev ${DEV} info | awk '/channel/{print $2}'`
 if [ -z ${IW_CHANNEL} ]; then
@@ -67,19 +63,21 @@ if [ $? = 0 ]; then
     logger "DFS Check: DFS_Check_ON"
     sed -i "/dfs_chec.sh/d" /etc/crontabs/root
     /etc/init.d/cron restart
-    read RADIO < /tmp/config-software/radio
+    read INTERVAL < /tmp/config-software/interval
     read FB_CHANNEL < /tmp/config-software/fb_channel
-    read MODE < /tmp/config-software/mode
     read FB_BAND < /tmp/config-software/fb_band
+    CHANNEL=$(uci get wireless.${RADIO}.channel)
+    HTMODE=$(uci get wireless.${RADIO}.htmode)
+    MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
+    echo ${CHANNEL} > /tmp/config-software/channel
+    echo ${HTMODE} > /tmp/config-software/htmode
+
     uci set wireless.${RADIO}.channel=${FB_CHANNEL}
     uci set wireless.${RADIO}.htmode=${MODE}${FB_BAND}
     uci commit wireless
     wifi reload ${RADIO}
     sleep 30m
     logger "DFS Check: DFS_Check_OFF"
-    read INTERVAL < /tmp/config-software/interval
-    read CHANNEL < /tmp/config-software/channel
-    read HTMODE < /tmp/config-software/htmode
     sed -i "/dfs_chec.sh/d" /etc/crontabs/root
     echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check.sh # DFS Check" >> /etc/crontabs/root
     /etc/init.d/cron restart
