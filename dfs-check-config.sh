@@ -57,7 +57,7 @@ if [ -z ${IW_CHANNEL} ]; then
     logger "DFS Check: Abnormality"
 fi
     
-iw info ${DEV} info 2>&1 | grep -q 'No such wireless device'
+iwinfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
 if [ $? = 0 ]; then
     logger "DFS Check: DFS_Check_ON"
     sed -i "/dfs_chec.sh/d" /etc/crontabs/root
