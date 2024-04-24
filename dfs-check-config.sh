@@ -49,7 +49,6 @@ mkdir -p /etc/config-software/
 cat << "EOF" > /etc/config-software/dfs_check.sh
 #! /bin/sh
 
-read RADIO < /tmp/config-software/radio
 read DEV < /tmp/config-software/dev
 IW_CHANNEL=`iw dev ${DEV} info | awk '/channel/{print $2}'`
 if [ -z ${IW_CHANNEL} ]; then
@@ -63,6 +62,7 @@ if [ $? = 0 ]; then
     logger "DFS Check: DFS_Check_ON"
     sed -i "/dfs_chec.sh/d" /etc/crontabs/root
     /etc/init.d/cron restart
+    read RADIO < /tmp/config-software/radio
     read INTERVAL < /tmp/config-software/interval
     read FB_CHANNEL < /tmp/config-software/fb_channel
     read FB_BAND < /tmp/config-software/fb_band
@@ -142,9 +142,9 @@ exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -
 echo -e "\033[1;36mWi-Fi ----------------------------------\033[0;39m"
 read INTERVAL < /tmp/config-software/interval
 echo -e "\033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
-read CHANNEL < /tmp/config-software/channel
+CHANNEL=$(uci get wireless.${RADIO}.channel)
 echo -e "\033[1;37mNow Channel: ${CHANNEL} Ch\033[0;39m"
-read HTMODE < /tmp/config-software/htmode
+HTMODE=$(uci get wireless.${RADIO}.htmode)
 echo -e "\033[1;37mNow Htmode: ${HTMODE}\033[0;39m"
 echo -e "\033[1;36mSpeed test -----------------------------\033[0;39m"
 echo -e "\033[1;37mDFS Check run time:\033[0;39m"
