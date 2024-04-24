@@ -139,14 +139,14 @@ echo -e "\033[1;37mDISABLED:\033[0;39m"
 exec logread | grep "DFS->DISABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
 echo -e "\033[1;37mENABLED:\033[0;39m"
 exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
-echo -e "\033[1;36mWi-Fi ----------------------------------\033[0;39m"
+echo -e "\033[1;36mInterval -------------------------------\033[0;39m"
 read INTERVAL < /tmp/config-software/interval
-echo -e "\033[1;37mNow Interval: ${INTERVAL} min\033[0;39m"
+echo -e "\033[1;37mInterval: ${INTERVAL}min\033[0;39m"
+echo -e "\033[1;36mWi-Fi ----------------------------------\033[0;39m"
 read RADIO < /tmp/config-software/radio
 CHANNEL=$(uci get wireless.${RADIO}.channel)
-echo -e "\033[1;37mNow Channel: ${CHANNEL} Ch\033[0;39m"
 HTMODE=$(uci get wireless.${RADIO}.htmode)
-echo -e "\033[1;37mNow Htmode: ${HTMODE}\033[0;39m"
+echo -e "\033[1;37mChannel Htmode: ${CHANNEL}Ch ${HTMODE}\033[0;39m"
 echo -e "\033[1;36mSpeed test -----------------------------\033[0;39m"
 echo -e "\033[1;37mDFS Check run time:\033[0;39m"
 time sh /etc/config-software/dfs_check.sh
