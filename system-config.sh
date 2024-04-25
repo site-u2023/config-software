@@ -270,9 +270,9 @@ do
   read -p " Please select key [0/1 or r]: " num
   case "${num}" in
     "0" ) TWT=''
-          _func_DFS_CHECK ;;
+          _func_ZZDFS ;;
     "1" ) TWT='on'
-          _func_DFS_CHECK ;;
+          _func_ZZDF ;;
     "r" ) break ;;    
   esac
 done
@@ -280,7 +280,7 @@ fi
 _func_DEVICE_confirmation
 }
 
-function _func_DFS_CHECK {
+function _func_ZZDFS {
 while :
 do
   echo -e " \033[1;41mUse DFS Check NEW\033[0;39m"
@@ -288,9 +288,9 @@ do
   echo -e " \033[1;34m[1]: ON\033[0;39m"
   read -p " Please select key [0/1 or r]: " num
   case "${num}" in
-    "0" ) DFS_NEW=''
+    "0" ) ZZDFS=''
           _func_DEVICE_confirmation ;;
-    "1" ) DFS_NEW='on'
+    "1" ) ZZDFS='on'
           _func_DEVICE_confirmation ;;
     "r" ) break ;;   
   esac
@@ -334,8 +334,8 @@ do
   if [ -n "$TWT" ]; then
   echo -e " \033[1;41mTWT: ON\033[0;39m"
   fi
-  if [ -n "$DFS_NEW" ]; then
-  echo -e " \033[1;41mDFS Check NEW\033[0;39m"
+  if [ -n "$ZZDFS" ]; then
+  echo -e " \033[1;41mZZDFS033[0;39m"
   fi
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " Please select key [y/n or q]: " num
@@ -448,10 +448,10 @@ function _func_DEVICE_SET {
   uci add_list wireless.${RADIO_BB}.hostapd_options='he_twt_responder=1'
   uci commit wireless
   fi
-  if [ "$DFS_NEW" = "on" ]; then
-  wget --no-check-certificate -O /etc/config-software/dfs-check-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dfs-check-config.sh
-  sh /etc/config-software/dfs-check-config.sh 2> /dev/null
-  service dfs_check enable
+  if [ "$ZZDFS" = "on" ]; then
+  wget --no-check-certificate -O /etc/config-software/zzdfs-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/zzdfs-config.sh
+  sh /etc/config-software/zzdfs-config.sh 2> /dev/null
+  service zzdfs enable
   fi
   if [ "$GUEST" = "on" ]; then
   opkg update
@@ -466,7 +466,7 @@ function _func_DEVICE_SET {
   if [ "$GUEST" = "on" ]; then
   echo -e " \033[1;32mGuest Wi-Fi: http://${input_str_SYSTEM_HOSTNAME}.lan/guest.html\033[0;39m"
   fi
-  if [ "$DFS_NEW" = "on" ]; then
+  if [ "$ZZDFS" = "on" ]; then
   echo -e " \033[1;32mDFS Check NOW: How to check logs 'dfslog'\033[0;39m"
   fi
   read -p " Press any key (Reboot the device)"
