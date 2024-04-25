@@ -11,7 +11,7 @@ START=99
 STOP=01
      
 start() {
-    sleep 75s
+    sleep 1m 15s
     mkdir -p /tmp/config-software/
     RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
     CHS=`echo ${RADIO} | wc -w`
@@ -80,14 +80,14 @@ if [ $? = 0 ]; then
             uci set wireless.${RADIO}.htmode=${HTMODE}
             uci commit wireless
             wifi reload  ${RADIO}
-            sleep 70s
+            sleep 1m 10s
             echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
             /etc/init.d/cron restart
         else
             logger "ZZDFS: No_radio"
             sed -i "/zzdfs.sh/d" /etc/crontabs/root
             /etc/init.d/cron restart
-            sleep 70s
+            sleep 1m 10s
             wifi reload ${RADIO}
             read INTERVAL < /tmp/config-software/interval
             echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
