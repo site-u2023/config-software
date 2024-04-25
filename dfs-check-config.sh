@@ -77,13 +77,14 @@ if [ $? = 0 ]; then
     wifi reload ${RADIO}
     sleep 30m
     logger "DFS Check: DFS_Check_OFF"
-    sed -i "/dfs_chec.sh/d" /etc/crontabs/root
-    echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check.sh # DFS Check" >> /etc/crontabs/root
-    /etc/init.d/cron restart
     uci set wireless.${RADIO}.channel=${CHANNEL}
     uci set wireless.${RADIO}.htmode=${HTMODE}
     uci commit wireless
     wifi reload  ${RADIO}
+    sleep 70s
+    sed -i "/dfs_chec.sh/d" /etc/crontabs/root
+    echo "*/${INTERVAL} * * * * sh /etc/config-software/dfs_check.sh # DFS Check" >> /etc/crontabs/root
+    /etc/init.d/cron restart
 fi
 EOF
 
