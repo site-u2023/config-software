@@ -87,8 +87,8 @@ if [ $? = 0 ]; then
             logger "ZZDFS: No_radio"
             sed -i "/zzdfs.sh/d" /etc/crontabs/root
             /etc/init.d/cron restart
-            wifi reload ${RADIO}
             sleep 70s
+            wifi reload ${RADIO}
             read INTERVAL < /tmp/config-software/interval
             echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
             /etc/init.d/cron restart
