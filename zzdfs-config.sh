@@ -27,7 +27,7 @@ start() {
         RADIO=`echo ${RADIO}| awk '{print $2}'`
     fi
     CH=`echo ${RADIO} | grep -o "[0-9]*"`
-    DEV=$(iw dev | awk '/Interface/{print $2}' | grep ${CH} | tee /tmp/config-software/dev)
+    echo $(iw dev | awk '/Interface/{print $2}' | grep ${CH}) > /tmp/config-software/dev
     echo ${INTERVAL} > /tmp/config-software/interval
     echo ${RADIO} > /tmp/config-software/radio
     echo ${FB_BAND} > /tmp/config-software/fb_band
