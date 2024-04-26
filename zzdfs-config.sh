@@ -71,8 +71,8 @@ if [ $? = 0 ]; then
             read INTERVAL < /tmp/config-software/interval
             read FB_CHANNEL < /tmp/config-software/fb_channel
             read FB_BAND < /tmp/config-software/fb_band
-            CHANNEL=$(uci get wireless.${RADIO}.channel | grep ${CH} | tee /tmp/config-software/channel)
-            HTMODE=$(uci get wireless.${RADIO}.htmode | grep ${CH} | tee /tmp/config-software/htmode)
+            CHANNEL=$(uci get wireless.${RADIO}.channel | tee /tmp/config-software/channel)
+            HTMODE=$(uci get wireless.${RADIO}.htmode | tee /tmp/config-software/htmode)
             MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
             uci set wireless.${RADIO}.channel=${FB_CHANNEL}
             uci set wireless.${RADIO}.htmode=${MODE}${FB_BAND}
