@@ -154,28 +154,26 @@ if [ -z ${NURO_V6} ]; then
     read -p " IPv6を取得出来ません"
     exit 0
 else
-    if [[ ${NURO_V6} = ${RULE_0} || ${NURO_V6} = ${RULE_1} || ${NURO_V6} = ${RULE_2} || ${NURO_V6} = ${RULE_3} ]]; then
-        if [ ${NURO_V6} = ${RULE_0} ]; then
-            BR_ADDR="2001:3b8:200:ff9::1"
-            IPV6_PREFIX="240d:000f:0000"
-            IPV4_PREFIX="219.104.128.0"
-            echo "rulr 0"
-        elif [ ${NURO_V6} = ${RULE_1} ]; then
-            BR_ADDR="2001:3b8:200:ff9::1"
-            IPV6_PREFIX="240d:000f:1000"
-            IPV4_PREFIX="219.104.144.0"
-            echo "rule 1"
-        elif [ ${NURO_V6} = ${RULE_2} ]; then
-            BR_ADDR="2001:3b8:200:ff9::1"
-            IPV6_PREFIX="240d:000f:2000"
-            IPV4_PREFIX="219.104.160.0"
-            echo "rule 2"
-        elif [ ${NURO_V6} = ${RULE_3} ]; then
-            BR_ADDR="2001:3b8:200:ff9::1"
-            IPV6_PREFIX="240d:000f:3000"
-            IPV4_PREFIX="219.104.176.0"
-            echo "rule 3"
-        fi
+    if [ ${NURO_V6} = ${RULE_0} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:0000"
+        IPV4_PREFIX="219.104.128.0"
+        echo "rulr 0"
+    elif [ ${NURO_V6} = ${RULE_1} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:1000"
+        IPV4_PREFIX="219.104.144.0"
+        echo "rule 1"
+    elif [ ${NURO_V6} = ${RULE_2} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:2000"
+        IPV4_PREFIX="219.104.160.0"
+        echo "rule 2"
+    elif [ ${NURO_V6} = ${RULE_3} ]; then
+        BR_ADDR="2001:3b8:200:ff9::1"
+        IPV6_PREFIX="240d:000f:3000"
+        IPV4_PREFIX="219.104.176.0"
+        echo "rule 3"
     else
         echo  "${NURO_V6}"
         read -p " 未対応のIPV6アドレスです"
