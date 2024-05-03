@@ -40,15 +40,12 @@ done
 }
 
 function _func_MAP_e_VirtualConnect_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
 opkg install bash
 opkg install map
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
-wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-wget --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
+wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
+wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
 sed -i "/Onry_V6plus/d"  /etc/config-software/map-e.sh
 bash /etc/config-software/map-e.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -110,15 +107,12 @@ done
 }
 
 function _func_MAP_e_V6plus_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
 opkg install bash
 opkg install map
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
-wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-wget --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
+wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
+wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
 sed -i "/Onry_OCN/d"  /etc/config-software/map-e.sh
 bash /etc/config-software/map-e.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -197,7 +191,7 @@ exit
 }
 
 function _func_MAP_e_Nuro {
-wget --no-check-certificate -O /etc/config-software/map-e-nuro.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-nuro.sh
+wget -6 --no-check-certificate -O /etc/config-software/map-e-nuro.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-nuro.sh
 sh /etc/config-software/map-e-nuro.sh
 }
 
@@ -236,10 +230,7 @@ done
 }
 
 function _func_DS_LITE_Transix_east_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
 opkg install ds-lite
 wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
@@ -265,10 +256,7 @@ done
 }
 
 function _func_DS_LITE_Transix_west_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
 opkg install ds-lite
 wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sed -i -e "s/AFTR_ADDRESS/2404:8e01::feed:100/g" /etc/config-software/ds-lite.sh
@@ -325,10 +313,7 @@ done
 }
 
 function _func_DS_LITE_Xpass_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
 opkg install ds-lite
 wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sed -i -e "s/AFTR_ADDRESS/2001:f60:0:200::1:1/g" /etc/config-software/ds-lite.sh
@@ -385,10 +370,7 @@ done
 }
 
 function _func_DS_LITE_V6connect_SET {
-UPDATE="/tmp/opkg-lists/openwrt_telephony"
-if [ ! -e ${UPDATE} ]; then
 opkg update
-fi
 opkg install ds-lite
 wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
 sed -i -e "s/AFTR_ADDRESS/2001:c28:5:301::11/g" /etc/config-software/ds-lite.sh
@@ -641,7 +623,7 @@ exit
 }
 
 OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
-if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
+if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "SN" ]]; then
  echo -e " \033[1;37mバージョンチェック: OK\033[0;39m"
  else
  read -p " バージョンが違うため終了します"
