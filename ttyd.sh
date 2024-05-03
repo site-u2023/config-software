@@ -33,6 +33,6 @@ uci add_list ttyd.ttyd.client_option='theme={"background": "blue"}'
 uci add_list ttyd.ttyd.client_option='titleFixed=config-software'
 
 uci commit ttyd
+/etc/init.d/rpcd restart
 service ttyd enable
 service ttyd start
-#/etc/init.d/rpcd restart
