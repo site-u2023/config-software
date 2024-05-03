@@ -12,6 +12,13 @@ opkg update
 opkg install ttyd
 opkg install luci-app-ttyd
 
+uci del_list ttyd.@ttyd[0].client_option='fontSize=25'
+uci del_list ttyd.@ttyd[0].client_option='theme={"background": "black"}'
+uci del_list ttyd.@ttyd[0].client_option='titleFixed=ttyd'
+uci del_list ttyd.ttyd.client_option='fontSize=25'
+uci del_list ttyd.ttyd.client_option='theme={"background": "blue"}'
+uci del_list ttyd.ttyd.client_option='titleFixed=config-software'
+
 uci set ttyd.@ttyd[0]=ttyd
 uci set ttyd.@ttyd[0].interface='@lan'
 uci set ttyd.@ttyd[0].command='/bin/login -f root'
