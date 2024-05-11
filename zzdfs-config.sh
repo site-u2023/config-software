@@ -167,7 +167,7 @@ WIFI=`uci get wireless.${RADIO}.disabled` 2>/dev/null
 if [ "${WIFI}" != 1 ]; then
     echo -e "\033[1;32mWi-Fi 5G ${RADIO} ENABLE\033[0;39m"   
 else
-    echo -e "\033[1;31mNOW Wi-Fi 5G ${RADIO} DISABLE\033[0;39m"
+    echo -e "\033[1;31mWi-Fi 5G ${RADIO} DISABLE\033[0;39m"
 fi
 echo -e "\033[1;37mFALLBACK Channel/ Htmode: ${FB_CHANNEL}Ch/ ${MODE}${FB_BAND}\033[0;39m"
 echo -e "\033[1;33mWi-Fi 5G Channel/ Htmode: ${CHANNEL}Ch/ ${HTMODE}\033[0;39m"
