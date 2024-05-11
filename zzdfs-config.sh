@@ -83,7 +83,7 @@ function _DFS() {
 	
 
 read DEV < /tmp/config-software/dev
-winfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
+iwinfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
 if [ $? = 0 ]; then
     read RADIO < /tmp/config-software/radio
     WIFI=`uci get wireless.${RADIO}.disabled`
