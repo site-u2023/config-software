@@ -87,8 +87,8 @@ if [ $? = 0 ]; then
     read RADIO < /tmp/config-software/radio
     WIFI=`uci get wireless.${RADIO}.disabled`
     if [ "${WIFI}" != 1 ]; then 
-		dfs=`logread -e "DFS->DISABLED"`
-		if [ -n "${dfs}" ]; then
+		DFS=`logread -e "DFS->DISABLED"`
+		if [ -n "${DFS}" ]; then
 			_DFS
 		else
 			wifi reload ${RADIO}
