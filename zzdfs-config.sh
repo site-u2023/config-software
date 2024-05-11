@@ -55,7 +55,6 @@ function _DFS() {
 	sed -i "/zzdfs.sh/d" /etc/crontabs/root
 	service cron restart
 	service log restart
-	read INTERVAL < /tmp/config-software/interval
 	read RADIO < /tmp/config-software/radio
 	read FB_CHANNEL < /tmp/config-software/fb_channel
 	read FB_BAND < /tmp/config-software/fb_band
@@ -68,7 +67,6 @@ function _DFS() {
 	wifi reload ${RADIO}
 	sleep 30m
 	logger "ZZDFS: ZZDFS_OFF"	
-	read RADIO < /tmp/config-software/radio
 	read CHANNEL < /tmp/config-software/channel
 	read HTMODE < /tmp/config-software/htmode
 	uci set wireless.${RADIO}.channel=${CHANNEL}
@@ -76,6 +74,7 @@ function _DFS() {
 	uci commit wireless
 	wifi reload ${RADIO}
     sleep 1m 10s
+    read INTERVAL < /tmp/config-software/interval
     echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
     service cron restart
 	return 0
@@ -88,8 +87,8 @@ if [ $? = 0 ]; then
     read RADIO < /tmp/config-software/radio
     WIFI=`uci get wireless.${RADIO}.disabled`
     if [ "${WIFI}" != 1 ]; then 
-		date_d=`logread -e "DFS->DISABLED"`
-		if [ -n "${date_d}" ]; then
+		dfs=`logread -e "DFS->DISABLED"`
+		if [ -n "${dfs}" ]; then
 			_DFS
 		else
 			wifi reload ${RADIO}
