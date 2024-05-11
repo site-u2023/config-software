@@ -11,7 +11,8 @@ START=99
 STOP=01
      
 start() {
-    sleep 1m 15s
+	sleep 1m 15s
+	logger "ZZDFS: Start"
     mkdir -p /tmp/config-software/
     RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
     CHS=`echo ${RADIO} | wc -w`
@@ -22,9 +23,10 @@ start() {
     echo $(iw dev | awk '/Interface/{print $2}' | grep ${CH}) > /tmp/config-software/dev
     echo ${INTERVAL} > /tmp/config-software/interval
     echo ${RADIO} > /tmp/config-software/radio
+	echo $(uci get wireless.${RADIO}.channel) > /tmp/config-software/channel
+    echo $(uci get wireless.${RADIO}.htmode) > /tmp/config-software/htmode    
     echo ${FB_BAND} > /tmp/config-software/fb_band
     echo ${FB_CHANNEL} > /tmp/config-software/fb_channel
-    logger "ZZDFS: Start"
     sed -i "/zzdfs.sh/d" /etc/crontabs/root
     echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
     service cron restart
@@ -48,44 +50,60 @@ mkdir -p /etc/config-software/
 cat << "EOF" > /etc/config-software/zzdfs.sh
 #! /bin/sh
 
+function _DFS() {
+	logger "ZZDFS: ZZDFS_ON"
+	sed -i "/zzdfs.sh/d" /etc/crontabs/root
+	service cron restart
+	service log restart
+	read INTERVAL < /tmp/config-software/interval
+	read RADIO < /tmp/config-software/radio
+	read FB_CHANNEL < /tmp/config-software/fb_channel
+	read FB_BAND < /tmp/config-software/fb_band
+	echo $(uci get wireless.${RADIO}.channel) > /tmp/config-software/channel
+	HTMODE=$(uci get wireless.${RADIO}.htmode | tee /tmp/config-software/htmode) 
+	MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`	
+	uci set wireless.${RADIO}.channel=${FB_CHANNEL}
+	uci set wireless.${RADIO}.htmode=${MODE}${FB_BAND}
+	uci commit wireless
+	wifi reload ${RADIO}
+	sleep 30m
+	logger "ZZDFS: ZZDFS_OFF"	
+	read RADIO < /tmp/config-software/radio
+	read CHANNEL < /tmp/config-software/channel
+	read HTMODE < /tmp/config-software/htmode
+	uci set wireless.${RADIO}.channel=${CHANNEL}
+	uci set wireless.${RADIO}.htmode=${HTMODE}
+	uci commit wireless
+	wifi reload ${RADIO}
+    sleep 1m 10s
+    echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
+    service cron restart
+	return 0
+}
+	
+
 read DEV < /tmp/config-software/dev
-iwinfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
+winfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
 if [ $? = 0 ]; then
     read RADIO < /tmp/config-software/radio
     WIFI=`uci get wireless.${RADIO}.disabled`
     if [ "${WIFI}" != 1 ]; then 
-        logger "ZZDFS: ZZDFS_On"
-        sed -i "/zzdfs.sh/d" /etc/crontabs/root
-        /etc/init.d/cron restart
-        read INTERVAL < /tmp/config-software/interval
-        read FB_CHANNEL < /tmp/config-software/fb_channel
-        read FB_BAND < /tmp/config-software/fb_band
-        CHANNEL=$(uci get wireless.${RADIO}.channel | tee /tmp/config-software/channel)
-        HTMODE=$(uci get wireless.${RADIO}.htmode | tee /tmp/config-software/htmode)
-        MODE=`echo ${HTMODE} | grep -o "[A-Z]*"`
-        uci set wireless.${RADIO}.channel=${FB_CHANNEL}
-        uci set wireless.${RADIO}.htmode=${MODE}${FB_BAND}
-        uci commit wireless
-        wifi reload ${RADIO}
-        sleep 30m
-        logger "ZZDFS: ZZDFS_Off"
-        uci set wireless.${RADIO}.channel=${CHANNEL}
-        uci set wireless.${RADIO}.htmode=${HTMODE}
-        uci commit wireless
-        wifi reload  ${RADIO}
-        sleep 1m 10s
-        echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
-        service cron restart
-    else
-        logger "ZZDFS: ${RADIO}_Disable"
-    fi
-fi    
+		date_d=`logread -e "DFS->DISABLED"`
+		if [ -n "${date_d}" ]; then
+			_DFS
+		else
+			wifi reload ${RADIO}
+		fi
+	fi
+fi
 EOF
 
 
 cat <<"EOF" > /usr/bin/zzdfst
 #! /bin/sh
+
 read INTERVAL < /tmp/config-software/interval
+
 if [ -n "$1" ]; then
     logger "ZZDFS: Interval_Change"
 	description_INTERVAL="$1"
@@ -126,14 +144,15 @@ chmod +x /usr/bin/zzdfst
 
 cat <<"EOF" > /usr/bin/zzdfsl
 #!/bin/sh
+LOGDIR="/tmp/log/syslog"
 echo -e "\033[1;36mZZDFS\033[0;39m"
 echo -e "\033[1;36mLOG ------------------------------------\033[0;39m"
 echo -e "\033[1;37mLOG:\033[0;39m"
-exec logread | grep "ZZDFS" | awk '{ print $1,$2,$3,$4,$5,$9 }' | tail -n 10
+grep "ZZDFS" ${LOGDIR} | awk '{ print $1,$2,$3,$4,$5,$9 }' | tail -n 10
 echo -e "\033[1;37mDISABLED:\033[0;39m"
-exec logread | grep "DFS->disabled" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
+grep "DFS->DISABLED" ${LOGDIR} | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
 echo -e "\033[1;37mENABLED:\033[0;39m"
-exec logread | grep "DFS->ENABLED" | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
+grep "DFS->ENABLED" ${LOGDIR} | awk '{ print $1,$2,$3,$4,$5,$11 }' | tail -n 1
 echo -e "\033[1;36mINFORMATION ----------------------------\033[0;39m"
 read INTERVAL < /tmp/config-software/interval
 echo -e "\033[1;37mInterval: ${INTERVAL}min\033[0;39m"
@@ -147,12 +166,12 @@ CHANNEL=$(uci get wireless.${RADIO}.channel)
 HTMODE=$(uci get wireless.${RADIO}.htmode)
 WIFI=`uci get wireless.${RADIO}.disabled` 2>/dev/null
 if [ "${WIFI}" != 1 ]; then
-    echo -e "\033[1;37mWi-Fi 5G ${RADIO} ENABLE\033[0;39m"   
+    echo -e "\033[1;32mWi-Fi 5G ${RADIO} ENABLE\033[0;39m"   
 else
-    echo -e "\033[1;37mWi-Fi 5G ${RADIO} DISABLE\033[0;39m"
+    echo -e "\033[1;31mNOW Wi-Fi 5G ${RADIO} DISABLE\033[0;39m"
 fi
-echo -e "\033[1;37mWi-Fi 5G Channel/ Htmode: ${CHANNEL}Ch/ ${HTMODE}\033[0;39m"
 echo -e "\033[1;37mFALLBACK Channel/ Htmode: ${FB_CHANNEL}Ch/ ${MODE}${FB_BAND}\033[0;39m"
+echo -e "\033[1;33mWi-Fi 5G Channel/ Htmode: ${CHANNEL}Ch/ ${HTMODE}\033[0;39m"
 echo -e "\033[1;36m----------------------------------------\033[0;39m"
 EOF
 chmod +x /usr/bin/zzdfsl
