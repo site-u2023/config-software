@@ -85,10 +85,10 @@ read DEV < /tmp/config-software/dev
 iwinfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
 if [ $? = 0 ]; then
     read RADIO < /tmp/config-software/radio
-    uci get wireless.${RADIO}.disabled 2>&1
-    if [ $? = 1 ]; then
-		logread -e "DFS->DISABLED" 2>&1
-		if [ $? = 0 ]; then
+    WIFI=`uci get wireless.${RADIO}.disabled`
+    if [ "${WIFI}" != 1 ]; then 
+		DFS=`logread -e "DFS->DISABLED"`
+		if [ -n "${DFS}" ]; then
 			_DFS
 		else
     		wifi reload ${RADIO}
