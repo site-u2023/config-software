@@ -13,7 +13,7 @@ STOP=01
 start() {
 	sleep 1m 15s
 	logger "ZZDFS: Start"
-	mkdir -p /tmp/config-software/
+    mkdir -p /tmp/config-software/
     RADIO=`uci show wireless | grep "band='5g'" | cut -d'.' -f2 | awk '{ print $1 }'`
     CHS=`echo ${RADIO} | wc -w`
     if [ ${CHS} = 2 ];then
@@ -79,22 +79,7 @@ function _DFS() {
     service cron restart
 	return 0
 }
-	
 
-read DEV < /tmp/config-software/dev
-iwinfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
-if [ $? = 0 ]; then
-    read RADIO < /tmp/config-software/radio
-    uci get wireless.${RADIO}.disabled 2>&1
-    if [ $? = 1 ]; then
-		logread -e "DFS->DISABLED" 2>&1
-		if [ $? = 0 ]; then
-			_DFS
-		else
-    		wifi reload ${RADIO}
-		fi
-	fi
-fi
 
 read DEV < /tmp/config-software/dev
 iwinfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
