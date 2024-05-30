@@ -51,10 +51,9 @@ cat << "EOF" > /etc/config-software/zzdfs.sh
 #! /bin/sh
 
 function _DFS() {
-	logger "ZZDFS: ZZDFS_ON"
+logger "ZZDFS: ZZDFS_ON"
 	sed -i "/zzdfs.sh/d" /etc/crontabs/root
 	service cron restart
-	service log restart
 	read RADIO < /tmp/config-software/radio
 	read FB_CHANNEL < /tmp/config-software/fb_channel
 	read FB_BAND < /tmp/config-software/fb_band
@@ -74,6 +73,7 @@ function _DFS() {
 	uci commit wireless
 	wifi reload ${RADIO}
     sleep 1m 10s
+    service log restart
     read INTERVAL < /tmp/config-software/interval
     echo "*/${INTERVAL} * * * * sh /etc/config-software/zzdfs.sh # ZZDFS" >> /etc/crontabs/root
     service cron restart
