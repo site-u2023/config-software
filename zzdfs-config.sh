@@ -1,5 +1,11 @@
 #! /bin/sh
 
+uci set system.@system[0].log_file='/var/log/syslog'
+uci set 
+uci commit system
+service system restart
+service log restart
+
 cat << "EOF" > /etc/init.d/zzdfs
 #!/bin/sh /etc/rc.common
 
