@@ -57,7 +57,7 @@ cat << "EOF" > /etc/config-software/zzdfs.sh
 #! /bin/sh
 
 function _DFS() {
-logger "ZZDFS: ZZDFS_ON"
+	logger "ZZDFS: ZZDFS_ON"
 	sed -i "/zzdfs.sh/d" /etc/crontabs/root
 	service cron restart
 	read RADIO < /tmp/config-software/radio
@@ -92,13 +92,8 @@ iwinfo ${DEV} info 2>&1 | grep -q 'No such wireless device'
 if [ $? = 0 ]; then
     read RADIO < /tmp/config-software/radio
     WIFI=`uci get wireless.${RADIO}.disabled`
-    if [ "${WIFI}" != 1 ]; then 
-		DFS=`logread -e "DFS->DISABLED"`
-		if [ -n "${DFS}" ]; then
-			_DFS
-		else
-    		wifi reload ${RADIO}
-		fi
+    if [ 1 != "${WIFI}" ]; then 
+        _DFS
 	fi
 fi
 EOF
