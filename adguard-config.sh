@@ -208,6 +208,7 @@ chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
+opkg install --nodeps libuuid1
 if [ -n "${AD_INST}" ]; then
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
 sh /etc/config-software/adguard.sh
