@@ -120,41 +120,41 @@ PACAGE_LIST=`cat  /etc/config-software/pacage_list |sed -ne '/ <script type/,/<\
 #echo $PACAGE_LIST
 
 # log viewer
-LOG_VIEWER=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-log-viewer") ,41)}'`
+LOG_VIEWER=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-log-viewer") ,44)}'`
 #echo $LOG_VIEWER
 wget --no-check-certificate -O /tmp/luci-app-log-viewer_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LOG_VIEWER}
 opkg install /tmp/luci-app-log-viewer_all.ipk
 rm /tmp/luci-app-log-viewer_all.ipk
 
 # cpu status
-CPU_STATUS_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-cpu-status_0") ,41)}'`
+CPU_STATUS_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-cpu-status_0") ,44)}'`
 #echo $CPU_STATUS_V
 wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${CPU_STATUS_V}
 opkg install /tmp/luci-app-cpu-status_all.ipk
 rm /tmp/luci-app-cpu-status_all.ipk
 
 # cpu perf
-CPU_PERF_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-cpu-perf") ,39)}'`
+CPU_PERF_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-cpu-perf") ,42)}'`
 #echo $CPU_PERF_V
 wget --no-check-certificate -O /tmp/luci-app-cpu-perf_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${CPU_PERF_V}
 opkg install /tmp/luci-app-cpu-perf_all.ipk
 rm /tmp/luci-app-cpu-perf_all.ipk
 
 # temp status
-TEMP_STATUS_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-temp-status") ,42)}'`
+TEMP_STATUS_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-temp-status") ,45)}'`
 #echo $TEMP_STATUS_V
 wget --no-check-certificate -O /tmp/luci-app-temp-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${TEMP_STATUS_V}
 opkg install /tmp/luci-app-temp-status_all.ipk
 rm /tmp/luci-app-temp-status_all.ipk
 
 # Internet detector
-INTERNET_DETECTOR=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/internet-detector_1") ,39)}'`
+INTERNET_DETECTOR=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/internet-detector_1") ,41)}'`
 #echo $INTERNET_DETECTOR
 wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR}
 opkg install /tmp/internet-detector_all.ipk
 rm /tmp/internet-detector_all.ipk
 /etc/init.d/internet-detector enable
-LUCI_APP_INTERNET_DETECTER_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-internet-detector") ,48)}'`
+LUCI_APP_INTERNET_DETECTER_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-internet-detector") ,51)}'`
 #echo $LUCI_APP_INTERNET_DETECTER_V
 wget --no-check-certificate -O /tmp/luci-app-internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_INTERNET_DETECTER_V}
 opkg install /tmp/luci-app-internet-detector_all.ipk
@@ -190,7 +190,7 @@ hd-idle
 luci-app-hd-idle
 EOF
 
-LUCI_APP_DISKA_INFO_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-disks-info") ,41)}'`
+LUCI_APP_DISKA_INFO_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-disks-info") ,44)}'`
 #echo $LUCI_APP_DISKA_INFO_V
 wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_DISKA_INFO_V}
 opkg install /tmp/luci-app-disks-info_all.ipk
