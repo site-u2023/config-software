@@ -1,6 +1,6 @@
 US	United States
 CA	Canada
-JP3	Japan
+JP	Japan
 DE	Germany
 NL	Netherlands
 IT	Italy
