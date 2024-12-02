@@ -12,10 +12,8 @@ opkg update
 opkg install ttyd
 opkg install luci-app-ttyd
 
-uci del_list ttyd.@ttyd[0].client_option='fontSize=25'
 uci del_list ttyd.@ttyd[0].client_option='theme={"background": "black"}'
 uci del_list ttyd.@ttyd[0].client_option='titleFixed=ttyd'
-uci del_list ttyd.ttyd.client_option='fontSize=25'
 uci del_list ttyd.ttyd.client_option='theme={"background": "blue"}'
 uci del_list ttyd.ttyd.client_option='titleFixed=config-software'
 
@@ -25,7 +23,6 @@ uci set ttyd.@ttyd[0].command='/bin/login -f root'
 uci set ttyd.@ttyd[0].ipv6='1'
 uci set ttyd.@ttyd[0].debug='7'
 uci set ttyd.@ttyd[0].url_arg='1'
-uci add_list ttyd.@ttyd[0].client_option='fontSize=25'
 uci add_list ttyd.@ttyd[0].client_option='theme={"background": "black"}'
 uci add_list ttyd.@ttyd[0].client_option='titleFixed=ttyd'
 uci set ttyd.ttyd=ttyd
@@ -35,11 +32,10 @@ uci set ttyd.ttyd.ipv6='1'
 uci set ttyd.ttyd.debug='7'
 uci set ttyd.ttyd.command='confsoft'
 uci set ttyd.ttyd.url_arg='1'
-uci add_list ttyd.ttyd.client_option='fontSize=25'
 uci add_list ttyd.ttyd.client_option='theme={"background": "blue"}'
 uci add_list ttyd.ttyd.client_option='titleFixed=config-software'
 
 uci commit ttyd
-/etc/init.d/ttyd start
-#/etc/init.d/rpcd restart
+/etc/init.d/ttyd enable
+/etc/init.d/rpcd start
 
