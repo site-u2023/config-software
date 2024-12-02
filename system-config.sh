@@ -305,27 +305,27 @@ do
   echo -e " \033[1;33mDevice Password: ${input_str_ROOT_PASSWD}\033[0;39m"
   echo -e " \033[1;35mWi-Fi Country Code: ${input_str_COUNTRY}\033[0;39m"
   if [ ! -z ${WIFI_NO_A} ]; then
-  echo -e " \033[1;32mWi-Fi ${RADIO_A} ${WIFI_NO_A} SSID: ${input_str_WIFI_PASSWD_A}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${RADIO_A} ${WIFI_NO_A} SSID: ${input_str_WIFI_SSID_A}\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_A} ${WIFI_NO_A} Password: ${input_str_WIFI_PASSWD_A}\033[0;39m"
   fi
   if [ ! -z ${WIFI_NO_AA} ]; then
-  echo -e " \033[1;32mWi-Fi ${RADIO_AA} ${WIFI_NO_AA} SSID: ${input_str_WIFI_PASSWD_AA}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${RADIO_AA} ${WIFI_NO_AA} SSID: ${input_str_WIFI_SSID_AA}\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_AA} ${WIFI_NO_AA} Password: ${input_str_WIFI_PASSWD_AA}\033[0;39m"
   fi
   if [ ! -z ${WIFI_NO_B} ]; then
-  echo -e " \033[1;32mWi-Fi ${RADIO_B} ${WIFI_NO_B} SSID: ${input_str_WIFI_PASSWD_B}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${RADIO_B} ${WIFI_NO_B} SSID: ${input_str_WIFI_SSID_B}\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_B} ${WIFI_NO_B} Password: ${input_str_WIFI_PASSWD_B}\033[0;39m"
   fi
   if [ ! -z ${WIFI_NO_BB} ]; then
-  echo -e " \033[1;32mWi-Fi ${RADIO_BB} ${WIFI_NO_BB} SSID: ${input_str_WIFI_PASSWD_BB}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${RADIO_BB} ${WIFI_NO_BB} SSID: ${input_str_WIFI_SSID_BB}\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_BB} ${WIFI_NO_BB} Password: ${input_str_WIFI_PASSWD_BB}\033[0;39m"
   fi
   if [ ! -z ${WIFI_NO_C} ]; then
-  echo -e " \033[1;32mWi-Fi ${RADIO_C} ${WIFI_NO_C} SSID: ${input_str_WIFI_PASSWD_C}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${RADIO_C} ${WIFI_NO_C} SSID: ${input_str_WIFI_SSID_C}\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_C} ${WIFI_NO_C} Password: ${input_str_WIFI_PASSWD_C}\033[0;39m"
   fi
   if [ ! -z ${WIFI_NO_CC} ]; then
-  echo -e " \033[1;32mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} SSID: ${input_str_WIFI_PASSWD_CC}\033[0;39m"
+  echo -e " \033[1;32mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} SSID: ${input_str_WIFI_SSID_CC}\033[0;39m"
   echo -e " \033[1;36mWi-Fi ${RADIO_CC} ${WIFI_NO_CC} Password: ${input_str_WIFI_PASSWD_CC}\033[0;39m"
   fi
   if [ -n "$GUEST" ]; then
