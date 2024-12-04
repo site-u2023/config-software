@@ -1047,7 +1047,7 @@ if [ -z "$TTYD_JA" ]; then
 opkg install luci-i18n-ttyd-$input_str_Languages
 fi
 
-coreutils
+# coreutils
 if [ -z "$CORE" ]; then
 opkg install coreutils
 fi
