@@ -905,7 +905,7 @@ uci set ttyd.@ttyd[0].url_arg='1'
 uci commit ttyd
 fi
 
-coreutils
+# coreutils
 if [ -z "$CORE" ]; then
 opkg install coreutils
 fi
