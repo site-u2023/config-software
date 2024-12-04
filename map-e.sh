@@ -857,7 +857,7 @@ cp /etc/config/firewall /etc/config/firewall.map-e.old
 # DHCP LAN
 uci set dhcp.lan=dhcp
 uci set dhcp.lan.ra='relay'
-uci set dhcp.lan.dhcpv6='server'
+uci set dhcp.lan.dhcpv6='relay'
 uci set dhcp.lan.ndp='relay'
 uci set dhcp.lan.force='1'
 
@@ -906,7 +906,7 @@ uci set network.${WANMAP}.offset=${offset}
 uci set network.${WANMAP}.legacymap='1'
 uci set network.${WANMAP}.mtu='1460'
 uci set network.${WANMAP}.tunlink='wan6'
-uci set network.${WANMAP}.encaplimit='ignore'
+uci set network.${WANMAP}.encaplimit='ignore' # Onry_V6plus
 
 # FW
 ZOON_NO='1'
