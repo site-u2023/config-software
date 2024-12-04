@@ -903,7 +903,6 @@ uci set network.${WANMAP}.encaplimit='ignore' # Onry_V6plus
 ZOON_NO='1'
 uci del_list firewall.@zone[${ZOON_NO}].network='wan'
 uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAP}
-#uci add_list firewall.@zone[${ZOON_NO}].network=${WAN6RA} # Onry_OCN
 
 uci commit
 
