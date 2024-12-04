@@ -45,7 +45,7 @@ opkg install bash
 opkg install map
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
+wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-ocn.sh
 sed -i "/Onry_V6plus/d"  /etc/config-software/map-e.sh
 bash /etc/config-software/map-e.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -112,7 +112,7 @@ opkg install bash
 opkg install map
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
+wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-v6plus.sh
 sed -i "/Onry_OCN/d"  /etc/config-software/map-e.sh
 bash /etc/config-software/map-e.sh 2> /dev/null
 read -p " 何かキーを押してデバイスを再起動してください"
