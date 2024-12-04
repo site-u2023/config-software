@@ -854,15 +854,15 @@ cp /etc/config/network /etc/config/network.map-e.old
 cp /etc/config/network /etc/config/dhcp.map-e.old
 cp /etc/config/firewall /etc/config/firewall.map-e.old
 
+# WAN
+uci set network.wan.auto='0'
+
 # DHCP LAN
 uci set dhcp.lan=dhcp
 uci set dhcp.lan.ra='relay'
 uci set dhcp.lan.dhcpv6='relay'
 uci set dhcp.lan.ndp='relay'
 uci set dhcp.lan.force='1'
-
-# WAN
-uci set network.wan.auto='0'
 
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
@@ -880,15 +880,6 @@ uci set network.wan6.proto='dhcpv6'
 uci set network.wan6.reqaddress='try'
 uci set network.wan6.reqprefix='auto'
 uci set network.wan6.ip6prefix=${CE}::/64
-
-# WAN6RA # Onry_OCN
-#WAN6RA='wan6ra' # Onry_OCN
-#zuci set network.${WAN6RA}=interface # Onry_OCN
-#zuci set network.${WAN6RA}.device=${WAN6_DEVICE} # Onry_OCN
-#uci set network.${WAN6RA}.proto='static' # Onry_OCN
-#uci set network.${WAN6RA}.ip6gw=${CE}::1 # Onry_OCN
-#uci set network.${WAN6RA}.ip6prefix=${CE}::/56 # Onry_OCN
-#uci add_list network.${WAN6RA}.ip6addr=${CE}::1001 # Onry_OCN
 
 # WANMAP
 WANMAP='wanmap'
@@ -918,10 +909,6 @@ uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
 echo -e "\033[1;32m wan6 ip6prefix: \033[0;39m"${CE}::/64
-#echo -e "\033[1;32m ${WAN6RA} device: \033[0;39m${WAN6_DEVICE} # Onry_OCN
-#echo -e "\033[1;32m ${WAN6RA} ip6gw: \033[0;39m"${CE}::1 # Onry_OCNN
-#echo -e "\033[1;32m ${WAN6RA} ip6prefix: \033[0;39m"${CE}::/56 # Onry_OCN
-#echo -e "\033[1;32m ${WAN6RA} ip6addr: \033[0;39m"${CE}::1001 # Onry_OCN
 echo -e "\033[1;32m ${WANMAP} peeraddr: \033[0;39m"${peeraddr}
 echo -e "\033[1;32m ${WANMAP} ip4prefixlen: \033[0;39m"${ip4prefixlen}
 echo -e "\033[1;32m ${WANMAP} ip6pfx: \033[0;39m"${ip6pfx}::
