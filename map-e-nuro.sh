@@ -71,7 +71,7 @@ uci set network.${WANMAP}.ealen='20'
 uci set network.${WANMAP}.psidlen='8'
 uci set network.${WANMAP}.offset='4'
 uci set network.${WANMAP}.legacymap='1'
-uci set network.${WANMAP}.mtu='1460'
+uci set network.${WANMAP}.mtu='1452'
 uci set network.${WANMAP}.encaplimit='ignore'
 uci set network.${WANMAP}.tunlink='wan6'
 # FW
