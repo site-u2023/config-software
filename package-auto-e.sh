@@ -148,7 +148,7 @@ opkg install /tmp/luci-app-temp-status_all.ipk
 rm /tmp/luci-app-temp-status_all.ipk
 
 # Internet detector
-INTERNET_DETECTOR=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/internet-detector_1") ,60)}' | awk '{ sub(".ipk.*$",""); print $0; }'`
+INTERNET_DETECTOR=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/internet-detector_") ,60)}' | awk '{ sub(".ipk.*$",""); print $0; }'`
 #echo $INTERNET_DETECTOR
 wget --no-check-certificate -O /tmp/internet-detector_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${INTERNET_DETECTOR}.ipk
 opkg install /tmp/internet-detector_all.ipk
