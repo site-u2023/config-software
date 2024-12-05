@@ -1057,9 +1057,9 @@ fi
 
 # disks info
 if [ -z "$luci_app_disks_info" ]; then
-LUCI_APP_DISKA_INFO_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-disks-info") ,44)}'`
+LUCI_APP_DISKA_INFO_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-disks-info") ,60)}' | awk '{ sub(".ipk.*$",""); print $0; }'`
 #echo $LUCI_APP_DISKA_INFO_V
-wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_DISKA_INFO_V}
+wget --no-check-certificate -O /tmp/luci-app-disks-info_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${LUCI_APP_DISKA_INFO_V}.ipk
 opkg install /tmp/luci-app-disks-info_all.ipk
 rm /tmp/luci-app-disks-info_all.ipk
 fi
