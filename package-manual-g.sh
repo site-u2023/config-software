@@ -1142,7 +1142,7 @@ fi
 
 # custom feed (log viewer, cpu status, cpu perf, temp status, Internet detector, disk info)
 wget --no-check-certificate -O /etc/config-software/pacage_list https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
-PACAGE_LIST=`cat  /etc/config-software/pacage_list |sed -ne '/ <script type/,/<\/script>/p' |sed -e 's/<[^>]*>//g'`
+PACAGE_LIST=`cat /etc/config-software/pacage_list |sed -ne '/ <script type/,/<\/script>/p' |sed -e 's/<[^>]*>//g'`
 #echo $PACAGE_LIST
 
 # log viewer
