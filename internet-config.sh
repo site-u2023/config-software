@@ -191,8 +191,6 @@ exit
 }
 
 function _func_MAP_e_Nuro {
-opkg update
-opkg install map
 wget -6 --no-check-certificate -O /etc/config-software/map-e-nuro.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-nuro.sh
 sh /etc/config-software/map-e-nuro.sh
 }
