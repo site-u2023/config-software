@@ -202,7 +202,7 @@ opkg install /tmp/luci-app-log-viewer_all.ipk
 rm /tmp/luci-app-log-viewer_all.ipk
 
 # cpu status
-CPU_STATUS_V=`echo ${PACAGE_LIST} | awk '{print substr($0,index($0,"current/luci-app-cpu-status_0") ,60)}' | awk '{ sub(".ipk.*$",""); print $0; }'`
+CPU_STATUS_V=`echo ${PACAGE_LIST} | awk '{ if (gsub(/luci-app-cpu-status-mini/, "HOGEHOGE")) print }' | awk '{print substr($0,index($0,"current/luci-app-cpu-status") ,60)}' | awk '{ sub(".ipk.*$",""); print $0; }'`
 #echo $CPU_STATUS_V
 wget --no-check-certificate -O /tmp/luci-app-cpu-status_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/${CPU_STATUS_V}.ipk
 opkg install /tmp/luci-app-cpu-status_all.ipk
