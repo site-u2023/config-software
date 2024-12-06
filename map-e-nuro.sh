@@ -43,7 +43,6 @@ cp /etc/config/network /etc/config/network.map-e-nuro.old
 cp /etc/config/network /etc/config/dhcp.map-e-nuro.old
 cp /etc/config/firewall /etc/config/firewall.map-e-nuro.old
 # DHCP LAN
-uci set dhcp.lan=dhcp
 uci set dhcp.lan.ra='relay'
 uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ndp='relay'
@@ -52,7 +51,7 @@ uci set dhcp.lan.force='1'
 uci set network.wan.auto='1'
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
-uci set dhcp.wan6.interface='wan6'
+uci set dhcp.wan6.ignore='1'
 uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
 uci set dhcp.wan6.dhcpv6='relay'
