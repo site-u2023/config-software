@@ -842,26 +842,22 @@ IPV4=${octet[0]}.${octet[1]}.${octet[2]}.${octet[3]}
 PSID=$psid
 BR=$peeraddr
 
-WAN6_DEVICE=`uci get network.wan6.device`
-
 # network backup
 cp /etc/config/network /etc/config/network.map-e-v6plus.old
 cp /etc/config/network /etc/config/network.map-e-v6plus.old
 cp /etc/config/firewall /etc/config/network.map-e-v6plus.old
 
-# DHCP LAN
-uci set dhcp.lan=dhcp
-uci set dhcp.lan.dhcpv6='server'
-uci set dhcp.lan.ra='relay'
-uci set dhcp.lan.ndp='relay'
-uci set dhcp.lan.force='1'
-
 # WAN
 uci set network.wan.auto='0'
 
+# DHCP LAN
+uci set dhcp.lan.ra='relay'
+uci set dhcp.lan.dhcpv6='relay'
+uci set dhcp.lan.ndp='relay'
+uci set dhcp.lan.force='1'
+
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
-uci set dhcp.wan6.interface='wan6'
 uci set dhcp.wan6.ignore='1'
 uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
@@ -869,9 +865,9 @@ uci set dhcp.wan6.dhcpv6='relay'
 uci set dhcp.wan6.ndp='relay'
 
 # WAN6
-uci set network.wan6=interface
-uci set network.wan6.device=${WAN6_DEVICE}
 uci set network.wan6.proto='dhcpv6'
+uci set network.wan6.reqaddress='try'
+uci set network.wan6.reqprefix='auto'
 uci set network.wan6.ip6prefix=${CE}::/64
 
 # WANMAP
