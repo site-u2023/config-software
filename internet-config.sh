@@ -4,11 +4,11 @@
 function _func_MAP_e_VirtualConnect {
 while :
 do
-  echo -e " \033[1;33m要ONU直結\033[0;39m"
-  echo -e " \033[1;33mHGW非対応\033[0;39m"
-  echo -e " \033[1;34mOCNバーチャルコネクト --------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]: OCNバーチャルコネクトのインストールと設定 (マルチセッション対応)\033[0;39m"
-  echo -e " \033[1;31m[b]: OCNバーチャルコネクトのリムーブと以前の設定に復元\033[0;39m"
+  echo -e " \033[7;37m要ONU直結\033[0;39m"
+  echo -e " \033[7;37mHGW非対応\033[0;39m"
+  echo -e " \033[1;34mOCNバーチャルコネクト・V6プラス・IPv6オプション ----------\033[0;39m"
+  echo -e " \033[1;34m[e]: OCNバーチャルコネクト・V6プラス・IPv6オプション自動設定（マルチセッション対応）\033[0;39m"
+  echo -e " \033[1;31m[b]: OCNバーチャルコネクト・V6プラス・IPv6オプションのリムーブと以前の設定に復元\033[0;39m"
   echo -e " \033[1;32m[n]: マルチセッション対応設定のみ実行\033[0;39m"
   echo -e " \033[1;35m[o]: マルチセッション対応設定を以前の設定に復元\033[0;39m"
   echo -e " \033[1;33m[r]: 戻る\033[0;39m"
@@ -27,7 +27,7 @@ done
 function _func_MAP_e_VirtualConnect_confirmation {
 while :
 do
-  echo -e " \033[1;37mOCNバーチャルコネクトの設定とインストールとを実行します\033[0;39m"
+  echo -e " \033[1;37mOCNバーチャルコネクト・V6プラス・IPv6オプションの設定（マルチセッション対応）とインストールとを実行します\033[0;39m"
   echo -e " \033[1;37mインストール: map 6kB\033[0;39m"
   echo -e " \033[1;37mインストール: bash 375kB\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
@@ -56,7 +56,7 @@ exit
 function _func_MAP_e_VirtualConnect_Before {
 while :
 do
-  echo -e " \033[1;37mOCNバーチャルコネクトの設定を以前の設定に復元します\033[0;39m"
+  echo -e " \033[1;37mOCNバーチャルコネクト・V6プラス・IPv6オプション（マルチセッション対応）の設定を以前の設定に復元します\033[0;39m"
   echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
   echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
   read -p " 宜しいですか [y/n or r]: " num
@@ -66,87 +66,6 @@ do
     "r" ) break ;;
   esac
 done
-}
-
-function _func_MAP_e_V6plus {
-while :
-do
-  echo -e " \033[1;33m要ONU直結\033[0;39m"
-  echo -e " \033[1;33mHGW非対応\033[0;39m"
-  echo -e " \033[1;33mV6プラス・IPv6オプション -----------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]: V6プラス・IPv6オプションの設定を実行 (マルチセッション対応)\033[0;39m"
-  echo -e " \033[1;31m[b]: 以前の設定に復元\033[0;39m"
-  echo -e " \033[1;32m[n]: マルチセッション対応設定のみ実行\033[0;39m"
-  echo -e " \033[1;35m[o]: マルチセッション対応設定を以前の設定に復元\033[0;39m"
-  echo -e " \033[1;33m[r]: 戻る\033[0;39m"
-  echo -e " \033[1;33m------------------------------------------------------\033[0;39m"
-  read -p " 選択してください [e/b/n/o or r]: " num
-  case "${num}" in
-    "e" ) _func_MAP_e_V6plus_confirmation ;;
-    "b" ) _func_MAP_e_V6plus_Before ;;
-    "n" ) _func_MAP_e_Nichiban_map ;;
-    "o" ) _func_MAP_e_Nichiban_map_Before ;;
-    "r" ) break ;;
-  esac
-done
-}
-
-function _func_MAP_e_V6plus_confirmation {
-while :
-do
-  echo -e " \033[1;37mV6プラス・IPv6オプションの設定を実行します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: map サイズ: 6kBをインストールします\033[0;39m"
-  echo -e " \033[1;37mパッケージ: bash サイズ: 375kBをインストールします\033[0;39m"
-  read -p " 宜しいですか [y/n or r]: " num
-  case "${num}" in
-    "y" ) _func_MAP_e_V6plus_SET ;;
-    "n" ) _func_MAP_e_V6plus ;;
-    "r" ) break ;;
-  esac
-done
-}
-
-function _func_MAP_e_V6plus_SET {
-opkg update
-opkg install bash
-opkg install map
-cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
-wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
-sed -i "/Onry_OCN/d"  /etc/config-software/map-e.sh
-bash /etc/config-software/map-e.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
-}
-
-function _func_MAP_e_V6plus_Before {
-while :
-do
-  echo -e " \033[1;37mV6プラス・IPv6オプションの設定を以前の設定に復元します\033[0;39m"
-  echo -e " \033[1;37mパッケージ: mapはリムーブしません\033[0;39m"
-  echo -e " \033[1;37mパッケージ: bashはリムーブしません\033[0;39m"
-  read -p " 宜しいですか [y/n or r]: " num
-  case "${num}" in
-    "y" ) _func_MAP_e_Restoration ;;
-    "n" ) _func_MAP_e_V6plus ;;
-    "r" ) break ;;
-  esac
-done
-}
-function _func_MAP_e_Restoration {
-cp /etc/config/network.map-e.old /etc/config/network
-cp /etc/config/dhcp.map-e.old /etc/config/dhcp
-cp /etc/config/firewall.map-e.old /etc/config/firewall
-rm /etc/config/network.map-e.old
-rm /etc/config/dhcp.map-e.old
-rm /etc/config/firewall.map-e.old
-cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
-rm /lib/netifd/proto/map.sh.old
-rm /etc/config-software/map-e.sh
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
 }
 
 function _func_MAP_e_Nichiban_map {
@@ -198,7 +117,7 @@ sh /etc/config-software/map-e-nuro.sh
 function _func_DS_LITE_Transix {
 while :
 do
-  echo -e " \033[1;35mトランジックス ---------------------------------------\033[0;39m"
+  echo -e " \033[1;32mトランジックス ---------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: （NTT東日本エリア）トランジックスの設定を実行\033[0;39m"
   echo -e " \033[1;32m[w]: （NTT西日本エリア）トランジックスの設定を実行\033[0;39m"
   echo -e " \033[1;31m[b]: 以前の設定に復元\033[0;39m"
@@ -283,7 +202,7 @@ done
 function _func_DS_LITE_Xpass {
 while :
 do
-  echo -e " \033[1;31mクロスパス -------------------------------------------\033[0;39m"
+  echo -e " \033[1;35mクロスパス -------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: クロスパスの設定を実行\033[0;39m"
   echo -e " \033[1;31m[b]: 以前の設定に復元\033[0;39m"
   echo -e " \033[1;33m[r]: 戻る\033[0;39m"    
@@ -340,11 +259,11 @@ done
 function _func_DS_LITE_V6connect {
 while :
 do
-  echo -e " \033[1;36mv6 コネクト -----------------------------------------\033[0;39m"
+  echo -e " \033[1;35mv6 コネクト -----------------------------------------\033[0;39m"
   echo -e " \033[1;34m[e]: v6コネクトの設定を実行\033[0;39m"
   echo -e " \033[1;31m[b]: 以前の設定に復元\033[0;39m"
   echo -e " \033[1;33m[r]: 戻る\033[0;39m"    
-  echo -e " \033[1;31m-----------------------------------------------------\033[0;39m"
+  echo -e " \033[1;35m-----------------------------------------------------\033[0;39m"
   read -p " 選択してください [e/b or r]: " num
   case "${num}" in
     "e" ) _func_DS_LITE_V6connect_confirmation ;;
@@ -407,14 +326,14 @@ exit
 function _func_PPPoE {
 while :
 do
-  echo -e " \033[1;33m認証ID (ユーザー名)及びパスワードを準備下さい\033[0;39m"
-  echo -e " \033[1;37mPPPoE -----------------------------------------------\033[0;39m"
+  echo -e " \033[1;35m認証ID (ユーザー名)及びパスワードを準備下さい\033[0;39m"
+  echo -e " \033[1;31mPPPoE -----------------------------------------------\033[0;39m"
   echo -e " \033[1;34m[4]: PPPoEのIPv4接続の設定を実行\033[0;39m"
   echo -e " \033[1;32m[6]: PPPoEのIPv4及びIPv6接続の設定を実行\033[0;39m"
   echo -e " \033[1;31m[b]: PPPoEのIPv4接続を以前の設定に復元\033[0;39m"
   echo -e " \033[1;35m[w]: PPPoEのIPv4及びIPv6接続を以前の設定に復元\033[0;39m"
   echo -e " \033[1;33m[r]: 戻る\033[0;39m"    
-  echo -e " \033[1;36m-----------------------------------------------------\033[0;39m"
+  echo -e " \033[1;35m-----------------------------------------------------\033[0;39m"
   read -p " 選択してください [4/6/b/w or r]: " num
   case "${num}" in
     "4" ) _func_PPPoE_ID ;;
@@ -457,10 +376,10 @@ done
 function _func_PPPoE_confirmation {
 while :
 do
-  echo -e " \033[1;34mPPPoE IPv4 ------------------------------------------\033[0;39m"
+  echo -e " \033[1;31mPPPoE IPv4 ------------------------------------------\033[0;39m"
   echo -e " \033[1;37m PAP・CHA認証ID (ユーザー名): ${input_str_ID}\033[0;39m"
   echo -e " \033[1;37m PAP・CHA認証パスワード     : ${input_str_PASSWORD}\033[0;39m"
-  echo -e " \033[1;34m-----------------------------------------------------\033[0;39m"
+  echo -e " \033[1;31m-----------------------------------------------------\033[0;39m"
   read -p " 設定を開始します [y/n or r]: " num
   case "${num}" in 
     "y" ) _func_PPPoE_SET ;;
@@ -564,12 +483,12 @@ done
 function _func_PPPoE_confirmation6 {
 while :
 do
-  echo -e " \033[1;32mPPPoE IPv4 IPv6 -------------------------------------\033[0;39m"
+  echo -e " \033[1;36mPPPoE IPv4 IPv6 -------------------------------------\033[0;39m"
   echo -e " \033[1;37m PAP・CHA IPv4認証ID (ユーザー名): ${input_str_ID4}\033[0;39m"
   echo -e " \033[1;37m PAP・CHA IPv4認証パスワード     : ${input_str_PASSWORD4}\033[0;39m"
   echo -e " \033[1;37m PAP・CHA IPv6認証ID (ユーザー名): ${input_str_ID6}\033[0;39m"
   echo -e " \033[1;37m PAP・CHA IPv6認証パスワード     : ${input_str_PASSWORD6}\033[0;39m"
-  echo -e " \033[1;32m-----------------------------------------------------\033[0;39m"
+  echo -e " \033[1;36m-----------------------------------------------------\033[0;39m"
   read -p " 設定を開始します [y/n or r]: " num
   case "${num}" in
     "y" ) _func_PPPoE_SET6 ;;
@@ -633,21 +552,20 @@ fi
 
 while :
 do
-  echo -e " \033[1;33mJapanese notation\033[0;39m"
-  echo -e " \033[1;33m要ONU直結\033[0;39m"
+  echo -e " \033[7;37mJapanese notation\033[0;39m"
+  echo -e " \033[7;37m要ONU直結\033[0;39m"
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[v]: OCNバーチャルコネクト自動設定 (マルチセッション対応)\033[0;39m"
-  echo -e " \033[1;33m[p]: V6プラス・IPv6オプション自動設定 (マルチセッション対応)\033[0;39m"
-  echo -e " \033[1;32m[n]: NURO光 MAP-e自動設定 (検証中)\033[0;39m"  
-  echo -e " \033[1;35m[t]: トランジックス自動設定\033[0;39m"
-  echo -e " \033[1;31m[x]: クロスパス自動設定\033[0;39m"
-  echo -e " \033[1;36m[c]: v6 コネクト自動設定\033[0;39m"
-  echo -e " \033[1;37m[o]: PPPoE (iPv4・IPv6): 要認証ID (ユーザー名)・パスワード\033[0;39m"
-  echo -e " \033[7;40m[q]: 終了\033[0;39m"
+  echo -e " \033[1;34m[e]: OCNバーチャルコネクト・V6プラス・IPv6オプション自動設定（マルチセッション対応）\033[0;39m"
+  echo -e " \033[1;33m[n]: NURO光 MAP-e自動設定 (検証中)\033[0;39m"  
+  echo -e " \033[1;32m[t]: トランジックス自動設定\033[0;39m"
+  echo -e " \033[1;35m[x]: クロスパス自動設定\033[0;39m"
+  echo -e " \033[1;31m[c]: v6 コネクト自動設定\033[0;39m"
+  echo -e " \033[1;36m[o]: PPPoE (iPv4・IPv6): 要認証ID (ユーザー名)・パスワード\033[0;39m"
+  echo -e " \033[7;37m[q]: 終了\033[0;39m"
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
   read -p " 選択してください [v/p/n/t/x/c/o or q]: " num
   case "${num}" in
-    "v" ) _func_MAP_e_VirtualConnect ;;
+    "e" ) _func_MAP_e_VirtualConnect ;;
     "p" ) _func_MAP_e_V6plus ;;
     "n" ) _func_MAP_e_Nuro ;;
     "t" ) _func_DS_LITE_Transix ;;
