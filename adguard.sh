@@ -1,6 +1,5 @@
 #! /bin/sh
 
-
 cp /etc/config/network /etc/config/network.adguard.bak
 cp /etc/config/dhcp /etc/config/dhcp.adguard.bak
 cp /etc/config/firewall /etc/config/firewall.adguard.bak
