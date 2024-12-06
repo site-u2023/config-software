@@ -109,6 +109,17 @@ reboot
 exit
 }
 
+function _func_MAP_e_Restoration {
+cp /etc/config/network.map-e.old /etc/config/network
+rm /etc/config/network.map-e.old
+cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
+rm /lib/netifd/proto/map.sh.old
+rm /etc/config-software/map-e.sh
+read -p " 何かキーを押してデバイスを再起動してください"
+reboot
+exit
+}
+
 function _func_MAP_e_Nuro {
 wget -6 --no-check-certificate -O /etc/config-software/map-e-nuro.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e-nuro.sh
 sh /etc/config-software/map-e-nuro.sh
