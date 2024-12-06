@@ -1,6 +1,5 @@
 #! /bin/sh
 
- 
 opkg install adblock-fast
 opkg install luci-app-adblock-fast
 opkg install luci-i18n-adblock-fast-ja
@@ -15,5 +14,6 @@ uci set adblock-fast.file_url.url='https://raw.githubusercontent.com/tofukko/fil
 uci set adblock-fast.file_url.action='block'
 uci set adblock-fast.file_url.enabled='1'
 uci commit adblock-fast
-service adblock-fast enable
-service adblock-fast start
+/etc/init.d/adblock-fast enable
+/etc/init.d/adblock-fast start
+
