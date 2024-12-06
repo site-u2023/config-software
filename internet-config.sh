@@ -111,7 +111,6 @@ exit
 
 function _func_MAP_e_Restoration {
 cp /etc/config/network.map-e.old /etc/config/network
-rm /etc/config/network.map-e.old
 cp /etc/config/dhcp.map-e.old /etc/config/dhcp
 cp /etc/config/firewall.map-e.old /etc/config/firewall
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
