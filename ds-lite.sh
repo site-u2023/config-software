@@ -4,7 +4,6 @@
 cp /etc/config/network /etc/config/network.dslite.old
 
 # DHCP LAN
-uci set dhcp.lan=dhcp
 uci set dhcp.lan.ra='relay'
 uci set dhcp.lan.dhcpv6='server'
 uci set dhcp.lan.ndp='relay'
@@ -15,7 +14,6 @@ uci set network.wan.auto='0'
 
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
-uci set dhcp.wan6.interface='wan6'
 uci set dhcp.wan6.ignore='1'
 uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
