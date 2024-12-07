@@ -558,23 +558,22 @@ do
   echo -e " \033[7;37mJapanese notation\033[0;39m"
   echo -e " \033[7;37m要ONU直結\033[0;39m"
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[e]: OCNバーチャルコネクト・V6プラス・IPv6オプション自動設定（マルチセッション対応）\033[0;39m"
+  echo -e " \033[1;34m[m]: OCNバーチャルコネクト・V6プラス・IPv6オプション自動設定（マルチセッション対応）\033[0;39m"
   echo -e " \033[1;33m[n]: NURO光 MAP-e自動設定 (検証中)\033[0;39m"  
   echo -e " \033[1;32m[t]: トランジックス自動設定\033[0;39m"
   echo -e " \033[1;35m[x]: クロスパス自動設定\033[0;39m"
-  echo -e " \033[1;31m[c]: v6 コネクト自動設定\033[0;39m"
-  echo -e " \033[1;36m[o]: PPPoE (iPv4・IPv6): 要認証ID (ユーザー名)・パスワード\033[0;39m"
+  echo -e " \033[1;31m[v]: v6 コネクト自動設定\033[0;39m"
+  echo -e " \033[1;36m[p]: PPPoE (iPv4・IPv6): 要認証ID (ユーザー名)・パスワード\033[0;39m"
   echo -e " \033[7;37m[q]: 終了\033[0;39m"
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
-  read -p " 選択してください [v/p/n/t/x/c/o or q]: " num
+  read -p " 選択してください [m/p/n/t/x/v/p or q]: " num
   case "${num}" in
-    "e" ) _func_MAP_e_VirtualConnect ;;
-    "p" ) _func_MAP_e_V6plus ;;
+    "m" ) _func_MAP_e_VirtualConnect ;;
     "n" ) _func_MAP_e_Nuro ;;
     "t" ) _func_DS_LITE_Transix ;;
     "x" ) _func_DS_LITE_Xpass ;;
-    "c" ) _func_DS_LITE_V6connect ;;
-    "o" ) _func_PPPoE ;;
+    "v" ) _func_DS_LITE_V6connect ;;
+    "p" ) _func_PPPoE ;;
     "q" ) exit ;;
   esac
 done
