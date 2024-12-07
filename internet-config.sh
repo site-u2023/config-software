@@ -114,6 +114,9 @@ cp /etc/config/network.map-e.old /etc/config/network
 cp /etc/config/dhcp.map-e.old /etc/config/dhcp
 cp /etc/config/firewall.map-e.old /etc/config/firewall
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
+rm /etc/config/network.map-e.old
+rm /etc/config/dhcp.map-e.old
+rm /etc/config/firewall.map-e.old
 rm /lib/netifd/proto/map.sh.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
@@ -511,11 +514,9 @@ done
 
 function _func_PPPoE_SET6 {
 cp /etc/config/network /etc/config/network.pppoe6.bak
-uci set network.wan=interface
 uci set network.wan.proto='pppoe'
 uci set network.wan.username=${input_str_ID4}
 uci set network.wan.password=${input_str_PASSWORD4}
-uci set network.wan6=interface
 uci set network.wan6.proto='pppoe'
 uci set network.wan6.username=${input_str_ID6}
 uci set network.wan6.password=${input_str_PASSWORD6}
