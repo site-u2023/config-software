@@ -48,7 +48,7 @@ cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
 if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-elif [[ "${OPENWRT_RELEAS}" = "20" || "${OPENWRT_RELEAS}" = "19" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "19" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
 fi
 wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
@@ -106,7 +106,7 @@ cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
 if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-elif [[ "${OPENWRT_RELEAS}" = "20" || "${OPENWRT_RELEAS}" = "19" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "19" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
 fi
 read -p " 何かキーを押してデバイスを再起動してください"
