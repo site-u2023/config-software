@@ -57,11 +57,7 @@ OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | c
 if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 elif [[ "${OPENWRT_RELEAS}" = "20" || "${OPENWRT_RELEAS}" = "19" ]]; then
-  cp /etc/firewall.user /etc/firewall.user.old
-  wget -6 --no-check-certificate -O /etc/firewall.user https://raw.githubusercontent.com/site-u2023/map-e/main/firewall.user.new
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
-  opkg update
-  opkg install iptables-mod-ipopt
 fi
 wget -6 --no-check-certificate -O /etc/config-software/map-e.sh https://raw.githubusercontent.com/site-u2023/config-software/main/map-e.sh
 bash /etc/config-software/map-e.sh 2> /dev/null
@@ -90,12 +86,10 @@ cp /etc/config/network.map-e.old /etc/config/network
 cp /etc/config/dhcp.map-e.old /etc/config/dhcp
 cp /etc/config/firewall.map-e.old /etc/config/firewall
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
-cp /etc/firewall.user.old /etc/firewall.user
 rm /etc/config/network.map-e.old
 rm /etc/config/dhcp.map-e.old
 rm /etc/config/firewall.map-e.old
 rm /lib/netifd/proto/map.sh.old
-rm /etc/firewall.user.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
@@ -126,8 +120,6 @@ OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | c
 if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 elif [[ "${OPENWRT_RELEAS}" = "20" || "${OPENWRT_RELEAS}" = "19" ]]; then
-  cp /etc/firewall.user /etc/firewall.user.old
-  wget -6 --no-check-certificate -O /etc/firewall.user https://raw.githubusercontent.com/site-u2023/map-e/main/firewall.user.new
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
 fi
 read -p " 何かキーを押してデバイスを再起動してください"
@@ -149,9 +141,7 @@ done
 
 function _func_MAP_e_Nichiban_map_Restoration {
 cp /lib/netifd/proto/map.sh.old /lib/netifd/proto/map.sh
-cp /etc/firewall.user.old /etc/firewall.user
 rm /lib/netifd/proto/map.sh.old
-rm /etc/firewall.user.old
 read -p " 何かキーを押してデバイスを再起動してください"
 reboot
 exit
