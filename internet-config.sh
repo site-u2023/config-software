@@ -566,7 +566,7 @@ do
   echo -e " \033[1;36m[p]: PPPoE (iPv4・IPv6): 要認証ID (ユーザー名)・パスワード\033[0;39m"
   echo -e " \033[7;37m[q]: 終了\033[0;39m"
   echo -e " \033[1;37m----------------------------------------------------\033[0;39m"
-  read -p " 選択してください [m/p/n/t/x/v/p or q]: " num
+  read -p " 選択してください [m/n/t/x/v/p or q]: " num
   case "${num}" in
     "m" ) _func_MAP_e_VirtualConnect ;;
     "n" ) _func_MAP_e_Nuro ;;
