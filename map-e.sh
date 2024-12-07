@@ -864,7 +864,6 @@ uci set dhcp.lan.force='1'
 # DHCP WAN6        
 uci set dhcp.wan6=dhcp
 #uci set dhcp.wan6.interface='wan6'
-#uci set dhcp.wan6.ignore='1'
 uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
 uci set dhcp.wan6.dhcpv6='relay'
@@ -900,6 +899,7 @@ uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAPE}
 # Version-specific settings
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
 if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
+  uci set dhcp.wan6.ignore='1'
   uci set network.${WANMAPE}.legacymap='1'
   uci set network.${WANMAPE}.tunlink='wan6'
 elif [[ "${OPENWRT_RELEAS}" = "20" || "${OPENWRT_RELEAS}" = "19" ]]; then
