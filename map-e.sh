@@ -877,7 +877,7 @@ uci set network.wan6.reqprefix='auto'
 uci set network.wan6.ip6prefix=${CE}::/64
 
 # WANMAP
-WANMAP='wanmap'
+WANMAPE='wanmape'
 uci set network.${WANMAP}=interface
 uci set network.${WANMAP}.proto='map'
 uci set network.${WANMAP}.maptype='map-e'
