@@ -863,6 +863,7 @@ uci set dhcp.lan.force='1'
 
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
+uci set dhcp.wan6.interface='wan6'
 uci set dhcp.wan6.ignore='1'
 uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
