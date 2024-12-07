@@ -878,35 +878,35 @@ uci set network.wan6.ip6prefix=${CE}::/64
 
 # WANMAP
 WANMAPE='wanmape'
-uci set network.${WANMAP}=interface
-uci set network.${WANMAP}.proto='map'
-uci set network.${WANMAP}.maptype='map-e'
-uci set network.${WANMAP}.peeraddr=${peeraddr}
-uci set network.${WANMAP}.ipaddr=${ip4a}
-uci set network.${WANMAP}.ip4prefixlen=${ip4prefixlen}
-uci set network.${WANMAP}.ip6prefix=${ip6pfx}::
-uci set network.${WANMAP}.ip6prefixlen=${ip6prefixlen}
-uci set network.${WANMAP}.ealen=${ealen}
-uci set network.${WANMAP}.psidlen=${psidlen}
-uci set network.${WANMAP}.offset=${offset}
-uci set network.${WANMAP}.legacymap='1'
-uci set network.${WANMAP}.mtu='1460'
-uci set network.${WANMAP}.tunlink='wan6'
-uci set network.${WANMAP}.encaplimit='ignore'
+uci set network.${WANMAPE}=interface
+uci set network.${WANMAPE}.proto='map'
+uci set network.${WANMAPE}.maptype='map-e'
+uci set network.${WANMAPE}.peeraddr=${peeraddr}
+uci set network.${WANMAPE}.ipaddr=${ip4a}
+uci set network.${WANMAPE}.ip4prefixlen=${ip4prefixlen}
+uci set network.${WANMAPE}.ip6prefix=${ip6pfx}::
+uci set network.${WANMAPE}.ip6prefixlen=${ip6prefixlen}
+uci set network.${WANMAPE}.ealen=${ealen}
+uci set network.${WANMAPE}.psidlen=${psidlen}
+uci set network.${WANMAPE}.offset=${offset}
+uci set network.${WANMAPE}.legacymap='1'
+uci set network.${WANMAPE}.mtu='1460'
+uci set network.${WANMAPE}.tunlink='wan6'
+uci set network.${WANMAPE}.encaplimit='ignore'
 
 # FW
 ZOON_NO='1'
 uci del_list firewall.@zone[${ZOON_NO}].network='wan'
-uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAP}
+uci add_list firewall.@zone[${ZOON_NO}].network=${WANMAPE}
 
 uci commit
 
 echo -e "\033[1;33m wan ipaddr6: ${NET_ADDR6}\033[0;33m"
 echo -e "\033[1;32m wan6 ip6prefix: \033[0;39m"${CE}::/64
-echo -e "\033[1;32m ${WANMAP} peeraddr: \033[0;39m"${peeraddr}
-echo -e "\033[1;32m ${WANMAP} ip4prefixlen: \033[0;39m"${ip4prefixlen}
-echo -e "\033[1;32m ${WANMAP} ip6pfx: \033[0;39m"${ip6pfx}::
-echo -e "\033[1;32m ${WANMAP} ip6prefixlen: \033[0;39m"${ip6prefixlen}
-echo -e "\033[1;32m ${WANMAP} ealen: \033[0;39m"${ealen}
-echo -e "\033[1;32m ${WANMAP} psidlen: \033[0;39m"${psidlen}
-echo -e "\033[1;32m ${WANMAP} offset: \033[0;39m"${offset}
+echo -e "\033[1;32m ${WANMAPE} peeraddr: \033[0;39m"${peeraddr}
+echo -e "\033[1;32m ${WANMAPE} ip4prefixlen: \033[0;39m"${ip4prefixlen}
+echo -e "\033[1;32m ${WANMAPE} ip6pfx: \033[0;39m"${ip6pfx}::
+echo -e "\033[1;32m ${WANMAPE} ip6prefixlen: \033[0;39m"${ip6prefixlen}
+echo -e "\033[1;32m ${WANMAPE} ealen: \033[0;39m"${ealen}
+echo -e "\033[1;32m ${WANMAPE} psidlen: \033[0;39m"${psidlen}
+echo -e "\033[1;32m ${WANMAPE} offset: \033[0;39m"${offset}
