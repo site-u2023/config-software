@@ -902,7 +902,7 @@ if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_REL
   uci set dhcp.wan6.ignore='1'
   uci set network.${WANMAPE}.legacymap='1'
   uci set network.${WANMAPE}.tunlink='wan6'
-elif [[ "${OPENWRT_RELEAS}" = "20" || "${OPENWRT_RELEAS}" = "19" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "19" ]]; then
   uci add_list network.${WANMAPE}.tunlink='wan6'
 fi
 
