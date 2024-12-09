@@ -1,4 +1,4 @@
-# OpenWrt For new settings All-in-one script Suitable for beginners
+# OpenWrt Initial Setup All-in-One Script Suitable for beginners
 
 :warning:**Please contact us if you have any problems**
 
