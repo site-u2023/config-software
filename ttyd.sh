@@ -8,9 +8,14 @@ sh /etc/config-software/openwrt-config.sh
 EOF
 chmod +x /usr/bin/confsoft
 
-opkg update
-opkg install ttyd
-opkg install luci-app-ttyd
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update
+  opkg install luci-app-ttyd
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add  luci-app-ttyd
+fi
 
 uci del_list ttyd.@ttyd[0].client_option='theme={"background": "black"}'
 uci del_list ttyd.@ttyd[0].client_option='titleFixed=ttyd'
