@@ -53,7 +53,7 @@ uci set dhcp.lan.force='1'
 uci set network.wan.auto='1'
 # DHCP WAN6
 uci set dhcp.wan6=dhcp
-uci set dhcp.wan6.ignore='1'
+#uci set dhcp.wan6.ignore='1'
 uci set dhcp.wan6.master='1'
 uci set dhcp.wan6.ra='relay'
 uci set dhcp.wan6.dhcpv6='relay'
@@ -71,10 +71,20 @@ uci set network.${WANMAP}.ip6prefixlen='36'
 uci set network.${WANMAP}.ealen='20'
 uci set network.${WANMAP}.psidlen='8'
 uci set network.${WANMAP}.offset='4'
-uci set network.${WANMAP}.legacymap='1'
+#uci set network.${WANMAP}.legacymap='1'
 uci set network.${WANMAP}.mtu='1452'
 uci set network.${WANMAP}.encaplimit='ignore'
-uci set network.${WANMAP}.tunlink='wan6'
+#uci set network.${WANMAP}.tunlink='wan6'
+# Version-specific settings
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "SN" || "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
+  #uci set dhcp.wan6.interface='wan6'
+  uci set dhcp.wan6.ignore='1'
+  uci set network.${WANMAP}.legacymap='1'
+  uci set network.${WANMAP}.tunlink='wan6'
+elif [[ "${OPENWRT_RELEAS}" = "19" ]]; then
+  uci add_list network.${WANMAP}.tunlink='wan6'
+fi
 # FW
 ZOON_NO='1'
 uci del_list firewall.@zone[${ZOON_NO}].network='wan'
