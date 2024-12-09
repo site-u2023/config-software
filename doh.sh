@@ -74,11 +74,12 @@ if [ "stubby" = "`opkg list-installed stubby | awk '{ print $1 }'`" ]; then
  exit
 fi
 
-OPENWRT_RELEAS=`cat /etc/banner | grep OpenWrt | awk '{ print $2 }' | cut -c 1-2`
-if [ "${OPENWRT_RELEAS}" = "23" ] || [ "${OPENWRT_RELEAS}" = "22" ] || [ "${OPENWRT_RELEAS}" = "21" ] || [ "${OPENWRT_RELEAS}" = "SN" ]; then
- echo -e " \033[1;37mVersion chec: OK\033[0;39m"
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
+   echo -e " Version Check: \033[1;36mOK\033[0;39m"
  else
- read -p " Different version"
+   read -p " Exit due to different versions"
  exit
 fi
 
