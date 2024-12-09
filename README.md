@@ -127,7 +127,6 @@ $Shortcut.Save()
 ※Windows Hidden Files
 ```powershell:powershell
 Clear-Content .ssh\known_hosts -Force
-
 ```
 ---
 
@@ -137,8 +136,7 @@ Clear-Content .ssh\known_hosts -Force
 
 - [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
 ```sh:SSH
-mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh
-
+mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh; confsoft
 ```
 :warning:Internet connection setup requires device to be connected directly to ONU (Japan Only)
 <details><summary>:exclamation:MAP-e or other IPv4 unconnected</summary>
@@ -155,7 +153,6 @@ uci set network.@device[-1].mtu6='1500'
 #
 uci commit network
 /etc/init.d/network reload
-
 ```
 
 ---
