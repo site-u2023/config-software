@@ -31,13 +31,15 @@ NURO_V6=`echo $NET_PFX6 |cut -b -11`
 
 
 function _func_NURO {
-INSTALL_MAP=`opkg list-installed map`
-if [ ${INSTALL_MAP:0:3} = map ]; then
-    echo "map is installed"
-else
-    opkg update && opkg install map
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update && opkg install map
+  echo -e " \033[1;34mnuro map-e\033[0;39m"
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add map
 fi
-    echo -e " \033[1;34mnuro map-e\033[0;39m"
+
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
 cp /etc/config/network /etc/config/dhcp.map-e-nuro.old
