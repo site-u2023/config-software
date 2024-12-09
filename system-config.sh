@@ -454,13 +454,15 @@ function _func_DEVICE_SET {
   service zzdfs enable
   fi
   if [ "$GUEST" = "on" ]; then
-  opkg update
-  opkg install bash
-  opkg install qrencode
-  opkg install at
-  wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
-  bash /etc/config-software/guest.sh 2> /dev/null
-  service guest_wifi enable
+  OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+  if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+    opkg update
+    opkg install bash
+    opkg install qrencode
+    opkg install at
+    wget --no-check-certificate -O /etc/config-software/guest.sh https://raw.githubusercontent.com/site-u2023/config-software/main/guest.sh
+    bash /etc/config-software/guest.sh 2> /dev/null
+    service guest_wifi enable
   fi
   echo -e " \033[1;32mLuCi: http://${input_str_SYSTEM_HOSTNAME}.lan\033[0;39m"
   if [ "$GUEST" = "on" ]; then
