@@ -112,7 +112,6 @@ $Shortcut.Arguments = '-windowstyle hidden -ExecutionPolicy RemoteSigned "Start-
 $Shortcut.IconLocation = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,0"
 $Shortcut.WorkingDirectory = "."
 $Shortcut.Save()
-
 ```
 ---
 
@@ -173,7 +172,6 @@ No login authentication
 - Run from command
 ```sh:SSH
 confsoft
-
 ```
 :warning: forced termination：`Ctrl`+`c`
 
@@ -181,7 +179,6 @@ confsoft
 ```sh :SSH
 rm -rf /etc/config-software
 rm -rf /usr/bin/confsoft
-
 ```
 
 ## Access
@@ -239,7 +236,6 @@ Filer (used like Explorer with WinSCP)
 ```sh
 # attention required
 firstboot && reboot now
-
 ```
 `This will erase all settings and remove any installed packages. Are you sure? [N/y]`
 - `y`
