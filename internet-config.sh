@@ -40,10 +40,18 @@ done
 }
 
 function _func_MAP_e_VirtualConnect_SET {
-opkg update
-opkg install bash
-opkg install map
-cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg install bash
+  opkg install map
+  cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add bash
+  apk add map
+  cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
+fi
+
 # Version-specific settings
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
 if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
@@ -174,14 +182,47 @@ done
 }
 
 function _func_DS_LITE_Transix_east_SET {
-opkg update
-opkg install ds-lite
-wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
-sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
-sh /etc/config-software/ds-lite.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update
+  opkg install ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
+fi
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update
+  opkg install ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add  ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2404:8e00::feed:100/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
+fi
+
 }
 
 function _func_DS_LITE_Transix_confirmation_west {
@@ -200,14 +241,21 @@ done
 }
 
 function _func_DS_LITE_Transix_west_SET {
-opkg update
-opkg install ds-lite
-wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
-sed -i -e "s/AFTR_ADDRESS/2404:8e01::feed:100/g" /etc/config-software/ds-lite.sh
-sh /etc/config-software/ds-lite.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update
+  opkg install ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2404:8e01::feed:100/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add ds-lite
+fi
+
 }
 
 function _func_DS_LITE_Transix_Before {
@@ -257,14 +305,21 @@ done
 }
 
 function _func_DS_LITE_Xpass_SET {
-opkg update
-opkg install ds-lite
-wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
-sed -i -e "s/AFTR_ADDRESS/2001:f60:0:200::1:1/g" /etc/config-software/ds-lite.sh
-sh /etc/config-software/ds-lite.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update
+  opkg install ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2001:f60:0:200::1:1/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add ds-lite
+fi
+
 }
 
 function _func_DS_LITE_Xpass_Before {
@@ -314,14 +369,21 @@ done
 }
 
 function _func_DS_LITE_V6connect_SET {
-opkg update
-opkg install ds-lite
-wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
-sed -i -e "s/AFTR_ADDRESS/2001:c28:5:301::11/g" /etc/config-software/ds-lite.sh
-sh /etc/config-software/ds-lite.sh 2> /dev/null
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-exit
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update
+  opkg install ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2001:c28:5:301::11/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
+elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+  apk update
+  apk add ds-lite
+fi
+
 }
 
 function _func_DS_LITE_V6connect_Before {
