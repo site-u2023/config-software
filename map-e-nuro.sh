@@ -137,10 +137,20 @@ return 0
 
 function _func_NICHIBAN {
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
-wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
-read -p " 何かキーを押してデバイスを再起動してください"
-reboot
-return 0
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "SN" || "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
+  wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  return 0
+elif if [[ "${OPENWRT_RELEAS}" = "19" ]]; then
+  wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  return 0
+fi
+
+
 }
 
 function _func_NICHIBAN_PORT {
