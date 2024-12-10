@@ -49,10 +49,12 @@ OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | c
 if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
    echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
    echo -e " Version Check: \033[1;36mOK\033[0;39m"
- else
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
    wget --no-check-certificate -O /etc/config-software/package-auto-snapshot.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto-snapshot.sh
-          sh /etc/config-software/package-auto-snapshot.sh
- exit
+   sh /etc/config-software/package-auto-snapshot.sh
+   exit
+else
+  read -p " Exit due to different versions"
 fi
 
 while :
