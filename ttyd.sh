@@ -12,7 +12,7 @@ OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | c
 if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
   opkg update
   opkg install luci-app-ttyd
-elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add  luci-app-ttyd
 fi
