@@ -254,6 +254,11 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
 elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2404:8e01::feed:100/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
 fi
 
 }
@@ -318,6 +323,12 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
 elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2001:f60:0:200::1:1/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
 fi
 
 }
@@ -382,6 +393,12 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
 elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ds-lite
+  wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
+  sed -i -e "s/AFTR_ADDRESS/2001:c28:5:301::11/g" /etc/config-software/ds-lite.sh
+  sh /etc/config-software/ds-lite.sh 2> /dev/null
+  read -p " 何かキーを押してデバイスを再起動してください"
+  reboot
+  exit
 fi
 
 }
