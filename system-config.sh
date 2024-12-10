@@ -350,75 +350,59 @@ done
 function _func_DEVICE_SET {
   wget --no-check-certificate -O /etc/config-software/system.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system.sh
   if [ "$input_str_COUNTRY" = "JP" ]; then
-  sed -i -e "s|UTC|Asia/Tokyo|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "CN" ]; then
-  sed -i -e "s|UTC|Asia/Shanghai|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|CST-8|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "HK" ]; then
-  sed -i -e "s|UTC|Asia/Hong Kong|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|HKT-8|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "US" ]; then
-  echo -e " \033[1;37mYou probably live in Hawaii\033[0;39m"
-  echo -e " \033[1;37mPlease change to your local time zone\033[0;39m"
-  sed -i -e "s|UTC|Pacific/Honolulu|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|HST10|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "TW" ]; then
-  sed -i -e "s|UTC|Asia/Taipei|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|CST-8|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "KR" ]; then
-  sed -i -e "s|UTC|Asia/Seoul|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|KST-9|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "RU" ]; then
-  sed -i -e "s|UTC|Europe/Moscow|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|MSK-3|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "ID" ]; then
-  sed -i -e "s|UTC|Asia/Jakarta|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|WIB-7|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "VN" ]; then
-  sed -i -e "s|UTC|Asia/Jakarta|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|WIB-7|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "DE" ]; then
-  sed -i -e "s|UTC|Europe/Berlin|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|CET-1CEST,M3.5.0,M10.5.0/3|g" /etc/config-software/system.sh
-  fi
-  if [ "$input_str_COUNTRY" = "FR" ]; then
-  sed -i -e "s|UTC|Europe/Paris|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|CET-1CEST,M3.5.0,M10.5.0/3|g" /etc/config-software/system.sh
-  fi 
-  if [ "$input_str_COUNTRY" = "AU" ]; then
-  sed -i -e "s|UTC|Australia/Melbourne|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|AEST-10AEDT,M10.1.0,M4.1.0/3|g" /etc/config-software/system.sh
-  fi 
-  if [ "$input_str_COUNTRY" = "CA" ]; then
-  echo -e " \033[1;37mIs Alaska ok?\033[0;39m"
-  echo -e " \033[1;37mPlease change to your local time zone\033[0;39m"
-  sed -i -e "s|UTC|America/Anchorage|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|AKST9AKDT,M3.2.0,M11.1.0|g" /etc/config-software/system.sh
-  fi 
-  if [ "$input_str_COUNTRY" = "IN" ]; then
-  sed -i -e "s|UTC|Asia/Kolkata|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|IST-5:30|g" /etc/config-software/system.sh
-  fi 
-  if [ "$input_str_COUNTRY" = "TR" ]; then
-  sed -i -e "s|UTC|Europe/Istanbul|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|<+03>-3|g" /etc/config-software/system.sh
-  fi 
-  if [ "$input_str_COUNTRY" = "SG" ]; then
-  sed -i -e "s|UTC|Asia/Singapore|g" /etc/config-software/system.sh
-  sed -i -e "s|JST-9|<+08>-8|g" /etc/config-software/system.sh
-  fi 
-  if [ -z "$input_str_COUNTRY" ]; then
-  echo -e " \033[5;43mPlease change time zone manually\033[0;39m"
-  sed -i -e "s|JST-9||g" /etc/config-software/system.sh
+    sed -i -e "s|UTC|Asia/Tokyo|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "CN" ]; then
+    sed -i -e "s|UTC|Asia/Shanghai|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|CST-8|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "HK" ]; then
+    sed -i -e "s|UTC|Asia/Hong Kong|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|HKT-8|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "US" ]; then
+    echo -e " \033[1;37mYou probably live in Hawaii\033[0;39m"
+    echo -e " \033[1;37mPlease change to your local time zone\033[0;39m"
+    sed -i -e "s|UTC|Pacific/Honolulu|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|HST10|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "TW" ]; then
+    sed -i -e "s|UTC|Asia/Taipei|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|CST-8|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "KR" ]; then
+    sed -i -e "s|UTC|Asia/Seoul|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|KST-9|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "RU" ]; then
+    sed -i -e "s|UTC|Europe/Moscow|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|MSK-3|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "ID" ]; then
+    sed -i -e "s|UTC|Asia/Jakarta|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|WIB-7|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "VN" ]; then
+    sed -i -e "s|UTC|Asia/Jakarta|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|WIB-7|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "DE" ]; then
+    sed -i -e "s|UTC|Europe/Berlin|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|CET-1CEST,M3.5.0,M10.5.0/3|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "FR" ]; then
+    sed -i -e "s|UTC|Europe/Paris|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|CET-1CEST,M3.5.0,M10.5.0/3|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "AU" ]; then
+    sed -i -e "s|UTC|Australia/Melbourne|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|AEST-10AEDT,M10.1.0,M4.1.0/3|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "CA" ]; then
+    echo -e " \033[1;37mIs Alaska ok?\033[0;39m"
+    echo -e " \033[1;37mPlease change to your local time zone\033[0;39m"
+    sed -i -e "s|UTC|America/Anchorage|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|AKST9AKDT,M3.2.0,M11.1.0|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "IN" ]; then
+    sed -i -e "s|UTC|Asia/Kolkata|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|IST-5:30|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "TR" ]; then
+    sed -i -e "s|UTC|Europe/Istanbul|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|<+03>-3|g" /etc/config-software/system.sh
+  elif [ "$input_str_COUNTRY" = "SG" ]; then
+    sed -i -e "s|UTC|Asia/Singapore|g" /etc/config-software/system.sh
+    sed -i -e "s|JST-9|<+08>-8|g" /etc/config-software/system.sh
+  elif [ -z "$input_str_COUNTRY" ]; then
+    echo -e " \033[5;43mPlease change time zone manually\033[0;39m"
+    sed -i -e "s|JST-9||g" /etc/config-software/system.sh
   fi
   sed -i -e "s/HOSTNAME='openwrt'/HOSTNAME=${input_str_SYSTEM_HOSTNAME}/g" /etc/config-software/system.sh
   sed -i -e "s/ROOT_PASSWD/${input_str_ROOT_PASSWD}/g" /etc/config-software/system.sh
