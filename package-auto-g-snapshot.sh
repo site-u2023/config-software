@@ -180,7 +180,6 @@ apk add luci-theme-openwrt-2020
 apk add attendedsysupgrade-common
 apk add luci-app-attendedsysupgrade
 apk add luci-i18n-attendedsysupgrade-$input_str_Languages
-apk add auc
 
 # USB
 if [ -n "$str_USB" ]; then
