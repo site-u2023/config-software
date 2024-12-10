@@ -15,7 +15,7 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
     opkg update
   fi
     opkg install ttyd
-elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ttyd
 fi
