@@ -86,7 +86,6 @@ attendedsysupgrade-common
 luci-app-attendedsysupgrade
 luci-i18n-dashboard-$input_str_Languages
 luci-i18n-base-$input_str_Languages
-luci-i18n-opkg-$input_str_Languages
 luci-i18n-firewall-$input_str_Languages
 luci-i18n-ttyd-$input_str_Languages
 luci-i18n-sqm-$input_str_Languages
@@ -102,7 +101,6 @@ apk add luci
 apk add luci-ssl
 # Language
 apk add luci-i18n-base-$input_str_Languages
-apk add luci-i18n-opkg-$input_str_Languages
 apk add luci-i18n-firewall-$input_str_Languages
 
 # Dashboard
