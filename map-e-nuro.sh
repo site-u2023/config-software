@@ -143,7 +143,7 @@ if [[ "${OPENWRT_RELEAS}" = "SN" || "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_REL
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
   return 0
-elif if [[ "${OPENWRT_RELEAS}" = "19" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "19" ]]; then
   wget --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
