@@ -14,7 +14,7 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
   opkg install luci-app-ttyd
 elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
-  apk add  luci-app-ttyd
+  apk add luci-app-ttyd
 fi
 
 uci del_list ttyd.@ttyd[0].client_option='theme={"background": "black"}'
