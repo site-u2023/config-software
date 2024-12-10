@@ -184,7 +184,6 @@ apk add luci-i18n-attendedsysupgrade-$input_str_Languages
 # USB
 if [ -n "$str_USB" ]; then
 cat << EOF >> /etc/config-software/list-installed/Before
-luci-app-disks-info
 block-mount
 kmod-usb-storage
 kmod-usb-storage-uas
