@@ -30,7 +30,6 @@ luci-theme-material
 luci-theme-openwrt-2020
 attendedsysupgrade-common
 luci-app-attendedsysupgrade
-auc
 luci-app-log-viewer
 luci-app-cpu-perf
 luci-app-temp-status
@@ -112,7 +111,6 @@ apk add luci-theme-openwrt-2020
 # Attended Sysupgrade
 apk add attendedsysupgrade-common
 apk add luci-app-attendedsysupgrade
-apk add auc
 
 # USB
 if [ -n "$str_USB" ]; then
