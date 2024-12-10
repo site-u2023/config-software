@@ -45,7 +45,7 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
   opkg install bash
   opkg install map
   cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
-elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add bash
   apk add map
@@ -192,7 +192,7 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
   exit
-elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ds-lite
   wget --no-check-certificate -O /etc/config-software/ds-lite.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ds-lite.sh
@@ -251,7 +251,7 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
   exit
-elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ds-lite
 fi
@@ -315,7 +315,7 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
   exit
-elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ds-lite
 fi
@@ -379,7 +379,7 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
   read -p " 何かキーを押してデバイスを再起動してください"
   reboot
   exit
-elif if [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
   apk update
   apk add ds-lite
 fi
