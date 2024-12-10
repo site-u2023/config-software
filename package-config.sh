@@ -50,7 +50,8 @@ if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_REL
    echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
    echo -e " Version Check: \033[1;36mOK\033[0;39m"
  else
-   read -p " Exit due to different versions"
+   wget --no-check-certificate -O /etc/config-software/package-auto-snapshot.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-auto-snapshot.sh
+          sh /etc/config-software/package-auto-snapshot.sh
  exit
 fi
 
