@@ -1,6 +1,6 @@
 # OpenWrt Initial Setup All-in-One Script Suitable for beginners
 
-### **emergency**
+### **Urgent**
 - [Security Advisory 2024-12-06-1 - OpenWrt Attended SysUpgrade server: Build artifact poisoning via truncated SHA-256 hash and command injection (CVE-2024-54143)](https://openwrt.org/advisory/2024-12-06)
 
 - [Attended Sysupgrade Server CVE-2024-54143](https://lists.openwrt.org/pipermail/openwrt-announce/2024-December/000061.html)
