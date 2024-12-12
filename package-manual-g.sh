@@ -136,7 +136,7 @@ do
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) LUCI_JA='1'
-          LUCI_JA_OPKG='1'
+#         LUCI_JA_OPKG='1'
           LUCI_JA_FIREWALL='1'
           break ;;
     "q" ) exit ;;
@@ -462,31 +462,26 @@ function _func_attendedsysupgrade {
 Attended_common=`opkg list-installed attendedsysupgrade-common | awk '{ print $1 }'`
 Attended=`opkg list-installed luci-app-attendedsysupgrade | awk '{ print $1 }'`
 Attended_ja=`opkg list-installed luci-i18n-attendedsysupgrade-$input_str_Languages | awk '{ print $1 }'`
-Auc=`opkg list-installed auc | awk '{ print $1 }'`
-if [ -z "$Attended_common" ] || [ -z "$Attended" ] || [ -z "$Attended_ja" ] || [ -z "$Auc" ]; then
+if [ -z "$Attended_common" ] || [ -z "$Attended" ] || [ -z "$Attended_ja" ]; then
 while :
 do
   echo -e " \033[1;33mInstall Attended Sysupgrade\033[0;39m"
   echo -e " \033[1;32mattendedsysupgrade-common: $((`opkg info attendedsysupgrade-common | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-app-attendedsysupgrade: $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-attendedsysupgrade-$input_str_Languages: $((`opkg info luci-i18n-attendedsysupgrade-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mauc: $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo attendedsysupgrade-common >> /etc/config-software/list-installed/Before
           echo luci-app-attendedsysupgrade >> /etc/config-software/list-installed/Before
-          echo auc >> /etc/config-software/list-installed/Before
           echo $((`opkg info attendedsysupgrade-common | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-app-attendedsysupgrade | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo luci-i18n-attendedsysupgrade-$input_str_Languages >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-i18n-attendedsysupgrade-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info auc | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
     "n" ) Attended_common='1'
           Attended='1'
           Attended_ja='1'
-          Auc='1'
           break ;;
     "q" ) exit ;;
   esac
@@ -1135,9 +1130,6 @@ opkg install luci-app-attendedsysupgrade
 fi
 if [ -z "$Attended_ja" ]; then
 opkg install luci-i18n-attendedsysupgrade-$input_str_Languages
-fi
-if [ -z "$Auc" ]; then
-opkg install auc
 fi
 
 # custom feed (log viewer, cpu status, cpu perf, temp status, Internet detector, disk info)
