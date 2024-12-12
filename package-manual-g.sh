@@ -116,22 +116,22 @@ _func_lucii18nbaseja
 
 function _func_lucii18nbaseja {
 LUCI_JA=`opkg list-installed luci-i18n-base-$input_str_Languages | awk '{ print $1 }'`
-LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-$input_str_Languages | awk '{ print $1 }'`
+#LUCI_JA_OPKG=`opkg list-installed luci-i18n-opkg-$input_str_Languages | awk '{ print $1 }'`
 LUCI_JA_FIREWALL=`opkg list-installed luci-i18n-firewall-$input_str_Languages | awk '{ print $1 }'`
 if [ -z "$LUCI_JA" ] || [ -z "$LUCI_JA_OPKG" ] || [ -z "$LUCI_JA_FIREWALL" ]; then
 while :
 do
   echo -e " \033[1;33mInstall LuCi language pack\033[0;39m"
   echo -e " \033[1;32mluci-i18n-base-$input_str_Languages: $((`opkg info luci-i18n-base-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
-  echo -e " \033[1;32mluci-i18n-opkg-$input_str_Languages: $((`opkg info luci-i18n-opkg-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
+# echo -e " \033[1;32mluci-i18n-opkg-$input_str_Languages: $((`opkg info luci-i18n-opkg-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mluci-i18n-firewall-$input_str_Languages: $((`opkg info luci-i18n-firewall-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   read -p " Please select key [y/n or q]: " num
   case "${num}" in
     "y" ) echo luci-i18n-base-$input_str_Languages >> /etc/config-software/list-installed/Before
-          echo luci-i18n-opkg-$input_str_Languages >> /etc/config-software/list-installed/Before
+#         echo luci-i18n-opkg-$input_str_Languages >> /etc/config-software/list-installed/Before
           echo luci-i18n-firewall-$input_str_Languages >> /etc/config-software/list-installed/Before
           echo $((`opkg info luci-i18n-base-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
-          echo $((`opkg info luci-i18n-opkg-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
+#         echo $((`opkg info luci-i18n-opkg-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo $((`opkg info luci-i18n-firewall-$input_str_Languages | grep Size | awk '{ print $2 }'`/1024)) >> /etc/config-software/list-installed/Flash
           echo -e " \033[1;32mTotal installation size: `awk '{sum += $1} END {print sum}' < /etc/config-software/list-installed/Flash`KB\033[0;39m"
           break ;;
@@ -1012,9 +1012,9 @@ fi
 if [ -z "$LUCI_JA" ]; then
 opkg install luci-i18n-base-$input_str_Languages
 fi
-if [ -z "$LUCI_JA_OPKG" ]; then
-opkg install luci-i18n-opkg-$input_str_Languages
-fi
+#if [ -z "$LUCI_JA_OPKG" ]; then
+#opkg install luci-i18n-opkg-$input_str_Languages
+#fi
 if [ -z "$LUCI_JA_FIREWALL" ]; then
 opkg install luci-i18n-firewall-$input_str_Languages
 fi
