@@ -93,7 +93,7 @@ luci-app-internet-detector
 luci-theme-argon
 luci-i18n-dashboard-$input_str_Languages
 luci-i18n-base-$input_str_Languages
-luci-i18n-opkg-$input_str_Languages
+#luci-i18n-opkg-$input_str_Languages
 luci-i18n-firewall-$input_str_Languages
 luci-i18n-ttyd-$input_str_Languages
 luci-i18n-sqm-$input_str_Languages
@@ -109,7 +109,7 @@ opkg install luci
 opkg install luci-ssl
 # Language
 opkg install luci-i18n-base-$input_str_Languages
-opkg install luci-i18n-opkg-$input_str_Languages
+#opkg install luci-i18n-opkg-$input_str_Languages
 opkg install luci-i18n-firewall-$input_str_Languages
 
 # Dashboard
