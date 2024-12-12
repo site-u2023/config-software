@@ -84,7 +84,6 @@ luci-theme-material
 luci-theme-openwrt-2020
 attendedsysupgrade-common
 luci-app-attendedsysupgrade
-auc
 luci-app-log-viewer
 luci-app-cpu-perf
 luci-app-temp-status
@@ -187,7 +186,6 @@ opkg install luci-theme-openwrt-2020
 opkg install attendedsysupgrade-common
 opkg install luci-app-attendedsysupgrade
 opkg install luci-i18n-attendedsysupgrade-$input_str_Languages
-opkg install auc
 
 # custom feed (log viewer, cpu status, cpu perf, temp status, Internet detector, disk info)
 wget --no-check-certificate -O /etc/config-software/pacage_list https://github.com/gSpotx2f/packages-openwrt/raw/master/current/
