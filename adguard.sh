@@ -6,7 +6,7 @@ cp /etc/config/firewall /etc/config/firewall.adguard.bak
 
 function _func_Package {
 opkg install adguardhome
-_func_Install 
+_func_Install
 }
 
 function _func_Native {
