@@ -1,5 +1,14 @@
 #! /bin/sh
 
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
+   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
+   echo -e " Version Check: \033[1;36mOK\033[0;39m"
+ else
+   read -p " Exit due to different versions"
+ exit
+fi
+
 opkg install adblock-fast
 opkg install luci-app-adblock-fast
 opkg install luci-i18n-adblock-fast-ja
