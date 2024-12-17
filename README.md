@@ -12,7 +12,7 @@
 
 <details><summary>Configuration</summary>
 
-:warning:Japanese notation
+:flag_jp: Japanese notation
 - [Script Selector](https://qiita.com/site_u/items/c6a50aa6dea965b5a774#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%BB%E3%83%AC%E3%82%AF%E3%82%BF%E3%83%BC%E8%A6%81onu%E7%9B%B4%E7%B5%90)
   - [Initial system setup (host name, password, wifi, etc.)](https://qiita.com/site_u/items/59c641c9dc0eec3b1324)
     - [Dynamic frequency selection (DFS)](https://qiita.com/site_u/items/f42be7c0953187b9428a#dynamic-frequency-selection-dfs)
