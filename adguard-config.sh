@@ -8,8 +8,8 @@ function _func_AdGuard {
 if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
   echo -e " \033[1;37mAdGuard already installed\033[0;39m"
 fi
-DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH | awk '{print substr($0,index($0,"=") )}'`
-if  [ "${DISTRIB_ARCH}" = "='aarch64_cortex-a53'" ] || [ "${DISTRIB_ARCH}" = "='arm_cortex-a7_neon-vfpv4'" ] || [ "${DISTRIB_ARCH}" = "='x86_64'" ]; then
+DISTRIB_ARCH=$(grep 'DISTRIB_ARCH' /etc/openwrt_release | cut -d"'" -f2)
+if  [ "${DISTRIB_ARCH}" = "aarch64_cortex-a53" ] || [ "${DISTRIB_ARCH}" = "arm_cortex-a7_neon-vfpv4" ] || [ "${DISTRIB_ARCH}" = "x86_64" ]; then
   echo -e " \033[1;37mSupported Architectures\033[0;39m"
 while :
 do
