@@ -106,9 +106,6 @@
 - [Starting PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4) (Key entry): `Win`+`x` > `a` > `yes`
   ※Standard on Windows 7 or later
 
-- `Forced Paste`
-- `yes`
-
 <details><summary>:exclamation:If you cannot SSH</summary>
 
 `C:\Users\yourusername\.ssh\known_hosts`
