@@ -106,22 +106,6 @@
 - [Starting PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4) (Key entry): `Win`+`x` > `a` > `yes`
   ※Standard on Windows 7 or later
 
-<details><summary>Create startup shortcut for ssh root@192.168.1.1(desktop)</summary>
-
-```sh:powershell: ssh
-$DESKTOP = ([Environment]::GetFolderPath("Desktop") + "\192.168.1.1.lnk")
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$DESKTOP")
-$Shortcut.TargetPath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-$Shortcut.Arguments = '-windowstyle hidden -ExecutionPolicy RemoteSigned "Start-Process ssh root@192.168.1.1"'
-$Shortcut.IconLocation = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,0"
-$Shortcut.WorkingDirectory = "."
-$Shortcut.Save()
-```
----
-
-</details>
-
 - `Forced Paste`
 - `yes`
 
