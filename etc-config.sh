@@ -23,8 +23,15 @@ do
   case "${num}" in
     "y" ) wget --no-check-certificate -O /etc/init.d/iperf3 https://raw.githubusercontent.com/site-u2023/iperf/main/iperf3
           chmod +x /etc/init.d/iperf3
-          opkg update
-          opkg install iperf3
+          OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+          if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+            opkg update
+            opkg install iperf3
+          elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+            apk update
+            apk add iperf3
+          exit
+          fi
           NET_IF="lan"
           . /lib/functions/network.sh
           network_flush_cache
@@ -49,6 +56,14 @@ done
 }
 
 function _func_WiFi_location_service {
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
+   echo -e " Version Check: \033[1;36mOK\033[0;39m"
+ else
+   read -p " Exit due to different versions"
+ exit
+fi
 while :
 do
   echo -e " \033[1;32mExecute Location Based Service (LBS) stop setting\033[0;39m"
@@ -71,8 +86,15 @@ do
   echo -e " \033[1;32mPerform SAMBA4 and WSDD2 installation\033[0;39m"
   read -p " Please select key [y/n]: " num
   case "${num}" in
-    "y" ) opkg update
-          opkg install luci-app-samba4 wsdd2
+    "y" ) OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+          if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+            opkg update
+            opkg install luci-app-samba4 wsdd2
+          elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
+            apk update
+            apk add luci-app-samba4 wsdd2
+          exit
+          fi
           /etc/init.d/samba4 enable
           /etc/init.d/samba4 start  
           read -p " Press any key"
@@ -83,6 +105,14 @@ done
 }
 
 function _func_DFS {
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
+   echo -e " Version Check: \033[1;36mOK\033[0;39m"
+ else
+   read -p " Exit due to different versions"
+ exit
+fi
 while :
 do
   echo -e " \033[1;33mDownload and install ZZDFS configuration script\033[0;39m"
@@ -104,6 +134,14 @@ done
 }
 
 function _func_GUEST {
+OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
+   echo -e " Version Check: \033[1;36mOK\033[0;39m"
+ else
+   read -p " Exit due to different versions"
+ exit
+fi
 while :
 do
   echo -e " \033[1;32mGuest Wi-Fi installation\033[0;39m"
@@ -126,15 +164,6 @@ do
   esac
 done  
 }
-
-OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
-   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
-   echo -e " Version Check: \033[1;36mOK\033[0;39m"
- else
-   read -p " Exit due to different versions"
- exit
-fi
 
 while :
 do
