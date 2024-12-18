@@ -147,7 +147,7 @@ opkg install ca-bundle
 wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/velop_wrt_pro7_adguard.sh
 sh /etc/config-software/adguard.sh
 fi
-/etc/init.d/AdGuardHome 2>&1 | grep -q '/etc/init.d/AdGuardHome: not found'
+/etc/init.d/AdGuardHome stop 2>&1 | grep -q '/etc/init.d/AdGuardHome: not found'
 if  [ $? == 1 ]; then
 /etc/init.d/AdGuardHome stop
 fi
