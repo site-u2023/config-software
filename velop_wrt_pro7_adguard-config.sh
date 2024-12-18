@@ -151,12 +151,12 @@ fi
 if  [ $? == 1 ]; then
 /etc/init.d/AdGuardHome stop
 fi
-if [ -e "/etc/adguardhome.yaml" ]; then
+if [ -e "/etc/AdGuardHome/AdGuardHome.yaml" ]; then
 cp /etc/AdGuardHome/AdGuardHome.yaml /etc/AdGuardHome/AdGuardHome.yaml.old
 fi
 cp /etc/AdGuardHome/AdGuardHome.yaml-new /etc/AdGuardHome/AdGuardHome.yaml
 sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/AdGuardHome/AdGuardHome.yaml
-sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
+sed -i "5c \  - name: ${input_str_USER}" /etc/AdGuardHome/AdGuardHome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
 sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/AdGuardHome/AdGuardHome.yaml
 sed -i -e "s/192.168.1.1:54/${NET_ADDR}:54/g" /etc/AdGuardHome/AdGuardHome.yaml
