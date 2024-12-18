@@ -53,7 +53,7 @@ cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 
 # Version-specific settings
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
+if [[ "${OPENWRT_RELEAS}" = "SN" || "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 elif [[ "${OPENWRT_RELEAS}" = "19" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
@@ -111,7 +111,7 @@ function _func_MAP_e_Nichiban_map_SET {
 cp /lib/netifd/proto/map.sh /lib/netifd/proto/map.sh.old
 # Version-specific settings
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
+if [[ "${OPENWRT_RELEAS}" = "SN" || "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map.sh.new
 elif [[ "${OPENWRT_RELEAS}" = "19" ]]; then
   wget -6 --no-check-certificate -O /lib/netifd/proto/map.sh https://raw.githubusercontent.com/site-u2023/map-e/main/map19.sh.new
@@ -626,10 +626,10 @@ fi
 while :
 do
   echo -e " \033[7;37mJapanese notation\033[0;39m"
-  echo -e " \033[7;37m要ONU直結\033[0;39m"
+  echo -e " \033[7;37m要HGW直結\033[0;39m"
   echo -e " \033[1;37minternet-config -------------------------------------\033[0;39m"
   echo -e " \033[1;34m[m]: OCNバーチャルコネクト・V6プラス・IPv6オプション自動設定（マルチセッション対応）\033[0;39m"
-  echo -e " \033[1;33m[n]: NURO光 MAP-e自動設定 (検証中)\033[0;39m"  
+  echo -e " \033[1;33m[n]: NURO光 MAP-e自動設定 (一部のみ対応：検証中)\033[0;39m"  
   echo -e " \033[1;32m[t]: トランジックス自動設定\033[0;39m"
   echo -e " \033[1;35m[x]: クロスパス自動設定\033[0;39m"
   echo -e " \033[1;31m[v]: v6 コネクト自動設定\033[0;39m"
