@@ -131,6 +131,7 @@ if [ -e ${UPDATE} ]; then
 opkg update
 UPDATE="1"
 fi
+mkdir -p /etc/AdGuardHome
 if [ -n "${JAPAN_FILTER}" ]; then
 wget --no-check-certificate -O /etc/AdGuardHome/AdGuardHome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
  else
