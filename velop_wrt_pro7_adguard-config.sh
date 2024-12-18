@@ -4,79 +4,28 @@ NET_IF="lan"
 network_flush_cache
 network_get_ipaddr NET_ADDR "${NET_IF}"
 
-function _func_AdGuard {
-if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-  echo -e " \033[1;37mAdGuard already installed\033[0;39m"
-fi
-DISTRIB_ARCH=`cat /etc/openwrt_release | grep DISTRIB_ARCH | awk '{print substr($0,index($0,"=") )}'`
-if  [ "${DISTRIB_ARCH}" = "='arm_cortex-a7_neon-vfpv4'" ]; then
-  echo -e " \033[1;37mSupported Architectures\033[0;39m"
-while :
-do
-  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]: AdGuard HOME configuration and installation\033[0;39m"
-  echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
-  echo -e " \033[1;32m[b]: Removing and restoring AdGuard HOME to previous settings\033[0;39m"
-  echo -e " \033[1;37m[q]: Quit\033[0;39m"   
-  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " Please select key [c/s/b or q]: " num
-  case "${num}" in
-    "c" ) _func_AdGuard_Confirm ;;
-    "s" ) _func_AdGuard_Admin ;;        
-    "b" ) _func_AdGuard_Before ;;
-    "q" ) exit ;;
-  esac
-done
- else
-  echo -e " \033[1;37mhttps://openwrt.org/packages/architectures\033[0;39m" 
-  echo -e " \033[1;37mUnsupported Web interface configuration\033[0;39m" 
-while :
-do
-  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
-  echo -e " \033[1;34m[c]: AdGuard HOME installation\033[0;39m"
-  echo -e " \033[1;32m[b]: Removing and restoring AdGuard HOME to previous settings\033[0;39m"
-  echo -e " \033[1;37m[q]: Quit\033[0;39m"   
-  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " Please select key [c/b or q]: " num
-  case "${num}" in
-    "c" ) _func_AdGuard_Only ;;      
-    "b" ) _func_AdGuard_Before ;;
-    "q" ) exit ;;
-  esac
-done
-fi
-}
-
-function _func_AdGuard_Only {
-while :
-do
-  echo -e " \033[1;32mInstall: adguardhome $((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADGUARD_VERSION}\033[0;39m"
-  read -p " Please select key [y/n]: " num
-  case "${num}" in
-    "y" ) wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/velop_wrt_pro7_adguard.sh
-          sh /etc/config-software/adguard.sh
-          echo -e " \033[1;32mInstallation complete\033[0;39m"
-          echo -e " \033[1;32mhttp://${NET_ADDR}:3000\033[0;39m"
-          read -p " Press any key (to reboot the device)"
-          reboot ;;    
-    "n" ) break ;;
-  esac
-done
-}
 
 function _func_AdGuard_Confirm {
 AD_INST="ad_inst"
-if [ -e ${UPDATE} ]; then
+
+#　Check version
+mkdir -p /tmp/config-software
+wget --no-check-certificate -O /tmp/config-software/AdGuardHome_list https://github.com/AdguardTeam/AdGuardHome
+AdGuardHome_list=`cat /tmp/config-software/AdGuardHome_list`
+latest_ver=`echo $AdGuardHome_list | awk '{print substr($0,index($0,"AdGuard Home v") ,30)}' | awk '{ sub("</span>.*$",""); print $0; }' | grep -o -E "(v[0-9]+\.){1}[0-9]+(\.[0-9]+)?" | head -n1`
+
+# Install
 opkg update
-UPDATE="1"
-fi
+opkg install ca-bundle
+
 while :
 do
   echo -e " \033[1;35mStart AdGuard HOME setup and installation\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface port number entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface user name entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface password entry\033[0;39m"
-  echo -e " \033[1;32mInstall: adguardhome $((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))KB Version ${ADGUARD_VERSION}\033[0;39m"
+  echo -e " \033[1;32mInstall: AdGuardHome Version ${latest_ver}\033[0;39m"
+  echo -e " \033[1;32mInstall: ca-bundle $((`opkg info ca-bundle | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mInstall: htpasswd: 63.90KB\033[0;39m"
   echo -e " \033[1;32mInstall: libaprutil $((`opkg info libaprutil | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
   echo -e " \033[1;32mInstall: libapr $((`opkg info libapr | grep Size | awk '{ print $2 }'`/1024))KB\033[0;39m"
@@ -273,29 +222,23 @@ exit
 
 
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
- read -p " AdBlock already installed"
- exit
-fi
-if [ "adblock-fast" = "`opkg list-installed adblock-fast | awk '{ print $1 }'`" ]; then
- read -p " AdBlock-fast already installed"
- exit
-fi
-if [ "https-dns-proxy" = "`opkg list-installed https-dns-proxy | awk '{ print $1 }'`" ]; then
- read -p " https-dns-proxy already installed"
- exit
-fi
-if [ "stubby" = "`opkg list-installed stubby | awk '{ print $1 }'`" ]; then
- read -p " DNS over TLS (DoT) already installed"
- exit
+  read -p " AdBlock already installed"
+  exit
+elif [ "https-dns-proxy" = "`opkg list-installed https-dns-proxy | awk '{ print $1 }'`" ]; then
+  read -p " https-dns-proxy already installed"
+  exit
+elif [ "stubby" = "`opkg list-installed stubby | awk '{ print $1 }'`" ]; then
+  read -p " DNS over TLS (DoT) already installed"
+  exit
 fi
 
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-if [[ "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
-   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
-   echo -e " Version Check: \033[1;36mOK\033[0;39m"
- else
-   read -p " Exit due to different versions"
- exit
+if [[ "${OPENWRT_RELEAS}" = "19" ]]; then
+  echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
+  echo -e " Version Check: \033[1;36mOK\033[0;39m"
+else
+  read -p " Exit due to different versions"
+exit
 fi
 
 if [ -e ${UPDATE} ]; then
@@ -304,22 +247,20 @@ UPDATE="1"
 fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-ADGUARD_VERSION=`opkg info adguardhome | grep Version | awk '{ print $2 }'`
-ADGUARD_SIZE=$((`opkg info adguardhome | grep Size | awk '{ print $2 }'`/1024))
-echo -e " \033[1;37mAvailable Memory Space: ${AVAILABLE_MEMORY}KB\033[0;39m"
-if [ -z "${AVAILABLE_FLASH}" ]; then
- echo -e " \033[1;37mAvailable Flash Space: No overlay\033[0;39m"
-AVAILABLE_FLASH=${AVAILABLE_MEMORY}
-else
- echo -e " \033[1;37mAvailable Flash Space: ${AVAILABLE_FLASH}KB\033[0;39m"
-fi
-echo -e " \033[1;37mInstalled Capacity: ${ADGUARD_SIZE}KB\033[0;39m"
-if [ "${AVAILABLE_FLASH}" -gt ${ADGUARD_SIZE} ]; then
- echo -e " \033[1;37mRecommended Memory Capacity: 51200KB\033[0;39m"
- echo -e " \033[1;37mRecommended Flash Capacity: 102400KB\033[0;39m"
- echo -e " \033[1;37minstallable\033[0;39m"
- _func_AdGuard
-else
- read -p " Exit due to insufficient flash space"
-exit
-fi
+
+while :
+do
+  echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
+  echo -e " \033[1;34m[c]: AdGuardHome configuration and installation\033[0;39m"
+  echo -e " \033[1;33m[s]: Web interface configuration (port, username and password only)\033[0;39m"
+  echo -e " \033[1;32m[b]: Removing and restoring AdGuardHome to previous settings\033[0;39m"
+  echo -e " \033[1;37m[q]: Quit\033[0;39m"   
+  echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
+  read -p " Please select key [c/s/b or q]: " num
+  case "${num}" in
+    "c" ) _func_AdGuard_Confirm ;;
+    "s" ) _func_AdGuard_Admin ;;        
+    "b" ) _func_AdGuard_Before ;;
+    "q" ) exit ;;
+  esac
+done
