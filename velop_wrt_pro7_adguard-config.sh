@@ -4,23 +4,15 @@ NET_IF="lan"
 network_flush_cache
 network_get_ipaddr NET_ADDR "${NET_IF}"
 
-
 function _func_AdGuard_Confirm {
 AD_INST="ad_inst"
-
-#　Check version
 mkdir -p /tmp/config-software
 wget --no-check-certificate -O /tmp/config-software/AdGuardHome_list https://github.com/AdguardTeam/AdGuardHome
 AdGuardHome_list=`cat /tmp/config-software/AdGuardHome_list`
 latest_ver=`echo $AdGuardHome_list | awk '{print substr($0,index($0,"AdGuard Home v") ,30)}' | awk '{ sub("</span>.*$",""); print $0; }' | grep -o -E "(v[0-9]+\.){1}[0-9]+(\.[0-9]+)?" | head -n1`
-
-# Install
-opkg update
-opkg install ca-bundle
-
 while :
 do
-  echo -e " \033[1;35mStart AdGuard HOME setup and installation\033[0;39m"
+  echo -e " \033[1;35mStart AdGuardHome setup and installation\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface port number entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface user name entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface password entry\033[0;39m"
@@ -42,7 +34,7 @@ done
 function _func_AdGuard_Admin {
 while :
 do
-  echo -e " \033[1;35mStart AdGuard HOME setup and installation\033[0;39m"
+  echo -e " \033[1;35mStart AdGuardHomeE setup and installation\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface port number entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface user name entry\033[0;39m"
   echo -e " \033[1;32mAdministrative web interface password entry\033[0;39m"
@@ -63,7 +55,7 @@ do
     "y" ) JAPAN_FILTER="japan_filter" ;
           _func_AdGuard_PORT ;;
     "n" ) _func_AdGuard_PORT ;;
-    "r" ) _func_AdGuard ;;    
+    "r" ) break ;;    
   esac
 done
 }
@@ -78,7 +70,7 @@ do
   case "${num}" in
     "y" ) _func_AdGuard_USER ;;
     "n" ) _func_AdGuard_PORT ;;
-    "r" ) _func_AdGuard ;;
+    "r" ) break ;;
   esac
 done
 }
@@ -93,7 +85,7 @@ do
   case "${num}" in
     "y" ) _func_AdGuard_PASSWD ;;
     "n" ) _func_AdGuard_USER ;;
-    "r" ) _func_AdGuard ;;
+    "r" ) break ;;
   esac
 done
 }
@@ -108,7 +100,7 @@ do
   case "${num}" in
     "y" ) _func_AdGuard_Confirm2 ;;
     "n" ) _func_AdGuard_PASSWD ;;
-    "r" ) _func_AdGuard ;;
+    "r" ) break ;;
   esac
 done
 }
@@ -129,7 +121,7 @@ do
   case "${num}" in
     "y" ) _func_AdGuard_SET ;;
     "n" ) _func_AdGuard_PORT ;;
-    "r" ) _func_AdGuard ;;
+    "r" ) break ;;
   esac
 done
 }
@@ -144,26 +136,20 @@ wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubuserc
  else
 wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
 fi
-if  [ "${DISTRIB_ARCH}" = "='aarch64_cortex-a53'" ]; then
-wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd
-fi
-if  [ "${DISTRIB_ARCH}" = "='arm_cortex-a7_neon-vfpv4'" ]; then
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-arm
-fi
-if  [ "${DISTRIB_ARCH}" = "='x86_64'" ]; then
-wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-x86
-fi
 chmod +x /usr/bin/htpasswd
 opkg install --nodeps libaprutil
 opkg install --nodeps libapr
 opkg install --nodeps libexpat
 opkg install --nodeps libuuid1
 if [ -n "${AD_INST}" ]; then
-wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard.sh
+opkg install ca-bundle
+wget --no-check-certificate -O /etc/config-software/adguard.sh https://raw.githubusercontent.com/site-u2023/config-software/main/velop_wrt_pro7_adguard.sh
 sh /etc/config-software/adguard.sh
 fi
-if [ "adguardhome" = "`opkg list-installed adguardhome | awk '{ print $1 }'`" ]; then
-service adguardhome stop
+/etc/init.d/AdGuardHome stop 2>&1 | grep -q '/etc/init.d/AdGuardHome: not found'
+if  [ $? == 1 ]; then
+/etc/init.d/AdGuardHome stop
 fi
 if [ -e "/etc/adguardhome.yaml" ]; then
 cp /etc/adguardhome.yaml /etc/adguardhome.yaml.old
@@ -183,8 +169,9 @@ reboot
 function _func_AdGuard_Before {
 while :
 do
-  echo -e " \033[1;37mRemove and restore AdGuard HOME to its previous settings\033[0;39m"
+  echo -e " \033[1;37mRemove and restore AdGuardHome to its previous settings\033[0;39m"
   echo -e " \033[1;37mRemove: adguardhome\033[0;39m"
+  echo -e " \033[1;37mRemove: ca-bundle\033[0;39m"
   echo -e " \033[1;37mRemove: htpasswd\033[0;39m"
   echo -e " \033[1;37mRemove: libaprutil\033[0;39m"
   echo -e " \033[1;37mRemove: libapr\033[0;39m"
@@ -192,34 +179,38 @@ do
   read -p " Please select key [y/n or r]: " num
   case "${num}" in
     "y" ) _func_AdGuard_Restoration ;;
-    "n" ) _func_AdGuard ;;
-    "r" ) _func_AdGuard ;;
+    "n" ) break ;;
+    "r" ) exit ;;
   esac
 done
 }
 
 function _func_AdGuard_Restoration {
-service adguardhome stop
-service adguardhome disable
-opkg remove adguardhome
-rm /usr/bin/htpasswd
-opkg remove --nodeps libaprutil
-opkg remove --nodeps libapr
-opkg remove --nodeps libexpat
-cp /etc/config/network.adguard.bak /etc/config/network
-rm /etc/config/network.adguard.bak
-cp /etc/config/dhcp.adguard.bak /etc/config/dhcp
-rm /etc/config/dhcp.adguard.bak
-cp /etc/config/firewall.adguard.bak /etc/config/firewall
-rm /etc/config/firewall.adguard.bak
-rm /etc/config-software/adguard-config.sh
-rm /etc/config-software/adguard.sh
-echo -e " \033[1;32mRemove and restore to previous settings completed\033[0;39m"
-read -p " Press any key (to reboot the device)"
+/etc/init.d/AdGuardHome stop
+/etc/init.d/AdGuardHome disable
+/etc/AdGuardHome/AdGuardHome -s uninstall
+uci -q delete dhcp.@dnsmasq[0].noresolv
+uci -q delete dhcp.@dnsmasq[0].cachesize
+uci set dhcp.@dnsmasq[0].rebind_protection='1'
+uci -q delete dhcp.@dnsmasq[0].server
+uci -q delete dhcp.@dnsmasq[0].port
+uci -q delete dhcp.lan.dhcp_option
+uci -q delete dhcp.lan.dns
+uci add_list dhcp.lan.dhcp_option="6,1.1.1.1,1.0.0.1"
+uci add_list dhcp.lan.dhcp_option="6,8.8.8.8,8.8.4.4"
+uci add_list dhcp.lan.dns="2606:4700:4700::1111"
+uci add_list dhcp.lan.dns="2606:4700:4700::1001"
+uci add_list dhcp.lan.dns="2001:4860:4860::8888"
+uci add_list dhcp.lan.dns="2001:4860:4860::8844"
+uci set network.wan.peerdns="0"
+uci set network.wan6.peerdns="0"
+uci -q delete network.wan.dns
+uci -q delete network.wan6.dns
+uci -q delete firewall.adguardhome_dns_53
+uci commit
 reboot
 exit
 }
-
 
 if [ "adblock" = "`opkg list-installed adblock | awk '{ print $1 }'`" ]; then
   read -p " AdBlock already installed"
@@ -238,7 +229,7 @@ if [[ "${OPENWRT_RELEAS}" = "19" ]]; then
   echo -e " Version Check: \033[1;36mOK\033[0;39m"
 else
   read -p " Exit due to different versions"
-exit
+  exit
 fi
 
 if [ -e ${UPDATE} ]; then
@@ -247,7 +238,6 @@ UPDATE="1"
 fi
 AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
 AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
-
 while :
 do
   echo -e " \033[1;34mAdGuard ----------------------------------------------\033[0;39m"
