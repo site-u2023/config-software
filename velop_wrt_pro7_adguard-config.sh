@@ -132,9 +132,9 @@ opkg update
 UPDATE="1"
 fi
 if [ -n "${JAPAN_FILTER}" ]; then
-wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
+wget --no-check-certificate -O /etc//etc/AdGuardHome/AdGuardHome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml
  else
-wget --no-check-certificate -O /etc/adguardhome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
+wget --no-check-certificate -O /etc//etc/AdGuardHome/AdGuardHome.yaml-new https://raw.githubusercontent.com/site-u2023/config-software/main/adguardhome.yaml-g
 fi
 wget --no-check-certificate -O /usr/bin/htpasswd https://github.com/site-u2023/config-software/raw/main/htpasswd-arm
 chmod +x /usr/bin/htpasswd
@@ -152,14 +152,14 @@ if  [ $? == 1 ]; then
 /etc/init.d/AdGuardHome stop
 fi
 if [ -e "/etc/adguardhome.yaml" ]; then
-cp /etc/adguardhome.yaml /etc/adguardhome.yaml.old
+cp /etc//etc/AdGuardHome/AdGuardHome.yaml /etc//etc/AdGuardHome/AdGuardHome.yaml.old
 fi
-cp /etc/adguardhome.yaml-new /etc/adguardhome.yaml
-sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc/adguardhome.yaml
+cp /etc//etc/AdGuardHome/AdGuardHome.yaml-new /etc//etc/AdGuardHome/AdGuardHome.yaml
+sed -i "/\  address:/c \  address: 0.0.0.0:${input_str_PORT}" /etc//etc/AdGuardHome/AdGuardHome.yaml
 sed -i "5c \  - name: ${input_str_USER}" /etc/adguardhome.yaml
 Bcrypt_PASSWD=`htpasswd -B -n -b ${input_str_USER} ${input_str_PASSWD}`
-sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc/adguardhome.yaml
-sed -i -e "s/192.168.1.1:54/${NET_ADDR}:54/g" /etc/adguardhome.yaml
+sed -i "6c \    password: ${Bcrypt_PASSWD#${input_str_USER}:}" /etc//etc/AdGuardHome/AdGuardHome.yaml
+sed -i -e "s/192.168.1.1:54/${NET_ADDR}:54/g" /etc//etc/AdGuardHome/AdGuardHome.yaml
 echo -e " \033[1;32mInstallation and configuration complete\033[0;39m"
 echo -e " \033[1;32mhttp://${NET_ADDR}:${input_str_PORT}\033[0;39m"
 read -p " Press any key (to reboot the device)"
