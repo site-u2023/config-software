@@ -2,6 +2,7 @@
 
 opkg install ca-bundle
 mkdir -p /etc/AdGuardHome
+latest_ver=`echo $AdGuardHome_list | awk '{print substr($0,index($0,"AdGuard Home v") ,30)}' | awk '{ sub("</span>.*$",""); print $0; }' | grep -o -E "(v[0-9]+\.){1}[0-9]+(\.[0-9]+)?" | head -n1`
 wget --no-check-certificate -O /etc/AdGuardHome/AdGuardHome_linux_armv7.tar.gz https://github.com/AdguardTeam/AdGuardHome/releases/download/${latest_ver}/AdGuardHome_linux_armv7.tar.gz
 tar -xzvf /etc/AdGuardHome/AdGuardHome_linux_armv7.tar.gz -C /etc/
 rm -rf /etc/AdGuardHome/AdGuardHome_linux_armv7.tar.gz
