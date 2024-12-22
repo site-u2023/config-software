@@ -42,6 +42,7 @@ done
 function _func_MAP_e_VirtualConnect_SET {
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
 if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
+  opkg update
   opkg install bash
   opkg install map
 elif [[ "${OPENWRT_RELEAS}" = "SN" ]]; then
