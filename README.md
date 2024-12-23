@@ -198,7 +198,8 @@ Filer (used like Explorer with WinSCP)
 
 - Download: [WinSCP](https://winscp.net/eng/download.php)
 
-- Automatic install
+<details><summary>Automatic install (powershell)</summary>
+  
 ```powershell
 $LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php" -UseBasicParsing
 $LINKS_VERSION = $LINKS.Links | Where-Object {$_.href -like "*WinSCP-*-Setup.exe*"} | Select-Object -ExpandProperty href
@@ -216,6 +217,10 @@ while ($true){
 Start-Process "C:\Users\$ONAMAE\Downloads\$VERSION" -ArgumentList "/VERYSILENT /NORESTART" -Wait
 Invoke-Expression "C:\Users\$ONAMAE\AppData\Local\Programs\WinSCP\WinSCP.exe"
 ```
+
+---
+
+<details>
 
 - Session
   - Host Nmae：`192.168.1.1`
