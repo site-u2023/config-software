@@ -118,7 +118,7 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
 ```
 :warning:Internet connection setup requires device to be connected directly to ONU (Japan Only)
 
-<details><summary>When scripts cannot be executed due to insufficient flash capacity:exclamation:</summary>
+<details><summary>:exclamation:When scripts cannot be executed due to insufficient flash capacity</summary>
 
 ```powershell
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ssh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/confsoft.sh; sh /etc/config-software/confsoft.sh; confsoft
@@ -128,7 +128,7 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
 
 </details>
 
-<details><summary>MAP-e or other IPv4 unconnected:exclamation:</summary>
+<details><summary>:exclamation:MAP-e or other IPv4 unconnected</summary>
 
 https://github.com/ can be connected using IPv6
   - Connect client for setup to LAN1
