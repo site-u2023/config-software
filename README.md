@@ -7,6 +7,7 @@
 
 ### Script Selector
 ![config](https://github.com/site-u2023/config-software/assets/140032047/0e7be2b8-7f81-44c7-9452-432fda1f7db8)
+
 :warning:**Please contact us if you have any problems**
 
 <details><summary>Configuration</summary>
