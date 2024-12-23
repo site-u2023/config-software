@@ -120,10 +120,9 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
 
 <details><summary>When scripts cannot be executed due to insufficient flash capacity:exclamation:</summary>
 
-```
-
 ```powershell
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ssh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/confsoft.sh; sh /etc/config-software/confsoft.sh; confsoft
+```
 
 ---
 
@@ -133,7 +132,7 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
 
 https://github.com/ can be connected using IPv6
   - Connect client for setup to LAN1
-```sh:SSH
+```sh
 # IPv6 Usage Settings
 uci add network device
 uci set network.@device[-1].name='lan1'
@@ -167,7 +166,7 @@ confsoft
 :warning: forced termination：`Ctrl`+`c`
 
 ### Remove
-```sh :SSH
+```sh
 rm -rf /etc/config-software
 rm -rf /usr/bin/confsoft
 ```
