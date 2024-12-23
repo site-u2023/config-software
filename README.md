@@ -113,10 +113,22 @@ ssh -o StrictHostKeyChecking=no -oHostKeyAlgorithms=+ssh-rsa root@192.168.1.1
 ### ttyd installation and configuration
 
 - [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
-```sh:SSH
+```sh
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ttyd.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ttyd.sh; sh /etc/config-software/ttyd.sh; confsoft
 ```
 :warning:Internet connection setup requires device to be connected directly to ONU (Japan Only)
+
+<details><summary>When scripts cannot be executed due to insufficient flash capacity:exclamation:</summary>
+
+```
+
+```powershell
+mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ssh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/confsoft.sh; sh /etc/config-software/confsoft.sh; confsoft
+
+---
+
+</details>
+
 <details><summary>:exclamation:MAP-e or other IPv4 unconnected</summary>
 
 https://github.com/ can be connected using IPv6
