@@ -106,16 +106,9 @@
 - [Starting PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4) (Key entry): `Win`+`x` > `a` > `yes`
   ※Standard on Windows 7 or later
 
-<details><summary>:exclamation:If you cannot SSH</summary>
-
-`C:\Users\yourusername\.ssh\known_hosts`
-※Windows Hidden Files
-```powershell:powershell
-Clear-Content .ssh\known_hosts -Force
+```powershell
+ssh -o StrictHostKeyChecking=no -oHostKeyAlgorithms=+ssh-rsa root@192.168.1.1
 ```
----
-
-</details>
  
 ### ttyd installation and configuration
 
