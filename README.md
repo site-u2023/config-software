@@ -197,8 +197,25 @@ Filer (used like Explorer with WinSCP)
 ### [SFTP](https://qiita.com/site_u/items/a23d165201081817cb00#sftp-server)
 
 - Download: [WinSCP](https://winscp.net/eng/download.php)
-  
-  Start WinSCP
+
+- Automatic install
+```powershell
+$LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php" -UseBasicParsing
+$LINKS_VERSION = $LINKS.Links | Where-Object {$_.href -like "*WinSCP-*-Setup.exe*"} | Select-Object -ExpandProperty href
+$VERSION = ($LINKS_VERSION -split '/')[-2]
+Write-Host Version to install $VERSION
+$ONAMAE = (whoami).Split(‘\’)[1]
+Invoke-WebRequest "https://winscp.net/download/$VERSION/download"
+while ($true){
+    if (Test-Path -Path "C:\Users\$ONAMAE\Downloads\$VERSION"){
+        break
+    }
+    Write-Host "File not found. Waiting..."
+    Start-Sleep -Seconds 3
+}
+Start-Process "C:\Users\$ONAMAE\Downloads\$VERSION" -ArgumentList "/VERYSILENT /NORESTART" -Wait
+Invoke-Expression "C:\Users\$ONAMAE\AppData\Local\Programs\WinSCP\WinSCP.exe"
+```
 
 - Session
   - Host Nmae：`192.168.1.1`
