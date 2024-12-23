@@ -124,7 +124,7 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
 
 - Only scripts are executed (ttyd not used)
 
-```powershell
+```sh
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ssh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/confsoft.sh; sh /etc/config-software/confsoft.sh; confsoft
 ```
 
