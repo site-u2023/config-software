@@ -128,7 +128,7 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
 
 </details>
 
-<details><summary>:exclamation:MAP-e or other IPv4 unconnected</summary>
+<details><summary>MAP-e or other IPv4 unconnected:exclamation:</summary>
 
 https://github.com/ can be connected using IPv6
   - Connect client for setup to LAN1
