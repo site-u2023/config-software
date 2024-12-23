@@ -207,7 +207,8 @@ Filer (used like Explorer with WinSCP)
 - Download: [WinSCP](https://winscp.net/eng/download.php)
 
 <details><summary>Automatic install (powershell)</summary>
-  
+
+- Install latest version software
 ```powershell
 $LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php" -UseBasicParsing
 $LINKS_VERSION = $LINKS.Links | Where-Object {$_.href -like "*WinSCP-*-Setup.exe*"} | Select-Object -ExpandProperty href
