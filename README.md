@@ -120,6 +120,8 @@ mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-softwa
 
 <details><summary>:exclamation:When scripts cannot be executed due to insufficient flash capacity</summary>
 
+- Only scripts are executed (ttyd not used)
+[confsoft](https://github.com/site-u2023/config-software/blob/main/sonfsoft.sh)
 ```powershell
 mkdir -p /etc/config-software; wget --no-check-certificate -O /etc/config-software/ssh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/confsoft.sh; sh /etc/config-software/confsoft.sh; confsoft
 ```
