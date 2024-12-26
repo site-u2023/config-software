@@ -57,14 +57,18 @@ quit_script() {
 # バージョンチェック
 check_version() {
   OPENWRT_RELEASE=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-  if [ "${OPENWRT_RELEASE}" =~ ^(19|20|21|22|23|24|SN)$ ]; then
-    echo -e "The version of this device is \033[1;33m$OPENWRT_RELEASE\033[0;39m"
-    echo -e "Version Check: \033[1;36mOK\033[0;39m"
-  else
-    echo -e "Incompatible version."
-    exit
-  fi
+  case "$OPENWRT_RELEASE" in
+    19|20|21|22|23|24|SN)
+      echo "The version of this device is \033[1;33m$OPENWRT_RELEASE\033[0;39m"
+      echo "Version Check: \033[1;36mOK\033[0;39m"
+      ;;
+    *)
+      echo "Incompatible version."
+      exit 1
+      ;;
+  esac
 }
+
 
 # メモリとフラッシュの空き容量確認
 check_memory() {
