@@ -35,6 +35,28 @@ download_package_script() {
   fi
 }
 
+# 広告及びDNSブロック設定スクリプト
+download_ad-dns-blocking_script() {
+  echo -e "\033[1;37mDownload script for ad-blocking setup\033[0;39m"
+  wget --no-check-certificate -O /etc/config-software/ad-dns-blocking-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocking-config.sh
+  if [ $? -eq 0 ]; then
+    sh /etc/config-software/ad-dns-blocking-config.sh
+  else
+    echo "Download failed!"
+  fi
+}
+
+# アクセスポイント設定スクリプト
+download_dumb_script() {
+  echo -e "\033[1;37mDownload script for dumb setup\033[0;39m"
+  wget --no-check-certificate -O /etc/config-software/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh
+  if [ $? -eq 0 ]; then
+    sh /etc/config-software/dumb-config.sh
+  else
+    echo "Download failed!"
+  fi
+}
+
 # その他の設定スクリプト
 download_other_script() {
   echo -e "\033[1;37mDownload other scripts\033[0;39m"
@@ -46,9 +68,9 @@ download_other_script() {
   fi
 }
 
-# 終了処理
-quit_script() {
-  echo -e "Deleting this script and related files."
+# スクリプト削除
+delete() {
+  echo -e "Deleting script and exiting."
   rm -rf /etc/config-software
   rm -rf /usr/bin/confsoft
   exit
@@ -82,10 +104,12 @@ check_memory() {
 main_menu() {
   while :; do
     echo -e "Please select an option:"
-    echo -e "[i] Internet Setup"
+    echo -e "[i] Internet Setup (Japanese line only)"
     echo -e "[s] System Setup"
     echo -e "[p] Package Setup"
-    echo -e "[e] Other Configurations"
+    echo -e "[d] Dumb Setup"
+    echo -e "[o] Other Configurations"
+    echo -e "[r] Delete & exit scripts"
     echo -e "[q] Quit"
 
     read -p "Select option: " option
@@ -93,8 +117,10 @@ main_menu() {
       "i") download_internet_script ;;
       "s") download_system_script ;;
       "p") download_package_script ;;
+      "d") download_dumb_script ;;
       "e") download_other_script ;;
-      "q") quit_script ;;
+      "r") delete ;;
+      "q") exit ;;
       *) echo "Invalid option!" ;;
     esac
   done
