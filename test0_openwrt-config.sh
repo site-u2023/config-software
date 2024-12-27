@@ -25,34 +25,27 @@ download_and_execute() {
     local description=$3
     local color_code=$4
 
+    mkdir -p /etc/config-software
     echo -e "\033[${color_code}m${description}\033[0;39m"
     log_message "Starting download: $description from $url"
-    
-    # 外部からスクリプトをダウンロード (ステータスコードを取得)
-    wget --no-check-certificate --spider "$url" 2>&1 | grep -q "HTTP/1.1 200 OK"
-    
+
+    # 外部からスクリプトをダウンロード
+    wget --no-check-certificate -O "/etc/config-software/${script_name}" "${url}" 2>> "$LOG_FILE"
+
     if [ $? -eq 0 ]; then
-        # ステータスコードが200 OKの場合
+        # ダウンロード成功時
         log_message "Download successful: $script_name"
-        wget --no-check-certificate -O "/etc/config-software/${script_name}" "${url}"
-        
+        sh "/etc/config-software/${script_name}"
         if [ $? -eq 0 ]; then
             log_message "Execution successful: $script_name"
-            sh "/etc/config-software/${script_name}"
-            if [ $? -eq 0 ]; then
-                log_message "Execution successful: $script_name"
-            else
-                log_message "Execution failed: $script_name"
-                echo "Execution failed!"
-            fi
         else
-            log_message "Download failed: $script_name"
-            echo "Download failed!"
+            log_message "Execution failed: $script_name"
+            echo "Execution failed!"
         fi
     else
-        # ステータスコードが200 OK以外の場合
-        log_message "Download failed: Maintenance in progress for $script_name"
-        echo "Maintenance in progress. The link may be temporarily unavailable."
+        # ダウンロード失敗時
+        log_message "Download failed or link unavailable: $script_name"
+        echo "The link may be temporarily unavailable or under maintenance. Please try again later."
     fi
 }
 
@@ -95,7 +88,7 @@ check_memory() {
 main_menu() {
     while :; do
         echo -e "Please select an option:"
-        
+
         # メニューオプションを新しい順番と色で表示
         echo -e "\033[${COLOR_BLUE}m[i] Internet Setup (Japanese line only)\033[0;39m"
         echo -e "\033[${COLOR_YELLOW}m[s] System Setup\033[0;39m"
@@ -105,7 +98,7 @@ main_menu() {
         echo -e "\033[${COLOR_CYAN}m[o] Other Configurations\033[0;39m"
         echo -e "\033[${COLOR_WHITE}m[q] Quit\033[0;39m"
         echo -e "\033[${COLOR_BLACK_ON_WHITE}m[d] Delete & exit scripts\033[0;39m"
-        
+
         read -p "Select option: " option
         case "$option" in
             "i")
