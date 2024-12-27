@@ -36,8 +36,8 @@ download_package_script() {
 }
 
 # 広告及びDNSブロック設定スクリプト
-download_ad-dns-blocking_script() {
-  echo -e "\033[1;37mDownload script for ad-blocking setup\033[0;39m"
+download_dns-blocking_script() {
+  echo -e "\033[1;37mDownload script for dns blocking setup\033[0;39m"
   wget --no-check-certificate -O /etc/config-software/ad-dns-blocking-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocking-config.sh
   if [ $? -eq 0 ]; then
     sh /etc/config-software/ad-dns-blocking-config.sh
@@ -47,8 +47,8 @@ download_ad-dns-blocking_script() {
 }
 
 # アクセスポイント設定スクリプト
-download_dumb_script() {
-  echo -e "\033[1;37mDownload script for dumb setup\033[0;39m"
+download_access-point_script() {
+  echo -e "\033[1;37mDownload script for access point Setup\033[0;39m"
   wget --no-check-certificate -O /etc/config-software/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh
   if [ $? -eq 0 ]; then
     sh /etc/config-software/dumb-config.sh
@@ -91,7 +91,6 @@ check_version() {
   esac
 }
 
-
 # メモリとフラッシュの空き容量確認
 check_memory() {
   AVAILABLE_MEMORY=$(free | fgrep 'Mem:' | awk '{ print $4 }')
@@ -107,7 +106,8 @@ main_menu() {
     echo -e "[i] Internet Setup (Japanese line only)"
     echo -e "[s] System Setup"
     echo -e "[p] Package Setup"
-    echo -e "[d] Dumb Setup"
+    echo -e "[a] Access point Setup"
+    echo -e "[d] Dns blocking Setup"
     echo -e "[o] Other Configurations"
     echo -e "[r] Delete & exit scripts"
     echo -e "[q] Quit"
@@ -117,8 +117,9 @@ main_menu() {
       "i") download_internet_script ;;
       "s") download_system_script ;;
       "p") download_package_script ;;
-      "d") download_dumb_script ;;
-      "e") download_other_script ;;
+      "a") download_access-point_script ;;
+      "a") download_dns-blocking_script ;;
+      "d") download_other_script ;;
       "r") delete ;;
       "q") exit ;;
       *) echo "Invalid option!" ;;
