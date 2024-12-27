@@ -57,16 +57,24 @@ function _func_DoT {
   done
 }
 
-while :; do
-  OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-  if [[ "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
-    echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
-    echo -e " Version Check: \033[1;36mOK\033[0;39m"
-  else
-    read -p " Exit due to different versions"
-    exit
-  fi
+# バージョンチェック
+check_version() {
+    OPENWRT_RELEASE=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+    case "$OPENWRT_RELEASE" in
+        19|20|21|22|23|24|SN)
+            echo -e "The version of this device is \033[1;33m$OPENWRT_RELEASE\033[0;39m"
+            echo -e "Version Check: \033[1;36mOK\033[0;39m"
+            ;;
+        *)
+            echo "Incompatible version."
+            exit 1
+            ;;
+    esac
+}
 
+# メインメニュー
+main_menu() {
+    while :; do
   echo -e " \033[7;33mAdGuard HOME and AdBlock are used exclusively\033[0;39m"
   echo -e " \033[7;33mAdGuard and DNS over HTTPS (DoH) are used exclusively\033[0;39m"
   echo -e " \033[7;33mAdGuard and DNS over TLS (DoT) are used exclusively\033[0;39m"
