@@ -1,101 +1,71 @@
-#! /bin/sh
+#!/bin/sh
 # License: CC0
 
-function _func_AdGuard_INST {
-  while :; do
-    echo -e " \033[1;34mDownload AdGuard HOME configuration script\033[0;39m"
-    read -p " Please select key [y/n]: " num
-    case "${num}" in
-      "y" ) 
-        wget --no-check-certificate -O /etc/config-software/adguard-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config.sh
-        sh /etc/config-software/adguard-config.sh
-        break ;;
-      "n" ) break ;;
-    esac
-  done
-}
-
-function _func_AdBlock_INST {
-  while :; do
-    echo -e " \033[1;32mDownload AdBlock configuration script\033[0;39m"
-    read -p " Please select key [y/n]: " num
-    case "${num}" in
-      "y" ) 
-        wget --no-check-certificate -O /etc/config-software/adblock-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-config.sh
-        sh /etc/config-software/adblock-config.sh
-        break ;;
-      "n" ) break ;;
-    esac
-  done
-}
-
-function _func_DoH {
-  while :; do
-    echo -e " \033[1;32mDNS over HTTPS (DoH) Download configuration script\033[0;39m"
-    read -p " Please select key [y/n]: " num
-    case "${num}" in
-      "y" ) 
-        wget --no-check-certificate -O /etc/config-software/doh.sh https://raw.githubusercontent.com/site-u2023/config-software/main/doh.sh
-        sh /etc/config-software/doh.sh
-        break ;;
-      "n" ) break ;;
-    esac
-  done
-}
-
-function _func_DoT {
-  while :; do
-    echo -e " \033[1;32mDNS over TLS (DoT) Download configuration script\033[0;39m"
-    read -p " Please select key [y/n]: " num
-    case "${num}" in
-      "y" ) 
-        wget --no-check-certificate -O /etc/config-software/dot.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dot.sh
-        sh /etc/config-software/dot.sh
-        break ;;
-      "n" ) break ;;
-    esac
-  done
-}
-
-# バージョンチェック
+# バージョン確認
 check_version() {
-    OPENWRT_RELEASE=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-    case "$OPENWRT_RELEASE" in
-        19|20|21|22|23|24|SN)
-            echo -e "The version of this device is \033[1;33m$OPENWRT_RELEASE\033[0;39m"
-            echo -e "Version Check: \033[1;36mOK\033[0;39m"
-            ;;
-        *)
-            echo "Incompatible version."
-            exit 1
-            ;;
-    esac
+  OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
+  
+  if [[ ! "${OPENWRT_RELEAS}" =~ ^(19|21|22|23|24)$ ]]; then
+    echo "Unsupported OpenWRT version: ${OPENWRT_RELEAS}"
+    echo "Supported versions: 19, 21, 22, 23, 24"
+    exit 1
+  fi
+  
+  echo "OpenWRT version: ${OPENWRT_RELEAS} - Supported"
 }
 
-# メインメニュー
+# メモリ確認
+check_memory() {
+  MEMORY=$(free | grep Mem | awk '{print $2}')
+  
+  # メモリが256MB未満なら警告
+  if [ "$MEMORY" -lt 262144 ]; then
+    echo "Warning: Low memory detected. Ensure you have at least 256MB of RAM."
+  else
+    echo "Memory check passed."
+  fi
+}
+
+# wgetを使って設定スクリプトをダウンロードして実行
+download_and_execute() {
+  local script_name=$1
+  local script_url=$2
+  
+  echo "Downloading ${script_name} configuration..."
+  wget --no-check-certificate -O "/etc/config-software/${script_name}.sh" "${script_url}"
+  
+  if [ $? -eq 0 ]; then
+    sh "/etc/config-software/${script_name}.sh"
+  else
+    echo "Error downloading ${script_name}. Please check the URL or your network connection."
+    exit 1
+  fi
+}
+
+# メインメニュー表示と選択処理
 main_menu() {
-    while :; do
-  echo -e " \033[7;33mAdGuard HOME and AdBlock are used exclusively\033[0;39m"
-  echo -e " \033[7;33mAdGuard and DNS over HTTPS (DoH) are used exclusively\033[0;39m"
-  echo -e " \033[7;33mAdGuard and DNS over TLS (DoT) are used exclusively\033[0;39m"
-  echo -e " \033[7;33mDNS over HTTPS (DoH) and DNS over TLS (DoT) are used exclusively\033[0;39m"
-  echo -e " \033[1;35mAd DNS blocking config ------------------------------\033[0;39m"
-  echo -e " \033[1;34m[g]: AdGuard HOME configuration and installation\033[0;39m"
-  echo -e " \033[1;32m[b]: AdBlock installation and configuration (Japan only)\033[0;39m"
-  echo -e " \033[1;31m[h]: DNS over HTTPS (DoH) configuration and installation\033[0;39m"
-  echo -e " \033[1;33m[t]: DNS over TLS (DoT) configuration and installation\033[0;39m"
-  echo -e " \033[1;37m[q]: Quit\033[0;39m"
-  echo -e " \033[1;35m-----------------------------------------------------\033[0;39m"
-  read -p " Please select key [g/b/h/t or q]: " num
-  case "${num}" in
-    "g" ) _func_AdGuard_INST ;;
-    "b" ) _func_AdBlock_INST ;;
-    "h" ) _func_DoH ;;
-    "t" ) _func_DoT ;;
-    "q" ) exit ;;
-  esac
-done
+  while :; do
+    echo -e "\033[1;35mPlease choose an option:\033[0m"
+    echo -e " \033[1;34m[g]\033[0m: Install AdGuard HOME"
+    echo -e " \033[1;32m[b]\033[0m: Install AdBlock"
+    echo -e " \033[1;31m[h]\033[0m: Configure DNS over HTTPS (DoH)"
+    echo -e " \033[1;33m[t]\033[0m: Configure DNS over TLS (DoT)"
+    echo -e " \033[1;37m[q]\033[0m: Quit"
+    
+    read -p "Select an option: " option
+    
+    case "$option" in
+      g) download_and_execute "adguard-config" "https://raw.githubusercontent.com/site-u2023/config-software/main/adguard-config.sh" ;;
+      b) download_and_execute "adblock-config" "https://raw.githubusercontent.com/site-u2023/config-software/main/adblock-config.sh" ;;
+      h) download_and_execute "doh" "https://raw.githubusercontent.com/site-u2023/config-software/main/doh.sh" ;;
+      t) download_and_execute "dot" "https://raw.githubusercontent.com/site-u2023/config-software/main/dot.sh" ;;
+      q) exit 0 ;;
+      *) echo "Invalid option, please try again." ;;
+    esac
+  done
+}
 
 # 初期処理
 check_version
+check_memory
 main_menu
