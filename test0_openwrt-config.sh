@@ -11,6 +11,7 @@ COLOR_GREEN="1;32"     # 緑
 COLOR_MAGENTA="1;35"   # マゼンダ
 COLOR_RED="1;31"       # 赤
 COLOR_CYAN="1;36"      # 水色 (シアン)
+${COLOR_BLACK_ON_WHITE="7:37"
 
 # ログをファイルに記録する関数
 log_message() {
