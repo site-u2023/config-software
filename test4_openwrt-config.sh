@@ -75,40 +75,63 @@ check_memory() {
 }
 
 # スクリプトの設定リスト
-declare -A script_list
-script_list=(
-    ["i"]="internet-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh Internet Setup (Japanese line only) 1;34"
-    ["s"]="system-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh System Setup 1;33"
-    ["p"]="package-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh Package Setup 1;32"
-    ["b"]="bridge-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/bridge-config.sh Bridge Setup 1;37"
-    ["a"]="ad-dns-blocker-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocker-config.sh Ads and DNS blockers Setup 1;37"
-    ["o"]="etc-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh Other Configurations 1;37"
-)
-
-# メインメニュー
+# 配列ではなく、case文で管理
 main_menu() {
     while :; do
         echo -e "Please select an option:"
-        for key in "${!script_list[@]}"; do
-            IFS=" " read -r script_name url description color_code <<< "${script_list[$key]}"
-            echo -e "[$key] $description"
-        done
+        echo -e "[i] Internet Setup (Japanese line only)"
+        echo -e "[s] System Setup"
+        echo -e "[p] Package Setup"
+        echo -e "[b] Bridge Setup"
+        echo -e "[a] Ads and DNS blockers Setup"
+        echo -e "[o] Other Configurations"
         echo -e "[d] Delete & exit scripts"
         echo -e "[q] Quit"
 
         read -p "Select option: " option
-        if [ "$option" == "q" ]; then
-            log_message "Exiting script"
-            exit
-        elif [ "$option" == "d" ]; then
-            delete_and_exit
-        elif [[ -v script_list["$option"] ]]; then
-            IFS=" " read -r script_name url description color_code <<< "${script_list[$option]}"
-            download_and_execute "$script_name" "$url" "$description" "$color_code"
-        else
-            echo "Invalid option!"
-            log_message "Invalid option selected: $option"
-        fi
+        case "$option" in
+            "i")
+                download_and_execute "internet-config.sh" \
+                    "https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh" \
+                    "Internet Setup (Japanese line only)" "1;34"
+                ;;
+            "s")
+                download_and_execute "system-config.sh" \
+                    "https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh" \
+                    "System Setup" "1;33"
+                ;;
+            "p")
+                download_and_execute "package-config.sh" \
+                    "https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh" \
+                    "Package Setup" "1;32"
+                ;;
+            "b")
+                download_and_execute "bridge-config.sh" \
+                    "https://raw.githubusercontent.com/site-u2023/config-software/main/bridge-config.sh" \
+                    "Bridge Setup" "1;37"
+                ;;
+            "a")
+                download_and_execute "ad-dns-blocker-config.sh" \
+                    "https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocker-config.sh" \
+                    "Ads and DNS blockers Setup" "1;37"
+                ;;
+            "o")
+                download_and_execute "etc-config.sh" \
+                    "https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh" \
+                    "Other Configurations" "1;37"
+                ;;
+            "d")
+                delete_and_exit
+                ;;
+            "q")
+                log_message "Exiting script"
+                exit
+                ;;
+            *)
+                echo "Invalid option!"
+                log_message "Invalid option selected: $option"
+                ;;
+        esac
     done
 }
 
