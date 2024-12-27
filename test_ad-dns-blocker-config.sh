@@ -95,3 +95,7 @@ main_menu() {
     "q" ) exit ;;
   esac
 done
+
+# 初期処理
+check_version
+main_menu
