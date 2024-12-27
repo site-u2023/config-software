@@ -17,9 +17,8 @@ download_and_execute() {
     local script_name=$1
     local url=$2
     local description=$3
-    local color_code=$4
 
-    echo -e "\033[${color_code}m${description}\033[0;39m"
+    echo "$description"
     log_message "Starting download: $description from $url"
     
     # 外部からスクリプトをダウンロード
@@ -43,7 +42,7 @@ download_and_execute() {
 
 # スクリプト削除と終了
 delete_and_exit() {
-    echo -e "Deleting script and exiting."
+    echo "Deleting script and exiting."
     log_message "Deleting scripts and exiting."
     rm -rf "${CONFIG_DIR}"
     rm -f /usr/bin/confsoft
@@ -54,9 +53,9 @@ delete_and_exit() {
 check_version() {
     OPENWRT_RELEASE=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
     case "$OPENWRT_RELEASE" in
-        19|20|21|22|23|24|SN)
-            echo -e "The version of this device is \033[1;33m$OPENWRT_RELEASE\033[0;39m"
-            echo -e "Version Check: \033[1;36mOK\033[0;39m"
+        19|20|21|22|23|24)
+            echo "The version of this device is $OPENWRT_RELEASE"
+            echo "Version Check: OK"
             log_message "Version check: OpenWRT $OPENWRT_RELEASE - OK"
             ;;
         *)
@@ -71,8 +70,8 @@ check_version() {
 check_memory() {
     AVAILABLE_MEMORY=$(free | awk '/Mem:/ { print $4 }')
     AVAILABLE_FLASH=$(df | awk '/overlayfs:\/overlay/ { print $4 }')
-    echo -e "Available Memory: $((AVAILABLE_MEMORY / 1024)) MB"
-    echo -e "Available Flash: $((AVAILABLE_FLASH / 1024)) MB"
+    echo "Available Memory: $((AVAILABLE_MEMORY / 1024)) MB"
+    echo "Available Flash: $((AVAILABLE_FLASH / 1024)) MB"
     log_message "Memory check: Available memory: $((AVAILABLE_MEMORY / 1024)) MB, Available flash: $((AVAILABLE_FLASH / 1024)) MB"
 }
 
@@ -86,17 +85,13 @@ load_script_list() {
     fi
 
     # スクリプトリストを配列に格納
-    while IFS= read -r line; do
-        case "$line" in
-            \#*) continue ;;  # コメント行は無視
-            *)
-                SCRIPT_NAME=$(echo "$line" | cut -d' ' -f1)
-                URL=$(echo "$line" | cut -d' ' -f2)
-                DESCRIPTION=$(echo "$line" | cut -d' ' -f3-)
-                COLOR_CODE=$(echo "$line" | cut -d' ' -f4)
-                SCRIPT_LIST["$SCRIPT_NAME"]="$URL|$DESCRIPTION|$COLOR_CODE"
-                ;;
-        esac
+    while IFS=' ' read -r SCRIPT_NAME URL DESCRIPTION COLOR_CODE; do
+        # 空行やコメント行を無視
+        if [ -z "$SCRIPT_NAME" ] || [[ "$SCRIPT_NAME" == \#* ]]; then
+            continue
+        fi
+        # 配列に格納する
+        SCRIPT_LIST["$SCRIPT_NAME"]="$URL|$DESCRIPTION|$COLOR_CODE"
     done < "$SCRIPTS_LIST"
 }
 
@@ -104,6 +99,7 @@ load_script_list() {
 main_menu() {
     while :; do
         echo -e "Please select an option:"
+        # スクリプトリストを表示
         for SCRIPT_NAME in "${!SCRIPT_LIST[@]}"; do
             IFS="|" read -r URL DESCRIPTION COLOR_CODE <<< "${SCRIPT_LIST[$SCRIPT_NAME]}"
             echo -e "[$SCRIPT_NAME] $DESCRIPTION"
