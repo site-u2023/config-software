@@ -2,7 +2,7 @@
 # License: CC0
 # OpenWrt >= 19.07
 
-LOG_FILE="/var/log/script_execution.log"
+LOG_FILE="/var/log/all_in_one_script_execution.log"
 
 # ログをファイルに記録する関数
 log_message() {
