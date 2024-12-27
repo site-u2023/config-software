@@ -4,6 +4,16 @@
 
 LOG_FILE="/var/log/all_in_one_script_execution.log"
 
+# 色番号定義 (虹色順)
+COLOR_RED="1;31"
+COLOR_ORANGE="1;33"
+COLOR_YELLOW="1;93"
+COLOR_GREEN="1;32"
+COLOR_BLUE="1;34"
+COLOR_INDIGO="1;35"
+COLOR_VIOLET="1;36"
+COLOR_PINK="1;37"
+
 # ログをファイルに記録する関数
 log_message() {
     local message=$1
@@ -83,51 +93,52 @@ check_memory() {
     log_message "Memory check: Available memory: $((AVAILABLE_MEMORY / 1024)) MB, Available flash: $((AVAILABLE_FLASH / 1024)) MB"
 }
 
-# スクリプトの設定リスト
-# 配列ではなく、case文で管理
+# メニュー表示
 main_menu() {
     while :; do
         echo -e "Please select an option:"
-        echo -e "[i] Internet Setup (Japanese line only)"
-        echo -e "[s] System Setup"
-        echo -e "[p] Package Setup"
-        echo -e "[b] Bridge Setup"
-        echo -e "[a] Ads and DNS blockers Setup"
-        echo -e "[o] Other Configurations"
-        echo -e "[d] Delete & exit scripts"
-        echo -e "[q] Quit"
-
+        
+        # メニューオプションを虹色順に表示
+        echo -e "\033[${COLOR_RED}m[i] Internet Setup (Japanese line only)\033[0;39m"
+        echo -e "\033[${COLOR_ORANGE}m[s] System Setup\033[0;39m"
+        echo -e "\033[${COLOR_YELLOW}m[p] Package Setup\033[0;39m"
+        echo -e "\033[${COLOR_GREEN}m[b] Bridge Setup\033[0;39m"
+        echo -e "\033[${COLOR_BLUE}m[a] Ads and DNS blockers Setup\033[0;39m"
+        echo -e "\033[${COLOR_INDIGO}m[o] Other Configurations\033[0;39m"
+        echo -e "\033[${COLOR_VIOLET}m[d] Delete & exit scripts\033[0;39m"
+        echo -e "\033[${COLOR_PINK}m[q] Quit\033[0;39m"
+        
         read -p "Select option: " option
         case "$option" in
             "i")
                 download_and_execute "internet-config.sh" \
                     "https://raw.githubusercontent.com/site-u2023/config-software/main/internet-config.sh" \
-                    "Internet Setup (Japanese line only)" "1;34"
+                    "Internet Setup (Japanese line only)" "$COLOR_RED"
                 ;;
             "s")
                 download_and_execute "system-config.sh" \
                     "https://raw.githubusercontent.com/site-u2023/config-software/main/system-config.sh" \
-                    "System Setup" "1;33"
+                    "System Setup" "$COLOR_ORANGE"
                 ;;
             "p")
                 download_and_execute "package-config.sh" \
                     "https://raw.githubusercontent.com/site-u2023/config-software/main/package-config.sh" \
-                    "Package Setup" "1;32"
+                    "Package Setup" "$COLOR_YELLOW"
                 ;;
             "b")
                 download_and_execute "bridge-config.sh" \
                     "https://raw.githubusercontent.com/site-u2023/config-software/main/bridge-config.sh" \
-                    "Bridge Setup" "1;37"
+                    "Bridge Setup" "$COLOR_GREEN"
                 ;;
             "a")
                 download_and_execute "ad-dns-blocker-config.sh" \
                     "https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocker-config.sh" \
-                    "Ads and DNS blockers Setup" "1;37"
+                    "Ads and DNS blockers Setup" "$COLOR_BLUE"
                 ;;
             "o")
                 download_and_execute "etc-config.sh" \
                     "https://raw.githubusercontent.com/site-u2023/config-software/main/etc-config.sh" \
-                    "Other Configurations" "1;37"
+                    "Other Configurations" "$COLOR_INDIGO"
                 ;;
             "d")
                 delete_and_exit
