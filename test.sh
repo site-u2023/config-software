@@ -36,22 +36,22 @@ download_package_script() {
 }
 
 # 広告及びDNSブロック設定スクリプト
-download_dns-blocking_script() {
-  echo -e "\033[1;37mDownload script for dns blocking setup\033[0;39m"
-  wget --no-check-certificate -O /etc/config-software/ad-dns-blocking-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocking-config.sh
+download_ad-dns-blocker_script() {
+  echo -e "\033[1;37mDownload script for ads and dns blockers setup\033[0;39m"
+  wget --no-check-certificate -O /etc/config-software/ad-dns-blocker-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/ad-dns-blocker-config.sh
   if [ $? -eq 0 ]; then
-    sh /etc/config-software/ad-dns-blocking-config.sh
+    sh /etc/config-software/ad-dns-blocker-config.sh
   else
     echo "Download failed!"
   fi
 }
 
-# アクセスポイント設定スクリプト
-download_access-point_script() {
-  echo -e "\033[1;37mDownload script for access point Setup\033[0;39m"
-  wget --no-check-certificate -O /etc/config-software/dumb-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/dumb-config.sh
+# ブリッジ設定スクリプト
+download_bridge_script() {
+  echo -e "\033[1;37mDownload script for bridge Setup\033[0;39m"
+  wget --no-check-certificate -O /etc/config-software/bridge-config.sh https://raw.githubusercontent.com/site-u2023/config-software/main/bridge-config.sh
   if [ $? -eq 0 ]; then
-    sh /etc/config-software/dumb-config.sh
+    sh /etc/config-software/bridge-config.sh
   else
     echo "Download failed!"
   fi
@@ -106,10 +106,10 @@ main_menu() {
     echo -e "[i] Internet Setup (Japanese line only)"
     echo -e "[s] System Setup"
     echo -e "[p] Package Setup"
-    echo -e "[a] Access point Setup"
-    echo -e "[d] Dns blocking Setup"
+    echo -e "[b] Bridge Setup"
+    echo -e "[a] Ads and DNS blockers Setup"
     echo -e "[o] Other Configurations"
-    echo -e "[r] Delete & exit scripts"
+    echo -e "[d] Delete & exit scripts"
     echo -e "[q] Quit"
 
     read -p "Select option: " option
@@ -117,10 +117,10 @@ main_menu() {
       "i") download_internet_script ;;
       "s") download_system_script ;;
       "p") download_package_script ;;
-      "a") download_access-point_script ;;
-      "a") download_dns-blocking_script ;;
-      "d") download_other_script ;;
-      "r") delete ;;
+      "b") download_bridge_script ;;
+      "a") download_ad-dns-blocker_script ;;
+      "o") download_other_script ;;
+      "d") delete ;;
       "q") exit ;;
       *) echo "Invalid option!" ;;
     esac
