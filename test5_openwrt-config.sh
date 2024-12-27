@@ -4,7 +4,7 @@
 
 LOG_FILE="/var/log/script_execution.log"
 CONFIG_DIR="/etc/config-software"
-SCRIPTS_LIST="$CONFIG_DIR/scripts.list"
+SCRIPTS_LIST="$CONFIG_DIR/openwrt-config.list"
 
 # ログをファイルに記録する関数
 log_message() {
