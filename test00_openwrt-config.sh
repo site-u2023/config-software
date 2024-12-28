@@ -3,10 +3,11 @@
 # OpenWrt >= 19.07
 
 LOG_FILE="/var/log/all_in_one_script_execution.log"
-COLOR_FILE="/etc/config-software/colors.txt"
-MENU_FILE="/etc/config-software/menu.txt"
-BASE_URL="https://github.com/site-u2023/config-software/blob/main/"
-CONFIG_DIR="/etc/config-software"
+BASE_URL="https://raw.githubusercontent.com/site-u2023/config-software/main"
+
+# 外部ファイルの読み込み
+COLORS_FILE="/etc/config-software/colors.txt"
+MENU_ITEMS_FILE="/etc/config-software/menu_items.txt"
 
 # ログをファイルに記録する関数
 log_message() {
@@ -14,32 +15,54 @@ log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $message" >> "$LOG_FILE"
 }
 
+# 外部ファイルの読み込み
+load_colors() {
+    if [ -f "$COLORS_FILE" ]; then
+        . "$COLORS_FILE"
+    else
+        echo "Error: Colors file not found!"
+        exit 1
+    fi
+}
+
+load_menu_items() {
+    if [ -f "$MENU_ITEMS_FILE" ]; then
+        MENU_ITEMS=$(cat "$MENU_ITEMS_FILE")
+    else
+        echo "Error: Menu items file not found!"
+        exit 1
+    fi
+}
+
 # スクリプトのダウンロードと実行を行う関数
 download_and_execute() {
     local script_name=$1
-    local description=$2
-    local color_code=$(grep "$description" "$COLOR_FILE" | cut -d' ' -f2)
+    local url=$2
+    local description=$3
+    local color_code=$4
 
-    mkdir -p "$CONFIG_DIR"
     echo -e "\033[${color_code}m${description}\033[0;39m"
-    log_message "Starting download: $description from ${BASE_URL}${script_name}"
+    log_message "Starting download: $description from $url"
 
-    wget --no-check-certificate -O "${CONFIG_DIR}/${script_name}" "${BASE_URL}${script_name}" 2>> "$LOG_FILE"
-
+    wget --no-check-certificate --spider "$url" 2>&1 | grep -q "HTTP/1.1 200 OK"
     if [ $? -eq 0 ]; then
-        # ダウンロード成功時
         log_message "Download successful: $script_name"
-        sh "${CONFIG_DIR}/${script_name}"
+        wget --no-check-certificate -O "/etc/config-software/${script_name}" "${url}"
         if [ $? -eq 0 ]; then
-            log_message "Execution successful: $script_name"
+            sh "/etc/config-software/${script_name}"
+            if [ $? -eq 0 ]; then
+                log_message "Execution successful: $script_name"
+            else
+                log_message "Execution failed: $script_name"
+                echo "Execution failed!"
+            fi
         else
-            log_message "Execution failed: $script_name"
-            echo "Execution failed!"
+            log_message "Download failed: $script_name"
+            echo "Download failed!"
         fi
     else
-        # ダウンロード失敗時
-        log_message "Download failed or link unavailable: $script_name"
-        echo "The link may be temporarily unavailable or under maintenance. Please try again later."
+        log_message "Download failed: Maintenance in progress for $script_name"
+        echo "Maintenance in progress. The link may be temporarily unavailable."
     fi
 }
 
@@ -47,26 +70,9 @@ download_and_execute() {
 delete_and_exit() {
     echo -e "Deleting script and exiting."
     log_message "Deleting scripts and exiting."
-    rm -rf "$CONFIG_DIR"
+    rm -rf /etc/config-software
     rm -rf /usr/bin/confsoft
     exit
-}
-
-# バージョンチェック
-check_version() {
-    OPENWRT_RELEASE=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-    case "$OPENWRT_RELEASE" in
-        19|20|21|22|23|24|SN)
-            echo -e "The version of this device is \033[1;33m$OPENWRT_RELEASE\033[0;39m"
-            echo -e "Version Check: \033[1;36mOK\033[0;39m"
-            log_message "Version check: OpenWRT $OPENWRT_RELEASE - OK"
-            ;;
-        *)
-            echo "Incompatible version."
-            log_message "Version check: Incompatible version $OPENWRT_RELEASE"
-            exit 1
-            ;;
-    esac
 }
 
 # メモリとフラッシュの空き容量確認
@@ -83,37 +89,24 @@ main_menu() {
     while :; do
         echo -e "Please select an option:"
 
-        while IFS= read -r line; do
-            description=$(echo "$line" | cut -d' ' -f1)
-            echo -e "$description"
-        done < "$MENU_FILE"
+        # メニューオプションを表示
+        echo "$MENU_ITEMS" | while IFS=, read -r key description relative_url color; do
+            echo -e "\033[${color}m[${key}] ${description}\033[0;39m"
+        done
 
         read -p "Select option: " option
         case "$option" in
-            "i")
-                download_and_execute "internet-config.sh" "Internet Setup (Japanese line only)"
-                ;;
-            "s")
-                download_and_execute "system-config.sh" "System Setup"
-                ;;
-            "p")
-                download_and_execute "package-config.sh" "Package Setup"
-                ;;
-            "b")
-                download_and_execute "bridge-config.sh" "Bridge Setup"
-                ;;
-            "a")
-                download_and_execute "ad-dns-blocker-config.sh" "Ads and DNS blockers Setup"
-                ;;
-            "o")
-                download_and_execute "etc-config.sh" "Other Configurations"
-                ;;
-            "d")
-                delete_and_exit
-                ;;
-            "q")
-                log_message "Exiting script"
-                exit
+            $(echo "$MENU_ITEMS" | awk -F, '{print $1}' | tr '\n' '|')q)
+                if [ "$option" = "q" ]; then
+                    log_message "Exiting script"
+                    exit
+                else
+                    script_name=$(echo "$MENU_ITEMS" | grep "^${option}," | cut -d',' -f3)
+                    description=$(echo "$MENU_ITEMS" | grep "^${option}," | cut -d',' -f2)
+                    relative_url=$(echo "$MENU_ITEMS" | grep "^${option}," | cut -d',' -f4)
+                    color=$(echo "$MENU_ITEMS" | grep "^${option}," | cut -d',' -f5)
+                    download_and_execute "$script_name" "${BASE_URL}/${relative_url}" "$description" "$color"
+                fi
                 ;;
             *)
                 echo "Invalid option!"
@@ -124,6 +117,7 @@ main_menu() {
 }
 
 # 初期処理
-check_version
+load_colors
+load_menu_items
 check_memory
 main_menu
