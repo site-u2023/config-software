@@ -1,8 +1,0 @@
-[i] Internet Setup (Japanese line only)
-[s] System Setup
-[p] Package Setup
-[b] Bridge Setup
-[a] Ads and DNS blockers Setup
-[o] Other Configurations
-[q] Quit
-[d] Delete & exit scripts

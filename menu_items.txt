@@ -1,0 +1,8 @@
+i,Internet Setup (Japanese line only),internet-config.sh,COLOR_BLUE
+s,System Setup,system-config.sh,COLOR_YELLOW
+p,Package Setup,package-config.sh,COLOR_GREEN
+b,Bridge Setup,bridge-config.sh,COLOR_MAGENTA
+a,Ads and DNS blockers Setup,ad-dns-blocker-config.sh,COLOR_RED
+o,Other Configurations,etc-config.sh,COLOR_CYAN
+d,Delete & exit scripts,delete.sh,COLOR_WHITE
+q,Quit,quit.sh,COLOR_WHITE
