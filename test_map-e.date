@@ -1,0 +1,75 @@
+ip6_prefix_tmp=`echo ${new_ip6_prefix/::/:0::}`
+if echo "$ip6_prefix_tmp" | grep -qE "^([0-9a-f]{1,4}):([0-9a-f]{1,4}):([0-9a-f]{1,4}):([0-9a-f]{0,4})"; then
+  tmp=( $( echo ${ip6_prefix_tmp} | sed -e "s|:| |g" ) )
+
+  for i in 0 1 2 3; do
+    if [ -z "${tmp[$i]}" ]; then tmp[$i]=0; fi
+    hextet[$i]=$(printf %d 0x${tmp[$i]})
+  done
+else
+  echo "プレフィックスを認識できません"
+  echo "ONUに直接接続していますか"
+  echo "終了します"
+  exit 1  
+fi
+
+prefix31=$(( ${hextet[0]} * 0x10000 + ${hextet[1]} & 0xfffe ))
+prefix38=$(( ${hextet[0]} * 0x1000000 + ${hextet[1]} * 0x100 + ( ${hextet[2]} & 0xfc00 ) >> 8 ))
+
+offset=6
+rfc=false
+if [ -n "${ruleprefix38[`printf 0x%x $prefix38`]}" ]; then
+  octet="${ruleprefix38[`printf 0x%x $prefix38`]}"
+  octet=(${octet//,/ })
+  octet[2]=$(( ${octet[2]} | $(( ${hextet[2]} & 0x0300 )) >> 8 )) 
+  octet[3]=$(( ${hextet[2]} & 0x00ff )) 
+  ipaddr="${ruleprefix38[`printf 0x%x $prefix38`]}",0
+  ip6prefixlen=38
+  psidlen=8 
+  offset=4
+elif [ -n "${ruleprefix31[`printf 0x%x $prefix31`]}" ]; then 
+  octet="${ruleprefix31[`printf 0x%x $prefix31`]}"
+  octet=(${octet//,/ })
+  octet[1]=$(( ${octet[1]} | $(( ${hextet[1]} & 0x0001 )) )) 
+  octet[2]=$(( ${hextet[2]} & 0xff00 ) >> 8 )
+  octet[3]=$(( ${hextet[2]} & 0x00ff ))
+  ipaddr="${ruleprefix31[`printf 0x%x $prefix31`]}",0,0
+  ip6prefixlen=31
+  psidlen=8
+  offset=4
+elif [ -n "${ruleprefix38_20[`printf 0x%x $prefix38`]}" ]; then 
+  octet="${ruleprefix38_20[`printf 0x%x $prefix38`]}"
+  octet=(${octet//,/ })
+  octet[2]=$(( ${octet[2]} | $(( ${hextet[2]} & 0x03c0 )) >> 6 )) 
+  octet[3]=$(( ${hextet[3]} & 0x003f )) 
+  ipaddr="${ruleprefix38_20[`printf 0x%x $prefix38`]}",0
+  ip6prefixlen=38
+  psidlen=6
+else
+  echo "未対応のプレフィックス"
+  exit 1 
+fi
+
+if [ $psidlen == 8 ]; then
+  psid=$(( ( ${hextet[3]} & 0xff00 ) >> 8 ))
+elif [ $psidlen == 6 ]; then
+  psid=$(( ( ${hextet[3]} & 0x3f00 ) >> 8 ))
+fi
+
+ports=""
+Amax=$(( (1 << $offset) - 1 ))
+for A in $(seq 1 $Amax); do
+  port=$(( (A << (16 - $offset)) | (psid << (16 - $offset - psidlen)) ))
+  ports+="$port-$(($port + ((1 << (16 - $offset - psidlen)) - 1)))"
+  if [ $A -lt $Amax ]; then 
+    if ! ((A % 3)); then
+      ports="$ports\n"
+    else
+      ports="$ports "
+    fi
+  fi
+done
+
+lp=$Amax
+nxps=$(( 1 << (16 - $offset) ))
+pslen=$(( 1 << (16 - $offset - psidlen) ))
