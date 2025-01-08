@@ -1,9 +1,25 @@
-#! /bin/sh
-
+#!/bin/ash
+# Check version
+TMP_DIR="/tmp/config-software"
+ADGUARD_URL="https://github.com/AdguardTeam/AdGuardHome"
+mkdir -p "$TMP_DIR"
+echo -e "\033[1;34m[INFO]\033[0;39m Downloading AdGuardHome list..."
+if wget --no-check-certificate -O "$TMP_DIR/AdGuardHome_list" "$ADGUARD_URL"; then
+    latest_ver=$(grep -o -E "AdGuard Home v[0-9]+\.[0-9]+(\.[0-9]+)?" "$TMP_DIR/AdGuardHome_list" | head -n1 | grep -o -E "v[0-9]+\.[0-9]+(\.[0-9]+)?")   
+    if [ -n "$latest_ver" ]; then
+        echo -e "\033[1;33mInstall Version: ${latest_ver}\033[0;39m"
+        read -p "Press any key to continue..."
+    else
+        echo -e "\033[1;31m[ERROR]\033[0;39m Failed to parse version information from AdGuardHome list."
+    fi
+else
+    echo -e "\033[1;31m[ERROR]\033[0;39m Failed to download AdGuardHome list from $ADGUARD_URL."
+fi
+rm -rf "$TMP_DIR"
+# Install
+opkg update
 opkg install ca-bundle
 mkdir -p /etc/AdGuardHome
-AdGuardHome_list=`cat /tmp/config-software/AdGuardHome_list`
-latest_ver=`echo $AdGuardHome_list | awk '{print substr($0,index($0,"AdGuard Home v") ,30)}' | awk '{ sub("</span>.*$",""); print $0; }' | grep -o -E "(v[0-9]+\.){1}[0-9]+(\.[0-9]+)?" | head -n1`
 wget --no-check-certificate -O /etc/AdGuardHome/AdGuardHome_linux_armv7.tar.gz https://github.com/AdguardTeam/AdGuardHome/releases/download/${latest_ver}/AdGuardHome_linux_armv7.tar.gz
 tar -xzvf /etc/AdGuardHome/AdGuardHome_linux_armv7.tar.gz -C /etc/
 rm -rf /etc/AdGuardHome/AdGuardHome_linux_armv7.tar.gz
@@ -42,4 +58,3 @@ uci set firewall.adguardhome_dns_53.dest_port='53'
 uci set firewall.adguardhome_dns_53.family="any"
 uci commit firewall
 /etc/init.d/firewall restart
-
