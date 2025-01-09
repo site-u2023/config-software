@@ -8,7 +8,6 @@ if wget --no-check-certificate -O "$TMP_DIR/AdGuardHome_list" "$ADGUARD_URL"; th
     latest_ver=$(grep -o -E "AdGuard Home v[0-9]+\.[0-9]+(\.[0-9]+)?" "$TMP_DIR/AdGuardHome_list" | head -n1 | grep -o -E "v[0-9]+\.[0-9]+(\.[0-9]+)?")   
     if [ -n "$latest_ver" ]; then
         echo -e "\033[1;33mInstall Version: ${latest_ver}\033[0;39m"
-        read -p "Press any key to continue..."
     else
         echo -e "\033[1;31m[ERROR]\033[0;39m Failed to parse version information from AdGuardHome list."
     fi
