@@ -256,11 +256,7 @@ Filer (used like Explorer with WinSCP)
 - Install latest version software
 ```powershell
 $psVersion = $PSVersionTable.PSVersion.Major
-if ($psVersion -lt 7) {
-    $LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php" -UseBasicParsing
-} else {
-    $LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php"
-}
+$LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php"
 $LINKS_VERSION = $LINKS.Links | Where-Object {$_.href -like "*WinSCP-*-Setup.exe*"} | Select-Object -ExpandProperty href
 $VERSION = ($LINKS_VERSION -split '/')[-2] -replace "WinSCP-([0-9]+\.[0-9]+\.[0-9]+).*", '$1'
 Write-Host "Version to install: $VERSION"
