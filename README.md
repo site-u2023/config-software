@@ -220,20 +220,22 @@ Filer (used like Explorer with WinSCP)
 
 - Install latest version software
 ```powershell
-$LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php" -UseBasicParsing
-$LINKS_VERSION = $LINKS.Links | Where-Object {$_.href -like "*WinSCP-*-Setup.exe*"} | Select-Object -ExpandProperty href
-$VERSION = ($LINKS_VERSION -split '/')[-2]
-Write-Host Version to install $VERSION
-$ONAMAE = (whoami).Split(‘\’)[1]
-Invoke-WebRequest "https://winscp.net/download/$VERSION/download"
-while ($true){
-    if (Test-Path -Path "C:\Users\$ONAMAE\Downloads\$VERSION"){
-        break
-    }
-    Write-Host "File not found. Waiting..."
-    Start-Sleep -Seconds 3
+$psVersion = $PSVersionTable.PSVersion.Major
+if ($psVersion -lt 7) {
+    $LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php" -UseBasicParsing
+} else {
+    $LINKS = Invoke-WebRequest "https://winscp.net/eng/download.php"
 }
-Start-Process "C:\Users\$ONAMAE\Downloads\$VERSION" -ArgumentList "/VERYSILENT /NORESTART" -Wait
+$LINKS_VERSION = $LINKS.Links | Where-Object {$_.href -like "*WinSCP-*-Setup.exe*"} | Select-Object -ExpandProperty href
+$VERSION = ($LINKS_VERSION -split '/')[-2] -replace "WinSCP-([0-9]+\.[0-9]+\.[0-9]+).*", '$1'
+Write-Host "Version to install: $VERSION"
+$downloadUrl = "https://jaist.dl.sourceforge.net/project/winscp/WinSCP/$VERSION/WinSCP-$VERSION-Setup.exe?viasf=1"
+Write-Host "Downloading from: $downloadUrl"
+$ONAMAE = (whoami).Split('\')[1]
+$destinationPath = "C:\Users\$ONAMAE\Downloads\WinSCP-$VERSION-Setup.exe"
+Invoke-WebRequest -Uri $downloadUrl -OutFile $destinationPath
+Write-Host "Installing WinSCP..."
+Start-Process -FilePath $destinationPath -ArgumentList "/VERYSILENT /NORESTART" -Wait
 Invoke-Expression "C:\Users\$ONAMAE\AppData\Local\Programs\WinSCP\WinSCP.exe"
 ```
 
