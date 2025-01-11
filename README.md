@@ -109,7 +109,7 @@
 <details><summary>Install Powershell 7 and create shortcut</summary>
 
 - Script for installing PowerShell 7 and creating shortcuts in a PowerShell 5.1 environment (desktop)
-```powershell:powershell
+```powershell
 $LINKS = Invoke-WebRequest "https://github.com/PowerShell/PowerShell/releases/latest" -UseBasicParsing
 $versionMatch = $LINKS.Content -match 'PowerShell-(\d+\.\d+\.\d+)' 
 $VERSION = $matches[1] 
