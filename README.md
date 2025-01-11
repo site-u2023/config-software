@@ -113,6 +113,7 @@ ssh -o StrictHostKeyChecking=no -oHostKeyAlgorithms=+ssh-rsa root@192.168.1.1
  <details><summary>If you cannot log in to SSH/summary>
 
   - `%USERPROFILE%\.ssh\known_hosts`
+
 ```powershell
 Clear-Content .ssh\known_hosts -Force 
 ```
