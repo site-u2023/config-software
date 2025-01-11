@@ -109,7 +109,16 @@
 ```powershell
 ssh -o StrictHostKeyChecking=no -oHostKeyAlgorithms=+ssh-rsa root@192.168.1.1
 ```
- 
+
+ <details><summary>If you cannot log in to SSH/summary>
+
+  - `%USERPROFILE%\.ssh\known_hosts`
+```powershell
+Clear-Content .ssh\known_hosts -Force 
+```
+
+</details>
+
 ### ttyd installation and configuration
 
 - [ttyd.sh](https://github.com/site-u2023/config-software/blob/main/ttyd.sh)
