@@ -110,45 +110,31 @@
 
 - Script for installing PowerShell 7 and creating shortcuts in a PowerShell 5.1 environment (desktop)
 ```powershell
-$LINKS = Invoke-WebRequest "https://github.com/PowerShell/PowerShell/releases/latest" -UseBasicParsing
-$versionMatch = $LINKS.Content -match 'PowerShell-(\d+\.\d+\.\d+)' 
-$VERSION = $matches[1] 
-Write-Host "Installing PowerShell version: $VERSION"
-$arch = (Get-CimInstance -ClassName Win32_OperatingSystem).OSArchitecture
-if ($arch -like "*64*") {
-    if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") {
-        $archFilter = "*win-arm64.msi*"
-        Write-Host "Detected architecture: ARM64"
-    } else {
-        $archFilter = "*win-x64.msi*"
-        Write-Host "Detected architecture: x64"
-    }
-} elseif ($arch -like "*32*") {
-    $archFilter = "*win-x86.msi*"
-    Write-Host "Detected architecture: x86"
+$currentVersion = $PSVersionTable.PSVersion
+Write-Host "Current PowerShell version: $($currentVersion)"
+$installed = Get-Command pwsh -ErrorAction SilentlyContinue
+if ($installed) {
+    Write-Host "PowerShell 7 is already installed. Skipping installation."
 } else {
-    Throw "Unsupported architecture: $arch"
+    Write-Host "Installing PowerShell 7..."
+    $url = "https://aka.ms/install-powershell.ps1"
+    Invoke-WebRequest -Uri $url -OutFile "install-powershell.ps1"
+    .\install-powershell.ps1
+    Write-Host "PowerShell 7 installation completed."
 }
-$LINKS_VERSION = $LINKS.Links | Where-Object { $_.href -like "*PowerShell-$VERSION*$archFilter" } | Select-Object -ExpandProperty href
-$DOWNLOAD_URL = "https://github.com$LINKS_VERSION"
-$installerPath = "$env:TEMP\PowerShell-Installer.msi"
-Invoke-WebRequest -Uri $DOWNLOAD_URL -OutFile $installerPath
-Start-Process msiexec.exe -ArgumentList "/i", $installerPath, "/quiet", "/norestart" -Wait
-Write-Host "PowerShell $VERSION installation is complete." -ForegroundColor Green
 $desktop = [Environment]::GetFolderPath("Desktop")
 $shortcutPath = "$desktop\PowerShell 7 (Admin).lnk"
 $targetPath = "C:\Program Files\PowerShell\7\pwsh.exe"
+$arguments = "-Command Start-Process pwsh -Verb runAs"
 $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = $targetPath
-$shortcut.Arguments = "-NoProfile"
-$shortcut.Description = "PowerShell 7 for Administrators"
+$shortcut.Arguments = $arguments
+$shortcut.Description = "PowerShell 7 Administrator Shortcut"
 $shortcut.WorkingDirectory = "$HOME"
-$shortcut.IconLocation = "$targetPath"
-$shortcut.TargetPath = "C:\Windows\System32\cmd.exe" 
-$shortcut.Arguments = "/c start ""PowerShell 7"" ""C:\Program Files\PowerShell\7\pwsh.exe"" -NoProfile" 
+$shortcut.IconLocation = $targetPath
 $shortcut.Save()
-Write-Host "PowerShell 7 admin shortcut created." -ForegroundColor Green
+Write-Host "PowerShell 7 administrator shortcut has been created."
 ```
 
 ---
