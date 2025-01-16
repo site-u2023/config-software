@@ -131,13 +131,16 @@ done
 sleep 1
 
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
-if [[ "${OPENWRT_RELEAS}" = "SN" || "${OPENWRT_RELEAS}" = "24" || "${OPENWRT_RELEAS}" = "23" || "${OPENWRT_RELEAS}" = "22" || "${OPENWRT_RELEAS}" = "21" || "${OPENWRT_RELEAS}" = "19" ]]; then
-   echo -e " The version of this device is \033[1;33m$OPENWRT_RELEAS\033[0;39m"
-   echo -e " Version Check: \033[1;36mOK\033[0;39m"
- else
-   read -p " Exit due to different versions"
- exit
-fi
+case "$OPENWRT_RELEAS" in
+    19|21|22|23|24)
+        echo "OpenWRT version: ${OPENWRT_RELEAS} - Supported"
+        ;;
+    *)
+        echo "Unsupported OpenWRT version: ${OPENWRT_RELEAS}"
+        echo "Supported versions: 19, 21, 22, 23, 24"
+        exit 1
+        ;;
+esac
 
   AVAILABLE_MEMORY=`free | fgrep 'Mem:' | awk '{ print $4 }'`
   AVAILABLE_FLASH=`df | fgrep 'overlayfs:/overlay' | awk '{ print $4 }'`
