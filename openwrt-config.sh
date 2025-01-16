@@ -133,11 +133,11 @@ sleep 1
 OPENWRT_RELEAS=$(grep 'DISTRIB_RELEASE' /etc/openwrt_release | cut -d"'" -f2 | cut -c 1-2)
 case "$OPENWRT_RELEAS" in
     19|21|22|23|24)
-        echo "OpenWRT version: ${OPENWRT_RELEAS} - Supported"
+        echo -e " \033[1;37mOpenWRT version: ${OPENWRT_RELEAS} - Supported\033[0;39m"
         ;;
     *)
-        echo "Unsupported OpenWRT version: ${OPENWRT_RELEAS}"
-        echo "Supported versions: 19, 21, 22, 23, 24"
+        echo -e " Unsupported OpenWRT version: ${OPENWRT_RELEAS}\033[0;39m"
+        echo -e " Supported versions: 19, 21, 22, 23, 24\033[0;39m"
         exit 1
         ;;
 esac
