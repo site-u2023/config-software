@@ -149,7 +149,7 @@ fi
   echo -e " \033[1;33m[t]\033[0;39m": AdBlock-fastのリムーブと以前の設定に復元
   echo -e " \033[1;37m[q]\033[0;39m": 終了    
   echo -e " \033[1;34m------------------------------------------------------\033[0;39m"
-  read -p " Please select key [e/f/b/t or q]: " num
+  read -p " Please select key [a/f/b/t or q]: " num
   case "${num}" in
     "a" ) _func_AdBlock_Confirm ;;
     "f" ) _func_AdBlock_fast_Confirm ;;
