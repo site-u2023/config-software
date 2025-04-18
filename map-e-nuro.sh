@@ -185,89 +185,104 @@ RULE_f=240d:000f:f # 小文字 f を使用
 RULE_10_0=240d:0010:0 # 240d:0010 のパターン用
 RULE_10_1=240d:0010:1 # 240d:0010 のパターン用
 
-if [ -z ${NURO_V6} ]; then
-    read -p " IPv6を取得出来ません"
+# アドレスパターン判定
+if [ -z "${NURO_V6}" ]; then
+    read -p "Could not retrieve IPv6 address. Press enter to exit."
     exit 0
 else
-    if [ ${NURO_V6} = ${RULE_0} ]; then
+    if [ "${NURO_V6}" = "${RULE_0}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:0000"
         IPV4_PREFIX="219.104.128.0"
-        echo "rulr 0"
-    elif [ ${NURO_V6} = ${RULE_1} ]; then
+        echo "Matched rule 0"
+    elif [ "${NURO_V6}" = "${RULE_1}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:1000"
         IPV4_PREFIX="219.104.144.0"
-        echo "rule 1"
-    elif [ ${NURO_V6} = ${RULE_2} ]; then
+        echo "Matched rule 1"
+    elif [ "${NURO_V6}" = "${RULE_2}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:2000"
         IPV4_PREFIX="219.104.160.0"
-        echo "rule 2"
-    elif [ ${NURO_V6} = ${RULE_3} ]; then
+        echo "Matched rule 2"
+    elif [ "${NURO_V6}" = "${RULE_3}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:3000"
         IPV4_PREFIX="219.104.176.0"
-        echo "rule 3"
+        echo "Matched rule 3"
     elif [ "${NURO_V6}" = "${RULE_4}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:4000"
-        IPV4_PREFIX="219.104.192.0"   
+        IPV4_PREFIX="219.104.192.0"
+        echo "Matched rule 4"
     elif [ "${NURO_V6}" = "${RULE_5}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:5000"
-        IPV4_PREFIX="219.104.208.0"   
+        IPV4_PREFIX="219.104.208.0"
+        echo "Matched rule 5"
     elif [ "${NURO_V6}" = "${RULE_6}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:6000"
-        IPV4_PREFIX="219.104.224.0"  
+        IPV4_PREFIX="219.104.224.0"
+        echo "Matched rule 6"
     elif [ "${NURO_V6}" = "${RULE_7}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:7000"
-        IPV4_PREFIX="219.104.240.0" 
+        IPV4_PREFIX="219.104.240.0"
+        echo "Matched rule 7"
     elif [ "${NURO_V6}" = "${RULE_8}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:8000"
-        IPV4_PREFIX="219.105.0.0" 
+        IPV4_PREFIX="219.105.0.0"
+        echo "Matched rule 8"
     elif [ "${NURO_V6}" = "${RULE_9}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:9000"
-        IPV4_PREFIX="219.105.16.0" 
-    elif [ "${NURO_V6}" = "${RULE_a}" ]; then # 小文字 a を使用
+        IPV4_PREFIX="219.105.16.0"
+        echo "Matched rule 9"
+    elif [ "${NURO_V6}" = "${RULE_a}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:a000"
-        IPV4_PREFIX="219.105.32.0"  
-    elif [ "${NURO_V6}" = "${RULE_b}" ]; then # 小文字 b を使用
+        IPV4_PREFIX="219.105.32.0"
+        echo "Matched rule a"
+    elif [ "${NURO_V6}" = "${RULE_b}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:b000"
-        IPV4_PREFIX="219.105.48.0"  
-    elif [ "${NURO_V6}" = "${RULE_c}" ]; then # 小文字 c を使用
+        IPV4_PREFIX="219.105.48.0"
+        echo "Matched rule b"
+    elif [ "${NURO_V6}" = "${RULE_c}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:c000"
-        IPV4_PREFIX="219.105.64.0"  
-    elif [ "${NURO_V6}" = "${RULE_d}" ]; then # 小文字 d を使用
+        IPV4_PREFIX="219.105.64.0"
+        echo "Matched rule c"
+    elif [ "${NURO_V6}" = "${RULE_d}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:d000"
-        IPV4_PREFIX="219.105.80.0"  
-    elif [ "${NURO_V6}" = "${RULE_e}" ]; then # 小文字 e を使用
+        IPV4_PREFIX="219.105.80.0"
+        echo "Matched rule d"
+    elif [ "${NURO_V6}" = "${RULE_e}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:e000"
-        IPV4_PREFIX="219.105.96.0"  
-    elif [ "${NURO_V6}" = "${RULE_f}" ]; then # 小文字 f を使用
+        IPV4_PREFIX="219.105.96.0"
+        echo "Matched rule e"
+    elif [ "${NURO_V6}" = "${RULE_f}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:000f:f000"
-        IPV4_PREFIX="219.105.112.0"  
+        IPV4_PREFIX="219.105.112.0"
+        echo "Matched rule f"
     elif [ "${NURO_V6}" = "${RULE_10_0}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:0010:0000"
         IPV4_PREFIX="219.105.128.0"
+        echo "Matched rule 10_0"
     elif [ "${NURO_V6}" = "${RULE_10_1}" ]; then
         BR_ADDR="2001:3b8:200:ff9::1"
         IPV6_PREFIX="240d:0010:1000"
-        IPV4_PREFIX="219.105.144.0"        
+        IPV4_PREFIX="219.105.144.0"
+        echo "Matched rule 10_1"
     else
-        echo  "${NURO_V6}"
-        read -p " 未対応のIPV6アドレスです"
+        echo "Unmatched NURO IPv6 prefix: ${NURO_V6}"
+        read -p "Unsupported IPv6 address. Press enter to exit."
         exit 0
     fi
 fi
