@@ -13,7 +13,7 @@ opkg list-installed | awk '{ print $1 }' > /etc/config-software/list-installed/B
 cat << EOF > /etc/config-software/list-installed/Before
 luci
 luci-ssl
-dashboard
+luci-mod-dashboard
 openssh-sftp-server
 luci-app-ttyd
 coreutils
