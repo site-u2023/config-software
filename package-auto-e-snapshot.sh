@@ -13,7 +13,7 @@ apk info | awk '{ print $1 }' > /etc/config-software/list-installed/Before
 cat << EOF > /etc/config-software/list-installed/Before
 luci
 luci-ssl
-dashboard
+luci-mod-dashboard
 openssh-sftp-server
 luci-app-ttyd
 coreutils
