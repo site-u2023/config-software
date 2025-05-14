@@ -849,7 +849,7 @@ BR=$peeraddr
 
 # network backup
 cp /etc/config/network /etc/config/network.map-e.old
-cp /etc/config/network /etc/config/dhcp.map-e.old
+cp /etc/config/dhcp /etc/config/dhcp.map-e.old
 cp /etc/config/firewall /etc/config/firewall.map-e.old
 
 # WAN
