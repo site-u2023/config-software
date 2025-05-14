@@ -42,7 +42,7 @@ fi
 
 # network backup
 cp /etc/config/network /etc/config/network.map-e-nuro.old
-cp /etc/config/network /etc/config/dhcp.map-e-nuro.old
+cp /etc/config/dhcp /etc/config/dhcp.map-e-nuro.old
 cp /etc/config/firewall /etc/config/firewall.map-e-nuro.old
 # DHCP LAN
 uci set dhcp.lan.ra='relay'
