@@ -1,5 +1,13 @@
 # OpenWrt Initial Setup All-in-One Script Suitable for beginners
 
+## Important Notice: Project Transition
+
+The development for this project has been completed and all future development has been moved to a new repository. Please refer to the new repository for the latest updates and ongoing work:
+
+https://github.com/site-u2023/aios
+
+Thank you for your understanding.
+
 ### Script Selector
 ![config](https://github.com/site-u2023/config-software/assets/140032047/0e7be2b8-7f81-44c7-9452-432fda1f7db8)
 
